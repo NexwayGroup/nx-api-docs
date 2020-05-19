@@ -1,0 +1,4951 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api Documentation",
+        "version": "1.0",
+        "title": "Api Documentation",
+        "termsOfService": "urn:tos",
+        "contact": {
+            
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "CustomizedProduct",
+            "description": "Api CRUD Customized Product"
+        },
+        {
+            "name": "Description",
+            "description": "Api CRUD Description"
+        },
+        {
+            "name": "PriceFunction",
+            "description": "Api CRUD Price Function"
+        },
+        {
+            "name": "Product",
+            "description": "Api CRUD Product"
+        },
+        {
+            "name": "Public",
+            "description": "Api Public Product"
+        },
+        {
+            "name": "basic-error-controller",
+            "description": "Basic Error Controller"
+        },
+        {
+            "name": "operation-handler",
+            "description": "Operation Handler"
+        }
+    ],
+    "paths": {
+        "/error": {
+            "get": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingGET",
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "head": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingHEAD",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingDELETE",
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "options": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingOPTIONS",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPATCH",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/info": {
+            "get": {
+                "tags": [
+                    "operation-handler"
+                ],
+                "summary": "handle",
+                "operationId": "handleUsingGET",
+                "produces": [
+                    "application/vnd.spring-boot.actuator.v3+json",
+                    "application/json",
+                    "application/vnd.spring-boot.actuator.v2+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abProduct\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProductUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/customized-products": {
+            "get": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abCustomizedProduct\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/customized-products/distinct": {
+            "get": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/products/customized-products/recap": {
+            "get": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/customized-products/unwind": {
+            "get": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/customized-products/{id}": {
+            "get": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CustomizedProduct"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "CustomizedProduct"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/products/descriptions": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDescription\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/descriptions/distinct": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/products/descriptions/recap": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/descriptions/search": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Search descriptions",
+                "operationId": "search",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "req",
+                        "in": "query",
+                        "description": "req",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDescription\u00bb"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            }
+        },
+        "/products/descriptions/unwind": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/descriptions/{id}": {
+            "get": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Description"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/products/distinct": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/products/import": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Import a product",
+                "operationId": "importProduct",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "description": "data",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "dryRun",
+                        "in": "query",
+                        "description": "dryRun",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "locale",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reason",
+                        "in": "query",
+                        "description": "reason",
+                        "required": false,
+                        "type": "string",
+                        "default": "resource import thru REST Api"
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "description": "storeId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/products/price-functions": {
+            "get": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abPriceFunction\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/price-functions/distinct": {
+            "get": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/products/price-functions/recap": {
+            "get": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/price-functions/unwind": {
+            "get": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/price-functions/{id}": {
+            "get": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PriceFunction"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "PriceFunction"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/products/public": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abPublicProduct\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/public/{id}": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PublicProduct"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            }
+        },
+        "/products/public/{id}/descriptions": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get public description of product",
+                "operationId": "getPublicDescription",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Description"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            }
+        },
+        "/products/public/{id}/nextgeneration": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get the next generation of product",
+                "operationId": "getNextGeneration_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "version",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PublicProduct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/recap": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/unwind": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "paged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "sort.sorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "sort.unsorted",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unpaged",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProductUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem_3",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/products/{id}/nextgeneration": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get the next generation of product",
+                "operationId": "getNextGeneration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/{id}/variants/matrix": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get the matrix",
+                "operationId": "getVariantMatrix",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "format",
+                        "required": false,
+                        "type": "string",
+                        "default": "1D"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Matrix"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            }
+        },
+        "/status": {
+            "get": {
+                "tags": [
+                    "operation-handler"
+                ],
+                "summary": "handle",
+                "operationId": "handleUsingGET_2",
+                "produces": [
+                    "application/vnd.spring-boot.actuator.v3+json",
+                    "application/json",
+                    "application/vnd.spring-boot.actuator.v2+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/status/**": {
+            "get": {
+                "tags": [
+                    "operation-handler"
+                ],
+                "summary": "handle",
+                "operationId": "handleUsingGET_1",
+                "produces": [
+                    "application/vnd.spring-boot.actuator.v3+json",
+                    "application/json",
+                    "application/vnd.spring-boot.actuator.v2+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "CustomizedProduct": {
+            "type": "object",
+            "required": [
+                "productId"
+            ],
+            "properties": {
+                "catalogId": {
+                    "type": "string",
+                    "description": "Optional catalog ID"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "fulfillmentTemplate": {
+                    "type": "string",
+                    "description": "Fulfillment template name"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "originalId": {
+                    "type": "string"
+                },
+                "prices": {
+                    "description": "Sale price of product by currency and country",
+                    "$ref": "#/definitions/Prices"
+                },
+                "productId": {
+                    "type": "string",
+                    "description": "Product ID of merchant"
+                },
+                "sellingStores": {
+                    "type": "array",
+                    "description": "List of stores selling this product",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Product status",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED"
+                    ]
+                },
+                "subscriptionTemplate": {
+                    "type": "string",
+                    "description": "Subscription template name"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "title": "CustomizedProduct"
+        },
+        "Description": {
+            "type": "object",
+            "required": [
+                "description",
+                "localizedMarketingName"
+            ],
+            "properties": {
+                "catalogId": {
+                    "type": "string",
+                    "description": "Catalog ID"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description"
+                },
+                "fallbackLocale": {
+                    "type": "string",
+                    "description": "Fallback locale"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "localizedLongDesc": {
+                    "type": "object",
+                    "description": "Long descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedManualRenewalEmailDesc": {
+                    "type": "object",
+                    "description": "Manual Renewal email descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedMarketingName": {
+                    "type": "object",
+                    "description": "Marketing name descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedPurchaseEmailDesc": {
+                    "type": "object",
+                    "description": "Purchase email descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedShortDesc": {
+                    "type": "object",
+                    "description": "Short descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedSubscriptionEmailDesc": {
+                    "type": "object",
+                    "description": "Subscription email descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedThankYouDesc": {
+                    "type": "object",
+                    "description": "Thank-you page descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "longDesc": {
+                    "type": "string"
+                },
+                "manualRenewalEmailDesc": {
+                    "type": "string"
+                },
+                "marketingName": {
+                    "type": "string"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "purchaseEmailDesc": {
+                    "type": "string"
+                },
+                "shortDesc": {
+                    "type": "string"
+                },
+                "subscriptionEmailDesc": {
+                    "type": "string"
+                },
+                "thankYouDesc": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "variableDescriptions": {
+                    "type": "array",
+                    "description": "Variable Descriptions",
+                    "items": {
+                        "$ref": "#/definitions/VariableDescription"
+                    }
+                }
+            },
+            "title": "Description"
+        },
+        "DiscountStatus": {
+            "type": "object",
+            "title": "DiscountStatus"
+        },
+        "DiscountedPrice": {
+            "type": "object",
+            "title": "DiscountedPrice"
+        },
+        "Document": {
+            "type": "object",
+            "title": "Document",
+            "additionalProperties": {
+                "type": "object"
+            }
+        },
+        "FullPrice": {
+            "type": "object",
+            "required": [
+                "currency",
+                "grossPrice",
+                "msrp",
+                "netPrice",
+                "value",
+                "vatAmount",
+                "vatRate"
+            ],
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "description": "Purchase currency (ISO-4217 format)"
+                },
+                "discountedPrice": {
+                    "description": "Discounted price",
+                    "$ref": "#/definitions/DiscountedPrice"
+                },
+                "grossMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "MSRP (Manufacturer Suggested Retail Price) with taxes included"
+                },
+                "grossPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Cost of product with taxes included"
+                },
+                "msrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The msrp price; enter -1 to use the currency msrp price for this country"
+                },
+                "netMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "MSRP (Manufacturer Suggested Retail Price) net"
+                },
+                "netPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Net price"
+                },
+                "value": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The product price; enter -1 to use the currency price for this country"
+                },
+                "vatAmount": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "VAT amount (grossPrice - netPrice)"
+                },
+                "vatAmountMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "VAT amount (grossPrice - netPrice) for MSRP (Manufacturer Suggested Retail Price)"
+                },
+                "vatIncluded": {
+                    "type": "boolean",
+                    "description": "Indicates if the price includes VAT"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Sales tax rate"
+                }
+            },
+            "title": "FullPrice"
+        },
+        "Map\u00abstring,PriceInformation\u00bb": {
+            "type": "object",
+            "title": "Map\u00abstring,PriceInformation\u00bb",
+            "additionalProperties": {
+                "$ref": "#/definitions/PriceInformation"
+            }
+        },
+        "Map\u00abstring,string\u00bb": {
+            "type": "object",
+            "title": "Map\u00abstring,string\u00bb",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "Matrix": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "type": "string",
+                    "description": "Order of variables in the matrix",
+                    "readOnly": true
+                },
+                "matrix": {
+                    "type": "object",
+                    "description": "Matrix",
+                    "readOnly": true
+                },
+                "matrixVariables": {
+                    "type": "array",
+                    "description": "List of variables",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/Variable"
+                    }
+                }
+            },
+            "title": "Matrix"
+        },
+        "ModelAndView": {
+            "type": "object",
+            "properties": {
+                "empty": {
+                    "type": "boolean"
+                },
+                "model": {
+                    "type": "object"
+                },
+                "modelMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "reference": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "100 CONTINUE",
+                        "101 SWITCHING_PROTOCOLS",
+                        "102 PROCESSING",
+                        "103 CHECKPOINT",
+                        "200 OK",
+                        "201 CREATED",
+                        "202 ACCEPTED",
+                        "203 NON_AUTHORITATIVE_INFORMATION",
+                        "204 NO_CONTENT",
+                        "205 RESET_CONTENT",
+                        "206 PARTIAL_CONTENT",
+                        "207 MULTI_STATUS",
+                        "208 ALREADY_REPORTED",
+                        "226 IM_USED",
+                        "300 MULTIPLE_CHOICES",
+                        "301 MOVED_PERMANENTLY",
+                        "302 FOUND",
+                        "302 MOVED_TEMPORARILY",
+                        "303 SEE_OTHER",
+                        "304 NOT_MODIFIED",
+                        "305 USE_PROXY",
+                        "307 TEMPORARY_REDIRECT",
+                        "308 PERMANENT_REDIRECT",
+                        "400 BAD_REQUEST",
+                        "401 UNAUTHORIZED",
+                        "402 PAYMENT_REQUIRED",
+                        "403 FORBIDDEN",
+                        "404 NOT_FOUND",
+                        "405 METHOD_NOT_ALLOWED",
+                        "406 NOT_ACCEPTABLE",
+                        "407 PROXY_AUTHENTICATION_REQUIRED",
+                        "408 REQUEST_TIMEOUT",
+                        "409 CONFLICT",
+                        "410 GONE",
+                        "411 LENGTH_REQUIRED",
+                        "412 PRECONDITION_FAILED",
+                        "413 PAYLOAD_TOO_LARGE",
+                        "413 REQUEST_ENTITY_TOO_LARGE",
+                        "414 URI_TOO_LONG",
+                        "414 REQUEST_URI_TOO_LONG",
+                        "415 UNSUPPORTED_MEDIA_TYPE",
+                        "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+                        "417 EXPECTATION_FAILED",
+                        "418 I_AM_A_TEAPOT",
+                        "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+                        "420 METHOD_FAILURE",
+                        "421 DESTINATION_LOCKED",
+                        "422 UNPROCESSABLE_ENTITY",
+                        "423 LOCKED",
+                        "424 FAILED_DEPENDENCY",
+                        "425 TOO_EARLY",
+                        "426 UPGRADE_REQUIRED",
+                        "428 PRECONDITION_REQUIRED",
+                        "429 TOO_MANY_REQUESTS",
+                        "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+                        "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+                        "500 INTERNAL_SERVER_ERROR",
+                        "501 NOT_IMPLEMENTED",
+                        "502 BAD_GATEWAY",
+                        "503 SERVICE_UNAVAILABLE",
+                        "504 GATEWAY_TIMEOUT",
+                        "505 HTTP_VERSION_NOT_SUPPORTED",
+                        "506 VARIANT_ALSO_NEGOTIATES",
+                        "507 INSUFFICIENT_STORAGE",
+                        "508 LOOP_DETECTED",
+                        "509 BANDWIDTH_LIMIT_EXCEEDED",
+                        "510 NOT_EXTENDED",
+                        "511 NETWORK_AUTHENTICATION_REQUIRED"
+                    ]
+                },
+                "view": {
+                    "$ref": "#/definitions/View"
+                },
+                "viewName": {
+                    "type": "string"
+                }
+            },
+            "title": "ModelAndView"
+        },
+        "Parameter": {
+            "type": "object",
+            "required": [
+                "defaultValue",
+                "field",
+                "max",
+                "min",
+                "pattern",
+                "type"
+            ],
+            "properties": {
+                "defaultValue": {
+                    "type": "string",
+                    "description": "Parameter default value"
+                },
+                "field": {
+                    "type": "string",
+                    "description": "Parameter name"
+                },
+                "internalDesc": {
+                    "type": "string",
+                    "description": "Parameter internal description"
+                },
+                "labels": {
+                    "type": "object",
+                    "description": "Parameter labels",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "max": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Maximum value"
+                },
+                "min": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Minimum value"
+                },
+                "pattern": {
+                    "type": "string",
+                    "description": "Pattern value"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Parameter type",
+                    "enum": [
+                        "INTEGER",
+                        "STRING"
+                    ]
+                }
+            },
+            "title": "Parameter"
+        },
+        "PriceFunction": {
+            "type": "object",
+            "required": [
+                "expression",
+                "name"
+            ],
+            "properties": {
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "expression": {
+                    "type": "string",
+                    "description": "JEXL expression for price function"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the price function"
+                },
+                "originalId": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "type": "array",
+                    "description": "Parameters of the expression",
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }
+                },
+                "productFields": {
+                    "type": "array",
+                    "description": "Product fields used in the expression",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "variables": {
+                    "type": "array",
+                    "description": "Variables used in the expression",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "title": "PriceFunction"
+        },
+        "PriceInformation": {
+            "type": "object",
+            "required": [
+                "msrp",
+                "value"
+            ],
+            "properties": {
+                "msrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The msrp price; enter -1 to use the currency msrp price for this country"
+                },
+                "value": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The product price; enter -1 to use the currency price for this country"
+                },
+                "vatIncluded": {
+                    "type": "boolean",
+                    "description": "Indicates if the price includes VAT"
+                }
+            },
+            "title": "PriceInformation"
+        },
+        "Prices": {
+            "type": "object",
+            "required": [
+                "defaultCurrency",
+                "priceByCountryByCurrency"
+            ],
+            "properties": {
+                "defaultCurrency": {
+                    "type": "string",
+                    "description": "Product default currency (ISO-4217 format)"
+                },
+                "priceByCountryByCurrency": {
+                    "type": "object",
+                    "description": "Product price by currency (ISO-4217) and country (ISO-3166-1 alpha-2); each currency requires a default price",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/PriceInformation"
+                        }
+                    }
+                }
+            },
+            "title": "Prices"
+        },
+        "Product": {
+            "type": "object",
+            "required": [
+                "lifeTime",
+                "prices",
+                "publisherRefId",
+                "sellingStores"
+            ],
+            "properties": {
+                "availableVariables": {
+                    "type": "array",
+                    "description": "Available product variables",
+                    "items": {
+                        "$ref": "#/definitions/Variable"
+                    }
+                },
+                "blackListedCountries": {
+                    "type": "array",
+                    "description": "List of countries not authorized for this product",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "catalogId": {
+                    "type": "string",
+                    "description": "Catalog ID"
+                },
+                "codeName": {
+                    "type": "string",
+                    "description": "Code name of product"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "descriptionId": {
+                    "type": "string",
+                    "description": "Description ID"
+                },
+                "externalContext": {
+                    "type": "string",
+                    "description": "External context"
+                },
+                "forcedCrossSaleProductIds": {
+                    "type": "array",
+                    "description": "List of forced cross-sales product IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "fulfillmentTemplate": {
+                    "type": "string",
+                    "description": "Fulfillment template name"
+                },
+                "genericName": {
+                    "type": "string",
+                    "description": "Name of product"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "lifeTime": {
+                    "type": "string",
+                    "description": "lifeTime"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "nextGenerationOf": {
+                    "type": "array",
+                    "description": "List of old generation IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "Product parent ID",
+                    "readOnly": true
+                },
+                "physical": {
+                    "type": "boolean",
+                    "description": "Indicates if the product is physical/digital"
+                },
+                "priceFunction": {
+                    "type": "string",
+                    "description": "Price function ID"
+                },
+                "prices": {
+                    "description": "Price of product by currency and country",
+                    "$ref": "#/definitions/Prices"
+                },
+                "productFamily": {
+                    "type": "string",
+                    "description": "Product family"
+                },
+                "publisherProductId": {
+                    "type": "string"
+                },
+                "publisherRefId": {
+                    "type": "string",
+                    "description": "Product publisher reference"
+                },
+                "relatedContents": {
+                    "type": "array",
+                    "description": "Links for downloading product-related content file",
+                    "items": {
+                        "$ref": "#/definitions/RelatedContent"
+                    }
+                },
+                "resources": {
+                    "type": "array",
+                    "description": "Product resources",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    }
+                },
+                "salesMode": {
+                    "type": "string",
+                    "description": "Sales mode",
+                    "enum": [
+                        "BILLING_PLAN",
+                        "STANDARD"
+                    ]
+                },
+                "sellingStores": {
+                    "type": "array",
+                    "description": "List of stores selling this product",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "signedProduct": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Product status",
+                    "readOnly": true,
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED"
+                    ]
+                },
+                "subProducts": {
+                    "type": "array",
+                    "description": "List of sub-product IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "subscriptionTemplate": {
+                    "type": "string",
+                    "description": "Subscription template name"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Product type",
+                    "enum": [
+                        "SOFTWARE",
+                        "GAMES",
+                        "CASUAL",
+                        "SERVICE",
+                        "B2C",
+                        "B2B"
+                    ]
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "visualTags": {
+                    "type": "object",
+                    "description": "Visual tags linked to product",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "title": "Product"
+        },
+        "ProductUpdate": {
+            "type": "object",
+            "required": [
+                "lifeTime",
+                "prices",
+                "publisherRefId",
+                "sellingStores"
+            ],
+            "properties": {
+                "availableVariables": {
+                    "type": "array",
+                    "description": "Available product variables",
+                    "items": {
+                        "$ref": "#/definitions/Variable"
+                    }
+                },
+                "blackListedCountries": {
+                    "type": "array",
+                    "description": "List of countries not authorized for this product",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "catalogId": {
+                    "type": "string",
+                    "description": "Catalog ID"
+                },
+                "codeName": {
+                    "type": "string",
+                    "description": "Code name of product"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "defaultLocale": {
+                    "type": "string",
+                    "description": "Default locale of the product"
+                },
+                "descriptionId": {
+                    "type": "string",
+                    "description": "Description ID"
+                },
+                "externalContext": {
+                    "type": "string",
+                    "description": "External context"
+                },
+                "forcedCrossSaleProductIds": {
+                    "type": "array",
+                    "description": "List of forced cross-sales product IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "fulfillmentTemplate": {
+                    "type": "string",
+                    "description": "Fulfillment template name"
+                },
+                "genericName": {
+                    "type": "string",
+                    "description": "Name of product"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "lifeTime": {
+                    "type": "string",
+                    "description": "lifeTime"
+                },
+                "localizedLongDesc": {
+                    "type": "object",
+                    "description": "List of localized long descriptions of the product",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedShortDesc": {
+                    "type": "object",
+                    "description": "List of localized short descriptions of the product",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedThankYouDesc": {
+                    "type": "object",
+                    "description": "List of localized thank you descriptions of the product",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "marketingName": {
+                    "type": "object",
+                    "description": "List of localized marketing names of the product",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "nextGenerationOf": {
+                    "type": "array",
+                    "description": "List of old generation IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "originalId": {
+                    "type": "string"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "Product parent ID",
+                    "readOnly": true
+                },
+                "physical": {
+                    "type": "boolean",
+                    "description": "Indicates if the product is physical/digital"
+                },
+                "priceFunction": {
+                    "type": "string",
+                    "description": "Price function ID"
+                },
+                "prices": {
+                    "description": "Price of product by currency and country",
+                    "$ref": "#/definitions/Prices"
+                },
+                "productFamily": {
+                    "type": "string",
+                    "description": "Product family"
+                },
+                "publisherProductId": {
+                    "type": "string"
+                },
+                "publisherRefId": {
+                    "type": "string",
+                    "description": "Product publisher reference"
+                },
+                "relatedContents": {
+                    "type": "array",
+                    "description": "Links for downloading product-related content file",
+                    "items": {
+                        "$ref": "#/definitions/RelatedContent"
+                    }
+                },
+                "resources": {
+                    "type": "array",
+                    "description": "Product resources",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    }
+                },
+                "salesMode": {
+                    "type": "string",
+                    "description": "Sales mode",
+                    "enum": [
+                        "BILLING_PLAN",
+                        "STANDARD"
+                    ]
+                },
+                "sellingStores": {
+                    "type": "array",
+                    "description": "List of stores selling this product",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "signedProduct": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Product status",
+                    "readOnly": true,
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED"
+                    ]
+                },
+                "subProducts": {
+                    "type": "array",
+                    "description": "List of sub-product IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "subscriptionTemplate": {
+                    "type": "string",
+                    "description": "Subscription template name"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Product type",
+                    "enum": [
+                        "SOFTWARE",
+                        "GAMES",
+                        "CASUAL",
+                        "SERVICE",
+                        "B2C",
+                        "B2B"
+                    ]
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "var": {
+                    "type": "string"
+                },
+                "variantOf": {
+                    "type": "string"
+                },
+                "visualTags": {
+                    "type": "object",
+                    "description": "Visual tags linked to product",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "title": "ProductUpdate"
+        },
+        "PublicParameter": {
+            "type": "object",
+            "required": [
+                "defaultValue",
+                "field",
+                "label",
+                "max",
+                "min",
+                "pattern",
+                "type"
+            ],
+            "properties": {
+                "defaultValue": {
+                    "type": "string",
+                    "description": "Parameter default value"
+                },
+                "field": {
+                    "type": "string",
+                    "description": "Parameter name"
+                },
+                "internalDesc": {
+                    "type": "string",
+                    "description": "Parameter internal description"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Parameter label"
+                },
+                "max": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Maximum value"
+                },
+                "min": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Minimum value"
+                },
+                "pattern": {
+                    "type": "string",
+                    "description": "Pattern value"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Parameter type",
+                    "enum": [
+                        "INTEGER",
+                        "STRING"
+                    ]
+                }
+            },
+            "title": "PublicParameter"
+        },
+        "PublicProduct": {
+            "type": "object",
+            "required": [
+                "lifeTime",
+                "publisherRefId"
+            ],
+            "properties": {
+                "catalogId": {
+                    "type": "string",
+                    "description": "Catalog ID"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "descriptionId": {
+                    "type": "string",
+                    "description": "Description ID"
+                },
+                "discountsStatus": {
+                    "type": "array",
+                    "description": "Discount status",
+                    "items": {
+                        "$ref": "#/definitions/DiscountStatus"
+                    }
+                },
+                "expirationDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Fulfillment's expiration date"
+                },
+                "externalContext": {
+                    "type": "string",
+                    "description": "External context"
+                },
+                "forcedCrossSaleProductIds": {
+                    "type": "array",
+                    "description": "List of forced cross-sales product IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "fulfillmentTemplate": {
+                    "type": "string",
+                    "description": "Fulfillment template name"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "lifeTime": {
+                    "type": "string",
+                    "description": "lifeTime"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "nextGenerationOf": {
+                    "type": "array",
+                    "description": "List of old generation IDs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "Product parent ID",
+                    "readOnly": true
+                },
+                "physical": {
+                    "type": "boolean",
+                    "description": "Indicates if the product is physical/digital"
+                },
+                "previousLineItemId": {
+                    "type": "string",
+                    "description": "Previous line item ID"
+                },
+                "price": {
+                    "description": "Price of the product",
+                    "$ref": "#/definitions/FullPrice"
+                },
+                "priceFunctionExecutionErrorMessage": {
+                    "type": "string",
+                    "description": "Error when executing the price function"
+                },
+                "priceFunctionParameters": {
+                    "type": "array",
+                    "description": "Product parameters",
+                    "items": {
+                        "$ref": "#/definitions/PublicParameter"
+                    }
+                },
+                "priceFunctionParametersValues": {
+                    "type": "object",
+                    "description": "Product value parameters",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "productFamily": {
+                    "type": "string",
+                    "description": "Product family"
+                },
+                "publisherProductId": {
+                    "type": "string"
+                },
+                "publisherRefId": {
+                    "type": "string",
+                    "description": "Product publisher reference"
+                },
+                "relatedContents": {
+                    "type": "array",
+                    "description": "Links for downloading product-related content file",
+                    "items": {
+                        "$ref": "#/definitions/RelatedContent"
+                    }
+                },
+                "resources": {
+                    "type": "array",
+                    "description": "Product resources",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    }
+                },
+                "salesMode": {
+                    "type": "string",
+                    "description": "Sales mode",
+                    "enum": [
+                        "BILLING_PLAN",
+                        "STANDARD"
+                    ]
+                },
+                "signedProduct": {
+                    "type": "string"
+                },
+                "storeId": {
+                    "type": "string",
+                    "description": "Store ID"
+                },
+                "subscriptionTemplate": {
+                    "type": "string",
+                    "description": "Subscription template name"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Product type",
+                    "enum": [
+                        "SOFTWARE",
+                        "GAMES",
+                        "CASUAL",
+                        "SERVICE",
+                        "B2C",
+                        "B2B"
+                    ]
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "variableValues": {
+                    "type": "object",
+                    "description": "Product variable values"
+                },
+                "variables": {
+                    "type": "array",
+                    "description": "Available product variables",
+                    "items": {
+                        "$ref": "#/definitions/Variable"
+                    }
+                },
+                "variantOf": {
+                    "type": "string",
+                    "description": "Variant of"
+                },
+                "visualTags": {
+                    "type": "object",
+                    "description": "Visual tags linked to product",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "title": "PublicProduct"
+        },
+        "RecapEntry": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "targetValue": {
+                    "type": "string"
+                }
+            },
+            "title": "RecapEntry"
+        },
+        "RelatedContent": {
+            "type": "object",
+            "required": [
+                "file",
+                "label"
+            ],
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "description": "Download link or filename with extension"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Explanation of what this file is"
+                }
+            },
+            "title": "RelatedContent"
+        },
+        "Resource": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "URL of the asset"
+                }
+            },
+            "title": "Resource"
+        },
+        "SearchResult\u00abCustomizedProduct\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomizedProduct"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abCustomizedProduct\u00bb"
+        },
+        "SearchResult\u00abDescription\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Description"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDescription\u00bb"
+        },
+        "SearchResult\u00abDocument\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Document"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDocument\u00bb"
+        },
+        "SearchResult\u00abPriceFunction\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PriceFunction"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abPriceFunction\u00bb"
+        },
+        "SearchResult\u00abProduct\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abProduct\u00bb"
+        },
+        "SearchResult\u00abPublicProduct\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PublicProduct"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abPublicProduct\u00bb"
+        },
+        "SearchResult\u00abRecapEntry\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RecapEntry"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abRecapEntry\u00bb"
+        },
+        "SearchResult\u00abobject\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abobject\u00bb"
+        },
+        "Variable": {
+            "type": "object",
+            "required": [
+                "defaultValue",
+                "field",
+                "labels",
+                "localizedValue",
+                "type"
+            ],
+            "properties": {
+                "defaultValue": {
+                    "type": "object",
+                    "description": "Name of variable"
+                },
+                "field": {
+                    "type": "string",
+                    "description": "Variable name"
+                },
+                "internalDesc": {
+                    "type": "string",
+                    "description": "Variable internal description"
+                },
+                "labels": {
+                    "type": "object",
+                    "description": "Variable labels",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "localizedValue": {
+                    "type": "object",
+                    "description": "Variable localized value",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Variable type",
+                    "enum": [
+                        "LIST",
+                        "RANGE",
+                        "BOOL"
+                    ]
+                },
+                "value": {
+                    "type": "object",
+                    "description": "Possible values of variable"
+                }
+            },
+            "title": "Variable"
+        },
+        "VariableDescription": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "labels": {
+                    "type": "object",
+                    "description": "Short descriptions",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "variableValueDescriptions": {
+                    "type": "array",
+                    "description": "Descriptions of variable values",
+                    "items": {
+                        "$ref": "#/definitions/VariableValueDescription"
+                    }
+                }
+            },
+            "title": "VariableDescription"
+        },
+        "VariableValueDescription": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "descValue": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description"
+                },
+                "localizedValue": {
+                    "type": "object",
+                    "description": "Localized values of the variable",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "title": "VariableValueDescription"
+        },
+        "View": {
+            "type": "object",
+            "properties": {
+                "contentType": {
+                    "type": "string"
+                }
+            },
+            "title": "View"
+        }
+    }
+}
