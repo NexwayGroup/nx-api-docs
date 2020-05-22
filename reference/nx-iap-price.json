@@ -1,1 +1,878 @@
-{"swagger":"2.0","info":{"description":"API to manage prices","version":"1.0","title":"Nexway Monetize","license":{"name":"Nexway License Version 1.0"}},"host":"api.staging.nexway.build","basePath":"/","tags":[{"name":"Price","description":"Api CRUD Price"}],"schemes":["https"],"paths":{"/prices-iap-7734":{"get":{"tags":["Price"],"summary":"Get items","operationId":"getItems","produces":["application/json"],"parameters":[{"name":"Price query params","description":"Search by fields available for Price resource","required":false,"schema":{"$ref":"#/definitions/Price"}},{"name":"endingDate","description":"Search by end date of the price","required":false,"schema":{"type":"string"}},{"in":"body","name":"predicate","description":"predicate","required":false,"schema":{"type":"object"}},{"name":"startingDate","description":"Search by start date of the price","required":false,"schema":{"type":"string"}},{"name":"target","in":"query","description":"target","required":false,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/SearchResult«Price»"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"300"},"post":{"tags":["Price"],"summary":"Create an item","operationId":"createItem","consumes":["application/json"],"produces":["application/json"],"parameters":[{"in":"body","name":"request","description":"request","required":true,"schema":{"$ref":"#/definitions/Price"}}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/Price"}},"201":{"description":"Success","schema":{"$ref":"#/definitions/Price"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"300"}},"/prices-iap-7734/best":{"get":{"tags":["Price"],"summary":"getBestPrice","operationId":"getBestPriceUsingGET","produces":["*/*"],"parameters":[{"name":"country","in":"query","description":"country","required":true,"type":"string"},{"name":"currency","in":"query","description":"currency","required":false,"type":"string"},{"name":"customerId","in":"query","description":"customerId","required":true,"type":"string"},{"name":"date","in":"query","description":"date","required":false,"type":"string","format":"date-time"},{"name":"defaultCurrency","in":"query","description":"defaultCurrency","required":false,"type":"string"},{"name":"productId","in":"query","description":"productId","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/Price"}}},"deprecated":false}},"/prices-iap-7734/distinct":{"get":{"tags":["Price"],"summary":"Get distinct values for a given field","operationId":"distinct","produces":["application/json"],"parameters":[{"in":"body","name":"predicate","description":"predicate","required":false,"schema":{"type":"object"}},{"name":"target","in":"query","description":"target","required":false,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/SearchResult«object»"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"100"}},"/prices-iap-7734/recap":{"get":{"tags":["Price"],"summary":"Get recap quantities for a given field","operationId":"recap","produces":["application/json"],"parameters":[{"in":"body","name":"predicate","description":"predicate","required":false,"schema":{"type":"object"}},{"name":"target","in":"query","description":"target","required":true,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/SearchResult«RecapEntry»"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"150"}},"/prices-iap-7734/unwind":{"get":{"tags":["Price"],"summary":"Search unwind for a given field","operationId":"unwind","produces":["application/json"],"parameters":[{"in":"body","name":"predicate","description":"predicate","required":false,"schema":{"type":"object"}},{"name":"target","in":"query","description":"target","required":true,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/SearchResult«Document»"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"150"}},"/prices-iap-7734/{id}":{"get":{"tags":["Price"],"summary":"Get item","operationId":"getItem","produces":["application/json"],"parameters":[{"name":"id","in":"path","description":"id","required":true,"type":"string"}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/Price"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"200"},"put":{"tags":["Price"],"summary":"Update item","operationId":"updateItem","consumes":["application/json"],"produces":["application/json"],"parameters":[{"name":"id","in":"path","description":"id","required":true,"type":"string"},{"in":"body","name":"updateRequestItem","description":"updateRequestItem","required":true,"schema":{"$ref":"#/definitions/Price"}}],"responses":{"200":{"description":"Success","schema":{"$ref":"#/definitions/Price"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"400"},"delete":{"tags":["Price"],"summary":"Delete item","operationId":"deleteItem","produces":["application/json"],"parameters":[{"name":"id","in":"path","description":"id","required":true,"type":"string"}],"responses":{"200":{"description":"OK","schema":{"type":"object"}},"204":{"description":"No Content","schema":{"type":"object"}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"},"500":{"description":"Failure"}},"deprecated":false,"x-operationWeight":"500"}}},"securityDefinitions":{"Bearer":{"type":"oauth2","authorizationUrl":"http://nx-keycloak/iam/tokens","flow":"implicit","scopes":{"global":"global"}}},"definitions":{"Document":{"type":"object","title":"Document","additionalProperties":{"type":"object"}},"Entry«string,JsonNode»":{"type":"object","properties":{"key":{"type":"string"},"value":{"$ref":"#/definitions/JsonNode"}},"title":"Entry«string,JsonNode»"},"Event":{"type":"object","properties":{"affectedIds":{"type":"array","items":{"type":"string"}},"event":{"type":"string","enum":["CREATED","UPDATED","ARCHIVED"]},"previousData":{"$ref":"#/definitions/Price"},"when":{"type":"string","format":"date-time"}},"title":"Event"},"JsonNode":{"type":"object","properties":{"array":{"type":"boolean"},"bigDecimal":{"type":"boolean"},"bigInteger":{"type":"boolean"},"binary":{"type":"boolean"},"boolean":{"type":"boolean"},"containerNode":{"type":"boolean"},"double":{"type":"boolean"},"empty":{"type":"boolean"},"float":{"type":"boolean"},"floatingPointNumber":{"type":"boolean"},"int":{"type":"boolean"},"integralNumber":{"type":"boolean"},"long":{"type":"boolean"},"missingNode":{"type":"boolean"},"nodeType":{"type":"string","enum":["ARRAY","BINARY","BOOLEAN","MISSING","NULL","NUMBER","OBJECT","POJO","STRING"]},"null":{"type":"boolean"},"number":{"type":"boolean"},"object":{"type":"boolean"},"pojo":{"type":"boolean"},"short":{"type":"boolean"},"textual":{"type":"boolean"},"valueNode":{"type":"boolean"}},"title":"JsonNode"},"Price":{"type":"object","required":["currency","endDate","productId","startDate","value"],"properties":{"archived":{"type":"boolean","description":"Indicator if the price was removed/archived"},"country":{"type":"string","description":"Country code"},"createDate":{"type":"string","format":"date-time"},"currency":{"type":"string","description":"Currency"},"customerId":{"type":"string"},"dbVersion":{"type":"integer","format":"int64"},"endDate":{"type":"string","format":"date-time","description":"Price end date"},"endingDate":{"type":"string"},"field":{"$ref":"#/definitions/Entry«string,JsonNode»"},"history":{"type":"array","description":"Historical data on the price","items":{"$ref":"#/definitions/Event"}},"id":{"type":"string"},"lastUpdateReason":{"type":"string"},"modelVersion":{"type":"string"},"msrp":{"type":"number","format":"double","description":"Recommended price"},"originalId":{"type":"string"},"productId":{"type":"string","description":"Product identifier"},"startDate":{"type":"string","format":"date-time","description":"Price start date"},"startingDate":{"type":"string"},"updateDate":{"type":"string","format":"date-time"},"value":{"type":"number","format":"double","description":"Regular price"},"vatIncluded":{"type":"boolean","description":"Tax is included in price"}},"title":"Price"},"RecapEntry":{"type":"object","properties":{"count":{"type":"integer","format":"int32"},"targetValue":{"type":"string"}},"title":"RecapEntry"},"SearchResult«Document»":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/definitions/Document"}},"last":{"type":"boolean"},"number":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"}},"title":"SearchResult«Document»"},"SearchResult«Price»":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/definitions/Price"}},"last":{"type":"boolean"},"number":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"}},"title":"SearchResult«Price»"},"SearchResult«RecapEntry»":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/definitions/RecapEntry"}},"last":{"type":"boolean"},"number":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"}},"title":"SearchResult«RecapEntry»"},"SearchResult«object»":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object"}},"last":{"type":"boolean"},"number":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"}},"title":"SearchResult«object»"}}}
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Description for IAP must be overwritten",
+        "version": "1.0",
+        "title": "Nexway Monetize",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        }
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Price",
+            "description": "Api CRUD Price"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/prices": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abPrice\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/prices/best": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "getBestPrice",
+                "operationId": "getBestPriceUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "country",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "currency",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "customerId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "date",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "defaultCurrency",
+                        "in": "query",
+                        "description": "defaultCurrency",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "marketingCampaignId",
+                        "in": "query",
+                        "description": "marketingCampaignId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productId",
+                        "in": "query",
+                        "description": "productId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/prices/distinct": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/prices/recap": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/prices/unwind": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "predicate",
+                        "description": "predicate",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/prices/{id}": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Price"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "oauth2",
+            "authorizationUrl": "http://nx-keycloak/iam/tokens",
+            "flow": "implicit",
+            "scopes": {
+                "global": "global"
+            }
+        }
+    },
+    "definitions": {
+        "Document": {
+            "type": "object",
+            "title": "Document",
+            "additionalProperties": {
+                "type": "object"
+            }
+        },
+        "Entry\u00abstring,JsonNode\u00bb": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/definitions/JsonNode"
+                }
+            },
+            "title": "Entry\u00abstring,JsonNode\u00bb"
+        },
+        "Event": {
+            "type": "object",
+            "properties": {
+                "affectedIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "event": {
+                    "type": "string",
+                    "enum": [
+                        "CREATED",
+                        "UPDATED",
+                        "ARCHIVED"
+                    ]
+                },
+                "previousData": {
+                    "$ref": "#/definitions/Price"
+                },
+                "when": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "title": "Event"
+        },
+        "JsonNode": {
+            "type": "object",
+            "properties": {
+                "array": {
+                    "type": "boolean"
+                },
+                "bigDecimal": {
+                    "type": "boolean"
+                },
+                "bigInteger": {
+                    "type": "boolean"
+                },
+                "binary": {
+                    "type": "boolean"
+                },
+                "boolean": {
+                    "type": "boolean"
+                },
+                "containerNode": {
+                    "type": "boolean"
+                },
+                "double": {
+                    "type": "boolean"
+                },
+                "empty": {
+                    "type": "boolean"
+                },
+                "float": {
+                    "type": "boolean"
+                },
+                "floatingPointNumber": {
+                    "type": "boolean"
+                },
+                "int": {
+                    "type": "boolean"
+                },
+                "integralNumber": {
+                    "type": "boolean"
+                },
+                "long": {
+                    "type": "boolean"
+                },
+                "missingNode": {
+                    "type": "boolean"
+                },
+                "nodeType": {
+                    "type": "string",
+                    "enum": [
+                        "ARRAY",
+                        "BINARY",
+                        "BOOLEAN",
+                        "MISSING",
+                        "NULL",
+                        "NUMBER",
+                        "OBJECT",
+                        "POJO",
+                        "STRING"
+                    ]
+                },
+                "null": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "boolean"
+                },
+                "object": {
+                    "type": "boolean"
+                },
+                "pojo": {
+                    "type": "boolean"
+                },
+                "short": {
+                    "type": "boolean"
+                },
+                "textual": {
+                    "type": "boolean"
+                },
+                "valueNode": {
+                    "type": "boolean"
+                }
+            },
+            "title": "JsonNode"
+        },
+        "Price": {
+            "type": "object",
+            "required": [
+                "currency",
+                "endDate",
+                "productId",
+                "startDate",
+                "value"
+            ],
+            "properties": {
+                "archived": {
+                    "type": "boolean",
+                    "description": "Indicator if the price was removed/archived"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Country code"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "currency": {
+                    "type": "string",
+                    "description": "Currency"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Price end date"
+                },
+                "endingDate": {
+                    "type": "string"
+                },
+                "field": {
+                    "$ref": "#/definitions/Entry\u00abstring,JsonNode\u00bb"
+                },
+                "history": {
+                    "type": "array",
+                    "description": "Historical data on the price",
+                    "items": {
+                        "$ref": "#/definitions/Event"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "marketingCampaignId": {
+                    "type": "string",
+                    "description": "Marketing campaign Id"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "msrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Recommended price"
+                },
+                "originalId": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "string",
+                    "description": "Product identifier"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Price start date"
+                },
+                "startingDate": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "value": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Regular price"
+                },
+                "vatIncluded": {
+                    "type": "boolean",
+                    "description": "Tax is included in price"
+                }
+            },
+            "title": "Price"
+        },
+        "RecapEntry": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "targetValue": {
+                    "type": "string"
+                }
+            },
+            "title": "RecapEntry"
+        },
+        "SearchResult\u00abDocument\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Document"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDocument\u00bb"
+        },
+        "SearchResult\u00abPrice\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Price"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abPrice\u00bb"
+        },
+        "SearchResult\u00abRecapEntry\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RecapEntry"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abRecapEntry\u00bb"
+        },
+        "SearchResult\u00abobject\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abobject\u00bb"
+        }
+    }
+}
