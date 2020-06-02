@@ -1,16 +1,11 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Api Documentation",
+        "description": "API to manage products",
         "version": "1.0",
-        "title": "Api Documentation",
-        "termsOfService": "urn:tos",
-        "contact": {
-            
-        },
+        "title": "Product service",
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+            "name": "Nexway License Version 1.0"
         }
     },
     "host": "api.staging.nexway.build",
@@ -35,282 +30,12 @@
         {
             "name": "Public",
             "description": "Api Public Product"
-        },
-        {
-            "name": "basic-error-controller",
-            "description": "Basic Error Controller"
-        },
-        {
-            "name": "operation-handler",
-            "description": "Operation Handler"
         }
     ],
+    "schemes": [
+        "https"
+    ],
     "paths": {
-        "/error": {
-            "get": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingGET",
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "head": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingHEAD",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "post": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPOST",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "put": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPUT",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "delete": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingDELETE",
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "options": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingOPTIONS",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "patch": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "errorHtml",
-                "operationId": "errorHtmlUsingPATCH",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ModelAndView"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/info": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
         "/products": {
             "get": {
                 "tags": [
@@ -323,65 +48,137 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
+                        "name": "blackListedCountries",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
+                        "description": "Filter products blacklisted in specific country, may be multiple occurrences of this param",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "unpaged",
+                        "name": "catalogId",
                         "in": "query",
+                        "description": "Filter products by catalog ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "codeName",
+                        "in": "query",
+                        "description": "Filter products by code name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Filter products by customerId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "descriptionId",
+                        "in": "query",
+                        "description": "Filter products by description ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fulfillmentTemplate",
+                        "in": "query",
+                        "description": "Filter products by fulfillment template name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "genericName",
+                        "in": "query",
+                        "description": "Filter products by generic name of the product",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lifeTime",
+                        "in": "query",
+                        "description": "Filter products by subscription lifetime",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "Filter products by parentId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "physical",
+                        "in": "query",
+                        "description": "Filter physical products",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "name": "priceFunction",
+                        "in": "query",
+                        "description": "Filter products by price function ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productFamily",
+                        "in": "query",
+                        "description": "Filter products by product family",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "publisherRefId",
+                        "in": "query",
+                        "description": "Filter products by publisher reference ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "salesMode",
+                        "in": "query",
+                        "description": "Filter products by sales mode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sellingStore",
+                        "in": "query",
+                        "description": "Filter products by availability in stores, may be multiple occurrences of this param",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter products by status (ENABLED/DISABLED)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subscriptionTemplate",
+                        "in": "query",
+                        "description": "Filter products by subscription template",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter products by product type",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -472,65 +269,60 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
+                        "name": "catalogId",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
+                        "description": "Filter products by catalog ID",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "unpaged",
+                        "name": "customerId",
                         "in": "query",
+                        "description": "Filter products by customer ID",
                         "required": false,
-                        "type": "boolean"
+                        "type": "string"
+                    },
+                    {
+                        "name": "fulfillmentTemplate",
+                        "in": "query",
+                        "description": "Filter products by fulfillment template name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productId",
+                        "in": "query",
+                        "description": "Filter products by product ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sellingStore",
+                        "in": "query",
+                        "description": "Filter products by availability in stores, may be multiple occurrences of this param",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter products by status (ENABLED/DISABLED)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subscriptionTemplate",
+                        "in": "query",
+                        "description": "Filter products by subscription template",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -621,65 +413,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -718,65 +456,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -815,65 +499,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -979,9 +609,6 @@
                             "$ref": "#/definitions/CustomizedProduct"
                         }
                     },
-                    "201": {
-                        "description": "Created"
-                    },
                     "401": {
                         "description": "Unauthorized"
                     },
@@ -1058,65 +685,32 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
+                        "name": "catalogId",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
+                        "description": "Filter descriptions by catalogId",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "unpaged",
+                        "name": "customerId",
                         "in": "query",
+                        "description": "Filter descriptions by customerId",
                         "required": false,
-                        "type": "boolean"
+                        "type": "string"
+                    },
+                    {
+                        "name": "fallbackLocale",
+                        "in": "query",
+                        "description": "Filter descriptions by fallback locale",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1207,65 +801,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1304,65 +844,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1401,56 +887,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "req",
                         "in": "query",
                         "description": "req",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1462,12 +903,6 @@
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     },
                     "404": {
                         "description": "Not Found"
@@ -1492,65 +927,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1656,9 +1037,6 @@
                             "$ref": "#/definitions/Description"
                         }
                     },
-                    "201": {
-                        "description": "Created"
-                    },
                     "401": {
                         "description": "Unauthorized"
                     },
@@ -1735,65 +1113,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1834,15 +1158,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "in": "body",
-                        "name": "data",
-                        "description": "data",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
                     {
                         "name": "dryRun",
                         "in": "query",
@@ -1915,65 +1230,25 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
+                        "name": "customerId",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
+                        "description": "Filter price functions by customerId",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "unpaged",
+                        "name": "name",
                         "in": "query",
+                        "description": "Filter price functions by name",
                         "required": false,
-                        "type": "boolean"
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -2064,65 +1339,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2161,65 +1382,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2258,65 +1425,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2422,9 +1535,6 @@
                             "$ref": "#/definitions/PriceFunction"
                         }
                     },
-                    "201": {
-                        "description": "Created"
-                    },
                     "401": {
                         "description": "Unauthorized"
                     },
@@ -2501,65 +1611,137 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
+                        "name": "blackListedCountries",
                         "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
+                        "description": "Filter products blacklisted in specific country, may be multiple occurrences of this param",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "unpaged",
+                        "name": "catalogId",
                         "in": "query",
+                        "description": "Filter products by catalog ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "codeName",
+                        "in": "query",
+                        "description": "Filter products by code name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Filter products by customerId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "descriptionId",
+                        "in": "query",
+                        "description": "Filter products by description ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fulfillmentTemplate",
+                        "in": "query",
+                        "description": "Filter products by fulfillment template name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "genericName",
+                        "in": "query",
+                        "description": "Filter products by generic name of the product",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lifeTime",
+                        "in": "query",
+                        "description": "Filter products by subscription lifetime",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "query",
+                        "description": "Filter products by parentId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "physical",
+                        "in": "query",
+                        "description": "Filter physical products",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "name": "priceFunction",
+                        "in": "query",
+                        "description": "Filter products by price function ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productFamily",
+                        "in": "query",
+                        "description": "Filter products by product family",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "publisherRefId",
+                        "in": "query",
+                        "description": "Filter products by publisher reference ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "salesMode",
+                        "in": "query",
+                        "description": "Filter products by sales mode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sellingStore",
+                        "in": "query",
+                        "description": "Filter products by availability in stores, may be multiple occurrences of this param",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter products by status (ENABLED/DISABLED)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subscriptionTemplate",
+                        "in": "query",
+                        "description": "Filter products by subscription template",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter products by product type",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -2658,12 +1840,6 @@
                     "400": {
                         "description": "Bad Request"
                     },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
                     "404": {
                         "description": "Not Found"
                     },
@@ -2712,12 +1888,6 @@
                     "400": {
                         "description": "Bad Request"
                     },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
                     "404": {
                         "description": "Not Found"
                     },
@@ -2741,65 +1911,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2838,65 +1954,11 @@
                 ],
                 "parameters": [
                     {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
                         "name": "target",
                         "in": "query",
                         "description": "target",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -3002,9 +2064,6 @@
                             "$ref": "#/definitions/Product"
                         }
                     },
-                    "201": {
-                        "description": "Created"
-                    },
                     "401": {
                         "description": "Unauthorized"
                     },
@@ -3098,12 +2157,6 @@
                     "400": {
                         "description": "Bad Request"
                     },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
                     "404": {
                         "description": "Not Found"
                     },
@@ -3140,15 +2193,6 @@
                         "description": "id",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
                     }
                 ],
                 "responses": {
@@ -3161,12 +2205,6 @@
                     "400": {
                         "description": "Bad Request"
                     },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
                     "404": {
                         "description": "Not Found"
                     },
@@ -3177,97 +2215,15 @@
                 "deprecated": false,
                 "x-operationWeight": "400"
             }
-        },
-        "/status": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET_2",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/status/**": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET_1",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "oauth2",
+            "authorizationUrl": "https://api.staging.nexway.build/iam/tokens",
+            "flow": "implicit",
+            "scopes": {
+                "global": "global"
             }
         }
     },
@@ -3367,7 +2323,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "Description"
+                    "description": "Description's comment"
                 },
                 "fallbackLocale": {
                     "type": "string",
@@ -3381,76 +2337,83 @@
                 },
                 "localizedLongDesc": {
                     "type": "object",
-                    "description": "Long descriptions",
+                    "description": "Localized long descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedManualRenewalEmailDesc": {
                     "type": "object",
-                    "description": "Manual Renewal email descriptions",
+                    "description": "Localized manual Renewal email descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedMarketingName": {
                     "type": "object",
-                    "description": "Marketing name descriptions",
+                    "description": "Localized marketing name descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedPurchaseEmailDesc": {
                     "type": "object",
-                    "description": "Purchase email descriptions",
+                    "description": "Localized purchase email descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedShortDesc": {
                     "type": "object",
-                    "description": "Short descriptions",
+                    "description": "Localized short descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedSubscriptionEmailDesc": {
                     "type": "object",
-                    "description": "Subscription email descriptions",
+                    "description": "Localized subscription email descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "localizedThankYouDesc": {
                     "type": "object",
-                    "description": "Thank-you page descriptions",
+                    "description": "Localized thank you page descriptions",
                     "additionalProperties": {
                         "type": "string"
                     }
                 },
                 "longDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Long description (fallback language used)"
                 },
                 "manualRenewalEmailDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Manual renewal email description (fallback language used)"
                 },
                 "marketingName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Product Name (fallback language used)"
                 },
                 "modelVersion": {
                     "type": "string"
                 },
                 "purchaseEmailDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Purchase email description (fallback language used)"
                 },
                 "shortDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Short description (fallback language used)"
                 },
                 "subscriptionEmailDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Subscription email description (fallback language used)"
                 },
                 "thankYouDesc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Thank you page description (fallback language used)"
                 },
                 "updateDate": {
                     "type": "string",
@@ -3575,11 +2538,6 @@
                     "description": "Order of variables in the matrix",
                     "readOnly": true
                 },
-                "matrix": {
-                    "type": "object",
-                    "description": "Matrix",
-                    "readOnly": true
-                },
                 "matrixVariables": {
                     "type": "array",
                     "description": "List of variables",
@@ -3590,106 +2548,6 @@
                 }
             },
             "title": "Matrix"
-        },
-        "ModelAndView": {
-            "type": "object",
-            "properties": {
-                "empty": {
-                    "type": "boolean"
-                },
-                "model": {
-                    "type": "object"
-                },
-                "modelMap": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "object"
-                    }
-                },
-                "reference": {
-                    "type": "boolean"
-                },
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "100 CONTINUE",
-                        "101 SWITCHING_PROTOCOLS",
-                        "102 PROCESSING",
-                        "103 CHECKPOINT",
-                        "200 OK",
-                        "201 CREATED",
-                        "202 ACCEPTED",
-                        "203 NON_AUTHORITATIVE_INFORMATION",
-                        "204 NO_CONTENT",
-                        "205 RESET_CONTENT",
-                        "206 PARTIAL_CONTENT",
-                        "207 MULTI_STATUS",
-                        "208 ALREADY_REPORTED",
-                        "226 IM_USED",
-                        "300 MULTIPLE_CHOICES",
-                        "301 MOVED_PERMANENTLY",
-                        "302 FOUND",
-                        "302 MOVED_TEMPORARILY",
-                        "303 SEE_OTHER",
-                        "304 NOT_MODIFIED",
-                        "305 USE_PROXY",
-                        "307 TEMPORARY_REDIRECT",
-                        "308 PERMANENT_REDIRECT",
-                        "400 BAD_REQUEST",
-                        "401 UNAUTHORIZED",
-                        "402 PAYMENT_REQUIRED",
-                        "403 FORBIDDEN",
-                        "404 NOT_FOUND",
-                        "405 METHOD_NOT_ALLOWED",
-                        "406 NOT_ACCEPTABLE",
-                        "407 PROXY_AUTHENTICATION_REQUIRED",
-                        "408 REQUEST_TIMEOUT",
-                        "409 CONFLICT",
-                        "410 GONE",
-                        "411 LENGTH_REQUIRED",
-                        "412 PRECONDITION_FAILED",
-                        "413 PAYLOAD_TOO_LARGE",
-                        "413 REQUEST_ENTITY_TOO_LARGE",
-                        "414 URI_TOO_LONG",
-                        "414 REQUEST_URI_TOO_LONG",
-                        "415 UNSUPPORTED_MEDIA_TYPE",
-                        "416 REQUESTED_RANGE_NOT_SATISFIABLE",
-                        "417 EXPECTATION_FAILED",
-                        "418 I_AM_A_TEAPOT",
-                        "419 INSUFFICIENT_SPACE_ON_RESOURCE",
-                        "420 METHOD_FAILURE",
-                        "421 DESTINATION_LOCKED",
-                        "422 UNPROCESSABLE_ENTITY",
-                        "423 LOCKED",
-                        "424 FAILED_DEPENDENCY",
-                        "425 TOO_EARLY",
-                        "426 UPGRADE_REQUIRED",
-                        "428 PRECONDITION_REQUIRED",
-                        "429 TOO_MANY_REQUESTS",
-                        "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
-                        "451 UNAVAILABLE_FOR_LEGAL_REASONS",
-                        "500 INTERNAL_SERVER_ERROR",
-                        "501 NOT_IMPLEMENTED",
-                        "502 BAD_GATEWAY",
-                        "503 SERVICE_UNAVAILABLE",
-                        "504 GATEWAY_TIMEOUT",
-                        "505 HTTP_VERSION_NOT_SUPPORTED",
-                        "506 VARIANT_ALSO_NEGOTIATES",
-                        "507 INSUFFICIENT_STORAGE",
-                        "508 LOOP_DETECTED",
-                        "509 BANDWIDTH_LIMIT_EXCEEDED",
-                        "510 NOT_EXTENDED",
-                        "511 NETWORK_AUTHENTICATION_REQUIRED"
-                    ]
-                },
-                "view": {
-                    "$ref": "#/definitions/View"
-                },
-                "viewName": {
-                    "type": "string"
-                }
-            },
-            "title": "ModelAndView"
         },
         "Parameter": {
             "type": "object",
@@ -4008,7 +2866,6 @@
                 "status": {
                     "type": "string",
                     "description": "Product status",
-                    "readOnly": true,
                     "enum": [
                         "ENABLED",
                         "DISABLED"
@@ -4237,7 +3094,6 @@
                 "status": {
                     "type": "string",
                     "description": "Product status",
-                    "readOnly": true,
                     "enum": [
                         "ENABLED",
                         "DISABLED"
@@ -4833,17 +3689,12 @@
         "Variable": {
             "type": "object",
             "required": [
-                "defaultValue",
                 "field",
                 "labels",
                 "localizedValue",
                 "type"
             ],
             "properties": {
-                "defaultValue": {
-                    "type": "object",
-                    "description": "Name of variable"
-                },
                 "field": {
                     "type": "string",
                     "description": "Variable name"
@@ -4877,10 +3728,6 @@
                         "RANGE",
                         "BOOL"
                     ]
-                },
-                "value": {
-                    "type": "object",
-                    "description": "Possible values of variable"
                 }
             },
             "title": "Variable"
@@ -4937,15 +3784,6 @@
                 }
             },
             "title": "VariableValueDescription"
-        },
-        "View": {
-            "type": "object",
-            "properties": {
-                "contentType": {
-                    "type": "string"
-                }
-            },
-            "title": "View"
         }
     }
 }
