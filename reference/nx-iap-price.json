@@ -55,7 +55,7 @@
                     {
                         "name": "endingDate",
                         "in": "query",
-                        "description": "Filter by end date of the price",
+                        "description": "Filter by end date of the price. You can use date ranges by using < or << operator, examples: endingDate=XXXX< will return prices ending after XXXX, endingDate=<XXXX will return prices ending before XXXX, endingDate=XXXX<<YYYYY will return prices ending between XXXX and YYYY",
                         "required": false,
                         "type": "string"
                     },
@@ -83,7 +83,7 @@
                     {
                         "name": "startingDate",
                         "in": "query",
-                        "description": "Filter by start date of the price",
+                        "description": "Filter by start date of the price. You can use date ranges by using < or << operator, examples: startingDate=XXXX< will return prices starting after XXXX, startingDate=<XXXX will return prices starting before XXXX, startingDate=XXXX<<YYYYY will return prices starting between XXXX and YYYY",
                         "required": false,
                         "type": "string"
                     },
@@ -190,8 +190,8 @@
                 "tags": [
                     "Price"
                 ],
-                "summary": "getBestPrice",
-                "operationId": "getBestPriceUsingGET",
+                "summary": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
+                "operationId": "getBestPrice",
                 "produces": [
                     "*/*"
                 ],
@@ -199,16 +199,18 @@
                     {
                         "name": "country",
                         "in": "query",
-                        "description": "country",
-                        "required": true,
-                        "type": "string"
+                        "description": "Country code in ISO 3166-2 format, example: FR",
+                        "required": false,
+                        "type": "string",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "currency",
                         "in": "query",
-                        "description": "currency",
+                        "description": "Currency code in ISO-4217 format, example: USD",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "customerId",
@@ -220,17 +222,19 @@
                     {
                         "name": "date",
                         "in": "query",
-                        "description": "date",
+                        "description": "Effective date in ISO-8601 format, examples: 2020-10-14, 2020-10-14T12:00:00Z",
                         "required": false,
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "defaultCurrency",
                         "in": "query",
-                        "description": "defaultCurrency",
+                        "description": "Default product currency to fallback in ISO-4217 format",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "marketingCampaignId",
@@ -549,18 +553,6 @@
                 "type": "object"
             }
         },
-        "Entry\u00abstring,JsonNode\u00bb": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string"
-                },
-                "value": {
-                    "$ref": "#/definitions/JsonNode"
-                }
-            },
-            "title": "Entry\u00abstring,JsonNode\u00bb"
-        },
         "Event": {
             "type": "object",
             "properties": {
@@ -588,89 +580,6 @@
             },
             "title": "Event"
         },
-        "JsonNode": {
-            "type": "object",
-            "properties": {
-                "array": {
-                    "type": "boolean"
-                },
-                "bigDecimal": {
-                    "type": "boolean"
-                },
-                "bigInteger": {
-                    "type": "boolean"
-                },
-                "binary": {
-                    "type": "boolean"
-                },
-                "boolean": {
-                    "type": "boolean"
-                },
-                "containerNode": {
-                    "type": "boolean"
-                },
-                "double": {
-                    "type": "boolean"
-                },
-                "empty": {
-                    "type": "boolean"
-                },
-                "float": {
-                    "type": "boolean"
-                },
-                "floatingPointNumber": {
-                    "type": "boolean"
-                },
-                "int": {
-                    "type": "boolean"
-                },
-                "integralNumber": {
-                    "type": "boolean"
-                },
-                "long": {
-                    "type": "boolean"
-                },
-                "missingNode": {
-                    "type": "boolean"
-                },
-                "nodeType": {
-                    "type": "string",
-                    "enum": [
-                        "ARRAY",
-                        "BINARY",
-                        "BOOLEAN",
-                        "MISSING",
-                        "NULL",
-                        "NUMBER",
-                        "OBJECT",
-                        "POJO",
-                        "STRING"
-                    ]
-                },
-                "null": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "boolean"
-                },
-                "object": {
-                    "type": "boolean"
-                },
-                "pojo": {
-                    "type": "boolean"
-                },
-                "short": {
-                    "type": "boolean"
-                },
-                "textual": {
-                    "type": "boolean"
-                },
-                "valueNode": {
-                    "type": "boolean"
-                }
-            },
-            "title": "JsonNode"
-        },
         "Price": {
             "type": "object",
             "required": [
@@ -687,7 +596,7 @@
                 },
                 "country": {
                     "type": "string",
-                    "description": "Country code"
+                    "description": "Country code in ISO 3166-2 format"
                 },
                 "createDate": {
                     "type": "string",
@@ -695,7 +604,7 @@
                 },
                 "currency": {
                     "type": "string",
-                    "description": "Currency"
+                    "description": "Currency code in ISO-4217 format"
                 },
                 "customerId": {
                     "type": "string"
@@ -707,13 +616,7 @@
                 "endDate": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Price end date"
-                },
-                "endingDate": {
-                    "type": "string"
-                },
-                "field": {
-                    "$ref": "#/definitions/Entry\u00abstring,JsonNode\u00bb"
+                    "description": "Price end date timestamp (example: 1589439239780)"
                 },
                 "history": {
                     "type": "array",
@@ -750,10 +653,7 @@
                 "startDate": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Price start date"
-                },
-                "startingDate": {
-                    "type": "string"
+                    "description": "Price start date timestamp (example: 1589439239780)"
                 },
                 "updateDate": {
                     "type": "string",
