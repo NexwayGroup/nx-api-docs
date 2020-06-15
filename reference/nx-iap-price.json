@@ -190,7 +190,8 @@
                 "tags": [
                     "Price"
                 ],
-                "summary": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
+                "summary": "Get best price for parameters",
+                "description": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
                 "operationId": "getBestPrice",
                 "produces": [
                     "*/*"
@@ -200,7 +201,7 @@
                         "name": "country",
                         "in": "query",
                         "description": "Country code in ISO 3166-2 format, example: FR",
-                        "required": false,
+                        "required": true,
                         "type": "string",
                         "allowEmptyValue": false
                     },
@@ -215,9 +216,10 @@
                     {
                         "name": "customerId",
                         "in": "query",
-                        "description": "customerId",
+                        "description": "ID of the customer",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "date",
@@ -239,16 +241,18 @@
                     {
                         "name": "marketingCampaignId",
                         "in": "query",
-                        "description": "marketingCampaignId",
+                        "description": "ID of marketing campaign",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "allowEmptyValue": false
                     },
                     {
                         "name": "productId",
                         "in": "query",
-                        "description": "productId",
+                        "description": "ID of the product",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "allowEmptyValue": false
                     }
                 ],
                 "responses": {
