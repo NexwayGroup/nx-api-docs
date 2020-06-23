@@ -494,8 +494,9 @@
                 "tags": [
                     "Price"
                 ],
-                "summary": "Delete item",
-                "operationId": "deleteItem",
+                "summary": "Delete price",
+                "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
+                "operationId": "deletePrice",
                 "produces": [
                     "application/json"
                 ],
@@ -534,8 +535,7 @@
                         "description": "Failure"
                     }
                 },
-                "deprecated": false,
-                "x-operationWeight": "500"
+                "deprecated": false
             }
         }
     },
@@ -666,7 +666,7 @@
                 "value": {
                     "type": "number",
                     "format": "double",
-                    "description": "Regular price"
+                    "description": "Regular price, two decimal places format"
                 },
                 "vatIncluded": {
                     "type": "boolean",
