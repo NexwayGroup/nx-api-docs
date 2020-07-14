@@ -1,6 +1,723 @@
 {
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "https"
+    ],
     "swagger": "2.0",
+    "info": {
+        "description": "Allows define specific cart behaviour in set time frame.\n\nAvailable customization\nFilter products available in cart.\nDefine custom prices (along with price service).\n\nCampaign is triggered by URL query parameter \"mktop\" while creating the cart\ne.g. https://my-store-url/checkout/add?mktop=my_mkt_name_example&product=ef974b53-4aa1-4378-9798-97b9168bf884",
+        "title": "Marketing campaign",
+        "version": "1.0"
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/marketing-campaign",
     "paths": {
-        
-    }
+        "/campaigns": {
+            "get": {
+                "tags": [
+                    "campaign"
+                ],
+                "summary": "List campaigns.",
+                "operationId": "listCampaign",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 10,
+                        "x-go-name": "Size",
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 41,
+                        "x-go-name": "Page",
+                        "description": "Current displayed pagination page.",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "createDate,desc",
+                        "x-go-name": "Sort",
+                        "description": "Sort list results.\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "431b946a-92ea-430a-984d-c3cd65d2bb77",
+                        "x-go-name": "CustomerID",
+                        "description": "Filter results by customerId",
+                        "name": "customerId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "Name",
+                        "description": "Filter results by campaign name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "example": "1593583200000<",
+                        "x-go-name": "StartDate",
+                        "description": "Search campaign which starts at specific period. In example filter\ncampaign which starts after/or at Wed Jul 01 2020 06:00:00",
+                        "name": "startDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "example": "<1596261600000",
+                        "x-go-name": "EndDate",
+                        "description": "Search campaign which ends at specific period. In example filter\ncampaign which ends before/or at Wed Aug 01 2020 06:00:00",
+                        "name": "endDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid4",
+                        "x-go-name": "ProductsId",
+                        "description": "Filter results by product or variant id",
+                        "name": "products.id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "variant",
+                        "x-go-name": "ProductsMatchMode",
+                        "description": "Filter results by product match mode (filter mode)",
+                        "name": "products.matchMode",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listCampaignSuccess"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "campaign"
+                ],
+                "summary": "Creates campaign.",
+                "operationId": "createCampaign",
+                "parameters": [
+                    {
+                        "name": "Param",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "name",
+                                "startDate"
+                            ],
+                            "properties": {
+                                "customerId": {
+                                    "description": "Associates entity to certain customer.",
+                                    "type": "string",
+                                    "x-go-name": "CustomerID",
+                                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                                },
+                                "endDate": {
+                                    "description": "When the marketing campaign ends.\nTimestamp in milliseconds. Must be greater than startDate.\nWhen omitted campaign is infinite.",
+                                    "type": "integer",
+                                    "format": "uint64",
+                                    "x-go-name": "EndDate",
+                                    "example": 1596261600000
+                                },
+                                "name": {
+                                    "description": "Marketing campaign name.\nMust be unique along with customerId (composed unique key).\nName is used in URL query parameter \"mktop\" to create campaign cart.",
+                                    "type": "string",
+                                    "x-go-name": "Name",
+                                    "example": "my_mkt_name_example"
+                                },
+                                "products": {
+                                    "description": "Campaign products filter.",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/CampaignProduct"
+                                    },
+                                    "x-go-name": "Products",
+                                    "example": [
+                                        {
+                                            "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
+                                            "matchMode": "variant"
+                                        },
+                                        {
+                                            "id": "7af99959-5ac4-4b15-a880-78e5f2ebc595",
+                                            "matchMode": "variant"
+                                        }
+                                    ]
+                                },
+                                "startDate": {
+                                    "description": "When the marketing campaign starts.\nTimestamp in milliseconds.",
+                                    "type": "integer",
+                                    "format": "uint64",
+                                    "x-go-name": "StartDate",
+                                    "example": 1593583200000
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/starterSuccessCreate"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/campaigns/{id}": {
+            "get": {
+                "tags": [
+                    "campaign"
+                ],
+                "summary": "Gets campaign.",
+                "operationId": "getCampaign",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getCampaignSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "campaign"
+                ],
+                "summary": "Updates campaign.",
+                "operationId": "updateCampaign",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Campaign"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/putCampaignSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "campaign"
+                ],
+                "summary": "Deletes campaign.",
+                "operationId": "deleteCampaign",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Campaign": {
+            "description": "Campaign\nSingle campaign entity.",
+            "type": "object",
+            "required": [
+                "name",
+                "startDate"
+            ],
+            "properties": {
+                "createDate": {
+                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "CreateDate",
+                    "example": 1593683684789
+                },
+                "customerId": {
+                    "description": "Associates entity to certain customer.",
+                    "type": "string",
+                    "x-go-name": "CustomerID",
+                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                },
+                "dbVersion": {
+                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "DbVersion",
+                    "example": 0
+                },
+                "endDate": {
+                    "description": "When the marketing campaign ends.\nTimestamp in milliseconds. Must be greater than startDate.\nWhen omitted campaign is infinite.",
+                    "type": "integer",
+                    "format": "uint64",
+                    "x-go-name": "EndDate",
+                    "example": 1596261600000
+                },
+                "id": {
+                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
+                    "type": "string",
+                    "x-go-name": "ID",
+                    "example": "d87e0973-980a-4485-a39d-682184a8988a"
+                },
+                "name": {
+                    "description": "Marketing campaign name.\nMust be unique along with customerId (composed unique key).\nName is used in URL query parameter \"mktop\" to create campaign cart.",
+                    "type": "string",
+                    "x-go-name": "Name",
+                    "example": "my_mkt_name_example"
+                },
+                "products": {
+                    "description": "Campaign products filter.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CampaignProduct"
+                    },
+                    "x-go-name": "Products",
+                    "example": [
+                        {
+                            "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
+                            "matchMode": "variant"
+                        },
+                        {
+                            "id": "7af99959-5ac4-4b15-a880-78e5f2ebc595",
+                            "matchMode": "variant"
+                        }
+                    ]
+                },
+                "startDate": {
+                    "description": "When the marketing campaign starts.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "uint64",
+                    "x-go-name": "StartDate",
+                    "example": 1593583200000
+                },
+                "updateDate": {
+                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UpdateDate",
+                    "example": 1593685645385
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "CampaignProduct": {
+            "description": "CampaignProduct\nSingle filter entity.",
+            "type": "object",
+            "required": [
+                "id",
+                "matchMode"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Product or variant id.",
+                    "type": "string",
+                    "x-go-name": "Id",
+                    "example": "bda56683-4641-4d8a-af46-28a73394a2ae"
+                },
+                "matchMode": {
+                    "$ref": "#/definitions/CampaignProductMatchMode"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "CampaignProductMatchMode": {
+            "description": "CampaignProductMatchMode\nAvailable filter modes: variant, parent. The \"variant\" allows only one\nproduct (variant) in campaign. The \"parent\" enables whole product with it's\nvariants in campaign (not supported yet).",
+            "type": "string",
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        }
+    },
+    "responses": {
+        "getCampaignSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/Campaign"
+            }
+        },
+        "listCampaignSuccess": {
+            "description": "operation was successful",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "type": "string",
+                        "x-go-name": "Format",
+                        "example": "short"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Campaign"
+                        },
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage",
+                        "example": false
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Page",
+                        "example": 41
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Size",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "TotalMatchingItems",
+                        "example": 100523
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "ComputedTotalPages",
+                        "example": 10053
+                    }
+                }
+            }
+        },
+        "putCampaignSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/Campaign"
+            }
+        },
+        "starterBadRequest": {
+            "description": "Bad request.\nUsually indicates validation failure.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "HTTP response status codes label",
+                        "type": "string",
+                        "x-go-name": "StatusLabel",
+                        "example": "Bad Request"
+                    },
+                    "message": {
+                        "description": "Detailed error message",
+                        "type": "string",
+                        "x-go-name": "ErrorMessage",
+                        "example": "error: customerId can't be empty"
+                    },
+                    "path": {
+                        "description": "Resource path",
+                        "type": "string",
+                        "x-go-name": "Path",
+                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                    },
+                    "status": {
+                        "description": "HTTP response error status codes",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Status",
+                        "example": 400
+                    },
+                    "timestamp": {
+                        "description": "Error timestamp in milliseconds",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Timestamp",
+                        "example": 1593769514607
+                    }
+                }
+            }
+        },
+        "starterForbidden": {
+            "description": "Forbidden.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "HTTP response status codes label",
+                        "type": "string",
+                        "x-go-name": "StatusLabel",
+                        "example": "Forbidden"
+                    },
+                    "message": {
+                        "description": "Detailed error message",
+                        "type": "string",
+                        "x-go-name": "ErrorMessage",
+                        "example": "Forbidden"
+                    },
+                    "path": {
+                        "description": "Resource path",
+                        "type": "string",
+                        "x-go-name": "Path",
+                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                    },
+                    "status": {
+                        "description": "HTTP response error status codes",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Status",
+                        "example": 403
+                    },
+                    "timestamp": {
+                        "description": "Error timestamp in milliseconds",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Timestamp",
+                        "example": 1593769514607
+                    }
+                }
+            }
+        },
+        "starterInternalServerError": {
+            "description": "Internal server error.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "HTTP response status codes label",
+                        "type": "string",
+                        "x-go-name": "StatusLabel",
+                        "example": "Internal Server Error"
+                    },
+                    "message": {
+                        "description": "Detailed error message",
+                        "type": "string",
+                        "x-go-name": "ErrorMessage",
+                        "example": "invalid memory address or nil pointer dereference"
+                    },
+                    "path": {
+                        "description": "Resource path",
+                        "type": "string",
+                        "x-go-name": "Path",
+                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                    },
+                    "status": {
+                        "description": "HTTP response error status codes",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Status",
+                        "example": 500
+                    },
+                    "timestamp": {
+                        "description": "Error timestamp in milliseconds",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Timestamp",
+                        "example": 1593769514607
+                    }
+                }
+            }
+        },
+        "starterNotFound": {
+            "description": "Not found.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "HTTP response status codes label",
+                        "type": "string",
+                        "x-go-name": "StatusLabel",
+                        "example": "Not Found"
+                    },
+                    "message": {
+                        "description": "Detailed error message",
+                        "type": "string",
+                        "x-go-name": "ErrorMessage",
+                        "example": "item not found"
+                    },
+                    "path": {
+                        "description": "Resource path",
+                        "type": "string",
+                        "x-go-name": "Path",
+                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                    },
+                    "status": {
+                        "description": "HTTP response error status codes",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Status",
+                        "example": 404
+                    },
+                    "timestamp": {
+                        "description": "Error timestamp in milliseconds",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Timestamp",
+                        "example": 1593769514607
+                    }
+                }
+            }
+        },
+        "starterSuccessCreate": {
+            "description": "Successful.",
+            "headers": {
+                "Location": {
+                    "type": "string",
+                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89"
+                }
+            }
+        },
+        "starterSuccessNoContent": {
+            "description": "Successful."
+        },
+        "starterUnauthorized": {
+            "description": "Unauthorized.\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "HTTP response status codes label",
+                        "type": "string",
+                        "x-go-name": "StatusLabel",
+                        "example": "Unauthorized"
+                    },
+                    "message": {
+                        "description": "Detailed error message",
+                        "type": "string",
+                        "x-go-name": "ErrorMessage",
+                        "example": "Unauthorized"
+                    },
+                    "path": {
+                        "description": "Resource path",
+                        "type": "string",
+                        "x-go-name": "Path",
+                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                    },
+                    "status": {
+                        "description": "HTTP response error status codes",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Status",
+                        "example": 401
+                    },
+                    "timestamp": {
+                        "description": "Error timestamp in milliseconds",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Timestamp",
+                        "example": 1593769514607
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "security": [
+        {
+            "JWT": [
+                
+            ]
+        }
+    ]
 }
