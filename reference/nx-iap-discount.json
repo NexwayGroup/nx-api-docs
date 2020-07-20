@@ -1,0 +1,1751 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api to manage discounts",
+        "version": "1.0",
+        "title": "Discounts",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        }
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Discount",
+            "description": "Api CRUD Discount"
+        },
+        {
+            "name": "DiscountUsage",
+            "description": "Api R Discount Usage"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/discounts": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Customer Id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "Discount end date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "level",
+                        "in": "query",
+                        "description": "Level of product discount apples: PRODUCT, FORCED_CROSS_SELL, CROSS_SELL, UP_SELL",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "Model type of discount: CAMPAIGN, COUPON, SINGLE_USE_CODE",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of discount",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentProductIds",
+                        "in": "query",
+                        "description": "Products to which discount is restricted",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "productIds",
+                        "in": "query",
+                        "description": "Products to which discount is restricted",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "Discount start date",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "storeIds",
+                        "in": "query",
+                        "description": "Stores discount can be applied to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDiscount\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            }
+        },
+        "/discounts/discount/cart": {
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Apply discounts on cart",
+                "operationId": "applyDiscountsOnCart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "cart",
+                        "description": "cart",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Cart"
+                        }
+                    },
+                    {
+                        "name": "roundedPrice",
+                        "in": "query",
+                        "description": "roundedPrice",
+                        "required": false,
+                        "type": "boolean",
+                        "default": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Cart"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/discounts/distinct": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/discounts/import": {
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Import a discount",
+                "operationId": "importDiscount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "discount",
+                        "description": "discount",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    {
+                        "name": "reason",
+                        "in": "query",
+                        "description": "reason",
+                        "required": false,
+                        "type": "string",
+                        "default": "resource import thru REST Api"
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "description": "storeId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "800"
+            }
+        },
+        "/discounts/recap": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/discounts/unwind": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/discounts/usages": {
+            "get": {
+                "tags": [
+                    "DiscountUsage"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "Catalog Id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Customer Id discount applied to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "discountCode",
+                        "in": "query",
+                        "description": "Discount Code",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "discountId",
+                        "in": "query",
+                        "description": "Discount Id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endUserEmail",
+                        "in": "query",
+                        "description": "Email used",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endUserId",
+                        "in": "query",
+                        "description": "EndUser Id",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "orderId",
+                        "in": "query",
+                        "description": "Order Id discount applied to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "description": "Store Id discount applied to",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDiscountUsage\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Declare discount usages",
+                "operationId": "declareUsages",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "reason",
+                        "in": "query",
+                        "description": "reason",
+                        "required": false,
+                        "type": "string",
+                        "default": "notify usage of single codes thru REST Api"
+                    },
+                    {
+                        "in": "body",
+                        "name": "requests",
+                        "description": "requests",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DiscountUsageDeclaration"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            }
+        },
+        "/discounts/usages/distinct": {
+            "get": {
+                "tags": [
+                    "DiscountUsage"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "100"
+            }
+        },
+        "/discounts/usages/recap": {
+            "get": {
+                "tags": [
+                    "DiscountUsage"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/discounts/usages/unwind": {
+            "get": {
+                "tags": [
+                    "DiscountUsage"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "target",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "150"
+            }
+        },
+        "/discounts/usages/{id}": {
+            "get": {
+                "tags": [
+                    "DiscountUsage"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DiscountUsage"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            }
+        },
+        "/discounts/{id}": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequestItem",
+                        "description": "updateRequestItem",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Discount"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "500"
+            }
+        },
+        "/discounts/{id}/generate": {
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Generate coupons",
+                "operationId": "generateSingleUseCodes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "dryRun",
+                        "in": "query",
+                        "description": "dryRun",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reason",
+                        "in": "query",
+                        "description": "reason",
+                        "required": false,
+                        "type": "string",
+                        "default": "generation request of single codes thru REST Api"
+                    },
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SingleUseCodeGenerationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/SingleUseCodeGenerationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "deprecated": false,
+                "x-operationWeight": "200"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "oauth2",
+            "authorizationUrl": "https://api.staging.nexway.build/iam/tokens",
+            "flow": "implicit",
+            "scopes": {
+                "global": "global"
+            }
+        }
+    },
+    "definitions": {
+        "BuyerBehavior": {
+            "type": "object",
+            "properties": {
+                "abandonedCart": {
+                    "type": "boolean"
+                },
+                "renewal": {
+                    "type": "boolean"
+                },
+                "retainBuyer": {
+                    "type": "boolean"
+                }
+            },
+            "title": "BuyerBehavior"
+        },
+        "Cart": {
+            "type": "object",
+            "properties": {
+                "buyerBehavior": {
+                    "$ref": "#/definitions/BuyerBehavior"
+                },
+                "catalogId": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "discounts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "discountsStatus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DiscountStatus"
+                    }
+                },
+                "endUser": {
+                    "$ref": "#/definitions/EndUser"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                "source": {
+                    "type": "string"
+                },
+                "storeId": {
+                    "type": "string"
+                },
+                "totalAmount": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "Cart"
+        },
+        "Discount": {
+            "title": "Discount",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Discount"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "amountByCurrency": {
+                            "type": "object",
+                            "description": "Discount amount by currencies",
+                            "additionalProperties": {
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "buyerBehaviorTriggers": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "RETAIN_BUYER",
+                                    "ABANDONED_CART",
+                                    "RENEWAL"
+                                ]
+                            }
+                        },
+                        "catalogId": {
+                            "type": "string",
+                            "description": "Catalog Id"
+                        },
+                        "code": {
+                            "type": "string"
+                        },
+                        "countries": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "createDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "customerId": {
+                            "type": "string"
+                        },
+                        "dbVersion": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "discountRate": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Value of discount rate"
+                        },
+                        "dynamicVariables": {
+                            "type": "object",
+                            "description": "Dynamic variables"
+                        },
+                        "endDate": {
+                            "type": "string",
+                            "description": "Discount end date"
+                        },
+                        "endUserEmails": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "endUserGroupIds": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "endUserTypes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "endingDate": {
+                            "type": "string"
+                        },
+                        "enduserId": {
+                            "type": "string"
+                        },
+                        "generated": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "lastUpdateReason": {
+                            "type": "string"
+                        },
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "PRODUCT",
+                                "FORCED_CROSS_SELL",
+                                "CROSS_SELL",
+                                "UP_SELL"
+                            ]
+                        },
+                        "localizedLabels": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "maxUsages": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "model": {
+                            "type": "string",
+                            "enum": [
+                                "CAMPAIGN",
+                                "COUPON",
+                                "SINGLE_USE_CODE"
+                            ]
+                        },
+                        "modelVersion": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "originalId": {
+                            "type": "string"
+                        },
+                        "parentProductIds": {
+                            "type": "array",
+                            "description": "Parent products IDs to which discount can be applied",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "productIds": {
+                            "type": "array",
+                            "description": "Products to which discount can be applied",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "productOrParentId": {
+                            "type": "string"
+                        },
+                        "publisherRefIds": {
+                            "type": "array",
+                            "description": "Product publisher references to which discount can be applied",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "sources": {
+                            "type": "array",
+                            "description": "Sources to which discount can be applied: PURCHASE, MANUAL_RENEWAL, SUBSCRIPTION, BILLING_PLAN",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "startDate": {
+                            "type": "string",
+                            "description": "Discount start date"
+                        },
+                        "startingDate": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "ENABLED",
+                                "DISABLED"
+                            ]
+                        },
+                        "storeIds": {
+                            "type": "array",
+                            "description": "Stores to which discount can be applied",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "thresholds": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "updateDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "used": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "title": "Discount"
+                }
+            ]
+        },
+        "DiscountStatus": {
+            "type": "object",
+            "properties": {
+                "discount": {
+                    "type": "string"
+                },
+                "discountLabel": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "APPLIED",
+                        "NOT_APPLICABLE",
+                        "OVERLAPPING",
+                        "OVERUSED",
+                        "INVALID"
+                    ]
+                }
+            },
+            "title": "DiscountStatus"
+        },
+        "DiscountUsage": {
+            "type": "object",
+            "properties": {
+                "createDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "dbVersion": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "discountCode": {
+                    "type": "string"
+                },
+                "discountId": {
+                    "type": "string"
+                },
+                "endUserEmail": {
+                    "type": "string"
+                },
+                "enduserId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastUpdateReason": {
+                    "type": "string"
+                },
+                "modelVersion": {
+                    "type": "string"
+                },
+                "orderId": {
+                    "type": "string"
+                },
+                "storeId": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "useDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "used": {
+                    "type": "boolean"
+                }
+            },
+            "title": "DiscountUsage"
+        },
+        "DiscountUsageDeclaration": {
+            "type": "object",
+            "properties": {
+                "catalogId": {
+                    "type": "string",
+                    "description": "Catalog Id"
+                },
+                "customerId": {
+                    "type": "string",
+                    "description": "Customer Id discount applied to"
+                },
+                "discountCode": {
+                    "type": "string",
+                    "description": "Discount Code"
+                },
+                "discountId": {
+                    "type": "string",
+                    "description": "Discount Id"
+                },
+                "endUserEmail": {
+                    "type": "string",
+                    "description": "Email used"
+                },
+                "endUserId": {
+                    "type": "string",
+                    "description": "EndUser Id"
+                },
+                "orderId": {
+                    "type": "string",
+                    "description": "Order Id discount applied to"
+                },
+                "storeId": {
+                    "type": "string",
+                    "description": "Store Id discount applied to"
+                }
+            },
+            "title": "DiscountUsageDeclaration"
+        },
+        "DiscountedPrice": {
+            "type": "object",
+            "properties": {
+                "discountCode": {
+                    "type": "string"
+                },
+                "discountId": {
+                    "type": "string"
+                },
+                "discountLabel": {
+                    "type": "string"
+                },
+                "discountRate": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "discountedGrossPrice": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "discountedNetPrice": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "grossPriceDiscountAmount": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "netPriceDiscountAmount": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "signedDiscount": {
+                    "type": "string"
+                },
+                "vatDiscountAmount": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "DiscountedPrice"
+        },
+        "Document": {
+            "type": "object",
+            "title": "Document",
+            "additionalProperties": {
+                "type": "object"
+            }
+        },
+        "EndUser": {
+            "type": "object",
+            "properties": {
+                "country": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "groupId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "title": "EndUser"
+        },
+        "FullPrice": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "discountedPrice": {
+                    "$ref": "#/definitions/DiscountedPrice"
+                },
+                "grossMsrp": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "grossPrice": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "netMsrp": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "netPrice": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "vatAmount": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "vatAmountMsrp": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "FullPrice"
+        },
+        "Product": {
+            "type": "object",
+            "properties": {
+                "crossSellBy": {
+                    "type": "string"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "discountsStatus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DiscountStatus"
+                    }
+                },
+                "forcedBy": {
+                    "type": "string"
+                },
+                "fullPrice": {
+                    "$ref": "#/definitions/FullPrice"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "price": {
+                    "$ref": "#/definitions/FullPrice"
+                },
+                "priceFunctionParametersValues": {
+                    "type": "object"
+                },
+                "publisherRefId": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "unitPrice": {
+                    "$ref": "#/definitions/FullPrice"
+                },
+                "upSellBy": {
+                    "type": "string"
+                },
+                "variantOf": {
+                    "type": "string"
+                }
+            },
+            "title": "Product"
+        },
+        "RecapEntry": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "targetValue": {
+                    "type": "string"
+                }
+            },
+            "title": "RecapEntry"
+        },
+        "SearchResult\u00abDiscountUsage\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DiscountUsage"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDiscountUsage\u00bb"
+        },
+        "SearchResult\u00abDiscount\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Discount"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDiscount\u00bb"
+        },
+        "SearchResult\u00abDocument\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Document"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abDocument\u00bb"
+        },
+        "SearchResult\u00abRecapEntry\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RecapEntry"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abRecapEntry\u00bb"
+        },
+        "SearchResult\u00abobject\u00bb": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "last": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalItems": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SearchResult\u00abobject\u00bb"
+        },
+        "SingleUseCodeGenerationRequest": {
+            "type": "object",
+            "properties": {
+                "forceLowercase": {
+                    "type": "boolean"
+                },
+                "forceUppercase": {
+                    "type": "boolean"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SingleUseCodeGenerationRequest"
+        },
+        "SingleUseCodeGenerationResponse": {
+            "type": "object",
+            "properties": {
+                "codes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "remaining": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "title": "SingleUseCodeGenerationResponse"
+        }
+    }
+}
