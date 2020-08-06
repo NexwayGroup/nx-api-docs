@@ -137,8 +137,8 @@ For example, having prices declared for a product like this (presented as a prod
   },
 ...
 ```
-searching for a price with currency=EUR and country=FR, price returned will be 1899 EUR.
-searching for a price with currency=EUR and country=DE, price returned will be 899 EUR.
+searching for a price with currency=EUR and country=FR, price returned will be 1899 EUR.  
+searching for a price with currency=EUR and country=DE, price returned will be 899 EUR.  
 searching for a price with currency=EUR and country=ES, price returned will be 2000 EUR - default ES currency is used.
 
 5. defaultCurrency
