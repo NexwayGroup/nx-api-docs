@@ -1,4 +1,4 @@
-## PRICE API
+## Price API guide
 Price service is a place to manage prices for products. Service allows to find or create prices for products. Prices once created cannot be deleted, unless they are scheduled in the future (their startDate is not reached yet).
 ## General
 There are two ways to manage prices. 
