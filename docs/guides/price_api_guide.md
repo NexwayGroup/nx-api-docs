@@ -386,8 +386,11 @@ expect
 ......Price A......|..............NP...............>
 ```
 In this case between price A and B is a gap without price:
+
 `A - startDate: 2020-03-01, endDate: 2020-08-31`
+
 `B - startDate: 2020-11-01, endDate: infinity`
+
 Deleting price C will result in not having price from end of price A to infinity
 
 Case 5.
