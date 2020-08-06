@@ -2444,6 +2444,82 @@
                 "type": "object"
             }
         },
+        "FullPrice": {
+            "type": "object",
+            "required": [
+                "currency",
+                "grossPrice",
+                "msrp",
+                "netPrice",
+                "value",
+                "vatAmount",
+                "vatRate"
+            ],
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "description": "Purchase currency (ISO-4217 format)"
+                },
+                "discountedPrice": {
+                    "description": "Discounted price",
+                    "$ref": "#/definitions/DiscountedPrice"
+                },
+                "grossMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "MSRP (Manufacturer Suggested Retail Price) with taxes included"
+                },
+                "grossPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Cost of product with taxes included"
+                },
+                "marketingCampaignId": {
+                    "type": "string",
+                    "description": "Marketing Campaign ID"
+                },
+                "msrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The msrp price; enter -1 to use the currency msrp price for this country"
+                },
+                "netMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "MSRP (Manufacturer Suggested Retail Price) net"
+                },
+                "netPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Net price"
+                },
+                "value": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The product price; enter -1 to use the currency price for this country"
+                },
+                "vatAmount": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "VAT amount (grossPrice - netPrice)"
+                },
+                "vatAmountMsrp": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "VAT amount (grossPrice - netPrice) for MSRP (Manufacturer Suggested Retail Price)"
+                },
+                "vatIncluded": {
+                    "type": "boolean",
+                    "description": "Indicates if the price includes VAT"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Sales tax rate"
+                }
+            },
+            "title": "FullPrice"
+        },
         "Map\u00abstring,PriceInformation\u00bb": {
             "type": "object",
             "title": "Map\u00abstring,PriceInformation\u00bb",
@@ -2531,82 +2607,6 @@
                 }
             },
             "title": "Parameter"
-        },
-        "Price": {
-            "type": "object",
-            "required": [
-                "currency",
-                "grossPrice",
-                "msrp",
-                "netPrice",
-                "value",
-                "vatAmount",
-                "vatRate"
-            ],
-            "properties": {
-                "currency": {
-                    "type": "string",
-                    "description": "Purchase currency (ISO-4217 format)"
-                },
-                "discountedPrice": {
-                    "description": "Discounted price",
-                    "$ref": "#/definitions/DiscountedPrice"
-                },
-                "grossMsrp": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "MSRP (Manufacturer Suggested Retail Price) with taxes included"
-                },
-                "grossPrice": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Cost of product with taxes included"
-                },
-                "marketingCampaignId": {
-                    "type": "string",
-                    "description": "Marketing Campaign ID"
-                },
-                "msrp": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "The msrp price; enter -1 to use the currency msrp price for this country"
-                },
-                "netMsrp": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "MSRP (Manufacturer Suggested Retail Price) net"
-                },
-                "netPrice": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Net price"
-                },
-                "value": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "The product price; enter -1 to use the currency price for this country"
-                },
-                "vatAmount": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "VAT amount (grossPrice - netPrice)"
-                },
-                "vatAmountMsrp": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "VAT amount (grossPrice - netPrice) for MSRP (Manufacturer Suggested Retail Price)"
-                },
-                "vatIncluded": {
-                    "type": "boolean",
-                    "description": "Indicates if the price includes VAT"
-                },
-                "vatRate": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Sales tax rate"
-                }
-            },
-            "title": "Price"
         },
         "PriceFunction": {
             "type": "object",
@@ -3290,7 +3290,7 @@
                 },
                 "price": {
                     "description": "Unit price of the product with price function",
-                    "$ref": "#/definitions/Price"
+                    "$ref": "#/definitions/FullPrice"
                 },
                 "priceFunctionExecutionErrorMessage": {
                     "type": "string",
@@ -3368,7 +3368,7 @@
                 },
                 "unitPrice": {
                     "description": "Unit price of the product",
-                    "$ref": "#/definitions/Price"
+                    "$ref": "#/definitions/FullPrice"
                 },
                 "updateDate": {
                     "type": "string",
