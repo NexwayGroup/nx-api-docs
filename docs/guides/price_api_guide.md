@@ -92,9 +92,11 @@ Logic behind price search based on provided parameters:
 1. date
 
 If date is not given in query param, price will be searched for current date. This is important because the price will be searched only within prices valid on a given date. So if we have timeline like this with only one price defined:
-`......A......|...NoPrice...|...B......>`  
-`A - startDate: 2020-01-01, endDate: 2020-10-31`  
-`B - startDate: 2021-01-01, endDate: none`  
+```
+......A......|...NoPrice...|...B......>
+A - startDate: 2020-01-01, endDate: 2020-10-31
+B - startDate: 2021-01-01, endDate: none
+```
 with a gap between 2020-10-31 and 2021-01-01, price request for dates within a gap will result with no price returned, as prices A and B will not be taken into account during the search. Keep in mind that having gap between prices is not a valid config and will indicate the wrong configuration of the product itself.
 
 2. marketingCampaignId
