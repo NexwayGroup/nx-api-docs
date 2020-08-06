@@ -3,6 +3,7 @@ Price service is a place to manage prices for products. Service allows to find o
 ## General
 There are two ways to manage prices. 
 Prices declared/updated through product creation/update with Product API in `prices` node are automatically fed into Price API.
+
 POST `/products` - request body:
 ```json
 {
@@ -39,6 +40,7 @@ After product creation all prices are automatically created in Price API with va
 
 
 Second way to create prices is to make a request directly to Price API: 
+
 POST `/prices` - request body: 
 ```json
 {
@@ -86,7 +88,7 @@ Additional parameters:
 * marketingCampaignId
 * date
 If date not specified, price will be searched for current date
-
+---
 Logic behind price search based on provided parameters:
 
 1. date
@@ -171,7 +173,7 @@ Sample response:
    ]
 }
 ```
-If service doesn't find any prices, then return information: 
+If service doesn't find any prices, it returns information: 
 `Price not found for product "productId" for "given country" on date "given date"`
 ```json
 {
@@ -197,11 +199,17 @@ result
 ........Price A........|........Price B..........>
 ```
 Having a product with one price A declared:
+
 `A - startDate: 2020-03-01, endDate: infinity`
+
 Creating a new price B with the same parameters as price A:  
+
 `B - startDate: 2020-10-01, endDate: infinity`
+
 as a result we will get:
+
 `A - startDate: 2020-03-01, endDate: 2020-09-30`
+
 `B - startDate: 2020-10-01, endDate: infinity`
 
 Case 2.
@@ -215,13 +223,21 @@ result
 .....Price A.....|....Price B....|.....Price C........>
 ```
 Having a product with one price A:  
+
 `A - startDate: 2020-03-01, endDate: infinity`
+
 Creating a new price B with the same parameters as price A:
+
 `B - startDate: 2020-10-01, endDate: 2021-01-31`
+
 as a result we will get:
+
 `A - startDate: 2020-03-01, endDate: 2020-09-30`
+
 `B - startDate: 2020-10-01, endDate: 2021-01-31`
+
 `C - startDate: 2021-02-01, endDate: infinity`
+
 Price C was created by Price API (because price B interrupts the continuity of duration of Price A) and has the same parameters and value as Price A.
 
 Case 3.
@@ -257,17 +273,29 @@ result
 .....Price A....|.Price B.|....Price E....|.Price D..>
 ```
 Having a product with prices A, B, C and D:
+
 `A - startDate: 2020-03-01, endDate: 2020-05-31`
+
 `B - startDate: 2020-06-01, endDate: 2020-08-31`
+
 `C - startDate: 2020-09-01, endDate: 2020-11-30`
+
 `D - startDate: 2020-12-01, endDate: infinity`
+
 Creating a new price E, which overlaps partially price B, entire price C and partially price D:
+
 `E - startDate: 2020-08-01, endDate: 2020-12-31`
+
 as a result we will have:
+
 `A - startDate: 2020-03-01, endDate: 2020-05-31`
+
 `B - startDate: 2020-06-01, endDate: 2020-07-31`
+
 `C - archived`
+
 `N - startDate: 2020-08-01, endDate: 2020-12-31`   
+
 `D - startDate: 2021-01-01, endDate: infinity`
 
 ## Deleting price
@@ -285,9 +313,13 @@ expect
 ....................Price A.....................>
 ```
 Having a product with two prices A and B, where B was created on top of price A:
+
 `A - startDate: 2020-03-01, endDate: 2020-09-30`
+
 `B - startDate: 2020-10-01, endDate: infinity`
+
 after deleting B, as a result we will get price A restored:   
+
 `A - startDate: 2020-03-01, endDate: infinity`
 
 
@@ -299,11 +331,17 @@ expect
 ..........A.........|.......B.........>
 ```
 we have product with three prices A, X and B: 
+
 `A - startDate: current, endDate: 2020-08-31` 
+
 `X - startDate: 2020-09-01, endDate: 2020-11-30` 
+
 `B - startDate: 2020-12-01, endDate: infinity` 
+
 after deleting X, as a result we will get:   
+
 `A - startDate: current, endDate: 2020-11-30` 
+
 `B - startDate: 2020-12-01, endDate: infinity`
 
 Case 3.
@@ -315,12 +353,19 @@ expect
 ......Price A......|...........Price B.............>
 ```
 in this case at the beginning there were two prices A and B:
+
 `A - startDate: 2020-03-01, endDate: 2020-10-31`
+
 `B - startDate: 2020-11-01, endDate: infinity`
+
 then price C was created, which overlapped only B, which resulted in having following prices:
+
 `A - startDate: 2020-03-01, endDate: 2020-10-31`
+
 `C - startDate: 2020-11-01, endDate: 2020-11-30`
+
 `B - startDate: 2020-12-01, endDate: infinity`
+
 after deleting price C, as a result we get back the previous timeline
 
 Case 4.
@@ -346,17 +391,29 @@ expect
 ......Price A.......|..Price B..|..Price C..|..Price D..|....Price E....>
 ```
 First diagram shows a current state: three prices A, X and E, but last created price X has overlapped the previous prices A, B, C, D, and E (see second diagram) when it was created. Current state of all prices:
+
 `A - startDate: 2020-03-01, endDate: 2020-08-31`
+
 `B - archived`
+
 `C - archived`
+
 `D - archived`
+
 `E - startDate: 2021-04-01, endDate: infinity`
+
 `X - startDate: 2020-09-01, endDate: 2021-03-31`
+
 If price X will be deleted, service will restore the previously overlapped prices (see last diagram):
+
 `A - startDate: 2020-03-01, endDate: 2020-09-30`
+
 `B - startDate: 2020-10-01, endDate: 2020-11-30`
+
 `C - startDate: 2020-12-01, endDate: 2021-01-31`
+
 `D - startDate: 2021-02-01, endDate: 2021-03-31`
+
 `E - startDate: 2021-04-01, endDate: infinity`
 
 Price restoring feature is limited only to a scope of price that is being deleted and historical data of changes that were done because of the creation of that price. If any price that would be restored was deleted meanwhile, then it will not be restored and there will be a gap in price schedule in this period.
