@@ -251,15 +251,25 @@ result
 ......Price A...|..Price B..|...Price D...|..Price C..>
 ```
 Having a product with several prices spread over time: A, B and C:
+
 `A - startDate: 2020-03-01, endDate: 2020-05-31`
+
 `B - startDate: 2020-06-01, endDate: 2020-08-31`   
+
 `C - startDate: 2020-09-01, endDate: infinity`
+
 Creating the price D, which overlaps partially price B and price C:
+
 `D - startDate: 2020-07-01, endDate: 2020-10-31`   
+
 as a result we will get:
+
 `A - startDate: 2020-03-01, endDate: 2020-05-31`
+
 `B - startDate: 2020-06-01, endDate: 2020-06-30`
+
 `N - startDate: 2020-07-01, endDate: 2020-10-31`  
+
 `D - startDate: 2020-11-01, endDate: infinity`
 
 Case 4.
