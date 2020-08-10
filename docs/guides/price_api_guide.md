@@ -46,8 +46,8 @@ POST `/prices` - request body:
 {
   "customerId": "myCustomerId",
   "productId": "myProductId",
-  "startDate": "2019-09-28T13:22:00Z",
-  "endDate": "2019-11-28T13:22:00Z", (if not declared, endDate will be infinity)
+  "startDate": 1569669720000,
+  "endDate": 1574943720000, (if not declared, endDate will be infinity)
   "country": "FR",
   "currency": "EUR",
   "msrp": 200.00,
