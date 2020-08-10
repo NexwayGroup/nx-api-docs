@@ -2,8 +2,7 @@
 Price service is a place to manage prices for products. Service allows to find or create prices for products. Prices once created cannot be deleted, unless they are scheduled in the future (their startDate is not reached yet).
 ## General
 There are two ways to manage prices. 
-Prices declared/updated through product creation/update with Product API in `prices` node are automatically fed into Price API.
-
+Prices can be declared/updated through product creation/update with the Product API. In this scenario the 'prices' node from the Product API are automatically fed into Price API.  
 POST `/products` - request body:
 ```json
 {
@@ -39,7 +38,7 @@ POST `/products` - request body:
 After product creation all prices are automatically created in Price API with validity dates from product creation date to infinity.
 
 
-Second way to create prices is to make a request directly to Price API: 
+The second (and direct) way is to create prices through the Price API request:
 
 POST `/prices` - request body: 
 ```json
@@ -55,9 +54,9 @@ POST `/prices` - request body:
   "vatIncluded": false
 }
 ```
-With using Price API directly, prices can be created, scheduled for the future (created with the startDate in the future), updated or deleted (only if they are scheduled in the future).
+When using Price API directly, prices can be created, scheduled for the future (created with the startDate in the future), updated or deleted (only if they are scheduled in the future).
 
-When creating a price in Price API those fields are required:
+When creating a price in Price API the below fields are required:
 * customerId - Customer identifier (ex:  60f70f89-0498-487e-ba55-2cac045d4171)
 * productId - Product identifier (ex:  60f70f89-0498-487e-ba55-2cac045d4171)
 * startDate - Price start date timestamp in milliseconds (ex: 1589439239780)
