@@ -2,7 +2,8 @@
 Price service is a place to manage prices for products. Service allows to find or create prices for products. Prices once created cannot be deleted, unless they are scheduled in the future (their startDate is not reached yet).
 ## General
 There are two ways to manage prices. 
-Prices can be declared/updated through product creation/update with the Product API. In this scenario the 'prices' node from the Product API are automatically fed into Price API.  
+Prices can be declared/updated through product creation/update with the Product API. In this scenario the 'prices' node from the Product API are automatically fed into Price API.
+
 POST `/products` - request body:
 ```json
 {
