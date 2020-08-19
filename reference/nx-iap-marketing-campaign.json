@@ -146,6 +146,24 @@
                                     "x-go-name": "EndDate",
                                     "example": 1596261600000
                                 },
+                                "mandatoryProducts": {
+                                    "description": "Products mandatory in cart (if not,  marketing campaign will be disabled)",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/CampaignProduct"
+                                    },
+                                    "x-go-name": "MandatoryProducts",
+                                    "example": [
+                                        {
+                                            "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
+                                            "matchMode": "variant"
+                                        },
+                                        {
+                                            "id": "7af99959-5ac4-4b15-a880-78e5f2ebc595",
+                                            "matchMode": "variant"
+                                        }
+                                    ]
+                                },
                                 "name": {
                                     "description": "Marketing campaign name.\nMust be unique along with customerId (composed unique key).\nName is used in URL query parameter \"mktop\" to create campaign cart.",
                                     "type": "string",
@@ -158,7 +176,7 @@
                                     "items": {
                                         "$ref": "#/definitions/CampaignProduct"
                                     },
-                                    "x-go-name": "Products",
+                                    "x-go-name": "AllowedProducts",
                                     "example": [
                                         {
                                             "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
@@ -357,6 +375,24 @@
                     "x-go-name": "ID",
                     "example": "d87e0973-980a-4485-a39d-682184a8988a"
                 },
+                "mandatoryProducts": {
+                    "description": "Products mandatory in cart (if not,  marketing campaign will be disabled)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CampaignProduct"
+                    },
+                    "x-go-name": "MandatoryProducts",
+                    "example": [
+                        {
+                            "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
+                            "matchMode": "variant"
+                        },
+                        {
+                            "id": "7af99959-5ac4-4b15-a880-78e5f2ebc595",
+                            "matchMode": "variant"
+                        }
+                    ]
+                },
                 "name": {
                     "description": "Marketing campaign name.\nMust be unique along with customerId (composed unique key).\nName is used in URL query parameter \"mktop\" to create campaign cart.",
                     "type": "string",
@@ -369,7 +405,7 @@
                     "items": {
                         "$ref": "#/definitions/CampaignProduct"
                     },
-                    "x-go-name": "Products",
+                    "x-go-name": "AllowedProducts",
                     "example": [
                         {
                             "id": "bda56683-4641-4d8a-af46-28a73394a2ae",
