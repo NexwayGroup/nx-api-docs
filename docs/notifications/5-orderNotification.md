@@ -3,7 +3,7 @@
 
 ## Lifecycle
 
-![Order Lifecycle](/docs/ressources/orderLifecyle.png)
+![Order Lifecycle](./orderLifecycle.png)
 
 ## Event list
 

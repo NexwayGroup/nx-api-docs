@@ -1,7 +1,5 @@
-Navigation: Overview/Understanding Nexway Monetize REST APIs
-SortOrder: 110
 
-# Understanding Nexway Monetize REST APIs
+# Understanding Nexway REST APIs
 
 Nexway Monetize is a RESTFull API platform.
 
@@ -26,6 +24,6 @@ We have two kinds of APIs.:
 
 
 ## Security
-All connections are done through HTTPS (by default TLS 1.2; TLS 1.1 can also be used).
+All connections are done through HTTPS (by default TLS 1.2;).
  
 All APIs are secured using [JWT Authentication](/nexway-monetize/reference/jwt-authentication) except for [Shopper APIs](/nexway-monetize/reference/shopper-apis). 
