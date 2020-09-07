@@ -1,6 +1,3 @@
-Navigation: Notifications/Subscription Notifications
-SortOrder: 230
-
 # Subscription Notifications
 
 ## Lifecycle

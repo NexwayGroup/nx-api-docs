@@ -1,11 +1,9 @@
-Navigation: Notifications/Order Notifications
-SortOrder: 220
 
 # Order Notifications
 
 ## Lifecycle
 
-![Order Lifecycle](/nexway-monetize/static/orderLifecyle.png)
+![Order Lifecycle](/docs/ressources/orderLifecyle.png)
 
 ## Event list
 

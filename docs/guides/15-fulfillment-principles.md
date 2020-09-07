@@ -1,5 +1,3 @@
-Navigation: Fulfillment/How fulfillment works
-SortOrder: 310
 
 # How fulfillment works
 

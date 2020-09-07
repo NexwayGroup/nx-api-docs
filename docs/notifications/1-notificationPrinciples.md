@@ -1,7 +1,5 @@
-Navigation: Notifications/How notifications work
-SortOrder: 210
 
-# How notifications work
+# How notifications works
 
 Notifications keep you informed in real time about events that happen on the Nexway Monetize platform.
 
@@ -11,12 +9,18 @@ The Nexway Monetize platform has two notification mechanisms:
 
 Note that there is no way to reply to either an email or a webhook notification.
 
-## By webhook
+## Methods
+
+### By webhook
 Webhooks provide a way to deliver notifications to an external web server whenever certain actions or changes in status affect one of your resources in Nexway Monetize.
 The HTTP body request is available only in JSON format.
 
-## By email
+### By email
 By default, the email body will use the same JSON format as the webhook body.
+
+## Authentication
+
+* TLS 1.2+ (server or client) is available.
 
 ## List of resource notifications
 * Orders
