@@ -9,14 +9,14 @@
 ## List of fields
 
 | Name | Description |
+| ---- | ----------- |
+| id | subscription unique identifier |
 | modelId | subscription model id |
 | name | subscription product name |
 | lifecycle | internal id |
-| product.id | product id |
-| product.lineItemId | original order line item id |
-| ---- | ----------- |
-
-Work in progress
+| products[] | List of products in subscription |
+| products[].id | product id |
+| products[].lineItemId | original order line item id |
 
 ### Example
 ```json
