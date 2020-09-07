@@ -22,12 +22,9 @@ By default, the email body will use the same JSON format as the webhook body.
 
 * TLS 1.2+ (server or client) is available.
 
-## List of resource notifications
-* Orders
-* Subscriptions
 
 ## Configure notifications
-You can configure notifications via Nexway Center or via [APIs](/nexway-monetize/reference/manage-notifications).
+You can configure notifications via Nexway Center or via APIs.
 
 ### Create an order confirmation notification
 In this example, we want to send an order confirmation notification both by email and by webhook.
