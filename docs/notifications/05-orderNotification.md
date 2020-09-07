@@ -44,6 +44,8 @@ This is how both email and webhook notifications are structured:
 | currency | Order's Currency |
 | totalPriceIncVAT | Order total price, including sales tax |
 | totalPriceExclVAT | Order total price, excluding sales tax |
+| salesFlag | Sales flag|
+| externalContext | Based64 encoded string of cart parameters |
 | payment.method | Payment method (Visa, Mastercard, PayPal, SEPA, etc.)
 | payment.automaticBilling | Payment can be renewed (true/false) |
 | user.email | Buyer's email |
@@ -59,7 +61,9 @@ This is how both email and webhook notifications are structured:
 | items[].product.name | Product name |
 | items[].product.uniqueReference | A unique ID for identifying your product on the Nexway Monetize platform |
 | items[].product.publisherReference | A unique ID for identifying your product in your information system |
+| items[].fulfillmentId | Fulfillment id, pointer to fulfillment details |
 | items[].quantity | Product quantity |
+| items[].activationCode | Product activation code |
 | items[].unitPriceIncVAT | Product unit price, including sales tax |
 | items[].unitPriceExclVAT | Product unit price, excluding sales tax |
 | items[].externalContext  | Product external context |
@@ -84,6 +88,10 @@ This is how both email and webhook notifications are structured:
 		},
 		"totalPriceIncVAT": 357,
 		"totalPriceExclVAT": 297.5,
+        "externalContext":"eyJzcGFnZSI6==",
+        "salesFlag":[
+         "EXTMD_Daily_fr_XXXrenew-30"
+        ],
 		"currency": "USD",
 		"user": {
 			"email": "jdoe@com2us.com",
@@ -103,6 +111,8 @@ This is how both email and webhook notifications are structured:
 					"uniqueReference": "82165493-486f-54fa-a454-65458da64c53",
 					"publisherReference": "SKU-0001",
 				},
+                "fulfillmentId":"fff994ac-2e29-4dce-a8dd-6c582eee7927",
+                "activationCode":"XXXXX-4REZC-CV64B-XXX",
 				"quantity": 1,
 				"externalContext": "what the customer wants"
 				"unitPriceIncVAT": 178.5,
