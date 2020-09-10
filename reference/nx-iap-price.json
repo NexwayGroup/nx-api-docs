@@ -1,23 +1,26 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.1",
     "info": {
-        "description": "API to manage prices",
-        "version": "1.0",
         "title": "Price",
+        "description": "API to manage prices",
         "license": {
             "name": "Nexway License Version 1.0"
-        }
+        },
+        "version": "1.0"
     },
-    "host": "api.staging.nexway.build",
-    "basePath": "/",
-    "tags": [
+    "servers": [
         {
-            "name": "Price",
-            "description": "Api CRUD Price"
+            "url": "https://api.staging.nexway.build/",
+            "description": "Generated server url"
         }
     ],
-    "schemes": [
-        "https"
+    "security": [
+        {
+            "Bearer": [
+                "read",
+                "write"
+            ]
+        }
     ],
     "paths": {
         "/prices": {
@@ -27,109 +30,115 @@
                 ],
                 "summary": "Get items",
                 "operationId": "getItems",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [
-                    {
-                        "name": "country",
-                        "in": "query",
-                        "description": "Filter prices by country",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "currency",
-                        "in": "query",
-                        "description": "Filter prices by currency",
-                        "required": false,
-                        "type": "string"
-                    },
                     {
                         "name": "customerId",
                         "in": "query",
-                        "description": "Filter prices by customerId",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "endingDate",
-                        "in": "query",
-                        "description": "Filter by end date of the price. You can use date ranges by using < or << operator, examples: endingDate=XXXX< will return prices ending after XXXX, endingDate=<XXXX will return prices ending before XXXX, endingDate=XXXX<<YYYYY will return prices ending between XXXX and YYYY",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "marketingCampaignId",
-                        "in": "query",
-                        "description": "Filter prices by marketingCampaignId",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "msrp",
-                        "in": "query",
-                        "description": "Filter prices by msrp value",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices by customerId"
                     },
                     {
                         "name": "productId",
                         "in": "query",
-                        "description": "Filter prices by productId",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices by productId"
                     },
                     {
-                        "name": "startingDate",
+                        "name": "country",
                         "in": "query",
-                        "description": "Filter by start date of the price. You can use date ranges by using < or << operator, examples: startingDate=XXXX< will return prices starting after XXXX, startingDate=<XXXX will return prices starting before XXXX, startingDate=XXXX<<YYYYY will return prices starting between XXXX and YYYY",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices by country"
                     },
                     {
-                        "name": "target",
+                        "name": "currency",
                         "in": "query",
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices by currency"
                     },
                     {
-                        "name": "value",
+                        "name": "description",
                         "in": "query",
-                        "description": "Filter prices by price value",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices by price value"
+                    },
+                    {
+                        "name": "msrp",
+                        "in": "query",
+                        "description": "Filter prices by msrp value"
                     },
                     {
                         "name": "vatIncluded",
                         "in": "query",
-                        "description": "Filter prices with or without vat included",
-                        "required": false,
-                        "type": "string"
+                        "description": "Filter prices with or without vat included"
+                    },
+                    {
+                        "name": "startingDate",
+                        "in": "query",
+                        "description": "Filter by start date of the price. You can use date ranges by using < or << operator, examples: startingDate=XXXX< will return prices starting after XXXX, startingDate=<XXXX will return prices starting before XXXX, startingDate=XXXX<<YYYYY will return prices starting between XXXX and YYYY"
+                    },
+                    {
+                        "name": "endingDate",
+                        "in": "query",
+                        "description": "Filter by end date of the price. You can use date ranges by using < or << operator, examples: endingDate=XXXX< will return prices ending after XXXX, endingDate=<XXXX will return prices ending before XXXX, endingDate=XXXX<<YYYYY will return prices ending between XXXX and YYYY"
+                    },
+                    {
+                        "name": "marketingCampaignId",
+                        "in": "query",
+                        "description": "Filter prices by marketingCampaignId"
+                    },
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abPrice\u00bb"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultPrice"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "deprecated": false,
                 "x-operationWeight": "300"
             },
             "post": {
@@ -138,51 +147,241 @@
                 ],
                 "summary": "Create an item",
                 "operationId": "createItem",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Price"
-                        }
-                    }
-                ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Price"
-                        }
-                    },
                     "201": {
                         "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/Price"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "deprecated": false,
                 "x-operationWeight": "300"
+            }
+        },
+        "/prices/{id}": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Delete price",
+                "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
+                "operationId": "deleteItem",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/prices/best": {
@@ -193,77 +392,58 @@
                 "summary": "Get best price for parameters",
                 "description": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
                 "operationId": "getBestPrice",
-                "produces": [
-                    "*/*"
-                ],
-                "parameters": [
-                    {
-                        "name": "country",
-                        "in": "query",
-                        "description": "Country code in ISO 3166-2 format, example: FR",
-                        "required": true,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "currency",
-                        "in": "query",
-                        "description": "Currency code in ISO-4217 format, example: USD",
-                        "required": false,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "customerId",
-                        "in": "query",
-                        "description": "ID of the customer",
-                        "required": true,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "date",
-                        "in": "query",
-                        "description": "Effective date in ISO-8601 format, examples: 2020-10-14, 2020-10-14T12:00:00Z",
-                        "required": false,
-                        "type": "string",
-                        "format": "date-time",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "defaultCurrency",
-                        "in": "query",
-                        "description": "Default product currency to fallback in ISO-4217 format",
-                        "required": false,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "marketingCampaignId",
-                        "in": "query",
-                        "description": "ID of marketing campaign",
-                        "required": false,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    },
-                    {
-                        "name": "productId",
-                        "in": "query",
-                        "description": "ID of the product",
-                        "required": true,
-                        "type": "string",
-                        "allowEmptyValue": false
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Price"
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     }
-                },
-                "deprecated": false
+                }
             }
         },
         "/prices/distinct": {
@@ -273,39 +453,58 @@
                 ],
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "deprecated": false,
                 "x-operationWeight": "100"
             }
         },
@@ -316,39 +515,58 @@
                 ],
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "deprecated": false,
                 "x-operationWeight": "150"
             }
         },
@@ -359,458 +577,428 @@
                 ],
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "deprecated": false,
                 "x-operationWeight": "150"
             }
-        },
-        "/prices/{id}": {
-            "get": {
-                "tags": [
-                    "Price"
-                ],
-                "summary": "Get item",
-                "operationId": "getItem",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/Price"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "200"
-            },
-            "put": {
-                "tags": [
-                    "Price"
-                ],
-                "summary": "Update item",
-                "operationId": "updateItem",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "updateRequestItem",
-                        "description": "updateRequestItem",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Price"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/Price"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "400"
-            },
-            "delete": {
-                "tags": [
-                    "Price"
-                ],
-                "summary": "Delete price",
-                "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
-                "operationId": "deletePrice",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false
-            }
         }
     },
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "oauth2",
-            "authorizationUrl": "https://api.staging.nexway.build/iam/tokens",
-            "flow": "implicit",
-            "scopes": {
-                "global": "global"
-            }
-        }
-    },
-    "definitions": {
-        "Document": {
-            "type": "object",
-            "title": "Document",
-            "additionalProperties": {
-                "type": "object"
-            }
-        },
-        "Event": {
-            "type": "object",
-            "properties": {
-                "affectedIds": {
-                    "type": "array",
-                    "items": {
+    "components": {
+        "schemas": {
+            "ExceptionDetail": {
+                "type": "object",
+                "properties": {
+                    "errorType": {
                         "type": "string"
-                    }
-                },
-                "event": {
-                    "type": "string",
-                    "enum": [
-                        "CREATED",
-                        "UPDATED",
-                        "ARCHIVED"
-                    ]
-                },
-                "previousData": {
-                    "$ref": "#/definitions/Price"
-                },
-                "when": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            },
-            "title": "Event"
-        },
-        "Price": {
-            "type": "object",
-            "required": [
-                "currency",
-                "endDate",
-                "productId",
-                "startDate",
-                "value"
-            ],
-            "properties": {
-                "archived": {
-                    "type": "boolean",
-                    "description": "Indicator if the price was removed/archived"
-                },
-                "country": {
-                    "type": "string",
-                    "description": "Country code in ISO 3166-2 format"
-                },
-                "createDate": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "currency": {
-                    "type": "string",
-                    "description": "Currency code in ISO-4217 format"
-                },
-                "customerId": {
-                    "type": "string"
-                },
-                "dbVersion": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "endDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Price end date timestamp in milliseconds (example: 1589439239780)"
-                },
-                "history": {
-                    "type": "array",
-                    "description": "Historical data on the price",
-                    "items": {
-                        "$ref": "#/definitions/Event"
-                    }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "lastUpdateReason": {
-                    "type": "string"
-                },
-                "marketingCampaignId": {
-                    "type": "string",
-                    "description": "Marketing campaign Id"
-                },
-                "modelVersion": {
-                    "type": "string"
-                },
-                "msrp": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Recommended price"
-                },
-                "originalId": {
-                    "type": "string"
-                },
-                "productId": {
-                    "type": "string",
-                    "description": "Product identifier"
-                },
-                "startDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Price start date timestamp in milliseconds (example: 1589439239780)"
-                },
-                "updateDate": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "value": {
-                    "type": "number",
-                    "format": "double",
-                    "description": "Regular price, two decimal places format"
-                },
-                "vatIncluded": {
-                    "type": "boolean",
-                    "description": "Tax is included in price"
-                }
-            },
-            "title": "Price"
-        },
-        "RecapEntry": {
-            "type": "object",
-            "properties": {
-                "count": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "targetValue": {
-                    "type": "string"
-                }
-            },
-            "title": "RecapEntry"
-        },
-        "SearchResult\u00abDocument\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Document"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abDocument\u00bb"
-        },
-        "SearchResult\u00abPrice\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Price"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abPrice\u00bb"
-        },
-        "SearchResult\u00abRecapEntry\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RecapEntry"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abRecapEntry\u00bb"
-        },
-        "SearchResult\u00abobject\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "specific": {
                         "type": "object"
                     }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
                 }
             },
-            "title": "SearchResult\u00abobject\u00bb"
+            "NormalizeException": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        }
+                    }
+                }
+            },
+            "Event": {
+                "type": "object",
+                "properties": {
+                    "event": {
+                        "type": "string",
+                        "enum": [
+                            "CREATED",
+                            "UPDATED",
+                            "ARCHIVED"
+                        ]
+                    },
+                    "when": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "previousData": {
+                        "$ref": "#/components/schemas/Price"
+                    },
+                    "affectedIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Historical data on the price",
+                "readOnly": true
+            },
+            "Price": {
+                "required": [
+                    "currency",
+                    "endDate",
+                    "productId",
+                    "startDate",
+                    "value",
+                    "vatIncluded"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "deprecated": true
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "deprecated": true
+                    },
+                    "updateDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "deprecated": true
+                    },
+                    "modelVersion": {
+                        "type": "string",
+                        "deprecated": true
+                    },
+                    "dbVersion": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "productId": {
+                        "type": "string",
+                        "description": "Product identifier"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "Price start date timestamp in milliseconds",
+                        "format": "date-time"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "Price end date timestamp in milliseconds",
+                        "format": "date-time"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country code in ISO 3166-2 format",
+                        "example": "FR"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Currency code in ISO-4217 format",
+                        "example": "EUR"
+                    },
+                    "value": {
+                        "type": "number",
+                        "description": "Regular price, two decimal places format",
+                        "format": "double",
+                        "example": 14.99
+                    },
+                    "vatIncluded": {
+                        "type": "boolean",
+                        "description": "Tax is included in price"
+                    },
+                    "msrp": {
+                        "type": "number",
+                        "description": "Recommended price, two decimal places format",
+                        "format": "double",
+                        "example": 39.99
+                    },
+                    "marketingCampaignId": {
+                        "type": "string",
+                        "description": "Marketing campaign Id"
+                    },
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Indicator if the price was removed/archived"
+                    },
+                    "history": {
+                        "type": "array",
+                        "description": "Historical data on the price",
+                        "readOnly": true,
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        }
+                    }
+                }
+            },
+            "SearchResultPrice": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Price"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "SearchResultObject": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "RecapEntry": {
+                "type": "object",
+                "properties": {
+                    "targetValue": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "SearchResultRecapEntry": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RecapEntry"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Document": {
+                "type": "object",
+                "properties": {
+                    "empty": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": {
+                    "type": "object"
+                }
+            },
+            "SearchResultDocument": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "oauth2",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "Bearer",
+                "bearerFormat": "JWT",
+                "flows": {
+                    "password": {
+                        "tokenUrl": "https://api.staging.nexway.build/iam/tokens",
+                        "scopes": {
+                            "global": "global",
+                            "nexway": "nexway"
+                        }
+                    },
+                    "clientCredentials": {
+                        "tokenUrl": "https://api.staging.nexway.build/iam/tokens",
+                        "scopes": {
+                            "global": "global",
+                            "nexway": "nexway"
+                        }
+                    }
+                }
+            }
         }
     }
 }
