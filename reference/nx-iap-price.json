@@ -88,22 +88,22 @@
                     }
                 ],
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/SearchResultPrice"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -118,8 +118,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -128,8 +128,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -158,8 +158,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -178,8 +178,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -188,8 +188,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -210,22 +210,22 @@
                 "summary": "Get item",
                 "operationId": "getItem",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -240,8 +240,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -250,8 +250,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -270,22 +270,22 @@
                 "summary": "Update item",
                 "operationId": "updateItem",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -300,8 +300,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -310,8 +310,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -331,28 +331,8 @@
                 "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
                 "operationId": "deleteItem",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -371,8 +351,28 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -393,22 +393,22 @@
                 "description": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
                 "operationId": "getBestPrice",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "*/*": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -423,8 +423,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -433,8 +433,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -454,22 +454,22 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -484,8 +484,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -494,8 +494,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -508,30 +508,30 @@
                 "x-operationWeight": "100"
             }
         },
-        "/prices/unwind": {
+        "/prices/recap": {
             "get": {
                 "tags": [
                     "Price"
                 ],
-                "summary": "Search unwind for a given field",
-                "operationId": "unwind",
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -546,8 +546,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -556,8 +556,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -570,30 +570,30 @@
                 "x-operationWeight": "150"
             }
         },
-        "/prices/recap": {
+        "/prices/unwind": {
             "get": {
                 "tags": [
                     "Price"
                 ],
-                "summary": "Get recap quantities for a given field",
-                "operationId": "recap",
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -608,8 +608,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -618,8 +618,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -891,24 +891,25 @@
                     }
                 }
             },
-            "Document": {
+            "RecapEntry": {
                 "type": "object",
                 "properties": {
-                    "empty": {
-                        "type": "boolean"
+                    "targetValue": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
                     }
-                },
-                "additionalProperties": {
-                    "type": "object"
                 }
             },
-            "SearchResultDocument": {
+            "SearchResultRecapEntry": {
                 "type": "object",
                 "properties": {
                     "items": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Document"
+                            "$ref": "#/components/schemas/RecapEntry"
                         }
                     },
                     "last": {
@@ -932,25 +933,24 @@
                     }
                 }
             },
-            "RecapEntry": {
+            "Document": {
                 "type": "object",
                 "properties": {
-                    "targetValue": {
-                        "type": "string"
-                    },
-                    "count": {
-                        "type": "integer",
-                        "format": "int32"
+                    "empty": {
+                        "type": "boolean"
                     }
+                },
+                "additionalProperties": {
+                    "type": "object"
                 }
             },
-            "SearchResultRecapEntry": {
+            "SearchResultDocument": {
                 "type": "object",
                 "properties": {
                     "items": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/RecapEntry"
+                            "$ref": "#/components/schemas/Document"
                         }
                     },
                     "last": {
