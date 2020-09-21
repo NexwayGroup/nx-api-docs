@@ -77,6 +77,26 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultCustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -97,28 +117,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultCustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -147,6 +147,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -169,16 +179,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -199,6 +199,26 @@
                 "summary": "Get item",
                 "operationId": "getItem",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -219,28 +239,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -259,6 +259,26 @@
                 "summary": "Update item",
                 "operationId": "updateItem",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -279,28 +299,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -319,6 +319,26 @@
                 "summary": "Delete item",
                 "operationId": "deleteItem",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -341,26 +361,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -381,6 +381,26 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -401,28 +421,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -443,6 +443,26 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -463,28 +483,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -505,6 +505,26 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -525,28 +545,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -645,6 +645,26 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDescription"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -665,28 +685,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDescription"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -715,6 +715,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -737,16 +747,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -767,6 +767,26 @@
                 "summary": "Get item",
                 "operationId": "getItem_1",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -787,28 +807,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -827,6 +827,26 @@
                 "summary": "Update item",
                 "operationId": "updateItem_1",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -847,28 +867,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -887,6 +887,26 @@
                 "summary": "Delete item",
                 "operationId": "deleteItem_1",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -909,26 +929,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -949,6 +949,26 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_1",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -969,28 +989,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1011,6 +1011,26 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_1",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1031,28 +1051,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1073,6 +1073,26 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_1",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1093,28 +1113,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1156,6 +1156,26 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultPriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1176,28 +1196,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultPriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1226,6 +1226,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1248,16 +1258,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1278,6 +1278,26 @@
                 "summary": "Get item",
                 "operationId": "getItem_2",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1298,28 +1318,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1338,6 +1338,26 @@
                 "summary": "Update item",
                 "operationId": "updateItem_2",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1358,28 +1378,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1398,6 +1398,26 @@
                 "summary": "Delete item",
                 "operationId": "deleteItem_2",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1420,26 +1440,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1460,6 +1460,26 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_2",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1480,28 +1500,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1522,6 +1522,26 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_2",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1542,28 +1562,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1584,6 +1584,26 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_2",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1604,28 +1624,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1638,20 +1638,21 @@
                 "x-operationWeight": "150"
             }
         },
-        "/products/{id}/nextgeneration": {
+        "/products/{id}/variants/matrix": {
             "get": {
                 "tags": [
                     "Product"
                 ],
-                "summary": "Get the next generation of product",
-                "operationId": "getNextGeneration",
+                "summary": "Get variant matrix",
+                "description": "Get matrix of all available product variants",
+                "operationId": "getVariantMatrix",
                 "responses": {
                     "404": {
                         "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/Matrix"
                                 }
                             }
                         }
@@ -1661,7 +1662,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/Matrix"
                                 }
                             }
                         }
@@ -1671,7 +1672,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/Matrix"
                                 }
                             }
                         }
@@ -1681,13 +1682,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/Matrix"
                                 }
                             }
                         }
                     }
                 },
-                "x-operationWeight": "300"
+                "x-operationWeight": "400"
             }
         },
         "/products/import": {
@@ -1877,6 +1878,26 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1897,28 +1918,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1947,6 +1948,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -1969,16 +1980,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1991,83 +1992,20 @@
                 "x-operationWeight": "300"
             }
         },
-        "/products/{id}/variants/matrix": {
+        "/products/{id}/nextgeneration": {
             "get": {
                 "tags": [
                     "Product"
                 ],
-                "summary": "Get variant matrix",
-                "description": "Get matrix of all available product variants",
-                "operationId": "getVariantMatrix",
+                "summary": "Get the next generation of product",
+                "operationId": "getNextGeneration",
                 "responses": {
                     "404": {
                         "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "400"
-            }
-        },
-        "/products/{id}": {
-            "get": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get item",
-                "operationId": "getItem_3",
-                "responses": {
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
+                                    "$ref": "#/components/schemas/Product"
                                 }
                             }
                         }
@@ -2082,8 +2020,50 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem_3",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2092,8 +2072,28 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2112,6 +2112,26 @@
                 "summary": "Update item",
                 "operationId": "updateItem_3",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2132,28 +2152,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2172,6 +2172,26 @@
                 "summary": "Delete item",
                 "operationId": "deleteItem_3",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2194,26 +2214,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2234,6 +2234,26 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_3",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2254,28 +2274,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2296,6 +2296,26 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_3",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2316,28 +2336,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2358,6 +2358,26 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_3",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2378,28 +2398,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2410,110 +2410,6 @@
                     }
                 },
                 "x-operationWeight": "150"
-            }
-        },
-        "/products/public/{id}/descriptions": {
-            "get": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Get public description of product",
-                "operationId": "getPublicDescription",
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "400"
-            }
-        },
-        "/products/public/{id}/nextgeneration": {
-            "get": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Get the next generation of product",
-                "operationId": "getNextGeneration_1",
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "300"
             }
         },
         "/products/public": {
@@ -2625,6 +2521,26 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultPublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2645,16 +2561,6 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultPublicProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -2664,13 +2570,107 @@
                                 }
                             }
                         }
+                    }
+                },
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/public/{id}/descriptions": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get public description of product",
+                "operationId": "getPublicDescription",
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
                     },
                     "500": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "400"
+            }
+        },
+        "/products/public/{id}/nextgeneration": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get the next generation of product",
+                "operationId": "getNextGeneration_1",
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
                                 }
                             }
                         }
@@ -2687,6 +2687,26 @@
                 "summary": "Get item",
                 "operationId": "getItem_4",
                 "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2707,28 +2727,8 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2854,6 +2854,10 @@
                     "subscriptionTemplate": {
                         "type": "string",
                         "description": "Subscription template name"
+                    },
+                    "trialAllowed": {
+                        "type": "boolean",
+                        "description": "Indicator if subscription trial is allowed on this product"
                     },
                     "status": {
                         "type": "string",
@@ -3475,6 +3479,87 @@
                     }
                 }
             },
+            "Matrix": {
+                "type": "object",
+                "properties": {
+                    "matrixVariables": {
+                        "type": "array",
+                        "description": "List of variables",
+                        "readOnly": true,
+                        "items": {
+                            "$ref": "#/components/schemas/Variable"
+                        }
+                    },
+                    "matrix": {
+                        "type": "object",
+                        "description": "Matrix",
+                        "readOnly": true
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Order of variables in the matrix",
+                        "readOnly": true
+                    }
+                }
+            },
+            "Variable": {
+                "required": [
+                    "defaultValue",
+                    "field",
+                    "labels",
+                    "localizedValue",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "object",
+                        "description": "Possible values of variable"
+                    },
+                    "field": {
+                        "type": "string",
+                        "description": "Variable name"
+                    },
+                    "internalDesc": {
+                        "type": "string",
+                        "description": "Variable internal description"
+                    },
+                    "defaultValue": {
+                        "type": "object",
+                        "description": "Name of variable"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Variable type",
+                        "enum": [
+                            "LIST",
+                            "RANGE",
+                            "BOOL"
+                        ]
+                    },
+                    "labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "description": "Variable labels"
+                        },
+                        "description": "Variable labels"
+                    },
+                    "localizedValue": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string",
+                                "description": "Variable localized value"
+                            },
+                            "description": "Variable localized value"
+                        },
+                        "description": "Variable localized value"
+                    }
+                },
+                "description": "Available product variables"
+            },
             "Product": {
                 "required": [
                     "lifeTime",
@@ -3525,6 +3610,10 @@
                     "subscriptionTemplate": {
                         "type": "string",
                         "description": "Subscription template name"
+                    },
+                    "trialAllowed": {
+                        "type": "boolean",
+                        "description": "Flag for subscription trial allowed on this product"
                     },
                     "publisherProductId": {
                         "type": "string"
@@ -3735,64 +3824,6 @@
                 },
                 "description": "Product resources"
             },
-            "Variable": {
-                "required": [
-                    "defaultValue",
-                    "field",
-                    "labels",
-                    "localizedValue",
-                    "type"
-                ],
-                "type": "object",
-                "properties": {
-                    "value": {
-                        "type": "object",
-                        "description": "Possible values of variable"
-                    },
-                    "field": {
-                        "type": "string",
-                        "description": "Variable name"
-                    },
-                    "internalDesc": {
-                        "type": "string",
-                        "description": "Variable internal description"
-                    },
-                    "defaultValue": {
-                        "type": "object",
-                        "description": "Name of variable"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "Variable type",
-                        "enum": [
-                            "LIST",
-                            "RANGE",
-                            "BOOL"
-                        ]
-                    },
-                    "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "description": "Variable labels"
-                        },
-                        "description": "Variable labels"
-                    },
-                    "localizedValue": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string",
-                                "description": "Variable localized value"
-                            },
-                            "description": "Variable localized value"
-                        },
-                        "description": "Variable localized value"
-                    }
-                },
-                "description": "Available product variables"
-            },
             "SearchResultProduct": {
                 "type": "object",
                 "properties": {
@@ -3820,29 +3851,6 @@
                     "number": {
                         "type": "integer",
                         "format": "int32"
-                    }
-                }
-            },
-            "Matrix": {
-                "type": "object",
-                "properties": {
-                    "matrixVariables": {
-                        "type": "array",
-                        "description": "List of variables",
-                        "readOnly": true,
-                        "items": {
-                            "$ref": "#/components/schemas/Variable"
-                        }
-                    },
-                    "matrix": {
-                        "type": "object",
-                        "description": "Matrix",
-                        "readOnly": true
-                    },
-                    "format": {
-                        "type": "string",
-                        "description": "Order of variables in the matrix",
-                        "readOnly": true
                     }
                 }
             },
@@ -4054,6 +4062,10 @@
                         "type": "string",
                         "description": "Subscription template name"
                     },
+                    "trialAllowed": {
+                        "type": "boolean",
+                        "description": "Flag for subscription trial allowed on this product"
+                    },
                     "publisherProductId": {
                         "type": "string"
                     },
@@ -4224,6 +4236,10 @@
                     "previousLineItemId": {
                         "type": "string",
                         "description": "Previous line item ID"
+                    },
+                    "trial": {
+                        "type": "boolean",
+                        "description": "Indicator if it is a product trial"
                     }
                 }
             },
