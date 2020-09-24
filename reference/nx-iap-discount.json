@@ -31,6 +31,17 @@
                 "summary": "generateSingleUseCodes",
                 "description": "Generate coupons",
                 "operationId": "generateSingleUseCodes",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Discount id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "404": {
                         "description": "Not Found",
@@ -82,8 +93,223 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "/discounts": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems",
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Customer Id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "storeIds",
+                        "in": "query",
+                        "description": "Stores discount can be applied to",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productIds",
+                        "in": "query",
+                        "description": "Products to which discount is restricted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "parentProductIds",
+                        "in": "query",
+                        "description": "Products to which discount is restricted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of discount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "Discount start date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "Discount end date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "level",
+                        "in": "query",
+                        "description": "Level of product discount applies",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "PRODUCT",
+                                "FORCED_CROSS_SELL",
+                                "CROSS_SELL",
+                                "UP_SELL"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "Model type of discount",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "CAMPAIGN",
+                                "COUPON",
+                                "SINGLE_USE_CODE"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDiscount"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
                 },
-                "x-operationWeight": "200"
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem",
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Discount"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300"
             }
         },
         "/discounts/import": {
@@ -115,6 +341,16 @@
                             }
                         }
                     },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Discount"
+                                }
+                            }
+                        }
+                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -135,21 +371,11 @@
                             }
                         }
                     },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Discount"
-                                }
-                            }
-                        }
-                    },
                     "201": {
                         "description": "Created",
                         "headers": {
                             "Location": {
-                                "description": "link to the new discount ref",
+                                "description": "UUID generated for the new discount ref",
                                 "style": "simple"
                             }
                         },
@@ -161,186 +387,7 @@
                             }
                         }
                     }
-                },
-                "x-operationWeight": "800"
-            }
-        },
-        "/discounts": {
-            "get": {
-                "tags": [
-                    "Discount"
-                ],
-                "summary": "Get items",
-                "operationId": "getItems",
-                "parameters": [
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "customerId",
-                        "in": "query",
-                        "description": "Customer Id"
-                    },
-                    {
-                        "name": "storeIds",
-                        "in": "query",
-                        "description": "Stores discount can be applied to"
-                    },
-                    {
-                        "name": "productIds",
-                        "in": "query",
-                        "description": "Products to which discount is restricted"
-                    },
-                    {
-                        "name": "parentProductIds",
-                        "in": "query",
-                        "description": "Products to which discount is restricted"
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "Name of discount"
-                    },
-                    {
-                        "name": "startDate",
-                        "in": "query",
-                        "description": "Discount start date"
-                    },
-                    {
-                        "name": "endDate",
-                        "in": "query",
-                        "description": "Discount end date"
-                    },
-                    {
-                        "name": "level",
-                        "in": "query",
-                        "description": "Level of product discount apples: PRODUCT, FORCED_CROSS_SELL, CROSS_SELL, UP_SELL"
-                    },
-                    {
-                        "name": "model",
-                        "in": "query",
-                        "description": "Model type of discount: CAMPAIGN, COUPON, SINGLE_USE_CODE"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDiscount"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "300"
-            },
-            "post": {
-                "tags": [
-                    "Discount"
-                ],
-                "summary": "Create an item",
-                "operationId": "createItem",
-                "responses": {
-                    "201": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Discount"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "300"
+                }
             }
         },
         "/discounts/usages": {
@@ -354,47 +401,74 @@
                     {
                         "name": "orderId",
                         "in": "query",
-                        "description": "Order Id discount applied to"
+                        "description": "Order Id discount applied to",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "customerId",
                         "in": "query",
-                        "description": "Customer Id discount applied to"
+                        "description": "Customer Id discount applied to",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "storeId",
                         "in": "query",
-                        "description": "Store Id discount applied to"
+                        "description": "Store Id discount applied to",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "discountId",
                         "in": "query",
-                        "description": "Discount Id"
+                        "description": "Discount Id",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "discountCode",
                         "in": "query",
-                        "description": "Discount Code"
+                        "description": "Discount Code",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "endUserEmail",
                         "in": "query",
-                        "description": "Email used"
+                        "description": "Email used",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "endUserId",
                         "in": "query",
-                        "description": "EndUser Id"
+                        "description": "EndUser Id",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "catalogId",
                         "in": "query",
-                        "description": "Catalog Id"
+                        "description": "Catalog Id",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "target",
                         "in": "query",
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -408,8 +482,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -428,18 +512,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -474,8 +548,7 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "x-operationWeight": "400"
+                }
             }
         },
         "/discounts/discount/cart": {
@@ -537,8 +610,7 @@
                             }
                         }
                     }
-                },
-                "x-operationWeight": "500"
+                }
             }
         },
         "/discounts/{id}": {
@@ -548,6 +620,16 @@
                 ],
                 "summary": "Get item",
                 "operationId": "getItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -559,8 +641,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -579,18 +671,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -608,6 +690,16 @@
                 ],
                 "summary": "Update item",
                 "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -615,26 +707,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Discount"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -658,6 +730,26 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
                 "x-operationWeight": "400"
@@ -668,9 +760,19 @@
                 ],
                 "summary": "Delete item",
                 "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -689,6 +791,16 @@
                             }
                         }
                     },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Forbidden",
                         "content": {
@@ -699,18 +811,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -741,8 +843,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -761,18 +873,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -803,8 +905,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -823,18 +935,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -865,8 +967,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -885,18 +997,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -927,8 +1029,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -947,18 +1059,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -978,6 +1080,16 @@
                 ],
                 "summary": "Get item",
                 "operationId": "getItem_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -989,8 +1101,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1009,18 +1131,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1051,8 +1163,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1071,18 +1193,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1113,8 +1225,18 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1133,18 +1255,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1174,6 +1286,127 @@
                         }
                     }
                 }
+            },
+            "ExceptionDetail": {
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
+                }
+            },
+            "NormalizeException": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        }
+                    }
+                }
+            },
+            "Campaign": {
+                "required": [
+                    "endDate",
+                    "level",
+                    "name",
+                    "storeIds"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Discount"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "weight": {
+                                "type": "integer",
+                                "description": "Determines which coupon is applied when there are two with the same name. Higher value increases priority.",
+                                "format": "int32",
+                                "example": 100
+                            },
+                            "maxUsePerStore": {
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "maxUsePerEndUser": {
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Coupon": {
+                "required": [
+                    "endDate",
+                    "level",
+                    "name",
+                    "storeIds"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Discount"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "weight": {
+                                "type": "integer",
+                                "description": "Determines which coupon is applied when there are two with the same name. Higher value increases priority.",
+                                "format": "int32",
+                                "example": 100
+                            },
+                            "maxUsePerStore": {
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "maxUsePerEndUser": {
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "codes": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "Discount": {
                 "required": [
@@ -1416,53 +1649,24 @@
                     }
                 },
                 "discriminator": {
-                    "propertyName": "model"
-                }
-            },
-            "ExceptionDetail": {
-                "type": "object",
-                "properties": {
-                    "errorType": {
-                        "type": "string"
-                    },
-                    "resourceType": {
-                        "type": "string"
-                    },
-                    "resourceId": {
-                        "type": "string"
-                    },
-                    "resourceDisplayName": {
-                        "type": "string"
-                    },
-                    "specific": {
-                        "type": "object"
+                    "propertyName": "model",
+                    "mapping": {
+                        "COUPON": "#/components/schemas/Coupon",
+                        "CAMPAIGN": "#/components/schemas/Campaign",
+                        "SINGLE_USE_CODE": "#/components/schemas/SingleUseCode"
                     }
-                }
-            },
-            "NormalizeException": {
-                "type": "object",
-                "properties": {
-                    "timestamp": {
-                        "type": "integer",
-                        "format": "int64"
+                },
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Coupon"
                     },
-                    "status": {
-                        "type": "integer",
-                        "format": "int32"
+                    {
+                        "$ref": "#/components/schemas/Campaign"
                     },
-                    "error": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    },
-                    "details": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ExceptionDetail"
-                        }
+                    {
+                        "$ref": "#/components/schemas/SingleUseCode"
                     }
-                }
+                ]
             },
             "SearchResultDiscount": {
                 "type": "object",
@@ -1493,6 +1697,20 @@
                         "format": "int32"
                     }
                 }
+            },
+            "SingleUseCode": {
+                "required": [
+                    "endDate",
+                    "level",
+                    "name",
+                    "storeIds"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Discount"
+                    }
+                ]
             },
             "BuyerBehavior": {
                 "type": "object",
@@ -1994,10 +2212,6 @@
         "securitySchemes": {
             "Bearer": {
                 "type": "oauth2",
-                "name": "Authorization",
-                "in": "header",
-                "scheme": "Bearer",
-                "bearerFormat": "JWT",
                 "flows": {
                     "password": {
                         "tokenUrl": "https://api.staging.nexway.build/iam/tokens",
