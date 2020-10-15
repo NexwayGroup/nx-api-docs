@@ -1,0 +1,534 @@
+{
+    "consumes": [
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Uploads files that will be hosted by Nexway and then accessed through public\nhttps links. Assets can be transferred as text, binary data or URL link.",
+        "title": "Assets",
+        "contact": {
+            "url": "https://www.nexway.com"
+        },
+        "version": "1.0"
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/",
+    "paths": {
+        "/assets": {
+            "get": {
+                "description": "Returns collection of public URLs. For internal use by Nexway.",
+                "tags": [
+                    "asset"
+                ],
+                "summary": "List assets",
+                "operationId": "listAssets",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 50,
+                        "x-go-name": "Size",
+                        "description": "Amount of items returned per pagination page",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 0,
+                        "x-go-name": "Page",
+                        "description": "Pagination page starting from 0",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listAssetsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "description": "File is transferred using multipart/form-data\nhttps://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2 As a result\nservice will return a public https link to resource. File content is used to\ngenerate id of the asset, hence files cannot be duplicated. In such case\nasset is re-uploaded to already existing location. Only one file can be sent\nat once.\n\n# Usage and integration examples\n\n## curl\n\nTransfer file from disk\n\n\tcurl -i -X POST \\\n\t\thttps://api.staging.nexway.build/assets \\\n\t\t-H \"Authorization: Bearer ${JWT_TOKEN}\" \\\n\t\t-F file=@\"/home/user/Pictures/nexway_main.png\"\n\nTransfer using url\n\n\tcurl -i -X POST \\\n\t\thttps://api.staging.nexway.build/assets \\\n\t\t-H \"Authorization: Bearer ${JWT_TOKEN}\" \\\n\t\t-F url=\"https://www.nexway.com/wp-content/uploads/2019/08/nexway_main.png\"\n\nDefine file content type\n\n\tcurl -i -X POST \\\n\t\thttps://api.staging.nexway.build/assets \\\n\t\t-H \"Authorization: Bearer ${JWT_TOKEN}\" \\\n\t\t-F file=@\"/home//user/Documents/report.csv;type=text/csv\"\n\n## golang\n\n\t// Download file from URL\n\tfileResp, _ := http.Get(\"https://www.nexway.com/wp-content/uploads/2019/08/nexway_main.png\")\n\tdefer fileResp.Body.Close()\n\n\t// create multipart form\n\tbody := &bytes.Buffer{}\n\twriter := multipart.NewWriter(body)\n\th := make(textproto.MIMEHeader)\n\th.Set(\"Content-Disposition\", fmt.Sprintf(`form-data; name=\"%s\"; filename=\"%s\"`, \"file\", \"nexway_main.png\"))\n\th.Set(\"Content-Type\", \"image/png\")\n\tpart, _ := writer.CreatePart(h)\n\tio.Copy(part, fileResp.Body)\n\twriter.Close()\n\n\t// Execute the request\n\tr, _ := http.NewRequest(\"POST\", \"https://api.staging.nexway.build/assets\", body)\n\tr.Header.Add(\"Content-Type\", writer.FormDataContentType())\n\tr.Header.Add(\"Authorization\", \"Bearer \"+os.Getenv(\"JWT_TOKEN\"))\n\tclient := &http.Client{}\n\tresp, _ := client.Do(r)\n\n\t// Results\n\tfmt.Println(\"Headers\", resp.Header)\n\tbodyBytes, _ := ioutil.ReadAll(resp.Body)\n\tfmt.Println(\"Body\", string(bodyBytes))\n\n## java\n\n\t// Create multipart form\n\tFile file = new File(\"/home/user/Pictures/nexway_main.png\");\n\tString boundary = \"JavaMultiFormBoundary58c6x3GIcM\";\n\tHttpEntity reqEntity = MultipartEntityBuilder.create()\n\t  .setBoundary(boundary)\n\t  .addBinaryBody(\"file\", file, ContentType.IMAGE_PNG, \"nexway_main.png\")\n\t  .build();\n\n\t// Create post request with form\n\tHttpPost httpPost = new HttpPost(\"https://api.staging.nexway.build/assets\");\n\thttpPost.setHeader(\"Authorization\", \"Bearer \"+System.getenv(\"JWT_TOKEN\"));\n\thttpPost.setHeader(\"Content-Type\", \"multipart/form-data; boundary=\"+boundary);\n\thttpPost.setEntity(reqEntity);\n\n\t// Execute request\n\tCloseableHttpClient httpClient = HttpClients.createDefault();\n\tCloseableHttpResponse httpResponse = httpClient.execute(httpPost);\n\tSystem.out.println(\"Response: \" + httpResponse);\n\tSystem.out.println(\"Response Body : \" + EntityUtils.toString(httpResponse.getEntity(), \"UTF-8\"));\n\thttpClient.close();",
+                "tags": [
+                    "asset"
+                ],
+                "summary": "Upload asset",
+                "operationId": "postAsset",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "x-go-name": "File",
+                        "description": "Upload file from hard drive",
+                        "name": "file",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "Url",
+                        "description": "Upload by URL",
+                        "name": "url",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/postAssetSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Only Nexway employee can delete the assets.",
+                "tags": [
+                    "asset"
+                ],
+                "summary": "Delete assets",
+                "operationId": "deleteAssets",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ids": {
+                                    "description": "The request contains a list of up to 1000 keys that you want to\ndelete",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-go-name": "Ids"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/control/{orderId}/{filename}": {
+            "get": {
+                "description": "Evaluates whether product-related content file is stored in the order.",
+                "tags": [
+                    "asset"
+                ],
+                "summary": "Control Assets",
+                "operationId": "controlAssets",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "OrderId",
+                        "description": "Order id",
+                        "name": "orderId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "Filename",
+                        "description": "File name without URL and MDAUTH e.g. software.exe",
+                        "name": "filename",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/controlAssetsBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AssetDefinition": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "description": "Public URL to asset",
+                    "type": "string",
+                    "x-go-name": "URL"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-asset/service"
+        },
+        "BadRequest": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Bad Request"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "error: field can't be empty"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 400
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "Forbidden": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Forbidden"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Forbidden"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 403
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "InternalServerError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Internal Server Error"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "invalid memory address or nil pointer dereference"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 500
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "NotFound": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Not Found"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "item not found"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 404
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "Unauthorized": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Unauthorized"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Unauthorized"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 401
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        }
+    },
+    "responses": {
+        "controlAssetsBadRequest": {
+            "description": "Search failure\n\nResponse returns no content. Possible reasons that file was not found:\n1. Order doesn't exists\n2. File not found in order\n3. Found more that one order\n4. Order service unavailable"
+        },
+        "listAssetsSuccess": {
+            "description": "Success",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "type": "string",
+                        "x-go-name": "Format",
+                        "example": "short"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/AssetDefinition"
+                        },
+                        "x-go-name": "Items",
+                        "example": [
+                            {
+                                "url": "https://s3.staging.nexway.build/iap-staticfiles/872176b24b80e9a62f947bd555f2abb3.png"
+                            }
+                        ]
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage",
+                        "example": false
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Page",
+                        "example": 41
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Size",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "TotalMatchingItems",
+                        "example": 100523
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "ComputedTotalPages",
+                        "example": 10053
+                    }
+                }
+            }
+        },
+        "postAssetSuccess": {
+            "description": "Success",
+            "headers": {
+                "Location": {
+                    "type": "string",
+                    "description": "Public https link to uploaded resource"
+                }
+            }
+        },
+        "starterBadRequest": {
+            "description": "Bad request\n\nUsually indicates validation failure",
+            "schema": {
+                "$ref": "#/definitions/BadRequest"
+            }
+        },
+        "starterForbidden": {
+            "description": "Forbidden",
+            "schema": {
+                "$ref": "#/definitions/Forbidden"
+            }
+        },
+        "starterInternalServerError": {
+            "description": "Internal server error",
+            "schema": {
+                "$ref": "#/definitions/InternalServerError"
+            }
+        },
+        "starterNotFound": {
+            "description": "Not found",
+            "schema": {
+                "$ref": "#/definitions/NotFound"
+            }
+        },
+        "starterSuccessCreate": {
+            "description": "Successful",
+            "headers": {
+                "Location": {
+                    "type": "string",
+                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89"
+                }
+            }
+        },
+        "starterSuccessNoContent": {
+            "description": "Successful"
+        },
+        "starterUnauthorized": {
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
+            "schema": {
+                "$ref": "#/definitions/Unauthorized"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "security": [
+        {
+            "JWT": [
+                
+            ]
+        }
+    ]
+}
