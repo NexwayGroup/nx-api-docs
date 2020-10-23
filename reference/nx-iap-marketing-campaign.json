@@ -28,18 +28,18 @@
                     {
                         "type": "integer",
                         "format": "int64",
-                        "example": 10,
+                        "default": 50,
                         "x-go-name": "Size",
-                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "description": "Amount of items returned per pagination page",
                         "name": "size",
                         "in": "query"
                     },
                     {
                         "type": "integer",
                         "format": "int64",
-                        "example": 41,
+                        "default": 0,
                         "x-go-name": "Page",
-                        "description": "Current displayed pagination page.",
+                        "description": "Pagination page starting from 0",
                         "name": "page",
                         "in": "query"
                     },
@@ -47,7 +47,7 @@
                         "type": "string",
                         "example": "createDate,desc",
                         "x-go-name": "Sort",
-                        "description": "Sort list results.\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
+                        "description": "Sort list results\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
                         "name": "sort",
                         "in": "query"
                     },
@@ -64,6 +64,14 @@
                         "x-go-name": "Name",
                         "description": "Filter results by campaign name",
                         "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "enabled",
+                        "x-go-name": "Status",
+                        "description": "Filter result by status",
+                        "name": "status",
                         "in": "query"
                     },
                     {
@@ -130,7 +138,8 @@
                             "type": "object",
                             "required": [
                                 "name",
-                                "startDate"
+                                "startDate",
+                                "status"
                             ],
                             "properties": {
                                 "customerId": {
@@ -194,6 +203,9 @@
                                     "format": "uint64",
                                     "x-go-name": "StartDate",
                                     "example": 1593583200000
+                                },
+                                "status": {
+                                    "$ref": "#/definitions/CampaignStatus"
                                 }
                             }
                         }
@@ -334,12 +346,51 @@
         }
     },
     "definitions": {
+        "BadRequest": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Bad Request"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "error: field can't be empty"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 400
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
         "Campaign": {
             "description": "Campaign\nSingle campaign entity.",
             "type": "object",
             "required": [
                 "name",
-                "startDate"
+                "startDate",
+                "status"
             ],
             "properties": {
                 "createDate": {
@@ -424,6 +475,9 @@
                     "x-go-name": "StartDate",
                     "example": 1593583200000
                 },
+                "status": {
+                    "$ref": "#/definitions/CampaignStatus"
+                },
                 "updateDate": {
                     "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
                     "type": "integer",
@@ -458,6 +512,162 @@
             "description": "CampaignProductMatchMode\nAvailable filter modes: variant, parent. The \"variant\" allows only one\nproduct (variant) in campaign. The \"parent\" enables whole product with it's\nvariants in campaign (not supported yet).",
             "type": "string",
             "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "CampaignStatus": {
+            "type": "string",
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "Forbidden": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Forbidden"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Forbidden"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 403
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "InternalServerError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Internal Server Error"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "invalid memory address or nil pointer dereference"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 500
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "NotFound": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Not Found"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "item not found"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 404
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "Unauthorized": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Unauthorized"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Unauthorized"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 401
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
         }
     },
     "responses": {
@@ -530,167 +740,31 @@
             }
         },
         "starterBadRequest": {
-            "description": "Bad request.\nUsually indicates validation failure.",
+            "description": "Bad request\n\nUsually indicates validation failure",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "description": "HTTP response status codes label",
-                        "type": "string",
-                        "x-go-name": "StatusLabel",
-                        "example": "Bad Request"
-                    },
-                    "message": {
-                        "description": "Detailed error message",
-                        "type": "string",
-                        "x-go-name": "ErrorMessage",
-                        "example": "error: customerId can't be empty"
-                    },
-                    "path": {
-                        "description": "Resource path",
-                        "type": "string",
-                        "x-go-name": "Path",
-                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
-                    },
-                    "status": {
-                        "description": "HTTP response error status codes",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Status",
-                        "example": 400
-                    },
-                    "timestamp": {
-                        "description": "Error timestamp in milliseconds",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Timestamp",
-                        "example": 1593769514607
-                    }
-                }
+                "$ref": "#/definitions/BadRequest"
             }
         },
         "starterForbidden": {
-            "description": "Forbidden.",
+            "description": "Forbidden",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "description": "HTTP response status codes label",
-                        "type": "string",
-                        "x-go-name": "StatusLabel",
-                        "example": "Forbidden"
-                    },
-                    "message": {
-                        "description": "Detailed error message",
-                        "type": "string",
-                        "x-go-name": "ErrorMessage",
-                        "example": "Forbidden"
-                    },
-                    "path": {
-                        "description": "Resource path",
-                        "type": "string",
-                        "x-go-name": "Path",
-                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
-                    },
-                    "status": {
-                        "description": "HTTP response error status codes",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Status",
-                        "example": 403
-                    },
-                    "timestamp": {
-                        "description": "Error timestamp in milliseconds",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Timestamp",
-                        "example": 1593769514607
-                    }
-                }
+                "$ref": "#/definitions/Forbidden"
             }
         },
         "starterInternalServerError": {
-            "description": "Internal server error.",
+            "description": "Internal server error",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "description": "HTTP response status codes label",
-                        "type": "string",
-                        "x-go-name": "StatusLabel",
-                        "example": "Internal Server Error"
-                    },
-                    "message": {
-                        "description": "Detailed error message",
-                        "type": "string",
-                        "x-go-name": "ErrorMessage",
-                        "example": "invalid memory address or nil pointer dereference"
-                    },
-                    "path": {
-                        "description": "Resource path",
-                        "type": "string",
-                        "x-go-name": "Path",
-                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
-                    },
-                    "status": {
-                        "description": "HTTP response error status codes",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Status",
-                        "example": 500
-                    },
-                    "timestamp": {
-                        "description": "Error timestamp in milliseconds",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Timestamp",
-                        "example": 1593769514607
-                    }
-                }
+                "$ref": "#/definitions/InternalServerError"
             }
         },
         "starterNotFound": {
-            "description": "Not found.",
+            "description": "Not found",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "description": "HTTP response status codes label",
-                        "type": "string",
-                        "x-go-name": "StatusLabel",
-                        "example": "Not Found"
-                    },
-                    "message": {
-                        "description": "Detailed error message",
-                        "type": "string",
-                        "x-go-name": "ErrorMessage",
-                        "example": "item not found"
-                    },
-                    "path": {
-                        "description": "Resource path",
-                        "type": "string",
-                        "x-go-name": "Path",
-                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
-                    },
-                    "status": {
-                        "description": "HTTP response error status codes",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Status",
-                        "example": 404
-                    },
-                    "timestamp": {
-                        "description": "Error timestamp in milliseconds",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Timestamp",
-                        "example": 1593769514607
-                    }
-                }
+                "$ref": "#/definitions/NotFound"
             }
         },
         "starterSuccessCreate": {
-            "description": "Successful.",
+            "description": "Successful",
             "headers": {
                 "Location": {
                     "type": "string",
@@ -699,46 +773,12 @@
             }
         },
         "starterSuccessNoContent": {
-            "description": "Successful."
+            "description": "Successful"
         },
         "starterUnauthorized": {
-            "description": "Unauthorized.\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "error": {
-                        "description": "HTTP response status codes label",
-                        "type": "string",
-                        "x-go-name": "StatusLabel",
-                        "example": "Unauthorized"
-                    },
-                    "message": {
-                        "description": "Detailed error message",
-                        "type": "string",
-                        "x-go-name": "ErrorMessage",
-                        "example": "Unauthorized"
-                    },
-                    "path": {
-                        "description": "Resource path",
-                        "type": "string",
-                        "x-go-name": "Path",
-                        "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
-                    },
-                    "status": {
-                        "description": "HTTP response error status codes",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Status",
-                        "example": 401
-                    },
-                    "timestamp": {
-                        "description": "Error timestamp in milliseconds",
-                        "type": "integer",
-                        "format": "int64",
-                        "x-go-name": "Timestamp",
-                        "example": 1593769514607
-                    }
-                }
+                "$ref": "#/definitions/Unauthorized"
             }
         }
     },
