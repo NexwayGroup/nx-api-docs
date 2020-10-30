@@ -156,6 +156,16 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -176,8 +186,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -188,16 +198,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -236,16 +236,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -256,8 +246,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -268,6 +258,16 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -298,6 +298,16 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -318,8 +328,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -330,16 +340,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -378,6 +378,16 @@
                     "required": true
                 },
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -398,8 +408,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -410,16 +420,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -448,12 +448,12 @@
                     }
                 ],
                 "responses": {
-                    "204": {
-                        "description": "No Content",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -468,28 +468,28 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
                                 }
                             }
                         }
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -536,6 +536,16 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -556,8 +566,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -568,16 +578,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -624,6 +624,16 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -644,8 +654,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -656,16 +666,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -712,6 +712,16 @@
                     }
                 ],
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -732,8 +742,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -744,16 +754,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1041,6 +1041,14 @@
                             "PURCHASE, SUBSCRIPTION, MANUAL_RENEWAL, BILLING_PLAN"
                         ]
                     },
+                    "localizedDesc": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "description": "Localized short descriptions"
+                        },
+                        "description": "Localized short descriptions"
+                    },
                     "weight": {
                         "type": "integer",
                         "description": "Set rule priority when several rules apply. Bigger weight = bigger priority",
@@ -1200,36 +1208,6 @@
                     }
                 }
             },
-            "SearchResultProductRecommendation": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ProductRecommendation"
-                        }
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "totalItems": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
             "RecapEntry": {
                 "type": "object",
                 "properties": {
@@ -1290,6 +1268,36 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Document"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "SearchResultProductRecommendation": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductRecommendation"
                         }
                     },
                     "last": {
@@ -1419,27 +1427,10 @@
         },
         "securitySchemes": {
             "Bearer": {
-                "type": "oauth2",
-                "name": "Authorization",
-                "in": "header",
-                "scheme": "Bearer",
-                "bearerFormat": "JWT",
-                "flows": {
-                    "password": {
-                        "tokenUrl": "https://api.staging.nexway.build/iam/tokens",
-                        "scopes": {
-                            "global": "global",
-                            "nexway": "nexway"
-                        }
-                    },
-                    "clientCredentials": {
-                        "tokenUrl": "https://api.staging.nexway.build/iam/tokens",
-                        "scopes": {
-                            "global": "global",
-                            "nexway": "nexway"
-                        }
-                    }
-                }
+                "type": "http",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
