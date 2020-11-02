@@ -3,7 +3,7 @@
 
 ## Lifecycle
 
-![Order Lifecycle](./orderLifecycle.png)
+![Order Lifecycle](https://s3storage.nexway.com/iap-staticfiles/d69d9ebc97125f5a6034b6016adcbb1f.png)
 
 ## Event list
 
