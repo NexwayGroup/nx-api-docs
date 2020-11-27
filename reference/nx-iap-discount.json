@@ -23,31 +23,21 @@
         }
     ],
     "paths": {
-        "/discounts/import": {
+        "/discounts/discount/cart": {
             "post": {
                 "tags": [
                     "Discount"
                 ],
-                "summary": "importDiscount",
-                "description": "Import a discount",
-                "operationId": "importDiscount",
+                "summary": "applyDiscountsOnCart",
+                "description": "Apply discounts on cart",
+                "operationId": "applyDiscountsByCart",
                 "responses": {
                     "404": {
                         "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Cart"
                                 }
                             }
                         }
@@ -57,23 +47,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Discount"
+                                    "$ref": "#/components/schemas/Cart"
                                 }
                             }
                         }
                     },
-                    "201": {
-                        "description": "Created",
-                        "headers": {
-                            "Location": {
-                                "description": "UUID generated for the new discount ref",
-                                "style": "simple"
-                            }
-                        },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Cart"
                                 }
                             }
                         }
@@ -83,7 +67,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Cart"
                                 }
                             }
                         }
@@ -93,7 +77,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Cart"
                                 }
                             }
                         }
@@ -193,6 +177,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -215,16 +209,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -262,31 +246,21 @@
                 }
             }
         },
-        "/discounts/discount/cart": {
+        "/discounts/import": {
             "post": {
                 "tags": [
                     "Discount"
                 ],
-                "summary": "applyDiscountsOnCart",
-                "description": "Apply discounts on cart",
-                "operationId": "applyDiscountsByCart",
+                "summary": "importDiscount",
+                "description": "Import a discount",
+                "operationId": "importDiscount",
                 "responses": {
                     "404": {
                         "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
+                                    "type": "object"
                                 }
                             }
                         }
@@ -296,7 +270,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cart"
+                                    "type": "object"
                                 }
                             }
                         }
@@ -306,7 +280,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cart"
+                                    "type": "object"
                                 }
                             }
                         }
@@ -316,7 +290,33 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cart"
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "headers": {
+                            "Location": {
+                                "description": "UUID generated for the new discount ref",
+                                "style": "simple"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Discount"
                                 }
                             }
                         }
@@ -509,6 +509,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -531,16 +541,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -569,6 +569,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -591,16 +601,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -641,6 +641,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -663,16 +673,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -711,6 +711,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -733,16 +743,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -771,6 +771,26 @@
                     }
                 ],
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -793,26 +813,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -843,6 +843,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -865,16 +875,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -905,6 +905,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -927,16 +937,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -967,6 +967,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -989,16 +999,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1029,6 +1029,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1051,16 +1061,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1101,6 +1101,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1123,16 +1133,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1163,6 +1163,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1185,16 +1195,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1225,6 +1225,16 @@
                             }
                         }
                     },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1254,16 +1264,6 @@
                                 }
                             }
                         }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
                     }
                 },
                 "x-operationWeight": "150"
@@ -1272,6 +1272,293 @@
     },
     "components": {
         "schemas": {
+            "BuyerBehavior": {
+                "type": "object",
+                "properties": {
+                    "retainBuyer": {
+                        "type": "boolean"
+                    },
+                    "abandonedCart": {
+                        "type": "boolean"
+                    },
+                    "renewal": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Cart": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    },
+                    "endUser": {
+                        "$ref": "#/components/schemas/EndUser"
+                    },
+                    "totalAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "discounts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "discountsStatus": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountStatus"
+                        }
+                    },
+                    "buyerBehavior": {
+                        "$ref": "#/components/schemas/BuyerBehavior"
+                    },
+                    "catalogId": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DiscountStatus": {
+                "type": "object",
+                "properties": {
+                    "discount": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "APPLIED",
+                            "NOT_APPLICABLE",
+                            "OVERLAPPING",
+                            "OVERUSED",
+                            "INVALID"
+                        ]
+                    },
+                    "discountLabel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DiscountedPrice": {
+                "type": "object",
+                "properties": {
+                    "discountedNetPrice": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "discountedGrossPrice": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "discountRate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "netPriceDiscountAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "grossPriceDiscountAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "vatDiscountAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "signedDiscount": {
+                        "type": "string"
+                    },
+                    "discountCode": {
+                        "type": "string"
+                    },
+                    "discountId": {
+                        "type": "string"
+                    },
+                    "discountLabel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "EndUser": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "groupId": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
+            "FullPrice": {
+                "type": "object",
+                "properties": {
+                    "vatAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "netPrice": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "grossPrice": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "vatAmountMsrp": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "netMsrp": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "grossMsrp": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "discountedPrice": {
+                        "$ref": "#/components/schemas/DiscountedPrice"
+                    }
+                }
+            },
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "fullPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "unitPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "variantOf": {
+                        "type": "string"
+                    },
+                    "publisherRefId": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "discountsStatus": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountStatus"
+                        }
+                    },
+                    "forcedBy": {
+                        "type": "string"
+                    },
+                    "crossSellBy": {
+                        "type": "string"
+                    },
+                    "upSellBy": {
+                        "type": "string"
+                    },
+                    "priceFunctionParametersValues": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "Campaign": {
                 "required": [
                     "endDate",
@@ -1621,293 +1908,6 @@
                         "$ref": "#/components/schemas/Discount"
                     }
                 ]
-            },
-            "BuyerBehavior": {
-                "type": "object",
-                "properties": {
-                    "retainBuyer": {
-                        "type": "boolean"
-                    },
-                    "abandonedCart": {
-                        "type": "boolean"
-                    },
-                    "renewal": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "Cart": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "storeId": {
-                        "type": "string"
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "locale": {
-                        "type": "string"
-                    },
-                    "products": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Product"
-                        }
-                    },
-                    "endUser": {
-                        "$ref": "#/components/schemas/EndUser"
-                    },
-                    "totalAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "discounts": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "discountsStatus": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DiscountStatus"
-                        }
-                    },
-                    "buyerBehavior": {
-                        "$ref": "#/components/schemas/BuyerBehavior"
-                    },
-                    "catalogId": {
-                        "type": "string"
-                    },
-                    "source": {
-                        "type": "string"
-                    }
-                }
-            },
-            "DiscountStatus": {
-                "type": "object",
-                "properties": {
-                    "discount": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "APPLIED",
-                            "NOT_APPLICABLE",
-                            "OVERLAPPING",
-                            "OVERUSED",
-                            "INVALID"
-                        ]
-                    },
-                    "discountLabel": {
-                        "type": "string"
-                    }
-                }
-            },
-            "DiscountedPrice": {
-                "type": "object",
-                "properties": {
-                    "discountedNetPrice": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "discountedGrossPrice": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "discountRate": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "netPriceDiscountAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "grossPriceDiscountAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "vatDiscountAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "signedDiscount": {
-                        "type": "string"
-                    },
-                    "discountCode": {
-                        "type": "string"
-                    },
-                    "discountId": {
-                        "type": "string"
-                    },
-                    "discountLabel": {
-                        "type": "string"
-                    }
-                }
-            },
-            "EndUser": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "locale": {
-                        "type": "string"
-                    },
-                    "country": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "groupId": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    }
-                }
-            },
-            "FullPrice": {
-                "type": "object",
-                "properties": {
-                    "vatAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "netPrice": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "vatRate": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "grossPrice": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "vatAmountMsrp": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "netMsrp": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "grossMsrp": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "discountedPrice": {
-                        "$ref": "#/components/schemas/DiscountedPrice"
-                    }
-                }
-            },
-            "Product": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "fullPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "unitPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "price": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "variantOf": {
-                        "type": "string"
-                    },
-                    "publisherRefId": {
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "discountsStatus": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DiscountStatus"
-                        }
-                    },
-                    "forcedBy": {
-                        "type": "string"
-                    },
-                    "crossSellBy": {
-                        "type": "string"
-                    },
-                    "upSellBy": {
-                        "type": "string"
-                    },
-                    "priceFunctionParametersValues": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "object"
-                        }
-                    }
-                }
             },
             "SingleUseCodeGenerationResponse": {
                 "type": "object",
