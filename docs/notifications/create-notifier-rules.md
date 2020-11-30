@@ -6,7 +6,7 @@ POST "https://api.nexway.store/customer-notifier/rules"
 ```
 
 ## Request body
-The request body takes a complete [Rule Resource] (./notification-rules) Rules resource, containing the following writable properties:
+The request body takes a complete [Rule Resource](./notification-rules.md) , containing the following writable properties:
 
 ```json
 {
