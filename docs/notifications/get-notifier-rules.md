@@ -1,12 +1,29 @@
-# notification-rules
+# Get notification rules
 
-## Methods
+## Request
+```json
+Get "https://api.nexway.store/customer-notifier/rules/{id}"
+```
 
-* post : [Create notification rule](./create-notifier-rules.md)
-* get - [Get a set of notification rules by id](./get-notifier-rules.md)
-* put - [Update a notification rule](./update-notifier-rule.md)
+## Path parameters
+|Parameter name|Value|Description|Additional|
+|--- |--- |--- |--- |
+|id|string|Id of a set of notification rules|Required|
 
-## Resource
+## Response
+
+|Status code|Description|Resource|
+|--- |--- |--- |
+|200|OKSuccess|`Rules`|
+|401|UnauthorizedUnauthorized||
+|403|ForbiddenForbidden||
+|500|Internal Server ErrorFailure||
+|503|Service UnavailableService Unavailable||
+
+
+
+## Request body
+The request body takes a complete [Rule Resource](./notification-rules.md) , containing the following writable properties:
 
 ```json
 {
@@ -34,7 +51,6 @@
     ]
 }
 ```
-
 ## Properties
 
 |Name|Type|Description|Additional|
@@ -51,3 +67,19 @@
 |rules[].webHooks.urlList[].Host|string|Hostname of the url|Optional|
 |rules[].webHooks.urlList[].Path|string|Path of the url or uri|Optional|
 |rules[].webHooks.urlList[].Scheme|string|Scheme of the url|Optional|
+
+
+
+
+|Status code|Description|Resource|
+|--- |--- |--- |
+|`201`|CreatedSuccess|`success`|
+|`400`|Bad RequestBad Request||
+|`401`|UnauthorizedUnauthorized||
+|`403`|ForbiddenForbidden||
+|`409`|ConflictConflict||
+|`500`|Internal Server ErrorFailure||
+|`503`|Service UnavailableService Unavailable||
+
+
+
