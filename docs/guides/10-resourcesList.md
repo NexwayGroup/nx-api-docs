@@ -3,5 +3,5 @@
 # Resources
 ## Hierarchy
 
-![Resources hierarchy](./monetize-object-relations.svg)
+![Resources hierarchy](monetize-object-relations.svg)
 
