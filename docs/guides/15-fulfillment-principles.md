@@ -10,7 +10,7 @@ Nexway provides standard fulfillment client-side REST APIs with a predefined set
 > In this documentation, some words refer the same entity: Customer, Publisher, and Partner all mean "you".
 
 ## Common payload/body "LicenseRequest"
-The Nexway Monetize Platform will send a common payload called [LicenseRequest Resource](/nexway-monetize/resources/licenserequest) for all requested actions.
+The Nexway Monetize Platform will send a common payload called [LicenseRequest Resource](https://api-doc.nexway.store/nexway-monetize/resources/licenserequest) for all requested actions.
 
 To ease the implementation on your side, you can see the [swagger file](http://api.staging.nexway.build/sample-fulfillment-provider/v2/api-docs/) and the associated [swagger UI](http://api.staging.nexway.build/sample-fulfillment-provider/swagger-ui.html).
 
