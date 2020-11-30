@@ -7,3 +7,4 @@
 
 ![Resources hierarchy](assets/images/monetize-object-relations.png)
 
+<img src = "assets/images/monetize-object-relations.png">
