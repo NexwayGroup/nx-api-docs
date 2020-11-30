@@ -31,7 +31,7 @@ In this example, we want to send an order confirmation notification both by emai
 
 The customer ID is `06874434-4d42-423e-87c0-3290862809cc`.
 
-Use the [Create notification rules](./create-notifier-rules) to `POST` the following rule:
+Use the [Create notification rules](./create-notifier-rules.md) to `POST` the following rule:
 ```json
 {
     "customerId": "06874434-4d42-423e-87c0-3290862809cc",
