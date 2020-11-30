@@ -29,5 +29,5 @@ Reactivate (subscription only) | Reactivation of subscription product | http://y
 
 ## Sample fulfillment server
 Nexway provides a sample fulfillment server for you to implement on your side to test expected behavior.
-Documentation is available [here](/nexway-monetize/reference/fulfillment-sample-server).
+Documentation is available [here](https://api-doc.nexway.store/nexway-monetize/reference/fulfillment-sample-server).
  
