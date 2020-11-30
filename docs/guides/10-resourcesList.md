@@ -4,3 +4,6 @@
 ## Hierarchy
 
 ![Resources hierarchy](resources/monetize-object-relations.svg)
+
+![Resources hierarchy](assets/images/monetize-object-relations.png)
+
