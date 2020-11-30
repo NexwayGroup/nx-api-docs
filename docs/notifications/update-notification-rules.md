@@ -1,9 +1,15 @@
-# Create notification rules
+# Update notification rules
 
 ## Request
 ```json
-POST "https://api.nexway.store/customer-notifier/rules"
+PUT "https://api.nexway.store/customer-notifier/ruless/{id}"
 ```
+
+## Path parameters
+|Parameter name|Value|Description|Additional|
+|--- |--- |--- |--- |
+|id|string|Id of a set of notification rules|Required|
+
 
 ## Request body
 The request body takes a complete [Rule Resource](./notification-rules.md) , containing the following writable properties:
@@ -53,7 +59,9 @@ The request body takes a complete [Rule Resource](./notification-rules.md) , con
 
 
 
-## Respone
+## Response
+
+The following HTTP status codes may be returned, optionally with a response resource.
 
 |Status code|Description|Resource|
 |--- |--- |--- |
