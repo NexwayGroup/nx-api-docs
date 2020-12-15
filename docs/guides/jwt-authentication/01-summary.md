@@ -10,10 +10,15 @@ A Refresh token is a long-lived token that you use to request new Access tokens.
 
 ## List of available APIs
 
-[[additional]]
+|Operation| 	HTTP Request| 	Resource Request| 	Description|
+|--|--|--|--|
+|getUserToken|`POST /iam/tokens`|TokenRequest|	Get/refresh a token|
+|invalidateToken|`DELETE /iam/tokens/invalidate`|	|	Invalidate a token|
+|resetUsingDELETE| 	`DELETE /iam/tokens/reset`||	reset|
+
 ## How to
 
-Nexway provides a POST [getUserToken](/nexway-monetize/reference/jwt-authentication/get-user-token) endpoint to get and refresh JWTs.
+Nexway provides a POST [getUserToken](docs/nx-api-docs/docs/guides/jwt_authentication/02-get-user-token.md) endpoint to get and refresh JWTs.
 You can get a token two different ways:
 * By using realm name, client secret, and by specifying the grant type in *client_credentials*, if using an application interface.
 * By using realm name, username, password, and by specifying the grant type in *password*, if you are a human user.
