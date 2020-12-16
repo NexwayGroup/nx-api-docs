@@ -1,5 +1,5 @@
 
-## reset
+## Reset
 ### Request
 
 `DELETE https://api.nexway.store/iam/tokens/reset`
