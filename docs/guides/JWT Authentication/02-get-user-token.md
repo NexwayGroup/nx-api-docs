@@ -8,7 +8,7 @@ Get a JWT token or refresh a new one.
 
 ### Request body
 
-The request body takes a complete TokenRequest resource, containing the following writable properties:
+The request body takes a complete [TokenRequest resource](https://api-doc.nexway.store/nexway-monetize/resources/tokenrequest?v=latest), containing the following writable properties:
 
 ```json
 {
@@ -35,7 +35,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description| 	Resource|
 |--|--|--|
-|200| 	**OK** Success |	AccessTokenResponse|
+|200| 	**OK** Success |	[AccessTokenResponse](https://api-doc.nexway.store/nexway-monetize/resources/accesstokenresponse?v=latest)|
 |401| 	**Unauthorized** Unauthorized| |	
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

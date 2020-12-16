@@ -58,7 +58,6 @@ The request body takes a complete UserUpdate resource, containing the following 
 ```
 
 ### Properties
-### Properties
 |Name| 	Type| 	Description| 	Additional|
 |--|--|--|--|
 |authorizedCustomers[]| 	array|List of authorized customer|	Optional|
