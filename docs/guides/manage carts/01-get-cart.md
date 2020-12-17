@@ -24,7 +24,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description| 	Resource|
 |--|--|--|
-|200| 	**OK** Success |	[Cart](https://api-doc.nexway.store/nexway-monetize/resources/cart?v=latest)|
+|200| 	**OK** Success |	[Cart](/docs/nx-api-docs/docs/guides/manage%20carts/04-cart.md)|
 |401| 	**Unauthorized** Unauthorized| |	
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

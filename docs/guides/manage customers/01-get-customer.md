@@ -20,7 +20,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description| 	Resource|
 |--|--|--|
-|200| 	**OK** Success |	[Customer](https://api-doc.nexway.store/nexway-monetize/resources/customer?v=latest)|
+|200| 	**OK** Success |	[Customer](/docs/nx-api-docs/docs/guides/manage%20customers/04-customer.md)|
 |401| 	**Unauthorized** Unauthorized| |	
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

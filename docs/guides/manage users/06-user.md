@@ -1,14 +1,17 @@
 
-## Create a user
+## User resource
 
-Create a user from a customer.
-### Request
+The User resource contains information about each one of a Nexway customer's colleagues or employees, and enables them to log on to Nexway Center and/or obtain a JWT to call directly secured APIs.
 
-`POST https://api.nexway.store/iam/users`
+When users are created on the platform, they receive an email which contains a URL with a unique token that they must use to set their password.
 
-## Request body
+### Methods
 
-The request body takes a complete [User resource](/docs/nx-api-docs/docs/guides/manage%20users/06-user.md), containing the following writable properties:
+- [post](/docs/nx-api-docs/docs/guides/manage%20users/01-create-user.md) - Create a user
+- [get](/docs/nx-api-docs/docs/guides/manage%20users/02-get-user.md) - Get a user by id
+
+### Resource
+
 ```json
 {
     "authorizedCustomers": [
@@ -17,9 +20,19 @@ The request body takes a complete [User resource](/docs/nx-api-docs/docs/guides/
             "name": "string"
         }
     ],
+    "createdAt": "date-time",
     "email": "string",
-    "emails": null,
+    "emails": [
+        {
+            "createDate": "date-time",
+            "emailId": "string",
+            "error": "string",
+            "id": "string",
+            "type": "string"
+        }
+    ],
     "firstName": "string",
+    "id": "string",
     "lastName": "string",
     "password": "string",
     "roles": [
@@ -49,9 +62,11 @@ The request body takes a complete [User resource](/docs/nx-api-docs/docs/guides/
         }
     ],
     "status": "string",
+    "token": "string",
     "userName": "string"
 }
 ```
+
 ### Properties
 
 |Name| 	Type| 	Description| 	Additional|
@@ -59,9 +74,16 @@ The request body takes a complete [User resource](/docs/nx-api-docs/docs/guides/
 |authorizedCustomers[]| 	array|List of authorized customer|	Optional|
 |authorizedCustomers[].customerId| 	string|Customer id|	Optional|
 |authorizedCustomers[].name| 	string|Customer name|	Optional|
+|createdAt| 	date-time|Creation date time|	Optional, read only. |
 |email| 	string|Email||
 |emails[]| 	array|List of emails sent to the user|Optional|
+|emails[].createDate| 	date-time|Create date time|	Optional, read only.|
+|emails[].emailId 	|string|Unique identifier of the email in the mail storage|Optional, read only.|
+|emails[].error| 	string|Error message if the email is not send|	Optional, read only.|
+|emails[].id| 	string|Unique identifier|	Optional, read only.|
+|emails[].type| 	string 	|Type|	Optional, read only. |
 |firstName| 	string|First name||	
+|id| 	string|Unique identifier|	Optional, read only. |
 |lastName| 	string|Last name||
 |password| 	string|Password||
 |roles[]| 	array|List of roles|Optional|
@@ -79,20 +101,5 @@ The request body takes a complete [User resource](/docs/nx-api-docs/docs/guides/
 |roles[].name| 	string|| 		Optional|
 |roles[].scopeParamRequired| 	boolean|| 		Optional|
 |status| 	string|Status, possible values are: `ENABLED`,`DISABLED`|	Optional|
+|token| 	string|Token used for reset the password|	Optional, read only.|
 |userName| 	string|Name||
-	
-### Authorisation
-
-You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/nx-api-docs/docs/guides/JWT%20Authentication/01-summary.md).
-This request requires the use of one of following authorisation methods: `OAuth2`.
-### Response
-
-The following HTTP status codes may be returned, optionally with a response resource.
-
-|Status code| 	Description|
-|--|--|--|
-|201| 	**Created** Success |
-|401| 	**Unauthorized** Unauthorized|
-|403| 	**Forbidden** Forbidden|
-|404| 	**Not Found** Not Found|
-|500| 	**Internal Server Error** Failure|

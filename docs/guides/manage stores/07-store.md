@@ -1,14 +1,25 @@
 
-## Create a store
+## Store resource
 
-Create a new store entry
-### Request
+A store is a point of sale that belongs to a customer (who may have more than one store).
 
-`POST https://api.nexway.store/stores`
+The store resource contains at least the following:
 
-## Request body
+- A name
+- One or more locales (default and list of available)
+- List of hostnames for store access (checkout and end-user portal)
+- Tax inclusion data
+- Design data: layout, theme, graphics (logo, banner, favicon, etc.)
 
-The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md), containing the following writable properties:
+Methods
+
+- [post](/docs/nx-api-docs/docs/guides/manage%20stores/01-create-store.md) - Create a store
+- [get](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/get-store?v=latest) - Get a store by ID
+- [get](/docs/nx-api-docs/docs/guides/manage%20stores/03-get-store.md) - Get a store by ID
+- [get](/docs/nx-api-docs/docs/guides/manage%20stores/02-get-store-by-hostname.md) - Get a store by hostname
+- [put](/docs/nx-api-docs/docs/guides/manage%20stores/05-update-store.md) - Update a store
+
+### Resource
 
 ```json
 {
@@ -60,11 +71,12 @@ The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides
     "thankYouDesc": {
         "<key>": "string"
     },
+    "theme": "string",
     "updateDate": "date-time"
 }
 ```
 
-## Properties
+### Properties
 
 |Name| 	Type| 	Description| 	Additional|
 |--|--|--|--|
@@ -104,44 +116,4 @@ The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides
 |targetNonRecurrentPaymentMethodsForSubscriptions| 	string|Target non-recurrent payment methods for subscriptions. Possible values are:`EVERYBODY`,`NOBODY`,`PROFESSIONAL`,`COMPANY`|	Optional|
 |thankYouDesc| 	object|Thank you description|Optional|
 |thankYouDesc.<key\>| 	map of string|| 		Optional
-|updateDate| 	date-time|| 		Optional|
-
-### Authorisation
-
-You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/nx-api-docs/docs/guides/JWT%20Authentication/01-summary.md).
-This request requires the use of one of following authorisation methods: `OAuth2`.
-### Response
-
-The following HTTP status codes may be returned, optionally with a response resource.
-
-|Status code| 	Description|Resource|
-|--|--|--|
-|201| 	**Created** Success ||
-|401| 	**Unauthorized** Unauthorized| |
-|403| 	**Forbidden** Forbidden||
-|404| 	**Not Found** Not Found||
-|500| 	**Internal Server Error** Failure||
-
-### Example
-
-```json
-{
-    "bannerInvoice": "https://mywebsite.com/images/banner_invoice.png",
-    "bannerOrderConfEmail": "https://mywebsite.com/images/banner_orderconfemail.png",
-    "customerId": "15654398-42c5-d54d-a15f-baf454s2354",
-    "defaultLocale": "en-US",
-    "hostnames": [
-        "mystore.nexway.store"
-    ],
-    "includeTax": true,
-    "logoFavicon": "https://mywebsite.com/images/logo_favicon.png",
-    "logoStore": "https://mywebsite.com/images/logo_store.png",
-    "name": "My First Store",
-    "saleLocales": [
-        "en-US",
-        "fr-FR"
-    ],
-    "status": "ENABLED",
-    "theme": "Black theme"
-}
-```
+|theme| 	string|Deprecated|	Optional, read only. |

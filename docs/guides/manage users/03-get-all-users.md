@@ -29,7 +29,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[UserSearchResult](https://api-doc.nexway.store/nexway-monetize/resources/usersearchresult?v=latest)|
+|200| 	**OK** Success |[UserSearchResult](/docs/nx-api-docs/docs/guides/manage%20users/07-userSearchResult.md)|
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

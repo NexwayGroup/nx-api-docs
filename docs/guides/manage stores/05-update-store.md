@@ -19,7 +19,7 @@ Update an existing store entry
 	
 ### Request body
 
-The request body takes a complete [Store resource](https://api-doc.nexway.store/nexway-monetize/resources/store?v=latest), containing the following writable properties:
+The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md), containing the following writable properties:
 
 ```json
 {
@@ -127,7 +127,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[SearchResult«Store»](https://api-doc.nexway.store/nexway-monetize/resources/searchresultstore?v=latest)|
+|200| 	**OK** Success |[Store](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md)|
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

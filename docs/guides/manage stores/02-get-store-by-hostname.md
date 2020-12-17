@@ -18,7 +18,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description| 	Resource|
 |--|--|--|
-|200| 	**OK** Success |	[Store](https://api-doc.nexway.store/nexway-monetize/resources/store?v=latest)|
+|200| 	**OK** Success |	[Store](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md)|
 |401| 	**Unauthorized** Unauthorized| |	
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||
