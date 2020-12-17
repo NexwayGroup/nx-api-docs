@@ -1,9 +1,9 @@
 
 
-##Delete a store
+## Delete a store
 
 Delete an existing store entry
-##Request
+## Request
 
 `DELETE https://api.nexway.store/stores/{id}`
 
