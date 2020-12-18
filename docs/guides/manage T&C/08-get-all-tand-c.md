@@ -1,22 +1,17 @@
 
-## Get a T&C
+## Get a list of T&C
 ### Request
 
-`GET https://api.nexway.store/tandcs/tandcs/{platform}/{customerId}/current`
-
-### Path parameters
-
-|Parameter name| 	Value| 	Description| 	Additional|
-|--|--|--|--|
-|platform 	|string|platform|	Required|
-|customerId| 	string|customerId|	Required|
+`GET https://api.nexway.store/tandcs/tandcs`
 
 ### Query parameters
 
 |Parameter name| 	Value| 	Description| 	Additional|
 |--|--|--|--|
-|withTC| 	boolean|withTC||
-	
+|page| 	int32|number of page you want to hit||
+|size| 	int32|number of items into the current page||
+|sort| 	string|sort a specific column to a direction (columnName,asc)||
+
 ### Authorisation
 
 This request requires the use of one of following authorisation methods: `OAuth2`.
@@ -27,7 +22,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[TermsAndConditions](/docs/guides/manage%20T&C/16-termsAndConditions.md)|
+|200| 	**OK** Success ||
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||
