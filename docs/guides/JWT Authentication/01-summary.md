@@ -12,7 +12,7 @@ A Refresh token is a long-lived token that you use to request new Access tokens.
 
 |Operation| 	HTTP Request| 	Resource Request| 	Description|
 |--|--|--|--|
-|getUserToken|`POST /iam/tokens`|[TokenRequest](/docs/nx-api-docs/docs/guides/JWT%20Authentication/05-tokenRequest.md)|	Get/refresh a token|
+|getUserToken|`POST /iam/tokens`|[TokenRequest](/docs/guides/JWT%20Authentication/05-tokenRequest.md)|	Get/refresh a token|
 |invalidateToken|`DELETE /iam/tokens/invalidate`|	|	Invalidate a token|
 |resetUsingDELETE| 	`DELETE /iam/tokens/reset`||	reset|
 

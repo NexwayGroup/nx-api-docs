@@ -19,7 +19,7 @@ Update an existing store entry
 	
 ### Request body
 
-The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md), containing the following writable properties:
+The request body takes a complete [Store resource](/docs/guides/manage%20stores/07-store.md), containing the following writable properties:
 
 ```json
 {
@@ -119,7 +119,7 @@ The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides
 
 ### Authorisation
 
-You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/nx-api-docs/docs/guides/JWT%20Authentication/01-summary.md).
+You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/guides/JWT%20Authentication/01-summary.md).
 This request requires the use of one of following authorisation methods: `OAuth2`.
 ### Response
 
@@ -127,7 +127,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[Store](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md)|
+|200| 	**OK** Success |[Store](/docs/guides/manage%20stores/07-store.md)|
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

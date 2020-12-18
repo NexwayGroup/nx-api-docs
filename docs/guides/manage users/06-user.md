@@ -7,8 +7,8 @@ When users are created on the platform, they receive an email which contains a U
 
 ### Methods
 
-- [post](/docs/nx-api-docs/docs/guides/manage%20users/01-create-user.md) - Create a user
-- [get](/docs/nx-api-docs/docs/guides/manage%20users/02-get-user.md) - Get a user by id
+- [post](/docs/guides/manage%20users/01-create-user.md) - Create a user
+- [get](/docs/guides/manage%20users/02-get-user.md) - Get a user by id
 
 ### Resource
 

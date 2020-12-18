@@ -2,7 +2,7 @@
 ## CartSearchResult resource
 ### Methods
 
-[get](/docs/nx-api-docs/docs/guides/manage%20carts/02-get-all-carts.md) - Get list of carts
+[get](/docs/guides/manage%20carts/02-get-all-carts.md) - Get list of carts
 
 ### Resource
 

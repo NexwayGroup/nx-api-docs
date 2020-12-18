@@ -2,7 +2,7 @@
 ## SearchResult«Store» resource
 ### Methods
 
-- [get](/docs/nx-api-docs/docs/guides/manage%20stores/04-get-all-stores.md)
+- [get](/docs/guides/manage%20stores/04-get-all-stores.md)
  - Get list of stores
 
 ### Resource

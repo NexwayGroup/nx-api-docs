@@ -16,9 +16,9 @@ Here is a non-exhaustive list of partner-related information:
 
 ### Methods
 
-- [get](/docs/nx-api-docs/docs/guides/manage%20customers/01-get-customer.md) - Get a customer by id
-- [get](/docs/nx-api-docs/docs/guides/manage%20customers/02-get-customer-by-name.md) - Get a customer by name
-- [get](/docs/nx-api-docs/docs/guides/manage%20customers/03-get-customer-by-realm-name.md) - Get a customer by realm name
+- [get](/docs/guides/manage%20customers/01-get-customer.md) - Get a customer by id
+- [get](/docs/guides/manage%20customers/02-get-customer-by-name.md) - Get a customer by name
+- [get](/docs/guides/manage%20customers/03-get-customer-by-realm-name.md) - Get a customer by realm name
 
 ### Resource
 

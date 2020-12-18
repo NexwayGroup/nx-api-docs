@@ -3,7 +3,7 @@
 
 ### Methods
 
-- [get](/docs/nx-api-docs/docs/guides/manage%20users/03-get-all-user.md) - Get list of users
+- [get](/docs/guides/manage%20users/03-get-all-user.md) - Get list of users
 
 ### Resource
 

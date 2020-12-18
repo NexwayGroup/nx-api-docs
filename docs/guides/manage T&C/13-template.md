@@ -2,9 +2,9 @@
 ## Template resource
 ### Methods
 
-- [post](/docs/nx-api-docs/docs/guides/manage%20T&C/07-create-tand-c-template.md) - Create a template
-- [get](/docs/nx-api-docs/docs/guides/manage%20T&C/09-get-tand-c-template.md) - Get a template by id
-- [put](/docs/nx-api-docs/docs/guides/manage%20T&C/08-update-tand-c-template.md) - Update a template
+- [post](/docs/guides/manage%20T&C/07-create-tand-c-template.md) - Create a template
+- [get](/docs/guides/manage%20T&C/09-get-tand-c-template.md) - Get a template by id
+- [put](/docs/guides/manage%20T&C/08-update-tand-c-template.md) - Update a template
 
 ### Resource
 

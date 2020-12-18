@@ -2,7 +2,7 @@
 ### AccessTokenResponse resource
 ## Methods
 
-* [post](https://nexway.stoplight.io/docs/nx-api-docs/docs/guides/JWT%20Authentication/02-get-user-token.md) - Get/refresh a token
+* [post](/docs/guides/JWT%20Authentication/02-get-user-token.md) - Get/refresh a token
 
 ## Resource
 

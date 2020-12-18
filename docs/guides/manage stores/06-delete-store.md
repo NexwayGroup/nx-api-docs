@@ -16,7 +16,7 @@ Delete an existing store entry
 	
 ### Authorisation
 
-You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/nx-api-docs/docs/guides/JWT%20Authentication/01-summary.md).
+You need to have a valid JWT to access this API. Please read [JWT Authentication](/docs/guides/JWT%20Authentication/01-summary.md).
 This request requires the use of one of following authorisation methods: `OAuth2`.
 ### Response
 

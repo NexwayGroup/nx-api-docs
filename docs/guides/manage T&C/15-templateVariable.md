@@ -2,9 +2,9 @@
 ## TemplateVariable resource
 ### Methods
 
-- [post](/docs/nx-api-docs/docs/guides/manage%20T&C/01-create-variable.md) - Create a template variable
-- [get](/docs/nx-api-docs/docs/guides/manage%20T&C/02-get-all-variables.md) - Get a list of template variables
-- [put](/docs/nx-api-docs/docs/guides/manage%20T&C/03-update-variable.md) - Update a template variable
+- [post](/docs/guides/manage%20T&C/01-create-variable.md) - Create a template variable
+- [get](/docs/guides/manage%20T&C/02-get-all-variables.md) - Get a list of template variables
+- [put](/docs/guides/manage%20T&C/03-update-variable.md) - Update a template variable
 
 ### Resource
 

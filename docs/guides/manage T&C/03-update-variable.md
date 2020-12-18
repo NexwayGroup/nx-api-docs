@@ -12,7 +12,7 @@
 
 ### Request body
 
-The request body takes a complete [TemplateVariable resource](/docs/nx-api-docs/docs/guides/manage%20T&C/15-templateVariable.md), containing the following writable properties:
+The request body takes a complete [TemplateVariable resource](/docs/guides/manage%20T&C/15-templateVariable.md), containing the following writable properties:
 
 ```json
 {
@@ -60,7 +60,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[TemplateVariable](/docs/nx-api-docs/docs/guides/manage%20T&C/15-templateVariable.md)|
+|200| 	**OK** Success |[TemplateVariable](/docs/guides/manage%20T&C/15-templateVariable.md)|
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

@@ -2,7 +2,7 @@
 ## TermsAndConditions resource
 ### Methods
 
-- [get](/docs/nx-api-docs/docs/guides/manage%20T&C/05-get-tand-c.md) - Get a T&C
+- [get](/docs/guides/manage%20T&C/05-get-tand-c.md) - Get a T&C
 
 ### Resource
 

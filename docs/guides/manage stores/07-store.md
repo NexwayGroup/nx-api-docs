@@ -13,11 +13,11 @@ The store resource contains at least the following:
 
 Methods
 
-- [post](/docs/nx-api-docs/docs/guides/manage%20stores/01-create-store.md) - Create a store
+- [post](/docs/guides/manage%20stores/01-create-store.md) - Create a store
 - [get](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/get-store?v=latest) - Get a store by ID
-- [get](/docs/nx-api-docs/docs/guides/manage%20stores/03-get-store.md) - Get a store by ID
-- [get](/docs/nx-api-docs/docs/guides/manage%20stores/02-get-store-by-hostname.md) - Get a store by hostname
-- [put](/docs/nx-api-docs/docs/guides/manage%20stores/05-update-store.md) - Update a store
+- [get](/docs/guides/manage%20stores/03-get-store.md) - Get a store by ID
+- [get](/docs/guides/manage%20stores/02-get-store-by-hostname.md) - Get a store by hostname
+- [put](/docs/guides/manage%20stores/05-update-store.md) - Update a store
 
 ### Resource
 

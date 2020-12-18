@@ -8,7 +8,7 @@ Get a JWT token or refresh a new one.
 
 ### Request body
 
-The request body takes a complete [TokenRequest](/docs/nx-api-docs/docs/guides/JWT%20Authentication/05-tokenRequest.md), containing the following writable properties:
+The request body takes a complete [TokenRequest](/docs/guides/JWT%20Authentication/05-tokenRequest.md), containing the following writable properties:
 
 ```json
 {
@@ -35,7 +35,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description| 	Resource|
 |--|--|--|
-|200| 	**OK** Success |	[AccessTokenRequest](/docs/nx-api-docs/docs/guides/JWT%20Authentication/06-accessTokenRequest.md)|
+|200| 	**OK** Success |	[AccessTokenRequest](/docs/guides/JWT%20Authentication/06-accessTokenRequest.md)|
 |401| 	**Unauthorized** Unauthorized| |	
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||

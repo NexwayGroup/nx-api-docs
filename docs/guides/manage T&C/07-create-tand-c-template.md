@@ -6,7 +6,7 @@
 
 ### Request body
 
-The request body takes a complete [Template resource](/docs/nx-api-docs/docs/guides/manage%20T&C/16-template.md), containing the following writable properties:
+The request body takes a complete [Template resource](/docs/guides/manage%20T&C/16-template.md), containing the following writable properties:
 
 ```json
 {

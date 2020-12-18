@@ -2,7 +2,7 @@
 ## Cart resource
 ### Methods
 
-- [get](/docs/nx-api-docs/docs/guides/manage%20carts/01-get-cart.md) - Get a cart by id
+- [get](/docs/guides/manage%20carts/01-get-cart.md) - Get a cart by id
 - [get](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/get-public-cart?v=latest) - Get a cart by id
 - [put](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/update-cart?v=latest) - Update a cart
 - [put](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/update-products-in-cart?v=latest) - Update products to a cart

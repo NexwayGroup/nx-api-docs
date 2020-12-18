@@ -27,7 +27,7 @@ The following HTTP status codes may be returned, optionally with a response reso
 
 |Status code| 	Description|Resource|
 |--|--|--|
-|200| 	**OK** Success |[TermsAndConditions](/docs/nx-api-docs/docs/guides/manage%20T&C/17-termsAndConditions.md)|
+|200| 	**OK** Success |[TermsAndConditions](/docs/guides/manage%20T&C/17-termsAndConditions.md)|
 |401| 	**Unauthorized** Unauthorized| |
 |403| 	**Forbidden** Forbidden||
 |404| 	**Not Found** Not Found||
