@@ -3,7 +3,7 @@
 ### Methods
 
 - [post](/docs/guides/manage%20T&C/09-create-tand-c-template.md) - Create a template
-- [get](/docs/guides/manage%20T&C/011-get-tand-c-template.md) - Get a template by id
+- [get](/docs/guides/manage%20T&C/11-get-tand-c-template.md) - Get a template by id
 - [put](/docs/guides/manage%20T&C/10-update-tand-c-template.md) - Update a template
 
 ### Resource
