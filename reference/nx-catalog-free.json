@@ -1,2017 +1,2015 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Api Documentation",
-        "version": "1.0",
-        "title": "Api Documentation",
-        "termsOfService": "urn:tos",
-        "contact": {
-            
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0"
-        }
-    },
-    "host": "api.staging.nexway.build",
-    "basePath": "/",
-    "tags": [
-        {
-            "name": "Catalog",
-            "description": "Api Command"
-        },
-        {
-            "name": "Public",
-            "description": "Api Public Catalog"
-        },
-        {
-            "name": "basic-error-controller",
-            "description": "Basic Error Controller"
-        },
-        {
-            "name": "operation-handler",
-            "description": "Operation Handler"
-        }
-    ],
-    "paths": {
-        "/catalogs": {
-            "get": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Get items",
-                "operationId": "getItems",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abAbstractCatalog\u00bb"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "300"
-            },
-            "post": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Create an item",
-                "operationId": "createItem",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "request",
-                        "description": "request",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    },
-                    "201": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "300"
-            }
-        },
-        "/catalogs/createFullCatalog": {
-            "post": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Create a full catalog",
-                "operationId": "createFullCatalog",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "fullCatalog",
-                        "description": "fullCatalog",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/FullCatalog"
-                        }
-                    },
-                    {
-                        "name": "reason",
-                        "in": "query",
-                        "description": "reason",
-                        "required": false,
-                        "type": "string",
-                        "default": "resource creation thru REST Api"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "200"
-            }
-        },
-        "/catalogs/distinct": {
-            "get": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Get distinct values for a given field",
-                "operationId": "distinct",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abobject\u00bb"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "100"
-            }
-        },
-        "/catalogs/public/{id}/descriptions": {
-            "get": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "getPublicDescription",
-                "operationId": "getPublicDescriptionUsingGET",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/PublicDescription"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/catalogs/recap": {
-            "get": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Get recap quantities for a given field",
-                "operationId": "recap",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abRecapEntry\u00bb"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "150"
-            }
-        },
-        "/catalogs/unwind": {
-            "get": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Search unwind for a given field",
-                "operationId": "unwind",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "pageNumber",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "paged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "in": "body",
-                        "name": "predicate",
-                        "description": "predicate",
-                        "required": false,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "name": "sort.sorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sort.unsorted",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "target",
-                        "in": "query",
-                        "description": "target",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "unpaged",
-                        "in": "query",
-                        "required": false,
-                        "type": "boolean"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/SearchResult\u00abDocument\u00bb"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "150"
-            }
-        },
-        "/catalogs/{id}": {
-            "get": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Get item",
-                "operationId": "getItem",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "200"
-            },
-            "put": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Update item",
-                "operationId": "updateItem",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "updateRequestItem",
-                        "description": "updateRequestItem",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/AbstractCatalog"
-                        }
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "400"
-            },
-            "delete": {
-                "tags": [
-                    "Catalog"
-                ],
-                "summary": "Delete item",
-                "operationId": "deleteItem",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "description": "Failure"
-                    }
-                },
-                "deprecated": false,
-                "x-operationWeight": "500"
-            }
-        },
-        "/error": {
-            "get": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingGET",
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "head": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingHEAD",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "post": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingPOST",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "put": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingPUT",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            },
-            "delete": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingDELETE",
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "options": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingOPTIONS",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            },
-            "patch": {
-                "tags": [
-                    "basic-error-controller"
-                ],
-                "summary": "error",
-                "operationId": "errorUsingPATCH",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "*/*"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/info": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/status": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET_2",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/status/**": {
-            "get": {
-                "tags": [
-                    "operation-handler"
-                ],
-                "summary": "handle",
-                "operationId": "handleUsingGET_1",
-                "produces": [
-                    "application/vnd.spring-boot.actuator.v3+json",
-                    "application/json",
-                    "application/vnd.spring-boot.actuator.v2+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body",
-                        "required": false,
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        }
-    },
-    "definitions": {
-        "AbstractCatalog": {
-            "type": "object",
-            "discriminator": "type",
-            "properties": {
-                "createDate": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "customerId": {
-                    "type": "string"
-                },
-                "dbVersion": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "descriptions": {
-                    "$ref": "#/definitions/Descriptions"
-                },
-                "endDate": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "lastUpdateReason": {
-                    "type": "string"
-                },
-                "modelVersion": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "originalId": {
-                    "type": "string"
-                },
-                "running": {
-                    "type": "boolean"
-                },
-                "salesMode": {
-                    "type": "string",
-                    "enum": [
-                        "BILLING_PLAN",
-                        "STANDARD"
-                    ]
-                },
-                "sellingStores": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "singleUse": {
-                    "type": "boolean"
-                },
-                "startDate": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                },
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "ENABLED",
-                        "DISABLED"
-                    ]
-                },
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "INTERNAL",
-                        "FULL_REMOTE",
-                        "PRICING_REMOTE",
-                        "VARIANT_PRICING_REMOTE",
-                        "SIGNED",
-                        "SHARED"
-                    ]
-                },
-                "updateDate": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            },
-            "title": "AbstractCatalog"
-        },
-        "CatalogItem": {
-            "type": "object",
-            "properties": {
-                "catalogId": {
-                    "type": "string"
-                },
-                "customerId": {
-                    "type": "string"
-                }
-            },
-            "title": "CatalogItem"
-        },
-        "Descriptions": {
-            "type": "object",
-            "properties": {
-                "fallbackLocale": {
-                    "type": "string"
-                },
-                "localizedLongDesc": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "localizedShortDesc": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "title": "Descriptions"
-        },
-        "Document": {
-            "type": "object",
-            "title": "Document",
-            "additionalProperties": {
-                "type": "object"
-            }
-        },
-        "FullCatalog": {
-            "type": "object",
-            "properties": {
-                "catalog": {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                "discounts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CatalogItem"
-                    }
-                },
-                "locale": {
-                    "type": "string"
-                },
-                "products": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Product"
-                    }
-                },
-                "recommendations": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CatalogItem"
-                    }
-                },
-                "storeId": {
-                    "type": "string"
-                }
-            },
-            "title": "FullCatalog"
-        },
-        "FullRemoteCatalog": {
-            "title": "FullRemoteCatalog",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "apiSecretKey": {
-                            "type": "string"
-                        },
-                        "baseUrl": {
-                            "type": "string"
-                        },
-                        "createDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "customerId": {
-                            "type": "string"
-                        },
-                        "dbVersion": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "descriptions": {
-                            "$ref": "#/definitions/Descriptions"
-                        },
-                        "endDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "lastUpdateReason": {
-                            "type": "string"
-                        },
-                        "modelVersion": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "originalId": {
-                            "type": "string"
-                        },
-                        "running": {
-                            "type": "boolean"
-                        },
-                        "salesMode": {
-                            "type": "string",
-                            "enum": [
-                                "BILLING_PLAN",
-                                "STANDARD"
-                            ]
-                        },
-                        "sellingStores": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "singleUse": {
-                            "type": "boolean"
-                        },
-                        "startDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "status": {
-                            "type": "string",
-                            "enum": [
-                                "ENABLED",
-                                "DISABLED"
-                            ]
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "INTERNAL",
-                                "FULL_REMOTE",
-                                "PRICING_REMOTE",
-                                "VARIANT_PRICING_REMOTE",
-                                "SIGNED",
-                                "SHARED"
-                            ]
-                        },
-                        "updateDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    "title": "FullRemoteCatalog"
-                }
-            ]
-        },
-        "InternalCatalog": {
-            "title": "InternalCatalog",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "createDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "customerId": {
-                            "type": "string"
-                        },
-                        "dbVersion": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "descriptions": {
-                            "$ref": "#/definitions/Descriptions"
-                        },
-                        "endDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "lastUpdateReason": {
-                            "type": "string"
-                        },
-                        "modelVersion": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "originalId": {
-                            "type": "string"
-                        },
-                        "running": {
-                            "type": "boolean"
-                        },
-                        "salesMode": {
-                            "type": "string",
-                            "enum": [
-                                "BILLING_PLAN",
-                                "STANDARD"
-                            ]
-                        },
-                        "sellingStores": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "singleUse": {
-                            "type": "boolean"
-                        },
-                        "startDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "status": {
-                            "type": "string",
-                            "enum": [
-                                "ENABLED",
-                                "DISABLED"
-                            ]
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "INTERNAL",
-                                "FULL_REMOTE",
-                                "PRICING_REMOTE",
-                                "VARIANT_PRICING_REMOTE",
-                                "SIGNED",
-                                "SHARED"
-                            ]
-                        },
-                        "updateDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    "title": "InternalCatalog"
-                }
-            ]
-        },
-        "ModelAndView": {
-            "type": "object",
-            "properties": {
-                "empty": {
-                    "type": "boolean"
-                },
-                "model": {
-                    "type": "object"
-                },
-                "modelMap": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "object"
-                    }
-                },
-                "reference": {
-                    "type": "boolean"
-                },
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "100 CONTINUE",
-                        "101 SWITCHING_PROTOCOLS",
-                        "102 PROCESSING",
-                        "103 CHECKPOINT",
-                        "200 OK",
-                        "201 CREATED",
-                        "202 ACCEPTED",
-                        "203 NON_AUTHORITATIVE_INFORMATION",
-                        "204 NO_CONTENT",
-                        "205 RESET_CONTENT",
-                        "206 PARTIAL_CONTENT",
-                        "207 MULTI_STATUS",
-                        "208 ALREADY_REPORTED",
-                        "226 IM_USED",
-                        "300 MULTIPLE_CHOICES",
-                        "301 MOVED_PERMANENTLY",
-                        "302 FOUND",
-                        "302 MOVED_TEMPORARILY",
-                        "303 SEE_OTHER",
-                        "304 NOT_MODIFIED",
-                        "305 USE_PROXY",
-                        "307 TEMPORARY_REDIRECT",
-                        "308 PERMANENT_REDIRECT",
-                        "400 BAD_REQUEST",
-                        "401 UNAUTHORIZED",
-                        "402 PAYMENT_REQUIRED",
-                        "403 FORBIDDEN",
-                        "404 NOT_FOUND",
-                        "405 METHOD_NOT_ALLOWED",
-                        "406 NOT_ACCEPTABLE",
-                        "407 PROXY_AUTHENTICATION_REQUIRED",
-                        "408 REQUEST_TIMEOUT",
-                        "409 CONFLICT",
-                        "410 GONE",
-                        "411 LENGTH_REQUIRED",
-                        "412 PRECONDITION_FAILED",
-                        "413 PAYLOAD_TOO_LARGE",
-                        "413 REQUEST_ENTITY_TOO_LARGE",
-                        "414 URI_TOO_LONG",
-                        "414 REQUEST_URI_TOO_LONG",
-                        "415 UNSUPPORTED_MEDIA_TYPE",
-                        "416 REQUESTED_RANGE_NOT_SATISFIABLE",
-                        "417 EXPECTATION_FAILED",
-                        "418 I_AM_A_TEAPOT",
-                        "419 INSUFFICIENT_SPACE_ON_RESOURCE",
-                        "420 METHOD_FAILURE",
-                        "421 DESTINATION_LOCKED",
-                        "422 UNPROCESSABLE_ENTITY",
-                        "423 LOCKED",
-                        "424 FAILED_DEPENDENCY",
-                        "425 TOO_EARLY",
-                        "426 UPGRADE_REQUIRED",
-                        "428 PRECONDITION_REQUIRED",
-                        "429 TOO_MANY_REQUESTS",
-                        "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
-                        "451 UNAVAILABLE_FOR_LEGAL_REASONS",
-                        "500 INTERNAL_SERVER_ERROR",
-                        "501 NOT_IMPLEMENTED",
-                        "502 BAD_GATEWAY",
-                        "503 SERVICE_UNAVAILABLE",
-                        "504 GATEWAY_TIMEOUT",
-                        "505 HTTP_VERSION_NOT_SUPPORTED",
-                        "506 VARIANT_ALSO_NEGOTIATES",
-                        "507 INSUFFICIENT_STORAGE",
-                        "508 LOOP_DETECTED",
-                        "509 BANDWIDTH_LIMIT_EXCEEDED",
-                        "510 NOT_EXTENDED",
-                        "511 NETWORK_AUTHENTICATION_REQUIRED"
-                    ]
-                },
-                "view": {
-                    "$ref": "#/definitions/View"
-                },
-                "viewName": {
-                    "type": "string"
-                }
-            },
-            "title": "ModelAndView"
-        },
-        "PriceRemoteCatalog": {
-            "title": "PriceRemoteCatalog",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "baseUrl": {
-                            "type": "string"
-                        },
-                        "createDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "customerId": {
-                            "type": "string"
-                        },
-                        "dbVersion": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "descriptions": {
-                            "$ref": "#/definitions/Descriptions"
-                        },
-                        "endDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "lastUpdateReason": {
-                            "type": "string"
-                        },
-                        "modelVersion": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "originalId": {
-                            "type": "string"
-                        },
-                        "running": {
-                            "type": "boolean"
-                        },
-                        "salesMode": {
-                            "type": "string",
-                            "enum": [
-                                "BILLING_PLAN",
-                                "STANDARD"
-                            ]
-                        },
-                        "sellingStores": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "singleUse": {
-                            "type": "boolean"
-                        },
-                        "startDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "status": {
-                            "type": "string",
-                            "enum": [
-                                "ENABLED",
-                                "DISABLED"
-                            ]
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "INTERNAL",
-                                "FULL_REMOTE",
-                                "PRICING_REMOTE",
-                                "VARIANT_PRICING_REMOTE",
-                                "SIGNED",
-                                "SHARED"
-                            ]
-                        },
-                        "updateDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    "title": "PriceRemoteCatalog"
-                }
-            ]
-        },
-        "Product": {
-            "type": "object",
-            "properties": {
-                "catalogId": {
-                    "type": "string"
-                },
-                "customerId": {
-                    "type": "string"
-                },
-                "parentId": {
-                    "type": "string"
-                }
-            },
-            "title": "Product"
-        },
-        "PublicDescription": {
-            "type": "object",
-            "properties": {
-                "longDesc": {
-                    "type": "string"
-                },
-                "shortDesc": {
-                    "type": "string"
-                }
-            },
-            "title": "PublicDescription"
-        },
-        "RecapEntry": {
-            "type": "object",
-            "properties": {
-                "count": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "targetValue": {
-                    "type": "string"
-                }
-            },
-            "title": "RecapEntry"
-        },
-        "SearchResult\u00abAbstractCatalog\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AbstractCatalog"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abAbstractCatalog\u00bb"
-        },
-        "SearchResult\u00abDocument\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Document"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abDocument\u00bb"
-        },
-        "SearchResult\u00abRecapEntry\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RecapEntry"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abRecapEntry\u00bb"
-        },
-        "SearchResult\u00abobject\u00bb": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "type": "object"
-                    }
-                },
-                "last": {
-                    "type": "boolean"
-                },
-                "number": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "size": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "totalItems": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "totalPages": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            },
-            "title": "SearchResult\u00abobject\u00bb"
-        },
-        "SharedCatalog": {
-            "title": "SharedCatalog",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "allowedMerchantCustomerIds": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "apiSecretKey": {
-                            "type": "string"
-                        },
-                        "createDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "customerId": {
-                            "type": "string"
-                        },
-                        "dbVersion": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "descriptions": {
-                            "$ref": "#/definitions/Descriptions"
-                        },
-                        "endDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "lastUpdateReason": {
-                            "type": "string"
-                        },
-                        "modelVersion": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "originalId": {
-                            "type": "string"
-                        },
-                        "products": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/SharedProduct"
-                            }
-                        },
-                        "running": {
-                            "type": "boolean"
-                        },
-                        "salesMode": {
-                            "type": "string",
-                            "enum": [
-                                "BILLING_PLAN",
-                                "STANDARD"
-                            ]
-                        },
-                        "sellingStores": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "singleUse": {
-                            "type": "boolean"
-                        },
-                        "startDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "status": {
-                            "type": "string",
-                            "enum": [
-                                "ENABLED",
-                                "DISABLED"
-                            ]
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "INTERNAL",
-                                "FULL_REMOTE",
-                                "PRICING_REMOTE",
-                                "VARIANT_PRICING_REMOTE",
-                                "SIGNED",
-                                "SHARED"
-                            ]
-                        },
-                        "updateDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    "title": "SharedCatalog"
-                }
-            ]
-        },
-        "VariantPriceRemoteCatalog": {
-            "title": "VariantPriceRemoteCatalog",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/AbstractCatalog"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "baseUrl": {
-                            "type": "string"
-                        },
-                        "createDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "customerId": {
-                            "type": "string"
-                        },
-                        "dbVersion": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "descriptions": {
-                            "$ref": "#/definitions/Descriptions"
-                        },
-                        "endDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "lastUpdateReason": {
-                            "type": "string"
-                        },
-                        "modelVersion": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "originalId": {
-                            "type": "string"
-                        },
-                        "running": {
-                            "type": "boolean"
-                        },
-                        "salesMode": {
-                            "type": "string",
-                            "enum": [
-                                "BILLING_PLAN",
-                                "STANDARD"
-                            ]
-                        },
-                        "sellingStores": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "singleUse": {
-                            "type": "boolean"
-                        },
-                        "startDate": {
-                            "type": "string",
-                            "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                        },
-                        "status": {
-                            "type": "string",
-                            "enum": [
-                                "ENABLED",
-                                "DISABLED"
-                            ]
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "INTERNAL",
-                                "FULL_REMOTE",
-                                "PRICING_REMOTE",
-                                "VARIANT_PRICING_REMOTE",
-                                "SIGNED",
-                                "SHARED"
-                            ]
-                        },
-                        "updateDate": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    "title": "VariantPriceRemoteCatalog"
-                }
-            ]
-        },
-        "View": {
-            "type": "object",
-            "properties": {
-                "contentType": {
-                    "type": "string"
-                }
-            },
-            "title": "View"
-        }
+  "swagger": "2.0",
+  "info": {
+    "description": "Catalogs",
+    "version": "1.0",
+    "title": "Catalogs",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
+  },
+  "host": "api.staging.nexway.build",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Catalog",
+      "description": "Api Command"
+    },
+    {
+      "name": "Public",
+      "description": "Api Public Catalog"
+    },
+    {
+      "name": "basic-error-controller",
+      "description": "Basic Error Controller"
+    },
+    {
+      "name": "operation-handler",
+      "description": "Operation Handler"
+    }
+  ],
+  "paths": {
+    "/catalogs": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predicate",
+            "description": "predicate",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "target",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchResult«AbstractCatalog»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "300"
+      },
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Create an item",
+        "operationId": "createItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "300"
+      }
+    },
+    "/catalogs/createFullCatalog": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Create a full catalog",
+        "operationId": "createFullCatalog",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fullCatalog",
+            "description": "fullCatalog",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FullCatalog"
+            }
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "description": "reason",
+            "required": false,
+            "type": "string",
+            "default": "resource creation thru REST Api"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "200"
+      }
+    },
+    "/catalogs/distinct": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Get distinct values for a given field",
+        "operationId": "distinct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predicate",
+            "description": "predicate",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "target",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchResult«object»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "100"
+      }
+    },
+    "/catalogs/public/{id}/descriptions": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "getPublicDescription",
+        "operationId": "getPublicDescriptionUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicDescription"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/catalogs/recap": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predicate",
+            "description": "predicate",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "target",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchResult«RecapEntry»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "150"
+      }
+    },
+    "/catalogs/unwind": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Search unwind for a given field",
+        "operationId": "unwind",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "predicate",
+            "description": "predicate",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "target",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchResult«Document»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "150"
+      }
+    },
+    "/catalogs/{id}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "200"
+      },
+      "put": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Update item",
+        "operationId": "updateItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "updateRequestItem",
+            "description": "updateRequestItem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AbstractCatalog"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "400"
+      },
+      "delete": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Delete item",
+        "operationId": "deleteItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "deprecated": false,
+        "x-operationWeight": "500"
+      }
+    },
+    "/error": {
+      "get": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "head": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      },
+      "options": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/info": {
+      "get": {
+        "tags": [
+          "operation-handler"
+        ],
+        "summary": "handle",
+        "operationId": "handleUsingGET",
+        "produces": [
+          "application/vnd.spring-boot.actuator.v3+json",
+          "application/json",
+          "application/vnd.spring-boot.actuator.v2+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "operation-handler"
+        ],
+        "summary": "handle",
+        "operationId": "handleUsingGET_2",
+        "produces": [
+          "application/vnd.spring-boot.actuator.v3+json",
+          "application/json",
+          "application/vnd.spring-boot.actuator.v2+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/status/**": {
+      "get": {
+        "tags": [
+          "operation-handler"
+        ],
+        "summary": "handle",
+        "operationId": "handleUsingGET_1",
+        "produces": [
+          "application/vnd.spring-boot.actuator.v3+json",
+          "application/json",
+          "application/vnd.spring-boot.actuator.v2+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "AbstractCatalog": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "createDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "dbVersion": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "descriptions": {
+          "$ref": "#/definitions/Descriptions"
+        },
+        "endDate": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lastUpdateReason": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "originalId": {
+          "type": "string"
+        },
+        "running": {
+          "type": "boolean"
+        },
+        "salesMode": {
+          "type": "string",
+          "enum": [
+            "BILLING_PLAN",
+            "STANDARD"
+          ]
+        },
+        "sellingStores": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "singleUse": {
+          "type": "boolean"
+        },
+        "startDate": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "INTERNAL",
+            "FULL_REMOTE",
+            "PRICING_REMOTE",
+            "VARIANT_PRICING_REMOTE",
+            "SIGNED",
+            "SHARED"
+          ]
+        },
+        "updateDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "AbstractCatalog"
+    },
+    "CatalogItem": {
+      "type": "object",
+      "properties": {
+        "catalogId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        }
+      },
+      "title": "CatalogItem"
+    },
+    "Descriptions": {
+      "type": "object",
+      "properties": {
+        "fallbackLocale": {
+          "type": "string"
+        },
+        "localizedLongDesc": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "localizedShortDesc": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Descriptions"
+    },
+    "Document": {
+      "type": "object",
+      "title": "Document",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "FullCatalog": {
+      "type": "object",
+      "properties": {
+        "catalog": {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        "discounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        },
+        "storeId": {
+          "type": "string"
+        }
+      },
+      "title": "FullCatalog"
+    },
+    "FullRemoteCatalog": {
+      "title": "FullRemoteCatalog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "apiSecretKey": {
+              "type": "string"
+            },
+            "baseUrl": {
+              "type": "string"
+            },
+            "createDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "dbVersion": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "descriptions": {
+              "$ref": "#/definitions/Descriptions"
+            },
+            "endDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "id": {
+              "type": "string"
+            },
+            "lastUpdateReason": {
+              "type": "string"
+            },
+            "modelVersion": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "originalId": {
+              "type": "string"
+            },
+            "running": {
+              "type": "boolean"
+            },
+            "salesMode": {
+              "type": "string",
+              "enum": [
+                "BILLING_PLAN",
+                "STANDARD"
+              ]
+            },
+            "sellingStores": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "singleUse": {
+              "type": "boolean"
+            },
+            "startDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ENABLED",
+                "DISABLED"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "INTERNAL",
+                "FULL_REMOTE",
+                "PRICING_REMOTE",
+                "VARIANT_PRICING_REMOTE",
+                "SIGNED",
+                "SHARED"
+              ]
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "title": "FullRemoteCatalog"
+        }
+      ]
+    },
+    "InternalCatalog": {
+      "title": "InternalCatalog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "createDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "dbVersion": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "descriptions": {
+              "$ref": "#/definitions/Descriptions"
+            },
+            "endDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "id": {
+              "type": "string"
+            },
+            "lastUpdateReason": {
+              "type": "string"
+            },
+            "modelVersion": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "originalId": {
+              "type": "string"
+            },
+            "running": {
+              "type": "boolean"
+            },
+            "salesMode": {
+              "type": "string",
+              "enum": [
+                "BILLING_PLAN",
+                "STANDARD"
+              ]
+            },
+            "sellingStores": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "singleUse": {
+              "type": "boolean"
+            },
+            "startDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ENABLED",
+                "DISABLED"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "INTERNAL",
+                "FULL_REMOTE",
+                "PRICING_REMOTE",
+                "VARIANT_PRICING_REMOTE",
+                "SIGNED",
+                "SHARED"
+              ]
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "title": "InternalCatalog"
+        }
+      ]
+    },
+    "ModelAndView": {
+      "type": "object",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "object"
+        },
+        "modelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "reference": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "100 CONTINUE",
+            "101 SWITCHING_PROTOCOLS",
+            "102 PROCESSING",
+            "103 CHECKPOINT",
+            "200 OK",
+            "201 CREATED",
+            "202 ACCEPTED",
+            "203 NON_AUTHORITATIVE_INFORMATION",
+            "204 NO_CONTENT",
+            "205 RESET_CONTENT",
+            "206 PARTIAL_CONTENT",
+            "207 MULTI_STATUS",
+            "208 ALREADY_REPORTED",
+            "226 IM_USED",
+            "300 MULTIPLE_CHOICES",
+            "301 MOVED_PERMANENTLY",
+            "302 FOUND",
+            "302 MOVED_TEMPORARILY",
+            "303 SEE_OTHER",
+            "304 NOT_MODIFIED",
+            "305 USE_PROXY",
+            "307 TEMPORARY_REDIRECT",
+            "308 PERMANENT_REDIRECT",
+            "400 BAD_REQUEST",
+            "401 UNAUTHORIZED",
+            "402 PAYMENT_REQUIRED",
+            "403 FORBIDDEN",
+            "404 NOT_FOUND",
+            "405 METHOD_NOT_ALLOWED",
+            "406 NOT_ACCEPTABLE",
+            "407 PROXY_AUTHENTICATION_REQUIRED",
+            "408 REQUEST_TIMEOUT",
+            "409 CONFLICT",
+            "410 GONE",
+            "411 LENGTH_REQUIRED",
+            "412 PRECONDITION_FAILED",
+            "413 PAYLOAD_TOO_LARGE",
+            "413 REQUEST_ENTITY_TOO_LARGE",
+            "414 URI_TOO_LONG",
+            "414 REQUEST_URI_TOO_LONG",
+            "415 UNSUPPORTED_MEDIA_TYPE",
+            "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+            "417 EXPECTATION_FAILED",
+            "418 I_AM_A_TEAPOT",
+            "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+            "420 METHOD_FAILURE",
+            "421 DESTINATION_LOCKED",
+            "422 UNPROCESSABLE_ENTITY",
+            "423 LOCKED",
+            "424 FAILED_DEPENDENCY",
+            "425 TOO_EARLY",
+            "426 UPGRADE_REQUIRED",
+            "428 PRECONDITION_REQUIRED",
+            "429 TOO_MANY_REQUESTS",
+            "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+            "500 INTERNAL_SERVER_ERROR",
+            "501 NOT_IMPLEMENTED",
+            "502 BAD_GATEWAY",
+            "503 SERVICE_UNAVAILABLE",
+            "504 GATEWAY_TIMEOUT",
+            "505 HTTP_VERSION_NOT_SUPPORTED",
+            "506 VARIANT_ALSO_NEGOTIATES",
+            "507 INSUFFICIENT_STORAGE",
+            "508 LOOP_DETECTED",
+            "509 BANDWIDTH_LIMIT_EXCEEDED",
+            "510 NOT_EXTENDED",
+            "511 NETWORK_AUTHENTICATION_REQUIRED"
+          ]
+        },
+        "view": {
+          "$ref": "#/definitions/View"
+        },
+        "viewName": {
+          "type": "string"
+        }
+      },
+      "title": "ModelAndView"
+    },
+    "PriceRemoteCatalog": {
+      "title": "PriceRemoteCatalog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "baseUrl": {
+              "type": "string"
+            },
+            "createDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "dbVersion": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "descriptions": {
+              "$ref": "#/definitions/Descriptions"
+            },
+            "endDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "id": {
+              "type": "string"
+            },
+            "lastUpdateReason": {
+              "type": "string"
+            },
+            "modelVersion": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "originalId": {
+              "type": "string"
+            },
+            "running": {
+              "type": "boolean"
+            },
+            "salesMode": {
+              "type": "string",
+              "enum": [
+                "BILLING_PLAN",
+                "STANDARD"
+              ]
+            },
+            "sellingStores": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "singleUse": {
+              "type": "boolean"
+            },
+            "startDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ENABLED",
+                "DISABLED"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "INTERNAL",
+                "FULL_REMOTE",
+                "PRICING_REMOTE",
+                "VARIANT_PRICING_REMOTE",
+                "SIGNED",
+                "SHARED"
+              ]
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "title": "PriceRemoteCatalog"
+        }
+      ]
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "catalogId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      },
+      "title": "Product"
+    },
+    "PublicDescription": {
+      "type": "object",
+      "properties": {
+        "longDesc": {
+          "type": "string"
+        },
+        "shortDesc": {
+          "type": "string"
+        }
+      },
+      "title": "PublicDescription"
+    },
+    "RecapEntry": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "targetValue": {
+          "type": "string"
+        }
+      },
+      "title": "RecapEntry"
+    },
+    "SearchResult«AbstractCatalog»": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AbstractCatalog"
+          }
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SearchResult«AbstractCatalog»"
+    },
+    "SearchResult«Document»": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SearchResult«Document»"
+    },
+    "SearchResult«RecapEntry»": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecapEntry"
+          }
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SearchResult«RecapEntry»"
+    },
+    "SearchResult«object»": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SearchResult«object»"
+    },
+    "SharedCatalog": {
+      "title": "SharedCatalog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "allowedMerchantCustomerIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "apiSecretKey": {
+              "type": "string"
+            },
+            "createDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "dbVersion": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "descriptions": {
+              "$ref": "#/definitions/Descriptions"
+            },
+            "endDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "id": {
+              "type": "string"
+            },
+            "lastUpdateReason": {
+              "type": "string"
+            },
+            "modelVersion": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "originalId": {
+              "type": "string"
+            },
+            "products": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/SharedProduct"
+              }
+            },
+            "running": {
+              "type": "boolean"
+            },
+            "salesMode": {
+              "type": "string",
+              "enum": [
+                "BILLING_PLAN",
+                "STANDARD"
+              ]
+            },
+            "sellingStores": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "singleUse": {
+              "type": "boolean"
+            },
+            "startDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ENABLED",
+                "DISABLED"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "INTERNAL",
+                "FULL_REMOTE",
+                "PRICING_REMOTE",
+                "VARIANT_PRICING_REMOTE",
+                "SIGNED",
+                "SHARED"
+              ]
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "title": "SharedCatalog"
+        }
+      ]
+    },
+    "VariantPriceRemoteCatalog": {
+      "title": "VariantPriceRemoteCatalog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractCatalog"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "baseUrl": {
+              "type": "string"
+            },
+            "createDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "dbVersion": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "descriptions": {
+              "$ref": "#/definitions/Descriptions"
+            },
+            "endDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "id": {
+              "type": "string"
+            },
+            "lastUpdateReason": {
+              "type": "string"
+            },
+            "modelVersion": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "originalId": {
+              "type": "string"
+            },
+            "running": {
+              "type": "boolean"
+            },
+            "salesMode": {
+              "type": "string",
+              "enum": [
+                "BILLING_PLAN",
+                "STANDARD"
+              ]
+            },
+            "sellingStores": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "singleUse": {
+              "type": "boolean"
+            },
+            "startDate": {
+              "type": "string",
+              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ENABLED",
+                "DISABLED"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "INTERNAL",
+                "FULL_REMOTE",
+                "PRICING_REMOTE",
+                "VARIANT_PRICING_REMOTE",
+                "SIGNED",
+                "SHARED"
+              ]
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "title": "VariantPriceRemoteCatalog"
+        }
+      ]
+    },
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        }
+      },
+      "title": "View"
+    }
+  }
 }
