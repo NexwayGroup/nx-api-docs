@@ -3,11 +3,12 @@
 ## Delete a store
 
 Delete an existing store entry
-## Request
+
+### Request
 
 `DELETE https://api.nexway.store/stores/{id}`
 
-## Path parameters
+### Path parameters
 
 |Parameter name| 	Value| 	Description |	Additional|
 |--|--|--|--|

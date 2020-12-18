@@ -2,11 +2,11 @@
 ## Get a store by hostname
 
 Get a store entry based on a hostname
-## Request
+### Request
 
 `GET https://api.nexway.store/stores/hostname/{hostname}`
 
-## Path parameters
+### Path parameters
 
 |Parameter name| 	Value| 	Description |	Additional|
 |--|--|--|--|

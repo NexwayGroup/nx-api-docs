@@ -6,7 +6,7 @@ Get a store entry based on an ID
 
 `GET https://api.nexway.store/stores/{id}`
 
-## Path parameters
+### Path parameters
 
 |Parameter name| 	Value| 	Description |	Additional|
 |--|--|--|--|

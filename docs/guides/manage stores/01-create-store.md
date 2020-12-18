@@ -6,7 +6,7 @@ Create a new store entry
 
 `POST https://api.nexway.store/stores`
 
-## Request body
+### Request body
 
 The request body takes a complete [Store resource](/docs/nx-api-docs/docs/guides/manage%20stores/07-store.md), containing the following writable properties:
 

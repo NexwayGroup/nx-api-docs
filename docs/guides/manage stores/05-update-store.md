@@ -6,7 +6,7 @@ Update an existing store entry
 
 `PUT https://api.nexway.store/stores/{id}`
 
-## Path parameters
+### Path parameters
 
 |Parameter name| 	Value| 	Description |	Additional|
 |--|--|--|--|
