@@ -4,7 +4,7 @@
 
 `DELETE https://api.nexway.store/carts/{id}`
 
-## Path parameters
+### Path parameters
 
 |Parameter name| 	Value| 	Description |	Additional|
 |--|--|--|--|

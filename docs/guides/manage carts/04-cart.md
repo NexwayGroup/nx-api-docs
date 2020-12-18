@@ -7,7 +7,7 @@
 - [put](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/update-cart?v=latest) - Update a cart
 - [put](https://api-doc.nexway.store/nexway-monetize/reference/shopper-apis/update-products-in-cart?v=latest) - Update products to a cart
 
-## Resource
+### Resource
 
 ```json
 {
@@ -144,7 +144,7 @@
 }
 ```
 
-## Properties
+### Properties
 
 | Name |	Type |	Description |	Additional |
 | -- | -- | -- | -- |

@@ -4,7 +4,7 @@
 
 `GET https://api.nexway.store/carts`
 
-## Query parameters
+### Query parameters
 
 |Name| 	Type| 	Description|
 |--|--|--|
