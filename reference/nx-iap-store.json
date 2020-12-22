@@ -1,0 +1,1839 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Stores",
+    "version": "v0",
+    "description": "API to manage stores"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/stores": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultStore"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      },
+      "post": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Create an item",
+        "operationId": "createItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Store"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      }
+    },
+    "/stores/{id}": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      },
+      "put": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Update item",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Store"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "400"
+      },
+      "delete": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Delete item",
+        "operationId": "deleteItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "500"
+      }
+    },
+    "/stores/distinct": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Get distinct values for a given field",
+        "operationId": "distinct",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/stores/recap": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultRecapEntry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/stores/unwind": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "summary": "Search unwind for a given field",
+        "operationId": "unwind",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/stores/public/distinct": {
+      "get": {
+        "tags": [
+          "api-public-queries"
+        ],
+        "summary": "Get distinct values for a given field",
+        "operationId": "distinct_1",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/stores/public/recap": {
+      "get": {
+        "tags": [
+          "api-public-queries"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap_1",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultRecapEntry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/stores/public/unwind": {
+      "get": {
+        "tags": [
+          "api-public-queries"
+        ],
+        "summary": "Search unwind for a given field",
+        "operationId": "unwind_1",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/stores/public": {
+      "get": {
+        "tags": [
+          "api-public-queries"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems_1",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultStore"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      }
+    },
+    "/stores/public/{id}": {
+      "get": {
+        "tags": [
+          "api-public-queries"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Design": {
+        "type": "object",
+        "properties": {
+          "layoutRef": {
+            "$ref": "#/components/schemas/DesignRef"
+          },
+          "themeRef": {
+            "$ref": "#/components/schemas/DesignRef"
+          },
+          "fontRef": {
+            "$ref": "#/components/schemas/DesignRef"
+          },
+          "i18nRef": {
+            "$ref": "#/components/schemas/I18nDesignRef"
+          },
+          "layout": {
+            "type": "string"
+          },
+          "theme": {
+            "type": "string"
+          },
+          "font": {
+            "type": "string"
+          }
+        }
+      },
+      "DesignRef": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Designs": {
+        "type": "object",
+        "properties": {
+          "checkout": {
+            "$ref": "#/components/schemas/Design"
+          },
+          "endUserPortal": {
+            "$ref": "#/components/schemas/Design"
+          },
+          "resellerCheckout": {
+            "$ref": "#/components/schemas/Design"
+          },
+          "paymentComponent": {
+            "$ref": "#/components/schemas/PaymentComponent"
+          }
+        }
+      },
+      "I18nDesignRef": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentComponent": {
+        "type": "object",
+        "properties": {
+          "rankedPaymentTabsByCountriesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RankedPaymentTabsByCountries"
+            }
+          }
+        }
+      },
+      "RankedPaymentTabsByCountries": {
+        "type": "object",
+        "properties": {
+          "countries": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rankedPaymentTabs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Route": {
+        "required": [
+          "hostname"
+        ],
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "pathPrefix": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "rawHostname": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "fullUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Store": {
+        "required": [
+          "defaultLocale",
+          "displayName",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "name": {
+            "maxLength": 150,
+            "minLength": 1,
+            "type": "string"
+          },
+          "displayName": {
+            "maxLength": 150,
+            "minLength": 1,
+            "type": "string"
+          },
+          "baseProduct": {
+            "type": "string"
+          },
+          "logoStore": {
+            "type": "string"
+          },
+          "bannerInvoice": {
+            "type": "string"
+          },
+          "bannerOrderConfEmail": {
+            "type": "string"
+          },
+          "logoFavicon": {
+            "type": "string"
+          },
+          "storeWebsite": {
+            "type": "string"
+          },
+          "defaultLocale": {
+            "type": "string"
+          },
+          "saleLocales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hostnames": {
+            "uniqueItems": true,
+            "type": "array",
+            "deprecated": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "routes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Route"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "designs": {
+            "$ref": "#/components/schemas/Designs"
+          },
+          "gtmId": {
+            "type": "string"
+          },
+          "nexwayGtmId": {
+            "type": "string"
+          },
+          "blackListedPaymentTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "additionalPaymentTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "blackListedCountries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "restrictedCountries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fallbackCartCountry": {
+            "type": "string"
+          },
+          "forceGeoipLocalization": {
+            "type": "boolean"
+          },
+          "promoteOneClickPayment": {
+            "type": "boolean"
+          },
+          "allowOrderDetailsOnCheckoutConfirmation": {
+            "type": "boolean"
+          },
+          "allowQuotes": {
+            "type": "boolean"
+          },
+          "recipientCodeMandatory": {
+            "type": "boolean"
+          },
+          "allowMultipleDiscounts": {
+            "type": "boolean"
+          },
+          "retryPaymentValidityDuration": {
+            "maximum": 90,
+            "type": "integer",
+            "format": "int64"
+          },
+          "quoteValidityDuration": {
+            "maximum": 90,
+            "type": "integer",
+            "format": "int64"
+          },
+          "quoteSubscriptionValidityDuration": {
+            "maximum": 90,
+            "type": "integer",
+            "format": "int64"
+          },
+          "multiplePaymentsValidityDuration": {
+            "maximum": 90,
+            "type": "integer",
+            "format": "int64"
+          },
+          "targetNonRecurrentPaymentMethodsForSubscriptions": {
+            "type": "string",
+            "enum": [
+              "NOBODY",
+              "COMPANY",
+              "EVERYBODY"
+            ]
+          },
+          "eligibleEndUserTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "RESELLER_AUTHENTICATION_REQUIRED",
+                "BUYER_AUTHENTICATION_REQUIRED",
+                "AUTHENTICATION_NOT_REQUIRED"
+              ]
+            }
+          },
+          "thankYouDesc": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "emailSenderOverride": {
+            "pattern": "^[\\w-+]+(\\.[\\w]+)*(@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$)?",
+            "type": "string"
+          },
+          "localizedPaymentDescriptors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "externalContextAlias": {
+            "type": "string"
+          },
+          "externalContextGenerationParams": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowInstallments": {
+            "type": "boolean"
+          },
+          "installmentOptions": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "allowSubscriptionUpgrade": {
+            "type": "boolean"
+          },
+          "hostname": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "pathPrefix": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "route": {
+            "$ref": "#/components/schemas/Route"
+          },
+          "saleLocale": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "layout": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "theme": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "deprecatedHostnames": {
+            "uniqueItems": true,
+            "type": "array",
+            "deprecated": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ExceptionDetail": {
+        "type": "object",
+        "properties": {
+          "errorType": {
+            "type": "string"
+          },
+          "resourceType": {
+            "type": "string"
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "resourceDisplayName": {
+            "type": "string"
+          },
+          "specific": {
+            "type": "object"
+          }
+        }
+      },
+      "NormalizeException": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExceptionDetail"
+            }
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unpaged": {
+            "type": "boolean"
+          },
+          "paged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Sort": {
+        "type": "object",
+        "properties": {
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SearchResultObject": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RecapEntry": {
+        "type": "object",
+        "properties": {
+          "targetValue": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchResultRecapEntry": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecapEntry"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "SearchResultDocument": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchResultStore": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Store"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UiConfiguration": {
+        "type": "object",
+        "properties": {
+          "deepLinking": {
+            "type": "boolean"
+          },
+          "displayOperationId": {
+            "type": "boolean"
+          },
+          "defaultModelsExpandDepth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultModelExpandDepth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultModelRendering": {
+            "type": "string",
+            "enum": [
+              "EXAMPLE",
+              "MODEL"
+            ]
+          },
+          "displayRequestDuration": {
+            "type": "boolean"
+          },
+          "docExpansion": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "LIST",
+              "FULL"
+            ]
+          },
+          "filter": {
+            "type": "object"
+          },
+          "maxDisplayedTags": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operationsSorter": {
+            "type": "string",
+            "enum": [
+              "ALPHA",
+              "METHOD"
+            ]
+          },
+          "showExtensions": {
+            "type": "boolean"
+          },
+          "tagsSorter": {
+            "type": "string",
+            "enum": [
+              "ALPHA"
+            ]
+          },
+          "validatorUrl": {
+            "type": "string"
+          },
+          "apisSorter": {
+            "type": "string",
+            "deprecated": true
+          },
+          "jsonEditor": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "showRequestHeaders": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "supportedSubmitMethods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SwaggerResource": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "swaggerVersion": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string",
+            "deprecated": true
+          }
+        }
+      },
+      "SecurityConfiguration": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "deprecated": true
+          },
+          "apiKeyVehicle": {
+            "type": "string",
+            "deprecated": true
+          },
+          "apiKeyName": {
+            "type": "string",
+            "deprecated": true
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "realm": {
+            "type": "string"
+          },
+          "appName": {
+            "type": "string"
+          },
+          "scopeSeparator": {
+            "type": "string"
+          },
+          "additionalQueryStringParams": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "useBasicAuthenticationWithAccessCodeGrant": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
