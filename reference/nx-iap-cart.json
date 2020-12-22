@@ -1,0 +1,2520 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cart",
+    "description": "API to manage carts",
+    "license": {
+      "name": "Nexway License Version 1.0"
+    },
+    "version": "1.0"
+  },
+  "servers": [],
+  "security": [
+    {
+      "Bearer": [
+        "read",
+        "write"
+      ]
+    }
+  ],
+  "paths": {
+    "/carts/{id}": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      },
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Update item",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "400"
+      },
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Delete item",
+        "operationId": "deleteItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "500"
+      }
+    },
+    "/carts/createCheckout": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Create checkout",
+        "operationId": "createCheckout",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "description": "Link to checkout URL",
+                "style": "simple"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/carts/{id}/wantedProducts": {
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Update products in cart",
+        "operationId": "updateProduct",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      }
+    },
+    "/carts": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultCart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Create an item",
+        "operationId": "createItem",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      }
+    },
+    "/carts/distinct": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get distinct values for a given field",
+        "operationId": "distinct",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/carts/recap": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultRecapEntry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/carts/unwind": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Search unwind for a given field",
+        "operationId": "unwind",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/carts/public/{id}": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Get a cart by ID",
+        "operationId": "getOne",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "100"
+      },
+      "put": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Update a cart",
+        "operationId": "put",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "200"
+      }
+    },
+    "/carts/public/products/{productId}/variants/matrix": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Get the variant matrix",
+        "operationId": "getProductVariantMatrix",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "300"
+      }
+    },
+    "/carts/public/{id}/product-recommendations/request": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Get product recommendations",
+        "operationId": "getProductRecommendations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "200"
+      }
+    },
+    "/carts/public/{id}/products": {
+      "put": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Update products in cart",
+        "operationId": "updateProduct_1",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "300"
+      }
+    },
+    "/carts/public/{id}/wantedProducts": {
+      "put": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Update products in cart",
+        "operationId": "updateProduct_2",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "300"
+      }
+    },
+    "/carts/public": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Create a cart",
+        "operationId": "publicCreateCart",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "description": "link to the new cart id",
+                "style": "simple"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "100"
+      }
+    },
+    "/carts/public/{id}/sendByMail": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Send cart by mail",
+        "operationId": "sendByEmail",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "100"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExceptionDetail": {
+        "type": "object",
+        "properties": {
+          "errorType": {
+            "type": "string"
+          },
+          "resourceType": {
+            "type": "string"
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "resourceDisplayName": {
+            "type": "string"
+          },
+          "specific": {
+            "type": "object"
+          }
+        }
+      },
+      "NormalizeException": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExceptionDetail"
+            }
+          }
+        }
+      },
+      "BuyerBehavior": {
+        "type": "object",
+        "properties": {
+          "retainBuyer": {
+            "type": "boolean"
+          },
+          "abandonedCart": {
+            "type": "boolean"
+          },
+          "renewal": {
+            "type": "boolean"
+          }
+        },
+        "description": "Buyer behavior"
+      },
+      "Cart": {
+        "required": [
+          "country",
+          "currency",
+          "endUser",
+          "price",
+          "products",
+          "storeId",
+          "totalAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "enduserId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "discount": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "salesFlag": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "manualUpdatingDate": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "manualUpdateDate": {
+            "type": "string",
+            "description": "Date of last manual modification",
+            "format": "date-time"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Store linked to cart"
+          },
+          "products": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "List of products in cart",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale of cart",
+            "readOnly": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of cart"
+          },
+          "endUser": {
+            "$ref": "#/components/schemas/EndUser"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "currency": {
+            "type": "object",
+            "properties": {
+              "currencyCode": {
+                "type": "string"
+              },
+              "defaultFractionDigits": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "numericCode": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "numericCodeAsString": {
+                "type": "string"
+              }
+            },
+            "description": "Currency of cart"
+          },
+          "discounts": {
+            "type": "array",
+            "description": "List of discounts (signed or promo code)",
+            "items": {
+              "type": "string",
+              "description": "List of discounts (signed or promo code)"
+            }
+          },
+          "endUserDiscounts": {
+            "type": "array",
+            "description": "List of available discounts for a end user",
+            "items": {
+              "$ref": "#/components/schemas/EndUserDiscount"
+            }
+          },
+          "endUserDiscountAmountByCurrency": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "description": "discounts amount available for a en user by currency",
+              "format": "double"
+            },
+            "description": "discounts amount available for a en user by currency"
+          },
+          "discountsStatus": {
+            "type": "array",
+            "description": "List of discount statuses",
+            "items": {
+              "$ref": "#/components/schemas/DiscountStatus"
+            }
+          },
+          "storeHostname": {
+            "type": "string",
+            "description": "Hostname of store"
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "description": "Full URL used by cart"
+          },
+          "vouchersTotalAmount": {
+            "type": "number",
+            "description": "Vouchers total amount",
+            "format": "double"
+          },
+          "vouchers": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Vouchers list selected on cart by end-user (Reseller approach)",
+            "items": {
+              "$ref": "#/components/schemas/Discount"
+            }
+          },
+          "cartIp": {
+            "type": "string",
+            "description": "Cart IP"
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "User-Agent"
+          },
+          "externalContext": {
+            "type": "string",
+            "description": "External context"
+          },
+          "salesFlags": {
+            "type": "array",
+            "description": "List of sales flags",
+            "items": {
+              "type": "string",
+              "description": "List of sales flags"
+            }
+          },
+          "buyerBehavior": {
+            "$ref": "#/components/schemas/BuyerBehavior"
+          },
+          "consentFlags": {
+            "$ref": "#/components/schemas/ConsentFlags"
+          },
+          "catalogId": {
+            "type": "string",
+            "description": "Catalog ID"
+          },
+          "marketingCampaignId": {
+            "type": "string",
+            "description": "Marketing campaign id"
+          },
+          "billingPlanId": {
+            "type": "string",
+            "description": "Billing plan ID"
+          },
+          "billingPlanPeriod": {
+            "type": "string",
+            "description": "Billing plan period"
+          },
+          "taxTransactionId": {
+            "type": "string",
+            "description": "Avalara tax transaction id"
+          },
+          "taxAuthority": {
+            "type": "string",
+            "description": "Tax authority",
+            "enum": [
+              "AVALARA",
+              "NX_VATENGINE"
+            ]
+          },
+          "installments": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Installment options",
+            "items": {
+              "type": "integer",
+              "description": "Installment options",
+              "format": "int32"
+            }
+          },
+          "notReadyForOrderCauseMessage": {
+            "type": "string"
+          },
+          "scheduledSuppressionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentTypes": {
+            "type": "array",
+            "description": "Available payment types to pay this cart",
+            "items": {
+              "$ref": "#/components/schemas/PaymentType"
+            }
+          },
+          "remitteds": {
+            "type": "array",
+            "description": "List of remitteds",
+            "items": {
+              "$ref": "#/components/schemas/Remitted"
+            }
+          },
+          "cancelPeriod": {
+            "type": "integer",
+            "description": "Cancel period in days",
+            "format": "int32"
+          },
+          "onPaymentClickRedirectUrl": {
+            "type": "string",
+            "description": "Redirection url to shopper"
+          },
+          "promoteOneClickPayment": {
+            "type": "boolean"
+          },
+          "maxPaymentsParts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minPartialPaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxPartialPaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "blockDiscounts": {
+            "type": "boolean",
+            "description": "Apply discounts on this cart"
+          },
+          "sentEmails": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "List of sent emails",
+            "items": {
+              "$ref": "#/components/schemas/SentEmail"
+            }
+          },
+          "source": {
+            "type": "string",
+            "description": "Source",
+            "enum": [
+              "PURCHASE",
+              "SUBSCRIPTION",
+              "MANUAL_RENEWAL",
+              "BILLING_PLAN"
+            ]
+          },
+          "productRecoId": {
+            "type": "string",
+            "description": "Product recommendation  id"
+          },
+          "totalAmount": {
+            "type": "number",
+            "description": "Total amount of order",
+            "format": "double"
+          },
+          "validVatNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "Company": {
+        "required": [
+          "companyName",
+          "vatNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user company name"
+          },
+          "vatNumber": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Company VAT number"
+          },
+          "cnpj": {
+            "type": "string",
+            "description": "CNPJ"
+          },
+          "fullRegistrationNumber": {
+            "pattern": "^\\d{14}$",
+            "type": "string",
+            "description": "Siret Number"
+          },
+          "registrationNumber": {
+            "pattern": "^\\d{9}$",
+            "type": "string",
+            "description": "Siren Number"
+          },
+          "apeCode": {
+            "pattern": "^\\d{4}[A-Za-z]$",
+            "type": "string",
+            "description": "APE/NAF code"
+          },
+          "validVatNumber": {
+            "type": "boolean"
+          }
+        },
+        "description": "End-user company"
+      },
+      "ConsentFlags": {
+        "type": "object",
+        "properties": {
+          "newsletterOptin": {
+            "type": "boolean",
+            "description": "Newsletter opt-in consent"
+          }
+        },
+        "description": "Consent flags"
+      },
+      "CreditCard": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "paymentMethodType": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "bin": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string"
+          }
+        },
+        "description": "List of credit cards"
+      },
+      "Discount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "localizedLabel": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "description": "Vouchers list selected on cart by end-user (Reseller approach)"
+      },
+      "DiscountStatus": {
+        "type": "object",
+        "properties": {
+          "discount": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "discountLabel": {
+            "type": "string"
+          }
+        },
+        "description": "List of discount statuses"
+      },
+      "DiscountUsage": {
+        "type": "object",
+        "properties": {
+          "discountCode": {
+            "type": "string"
+          }
+        }
+      },
+      "DiscountedPrice": {
+        "required": [
+          "discountCode",
+          "discountId",
+          "discountLabel",
+          "discountRate",
+          "discountedGrossPrice",
+          "discountedNetPrice",
+          "grossPriceDiscountAmount",
+          "netPriceDiscountAmount",
+          "vatDiscountAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "discountedNetPrice": {
+            "type": "number",
+            "description": "Discounted cost of product without taxes included",
+            "format": "double"
+          },
+          "discountedGrossPrice": {
+            "type": "number",
+            "description": "Discounted cost of product with taxes included",
+            "format": "double"
+          },
+          "discountRate": {
+            "type": "number",
+            "description": "Discount rate",
+            "format": "double"
+          },
+          "netPriceDiscountAmount": {
+            "type": "number",
+            "description": "Net price discount amount",
+            "format": "double"
+          },
+          "grossPriceDiscountAmount": {
+            "type": "number",
+            "description": "Gross price discount amount",
+            "format": "double"
+          },
+          "vatDiscountAmount": {
+            "type": "number",
+            "description": "VAT discount amount",
+            "format": "double"
+          },
+          "discountLabel": {
+            "type": "string",
+            "description": "Discount label"
+          },
+          "discountId": {
+            "type": "string",
+            "description": "Discount ID"
+          },
+          "discountCode": {
+            "type": "string",
+            "description": "Discount code"
+          },
+          "discountedNetPriceWithoutVoucher": {
+            "type": "number",
+            "description": "Discounted net price without voucher, only when a voucher is applied",
+            "format": "double"
+          },
+          "discountedGrossPriceWithoutVoucher": {
+            "type": "number",
+            "description": "Discounted gross price without voucher, only when a voucher is applied",
+            "format": "double"
+          },
+          "voucher": {
+            "$ref": "#/components/schemas/Voucher"
+          }
+        },
+        "description": "Discounted price",
+        "readOnly": true
+      },
+      "EndUser": {
+        "required": [
+          "country",
+          "email",
+          "firstName",
+          "lastName",
+          "locale",
+          "wallet",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user email"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user last name"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user first name"
+          },
+          "streetAddress": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book street address"
+          },
+          "city": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book city"
+          },
+          "zipCode": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book zip/postal code"
+          },
+          "country": {
+            "type": "string",
+            "description": "End-user country"
+          },
+          "locale": {
+            "type": "string",
+            "description": "End-user locale"
+          },
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "phone": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Phone"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "Birth date",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title",
+            "enum": [
+              "MR",
+              "MRS"
+            ]
+          },
+          "recipientCode": {
+            "type": "string",
+            "description": "Recipient Code, specially for Italy, San Marino and Vatican"
+          },
+          "taxExemptionEligible": {
+            "type": "boolean",
+            "description": "Tax exemption eligibility flag"
+          },
+          "id": {
+            "type": "string",
+            "description": "Reference ID of end-user service"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "storeRoute": {
+            "$ref": "#/components/schemas/Route"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Wallet"
+          },
+          "type": {
+            "type": "string",
+            "description": "End-user type"
+          },
+          "addressError": {
+            "type": "boolean",
+            "description": "Invalid address flag"
+          }
+        },
+        "description": "End-user who owns this cart"
+      },
+      "EndUserDiscount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "localizedLabels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "amountByCurrency": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "codes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountUsage"
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "List of available discounts for a end user"
+      },
+      "PaymentType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "replayable": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "role": {
+            "type": "string",
+            "deprecated": true
+          },
+          "registrable": {
+            "type": "boolean"
+          }
+        },
+        "description": "Available payment types to pay this cart"
+      },
+      "Paypal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "paymentMethodType": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "paypalPayerEmail": {
+            "type": "string"
+          }
+        },
+        "description": "List of PayPal accounts"
+      },
+      "Price": {
+        "required": [
+          "currency",
+          "netPrice",
+          "vatAmount",
+          "vatIncluded",
+          "vatRate"
+        ],
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "object",
+            "properties": {
+              "currencyCode": {
+                "type": "string"
+              },
+              "defaultFractionDigits": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "numericCode": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "numericCodeAsString": {
+                "type": "string"
+              }
+            },
+            "description": "Purchase currency (ISO-4217)"
+          },
+          "netPrice": {
+            "type": "number",
+            "description": "Net price",
+            "format": "double"
+          },
+          "grossPrice": {
+            "type": "number",
+            "description": "Gross price",
+            "format": "double"
+          },
+          "vatIncluded": {
+            "type": "boolean",
+            "description": "Tax included flag"
+          },
+          "vatRate": {
+            "type": "number",
+            "description": "Tax rate",
+            "format": "double"
+          },
+          "vatAmount": {
+            "type": "number",
+            "description": "Tax amount",
+            "format": "double"
+          },
+          "vatAmountMsrp": {
+            "type": "number",
+            "description": "Tax amount for MSRP (Manufacturer Suggested Retail Price)",
+            "format": "double"
+          },
+          "netMsrp": {
+            "type": "number",
+            "description": "Net MSRP (Manufacturer Suggested Retail Price)",
+            "format": "double"
+          },
+          "grossMsrp": {
+            "type": "number",
+            "description": "Gross MSRP (Manufacturer Suggested Retail Price)",
+            "format": "double"
+          },
+          "discountedPrice": {
+            "$ref": "#/components/schemas/DiscountedPrice"
+          },
+          "initialGrossPrice": {
+            "type": "number",
+            "description": "Initial Gross Price",
+            "format": "double"
+          },
+          "initialNetPrice": {
+            "type": "number",
+            "description": "Initial Net Price",
+            "format": "double"
+          },
+          "initialVatAmount": {
+            "type": "number",
+            "description": "Initial Tax amount",
+            "format": "double"
+          }
+        },
+        "description": "All information related to prices"
+      },
+      "Product": {
+        "required": [
+          "customerId",
+          "fullPrice",
+          "id",
+          "lifeTime",
+          "publisherRefId",
+          "quantity",
+          "unitPrice"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Product ID",
+            "readOnly": true
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Customer ID associated with product",
+            "readOnly": true
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "fullPrice": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Product parent ID",
+            "readOnly": true
+          },
+          "codeName": {
+            "type": "string",
+            "description": "Customer internal product name",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Product type"
+          },
+          "publisherRefId": {
+            "type": "string",
+            "description": "Product publisher reference ID"
+          },
+          "externalContext": {
+            "type": "string",
+            "description": "External context"
+          },
+          "lifeTime": {
+            "type": "string",
+            "description": "Lifetime"
+          },
+          "relatedContents": {
+            "type": "array",
+            "description": "Links for downloading related content files of product",
+            "items": {
+              "$ref": "#/components/schemas/RelatedContent"
+            }
+          },
+          "subscriptionTemplate": {
+            "type": "string",
+            "description": "Subscription template name"
+          },
+          "fulfillmentTemplate": {
+            "type": "string",
+            "description": "Fulfillment template name"
+          },
+          "signedProduct": {
+            "type": "string",
+            "description": "Signed product"
+          },
+          "variableValues": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "description": "Product variables"
+            },
+            "description": "Product variables"
+          },
+          "forcedCrossSaleProductIds": {
+            "type": "array",
+            "description": "List of IDs of forced cross-sell products",
+            "items": {
+              "type": "string",
+              "description": "List of IDs of forced cross-sell products"
+            }
+          },
+          "forcedBy": {
+            "type": "string",
+            "description": "Force via another product"
+          },
+          "crossSellBy": {
+            "type": "string",
+            "description": "Cross-sell via another product"
+          },
+          "upSellBy": {
+            "type": "string",
+            "description": "Upsell via another product"
+          },
+          "subProducts": {
+            "type": "array",
+            "description": "Sub-products",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "trial": {
+            "type": "boolean",
+            "description": "Indicator if the trial period is requested for the product"
+          },
+          "blackListedCountries": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "List of countries not authorized for this product",
+            "items": {
+              "type": "string",
+              "description": "List of countries not authorized for this product"
+            }
+          },
+          "previousLineItemId": {
+            "type": "string",
+            "description": "Previous line item ID"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Product quantity",
+            "format": "int32"
+          },
+          "priceFunctionParameters": {
+            "type": "array",
+            "description": "Parameters of the product",
+            "items": {
+              "$ref": "#/components/schemas/PublicParameter"
+            }
+          },
+          "priceFunctionParametersValues": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "description": "Value parameters of the product"
+            },
+            "description": "Value parameters of the product"
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "taxExempt": {
+            "type": "boolean",
+            "description": "Indicator if the product is tax exempt"
+          },
+          "taxCode": {
+            "type": "string",
+            "description": "Avatax tax code"
+          }
+        },
+        "description": "List of products in cart"
+      },
+      "PublicParameter": {
+        "required": [
+          "defaultValue",
+          "field",
+          "label",
+          "max",
+          "min",
+          "pattern",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Parameter label"
+          },
+          "type": {
+            "type": "string",
+            "description": "Parameter type"
+          },
+          "min": {
+            "type": "integer",
+            "description": "Minimum value",
+            "format": "int32"
+          },
+          "max": {
+            "type": "integer",
+            "description": "Maximum value",
+            "format": "int32"
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Pattern value"
+          },
+          "field": {
+            "type": "string",
+            "description": "Parameter name"
+          },
+          "defaultValue": {
+            "type": "object",
+            "description": "Parameter default name"
+          },
+          "internalDesc": {
+            "type": "string",
+            "description": "Internal description of the parameter"
+          }
+        },
+        "description": "Parameters of the product"
+      },
+      "RelatedContent": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "URL or file name with extension for downloading"
+          },
+          "label": {
+            "type": "string",
+            "description": "Text that explains what this binary is"
+          }
+        },
+        "description": "Links for downloading related content files of product"
+      },
+      "Remitted": {
+        "required": [
+          "id",
+          "remittanceAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "remittanceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "remittanceRate": {
+            "maximum": 1,
+            "exclusiveMaximum": false,
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "List of remitteds"
+      },
+      "Route": {
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "pathPrefix": {
+            "type": "string"
+          },
+          "fullUrl": {
+            "type": "string"
+          },
+          "builtHostname": {
+            "type": "string"
+          }
+        }
+      },
+      "SentEmail": {
+        "required": [
+          "dest",
+          "emailId",
+          "error",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "dest": {
+            "type": "string",
+            "description": "Email dest"
+          },
+          "id": {
+            "type": "string",
+            "description": "Internal reference ID"
+          },
+          "emailId": {
+            "type": "string",
+            "description": "Email reference in email storage service"
+          },
+          "error": {
+            "type": "string",
+            "description": "Email error message"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of email"
+          }
+        },
+        "description": "List of sent emails"
+      },
+      "Voucher": {
+        "type": "object",
+        "properties": {
+          "discounts": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Discount"
+            }
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "creditCards": {
+            "type": "array",
+            "description": "List of credit cards",
+            "items": {
+              "$ref": "#/components/schemas/CreditCard"
+            }
+          },
+          "paypals": {
+            "type": "array",
+            "description": "List of PayPal accounts",
+            "items": {
+              "$ref": "#/components/schemas/Paypal"
+            }
+          }
+        },
+        "description": "End-user's wallet"
+      },
+      "SearchResultObject": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchResultCart": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cart"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RecapEntry": {
+        "type": "object",
+        "properties": {
+          "targetValue": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchResultRecapEntry": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecapEntry"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "SearchResultDocument": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "JsonNode": {
+        "type": "object",
+        "properties": {
+          "array": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "null": {
+            "type": "boolean"
+          },
+          "float": {
+            "type": "boolean"
+          },
+          "nodeType": {
+            "type": "string",
+            "enum": [
+              "ARRAY",
+              "BINARY",
+              "BOOLEAN",
+              "MISSING",
+              "NULL",
+              "NUMBER",
+              "OBJECT",
+              "POJO",
+              "STRING"
+            ]
+          },
+          "number": {
+            "type": "boolean"
+          },
+          "floatingPointNumber": {
+            "type": "boolean"
+          },
+          "integralNumber": {
+            "type": "boolean"
+          },
+          "pojo": {
+            "type": "boolean"
+          },
+          "object": {
+            "type": "boolean"
+          },
+          "short": {
+            "type": "boolean"
+          },
+          "valueNode": {
+            "type": "boolean"
+          },
+          "missingNode": {
+            "type": "boolean"
+          },
+          "containerNode": {
+            "type": "boolean"
+          },
+          "int": {
+            "type": "boolean"
+          },
+          "binary": {
+            "type": "boolean"
+          },
+          "boolean": {
+            "type": "boolean"
+          },
+          "bigDecimal": {
+            "type": "boolean"
+          },
+          "double": {
+            "type": "boolean"
+          },
+          "long": {
+            "type": "boolean"
+          },
+          "bigInteger": {
+            "type": "boolean"
+          },
+          "textual": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter Bearer token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
