@@ -1,19 +1,14 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Customers",
-    "description": "Description for IAP must be overwritten",
+    "title": "Nexway Monetize",
+    "description": "",
     "license": {
       "name": "Nexway License Version 1.0"
     },
     "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "https://api.staging.nexway.build",
-      "description": "Generated server url"
-    }
-  ],
+  "servers": [],
   "security": [
     {
       "Bearer": [
@@ -23,6 +18,692 @@
     }
   ],
   "paths": {
+    "/customers/blacklistedsigneddata/remove": {
+      "post": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "operationId": "removeBlackListedSignedData",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "resource deletion thru REST Api"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlackListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customers/blacklistedsigneddata": {
+      "get": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultBlackListedSignedData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      },
+      "post": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Create an item",
+        "operationId": "createItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlackListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlackListedSignedData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      }
+    },
+    "/customers/blacklistedsigneddata/{id}": {
+      "get": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlackListedSignedData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      },
+      "put": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Update item",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlackListedSignedData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlackListedSignedData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "400"
+      },
+      "delete": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Delete item",
+        "operationId": "deleteItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "500"
+      }
+    },
+    "/customers/blacklistedsigneddata/distinct": {
+      "get": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Get distinct values for a given field",
+        "operationId": "distinct",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/customers/blacklistedsigneddata/recap": {
+      "get": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultRecapEntry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
+    "/customers/blacklistedsigneddata/unwind": {
+      "get": {
+        "tags": [
+          "api-blacked-signed-data-crud"
+        ],
+        "summary": "Search unwind for a given field",
+        "operationId": "unwind",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150"
+      }
+    },
     "/customers/{customerId}/sign": {
       "post": {
         "tags": [
@@ -140,22 +821,44 @@
         }
       }
     },
-    "/customers/my": {
-      "get": {
+    "/customers/{id}/remittanceAccount": {
+      "post": {
         "tags": [
           "api-crud"
         ],
-        "operationId": "getMy",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PublicCustomer"
-                }
+        "operationId": "createAccountHolder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "creation remittanceAccount holder"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Remittable"
               }
             }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -202,6 +905,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchResultPublicCustomer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/my": {
+      "get": {
+        "tags": [
+          "api-crud"
+        ],
+        "operationId": "getMy",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicCustomer"
                 }
               }
             }
@@ -270,123 +993,6 @@
         "deprecated": true
       }
     },
-    "/customers/sign": {
-      "post": {
-        "tags": [
-          "api-crud"
-        ],
-        "operationId": "signWithJWT",
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "max",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1000
-            }
-          },
-          {
-            "name": "persist",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/plain": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SignedResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/customers/verify": {
-      "post": {
-        "tags": [
-          "api-crud"
-        ],
-        "operationId": "verifyWithJwt",
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SignedRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/customers/realm/{name}": {
       "get": {
         "tags": [
@@ -416,120 +1022,6 @@
           }
         },
         "deprecated": true
-      }
-    },
-    "/customers/{id}/remittanceAccount": {
-      "post": {
-        "tags": [
-          "api-crud"
-        ],
-        "operationId": "createAccountHolder",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "reason",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "creation remittanceAccount holder"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Remittable"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/customers/{id}/secret/{secret}": {
-      "delete": {
-        "tags": [
-          "api-crud"
-        ],
-        "operationId": "deleteSecretKey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "secret",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "reason",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "deletion secret key thru REST Api"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/customers/{id}/secret": {
-      "post": {
-        "tags": [
-          "api-crud"
-        ],
-        "operationId": "generateSecretKey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "reason",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "generation secret key thru REST Api"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     },
     "/customers": {
@@ -1179,6 +1671,49 @@
   },
   "components": {
     "schemas": {
+      "BlackListRequest": {
+        "required": [
+          "signedData"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "signedData": {
+            "type": "string"
+          }
+        }
+      },
       "ExceptionDetail": {
         "type": "object",
         "properties": {
@@ -1221,6 +1756,52 @@
             "items": {
               "$ref": "#/components/schemas/ExceptionDetail"
             }
+          }
+        }
+      },
+      "BlackListedSignedData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "clear": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
           }
         }
       },
@@ -1377,6 +1958,36 @@
           }
         }
       },
+      "SearchResultBlackListedSignedData": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlackListedSignedData"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "SignedResponse": {
         "type": "object",
         "properties": {
@@ -1398,6 +2009,30 @@
             "type": "string"
           }
         }
+      },
+      "Remittable": {
+        "type": "object",
+        "properties": {
+          "parentRemittableId": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "details": {
+            "$ref": "#/components/schemas/RemittanceAccount"
+          }
+        }
+      },
+      "RemittanceAccount": {
+        "type": "object"
       },
       "PublicCustomer": {
         "type": "object",
@@ -1951,30 +2586,6 @@
           }
         }
       },
-      "Remittable": {
-        "type": "object",
-        "properties": {
-          "parentRemittableId": {
-            "type": "string"
-          },
-          "customerId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "readOnly": true
-          },
-          "vendor": {
-            "type": "string"
-          },
-          "details": {
-            "$ref": "#/components/schemas/RemittanceAccount"
-          }
-        }
-      },
-      "RemittanceAccount": {
-        "type": "object"
-      },
       "SearchResultCustomer": {
         "type": "object",
         "properties": {
@@ -2005,22 +2616,8 @@
           }
         }
       },
-      "KeyDefinition": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "defaultValue": {
-            "type": "object"
-          },
-          "required": {
-            "type": "boolean"
-          }
-        }
+      "Config": {
+        "type": "object"
       },
       "JsonNode": {
         "type": "object",
@@ -2051,10 +2648,16 @@
               "STRING"
             ]
           },
+          "number": {
+            "type": "boolean"
+          },
           "floatingPointNumber": {
             "type": "boolean"
           },
-          "number": {
+          "binary": {
+            "type": "boolean"
+          },
+          "integralNumber": {
             "type": "boolean"
           },
           "object": {
@@ -2063,43 +2666,65 @@
           "containerNode": {
             "type": "boolean"
           },
-          "missingNode": {
-            "type": "boolean"
-          },
-          "bigInteger": {
-            "type": "boolean"
-          },
-          "textual": {
-            "type": "boolean"
-          },
-          "valueNode": {
-            "type": "boolean"
-          },
-          "pojo": {
-            "type": "boolean"
-          },
-          "short": {
-            "type": "boolean"
-          },
-          "integralNumber": {
-            "type": "boolean"
-          },
-          "int": {
-            "type": "boolean"
-          },
           "long": {
+            "type": "boolean"
+          },
+          "missingNode": {
             "type": "boolean"
           },
           "double": {
             "type": "boolean"
           },
+          "pojo": {
+            "type": "boolean"
+          },
+          "bigInteger": {
+            "type": "boolean"
+          },
           "bigDecimal": {
+            "type": "boolean"
+          },
+          "textual": {
+            "type": "boolean"
+          },
+          "int": {
+            "type": "boolean"
+          },
+          "valueNode": {
+            "type": "boolean"
+          },
+          "short": {
             "type": "boolean"
           },
           "boolean": {
             "type": "boolean"
+          }
+        }
+      },
+      "ConfigDefinition": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyDefinition"
+            }
+          }
+        }
+      },
+      "KeyDefinition": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
           },
-          "binary": {
+          "type": {
+            "type": "string"
+          },
+          "defaultValue": {
+            "type": "object"
+          },
+          "required": {
             "type": "boolean"
           }
         }
@@ -2142,6 +2767,87 @@
           },
           "useBasicAuthenticationWithAccessCodeGrant": {
             "type": "boolean"
+          }
+        }
+      },
+      "UiConfiguration": {
+        "type": "object",
+        "properties": {
+          "deepLinking": {
+            "type": "boolean"
+          },
+          "displayOperationId": {
+            "type": "boolean"
+          },
+          "defaultModelsExpandDepth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultModelExpandDepth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultModelRendering": {
+            "type": "string",
+            "enum": [
+              "EXAMPLE",
+              "MODEL"
+            ]
+          },
+          "displayRequestDuration": {
+            "type": "boolean"
+          },
+          "docExpansion": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "LIST",
+              "FULL"
+            ]
+          },
+          "filter": {
+            "type": "object"
+          },
+          "maxDisplayedTags": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operationsSorter": {
+            "type": "string",
+            "enum": [
+              "ALPHA",
+              "METHOD"
+            ]
+          },
+          "showExtensions": {
+            "type": "boolean"
+          },
+          "tagsSorter": {
+            "type": "string",
+            "enum": [
+              "ALPHA"
+            ]
+          },
+          "validatorUrl": {
+            "type": "string"
+          },
+          "apisSorter": {
+            "type": "string",
+            "deprecated": true
+          },
+          "jsonEditor": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "showRequestHeaders": {
+            "type": "boolean",
+            "deprecated": true
+          },
+          "supportedSubmitMethods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
