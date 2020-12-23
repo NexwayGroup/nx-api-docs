@@ -9,9 +9,6 @@
   "paths": {
     "/tandcs/templates/{id}/processsample": {
       "post": {
-        "tags": [
-          "api-template-crud"
-        ],
         "operationId": "processSample",
         "parameters": [
           {
@@ -43,14 +40,15 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "template"
+        ],
+        "summary": ""
       }
     },
     "/tandcs/templates": {
       "get": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Get items",
         "operationId": "getItems_1",
         "parameters": [
@@ -131,7 +129,10 @@
             }
           }
         },
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "tags": [
+          "template"
+        ]
       },
       "post": {
         "tags": [
@@ -206,9 +207,6 @@
     },
     "/tandcs/templates/{id}": {
       "get": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Get item",
         "operationId": "getItem_1",
         "parameters": [
@@ -273,7 +271,10 @@
             }
           }
         },
-        "x-operationWeight": "200"
+        "x-operationWeight": "200",
+        "tags": [
+          "template"
+        ]
       },
       "put": {
         "tags": [
@@ -428,9 +429,6 @@
     },
     "/tandcs/templates/distinct": {
       "get": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Get distinct values for a given field",
         "operationId": "distinct_1",
         "parameters": [
@@ -511,14 +509,14 @@
             }
           }
         },
-        "x-operationWeight": "100"
+        "x-operationWeight": "100",
+        "tags": [
+          "template"
+        ]
       }
     },
     "/tandcs/templates/recap": {
       "get": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Get recap quantities for a given field",
         "operationId": "recap_1",
         "parameters": [
@@ -599,14 +597,14 @@
             }
           }
         },
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "tags": [
+          "template"
+        ]
       }
     },
     "/tandcs/templates/unwind": {
       "get": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Search unwind for a given field",
         "operationId": "unwind_1",
         "parameters": [
@@ -687,14 +685,14 @@
             }
           }
         },
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "tags": [
+          "template"
+        ]
       }
     },
     "/tandcs/variables": {
       "get": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Get items",
         "operationId": "getItems_2",
         "parameters": [
@@ -775,7 +773,10 @@
             }
           }
         },
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "tags": [
+          "variable"
+        ]
       },
       "post": {
         "tags": [
@@ -850,9 +851,6 @@
     },
     "/tandcs/variables/{id}": {
       "get": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Get item",
         "operationId": "getItem_2",
         "parameters": [
@@ -917,7 +915,10 @@
             }
           }
         },
-        "x-operationWeight": "200"
+        "x-operationWeight": "200",
+        "tags": [
+          "variable"
+        ]
       },
       "put": {
         "tags": [
@@ -1072,9 +1073,6 @@
     },
     "/tandcs/variables/distinct": {
       "get": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Get distinct values for a given field",
         "operationId": "distinct_2",
         "parameters": [
@@ -1155,14 +1153,14 @@
             }
           }
         },
-        "x-operationWeight": "100"
+        "x-operationWeight": "100",
+        "tags": [
+          "variable"
+        ]
       }
     },
     "/tandcs/variables/recap": {
       "get": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Get recap quantities for a given field",
         "operationId": "recap_2",
         "parameters": [
@@ -1243,14 +1241,14 @@
             }
           }
         },
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "tags": [
+          "variable"
+        ]
       }
     },
     "/tandcs/variables/unwind": {
       "get": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Search unwind for a given field",
         "operationId": "unwind_2",
         "parameters": [
@@ -1331,7 +1329,10 @@
             }
           }
         },
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "tags": [
+          "variable"
+        ]
       }
     }
   },
@@ -1928,5 +1929,12 @@
       }
     }
   },
-  "tags": []
+  "tags": [
+    {
+      "name": "template"
+    },
+    {
+      "name": "variable"
+    }
+  ]
 }
