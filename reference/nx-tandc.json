@@ -135,9 +135,6 @@
         ]
       },
       "post": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Create an item",
         "operationId": "createItem",
         "requestBody": {
@@ -202,7 +199,10 @@
             }
           }
         },
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "tags": [
+          "template"
+        ]
       }
     },
     "/tandcs/templates/{id}": {
@@ -277,9 +277,6 @@
         ]
       },
       "put": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Update item",
         "operationId": "updateItem",
         "parameters": [
@@ -354,12 +351,12 @@
             }
           }
         },
-        "x-operationWeight": "400"
+        "x-operationWeight": "400",
+        "tags": [
+          "template"
+        ]
       },
       "delete": {
-        "tags": [
-          "api-template-crud"
-        ],
         "summary": "Delete item",
         "operationId": "deleteItem",
         "parameters": [
@@ -424,7 +421,10 @@
             }
           }
         },
-        "x-operationWeight": "500"
+        "x-operationWeight": "500",
+        "tags": [
+          "template"
+        ]
       }
     },
     "/tandcs/templates/distinct": {
@@ -779,9 +779,6 @@
         ]
       },
       "post": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Create an item",
         "operationId": "createItem_1",
         "requestBody": {
@@ -846,7 +843,10 @@
             }
           }
         },
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "tags": [
+          "variable"
+        ]
       }
     },
     "/tandcs/variables/{id}": {
@@ -921,9 +921,6 @@
         ]
       },
       "put": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Update item",
         "operationId": "updateItem_1",
         "parameters": [
@@ -998,12 +995,12 @@
             }
           }
         },
-        "x-operationWeight": "400"
+        "x-operationWeight": "400",
+        "tags": [
+          "variable"
+        ]
       },
       "delete": {
-        "tags": [
-          "api-variable-crud"
-        ],
         "summary": "Delete item",
         "operationId": "deleteItem_1",
         "parameters": [
@@ -1068,7 +1065,11 @@
             }
           }
         },
-        "x-operationWeight": "500"
+        "x-operationWeight": "500",
+        "tags": [
+          "variable"
+        ],
+        "description": ""
       }
     },
     "/tandcs/variables/distinct": {
