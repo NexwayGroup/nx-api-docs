@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Catalogs",
+    "description": "This service provides the following resources:\n\n  * CRUD catalogs: /catalogs\n  * Create a full catalog (with products, discounts, product recommandations)",
     "version": "1.0",
     "title": "Catalogs",
     "termsOfService": "urn:tos",
@@ -35,7 +35,7 @@
     "/catalogs": {
       "get": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Get items",
         "operationId": "getItems",
@@ -77,7 +77,8 @@
             "required": false,
             "schema": {
               "type": "object"
-            }
+            },
+            "x-examples": {}
           },
           {
             "name": "sort.sorted",
@@ -94,7 +95,7 @@
           {
             "name": "target",
             "in": "query",
-            "description": "target",
+            "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
             "required": false,
             "type": "string"
           },
@@ -131,7 +132,7 @@
       },
       "post": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Create an item",
         "operationId": "createItem",
@@ -186,7 +187,7 @@
     "/catalogs/createFullCatalog": {
       "post": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Create a full catalog",
         "operationId": "createFullCatalog",
@@ -237,13 +238,13 @@
         },
         "deprecated": false,
         "x-operationWeight": "200",
-        "description": "Create a full catalog"
+        "description": "Create a full catalog (with products, discounts, product recommandations)"
       }
     },
     "/catalogs/distinct": {
       "get": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Get distinct values for a given field",
         "operationId": "distinct",
@@ -334,7 +335,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "100"
+        "x-operationWeight": "100",
+        "description": "Get catalogs based on query parameters avoiding duplicates"
       }
     },
     "/catalogs/public/{id}/descriptions": {
@@ -380,7 +382,7 @@
     "/catalogs/recap": {
       "get": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Get recap quantities for a given field",
         "operationId": "recap",
@@ -478,7 +480,7 @@
     "/catalogs/{id}": {
       "get": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Get item",
         "operationId": "getItem",
@@ -520,7 +522,7 @@
       },
       "put": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Update item",
         "operationId": "updateItem",
@@ -572,11 +574,12 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "400"
+        "x-operationWeight": "400",
+        "description": "Update a catalog"
       },
       "delete": {
         "tags": [
-          "Catalog"
+          "Catalogs"
         ],
         "summary": "Delete item",
         "operationId": "deleteItem",
@@ -619,7 +622,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "500"
+        "x-operationWeight": "500",
+        "description": "Delete a catalog"
       }
     }
   },
@@ -632,10 +636,11 @@
         "createDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation date"
+          "description": ""
         },
         "customerId": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer identifier"
         },
         "dbVersion": {
           "type": "integer",
@@ -647,10 +652,11 @@
         "endDate": {
           "type": "string",
           "example": "yyyy-MM-dd'T'HH:mm:ss'Z'",
-          "description": ""
+          "description": "Catalog end date"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Catalog identifier"
         },
         "lastUpdateReason": {
           "type": "string"
@@ -659,41 +665,47 @@
           "type": "string"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Catalog name"
         },
         "originalId": {
           "type": "string"
         },
         "running": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Now is between the catalog's start and end dates, and the catalog's status is \"enabled\""
         },
         "salesMode": {
           "type": "string",
           "enum": [
             "BILLING_PLAN",
             "STANDARD"
-          ]
+          ],
+          "description": "Catalog sales mode"
         },
         "sellingStores": {
           "type": "array",
+          "description": "List of identifiers for stores in this catalog",
           "items": {
             "type": "string"
           }
         },
         "singleUse": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Catalog is used for a single store once"
         },
         "startDate": {
           "type": "string",
           "example": "yyyy-MM-dd'T'HH:mm:ss'Z'",
-          "description": "Starting date"
+          "description": "Catalog Start date"
         },
         "status": {
           "type": "string",
           "enum": [
             "ENABLED",
             "DISABLED"
-          ]
+          ],
+          "description": "Catalog status"
         },
         "type": {
           "type": "string",
@@ -704,47 +716,48 @@
             "VARIANT_PRICING_REMOTE",
             "SIGNED",
             "SHARED"
-          ]
+          ],
+          "description": "Type of catalog"
         },
         "updateDate": {
           "type": "string",
           "format": "date-time",
-          "description": "last update date"
+          "description": ""
         }
       }
     },
     "CatalogItem": {
       "type": "object",
+      "title": "CatalogItem",
       "properties": {
         "catalogId": {
-          "type": "string"
+          "type": "string",
+          "description": "Catalog identifier"
         },
         "customerId": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer identifier"
         }
-      },
-      "title": "CatalogItem"
+      }
     },
     "Descriptions": {
       "type": "object",
+      "title": "Descriptions",
+      "description": "",
       "properties": {
         "fallbackLocale": {
-          "type": "string"
+          "type": "string",
+          "description": "default country code in ISO 3166-2 format"
         },
         "localizedLongDesc": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Map of strings with each country code linked to a long description"
         },
         "localizedShortDesc": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Map of strings with each country code linked to a short description"
         }
-      },
-      "title": "Descriptions"
+      }
     },
     "Document": {
       "type": "object",
@@ -755,6 +768,7 @@
     },
     "FullCatalog": {
       "type": "object",
+      "title": "FullCatalog",
       "properties": {
         "catalog": {
           "$ref": "#/definitions/AbstractCatalog"
@@ -766,7 +780,9 @@
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "example": "FR",
+          "description": "Country code in ISO 3166-2 format"
         },
         "products": {
           "type": "array",
@@ -781,422 +797,42 @@
           }
         },
         "storeId": {
-          "type": "string"
-        }
-      },
-      "title": "FullCatalog"
-    },
-    "FullRemoteCatalog": {
-      "title": "FullRemoteCatalog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractCatalog"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "apiSecretKey": {
-              "type": "string"
-            },
-            "baseUrl": {
-              "type": "string"
-            },
-            "createDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "customerId": {
-              "type": "string"
-            },
-            "dbVersion": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "descriptions": {
-              "$ref": "#/definitions/Descriptions"
-            },
-            "endDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "id": {
-              "type": "string"
-            },
-            "lastUpdateReason": {
-              "type": "string"
-            },
-            "modelVersion": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "originalId": {
-              "type": "string"
-            },
-            "running": {
-              "type": "boolean"
-            },
-            "salesMode": {
-              "type": "string",
-              "enum": [
-                "BILLING_PLAN",
-                "STANDARD"
-              ]
-            },
-            "sellingStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "singleUse": {
-              "type": "boolean"
-            },
-            "startDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "status": {
-              "type": "string",
-              "enum": [
-                "ENABLED",
-                "DISABLED"
-              ]
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "INTERNAL",
-                "FULL_REMOTE",
-                "PRICING_REMOTE",
-                "VARIANT_PRICING_REMOTE",
-                "SIGNED",
-                "SHARED"
-              ]
-            },
-            "updateDate": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "title": "FullRemoteCatalog"
-        }
-      ]
-    },
-    "InternalCatalog": {
-      "title": "InternalCatalog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractCatalog"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "createDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "customerId": {
-              "type": "string"
-            },
-            "dbVersion": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "descriptions": {
-              "$ref": "#/definitions/Descriptions"
-            },
-            "endDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "id": {
-              "type": "string"
-            },
-            "lastUpdateReason": {
-              "type": "string"
-            },
-            "modelVersion": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "originalId": {
-              "type": "string"
-            },
-            "running": {
-              "type": "boolean"
-            },
-            "salesMode": {
-              "type": "string",
-              "enum": [
-                "BILLING_PLAN",
-                "STANDARD"
-              ]
-            },
-            "sellingStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "singleUse": {
-              "type": "boolean"
-            },
-            "startDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "status": {
-              "type": "string",
-              "enum": [
-                "ENABLED",
-                "DISABLED"
-              ]
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "INTERNAL",
-                "FULL_REMOTE",
-                "PRICING_REMOTE",
-                "VARIANT_PRICING_REMOTE",
-                "SIGNED",
-                "SHARED"
-              ]
-            },
-            "updateDate": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "title": "InternalCatalog"
-        }
-      ]
-    },
-    "ModelAndView": {
-      "type": "object",
-      "properties": {
-        "empty": {
-          "type": "boolean"
-        },
-        "model": {
-          "type": "object"
-        },
-        "modelMap": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "reference": {
-          "type": "boolean"
-        },
-        "status": {
           "type": "string",
-          "enum": [
-            "100 CONTINUE",
-            "101 SWITCHING_PROTOCOLS",
-            "102 PROCESSING",
-            "103 CHECKPOINT",
-            "200 OK",
-            "201 CREATED",
-            "202 ACCEPTED",
-            "203 NON_AUTHORITATIVE_INFORMATION",
-            "204 NO_CONTENT",
-            "205 RESET_CONTENT",
-            "206 PARTIAL_CONTENT",
-            "207 MULTI_STATUS",
-            "208 ALREADY_REPORTED",
-            "226 IM_USED",
-            "300 MULTIPLE_CHOICES",
-            "301 MOVED_PERMANENTLY",
-            "302 FOUND",
-            "302 MOVED_TEMPORARILY",
-            "303 SEE_OTHER",
-            "304 NOT_MODIFIED",
-            "305 USE_PROXY",
-            "307 TEMPORARY_REDIRECT",
-            "308 PERMANENT_REDIRECT",
-            "400 BAD_REQUEST",
-            "401 UNAUTHORIZED",
-            "402 PAYMENT_REQUIRED",
-            "403 FORBIDDEN",
-            "404 NOT_FOUND",
-            "405 METHOD_NOT_ALLOWED",
-            "406 NOT_ACCEPTABLE",
-            "407 PROXY_AUTHENTICATION_REQUIRED",
-            "408 REQUEST_TIMEOUT",
-            "409 CONFLICT",
-            "410 GONE",
-            "411 LENGTH_REQUIRED",
-            "412 PRECONDITION_FAILED",
-            "413 PAYLOAD_TOO_LARGE",
-            "413 REQUEST_ENTITY_TOO_LARGE",
-            "414 URI_TOO_LONG",
-            "414 REQUEST_URI_TOO_LONG",
-            "415 UNSUPPORTED_MEDIA_TYPE",
-            "416 REQUESTED_RANGE_NOT_SATISFIABLE",
-            "417 EXPECTATION_FAILED",
-            "418 I_AM_A_TEAPOT",
-            "419 INSUFFICIENT_SPACE_ON_RESOURCE",
-            "420 METHOD_FAILURE",
-            "421 DESTINATION_LOCKED",
-            "422 UNPROCESSABLE_ENTITY",
-            "423 LOCKED",
-            "424 FAILED_DEPENDENCY",
-            "425 TOO_EARLY",
-            "426 UPGRADE_REQUIRED",
-            "428 PRECONDITION_REQUIRED",
-            "429 TOO_MANY_REQUESTS",
-            "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
-            "451 UNAVAILABLE_FOR_LEGAL_REASONS",
-            "500 INTERNAL_SERVER_ERROR",
-            "501 NOT_IMPLEMENTED",
-            "502 BAD_GATEWAY",
-            "503 SERVICE_UNAVAILABLE",
-            "504 GATEWAY_TIMEOUT",
-            "505 HTTP_VERSION_NOT_SUPPORTED",
-            "506 VARIANT_ALSO_NEGOTIATES",
-            "507 INSUFFICIENT_STORAGE",
-            "508 LOOP_DETECTED",
-            "509 BANDWIDTH_LIMIT_EXCEEDED",
-            "510 NOT_EXTENDED",
-            "511 NETWORK_AUTHENTICATION_REQUIRED"
-          ]
-        },
-        "view": {
-          "$ref": "#/definitions/View"
-        },
-        "viewName": {
-          "type": "string"
+          "description": "Store identifier"
         }
-      },
-      "title": "ModelAndView"
-    },
-    "PriceRemoteCatalog": {
-      "title": "PriceRemoteCatalog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractCatalog"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "baseUrl": {
-              "type": "string"
-            },
-            "createDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "customerId": {
-              "type": "string"
-            },
-            "dbVersion": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "descriptions": {
-              "$ref": "#/definitions/Descriptions"
-            },
-            "endDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "id": {
-              "type": "string"
-            },
-            "lastUpdateReason": {
-              "type": "string"
-            },
-            "modelVersion": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "originalId": {
-              "type": "string"
-            },
-            "running": {
-              "type": "boolean"
-            },
-            "salesMode": {
-              "type": "string",
-              "enum": [
-                "BILLING_PLAN",
-                "STANDARD"
-              ]
-            },
-            "sellingStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "singleUse": {
-              "type": "boolean"
-            },
-            "startDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "status": {
-              "type": "string",
-              "enum": [
-                "ENABLED",
-                "DISABLED"
-              ]
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "INTERNAL",
-                "FULL_REMOTE",
-                "PRICING_REMOTE",
-                "VARIANT_PRICING_REMOTE",
-                "SIGNED",
-                "SHARED"
-              ]
-            },
-            "updateDate": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "title": "PriceRemoteCatalog"
-        }
-      ]
+      }
     },
     "Product": {
       "type": "object",
+      "title": "Product",
       "properties": {
         "catalogId": {
-          "type": "string"
+          "type": "string",
+          "description": "Catalog identifier"
         },
         "customerId": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer identifier"
         },
         "parentId": {
-          "type": "string"
+          "type": "string",
+          "description": "Parent product identifier"
         }
-      },
-      "title": "Product"
+      }
     },
     "PublicDescription": {
       "type": "object",
+      "title": "PublicDescription",
       "properties": {
         "longDesc": {
-          "type": "string"
+          "type": "string",
+          "description": "long public catalog description"
         },
         "shortDesc": {
-          "type": "string"
+          "type": "string",
+          "description": "short public catalog description"
         }
-      },
-      "title": "PublicDescription"
+      }
     },
     "RecapEntry": {
       "type": "object",
@@ -1334,217 +970,6 @@
         }
       },
       "title": "SearchResult«object»"
-    },
-    "SharedCatalog": {
-      "title": "SharedCatalog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractCatalog"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "allowedMerchantCustomerIds": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "apiSecretKey": {
-              "type": "string"
-            },
-            "createDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "customerId": {
-              "type": "string"
-            },
-            "dbVersion": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "descriptions": {
-              "$ref": "#/definitions/Descriptions"
-            },
-            "endDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "id": {
-              "type": "string"
-            },
-            "lastUpdateReason": {
-              "type": "string"
-            },
-            "modelVersion": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "originalId": {
-              "type": "string"
-            },
-            "products": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/SharedProduct"
-              }
-            },
-            "running": {
-              "type": "boolean"
-            },
-            "salesMode": {
-              "type": "string",
-              "enum": [
-                "BILLING_PLAN",
-                "STANDARD"
-              ]
-            },
-            "sellingStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "singleUse": {
-              "type": "boolean"
-            },
-            "startDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "status": {
-              "type": "string",
-              "enum": [
-                "ENABLED",
-                "DISABLED"
-              ]
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "INTERNAL",
-                "FULL_REMOTE",
-                "PRICING_REMOTE",
-                "VARIANT_PRICING_REMOTE",
-                "SIGNED",
-                "SHARED"
-              ]
-            },
-            "updateDate": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "title": "SharedCatalog"
-        }
-      ]
-    },
-    "VariantPriceRemoteCatalog": {
-      "title": "VariantPriceRemoteCatalog",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractCatalog"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "baseUrl": {
-              "type": "string"
-            },
-            "createDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "customerId": {
-              "type": "string"
-            },
-            "dbVersion": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "descriptions": {
-              "$ref": "#/definitions/Descriptions"
-            },
-            "endDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "id": {
-              "type": "string"
-            },
-            "lastUpdateReason": {
-              "type": "string"
-            },
-            "modelVersion": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "originalId": {
-              "type": "string"
-            },
-            "running": {
-              "type": "boolean"
-            },
-            "salesMode": {
-              "type": "string",
-              "enum": [
-                "BILLING_PLAN",
-                "STANDARD"
-              ]
-            },
-            "sellingStores": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "singleUse": {
-              "type": "boolean"
-            },
-            "startDate": {
-              "type": "string",
-              "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            },
-            "status": {
-              "type": "string",
-              "enum": [
-                "ENABLED",
-                "DISABLED"
-              ]
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "INTERNAL",
-                "FULL_REMOTE",
-                "PRICING_REMOTE",
-                "VARIANT_PRICING_REMOTE",
-                "SIGNED",
-                "SHARED"
-              ]
-            },
-            "updateDate": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "title": "VariantPriceRemoteCatalog"
-        }
-      ]
-    },
-    "View": {
-      "type": "object",
-      "properties": {
-        "contentType": {
-          "type": "string"
-        }
-      },
-      "title": "View"
     }
   }
 }
