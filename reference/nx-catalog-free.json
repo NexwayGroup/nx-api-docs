@@ -126,7 +126,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "description": "Get all catalogs"
       },
       "post": {
         "tags": [
@@ -178,7 +179,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "300"
+        "x-operationWeight": "300",
+        "description": "Create a catalog"
       }
     },
     "/catalogs/createFullCatalog": {
@@ -234,7 +236,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "200"
+        "x-operationWeight": "200",
+        "description": "Create a full catalog"
       }
     },
     "/catalogs/distinct": {
@@ -370,7 +373,8 @@
             "description": "Not Found"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "description": "Get a catalog's public description"
       }
     },
     "/catalogs/recap": {
@@ -467,104 +471,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "150"
-      }
-    },
-    "/catalogs/unwind": {
-      "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "summary": "Search unwind for a given field",
-        "operationId": "unwind",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "pageNumber",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "paged",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "predicate",
-            "description": "predicate",
-            "required": false,
-            "schema": {
-              "type": "object"
-            }
-          },
-          {
-            "name": "sort.sorted",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "sort.unsorted",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "description": "target",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "unpaged",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SearchResult«Document»"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Failure"
-          }
-        },
-        "deprecated": false,
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "description": "Get a list of recap entries"
       }
     },
     "/catalogs/{id}": {
@@ -607,7 +515,8 @@
           }
         },
         "deprecated": false,
-        "x-operationWeight": "200"
+        "x-operationWeight": "200",
+        "description": "Get a catalog by ID"
       },
       "put": {
         "tags": [
@@ -718,10 +627,12 @@
     "AbstractCatalog": {
       "type": "object",
       "discriminator": "type",
+      "title": "AbstractCatalog",
       "properties": {
         "createDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Creation date"
         },
         "customerId": {
           "type": "string"
@@ -735,7 +646,8 @@
         },
         "endDate": {
           "type": "string",
-          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          "description": ""
         },
         "id": {
           "type": "string"
@@ -773,7 +685,8 @@
         },
         "startDate": {
           "type": "string",
-          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+          "example": "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          "description": "Starting date"
         },
         "status": {
           "type": "string",
@@ -795,10 +708,10 @@
         },
         "updateDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "last update date"
         }
-      },
-      "title": "AbstractCatalog"
+      }
     },
     "CatalogItem": {
       "type": "object",
