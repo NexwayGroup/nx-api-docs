@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Users",
-    "description": "API to manage users",
+    "description": "API to manage users identity and access management.\nIt brings together the management and modification of users, groups and roles.",
     "license": {
       "name": "Nexway License Version 1.0"
     },
@@ -21,7 +21,7 @@
     "/iam/users/{id}": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Get item",
         "operationId": "getItem",
@@ -92,7 +92,7 @@
       },
       "put": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Update a user",
         "description": "Update a user from a customer.",
@@ -138,7 +138,7 @@
       },
       "delete": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Delete a user",
         "description": "Delete a user from a customer.",
@@ -176,7 +176,7 @@
     "/iam/users": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Get items",
         "operationId": "getItems",
@@ -203,7 +203,8 @@
             "required": false,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
           }
         ],
         "responses": {
@@ -263,7 +264,7 @@
       },
       "post": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Create a user",
         "description": "Create a user from a customer.",
@@ -333,98 +334,10 @@
         "x-operationWeight": "100"
       }
     },
-    "/iam/users/distinct": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get distinct values for a given field",
-        "operationId": "distinct",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultObject"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "100"
-      }
-    },
     "/iam/users/recap": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Get recap quantities for a given field",
         "operationId": "recap",
@@ -435,7 +348,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
           },
           {
             "name": "pageable",
@@ -506,95 +420,8 @@
             }
           }
         },
-        "x-operationWeight": "150"
-      }
-    },
-    "/iam/users/unwind": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Search unwind for a given field",
-        "operationId": "unwind",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultDocument"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "150"
+        "x-operationWeight": "150",
+        "description": "Get a list of recap entries"
       }
     },
     "/iam/users/public/resetpassword/{realm}/{token}": {
@@ -784,13 +611,6 @@
         "readOnly": true
       },
       "UserUpdate": {
-        "required": [
-          "email",
-          "firstName",
-          "lastName",
-          "status",
-          "userName"
-        ],
         "type": "object",
         "properties": {
           "customerId": {
@@ -839,20 +659,287 @@
           "authorizedCustomerIds": {
             "uniqueItems": true,
             "type": "array",
+            "description": "Customer Identifiers this user has rights on",
             "items": {
               "type": "string"
             }
           }
+        },
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "userName",
+          "status"
+        ]
+      },
+      "Identity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "User email"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "User first name"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "User last name"
+          },
+          "locale": {
+            "type": "string",
+            "description": "Country code in ISO 3166-2 format"
+          },
+          "inactive": {
+            "type": "boolean",
+            "description": "identity is inactive"
+          },
+          "token": {
+            "type": "string",
+            "description": "Token used for reset the password"
+          },
+          "userName": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string",
+            "description": "User name"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          },
+          "clientId": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "secretKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecretKey"
+            }
+          },
+          "roleIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Role identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metaRoleIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Metarole identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authorizedCustomerIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Customer identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Email"
+            }
+          },
+          "preferences": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "provider": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TokenProvider"
+            },
+            "description": "Map of providers"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "RecapEntry": {
+        "type": "object",
+        "properties": {
+          "targetValue": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       },
-      "SearchResultObject":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object"}},"last":{"type":"boolean"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"number":{"type":"integer","format":"int32"}}},
-      "Identity":{"required":["email"],"type":"object","properties":{"id":{"type":"string","deprecated":true},"customerId":{"type":"string"},"createDate":{"type":"string","format":"date-time","deprecated":true},"updateDate":{"type":"string","format":"date-time","deprecated":true},"modelVersion":{"type":"string","deprecated":true},"dbVersion":{"type":"integer","format":"int64"},"lastUpdateReason":{"type":"string"},"originalId":{"type":"string","writeOnly":true},"email":{"maxLength":150,"minLength":6,"type":"string"},"firstName":{"maxLength":50,"minLength":0,"type":"string"},"lastName":{"maxLength":50,"minLength":0,"type":"string"},"locale":{"type":"string"},"inactive":{"type":"boolean"},"token":{"type":"string"},"userName":{"maxLength":50,"minLength":3,"type":"string"},"password":{"type":"string"},"clientId":{"maxLength":50,"minLength":3,"type":"string"},"secretKeys":{"type":"array","items":{"$ref":"#/components/schemas/SecretKey"}},"roleIds":{"uniqueItems":true,"type":"array","items":{"type":"string"}},"metaRoleIds":{"uniqueItems":true,"type":"array","items":{"type":"string"}},"authorizedCustomerIds":{"uniqueItems":true,"type":"array","items":{"type":"string"}},"emails":{"type":"array","items":{"$ref":"#/components/schemas/Email"}},"preferences":{"type":"object","additionalProperties":{"type":"object"}},"provider":{"type":"object","additionalProperties":{"$ref":"#/components/schemas/TokenProvider"}}}},
-      "RecapEntry":{"type":"object","properties":{"targetValue":{"type":"string"},"count":{"type":"integer","format":"int32"}}},
-      "SearchResultDocument":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/components/schemas/Document"}},"last":{"type":"boolean"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"number":{"type":"integer","format":"int32"}}},"SearchResultIdentity":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/components/schemas/Identity"}},"last":{"type":"boolean"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"number":{"type":"integer","format":"int32"}}},
-      "LostPassword":{"required":["email"],"type":"object","properties":{"email":{"maxLength":150,"minLength":6,"type":"string","description":"User email"}}},
-      "ValidityToken":{"type":"object","properties":{"status":{"type":"string","enum":["VALID","INVALID"]},"expirationDate":{"type":"string"}}},
-      "SearchResultRecapEntry":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/components/schemas/RecapEntry"}},"last":{"type":"boolean"},"totalItems":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int32"},"size":{"type":"integer","format":"int32"},"number":{"type":"integer","format":"int32"}}},
-      "Email":{"type":"object","properties":{"id":{"type":"string","description":"Unique identifier","readOnly":true},"emailId":{"type":"string","description":"Unique identifier of the email in the mail storage","readOnly":true},"createDate":{"type":"string","description":"Create date time","format":"date-time","readOnly":true},"type":{"type":"string","description":"Type","readOnly":true},"error":{"type":"string","description":"Error message if the email is not send","readOnly":true}},"description":"List of emails sent to the user"},
+      "SearchResultIdentity": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identity"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "LostPassword": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "User email"
+          }
+        }
+      },
+      "ValidityToken": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "VALID",
+              "INVALID"
+            ]
+          },
+          "expirationDate": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchResultRecapEntry": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecapEntry"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Email": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "readOnly": true
+          },
+          "emailId": {
+            "type": "string",
+            "description": "Unique identifier of the email in the mail storage",
+            "readOnly": true
+          },
+          "createDate": {
+            "type": "string",
+            "description": "Create date time",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Type",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message if the email is not send",
+            "readOnly": true
+          }
+        },
+        "description": "List of emails sent to the user"
+      },
       "User": {
         "required": [
           "email",
@@ -969,32 +1056,6 @@
           }
         }
       },
-      "Pageable": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "sort": {
-            "$ref": "#/components/schemas/Sort"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unpaged": {
-            "type": "boolean"
-          },
-          "paged": {
-            "type": "boolean"
-          }
-        }
-      },
       "UserCredential": {
         "required": [
           "password"
@@ -1004,6 +1065,15 @@
           "password": {
             "type": "string",
             "description": "Password related to a user."
+          }
+        }
+      },
+      "SecretKey": {
+        "title": "SecretKey",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           }
         }
       }
