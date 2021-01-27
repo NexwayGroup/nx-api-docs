@@ -1,0 +1,3347 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Order",
+        "description": "API to manage orders",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.staging.nexway.build",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "Bearer": [
+                "read",
+                "write"
+            ]
+        }
+    ],
+    "paths": {
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get items",
+                "operationId": "getItems",
+                "parameters": [
+                    {
+                        "name": "target",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "endUser.email",
+                        "in": "query",
+                        "description": "Filter orders by endUser email"
+                    },
+                    {
+                        "name": "endUser.country",
+                        "in": "query",
+                        "description": "Filter orders by endUser country"
+                    },
+                    {
+                        "name": "endUser.accountCreated",
+                        "in": "query",
+                        "description": "Filter orders by endUser accountCreated"
+                    },
+                    {
+                        "name": "customer.id",
+                        "in": "query",
+                        "description": "Filter orders by customer id"
+                    },
+                    {
+                        "name": "lineItem.id",
+                        "in": "query",
+                        "description": "Filter orders by lineItem id"
+                    },
+                    {
+                        "name": "lineItem.previousLineItemId",
+                        "in": "query",
+                        "description": "Filter orders by lineItem previousLineItemId"
+                    },
+                    {
+                        "name": "lineItem.subscriptionTemplate",
+                        "in": "query",
+                        "description": "Filter orders by lineItem subscriptionTemplate"
+                    },
+                    {
+                        "name": "lineItem.subscriptionId",
+                        "in": "query",
+                        "description": "Filter orders by lineItem subscriptionId"
+                    },
+                    {
+                        "name": "lineItem.publisherRefId",
+                        "in": "query",
+                        "description": "Filter orders by lineItem publisherRefId"
+                    },
+                    {
+                        "name": "lineItem.nexwayFulfillmentId",
+                        "in": "query",
+                        "description": "Filter orders by lineItem nexwayFulfillmentId"
+                    },
+                    {
+                        "name": "lineItem.publisherFulfillmentId",
+                        "in": "query",
+                        "description": "Filter orders by lineItem publisherFulfillmentId"
+                    },
+                    {
+                        "name": "lineItem.fulfillmentTemplate",
+                        "in": "query",
+                        "description": "Filter orders by lineItem fulfillmentTemplate"
+                    },
+                    {
+                        "name": "lineItem.activationCode",
+                        "in": "query",
+                        "description": "Filter orders by lineItem activationCode"
+                    },
+                    {
+                        "name": "email.emailId",
+                        "in": "query",
+                        "description": "Filter orders by emailId"
+                    },
+                    {
+                        "name": "invoice.id",
+                        "in": "query",
+                        "description": "Filter orders by invoice id"
+                    },
+                    {
+                        "name": "creditNote.id",
+                        "in": "query",
+                        "description": "Filter orders by creditNote id"
+                    },
+                    {
+                        "name": "creditNote.cancellationReason",
+                        "in": "query",
+                        "description": "Filter orders  creditNote cancellationReason"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "Filter orders by currency"
+                    },
+                    {
+                        "name": "cartId",
+                        "in": "query",
+                        "description": "Filter orders by cartId"
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "query",
+                        "description": "Filter orders by subscriptionId"
+                    },
+                    {
+                        "name": "generationId",
+                        "in": "query",
+                        "description": "Filter orders by generationId "
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter orders by status (CANCELED_WITH_ERROR/CANCEL_PENDING/CANCELED/PARTIAL_CANCELED/PARTIAL_COMPLETED/COMPLETED/ABORTED/PENDING_WITH_ERROR/PENDING/FRAUD_PENDING/PAYMENT_PENDING/PAYMENT_REFUSED/CREATED/FORCE_COMPLETED/FORCE_CANCELED)"
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "description": "Filter orders by source (PURCHASE/SUBSCRIPTION/MANUAL_RENEWAL/BILLING_PLAN)"
+                    },
+                    {
+                        "name": "catalogId",
+                        "in": "query",
+                        "description": "Filter orders by catalogId"
+                    },
+                    {
+                        "name": "consentId",
+                        "in": "query",
+                        "description": "Filter orders by consentId"
+                    },
+                    {
+                        "name": "billingPlanId",
+                        "in": "query",
+                        "description": "Filter orders by billingPlanId"
+                    },
+                    {
+                        "name": "billingPlanPeriod",
+                        "in": "query",
+                        "description": "Filter orders by billingPlanPeriod You can use date ranges by using < or << operator, examples: billingPlanPeriod=XXXX< will return orders starting after XXXX, billingPlanPeriod=<XXXX will return orders starting before XXXX, billingPlanPeriod=XXXX<<YYYYY will return orders starting between XXXX and YYYY"
+                    },
+                    {
+                        "name": "lifeCycleStatus",
+                        "in": "query",
+                        "description": "Filter orders by status (PREBILLING_PENDING/PREBILLING_FAILED/PREBILLING_FAILED/WAITING_FOR_PAYMENT/PARTIAL_COMPLETED/PAYMENT_PENDING/INVOICE_PENDING/ENDUSER_PENDING/SUBSCRIPTION_PENDING/FULFILLMENT_PENDING/EMAILCONFIRMATION_PENDING/COMPLETED_WITH_ERROR/COMPLETED/CANCEL_PENDING/CANCELED_WITH_ERROR/CANCELED/FORCE_COMPLETED/FORCE_CANCELED/FORCE_ABORTED)"
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultOrder"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create an item",
+                "operationId": "createItem",
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300"
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get item",
+                "operationId": "getItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update item",
+                "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "400"
+            },
+            "delete": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "500"
+            }
+        },
+        "/orders/distinct": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "100"
+            }
+        },
+        "/orders/unwind": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "150"
+            }
+        },
+        "/orders/recap": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "150"
+            }
+        },
+        "/orders/{id}/prepareforrepair": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Prepare an order for repair",
+                "operationId": "prepareForRepair",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{id}/repair": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Repair an order",
+                "operationId": "repairOrder",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "340",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{id}/email/send": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Resend email of the order",
+                "operationId": "resendEmail",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "350",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/subscription": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create a subscription order",
+                "operationId": "createSubscriptionOrder",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "headers": {
+                            "Location": {
+                                "description": "link to the new Order ref",
+                                "style": "simple"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": true,
+                "x-operationWeight": "700",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{id}/fullcancel": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Cancel completely an order",
+                "operationId": "fullCancelOrder",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{orderId}/lineItem/{lineItemId}/addevents": {
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update one line item in order",
+                "operationId": "addEventsOnLineItem",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "700",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{orderId}/lineItem/{lineItemId}/subLineItem/{subLineItemId}/addevents": {
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update one sub line item in order",
+                "operationId": "addEventsOnSubLineItem",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "900",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{id}/addevent": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Add event to order",
+                "operationId": "addOrderEvent",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "500",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/views/remittable/{id}/unpayoutableBalance": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "viewRemittableUnpayoutableBalance",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "uniqueItems": true,
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AccountAmount"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/views/{id}/summary": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "getOrderSummary",
+                "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderSummary"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ExceptionDetail": {
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
+                }
+            },
+            "NormalizeException": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        }
+                    }
+                }
+            },
+            "Company": {
+                "type": "object",
+                "properties": {
+                    "companyName": {
+                        "type": "string"
+                    },
+                    "vatNumber": {
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "type": "string"
+                    },
+                    "fullRegistrationNumber": {
+                        "type": "string"
+                    },
+                    "registrationNumber": {
+                        "type": "string"
+                    },
+                    "apeCode": {
+                        "type": "string"
+                    }
+                },
+                "description": "EndUser company"
+            },
+            "ConsentFlags": {
+                "type": "object",
+                "properties": {
+                    "newsletterOptin": {
+                        "type": "boolean",
+                        "description": "Newsletter opt-in consent"
+                    }
+                },
+                "description": "Consent flags"
+            },
+            "CreditNote": {
+                "required": [
+                    "cancellationReason",
+                    "date",
+                    "id",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Internal reference ID"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Indicates if full or partial cancellation ( PARTIAL/TOTAL)",
+                        "enum": [
+                            "PARTIAL",
+                            "TOTAL"
+                        ]
+                    },
+                    "cancellationReason": {
+                        "type": "string",
+                        "description": "Cancellation reason reference ID"
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "Invoice creation date",
+                        "format": "date-time"
+                    }
+                },
+                "description": "List of credit notes"
+            },
+            "Customer": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Customer service reference ID",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Customer status TRIAL/RUNNING",
+                        "readOnly": true
+                    },
+                    "retryPaymentValidityDuration": {
+                        "type": "integer",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "quoteValidityDuration": {
+                        "type": "integer",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "quoteSubscriptionValidityDuration": {
+                        "type": "integer",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "multiplePaymentsValidityDuration": {
+                        "type": "integer",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "features": {
+                        "$ref": "#/components/schemas/Features"
+                    }
+                },
+                "description": "Customer information"
+            },
+            "Discount": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "discountExternalContext": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DiscountedPrice": {
+                "type": "object",
+                "properties": {
+                    "discountedNetPrice": {
+                        "type": "number",
+                        "description": "Discounted cost of product without taxes included",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountedGrossPrice": {
+                        "type": "number",
+                        "description": "Discounted cost of product with taxes included",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountRate": {
+                        "type": "number",
+                        "description": "Discount rate",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "netPriceDiscountAmount": {
+                        "type": "number",
+                        "description": "Net price discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "grossPriceDiscountAmount": {
+                        "type": "number",
+                        "description": "Gross price discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "vatDiscountAmount": {
+                        "type": "number",
+                        "description": "VAT discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "signedDiscount": {
+                        "type": "string",
+                        "description": "Signed discount",
+                        "readOnly": true
+                    },
+                    "discountId": {
+                        "type": "string",
+                        "description": "Discount ID",
+                        "readOnly": true
+                    },
+                    "discountCode": {
+                        "type": "string",
+                        "description": "Discount promo code",
+                        "readOnly": true
+                    },
+                    "discountLabel": {
+                        "type": "string",
+                        "description": "Discount label",
+                        "readOnly": true
+                    },
+                    "discountExternalContext": {
+                        "type": "string",
+                        "description": "Discount external context",
+                        "readOnly": true
+                    },
+                    "discountedNetPriceWithoutVoucher": {
+                        "type": "number",
+                        "description": "Discounted net price without voucher, only when a voucher is applied",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountedGrossPriceWithoutVoucher": {
+                        "type": "number",
+                        "description": "Discounted gross price without voucher, only when a voucher is applied",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "voucher": {
+                        "$ref": "#/components/schemas/Voucher"
+                    }
+                },
+                "description": "Discounted price",
+                "readOnly": true
+            },
+            "Email": {
+                "required": [
+                    "emailId"
+                ],
+                "type": "object",
+                "properties": {
+                    "emailId": {
+                        "type": "string",
+                        "description": "Email reference in email storage service"
+                    },
+                    "templateName": {
+                        "type": "string",
+                        "description": "Email template name",
+                        "enum": [
+                            "CONFIRMATION_ACQUISITION",
+                            "PAYMENTSUCCESS",
+                            "CONFIRMATION_SUBSCRIPTION",
+                            "TRIAL_ACTIVATION_SUBSCRIPTION",
+                            "TRIAL_CONVERSION_SUBSCRIPTION",
+                            "CONFIRMATION_BILLING_PLAN",
+                            "PREBILLING_SUBSCRIPTION",
+                            "PREBILLING_BILLING_PLAN",
+                            "PREBILLING_ACQUISITION",
+                            "PREBILLING_TRIAL",
+                            "CANCELLATION",
+                            "CHARGEBACK_CBA",
+                            "CHARGEBACK_CHB",
+                            "PAYMENTFAILURE",
+                            "TRIAL_CONVERSION_FAILURE",
+                            "RELEASE_DATE_UPDATE",
+                            "CONFIRMATION_PRODUCT_RELEASED",
+                            "UNHANDLED_SUBSCRIPTION_V0"
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message"
+                    },
+                    "recipient": {
+                        "type": "string",
+                        "description": "Recipient"
+                    },
+                    "paymentId": {
+                        "type": "string",
+                        "description": "Payment ID"
+                    },
+                    "preorderProductId": {
+                        "type": "string",
+                        "description": "Product if the email is about specific product (preorder case)"
+                    },
+                    "createDate": {
+                        "type": "integer",
+                        "description": "Email creation date timestamp in milliseconds",
+                        "format": "int64"
+                    }
+                },
+                "description": "List of emails sent"
+            },
+            "EndUser": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "EndUser id"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "EndUser email"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "EndUser last name"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "EndUser first name"
+                    },
+                    "streetAddress": {
+                        "type": "string",
+                        "description": "EndUser street adress"
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "EndUser city"
+                    },
+                    "zipCode": {
+                        "type": "string",
+                        "description": "EndUser zip Code"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "EndUser country"
+                    },
+                    "locale": {
+                        "type": "string",
+                        "description": "EndUser locale"
+                    },
+                    "storeId": {
+                        "type": "string",
+                        "description": "EndUser storeId"
+                    },
+                    "company": {
+                        "$ref": "#/components/schemas/Company"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "description": "Brazilian individual taxpayer registry number ( cpf ) "
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "EndUser cpf BUYER/RESELLER/RESELLER_NOT_APPROVED/RESELLER_DECLINED"
+                    },
+                    "accountCreated": {
+                        "type": "boolean",
+                        "description": "If account is created : TRUE"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "EndUser phone number"
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "description": "EndUser birth  date timestamp in milliseconds",
+                        "format": "date-time"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "EndUser title"
+                    },
+                    "token": {
+                        "type": "string"
+                    },
+                    "recipientCode": {
+                        "type": "string",
+                        "description": "Recipient code"
+                    },
+                    "taxExemptionEligible": {
+                        "type": "boolean",
+                        "description": "Tax exemption eligible : TRUE/FALSE"
+                    },
+                    "accountExists": {
+                        "type": "boolean"
+                    }
+                },
+                "description": "End-user information"
+            },
+            "Features": {
+                "type": "object",
+                "properties": {
+                    "createInvoice": {
+                        "type": "boolean"
+                    },
+                    "sendOrderConfirmationEmail": {
+                        "type": "boolean"
+                    },
+                    "usingSubscriptionV1": {
+                        "type": "boolean"
+                    },
+                    "usingFulfillmentV1": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "FullPrice": {
+                "required": [
+                    "currency",
+                    "discountedPrice",
+                    "grossPrice",
+                    "netPrice",
+                    "vatAmount",
+                    "vatRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "vatAmount": {
+                        "type": "number",
+                        "description": "VAT amount (grossPrice - netPrice) ",
+                        "format": "double"
+                    },
+                    "netPrice": {
+                        "type": "number",
+                        "description": "Net price",
+                        "format": "double"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "description": "Sales tax rate",
+                        "format": "double"
+                    },
+                    "grossPrice": {
+                        "type": "number",
+                        "description": "Cost of product with taxes included",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Purchase currency (ISO-4217 format)"
+                    },
+                    "discountedPrice": {
+                        "$ref": "#/components/schemas/DiscountedPrice"
+                    }
+                },
+                "description": "All information related to amount"
+            },
+            "Invoice": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Internal reference ID"
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "Creation date",
+                        "format": "date-time"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type"
+                    }
+                },
+                "description": "Invoice information"
+            },
+            "LineItem": {
+                "required": [
+                    "fulfillmentTemplate",
+                    "id",
+                    "lifeTime",
+                    "netAmount",
+                    "previousLineItemId",
+                    "productId",
+                    "vatAmount",
+                    "vatRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Internal reference ID"
+                    },
+                    "previousLineItemId": {
+                        "type": "string",
+                        "description": "Internal reference ID to the previous lineItem order for this product (renew usecase)"
+                    },
+                    "productId": {
+                        "type": "string",
+                        "description": "Internal reference ID of product service"
+                    },
+                    "releaseDate": {
+                        "type": "string",
+                        "description": "Product release date",
+                        "format": "date-time"
+                    },
+                    "lifeTime": {
+                        "type": "string",
+                        "description": "Lifetime"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Product name"
+                    },
+                    "subscriptionTemplate": {
+                        "type": "string",
+                        "description": "Subscription template name"
+                    },
+                    "subscriptionId": {
+                        "type": "string",
+                        "description": "Subscription ID"
+                    },
+                    "trial": {
+                        "type": "boolean",
+                        "description": "Indicator if this is a subscription trial period"
+                    },
+                    "trialDuration": {
+                        "type": "integer",
+                        "description": "Duration of the subscription trial period (days)",
+                        "format": "int32"
+                    },
+                    "publisherRefId": {
+                        "type": "string",
+                        "description": "Publisher product ID"
+                    },
+                    "nexwayFulfillmentId": {
+                        "type": "string",
+                        "description": "Nexway fulfillment ID"
+                    },
+                    "publisherFulfillmentId": {
+                        "type": "string",
+                        "description": "Publisher fulfillment ID"
+                    },
+                    "relatedContents": {
+                        "type": "array",
+                        "description": "Links for downloading product-related content file",
+                        "items": {
+                            "$ref": "#/components/schemas/RelatedContent"
+                        }
+                    },
+                    "fulfillmentTemplate": {
+                        "type": "string",
+                        "description": "Fulfillment template name"
+                    },
+                    "processingStatus": {
+                        "type": "string",
+                        "description": "Line item processing status",
+                        "enum": [
+                            "CANCELED",
+                            "PARTIALLY_CANCELED",
+                            "FAILURE",
+                            "PENDING",
+                            "COMPLETED",
+                            "INITIALIZED"
+                        ]
+                    },
+                    "creditNoteProcessingStatus": {
+                        "type": "string",
+                        "description": "Line item credit note processing status",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "fulfillmentProcessingStatus": {
+                        "type": "string",
+                        "description": "Line item fulfillment processing status",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "subscriptionProcessingStatus": {
+                        "type": "string",
+                        "description": "Line item subscription processing status",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "processingEvent": {
+                        "type": "array",
+                        "properties": {
+                            "empty": {
+                                "type": "boolean"
+                            }
+                        },
+                        "description": "Line item history of processing events",
+                        "items": {
+                            "$ref": "#/components/schemas/ProcessingEvent"
+                        }
+                    },
+                    "externalContext": {
+                        "type": "string",
+                        "description": "External context"
+                    },
+                    "signedProduct": {
+                        "type": "string"
+                    },
+                    "productType": {
+                        "type": "string"
+                    },
+                    "productFamily": {
+                        "type": "string"
+                    },
+                    "variablesDetails": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/VariableDetails"
+                        },
+                        "description": "Product variables"
+                    },
+                    "priceFunctionParameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "fraudPoints": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "expirationDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "Cost of product",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Currency of product"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "description": "VAT rate for product",
+                        "format": "double"
+                    },
+                    "netAmount": {
+                        "type": "number",
+                        "description": "Cost of product with no taxes included",
+                        "format": "double"
+                    },
+                    "vatAmount": {
+                        "type": "number",
+                        "description": "VAT amount (grossPrice - netPrice)",
+                        "format": "double"
+                    },
+                    "discountAmount": {
+                        "type": "number",
+                        "description": "Cost of product after discount",
+                        "format": "double"
+                    },
+                    "discountRate": {
+                        "type": "number",
+                        "description": "Discount rate",
+                        "format": "double"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "unitPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "activationCode": {
+                        "type": "string"
+                    },
+                    "preorderReleaseNotificationNeeded": {
+                        "type": "boolean",
+                        "description": "Indicates if preorder on this line item has been released and is awaiting enduser notification"
+                    },
+                    "fulfillmentOperationId": {
+                        "type": "string"
+                    },
+                    "shortDesc": {
+                        "type": "string",
+                        "description": "Short description"
+                    },
+                    "longDesc": {
+                        "type": "string",
+                        "description": "Long description"
+                    },
+                    "thankYouDesc": {
+                        "type": "string",
+                        "description": "Thank-you description"
+                    },
+                    "emailDesc": {
+                        "type": "string",
+                        "description": "Email description"
+                    },
+                    "taxCode": {
+                        "type": "string",
+                        "description": "Avatax tax code"
+                    },
+                    "taxExempt": {
+                        "type": "boolean",
+                        "description": "Indicator if the product is tax exempt"
+                    },
+                    "physical": {
+                        "type": "boolean"
+                    },
+                    "businessSegment": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "deprecated": true
+                    }
+                },
+                "description": "List of products"
+            },
+            "Order": {
+                "required": [
+                    "currency",
+                    "fullTotalAmount",
+                    "totalAmount",
+                    "vatRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "General Status",
+                        "enum": [
+                            "CANCELED_WITH_ERROR",
+                            "CANCEL_PENDING",
+                            "CANCELED",
+                            "PARTIAL_CANCELED",
+                            "PARTIAL_COMPLETED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PENDING_WITH_ERROR",
+                            "PENDING",
+                            "FRAUD_PENDING",
+                            "PAYMENT_PENDING",
+                            "PAYMENT_REFUSED",
+                            "CREATED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED"
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "deprecated": true
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "deprecated": true
+                    },
+                    "updateDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "deprecated": true
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "modelVersion": {
+                        "type": "string",
+                        "deprecated": true
+                    },
+                    "dbVersion": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "payments": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "description": "List of payment attempts",
+                        "items": {
+                            "$ref": "#/components/schemas/Payment"
+                        }
+                    },
+                    "endUser": {
+                        "$ref": "#/components/schemas/EndUser"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Customer"
+                    },
+                    "lineItems": {
+                        "type": "array",
+                        "description": "List of products",
+                        "items": {
+                            "$ref": "#/components/schemas/LineItem"
+                        }
+                    },
+                    "store": {
+                        "$ref": "#/components/schemas/Store"
+                    },
+                    "totalAmount": {
+                        "type": "number",
+                        "description": "Total amount",
+                        "format": "double",
+                        "example": 102.5
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Currency",
+                        "example": "EUR, USD, GBP ..."
+                    },
+                    "fullTotalAmount": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "description": "VAT rate",
+                        "format": "double",
+                        "example": 0.2
+                    },
+                    "emails": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "description": "List of emails sent",
+                        "items": {
+                            "$ref": "#/components/schemas/Email"
+                        }
+                    },
+                    "parentOrderId": {
+                        "type": "string",
+                        "description": "Parent order reference ID",
+                        "example": "2G4NAYY4K23"
+                    },
+                    "subsidiaryId": {
+                        "type": "string",
+                        "description": "External ID from Subsidiary resource",
+                        "example": "d4beee32-5969-11eb-ae93-0242ac130002"
+                    },
+                    "invoice": {
+                        "$ref": "#/components/schemas/Invoice"
+                    },
+                    "creditNotes": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "description": "List of credit notes",
+                        "items": {
+                            "$ref": "#/components/schemas/CreditNote"
+                        }
+                    },
+                    "cartId": {
+                        "type": "string",
+                        "description": "External ID from Cart resource",
+                        "example": "f3fb782e-5969-11eb-ae93-0242ac130002"
+                    },
+                    "subscriptionId": {
+                        "type": "string",
+                        "description": "External ID from Subscription resource",
+                        "example": "119e3e2a-596a-11eb-ae93-0242ac130002"
+                    },
+                    "generationId": {
+                        "type": "string",
+                        "description": "Subscription number generation",
+                        "example": "1"
+                    },
+                    "paymentDeadline": {
+                        "type": "integer",
+                        "description": "Deadline timestamp to pay this order",
+                        "format": "int64",
+                        "example": 1616143889109
+                    },
+                    "endUserIp": {
+                        "type": "string",
+                        "description": "End-user IP used during purchase",
+                        "example": "127.0.0.1"
+                    },
+                    "cartIp": {
+                        "type": "string",
+                        "description": "Cart IP",
+                        "example": "127.0.0.1"
+                    },
+                    "storeHostname": {
+                        "type": "string",
+                        "description": "Store hostname",
+                        "example": "mystore.nexway.com"
+                    },
+                    "externalContext": {
+                        "type": "string",
+                        "description": "External context",
+                        "example": "myExternalContext"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Purchase type used for the order",
+                        "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN",
+                        "enum": [
+                            "PURCHASE",
+                            "SUBSCRIPTION",
+                            "MANUAL_RENEWAL",
+                            "BILLING_PLAN"
+                        ]
+                    },
+                    "salesFlags": {
+                        "type": "array",
+                        "description": "List of sales flags",
+                        "items": {
+                            "type": "string",
+                            "description": "List of sales flags"
+                        }
+                    },
+                    "consentFlags": {
+                        "$ref": "#/components/schemas/ConsentFlags"
+                    },
+                    "allowPaymentMethodRegistration": {
+                        "type": "boolean",
+                        "description": "Payment method registration authorized",
+                        "example": false
+                    },
+                    "promoteOneClickPayment": {
+                        "type": "boolean",
+                        "description": "Payment method registration authorized",
+                        "example": false
+                    },
+                    "maxPaymentsParts": {
+                        "type": "integer",
+                        "description": "Maximum payments parts",
+                        "format": "int32",
+                        "example": 1
+                    },
+                    "minPartialPaymentAmount": {
+                        "type": "number",
+                        "description": "Minimum payment amount",
+                        "format": "double",
+                        "example": 5
+                    },
+                    "numberOfInstallments": {
+                        "type": "integer",
+                        "description": "Number of installments",
+                        "format": "int32",
+                        "example": 1
+                    },
+                    "catalogId": {
+                        "type": "string",
+                        "description": "External ID from Catalog resource",
+                        "example": "88960ca8-5af8-11eb-ae93-0242ac130002"
+                    },
+                    "cancelPeriod": {
+                        "type": "integer",
+                        "description": "Cancel period in days",
+                        "format": "int32",
+                        "example": 14
+                    },
+                    "onPaymentClickRedirectUrl": {
+                        "type": "string",
+                        "description": "redirection url used after a purchase",
+                        "example": "https://my.website.com/confirmation"
+                    },
+                    "remitteds": {
+                        "type": "array",
+                        "description": "List of remitteds",
+                        "items": {
+                            "$ref": "#/components/schemas/Remitted"
+                        }
+                    },
+                    "consentId": {
+                        "type": "string",
+                        "description": "External ID from Consent resource",
+                        "example": "64f2d71c-5af9-11eb-ae93-0242ac130002"
+                    },
+                    "taxTransactionId": {
+                        "type": "string",
+                        "description": "Avalara transaction code",
+                        "example": "288d5056-d9c5-46c7-b7d8-954f45f399a4"
+                    },
+                    "billingPlanId": {
+                        "type": "string",
+                        "description": "External ID from Billing plan resource",
+                        "example": "25aaceea-5a34-11eb-ae93-0242ac130002"
+                    },
+                    "billingPlanPeriod": {
+                        "type": "string",
+                        "description": "Billing plan period",
+                        "example": "2023-12"
+                    },
+                    "prebillingStatus": {
+                        "type": "string",
+                        "description": "Global status for pre-billing processing workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "paymentStatus": {
+                        "type": "string",
+                        "description": "Global status for payment workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "invoiceStatus": {
+                        "type": "string",
+                        "description": "Global status for invoice workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "endUserCreationStatus": {
+                        "type": "string",
+                        "description": "Global status for endUser workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "registerPaymentMethodStatus": {
+                        "type": "string",
+                        "description": "Global status for payment method registration workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "fullCreditNoteStatus": {
+                        "type": "string",
+                        "description": "Global status for credit note workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "subscriptionStatus": {
+                        "type": "string",
+                        "description": "Global status for subscription workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "fulfillmentStatus": {
+                        "type": "string",
+                        "description": "Global status for fulfillment workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "emailConfirmationStatus": {
+                        "type": "string",
+                        "description": "Global status for email purchase workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "emailCancellationStatus": {
+                        "type": "string",
+                        "description": "Global status for email cancellation workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "lifeCycleStatus": {
+                        "type": "string",
+                        "enum": [
+                            "PREBILLING_PENDING",
+                            "PREBILLING_FAILED",
+                            "WAITING_FOR_PAYMENT",
+                            "PAYMENT_PENDING",
+                            "INVOICE_PENDING",
+                            "ENDUSER_PENDING",
+                            "SUBSCRIPTION_PENDING",
+                            "FULFILLMENT_PENDING",
+                            "EMAILCONFIRMATION_PENDING",
+                            "COMPLETED_WITH_ERROR",
+                            "COMPLETED",
+                            "CANCEL_PENDING",
+                            "CANCELED_WITH_ERROR",
+                            "CANCELED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED",
+                            "FORCE_ABORTED"
+                        ]
+                    },
+                    "avaTaxStatus": {
+                        "type": "string",
+                        "description": "Global status for tax workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ]
+                    },
+                    "price": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "salesFlag": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "payment": {
+                        "$ref": "#/components/schemas/Payment"
+                    },
+                    "trial": {
+                        "type": "boolean"
+                    },
+                    "remainingTotalAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "paymentDeadlineReached": {
+                        "type": "boolean"
+                    },
+                    "preorder": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Payment": {
+                "type": "object",
+                "properties": {
+                    "paymentId": {
+                        "type": "string",
+                        "description": "Reference ID of the payment attempt"
+                    },
+                    "transactionId": {
+                        "type": "string",
+                        "description": "Reference ID of payment service"
+                    },
+                    "replayedTransactionId": {
+                        "type": "string",
+                        "description": "Reference ID of the replayed payment"
+                    },
+                    "methodId": {
+                        "type": "string",
+                        "description": "Reference ID of the payment method in end-user wallet used to process payment"
+                    },
+                    "methodType": {
+                        "type": "string",
+                        "description": "Payment type used (Visa, PayPal, etc.)",
+                        "deprecated": true
+                    },
+                    "paymentTypeId": {
+                        "type": "string",
+                        "description": "Payment type used (Visa, PayPal, etc.)"
+                    },
+                    "remitteds": {
+                        "type": "array",
+                        "description": "Details for sharing for this payment",
+                        "items": {
+                            "$ref": "#/components/schemas/Remitted"
+                        }
+                    },
+                    "previousOrderId": {
+                        "type": "string",
+                        "description": "ID of previous order used to process payment"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "Amount of the processed payment",
+                        "format": "double"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Payment status NONE/INITIALIZED/PENDING/PARTIAL_COMPLETED/FAILED/COMPLETED/ABORTED",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "transitionPaymentDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "refundStatus": {
+                        "type": "string",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "mailPaymentFailureStatus": {
+                        "type": "string",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "mailPaymentConfirmationStatus": {
+                        "type": "string",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUNDED",
+                            "REFUND_FAILED"
+                        ]
+                    },
+                    "captured": {
+                        "type": "boolean",
+                        "description": "Is payment captured"
+                    },
+                    "informativeFraudCheck": {
+                        "type": "boolean",
+                        "description": "Has Fraud step"
+                    },
+                    "informativeDPStatus": {
+                        "type": "string",
+                        "description": "Estimated payment status in DP"
+                    },
+                    "magicalCardDetected": {
+                        "type": "boolean",
+                        "description": "Is magical card"
+                    },
+                    "proformaId": {
+                        "type": "string"
+                    },
+                    "proformaError": {
+                        "type": "string"
+                    },
+                    "asyncContext": {
+                        "type": "string"
+                    },
+                    "onPaymentClickRedirectUrl": {
+                        "type": "string",
+                        "description": "redirection url once payment page is closed"
+                    },
+                    "externalContext": {
+                        "type": "string",
+                        "description": "External context"
+                    },
+                    "processingEvent": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "description": "List of payment processing events",
+                        "items": {
+                            "$ref": "#/components/schemas/ProcessingEvent"
+                        }
+                    }
+                }
+            },
+            "ProcessingEvent": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name",
+                        "readOnly": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status",
+                        "readOnly": true
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Source",
+                        "readOnly": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message",
+                        "readOnly": true
+                    },
+                    "createDate": {
+                        "type": "integer",
+                        "description": "Date of creation",
+                        "format": "int64",
+                        "readOnly": true
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "description": "Line item history of processing events"
+            },
+            "RelatedContent": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "URL or file name with extension for downloading"
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Text that explains what this binary is"
+                    }
+                },
+                "description": "Links for downloading product-related content file"
+            },
+            "Remitted": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "remittanceAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "round": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "remittanceRate": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "description": "List of remitteds"
+            },
+            "Route": {
+                "type": "object",
+                "properties": {
+                    "hostname": {
+                        "type": "string"
+                    },
+                    "pathPrefix": {
+                        "type": "string"
+                    }
+                },
+                "description": "routes list"
+            },
+            "SearchResultOrder": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Order"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Store": {
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Reference ID of store service"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name"
+                    },
+                    "bannerInvoice": {
+                        "type": "string",
+                        "description": "Invoice banner"
+                    },
+                    "bannerOrderConfEmail": {
+                        "type": "string",
+                        "description": "Order confirmation banner"
+                    },
+                    "routes": {
+                        "type": "array",
+                        "description": "routes list",
+                        "writeOnly": true,
+                        "items": {
+                            "$ref": "#/components/schemas/Route"
+                        }
+                    },
+                    "allowOrderDetailsOnCheckoutConfirmation": {
+                        "type": "boolean",
+                        "description": "Allow order Details on checkout confirmation (TRUE/FALSE)"
+                    },
+                    "allowQuotes": {
+                        "type": "boolean",
+                        "description": "Allow quotes (TRUE/FALSE)",
+                        "writeOnly": true
+                    },
+                    "quoteValidityDuration": {
+                        "type": "integer",
+                        "description": "Quote validity duration ( days )",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "quoteSubscriptionValidityDuration": {
+                        "type": "integer",
+                        "description": "Quote subscription validity duration ( days )",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "retryPaymentValidityDuration": {
+                        "type": "integer",
+                        "description": "Retry payment validity duration ( days )",
+                        "format": "int64",
+                        "writeOnly": true
+                    },
+                    "multiplePaymentsValidityDuration": {
+                        "type": "integer",
+                        "description": "Multiple payments validity duration ( days )",
+                        "format": "int64",
+                        "writeOnly": true
+                    }
+                },
+                "description": "Store information"
+            },
+            "VariableDetails": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "object"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "desc": {
+                        "type": "string"
+                    }
+                },
+                "description": "Product variables"
+            },
+            "Voucher": {
+                "type": "object",
+                "properties": {
+                    "discounts": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Discount"
+                        }
+                    },
+                    "totalAmount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "description": "Discount list and voucher total amount",
+                "readOnly": true
+            },
+            "SearchResultObject": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Document": {
+                "type": "object",
+                "properties": {
+                    "empty": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": {
+                    "type": "object"
+                }
+            },
+            "SearchResultDocument": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "RecapEntry": {
+                "type": "object",
+                "properties": {
+                    "targetValue": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "SearchResultRecapEntry": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RecapEntry"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "AccountAmount": {
+                "required": [
+                    "currency"
+                ],
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "OrderSummary": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "enduserId": {
+                        "type": "string"
+                    },
+                    "invoiceId": {
+                        "type": "string"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    },
+                    "billingPlanId": {
+                        "type": "string"
+                    },
+                    "billingPlanPeriod": {
+                        "type": "string"
+                    },
+                    "consentId": {
+                        "type": "string"
+                    },
+                    "fullCreditNodeId": {
+                        "type": "string"
+                    },
+                    "lifeCycleStatus": {
+                        "type": "string",
+                        "enum": [
+                            "PREBILLING_PENDING",
+                            "PREBILLING_FAILED",
+                            "WAITING_FOR_PAYMENT",
+                            "PAYMENT_PENDING",
+                            "INVOICE_PENDING",
+                            "ENDUSER_PENDING",
+                            "SUBSCRIPTION_PENDING",
+                            "FULFILLMENT_PENDING",
+                            "EMAILCONFIRMATION_PENDING",
+                            "COMPLETED_WITH_ERROR",
+                            "COMPLETED",
+                            "CANCEL_PENDING",
+                            "CANCELED_WITH_ERROR",
+                            "CANCELED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED",
+                            "FORCE_ABORTED"
+                        ]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "CANCELED_WITH_ERROR",
+                            "CANCEL_PENDING",
+                            "CANCELED",
+                            "PARTIAL_CANCELED",
+                            "PARTIAL_COMPLETED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PENDING_WITH_ERROR",
+                            "PENDING",
+                            "FRAUD_PENDING",
+                            "PAYMENT_PENDING",
+                            "PAYMENT_REFUSED",
+                            "CREATED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED"
+                        ]
+                    },
+                    "fullTotalAmount": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductSummary"
+                        }
+                    }
+                }
+            },
+            "ProductSummary": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "unitPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "fullPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "priceFunctionParameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "trial": {
+                        "type": "boolean"
+                    },
+                    "trialDuration": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
