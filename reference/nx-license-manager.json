@@ -1,0 +1,1872 @@
+{
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "DESC",
+        "title": "License Manager",
+        "version": "1.0"
+    },
+    "host": "api.staging.nexway.build",
+    "basePath": "/license-manager",
+    "paths": {
+        "/license": {
+            "get": {
+                "tags": [
+                    "license"
+                ],
+                "summary": "List licenses.",
+                "operationId": "listLicense",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 50,
+                        "x-go-name": "Size",
+                        "description": "Amount of items returned per pagination page",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 0,
+                        "x-go-name": "Page",
+                        "description": "Pagination page starting from 0",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "createDate,desc",
+                        "x-go-name": "Sort",
+                        "description": "Sort list results\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "431b946a-92ea-430a-984d-c3cd65d2bb77",
+                        "x-go-name": "CustomerID",
+                        "description": "Filter results by customerId",
+                        "name": "customerId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Filter results by id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "example": "createDate=XXXX< will return result after XXXX, createDate=<XXXX will return result before XXXX, createDate=XXXX<<YYYYY will return result between XXXX and YYYY",
+                        "x-go-name": "CreateDate",
+                        "description": "Filter by create date. You can use date ranges by using < or << operator",
+                        "name": "createDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "x-go-name": "UpdateDate",
+                        "description": "Filter by create date. You can use date ranges by using < or << operator (the same behavior as for createDate)",
+                        "name": "updateDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "Running, Paused, Expired, Canceled",
+                        "x-go-name": "Status",
+                        "description": "Filter result by status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "product.id, product.name",
+                        "x-go-name": "Product",
+                        "description": "Filter by product and its subfields\nexample subfields:  id, licenseProviderDefinitionId, publisherProductId, name",
+                        "name": "product",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "endUser.lastName, endUser.city",
+                        "x-go-name": "EndUser",
+                        "description": "Filter by endUser and its subfields\nexample subfields: firstName, lastName, email, city, zipCode, country, locale",
+                        "name": "endUser",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "checkout.orderId, checkout.orderLineId",
+                        "x-go-name": "Checkout",
+                        "description": "Filter by checkout and its subfields\nexample subfields: orderId, orderLineId",
+                        "name": "checkout",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listLicenseSuccess"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "license"
+                ],
+                "summary": "Update license.",
+                "operationId": "updateLicense",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/License"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/putLicenseSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/license-provider-definitions": {
+            "get": {
+                "tags": [
+                    "license-provider-definitions"
+                ],
+                "summary": "List License Provider Definition.",
+                "operationId": "listLicenseProviderDefinition",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 50,
+                        "x-go-name": "Size",
+                        "description": "Amount of items returned per pagination page",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 0,
+                        "x-go-name": "Page",
+                        "description": "Pagination page starting from 0",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "createDate,desc",
+                        "x-go-name": "Sort",
+                        "description": "Sort list results\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "431b946a-92ea-430a-984d-c3cd65d2bb77",
+                        "x-go-name": "CustomerID",
+                        "description": "Filter results by customerId",
+                        "name": "customerId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "Name",
+                        "description": "Filter results by License Provider Definition name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "BaseUrl",
+                        "description": "Filter results by license related requests",
+                        "name": "baseUrl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "Status",
+                        "description": "Filter results by status\nexample Enable, Disable, TestMode",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "example": "createDate=XXXX< will return result after XXXX, createDate=<XXXX will return result before XXXX, createDate=XXXX<<YYYYY will return result between XXXX and YYYY",
+                        "x-go-name": "CreateDate",
+                        "description": "Filter by create date. You can use date ranges by using < or << operator",
+                        "name": "createDate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "uint64",
+                        "x-go-name": "UpdateDate",
+                        "description": "Filter by create date. You can use date ranges by using < or << operator (the same behavior as for createDate)",
+                        "name": "updateDate",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listLicenseProviderDefinitionSuccess"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "license-provider-definitions"
+                ],
+                "summary": "Update license provider definition.",
+                "operationId": "updateLicenseProviderDefinition",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/LicenseProviderDefinition"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/putLicenseProviderDefinitionSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "license-provider-definitions"
+                ],
+                "summary": "Creates license provider definition.",
+                "operationId": "createLicenseProviderDefinition",
+                "parameters": [
+                    {
+                        "name": "Param",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "name",
+                                "operationDefinitions"
+                            ],
+                            "properties": {
+                                "baseUrl": {
+                                    "description": "Base url of for license related requests",
+                                    "type": "string",
+                                    "x-go-name": "BaseURL",
+                                    "example": "https://api.nexway.store/license-keys-provider/client/xxx/licenses"
+                                },
+                                "bodyType": {
+                                    "description": "Body type",
+                                    "type": "string",
+                                    "x-go-name": "BodyType",
+                                    "example": "json; xml"
+                                },
+                                "customerId": {
+                                    "description": "Associates entity to certain customer.",
+                                    "type": "string",
+                                    "x-go-name": "CustomerID",
+                                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                                },
+                                "fillWithGeneric": {
+                                    "description": "if true, license will be filled with generic request/response payload for fulfillment",
+                                    "type": "boolean",
+                                    "x-go-name": "FillWithGeneric"
+                                },
+                                "httpClientConfiguration": {
+                                    "$ref": "#/definitions/HttpClientConfiguration"
+                                },
+                                "name": {
+                                    "description": "License Provider Definition name\nName must be unique",
+                                    "type": "string",
+                                    "x-go-name": "Name",
+                                    "example": "test-ManuallyCreatedGenericLicenseProvider"
+                                },
+                                "operationDefinitions": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "$ref": "#/definitions/OperationDefinition"
+                                    },
+                                    "x-go-name": "OperationDefinitions"
+                                },
+                                "permanentErrorsDefinition": {
+                                    "$ref": "#/definitions/PermanentErrorsDefinition"
+                                },
+                                "status": {
+                                    "description": "fulfillment definition status",
+                                    "type": "string",
+                                    "x-go-name": "Status",
+                                    "example": "Enable, Disable, TestMode (The testMode indicate to use the testModeParameters baseUrl and certificates and not the real one)"
+                                },
+                                "supportedOperations": {
+                                    "description": "Operations which can be performed about a single license.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-go-name": "SupportedOperations",
+                                    "example": "create; renew; pause; resume; cancel"
+                                },
+                                "testModeParameters": {
+                                    "$ref": "#/definitions/TestModeParameters"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/starterSuccessCreate"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/license-provider-definitions/{id}": {
+            "get": {
+                "tags": [
+                    "license-provider-definitions"
+                ],
+                "summary": "Gets license provider definition.",
+                "operationId": "getLicenseProviderDefinition",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getLicenseProviderDefinitionSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "license-provider-definitions"
+                ],
+                "summary": "Deletes license provider definitions.",
+                "operationId": "deleteLicenseProviderDefinition",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/license/{id}": {
+            "get": {
+                "tags": [
+                    "license"
+                ],
+                "summary": "Gets license.",
+                "operationId": "getLicense",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getLicenseSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "license"
+                ],
+                "summary": "Deletes license.",
+                "operationId": "deleteLicense",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/license/{id}/{operationExecutionId}": {
+            "get": {
+                "tags": [
+                    "operations"
+                ],
+                "summary": "OperationExecutionId - for now i don`t know what it is :).",
+                "operationId": "getOperationExecutionIdByLicenseId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "x-go-name": "OperationExecutionID",
+                        "description": "OperationExecutionId - for now i don`t know what it is :).",
+                        "name": "operationExecutionId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getOperationExecutionIdByLicenseIdSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/operation/{id}": {
+            "get": {
+                "tags": [
+                    "operations"
+                ],
+                "summary": "You can replay only last operation on license if it is error.",
+                "operationId": "getOperationExecutionId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getOperationExecutionIdSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "operations"
+                ],
+                "summary": "You can replay only last operation on license if it is error.",
+                "operationId": "replayOperationExecutionId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/replaySuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/operations": {
+            "post": {
+                "tags": [
+                    "operations"
+                ],
+                "summary": "Will return license for this operation.",
+                "operationId": "createOperationExecution",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/OperationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/postOperationExecutionSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "BadRequest": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Bad Request"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "error: field can't be empty"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 400
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "Checkout": {
+            "type": "object",
+            "properties": {
+                "affiliateId": {
+                    "type": "string",
+                    "x-go-name": "AffiliateID"
+                },
+                "billingPlanId": {
+                    "type": "string",
+                    "x-go-name": "BillingPlanID"
+                },
+                "cartExternalContext": {
+                    "type": "string",
+                    "x-go-name": "CartExternalContext"
+                },
+                "orderId": {
+                    "type": "string",
+                    "x-go-name": "OrderID"
+                },
+                "orderLineId": {
+                    "type": "string",
+                    "x-go-name": "OrderLineID"
+                },
+                "productUsageId": {
+                    "type": "string",
+                    "x-go-name": "ProductUsageID"
+                },
+                "resellerId": {
+                    "type": "string",
+                    "x-go-name": "ResellerID"
+                },
+                "storeExternalContext": {
+                    "type": "string",
+                    "x-go-name": "StoreExternalContext"
+                },
+                "subscriptionId": {
+                    "type": "string",
+                    "x-go-name": "SubscriptionID"
+                },
+                "trialContext": {
+                    "type": "string",
+                    "x-go-name": "TrialContext"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "ClientCredentialOauth2Config": {
+            "type": "object",
+            "properties": {
+                "clientId": {
+                    "type": "string",
+                    "x-go-name": "ClientID"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "x-go-name": "ClientSecret"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-go-name": "Scopes"
+                },
+                "tokenUrl": {
+                    "type": "string",
+                    "x-go-name": "TokenURL"
+                },
+                "values": {
+                    "$ref": "#/definitions/Values"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/httpclienthelper"
+        },
+        "DataExtractorDefinition": {
+            "type": "object",
+            "properties": {
+                "conversionTemplate": {
+                    "description": "represents the template in the response from the provider license to be used in process",
+                    "type": "string",
+                    "x-go-name": "ConversionTemplate"
+                },
+                "path": {
+                    "description": "represents the field in the response from the provider license to be used in process",
+                    "type": "string",
+                    "x-go-name": "Path"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "ExecutionTrace": {
+            "type": "object",
+            "properties": {
+                "executionError": {
+                    "type": "string",
+                    "x-go-name": "ExecutionError"
+                },
+                "extractedResponseData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "x-go-name": "ExtractedResponseData"
+                },
+                "httpRequest": {
+                    "type": "string",
+                    "x-go-name": "HttpRequest"
+                },
+                "httpResponse": {
+                    "type": "string",
+                    "x-go-name": "HttpResponse"
+                },
+                "httpResponseStatus": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "HttpResponseStatus"
+                },
+                "isScheduled": {
+                    "type": "boolean",
+                    "x-go-name": "IsScheduled"
+                },
+                "isSuccess": {
+                    "type": "boolean",
+                    "x-go-name": "IsSuccess"
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "Forbidden": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Forbidden"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Forbidden"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 403
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "Header": {
+            "description": "The keys should be in canonical form, as returned by\nCanonicalHeaderKey.",
+            "type": "object",
+            "title": "A Header represents the key-value pairs in an HTTP header.",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "x-go-package": "net/http"
+        },
+        "HttpClientConfiguration": {
+            "type": "object",
+            "properties": {
+                "clientCredentialOauth2Config": {
+                    "$ref": "#/definitions/ClientCredentialOauth2Config"
+                },
+                "httpHeaders": {
+                    "$ref": "#/definitions/Header"
+                },
+                "tlsConfiguration": {
+                    "$ref": "#/definitions/TlsConf"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/httpclienthelper"
+        },
+        "InternalServerError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Internal Server Error"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "invalid memory address or nil pointer dereference"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 500
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "License": {
+            "description": "License\nLicense for user.",
+            "type": "object",
+            "properties": {
+                "additionalData": {
+                    "description": "Additional data about the license. ex: publisher-specific, fulfillment ids etc",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "x-go-name": "AdditionalData"
+                },
+                "checkout": {
+                    "$ref": "#/definitions/Checkout"
+                },
+                "closeLicenseExpirationJobDone": {
+                    "description": "boolean flag indicating if tasks related to license's upcoming expiration has been finished",
+                    "type": "boolean",
+                    "x-go-name": "CloseLicenseExpirationJobDone"
+                },
+                "createDate": {
+                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "CreateDate",
+                    "example": 1593683684789
+                },
+                "customerId": {
+                    "description": "Associates entity to certain customer.",
+                    "type": "string",
+                    "x-go-name": "CustomerID",
+                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                },
+                "dbVersion": {
+                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "DbVersion",
+                    "example": 0
+                },
+                "expirationTimestamp": {
+                    "description": "license expiration date",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "ExpirationTimestamp"
+                },
+                "id": {
+                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
+                    "type": "string",
+                    "x-go-name": "ID",
+                    "example": "d87e0973-980a-4485-a39d-682184a8988a"
+                },
+                "lastFailureTimestamp": {
+                    "description": "Info about failure, if not present, it means that the error did not occur",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "LastFailureTimestamp"
+                },
+                "operationExecutions": {
+                    "description": "List of operations performed on license",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OperationExecution"
+                    },
+                    "x-go-name": "OperationExecutions"
+                },
+                "processingInProgress": {
+                    "description": "boolean flag indicating if license is currently being processed",
+                    "type": "boolean",
+                    "x-go-name": "ProcessingInProgress"
+                },
+                "product": {
+                    "$ref": "#/definitions/Product"
+                },
+                "status": {
+                    "type": "string",
+                    "x-go-name": "Status",
+                    "example": "Running, Canceled, Scheduled, Expired"
+                },
+                "updateDate": {
+                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UpdateDate",
+                    "example": 1593685645385
+                },
+                "user": {
+                    "$ref": "#/definitions/User"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "LicenseProviderDefinition": {
+            "description": "License Provider Definition\nResource responsible for providing information for the purchase of a license.",
+            "type": "object",
+            "required": [
+                "name",
+                "operationDefinitions"
+            ],
+            "properties": {
+                "baseUrl": {
+                    "description": "Base url of for license related requests",
+                    "type": "string",
+                    "x-go-name": "BaseURL",
+                    "example": "https://api.nexway.store/license-keys-provider/client/xxx/licenses"
+                },
+                "bodyType": {
+                    "description": "Body type",
+                    "type": "string",
+                    "x-go-name": "BodyType",
+                    "example": "json; xml"
+                },
+                "createDate": {
+                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "CreateDate",
+                    "example": 1593683684789
+                },
+                "customerId": {
+                    "description": "Associates entity to certain customer.",
+                    "type": "string",
+                    "x-go-name": "CustomerID",
+                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                },
+                "dbVersion": {
+                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "DbVersion",
+                    "example": 0
+                },
+                "fillWithGeneric": {
+                    "description": "if true, license will be filled with generic request/response payload for fulfillment",
+                    "type": "boolean",
+                    "x-go-name": "FillWithGeneric"
+                },
+                "httpClientConfiguration": {
+                    "$ref": "#/definitions/HttpClientConfiguration"
+                },
+                "id": {
+                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
+                    "type": "string",
+                    "x-go-name": "ID",
+                    "example": "d87e0973-980a-4485-a39d-682184a8988a"
+                },
+                "name": {
+                    "description": "License Provider Definition name\nName must be unique",
+                    "type": "string",
+                    "x-go-name": "Name",
+                    "example": "test-ManuallyCreatedGenericLicenseProvider"
+                },
+                "operationDefinitions": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/OperationDefinition"
+                    },
+                    "x-go-name": "OperationDefinitions"
+                },
+                "permanentErrorsDefinition": {
+                    "$ref": "#/definitions/PermanentErrorsDefinition"
+                },
+                "status": {
+                    "description": "fulfillment definition status",
+                    "type": "string",
+                    "x-go-name": "Status",
+                    "example": "Enable, Disable, TestMode (The testMode indicate to use the testModeParameters baseUrl and certificates and not the real one)"
+                },
+                "supportedOperations": {
+                    "description": "Operations which can be performed about a single license.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-go-name": "SupportedOperations",
+                    "example": "create; renew; pause; resume; cancel"
+                },
+                "testModeParameters": {
+                    "$ref": "#/definitions/TestModeParameters"
+                },
+                "updateDate": {
+                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UpdateDate",
+                    "example": 1593685645385
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "NexwayTrackingContext": {
+            "type": "object",
+            "properties": {
+                "Internal": {
+                    "type": "string"
+                },
+                "Request": {
+                    "type": "string"
+                },
+                "Session": {
+                    "type": "string"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/tracking"
+        },
+        "NotFound": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Not Found"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "item not found"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 404
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "OperationData": {
+            "type": "object",
+            "properties": {
+                "additionalData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "x-go-name": "AdditionalData"
+                },
+                "checkout": {
+                    "$ref": "#/definitions/Checkout"
+                },
+                "licenseId": {
+                    "type": "string",
+                    "x-go-name": "LicenseID"
+                },
+                "operation": {
+                    "type": "string",
+                    "x-go-name": "Operation"
+                },
+                "operationExecutionId": {
+                    "type": "string",
+                    "x-go-name": "OperationExecutionID"
+                },
+                "product": {
+                    "$ref": "#/definitions/Product"
+                },
+                "requestTimestamp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "RequestTimestamp"
+                },
+                "user": {
+                    "$ref": "#/definitions/User"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "OperationDefinition": {
+            "type": "object",
+            "properties": {
+                "bodyTemplate": {
+                    "description": "template to create a request body based on order data",
+                    "type": "string",
+                    "x-go-name": "BodyTemplate"
+                },
+                "httpHeaders": {
+                    "$ref": "#/definitions/Header"
+                },
+                "responsePaths": {
+                    "description": "declarations of fields to be retrieved from API response",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/DataExtractorDefinition"
+                    },
+                    "x-go-name": "ResponsePaths"
+                },
+                "urlComplement": {
+                    "description": "api paths for each supported operation",
+                    "type": "string",
+                    "x-go-name": "UrlComplement"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "OperationExecution": {
+            "type": "object",
+            "properties": {
+                "additionalData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "x-go-name": "AdditionalData"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "processingData": {
+                    "$ref": "#/definitions/OperationData"
+                },
+                "replyContext": {
+                    "type": "string",
+                    "x-go-name": "ReplyContext"
+                },
+                "request": {
+                    "$ref": "#/definitions/OperationRequest"
+                },
+                "requestTimestamp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "RequestTimestamp"
+                },
+                "requestTrackingContext": {
+                    "$ref": "#/definitions/NexwayTrackingContext"
+                },
+                "status": {
+                    "type": "string",
+                    "x-go-name": "Status"
+                },
+                "traces": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExecutionTrace"
+                    },
+                    "x-go-name": "Traces"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "OperationRequest": {
+            "type": "object",
+            "properties": {
+                "additionalData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "x-go-name": "AdditionalData"
+                },
+                "checkout": {
+                    "$ref": "#/definitions/Checkout"
+                },
+                "licenseId": {
+                    "type": "string",
+                    "x-go-name": "LicenseID"
+                },
+                "noAutomaticRetry": {
+                    "type": "boolean",
+                    "x-go-name": "NoAutomaticRetry"
+                },
+                "operation": {
+                    "type": "string",
+                    "x-go-name": "Operation"
+                },
+                "product": {
+                    "$ref": "#/definitions/Product"
+                },
+                "testModeParameters": {
+                    "$ref": "#/definitions/TestOperationParameters"
+                },
+                "user": {
+                    "$ref": "#/definitions/User"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "PermanentErrorsDefinition": {
+            "type": "object",
+            "properties": {
+                "errorCodes": {
+                    "description": "codes for error from API license provider",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-go-name": "ErrorCodes"
+                },
+                "errorMessages": {
+                    "description": "messages for error from API license provider",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-go-name": "ErrorMessages"
+                },
+                "httpStatusCodes": {
+                    "description": "status codes for error from API license provider",
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "x-go-name": "HttpStatusCodes"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "Product": {
+            "type": "object",
+            "properties": {
+                "expirationTimestamp": {
+                    "type": "string",
+                    "x-go-name": "ExpirationTimestamp"
+                },
+                "externalContext": {
+                    "type": "string",
+                    "x-go-name": "ExternalContext"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "licenseProviderDefinitionId": {
+                    "type": "string",
+                    "x-go-name": "LicenseProviderDefinitionID"
+                },
+                "lineItemId": {
+                    "type": "string",
+                    "x-go-name": "LineItemID"
+                },
+                "name": {
+                    "type": "string",
+                    "x-go-name": "Name"
+                },
+                "priceFunctionParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "x-go-name": "PriceFunctionParameters"
+                },
+                "publisherProductId": {
+                    "type": "string",
+                    "x-go-name": "PublisherProductID"
+                },
+                "releaseDate": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "ReleaseDate"
+                },
+                "startTimestamp": {
+                    "type": "string",
+                    "x-go-name": "StartTimestamp"
+                },
+                "variables": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "x-go-name": "Variables"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "ResponseDetails": {
+            "type": "object",
+            "properties": {
+                "errorMessage": {
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "license": {
+                    "$ref": "#/definitions/License"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/service"
+        },
+        "TestModeParameters": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "x-go-name": "BaseURL"
+                },
+                "httpClientConfiguration": {
+                    "$ref": "#/definitions/HttpClientConfiguration"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "TestOperationParameters": {
+            "description": "Transient",
+            "type": "object",
+            "properties": {
+                "responseBody": {
+                    "type": "string",
+                    "x-go-name": "ResponseBody"
+                },
+                "url": {
+                    "type": "string",
+                    "x-go-name": "Url"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "TlsConf": {
+            "type": "object",
+            "properties": {
+                "clientCertificates": {
+                    "type": "string",
+                    "x-go-name": "ClientCertificates"
+                },
+                "clientCertificatesExpirationDate": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "ClientCertificatesExpirationDate"
+                },
+                "lastCertificatesExpirationNotificationTimestamp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "LastCertificatesExpirationNotificationTimestamp"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "x-go-name": "PrivateKey"
+                },
+                "serverCACertificates": {
+                    "type": "string",
+                    "x-go-name": "ServerCACertificates"
+                },
+                "serverCACertificatesExpirationDate": {
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "ServerCACertificatesExpirationDate"
+                },
+                "tlsAuthMode": {
+                    "type": "string",
+                    "x-go-name": "TlsAuthMode"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/httpclienthelper"
+        },
+        "Unauthorized": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "type": "string",
+                    "x-go-name": "StatusLabel",
+                    "example": "Unauthorized"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage",
+                    "example": "Unauthorized"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "type": "string",
+                    "x-go-name": "Path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Status",
+                    "example": 401
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Timestamp",
+                    "example": 1593769514607
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "x-go-name": "City"
+                },
+                "companyIdentifier": {
+                    "type": "string",
+                    "x-go-name": "CompanyIdentifier"
+                },
+                "companyName": {
+                    "type": "string",
+                    "x-go-name": "CompanyName"
+                },
+                "country": {
+                    "type": "string",
+                    "x-go-name": "Country"
+                },
+                "email": {
+                    "type": "string",
+                    "x-go-name": "Email"
+                },
+                "firstName": {
+                    "type": "string",
+                    "x-go-name": "FirstName"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "lastName": {
+                    "type": "string",
+                    "x-go-name": "LastName"
+                },
+                "locale": {
+                    "type": "string",
+                    "x-go-name": "Locale"
+                },
+                "zipCode": {
+                    "type": "string",
+                    "x-go-name": "ZipCode"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-license-manager/model"
+        },
+        "Values": {
+            "description": "It is typically used for query parameters and form values.\nUnlike in the http.Header map, the keys in a Values map\nare case-sensitive.",
+            "type": "object",
+            "title": "Values maps a string key to a list of values.",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "x-go-package": "net/url"
+        }
+    },
+    "responses": {
+        "getLicenseProviderDefinitionSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/LicenseProviderDefinition"
+            }
+        },
+        "getLicenseSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/License"
+            }
+        },
+        "getOperationExecutionIdByLicenseIdSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/OperationExecution"
+            }
+        },
+        "getOperationExecutionIdSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/OperationExecution"
+            }
+        },
+        "listLicenseProviderDefinitionSuccess": {
+            "description": "operation was successful",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "type": "string",
+                        "x-go-name": "Format",
+                        "example": "short"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/LicenseProviderDefinition"
+                        },
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage",
+                        "example": false
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Page",
+                        "example": 41
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Size",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "TotalMatchingItems",
+                        "example": 100523
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "ComputedTotalPages",
+                        "example": 10053
+                    }
+                }
+            }
+        },
+        "listLicenseSuccess": {
+            "description": "operation was successful",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "type": "string",
+                        "x-go-name": "Format",
+                        "example": "short"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/License"
+                        },
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage",
+                        "example": false
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Page",
+                        "example": 41
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Size",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "TotalMatchingItems",
+                        "example": 100523
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "ComputedTotalPages",
+                        "example": 10053
+                    }
+                }
+            }
+        },
+        "postOperationExecutionSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/License"
+            }
+        },
+        "putLicenseProviderDefinitionSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/LicenseProviderDefinition"
+            }
+        },
+        "putLicenseSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/License"
+            }
+        },
+        "replaySuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/ResponseDetails"
+            }
+        },
+        "starterBadRequest": {
+            "description": "Bad request\n\nUsually indicates validation failure",
+            "schema": {
+                "$ref": "#/definitions/BadRequest"
+            }
+        },
+        "starterForbidden": {
+            "description": "Forbidden",
+            "schema": {
+                "$ref": "#/definitions/Forbidden"
+            }
+        },
+        "starterInternalServerError": {
+            "description": "Internal server error",
+            "schema": {
+                "$ref": "#/definitions/InternalServerError"
+            }
+        },
+        "starterNotFound": {
+            "description": "Not found",
+            "schema": {
+                "$ref": "#/definitions/NotFound"
+            }
+        },
+        "starterSuccessCreate": {
+            "description": "Successful",
+            "headers": {
+                "Location": {
+                    "type": "string",
+                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89"
+                }
+            }
+        },
+        "starterSuccessNoContent": {
+            "description": "Successful"
+        },
+        "starterUnauthorized": {
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
+            "schema": {
+                "$ref": "#/definitions/Unauthorized"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "security": [
+        {
+            "JWT": [
+                
+            ]
+        }
+    ]
+}
