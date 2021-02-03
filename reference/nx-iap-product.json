@@ -77,16 +77,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultCustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -97,8 +87,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultCustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -117,8 +117,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -157,8 +157,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -177,8 +177,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -209,16 +209,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -229,8 +219,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -249,8 +249,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -279,16 +279,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomizedProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -299,8 +289,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomizedProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -319,8 +319,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -369,8 +369,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -389,8 +389,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -411,16 +411,6 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -431,8 +421,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -451,8 +451,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -473,16 +473,6 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -493,8 +483,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -513,8 +513,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -535,16 +535,6 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -555,8 +545,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -575,8 +575,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -675,16 +675,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDescription"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -695,8 +685,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDescription"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -715,8 +715,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -755,8 +755,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -775,8 +775,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -807,16 +807,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -827,8 +817,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -847,8 +847,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -877,16 +877,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -897,8 +887,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Description"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -917,8 +917,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -967,8 +967,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -987,8 +987,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1009,16 +1009,6 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_1",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1029,8 +1019,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1049,8 +1049,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1071,16 +1071,6 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_1",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1091,8 +1081,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1111,8 +1111,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1133,16 +1133,6 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_1",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1153,8 +1143,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1173,8 +1173,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1216,16 +1216,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultPriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1236,8 +1226,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultPriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1256,8 +1256,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1296,8 +1296,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1316,8 +1316,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1348,16 +1348,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1368,8 +1358,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1388,8 +1388,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1418,16 +1418,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PriceFunction"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1438,8 +1428,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PriceFunction"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1458,8 +1458,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1508,8 +1508,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1528,8 +1528,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1550,16 +1550,6 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_2",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1570,8 +1560,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1590,8 +1590,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1612,16 +1612,6 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_2",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1632,8 +1622,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1652,8 +1652,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1674,6 +1674,16 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_2",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -1684,18 +1694,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1714,8 +1714,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1726,84 +1726,6 @@
                     }
                 },
                 "x-operationWeight": "150"
-            }
-        },
-        "/products/import": {
-            "post": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Import a product",
-                "operationId": "post",
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Created",
-                        "headers": {
-                            "Location": {
-                                "description": "link to the new Product ref",
-                                "style": "simple"
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "500"
             }
         },
         "/products": {
@@ -1920,16 +1842,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -1940,8 +1852,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1960,8 +1882,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2000,8 +1922,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2020,8 +1942,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2032,6 +1954,84 @@
                     }
                 },
                 "x-operationWeight": "300"
+            }
+        },
+        "/products/import": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Import a product",
+                "operationId": "post",
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "headers": {
+                            "Location": {
+                                "description": "link to the new Product ref",
+                                "style": "simple"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "500"
             }
         },
         "/products/{id}/variants/matrix": {
@@ -2157,16 +2157,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2177,8 +2167,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2197,8 +2197,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2227,16 +2227,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2247,8 +2237,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2267,8 +2267,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2317,8 +2317,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2337,8 +2337,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2359,16 +2359,6 @@
                 "summary": "Get distinct values for a given field",
                 "operationId": "distinct_3",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2379,8 +2369,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2399,8 +2399,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2421,16 +2421,6 @@
                 "summary": "Get recap quantities for a given field",
                 "operationId": "recap_3",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2441,8 +2431,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2461,8 +2461,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2483,16 +2483,6 @@
                 "summary": "Search unwind for a given field",
                 "operationId": "unwind_3",
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2503,8 +2493,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2523,8 +2523,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2646,16 +2646,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultPublicProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2666,8 +2656,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultPublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2686,8 +2686,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2822,16 +2822,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -2842,8 +2832,18 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicProduct"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2862,8 +2862,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3918,6 +3918,36 @@
                 },
                 "description": "Product resources"
             },
+            "SearchResultProduct": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
             "Variable": {
                 "required": [
                     "defaultValue",
@@ -3975,36 +4005,6 @@
                     }
                 },
                 "description": "Available product variables"
-            },
-            "SearchResultProduct": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Product"
-                        }
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "totalItems": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
             },
             "Matrix": {
                 "type": "object",
