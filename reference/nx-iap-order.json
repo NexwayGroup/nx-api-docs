@@ -23,6 +23,130 @@
         }
     ],
     "paths": {
+        "/orders/views/remittable/{id}/unpayoutableBalance": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "viewRemittableUnpayoutableBalance",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "uniqueItems": true,
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AccountAmount"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/views/{id}/summary": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "getOrderSummary",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderSummary"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/orders": {
             "get": {
                 "tags": [
@@ -191,8 +315,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -201,8 +325,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -251,8 +375,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -261,8 +385,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -323,8 +447,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -333,8 +457,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -402,8 +526,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -412,8 +536,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -462,6 +586,16 @@
                     }
                 ],
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "204": {
                         "description": "No Content",
                         "content": {
@@ -474,16 +608,6 @@
                     },
                     "401": {
                         "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -534,8 +658,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -544,8 +668,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -596,8 +720,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -606,8 +730,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -658,8 +782,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -668,8 +792,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -720,8 +844,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -730,8 +854,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -783,8 +907,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -793,8 +917,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -846,8 +970,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -856,8 +980,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -899,16 +1023,6 @@
                 "summary": "Create a subscription order",
                 "operationId": "createSubscriptionOrder",
                 "responses": {
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "500": {
                         "description": "Failure",
                         "content": {
@@ -919,8 +1033,28 @@
                             }
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -944,16 +1078,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
                     }
                 },
                 "deprecated": true,
@@ -969,6 +1093,16 @@
                 "summary": "Cancel completely an order",
                 "operationId": "fullCancelOrder",
                 "responses": {
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "202": {
                         "description": "Accepted",
                         "content": {
@@ -981,16 +1115,6 @@
                     },
                     "401": {
                         "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1024,6 +1148,69 @@
                 "x-privateApi": "true"
             }
         },
+        "/orders/{id}/addevent": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Add event to order",
+                "operationId": "addOrderEvent",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "500",
+                "x-privateApi": "true"
+            }
+        },
         "/orders/{orderId}/lineItem/{lineItemId}/addevents": {
             "put": {
                 "tags": [
@@ -1042,8 +1229,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1052,8 +1239,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1105,8 +1292,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1115,8 +1302,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1148,193 +1335,6 @@
                 },
                 "x-operationWeight": "900",
                 "x-privateApi": "true"
-            }
-        },
-        "/orders/{id}/addevent": {
-            "post": {
-                "tags": [
-                    "Order"
-                ],
-                "summary": "Add event to order",
-                "operationId": "addOrderEvent",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Order"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "500",
-                "x-privateApi": "true"
-            }
-        },
-        "/orders/views/remittable/{id}/unpayoutableBalance": {
-            "get": {
-                "tags": [
-                    "Order"
-                ],
-                "operationId": "viewRemittableUnpayoutableBalance",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "uniqueItems": true,
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/AccountAmount"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/orders/views/{id}/summary": {
-            "get": {
-                "tags": [
-                    "Order"
-                ],
-                "operationId": "getOrderSummary",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/OrderSummary"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     },
@@ -1384,6 +1384,387 @@
                         }
                     }
                 }
+            },
+            "AccountAmount": {
+                "required": [
+                    "currency"
+                ],
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "Discount": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "discountExternalContext": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DiscountedPrice": {
+                "type": "object",
+                "properties": {
+                    "discountedNetPrice": {
+                        "type": "number",
+                        "description": "Discounted cost of product without taxes included",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountedGrossPrice": {
+                        "type": "number",
+                        "description": "Discounted cost of product with taxes included",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountRate": {
+                        "type": "number",
+                        "description": "Discount rate",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "netPriceDiscountAmount": {
+                        "type": "number",
+                        "description": "Net price discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "grossPriceDiscountAmount": {
+                        "type": "number",
+                        "description": "Gross price discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "vatDiscountAmount": {
+                        "type": "number",
+                        "description": "VAT discount amount",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "signedDiscount": {
+                        "type": "string",
+                        "description": "Signed discount",
+                        "readOnly": true
+                    },
+                    "discountId": {
+                        "type": "string",
+                        "description": "Discount ID",
+                        "readOnly": true
+                    },
+                    "discountCode": {
+                        "type": "string",
+                        "description": "Discount promo code",
+                        "readOnly": true
+                    },
+                    "discountLabel": {
+                        "type": "string",
+                        "description": "Discount label",
+                        "readOnly": true
+                    },
+                    "discountExternalContext": {
+                        "type": "string",
+                        "description": "Discount external context",
+                        "readOnly": true
+                    },
+                    "discountedNetPriceWithoutVoucher": {
+                        "type": "number",
+                        "description": "Discounted net price without voucher, only when a voucher is applied",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "discountedGrossPriceWithoutVoucher": {
+                        "type": "number",
+                        "description": "Discounted gross price without voucher, only when a voucher is applied",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "voucher": {
+                        "$ref": "#/components/schemas/Voucher"
+                    }
+                },
+                "description": "Discounted price",
+                "readOnly": true
+            },
+            "FullPrice": {
+                "required": [
+                    "currency",
+                    "discountedPrice",
+                    "grossPrice",
+                    "initialGrossPrice",
+                    "initialNetPrice",
+                    "initialVatAmount",
+                    "netPrice",
+                    "vatAmount",
+                    "vatRate"
+                ],
+                "type": "object",
+                "properties": {
+                    "vatAmount": {
+                        "type": "number",
+                        "description": "VAT amount (grossPrice - netPrice) ",
+                        "format": "double"
+                    },
+                    "netPrice": {
+                        "type": "number",
+                        "description": "Net price",
+                        "format": "double"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "description": "Sales tax rate",
+                        "format": "double"
+                    },
+                    "grossPrice": {
+                        "type": "number",
+                        "description": "Cost of product with taxes included",
+                        "format": "double"
+                    },
+                    "initialGrossPrice": {
+                        "type": "number",
+                        "description": "Initial cost of product with taxes included",
+                        "format": "double"
+                    },
+                    "initialNetPrice": {
+                        "type": "number",
+                        "description": "Initial net price",
+                        "format": "double"
+                    },
+                    "initialVatAmount": {
+                        "type": "number",
+                        "description": "Initial VAT amount (initial grossPrice - initial netPrice)",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Purchase currency (ISO-4217 format)"
+                    },
+                    "discountedPrice": {
+                        "$ref": "#/components/schemas/DiscountedPrice"
+                    }
+                }
+            },
+            "OrderSummary": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "enduserId": {
+                        "type": "string"
+                    },
+                    "invoiceId": {
+                        "type": "string"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    },
+                    "billingPlanId": {
+                        "type": "string"
+                    },
+                    "billingPlanPeriod": {
+                        "type": "string"
+                    },
+                    "consentId": {
+                        "type": "string"
+                    },
+                    "fullCreditNodeId": {
+                        "type": "string"
+                    },
+                    "lifeCycleStatus": {
+                        "type": "string",
+                        "enum": [
+                            "PREBILLING_PENDING",
+                            "PREBILLING_FAILED",
+                            "WAITING_FOR_PAYMENT",
+                            "PAYMENT_PENDING",
+                            "INVOICE_PENDING",
+                            "ENDUSER_PENDING",
+                            "SUBSCRIPTION_PENDING",
+                            "FULFILLMENT_PENDING",
+                            "EMAILCONFIRMATION_PENDING",
+                            "COMPLETED_WITH_ERROR",
+                            "COMPLETED",
+                            "CANCEL_PENDING",
+                            "CANCELED_WITH_ERROR",
+                            "CANCELED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED",
+                            "FORCE_ABORTED"
+                        ]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "CANCELED_WITH_ERROR",
+                            "CANCEL_PENDING",
+                            "CANCELED",
+                            "PARTIAL_CANCELED",
+                            "PARTIAL_COMPLETED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PENDING_WITH_ERROR",
+                            "PENDING",
+                            "FRAUD_PENDING",
+                            "PAYMENT_PENDING",
+                            "PAYMENT_REFUSED",
+                            "CREATED",
+                            "FORCE_COMPLETED",
+                            "FORCE_CANCELED"
+                        ]
+                    },
+                    "fullTotalAmount": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductSummary"
+                        }
+                    }
+                }
+            },
+            "ProductSummary": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "unitPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "fullPrice": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "priceFunctionParameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "trial": {
+                        "type": "boolean"
+                    },
+                    "trialDuration": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Voucher": {
+                "type": "object",
+                "properties": {
+                    "discounts": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Discount"
+                        }
+                    },
+                    "totalAmount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "description": "Discount list and voucher total amount",
+                "readOnly": true
             },
             "Company": {
                 "type": "object",
@@ -1497,110 +1878,6 @@
                     }
                 },
                 "description": "Customer information"
-            },
-            "Discount": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "code": {
-                        "type": "string"
-                    },
-                    "label": {
-                        "type": "string"
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "discountExternalContext": {
-                        "type": "string"
-                    }
-                }
-            },
-            "DiscountedPrice": {
-                "type": "object",
-                "properties": {
-                    "discountedNetPrice": {
-                        "type": "number",
-                        "description": "Discounted cost of product without taxes included",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "discountedGrossPrice": {
-                        "type": "number",
-                        "description": "Discounted cost of product with taxes included",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "discountRate": {
-                        "type": "number",
-                        "description": "Discount rate",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "netPriceDiscountAmount": {
-                        "type": "number",
-                        "description": "Net price discount amount",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "grossPriceDiscountAmount": {
-                        "type": "number",
-                        "description": "Gross price discount amount",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "vatDiscountAmount": {
-                        "type": "number",
-                        "description": "VAT discount amount",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "signedDiscount": {
-                        "type": "string",
-                        "description": "Signed discount",
-                        "readOnly": true
-                    },
-                    "discountId": {
-                        "type": "string",
-                        "description": "Discount ID",
-                        "readOnly": true
-                    },
-                    "discountCode": {
-                        "type": "string",
-                        "description": "Discount promo code",
-                        "readOnly": true
-                    },
-                    "discountLabel": {
-                        "type": "string",
-                        "description": "Discount label",
-                        "readOnly": true
-                    },
-                    "discountExternalContext": {
-                        "type": "string",
-                        "description": "Discount external context",
-                        "readOnly": true
-                    },
-                    "discountedNetPriceWithoutVoucher": {
-                        "type": "number",
-                        "description": "Discounted net price without voucher, only when a voucher is applied",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "discountedGrossPriceWithoutVoucher": {
-                        "type": "number",
-                        "description": "Discounted gross price without voucher, only when a voucher is applied",
-                        "format": "double",
-                        "readOnly": true
-                    },
-                    "voucher": {
-                        "$ref": "#/components/schemas/Voucher"
-                    }
-                },
-                "description": "Discounted price",
-                "readOnly": true
             },
             "Email": {
                 "required": [
@@ -1765,87 +2042,6 @@
                         "type": "boolean"
                     }
                 }
-            },
-            "FullPrice": {
-                "required": [
-                    "currency",
-                    "discountedPrice",
-                    "grossPrice",
-                    "initialGrossPrice",
-                    "initialNetPrice",
-                    "initialVatAmount",
-                    "netPrice",
-                    "vatAmount",
-                    "vatRate"
-                ],
-                "type": "object",
-                "properties": {
-                    "vatAmount": {
-                        "type": "number",
-                        "description": "VAT amount (grossPrice - netPrice) ",
-                        "format": "double"
-                    },
-                    "netPrice": {
-                        "type": "number",
-                        "description": "Net price",
-                        "format": "double"
-                    },
-                    "vatRate": {
-                        "type": "number",
-                        "description": "Sales tax rate",
-                        "format": "double"
-                    },
-                    "grossPrice": {
-                        "type": "number",
-                        "description": "Cost of product with taxes included",
-                        "format": "double"
-                    },
-                    "initialGrossPrice": {
-                        "type": "number",
-                        "description": "Initial cost of product with taxes included",
-                        "format": "double"
-                    },
-                    "initialNetPrice": {
-                        "type": "number",
-                        "description": "Initial net price",
-                        "format": "double"
-                    },
-                    "initialVatAmount": {
-                        "type": "number",
-                        "description": "Initial VAT amount (initial grossPrice - initial netPrice)",
-                        "format": "double"
-                    },
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        },
-                        "description": "Purchase currency (ISO-4217 format)"
-                    },
-                    "discountedPrice": {
-                        "$ref": "#/components/schemas/DiscountedPrice"
-                    }
-                },
-                "description": "All information related to amount"
             },
             "Invoice": {
                 "required": [
@@ -3067,24 +3263,6 @@
                 },
                 "description": "Product variables"
             },
-            "Voucher": {
-                "type": "object",
-                "properties": {
-                    "discounts": {
-                        "uniqueItems": true,
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Discount"
-                        }
-                    },
-                    "totalAmount": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                },
-                "description": "Discount list and voucher total amount",
-                "readOnly": true
-            },
             "SearchResultObject": {
                 "type": "object",
                 "properties": {
@@ -3193,185 +3371,6 @@
                         "format": "int32"
                     },
                     "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "AccountAmount": {
-                "required": [
-                    "currency"
-                ],
-                "type": "object",
-                "properties": {
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                }
-            },
-            "OrderSummary": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "storeId": {
-                        "type": "string"
-                    },
-                    "enduserId": {
-                        "type": "string"
-                    },
-                    "invoiceId": {
-                        "type": "string"
-                    },
-                    "subscriptionId": {
-                        "type": "string"
-                    },
-                    "billingPlanId": {
-                        "type": "string"
-                    },
-                    "billingPlanPeriod": {
-                        "type": "string"
-                    },
-                    "consentId": {
-                        "type": "string"
-                    },
-                    "fullCreditNodeId": {
-                        "type": "string"
-                    },
-                    "lifeCycleStatus": {
-                        "type": "string",
-                        "enum": [
-                            "PREBILLING_PENDING",
-                            "PREBILLING_FAILED",
-                            "WAITING_FOR_PAYMENT",
-                            "PAYMENT_PENDING",
-                            "INVOICE_PENDING",
-                            "ENDUSER_PENDING",
-                            "SUBSCRIPTION_PENDING",
-                            "FULFILLMENT_PENDING",
-                            "EMAILCONFIRMATION_PENDING",
-                            "COMPLETED_WITH_ERROR",
-                            "COMPLETED",
-                            "CANCEL_PENDING",
-                            "CANCELED_WITH_ERROR",
-                            "CANCELED",
-                            "FORCE_COMPLETED",
-                            "FORCE_CANCELED",
-                            "FORCE_ABORTED"
-                        ]
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "CANCELED_WITH_ERROR",
-                            "CANCEL_PENDING",
-                            "CANCELED",
-                            "PARTIAL_CANCELED",
-                            "PARTIAL_COMPLETED",
-                            "COMPLETED",
-                            "ABORTED",
-                            "PENDING_WITH_ERROR",
-                            "PENDING",
-                            "FRAUD_PENDING",
-                            "PAYMENT_PENDING",
-                            "PAYMENT_REFUSED",
-                            "CREATED",
-                            "FORCE_COMPLETED",
-                            "FORCE_CANCELED"
-                        ]
-                    },
-                    "fullTotalAmount": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "products": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ProductSummary"
-                        }
-                    }
-                }
-            },
-            "ProductSummary": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "unitPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "fullPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
-                    "priceFunctionParameters": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        }
-                    },
-                    "trial": {
-                        "type": "boolean"
-                    },
-                    "trialDuration": {
                         "type": "integer",
                         "format": "int32"
                     }
