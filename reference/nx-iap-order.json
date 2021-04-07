@@ -23,66 +23,6 @@
         }
     ],
     "paths": {
-        "/orders/views/{id}/summary": {
-            "get": {
-                "tags": [
-                    "Order"
-                ],
-                "operationId": "getOrderSummary",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/OrderSummary"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/orders/views/remittable/{id}/unpayoutableBalance": {
             "get": {
                 "tags": [
@@ -104,6 +44,26 @@
                             }
                         }
                     },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Forbidden",
                         "content": {
@@ -123,6 +83,26 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/orders/views/{id}/summary": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "operationId": "getOrderSummary",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderSummary"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Not Found",
@@ -136,6 +116,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -315,26 +315,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -347,6 +327,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -375,26 +375,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -407,6 +387,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -447,26 +447,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -479,6 +459,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -526,26 +526,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -558,6 +538,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -586,8 +586,18 @@
                     }
                 ],
                 "responses": {
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -606,28 +616,18 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -658,26 +658,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -690,6 +670,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -720,26 +720,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -752,6 +732,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -782,26 +782,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -814,6 +794,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -844,26 +844,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -876,6 +856,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -907,26 +907,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -939,6 +919,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -970,26 +970,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1002,6 +982,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1023,6 +1023,16 @@
                 "summary": "Create a subscription order",
                 "operationId": "createSubscriptionOrder",
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "201": {
                         "description": "Success",
                         "headers": {
@@ -1039,6 +1049,16 @@
                             }
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Forbidden",
                         "content": {
@@ -1051,26 +1071,6 @@
                     },
                     "500": {
                         "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1093,12 +1093,42 @@
                 "summary": "Cancel completely an order",
                 "operationId": "fullCancelOrder",
                 "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
                                 }
                             }
                         }
@@ -1112,9 +1142,22 @@
                                 }
                             }
                         }
-                    },
-                    "202": {
-                        "description": "Accepted",
+                    }
+                },
+                "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/orders/{id}/addevent": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Add event to order",
+                "operationId": "addOrderEvent",
+                "responses": {
+                    "200": {
+                        "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1142,9 +1185,29 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
                     }
                 },
-                "x-operationWeight": "300",
+                "x-operationWeight": "500",
                 "x-privateApi": "true"
             }
         },
@@ -1166,26 +1229,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1198,6 +1241,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1229,26 +1292,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1261,6 +1304,26 @@
                     },
                     "401": {
                         "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1271,69 +1334,6 @@
                     }
                 },
                 "x-operationWeight": "900",
-                "x-privateApi": "true"
-            }
-        },
-        "/orders/{id}/addevent": {
-            "post": {
-                "tags": [
-                    "Order"
-                ],
-                "summary": "Add event to order",
-                "operationId": "addOrderEvent",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Order"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "500",
                 "x-privateApi": "true"
             }
         }
@@ -1382,6 +1382,43 @@
                         "items": {
                             "$ref": "#/components/schemas/ExceptionDetail"
                         }
+                    }
+                }
+            },
+            "AccountAmount": {
+                "required": [
+                    "currency"
+                ],
+                "type": "object",
+                "properties": {
+                    "currency": {
+                        "type": "object",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "numericCode": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
                     }
                 }
             },
@@ -1728,43 +1765,6 @@
                 },
                 "description": "Discount list and voucher total amount",
                 "readOnly": true
-            },
-            "AccountAmount": {
-                "required": [
-                    "currency"
-                ],
-                "type": "object",
-                "properties": {
-                    "currency": {
-                        "type": "object",
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "numericCode": {
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                }
             },
             "Company": {
                 "type": "object",
