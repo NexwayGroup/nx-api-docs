@@ -18,6 +18,278 @@
     }
   ],
   "paths": {
+    "/carts": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultCart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300"
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Create an item",
+        "operationId": "createItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrivateCartInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}/wantedProducts": {
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Update products in cart",
+        "operationId": "updateProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200"
+      }
+    },
+    "/carts/createCheckout": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Create checkout",
+        "operationId": "createCheckout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Checkout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
     "/carts/{id}": {
       "get": {
         "tags": [
@@ -89,85 +361,6 @@
         },
         "x-operationWeight": "200"
       },
-      "put": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Update item",
-        "operationId": "updateItem",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "400"
-      },
       "delete": {
         "tags": [
           "Cart"
@@ -237,258 +430,6 @@
           }
         },
         "x-operationWeight": "500"
-      }
-    },
-    "/carts/createCheckout": {
-      "post": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Create checkout",
-        "operationId": "createCheckout",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Location": {
-                "description": "Link to checkout URL",
-                "style": "simple"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "100"
-      }
-    },
-    "/carts/{id}/wantedProducts": {
-      "put": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Update products in cart",
-        "operationId": "updateProduct",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "200"
-      }
-    },
-    "/carts": {
-      "get": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Get items",
-        "operationId": "getItems",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultCart"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "300"
-      },
-      "post": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Create an item",
-        "operationId": "createItem",
-        "responses": {
-          "201": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "300"
       }
     },
     "/carts/distinct": {
@@ -739,6 +680,15 @@
         ],
         "summary": "Update a cart",
         "operationId": "put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartPut"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -787,6 +737,82 @@
           }
         ],
         "x-operationWeight": "200"
+      }
+    },
+    "/carts/public": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Create a cart",
+        "operationId": "publicCreateCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "100"
       }
     },
     "/carts/public/products/{productId}/variants/matrix": {
@@ -873,71 +899,22 @@
         "x-operationWeight": "200"
       }
     },
-    "/carts/public/{id}/products": {
-      "put": {
-        "tags": [
-          "Public"
-        ],
-        "summary": "Update products in cart",
-        "operationId": "updateProduct_1",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true,
-        "security": [
-          {
-            "none": []
-          }
-        ],
-        "x-operationWeight": "300"
-      }
-    },
     "/carts/public/{id}/wantedProducts": {
       "put": {
         "tags": [
           "Public"
         ],
         "summary": "Update products in cart",
-        "operationId": "updateProduct_2",
+        "operationId": "updateProduct_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -986,79 +963,6 @@
           }
         ],
         "x-operationWeight": "300"
-      }
-    },
-    "/carts/public": {
-      "post": {
-        "tags": [
-          "Public"
-        ],
-        "summary": "Create a cart",
-        "operationId": "publicCreateCart",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cart"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Location": {
-                "description": "link to the new cart id",
-                "style": "simple"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "none": []
-          }
-        ],
-        "x-operationWeight": "100"
       }
     },
     "/carts/public/{id}/sendByMail": {
@@ -1089,10 +993,500 @@
         ],
         "x-operationWeight": "100"
       }
+    },
+    "/carts/public/{id}/expectedFields": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Get the additional expected field for a country",
+        "operationId": "getFieldsConfigByCountry",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MandatoryFieldAttribute"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MandatoryFieldAttribute"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MandatoryFieldAttribute"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MandatoryFieldAttribute"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "300"
+      }
     }
   },
   "components": {
     "schemas": {
+      "BuyerBehavior": {
+        "type": "object",
+        "properties": {
+          "retainBuyer": {
+            "type": "boolean"
+          },
+          "abandonedCart": {
+            "type": "boolean"
+          },
+          "renewal": {
+            "type": "boolean"
+          }
+        },
+        "description": "Buyer behavior"
+      },
+      "Company": {
+        "required": [
+          "companyName",
+          "vatNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user company name",
+            "example": "My company name"
+          },
+          "vatNumber": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Company VAT number",
+            "example": "FR12345678901"
+          },
+          "cnpj": {
+            "type": "string",
+            "description": "CNPJ",
+            "example": "00.000.000 / 0001-00"
+          },
+          "fullRegistrationNumber": {
+            "pattern": "^\\d{14}$",
+            "type": "string",
+            "description": "Siret Number",
+            "example": "362 521 879 00034"
+          },
+          "registrationNumber": {
+            "pattern": "^\\d{9}$",
+            "type": "string",
+            "description": "Siren Number",
+            "example": "362 521 879"
+          },
+          "apeCode": {
+            "pattern": "^\\d{4}[A-Za-z]$",
+            "type": "string",
+            "description": "APE/NAF code",
+            "example": "4791B"
+          },
+          "validVatNumber": {
+            "type": "boolean"
+          }
+        },
+        "description": "End-user company"
+      },
+      "ConsentFlags": {
+        "type": "object",
+        "properties": {
+          "newsletterOptin": {
+            "type": "boolean",
+            "description": "Newsletter opt-in consent",
+            "example": true
+          }
+        },
+        "description": "Consent flags"
+      },
+      "EndUserPut": {
+        "required": [
+          "country",
+          "email",
+          "firstName",
+          "lastName",
+          "locale",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user email",
+            "example": "email@domain.com"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user last name",
+            "example": "last name"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "End-user first name",
+            "example": "first name"
+          },
+          "streetAddress": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book street address",
+            "example": "Street name"
+          },
+          "city": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book city",
+            "example": "city name"
+          },
+          "zipCode": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Address book zip/postal code",
+            "example": "12345"
+          },
+          "country": {
+            "type": "string",
+            "description": "End-user country",
+            "example": "FR"
+          },
+          "locale": {
+            "type": "string",
+            "description": "End-user locale",
+            "example": "fr-FR"
+          },
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "phone": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Phone",
+            "example": "0123456789"
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "Birth date",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title",
+            "example": "Mr",
+            "enum": [
+              "MR",
+              "MRS"
+            ]
+          },
+          "recipientCode": {
+            "type": "string",
+            "description": "Recipient Code, specially for Italy, San Marino and Vatican",
+            "example": "0000000000"
+          },
+          "taxExemptionEligible": {
+            "type": "boolean",
+            "description": "Tax exemption eligibility flag",
+            "example": false
+          }
+        },
+        "description": "End-user who owns this cart"
+      },
+      "PrivateCartInput": {
+        "required": [
+          "country",
+          "locale",
+          "storeId",
+          "wantedProducts"
+        ],
+        "type": "object",
+        "properties": {
+          "wantedProducts": {
+            "type": "array",
+            "description": "list of products or signed product in the cart with its quantity and price function parameters",
+            "items": {
+              "$ref": "#/components/schemas/ProductInput"
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale of cart",
+            "example": "fr-FR"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of cart",
+            "example": "FR"
+          },
+          "forcedCurrency": {
+            "type": "string",
+            "description": "Currency forced by end user",
+            "example": "EUR"
+          },
+          "endUser": {
+            "$ref": "#/components/schemas/EndUserPut"
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "User-Agent",
+            "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1"
+          },
+          "discounts": {
+            "type": "array",
+            "description": "List of signed discounts",
+            "items": {
+              "type": "string",
+              "description": "List of signed discounts"
+            }
+          },
+          "storeHostname": {
+            "type": "string",
+            "description": "Hostname of store",
+            "example": "storename.mydomain.fr"
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "description": "Full URL of cart",
+            "example": "https://storename.mydomain.fr"
+          },
+          "externalContext": {
+            "type": "string",
+            "description": "External context",
+            "example": "my external context"
+          },
+          "salesFlags": {
+            "type": "array",
+            "description": "List of sales flags",
+            "items": {
+              "type": "string",
+              "description": "List of sales flags"
+            }
+          },
+          "buyerBehavior": {
+            "$ref": "#/components/schemas/BuyerBehavior"
+          },
+          "consentFlags": {
+            "$ref": "#/components/schemas/ConsentFlags"
+          },
+          "hideUpSell": {
+            "type": "boolean",
+            "description": "Define if we display upsell recommendation",
+            "default": false
+          },
+          "hideCrossSell": {
+            "type": "boolean",
+            "description": "Define if we display cross sell recommendation",
+            "default": false
+          },
+          "productRecoId": {
+            "type": "string",
+            "description": "Product recommendation  id",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "marketingCampaignName": {
+            "type": "string",
+            "description": "Marketing campaign name",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Reference ID of the store service"
+          },
+          "onPaymentClickRedirectUrl": {
+            "type": "string",
+            "description": "redirection url once payment page is closed",
+            "example": "https://www.myredirecturl.com"
+          },
+          "paymentExternalContext": {
+            "type": "string"
+          },
+          "remitteds": {
+            "type": "array",
+            "description": "List of remitteds",
+            "items": {
+              "$ref": "#/components/schemas/Remitted"
+            }
+          },
+          "blockDiscounts": {
+            "type": "boolean",
+            "description": "Block discounts on this cart"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source",
+            "enum": [
+              "PURCHASE",
+              "SUBSCRIPTION",
+              "MANUAL_RENEWAL",
+              "BILLING_PLAN"
+            ]
+          },
+          "catalogId": {
+            "type": "string",
+            "description": "Catalog ID",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "partialPaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "initialOrderId": {
+            "type": "string",
+            "deprecated": true
+          },
+          "enduserId": {
+            "type": "string"
+          },
+          "billingPlanId": {
+            "type": "string"
+          },
+          "billingPlanPeriod": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "products": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProductInput"
+            },
+            "writeOnly": true
+          },
+          "ip": {
+            "type": "string",
+            "description": "Cart IP",
+            "example": "127.0.0.1"
+          }
+        }
+      },
+      "ProductInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Product ID",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Product quantity",
+            "format": "int32",
+            "example": 2
+          },
+          "priceFunctionParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "description": "Product parameters"
+            },
+            "description": "Product parameters"
+          },
+          "forcedBy": {
+            "type": "string",
+            "description": "Product to force by another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
+          },
+          "crossSellBy": {
+            "type": "string",
+            "description": "Product to cross-sell by another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
+          },
+          "upSellBy": {
+            "type": "string",
+            "description": "Product to upsell by another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
+          },
+          "previousLineItemId": {
+            "type": "string",
+            "description": "Previous line item ID",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
+          },
+          "trial": {
+            "type": "boolean",
+            "description": "Indicator if it is a product trial",
+            "example": false
+          }
+        }
+      },
+      "Remitted": {
+        "required": [
+          "id",
+          "remittanceAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "remittanceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "remittanceRate": {
+            "maximum": 1,
+            "exclusiveMaximum": false,
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "List of remitteds"
+      },
       "ExceptionDetail": {
         "type": "object",
         "properties": {
@@ -1137,21 +1531,6 @@
             }
           }
         }
-      },
-      "BuyerBehavior": {
-        "type": "object",
-        "properties": {
-          "retainBuyer": {
-            "type": "boolean"
-          },
-          "abandonedCart": {
-            "type": "boolean"
-          },
-          "renewal": {
-            "type": "boolean"
-          }
-        },
-        "description": "Buyer behavior"
       },
       "Cart": {
         "required": [
@@ -1214,17 +1593,21 @@
           },
           "manualUpdateDate": {
             "type": "string",
-            "description": "Date of last manual modification",
-            "format": "date-time"
+            "description": "Date of last manual modification, timestamp in milliseconds",
+            "format": "date-time",
+            "readOnly": true
           },
           "storeId": {
             "type": "string",
-            "description": "Store linked to cart"
+            "description": "External id from Store resource",
+            "readOnly": true,
+            "example": "df8ad22a-5038-11eb-ae93-0242ac130002"
           },
           "products": {
             "uniqueItems": true,
             "type": "array",
             "description": "List of products in cart",
+            "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Product"
             }
@@ -1232,11 +1615,13 @@
           "locale": {
             "type": "string",
             "description": "Locale of cart",
-            "readOnly": true
+            "readOnly": true,
+            "example": "fr-FR"
           },
           "country": {
             "type": "string",
-            "description": "Country of cart"
+            "description": "Country code of cart in ISO 3166-2 format",
+            "example": "FR"
           },
           "endUser": {
             "$ref": "#/components/schemas/EndUser"
@@ -1269,6 +1654,22 @@
               }
             },
             "description": "Currency of cart"
+          },
+          "forcedCurrency": {
+            "type": "string",
+            "description": "Currency forced by end user",
+            "example": "EUR"
+          },
+          "availableCurrencies": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Set of available currencies",
+            "example": "[EUR,USD]",
+            "items": {
+              "type": "string",
+              "description": "Set of available currencies",
+              "example": "[EUR,USD]"
+            }
           },
           "discounts": {
             "type": "array",
@@ -1348,6 +1749,16 @@
           "consentFlags": {
             "$ref": "#/components/schemas/ConsentFlags"
           },
+          "hideUpSell": {
+            "type": "boolean",
+            "description": "Define if we display upsell recommendation",
+            "default": false
+          },
+          "hideCrossSell": {
+            "type": "boolean",
+            "description": "Define if we display cross sell recommendation",
+            "default": false
+          },
           "catalogId": {
             "type": "string",
             "description": "Catalog ID"
@@ -1364,9 +1775,20 @@
             "type": "string",
             "description": "Billing plan period"
           },
+          "subscriptionId": {
+            "type": "string",
+            "description": "SubscriptionId"
+          },
           "taxTransactionId": {
             "type": "string",
             "description": "Avalara tax transaction id"
+          },
+          "taxTypes": {
+            "type": "array",
+            "description": "Tax type",
+            "items": {
+              "$ref": "#/components/schemas/TaxType"
+            }
           },
           "taxAuthority": {
             "type": "string",
@@ -1375,6 +1797,10 @@
               "AVALARA",
               "NX_VATENGINE"
             ]
+          },
+          "ecommerceToken": {
+            "type": "string",
+            "description": "Ecommerce token for cert capture"
           },
           "installments": {
             "uniqueItems": true,
@@ -1467,60 +1893,6 @@
           }
         }
       },
-      "Company": {
-        "required": [
-          "companyName",
-          "vatNumber"
-        ],
-        "type": "object",
-        "properties": {
-          "companyName": {
-            "maxLength": 50,
-            "minLength": 0,
-            "type": "string",
-            "description": "End-user company name"
-          },
-          "vatNumber": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string",
-            "description": "Company VAT number"
-          },
-          "cnpj": {
-            "type": "string",
-            "description": "CNPJ"
-          },
-          "fullRegistrationNumber": {
-            "pattern": "^\\d{14}$",
-            "type": "string",
-            "description": "Siret Number"
-          },
-          "registrationNumber": {
-            "pattern": "^\\d{9}$",
-            "type": "string",
-            "description": "Siren Number"
-          },
-          "apeCode": {
-            "pattern": "^\\d{4}[A-Za-z]$",
-            "type": "string",
-            "description": "APE/NAF code"
-          },
-          "validVatNumber": {
-            "type": "boolean"
-          }
-        },
-        "description": "End-user company"
-      },
-      "ConsentFlags": {
-        "type": "object",
-        "properties": {
-          "newsletterOptin": {
-            "type": "boolean",
-            "description": "Newsletter opt-in consent"
-          }
-        },
-        "description": "Consent flags"
-      },
       "CreditCard": {
         "type": "object",
         "properties": {
@@ -1534,31 +1906,61 @@
             "type": "string"
           },
           "bin": {
-            "type": "string"
+            "type": "string",
+            "description": "Bank Identification Number",
+            "example": "411111"
           },
           "expirationDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Expiration date credit card",
+            "example": "07/2025"
           }
         },
-        "description": "List of credit cards"
+        "description": "List of credit cards",
+        "readOnly": true
       },
       "Discount": {
+        "required": [
+          "amount",
+          "code",
+          "id",
+          "localizedLabel",
+          "status"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "External id from Discount resource",
+            "readOnly": true,
+            "example": "9a08c138-510c-11eb-ae93-0242ac130002"
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "Voucher code",
+            "readOnly": true,
+            "example": "MYVOUCHERCODE"
           },
           "amount": {
             "type": "number",
-            "format": "double"
+            "description": "Voucher amount",
+            "format": "double",
+            "readOnly": true,
+            "example": 5
           },
           "localizedLabel": {
-            "type": "string"
+            "type": "string",
+            "description": "Voucher label localized",
+            "readOnly": true,
+            "example": "my localized voucher label"
           },
           "status": {
+            "type": "string",
+            "description": "Voucher amount",
+            "readOnly": true,
+            "example": "APPLIED"
+          },
+          "discountExternalContext": {
             "type": "string"
           }
         },
@@ -1589,7 +1991,6 @@
       },
       "DiscountedPrice": {
         "required": [
-          "discountCode",
           "discountId",
           "discountLabel",
           "discountRate",
@@ -1604,54 +2005,81 @@
           "discountedNetPrice": {
             "type": "number",
             "description": "Discounted cost of product without taxes included",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 26.4
           },
           "discountedGrossPrice": {
             "type": "number",
             "description": "Discounted cost of product with taxes included",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 28.44
           },
           "discountRate": {
             "type": "number",
             "description": "Discount rate",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 0.35
           },
           "netPriceDiscountAmount": {
             "type": "number",
             "description": "Net price discount amount",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 14.22
           },
           "grossPriceDiscountAmount": {
             "type": "number",
             "description": "Gross price discount amount",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 15.31
           },
           "vatDiscountAmount": {
             "type": "number",
             "description": "VAT discount amount",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 2.04
           },
           "discountLabel": {
             "type": "string",
-            "description": "Discount label"
+            "description": "Discount label",
+            "readOnly": true,
+            "example": "Label example"
           },
           "discountId": {
             "type": "string",
-            "description": "Discount ID"
+            "description": "External id from Discount resource",
+            "readOnly": true,
+            "example": "85a2cfd6-510c-11eb-ae93-0242ac130002"
           },
           "discountCode": {
             "type": "string",
-            "description": "Discount code"
+            "description": "Discount code",
+            "readOnly": true,
+            "example": "MYDISCOUNTCODE"
+          },
+          "discountExternalContext": {
+            "type": "string",
+            "description": "Discount external context",
+            "example": "external context"
           },
           "discountedNetPriceWithoutVoucher": {
             "type": "number",
             "description": "Discounted net price without voucher, only when a voucher is applied",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 79.2
           },
           "discountedGrossPriceWithoutVoucher": {
             "type": "number",
             "description": "Discounted gross price without voucher, only when a voucher is applied",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 85.32
           },
           "voucher": {
             "$ref": "#/components/schemas/Voucher"
@@ -1676,45 +2104,53 @@
             "maxLength": 150,
             "minLength": 0,
             "type": "string",
-            "description": "End-user email"
+            "description": "End-user email",
+            "example": "email@domain.com"
           },
           "lastName": {
             "maxLength": 50,
             "minLength": 0,
             "type": "string",
-            "description": "End-user last name"
+            "description": "End-user last name",
+            "example": "last name"
           },
           "firstName": {
             "maxLength": 50,
             "minLength": 0,
             "type": "string",
-            "description": "End-user first name"
+            "description": "End-user first name",
+            "example": "first name"
           },
           "streetAddress": {
             "maxLength": 255,
             "minLength": 0,
             "type": "string",
-            "description": "Address book street address"
+            "description": "Address book street address",
+            "example": "Street name"
           },
           "city": {
             "maxLength": 255,
             "minLength": 0,
             "type": "string",
-            "description": "Address book city"
+            "description": "Address book city",
+            "example": "city name"
           },
           "zipCode": {
             "maxLength": 32,
             "minLength": 0,
             "type": "string",
-            "description": "Address book zip/postal code"
+            "description": "Address book zip/postal code",
+            "example": "12345"
           },
           "country": {
             "type": "string",
-            "description": "End-user country"
+            "description": "End-user country",
+            "example": "FR"
           },
           "locale": {
             "type": "string",
-            "description": "End-user locale"
+            "description": "End-user locale",
+            "example": "fr-FR"
           },
           "company": {
             "$ref": "#/components/schemas/Company"
@@ -1726,7 +2162,8 @@
             "maxLength": 50,
             "minLength": 0,
             "type": "string",
-            "description": "Phone"
+            "description": "Phone",
+            "example": "0123456789"
           },
           "birthDate": {
             "type": "string",
@@ -1736,6 +2173,7 @@
           "title": {
             "type": "string",
             "description": "Title",
+            "example": "Mr",
             "enum": [
               "MR",
               "MRS"
@@ -1743,15 +2181,18 @@
           },
           "recipientCode": {
             "type": "string",
-            "description": "Recipient Code, specially for Italy, San Marino and Vatican"
+            "description": "Recipient Code, specially for Italy, San Marino and Vatican",
+            "example": "0000000000"
           },
           "taxExemptionEligible": {
             "type": "boolean",
-            "description": "Tax exemption eligibility flag"
+            "description": "Tax exemption eligibility flag",
+            "example": false
           },
           "id": {
             "type": "string",
-            "description": "Reference ID of end-user service"
+            "description": "External ID from EndUser resource",
+            "example": "aa727f80-510e-11eb-ae93-0242ac130002"
           },
           "customerId": {
             "type": "string"
@@ -1767,11 +2208,14 @@
           },
           "type": {
             "type": "string",
-            "description": "End-user type"
+            "description": "End-user type",
+            "readOnly": true,
+            "example": "RESELLER"
           },
           "addressError": {
             "type": "boolean",
-            "description": "Invalid address flag"
+            "description": "Invalid address flag",
+            "example": true
           }
         },
         "description": "End-user who owns this cart"
@@ -1848,14 +2292,18 @@
             "type": "string"
           },
           "paypalPayerEmail": {
-            "type": "string"
+            "type": "string",
+            "description": "Paypal email account",
+            "example": "example@paypal.com"
           }
         },
-        "description": "List of PayPal accounts"
+        "description": "List of PayPal accounts",
+        "readOnly": true
       },
       "Price": {
         "required": [
           "currency",
+          "grossPrice",
           "netPrice",
           "vatAmount",
           "vatIncluded",
@@ -1887,46 +2335,64 @@
                 "type": "string"
               }
             },
-            "description": "Purchase currency (ISO-4217)"
+            "description": "Currency code in ISO-4217 format",
+            "readOnly": true,
+            "example": "EUR"
           },
           "netPrice": {
             "type": "number",
             "description": "Net price",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 8.4
           },
           "grossPrice": {
             "type": "number",
             "description": "Gross price",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 9.99
           },
           "vatIncluded": {
             "type": "boolean",
-            "description": "Tax included flag"
+            "description": "Tax included / not included",
+            "readOnly": true,
+            "example": true
           },
           "vatRate": {
             "type": "number",
             "description": "Tax rate",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 0.19
           },
           "vatAmount": {
             "type": "number",
             "description": "Tax amount",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 1.59
           },
           "vatAmountMsrp": {
             "type": "number",
             "description": "Tax amount for MSRP (Manufacturer Suggested Retail Price)",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 1.8
           },
           "netMsrp": {
             "type": "number",
             "description": "Net MSRP (Manufacturer Suggested Retail Price)",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 9.4
           },
           "grossMsrp": {
             "type": "number",
             "description": "Gross MSRP (Manufacturer Suggested Retail Price)",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 15.42
           },
           "discountedPrice": {
             "$ref": "#/components/schemas/DiscountedPrice"
@@ -1934,17 +2400,23 @@
           "initialGrossPrice": {
             "type": "number",
             "description": "Initial Gross Price",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 12.42
           },
           "initialNetPrice": {
             "type": "number",
             "description": "Initial Net Price",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 10.39
           },
           "initialVatAmount": {
             "type": "number",
             "description": "Initial Tax amount",
-            "format": "double"
+            "format": "double",
+            "readOnly": true,
+            "example": 1.72
           }
         },
         "description": "All information related to prices"
@@ -1952,26 +2424,64 @@
       "Product": {
         "required": [
           "customerId",
+          "defaultCurrency",
           "fullPrice",
           "id",
           "lifeTime",
           "publisherRefId",
           "quantity",
+          "renewingPrice",
           "unitPrice"
         ],
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "Product ID",
-            "readOnly": true
+            "description": "External ID from Product resource",
+            "readOnly": true,
+            "example": "2f06e154-5039-11eb-ae93-0242ac130002"
           },
           "customerId": {
             "type": "string",
-            "description": "Customer ID associated with product",
-            "readOnly": true
+            "description": "External ID from Customer resource",
+            "readOnly": true,
+            "example": "65fc962c-5039-11eb-ae93-0242ac130002"
+          },
+          "defaultCurrency": {
+            "type": "object",
+            "properties": {
+              "currencyCode": {
+                "type": "string"
+              },
+              "defaultFractionDigits": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "numericCode": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "numericCodeAsString": {
+                "type": "string"
+              }
+            },
+            "description": "Currency code in ISO-4217 format",
+            "readOnly": true,
+            "example": "EUR"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
           },
           "unitPrice": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "renewingPrice": {
             "$ref": "#/components/schemas/Price"
           },
           "fullPrice": {
@@ -1980,28 +2490,38 @@
           "parentId": {
             "type": "string",
             "description": "Product parent ID",
-            "readOnly": true
+            "readOnly": true,
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "codeName": {
             "type": "string",
             "description": "Customer internal product name",
-            "readOnly": true
+            "readOnly": true,
+            "example": "my code name"
           },
           "type": {
             "type": "string",
             "description": "Product type"
           },
+          "businessSegment": {
+            "type": "string",
+            "description": "Product business segment",
+            "example": "my business segment"
+          },
           "publisherRefId": {
             "type": "string",
-            "description": "Product publisher reference ID"
+            "description": "Product publisher reference ID",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "externalContext": {
             "type": "string",
-            "description": "External context"
+            "description": "External context",
+            "example": "external context"
           },
           "lifeTime": {
             "type": "string",
-            "description": "Lifetime"
+            "description": "Lifetime",
+            "example": "1 YEAR"
           },
           "relatedContents": {
             "type": "array",
@@ -2012,15 +2532,18 @@
           },
           "subscriptionTemplate": {
             "type": "string",
-            "description": "Subscription template name"
+            "description": "Subscription template name",
+            "example": "subscription template name"
           },
           "fulfillmentTemplate": {
             "type": "string",
-            "description": "Fulfillment template name"
+            "description": "Fulfillment template name",
+            "example": "fulfillment template name"
           },
           "signedProduct": {
             "type": "string",
-            "description": "Signed product"
+            "description": "Signed product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "variableValues": {
             "type": "object",
@@ -2040,15 +2563,18 @@
           },
           "forcedBy": {
             "type": "string",
-            "description": "Force via another product"
+            "description": "Force via another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "crossSellBy": {
             "type": "string",
-            "description": "Cross-sell via another product"
+            "description": "Cross-sell via another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "upSellBy": {
             "type": "string",
-            "description": "Upsell via another product"
+            "description": "Upsell via another product",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "subProducts": {
             "type": "array",
@@ -2059,7 +2585,8 @@
           },
           "trial": {
             "type": "boolean",
-            "description": "Indicator if the trial period is requested for the product"
+            "description": "Indicator if the trial period is requested for the product",
+            "example": false
           },
           "blackListedCountries": {
             "uniqueItems": true,
@@ -2072,12 +2599,14 @@
           },
           "previousLineItemId": {
             "type": "string",
-            "description": "Previous line item ID"
+            "description": "Previous line item ID",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "quantity": {
             "type": "integer",
             "description": "Product quantity",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "priceFunctionParameters": {
             "type": "array",
@@ -2096,18 +2625,22 @@
           },
           "name": {
             "type": "string",
-            "description": "Product name"
+            "description": "Product name",
+            "example": "product name"
           },
           "taxExempt": {
             "type": "boolean",
-            "description": "Indicator if the product is tax exempt"
+            "description": "Indicator if the product is tax exempt",
+            "example": false
           },
           "taxCode": {
             "type": "string",
-            "description": "Avatax tax code"
+            "description": "Avatax tax code",
+            "example": "tax code"
           }
         },
-        "description": "List of products in cart"
+        "description": "List of products in cart",
+        "readOnly": true
       },
       "PublicParameter": {
         "required": [
@@ -2123,21 +2656,25 @@
         "properties": {
           "label": {
             "type": "string",
-            "description": "Parameter label"
+            "description": "Parameter label",
+            "example": "label"
           },
           "type": {
             "type": "string",
-            "description": "Parameter type"
+            "description": "Parameter type",
+            "example": "type"
           },
           "min": {
             "type": "integer",
             "description": "Minimum value",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "max": {
             "type": "integer",
             "description": "Maximum value",
-            "format": "int32"
+            "format": "int32",
+            "example": 10
           },
           "pattern": {
             "type": "string",
@@ -2153,7 +2690,8 @@
           },
           "internalDesc": {
             "type": "string",
-            "description": "Internal description of the parameter"
+            "description": "Internal description of the parameter",
+            "example": "internal description"
           }
         },
         "description": "Parameters of the product"
@@ -2163,39 +2701,16 @@
         "properties": {
           "file": {
             "type": "string",
-            "description": "URL or file name with extension for downloading"
+            "description": "URL or file name with extension for downloading",
+            "example": "https://ww.domain.com/file.exe"
           },
           "label": {
             "type": "string",
-            "description": "Text that explains what this binary is"
+            "description": "Text that explains what this binary is",
+            "example": "file name"
           }
         },
         "description": "Links for downloading related content files of product"
-      },
-      "Remitted": {
-        "required": [
-          "id",
-          "remittanceAmount"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "remittanceAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "remittanceRate": {
-            "maximum": 1,
-            "exclusiveMaximum": false,
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "description": "List of remitteds"
       },
       "Route": {
         "type": "object",
@@ -2225,42 +2740,75 @@
         "properties": {
           "dest": {
             "type": "string",
-            "description": "Email dest"
+            "description": "Email dest",
+            "example": "email@domain.com"
           },
           "id": {
             "type": "string",
-            "description": "Internal reference ID"
+            "description": "Internal reference ID",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "emailId": {
             "type": "string",
-            "description": "Email reference in email storage service"
+            "description": "Email reference in email storage service",
+            "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25"
           },
           "error": {
             "type": "string",
-            "description": "Email error message"
+            "description": "Email error message",
+            "example": "error message"
           },
           "type": {
             "type": "string",
-            "description": "Type of email"
+            "description": "Type of email",
+            "example": "email type"
           }
         },
         "description": "List of sent emails"
       },
+      "TaxType": {
+        "type": "object",
+        "properties": {
+          "taxName": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "description": "Tax type"
+      },
       "Voucher": {
+        "required": [
+          "discounts",
+          "totalAmount"
+        ],
         "type": "object",
         "properties": {
           "discounts": {
             "uniqueItems": true,
             "type": "array",
+            "description": "Discount voucher details",
+            "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Discount"
             }
           },
           "totalAmount": {
             "type": "number",
-            "format": "double"
+            "description": "Total amount of vouchers",
+            "format": "double",
+            "readOnly": true,
+            "example": 60
           }
-        }
+        },
+        "description": "Voucher details",
+        "readOnly": true
       },
       "Wallet": {
         "type": "object",
@@ -2268,6 +2816,7 @@
           "creditCards": {
             "type": "array",
             "description": "List of credit cards",
+            "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/CreditCard"
             }
@@ -2275,12 +2824,63 @@
           "paypals": {
             "type": "array",
             "description": "List of PayPal accounts",
+            "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Paypal"
             }
           }
         },
         "description": "End-user's wallet"
+      },
+      "Catalog": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "singleUse": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Checkout": {
+        "required": [
+          "cart",
+          "fullCatalog"
+        ],
+        "type": "object",
+        "properties": {
+          "cart": {
+            "$ref": "#/components/schemas/PrivateCartInput"
+          },
+          "fullCatalog": {
+            "$ref": "#/components/schemas/FullCatalog"
+          }
+        }
+      },
+      "FullCatalog": {
+        "required": [
+          "catalog"
+        ],
+        "type": "object",
+        "properties": {
+          "catalog": {
+            "$ref": "#/components/schemas/Catalog"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          }
+        }
       },
       "SearchResultObject": {
         "type": "object",
@@ -2289,36 +2889,6 @@
             "type": "array",
             "items": {
               "type": "object"
-            }
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "SearchResultCart": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cart"
             }
           },
           "last": {
@@ -2425,9 +2995,307 @@
           }
         }
       },
+      "SearchResultCart": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cart"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CartPut": {
+        "required": [
+          "country",
+          "locale",
+          "wantedProducts"
+        ],
+        "type": "object",
+        "properties": {
+          "wantedProducts": {
+            "type": "array",
+            "description": "list of products or signed product in the cart with its quantity and price function parameters",
+            "items": {
+              "$ref": "#/components/schemas/ProductInput"
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale of cart",
+            "example": "fr-FR"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of cart",
+            "example": "FR"
+          },
+          "forcedCurrency": {
+            "type": "string",
+            "description": "Currency forced by end user",
+            "example": "EUR"
+          },
+          "endUser": {
+            "$ref": "#/components/schemas/EndUserPut"
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "User-Agent",
+            "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1"
+          },
+          "discounts": {
+            "type": "array",
+            "description": "List of signed discounts",
+            "items": {
+              "type": "string",
+              "description": "List of signed discounts"
+            }
+          },
+          "storeHostname": {
+            "type": "string",
+            "description": "Hostname of store",
+            "example": "storename.mydomain.fr"
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "description": "Full URL of cart",
+            "example": "https://storename.mydomain.fr"
+          },
+          "externalContext": {
+            "type": "string",
+            "description": "External context",
+            "example": "my external context"
+          },
+          "salesFlags": {
+            "type": "array",
+            "description": "List of sales flags",
+            "items": {
+              "type": "string",
+              "description": "List of sales flags"
+            }
+          },
+          "buyerBehavior": {
+            "$ref": "#/components/schemas/BuyerBehavior"
+          },
+          "consentFlags": {
+            "$ref": "#/components/schemas/ConsentFlags"
+          },
+          "hideUpSell": {
+            "type": "boolean",
+            "description": "Define if we display upsell recommendation",
+            "default": false
+          },
+          "hideCrossSell": {
+            "type": "boolean",
+            "description": "Define if we display cross sell recommendation",
+            "default": false
+          },
+          "productRecoId": {
+            "type": "string",
+            "description": "Product recommendation  id",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "marketingCampaignName": {
+            "type": "string",
+            "description": "Marketing campaign name",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "products": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProductInput"
+            },
+            "writeOnly": true
+          },
+          "ip": {
+            "type": "string",
+            "description": "Cart IP",
+            "example": "127.0.0.1"
+          }
+        }
+      },
+      "CartInput": {
+        "required": [
+          "country",
+          "locale",
+          "storeId",
+          "wantedProducts"
+        ],
+        "type": "object",
+        "properties": {
+          "wantedProducts": {
+            "type": "array",
+            "description": "list of products or signed product in the cart with its quantity and price function parameters",
+            "items": {
+              "$ref": "#/components/schemas/ProductInput"
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Locale of cart",
+            "example": "fr-FR"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country of cart",
+            "example": "FR"
+          },
+          "forcedCurrency": {
+            "type": "string",
+            "description": "Currency forced by end user",
+            "example": "EUR"
+          },
+          "endUser": {
+            "$ref": "#/components/schemas/EndUserPut"
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "User-Agent",
+            "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1"
+          },
+          "discounts": {
+            "type": "array",
+            "description": "List of signed discounts",
+            "items": {
+              "type": "string",
+              "description": "List of signed discounts"
+            }
+          },
+          "storeHostname": {
+            "type": "string",
+            "description": "Hostname of store",
+            "example": "storename.mydomain.fr"
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "description": "Full URL of cart",
+            "example": "https://storename.mydomain.fr"
+          },
+          "externalContext": {
+            "type": "string",
+            "description": "External context",
+            "example": "my external context"
+          },
+          "salesFlags": {
+            "type": "array",
+            "description": "List of sales flags",
+            "items": {
+              "type": "string",
+              "description": "List of sales flags"
+            }
+          },
+          "buyerBehavior": {
+            "$ref": "#/components/schemas/BuyerBehavior"
+          },
+          "consentFlags": {
+            "$ref": "#/components/schemas/ConsentFlags"
+          },
+          "hideUpSell": {
+            "type": "boolean",
+            "description": "Define if we display upsell recommendation",
+            "default": false
+          },
+          "hideCrossSell": {
+            "type": "boolean",
+            "description": "Define if we display cross sell recommendation",
+            "default": false
+          },
+          "productRecoId": {
+            "type": "string",
+            "description": "Product recommendation  id",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "marketingCampaignName": {
+            "type": "string",
+            "description": "Marketing campaign name",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Reference ID of the store service"
+          },
+          "onPaymentClickRedirectUrl": {
+            "type": "string",
+            "description": "redirection url once payment page is closed",
+            "example": "https://www.myredirecturl.com"
+          },
+          "paymentExternalContext": {
+            "type": "string"
+          },
+          "remitteds": {
+            "type": "array",
+            "description": "List of remitteds",
+            "items": {
+              "$ref": "#/components/schemas/Remitted"
+            }
+          },
+          "blockDiscounts": {
+            "type": "boolean",
+            "description": "Block discounts on this cart"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source",
+            "enum": [
+              "PURCHASE",
+              "SUBSCRIPTION",
+              "MANUAL_RENEWAL",
+              "BILLING_PLAN"
+            ]
+          },
+          "catalogId": {
+            "type": "string",
+            "description": "Catalog ID",
+            "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+          },
+          "partialPaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "initialOrderId": {
+            "type": "string",
+            "deprecated": true
+          },
+          "products": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProductInput"
+            },
+            "writeOnly": true
+          },
+          "ip": {
+            "type": "string",
+            "description": "Cart IP",
+            "example": "127.0.0.1"
+          }
+        }
+      },
       "JsonNode": {
         "type": "object",
         "properties": {
+          "float": {
+            "type": "boolean"
+          },
           "array": {
             "type": "boolean"
           },
@@ -2437,7 +3305,16 @@
           "null": {
             "type": "boolean"
           },
-          "float": {
+          "valueNode": {
+            "type": "boolean"
+          },
+          "containerNode": {
+            "type": "boolean"
+          },
+          "missingNode": {
+            "type": "boolean"
+          },
+          "object": {
             "type": "boolean"
           },
           "nodeType": {
@@ -2454,49 +3331,28 @@
               "STRING"
             ]
           },
-          "number": {
-            "type": "boolean"
-          },
-          "floatingPointNumber": {
+          "pojo": {
             "type": "boolean"
           },
           "integralNumber": {
             "type": "boolean"
           },
-          "pojo": {
-            "type": "boolean"
-          },
-          "object": {
+          "floatingPointNumber": {
             "type": "boolean"
           },
           "short": {
             "type": "boolean"
           },
-          "valueNode": {
-            "type": "boolean"
-          },
-          "missingNode": {
-            "type": "boolean"
-          },
-          "containerNode": {
-            "type": "boolean"
-          },
           "int": {
             "type": "boolean"
           },
-          "binary": {
-            "type": "boolean"
-          },
-          "boolean": {
-            "type": "boolean"
-          },
-          "bigDecimal": {
+          "long": {
             "type": "boolean"
           },
           "double": {
             "type": "boolean"
           },
-          "long": {
+          "bigDecimal": {
             "type": "boolean"
           },
           "bigInteger": {
@@ -2504,6 +3360,66 @@
           },
           "textual": {
             "type": "boolean"
+          },
+          "boolean": {
+            "type": "boolean"
+          },
+          "binary": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MandatoryFieldAttribute": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "jsonPath": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "B2B",
+              "B2C",
+              "B2B_B2C"
+            ]
+          },
+          "availableValues": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "errorMessage": {
+            "type": "string"
+          },
+          "validators": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Validator"
+            }
+          }
+        }
+      },
+      "Validator": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CUSTOM",
+              "REGEX"
+            ]
+          },
+          "regex": {
+            "type": "string"
           }
         }
       }
