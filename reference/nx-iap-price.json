@@ -23,6 +23,75 @@
         }
     ],
     "paths": {
+        "/prices/currencies/{customerId}": {
+            "get": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Get distinct currencies by customerId",
+                "description": "Search the currencies by customerId",
+                "operationId": "getDistinctCurrenciesByCustomer",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "uniqueItems": true,
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/prices/{id}": {
             "get": {
                 "tags": [
@@ -51,8 +120,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -71,8 +140,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -81,8 +150,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -98,18 +167,17 @@
                 "tags": [
                     "Price"
                 ],
-                "summary": "Update item",
+                "summary": "Update price",
                 "operationId": "updateItem",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -121,8 +189,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -141,37 +209,6 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "400"
-            },
-            "delete": {
-                "tags": [
-                    "Price"
-                ],
-                "summary": "Delete price",
-                "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
-                "operationId": "deleteItem",
-                "responses": {
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -182,6 +219,26 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Price"
+                ],
+                "summary": "Delete price",
+                "description": "Deleting prices is allowed only for prices that are scheduled in the future. Prices that have already been effective cannot be deleted in order to keep the history of pricing per product",
+                "operationId": "deleteItem",
+                "responses": {
                     "204": {
                         "description": "No Content",
                         "content": {
@@ -192,26 +249,6 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -221,68 +258,13 @@
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "/prices/best": {
-            "get": {
-                "tags": [
-                    "Price"
-                ],
-                "summary": "Get best price for parameters",
-                "description": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
-                "operationId": "getBestPrice",
-                "parameters": [
-                    {
-                        "name": "customerId",
-                        "in": "query",
-                        "description": "ID of the customer",
-                        "required": true
                     },
-                    {
-                        "name": "productId",
-                        "in": "query",
-                        "description": "ID of the product",
-                        "required": true
-                    },
-                    {
-                        "name": "country",
-                        "in": "query",
-                        "description": "Country code in ISO 3166-2 format",
-                        "required": true,
-                        "example": "FR"
-                    },
-                    {
-                        "name": "currency",
-                        "in": "query",
-                        "description": "Currency code in ISO-4217 format",
-                        "example": "USD"
-                    },
-                    {
-                        "name": "defaultCurrency",
-                        "in": "query",
-                        "description": "Fallback currency code in ISO-4217 format",
-                        "example": "EUR"
-                    },
-                    {
-                        "name": "date",
-                        "in": "query",
-                        "description": "Effective date in ISO-8601 format, examples: 2020-10-14, 2020-10-14T12:00:00Z"
-                    },
-                    {
-                        "name": "marketingCampaignId",
-                        "in": "query",
-                        "description": "ID of marketing campaign"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
+                    "500": {
+                        "description": "Failure",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Price"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -290,17 +272,7 @@
                     "404": {
                         "description": "Not Found",
                         "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NormalizeException"
                                 }
@@ -310,17 +282,7 @@
                     "403": {
                         "description": "Forbidden",
                         "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NormalizeException"
                                 }
@@ -415,8 +377,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -435,8 +397,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -445,8 +407,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -462,8 +424,17 @@
                 "tags": [
                     "Price"
                 ],
-                "summary": "Create an item",
+                "summary": "Create price",
                 "operationId": "createItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Price"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Success",
@@ -475,8 +446,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -495,8 +466,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -505,8 +476,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -515,38 +486,73 @@
                             }
                         }
                     }
-                },
-                "x-operationWeight": "300"
+                }
             }
         },
-        "/prices/currencies/{customerId}": {
+        "/prices/best": {
             "get": {
                 "tags": [
                     "Price"
                 ],
-                "summary": "Get distinct currencies by customerId",
-                "description": "Search the currencies by customerId",
-                "operationId": "getDistinctCurrenciesByCustomer",
+                "summary": "Get best price for parameters",
+                "description": "Search price for product with given parameters: country, currency, defaultCurrency, effective date",
+                "operationId": "getBestPrice",
+                "parameters": [
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "ID of the customer",
+                        "required": true
+                    },
+                    {
+                        "name": "productId",
+                        "in": "query",
+                        "description": "ID of the product",
+                        "required": true
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country code in ISO 3166-2 format",
+                        "required": true,
+                        "example": "FR"
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "Currency code in ISO-4217 format",
+                        "example": "USD"
+                    },
+                    {
+                        "name": "defaultCurrency",
+                        "in": "query",
+                        "description": "Fallback currency code in ISO-4217 format",
+                        "example": "EUR"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Effective date in ISO-8601 format, examples: 2020-10-14, 2020-10-14T12:00:00Z"
+                    },
+                    {
+                        "name": "marketingCampaignId",
+                        "in": "query",
+                        "description": "ID of marketing campaign"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                        "uniqueItems": true,
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/Price"
                                 }
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -565,8 +571,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -575,8 +581,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -606,8 +612,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -626,8 +632,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -636,8 +642,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -668,8 +674,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -688,8 +694,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -698,8 +704,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -730,8 +736,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -750,8 +756,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -760,8 +766,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -810,8 +816,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -830,8 +836,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "*/*": {
                                 "schema": {
@@ -840,8 +846,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "403": {
+                        "description": "Forbidden",
                         "content": {
                             "*/*": {
                                 "schema": {
