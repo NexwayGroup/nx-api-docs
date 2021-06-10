@@ -23,568 +23,6 @@
         }
     ],
     "paths": {
-        "/carts/{id}": {
-            "get": {
-                "tags": [
-                    "Cart"
-                ],
-                "summary": "Get item",
-                "operationId": "getItem",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "200"
-            },
-            "delete": {
-                "tags": [
-                    "Cart"
-                ],
-                "summary": "Delete item",
-                "operationId": "deleteItem",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "No Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "500"
-            }
-        },
-        "/carts/public/{id}/wantedProducts": {
-            "put": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Update products in cart",
-                "operationId": "updateProduct",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ProductInput"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "none": [
-                            
-                        ]
-                    }
-                ],
-                "x-operationWeight": "300"
-            }
-        },
-        "/carts/recap": {
-            "get": {
-                "tags": [
-                    "Cart"
-                ],
-                "summary": "Get recap quantities for a given field",
-                "operationId": "recap",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "150"
-            }
-        },
-        "/carts/unwind": {
-            "get": {
-                "tags": [
-                    "Cart"
-                ],
-                "summary": "Search unwind for a given field",
-                "operationId": "unwind",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "150"
-            }
-        },
-        "/carts/public": {
-            "post": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Create a cart",
-                "operationId": "publicCreateCart",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CartInput"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Cart"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "none": [
-                            
-                        ]
-                    }
-                ],
-                "x-operationWeight": "100"
-            }
-        },
-        "/carts/public/products/{productId}/variants/matrix": {
-            "get": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Get the variant matrix",
-                "operationId": "getProductVariantMatrix",
-                "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/JsonNode"
-                                }
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/JsonNode"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/JsonNode"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/JsonNode"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "none": [
-                            
-                        ]
-                    }
-                ],
-                "x-operationWeight": "300"
-            }
-        },
-        "/carts/distinct": {
-            "get": {
-                "tags": [
-                    "Cart"
-                ],
-                "summary": "Get distinct values for a given field",
-                "operationId": "distinct",
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-operationWeight": "100"
-            }
-        },
-        "/carts/public/{id}/product-recommendations/request": {
-            "get": {
-                "tags": [
-                    "Public"
-                ],
-                "summary": "Get product recommendations",
-                "operationId": "getProductRecommendations",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/JsonNode"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "none": [
-                            
-                        ]
-                    }
-                ],
-                "x-operationWeight": "200"
-            }
-        },
         "/carts/public/{id}": {
             "get": {
                 "tags": [
@@ -710,6 +148,133 @@
                 "x-operationWeight": "200"
             }
         },
+        "/carts/public/products/{productId}/variants/matrix": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get the variant matrix",
+                "operationId": "getProductVariantMatrix",
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "none": [
+                            
+                        ]
+                    }
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/carts/public/{id}/wantedProducts": {
+            "put": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Update products in cart",
+                "operationId": "updateProduct",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "none": [
+                            
+                        ]
+                    }
+                ],
+                "x-operationWeight": "300"
+            }
+        },
         "/carts/public/{id}/sendByMail": {
             "post": {
                 "tags": [
@@ -739,6 +304,35 @@
                     }
                 ],
                 "x-operationWeight": "100"
+            }
+        },
+        "/carts/public/{id}/product-recommendations/request": {
+            "get": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get product recommendations",
+                "operationId": "getProductRecommendations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "none": [
+                            
+                        ]
+                    }
+                ],
+                "x-operationWeight": "200"
             }
         },
         "/carts": {
@@ -779,8 +373,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -789,8 +383,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -848,8 +442,8 @@
                             }
                         }
                     },
-                    "500": {
-                        "description": "Failure",
+                    "401": {
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -858,8 +452,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
+                    "500": {
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -871,43 +465,24 @@
                 }
             }
         },
-        "/carts/createCheckout": {
-            "post": {
+        "/carts/{id}": {
+            "get": {
                 "tags": [
                     "Cart"
                 ],
-                "summary": "Create checkout",
-                "operationId": "createCheckout",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Checkout"
-                            }
+                "summary": "Get item",
+                "operationId": "getItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -918,12 +493,134 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
                     "500": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "200"
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "500"
+            }
+        },
+        "/carts/distinct": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get distinct values for a given field",
+                "operationId": "distinct",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
                                 }
                             }
                         }
@@ -933,17 +630,37 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
                     },
-                    "201": {
-                        "description": "Created",
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         }
@@ -1023,6 +740,227 @@
                 "x-operationWeight": "300"
             }
         },
+        "/carts/public": {
+            "post": {
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Create a cart",
+                "operationId": "publicCreateCart",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CartInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "none": [
+                            
+                        ]
+                    }
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/carts/recap": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get recap quantities for a given field",
+                "operationId": "recap",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "150"
+            }
+        },
+        "/carts/createCheckout": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Create checkout",
+                "operationId": "createCheckout",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Checkout"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "100"
+            }
+        },
         "/carts/{id}/wantedProducts": {
             "put": {
                 "tags": [
@@ -1083,55 +1021,72 @@
                 },
                 "x-operationWeight": "200"
             }
+        },
+        "/carts/unwind": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Search unwind for a given field",
+                "operationId": "unwind",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-operationWeight": "150"
+            }
         }
     },
     "components": {
         "schemas": {
-            "ExceptionDetail": {
-                "type": "object",
-                "properties": {
-                    "errorType": {
-                        "type": "string"
-                    },
-                    "resourceType": {
-                        "type": "string"
-                    },
-                    "resourceId": {
-                        "type": "string"
-                    },
-                    "resourceDisplayName": {
-                        "type": "string"
-                    },
-                    "specific": {
-                        "type": "object"
-                    }
-                }
-            },
-            "NormalizeException": {
-                "type": "object",
-                "properties": {
-                    "timestamp": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "status": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "error": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    },
-                    "details": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ExceptionDetail"
-                        }
-                    }
-                }
-            },
             "BuyerBehavior": {
                 "type": "object",
                 "properties": {
@@ -1865,6 +1820,10 @@
                         "description": "Tax exemption eligibility flag",
                         "example": false
                     },
+                    "taxExemptionChecked": {
+                        "type": "boolean",
+                        "description": "Check box for exemption rules"
+                    },
                     "id": {
                         "type": "string",
                         "description": "External ID from EndUser resource",
@@ -2533,6 +2492,9 @@
                 },
                 "description": "End-user's wallet"
             },
+            "JsonNode": {
+                "type": "object"
+            },
             "ProductInput": {
                 "type": "object",
                 "properties": {
@@ -2579,245 +2541,6 @@
                         "type": "boolean",
                         "description": "Indicator if it is a product trial",
                         "example": false
-                    }
-                }
-            },
-            "RecapEntry": {
-                "type": "object",
-                "properties": {
-                    "targetValue": {
-                        "type": "string"
-                    },
-                    "count": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "SearchResultRecapEntry": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/RecapEntry"
-                        }
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "totalItems": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "Document": {
-                "type": "object",
-                "properties": {
-                    "empty": {
-                        "type": "boolean"
-                    }
-                },
-                "additionalProperties": {
-                    "type": "object"
-                }
-            },
-            "SearchResultDocument": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Document"
-                        }
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "totalItems": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
-            },
-            "CartInput": {
-                "required": [
-                    "country",
-                    "locale",
-                    "storeId",
-                    "wantedProducts"
-                ],
-                "type": "object",
-                "properties": {
-                    "wantedProducts": {
-                        "type": "array",
-                        "description": "list of products or signed product in the cart with its quantity and price function parameters",
-                        "items": {
-                            "$ref": "#/components/schemas/ProductInput"
-                        }
-                    },
-                    "locale": {
-                        "type": "string",
-                        "description": "Locale of cart",
-                        "example": "fr-FR"
-                    },
-                    "country": {
-                        "type": "string",
-                        "description": "Country of cart",
-                        "example": "FR"
-                    },
-                    "forcedCurrency": {
-                        "type": "string",
-                        "description": "Currency forced by end user",
-                        "example": "EUR"
-                    },
-                    "endUser": {
-                        "$ref": "#/components/schemas/EndUserPut"
-                    },
-                    "userAgent": {
-                        "type": "string",
-                        "description": "User-Agent",
-                        "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1"
-                    },
-                    "discounts": {
-                        "type": "array",
-                        "description": "List of signed discounts",
-                        "items": {
-                            "type": "string",
-                            "description": "List of signed discounts"
-                        }
-                    },
-                    "storeHostname": {
-                        "type": "string",
-                        "description": "Hostname of store",
-                        "example": "storename.mydomain.fr"
-                    },
-                    "checkoutUrl": {
-                        "type": "string",
-                        "description": "Full URL of cart",
-                        "example": "https://storename.mydomain.fr"
-                    },
-                    "externalContext": {
-                        "type": "string",
-                        "description": "External context",
-                        "example": "my external context"
-                    },
-                    "salesFlags": {
-                        "type": "array",
-                        "description": "List of sales flags",
-                        "items": {
-                            "type": "string",
-                            "description": "List of sales flags"
-                        }
-                    },
-                    "buyerBehavior": {
-                        "$ref": "#/components/schemas/BuyerBehavior"
-                    },
-                    "consentFlags": {
-                        "$ref": "#/components/schemas/ConsentFlags"
-                    },
-                    "hideUpSell": {
-                        "type": "boolean",
-                        "description": "Define if we display upsell recommendation",
-                        "default": false
-                    },
-                    "hideCrossSell": {
-                        "type": "boolean",
-                        "description": "Define if we display cross sell recommendation",
-                        "default": false
-                    },
-                    "productRecoId": {
-                        "type": "string",
-                        "description": "Product recommendation  id",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
-                    },
-                    "marketingCampaignName": {
-                        "type": "string",
-                        "description": "Marketing campaign name",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
-                    },
-                    "storeId": {
-                        "type": "string",
-                        "description": "Reference ID of the store service"
-                    },
-                    "onPaymentClickRedirectUrl": {
-                        "type": "string",
-                        "description": "redirection url once payment page is closed",
-                        "example": "https://www.myredirecturl.com"
-                    },
-                    "paymentExternalContext": {
-                        "type": "string"
-                    },
-                    "remitteds": {
-                        "type": "array",
-                        "description": "List of remitteds",
-                        "items": {
-                            "$ref": "#/components/schemas/Remitted"
-                        }
-                    },
-                    "blockDiscounts": {
-                        "type": "boolean",
-                        "description": "Block discounts on this cart"
-                    },
-                    "source": {
-                        "type": "string",
-                        "description": "Source",
-                        "enum": [
-                            "PURCHASE",
-                            "SUBSCRIPTION",
-                            "MANUAL_RENEWAL",
-                            "BILLING_PLAN"
-                        ]
-                    },
-                    "catalogId": {
-                        "type": "string",
-                        "description": "Catalog ID",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
-                    },
-                    "partialPaymentAmount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "initialOrderId": {
-                        "type": "string",
-                        "deprecated": true
-                    },
-                    "products": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/ProductInput"
-                        },
-                        "writeOnly": true
-                    },
-                    "ip": {
-                        "type": "string",
-                        "description": "Cart IP",
-                        "example": "127.0.0.1"
                     }
                 }
             },
@@ -2920,42 +2643,13 @@
                         "type": "boolean",
                         "description": "Tax exemption eligibility flag",
                         "example": false
+                    },
+                    "taxExemptionChecked": {
+                        "type": "boolean",
+                        "description": "Check box for exemption rules"
                     }
                 },
                 "description": "End-user who owns this cart"
-            },
-            "JsonNode": {
-                "type": "object"
-            },
-            "SearchResultObject": {
-                "type": "object",
-                "properties": {
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        }
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "totalItems": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                }
             },
             "PrivateCartInput": {
                 "required": [
@@ -3125,6 +2819,410 @@
                     }
                 }
             },
+            "ExceptionDetail": {
+                "type": "object",
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
+                }
+            },
+            "NormalizeException": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        }
+                    }
+                }
+            },
+            "SearchResultObject": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "MandatoryFieldAttribute": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "jsonPath": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "B2B",
+                            "B2C",
+                            "B2B_B2C"
+                        ]
+                    },
+                    "availableValues": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    },
+                    "validators": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Validator"
+                        }
+                    }
+                }
+            },
+            "Validator": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "CUSTOM",
+                            "REGEX"
+                        ]
+                    },
+                    "regex": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CartInput": {
+                "required": [
+                    "country",
+                    "locale",
+                    "storeId",
+                    "wantedProducts"
+                ],
+                "type": "object",
+                "properties": {
+                    "wantedProducts": {
+                        "type": "array",
+                        "description": "list of products or signed product in the cart with its quantity and price function parameters",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductInput"
+                        }
+                    },
+                    "locale": {
+                        "type": "string",
+                        "description": "Locale of cart",
+                        "example": "fr-FR"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country of cart",
+                        "example": "FR"
+                    },
+                    "forcedCurrency": {
+                        "type": "string",
+                        "description": "Currency forced by end user",
+                        "example": "EUR"
+                    },
+                    "endUser": {
+                        "$ref": "#/components/schemas/EndUserPut"
+                    },
+                    "userAgent": {
+                        "type": "string",
+                        "description": "User-Agent",
+                        "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1"
+                    },
+                    "discounts": {
+                        "type": "array",
+                        "description": "List of signed discounts",
+                        "items": {
+                            "type": "string",
+                            "description": "List of signed discounts"
+                        }
+                    },
+                    "storeHostname": {
+                        "type": "string",
+                        "description": "Hostname of store",
+                        "example": "storename.mydomain.fr"
+                    },
+                    "checkoutUrl": {
+                        "type": "string",
+                        "description": "Full URL of cart",
+                        "example": "https://storename.mydomain.fr"
+                    },
+                    "externalContext": {
+                        "type": "string",
+                        "description": "External context",
+                        "example": "my external context"
+                    },
+                    "salesFlags": {
+                        "type": "array",
+                        "description": "List of sales flags",
+                        "items": {
+                            "type": "string",
+                            "description": "List of sales flags"
+                        }
+                    },
+                    "buyerBehavior": {
+                        "$ref": "#/components/schemas/BuyerBehavior"
+                    },
+                    "consentFlags": {
+                        "$ref": "#/components/schemas/ConsentFlags"
+                    },
+                    "hideUpSell": {
+                        "type": "boolean",
+                        "description": "Define if we display upsell recommendation",
+                        "default": false
+                    },
+                    "hideCrossSell": {
+                        "type": "boolean",
+                        "description": "Define if we display cross sell recommendation",
+                        "default": false
+                    },
+                    "productRecoId": {
+                        "type": "string",
+                        "description": "Product recommendation  id",
+                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                    },
+                    "marketingCampaignName": {
+                        "type": "string",
+                        "description": "Marketing campaign name",
+                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                    },
+                    "storeId": {
+                        "type": "string",
+                        "description": "Reference ID of the store service"
+                    },
+                    "onPaymentClickRedirectUrl": {
+                        "type": "string",
+                        "description": "redirection url once payment page is closed",
+                        "example": "https://www.myredirecturl.com"
+                    },
+                    "paymentExternalContext": {
+                        "type": "string"
+                    },
+                    "remitteds": {
+                        "type": "array",
+                        "description": "List of remitteds",
+                        "items": {
+                            "$ref": "#/components/schemas/Remitted"
+                        }
+                    },
+                    "blockDiscounts": {
+                        "type": "boolean",
+                        "description": "Block discounts on this cart"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Source",
+                        "enum": [
+                            "PURCHASE",
+                            "SUBSCRIPTION",
+                            "MANUAL_RENEWAL",
+                            "BILLING_PLAN"
+                        ]
+                    },
+                    "catalogId": {
+                        "type": "string",
+                        "description": "Catalog ID",
+                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                    },
+                    "partialPaymentAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "initialOrderId": {
+                        "type": "string",
+                        "deprecated": true
+                    },
+                    "products": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ProductInput"
+                        },
+                        "writeOnly": true
+                    },
+                    "ip": {
+                        "type": "string",
+                        "description": "Cart IP",
+                        "example": "127.0.0.1"
+                    }
+                }
+            },
+            "SearchResultCart": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cart"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "RecapEntry": {
+                "type": "object",
+                "properties": {
+                    "targetValue": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "SearchResultRecapEntry": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RecapEntry"
+                        }
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "totalItems": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Catalog": {
+                "type": "object",
+                "properties": {
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "singleUse": {
+                        "type": "boolean"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Checkout": {
+                "required": [
+                    "cart",
+                    "fullCatalog"
+                ],
+                "type": "object",
+                "properties": {
+                    "cart": {
+                        "$ref": "#/components/schemas/PrivateCartInput"
+                    },
+                    "fullCatalog": {
+                        "$ref": "#/components/schemas/FullCatalog"
+                    }
+                }
+            },
+            "FullCatalog": {
+                "required": [
+                    "catalog"
+                ],
+                "type": "object",
+                "properties": {
+                    "catalog": {
+                        "$ref": "#/components/schemas/Catalog"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                }
+            },
             "CartPut": {
                 "required": [
                     "country",
@@ -3234,114 +3332,24 @@
                     }
                 }
             },
-            "Catalog": {
+            "Document": {
                 "type": "object",
                 "properties": {
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "singleUse": {
+                    "empty": {
                         "type": "boolean"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "endDate": {
-                        "type": "string",
-                        "format": "date-time"
                     }
+                },
+                "additionalProperties": {
+                    "type": "object"
                 }
             },
-            "Checkout": {
-                "required": [
-                    "cart",
-                    "fullCatalog"
-                ],
-                "type": "object",
-                "properties": {
-                    "cart": {
-                        "$ref": "#/components/schemas/PrivateCartInput"
-                    },
-                    "fullCatalog": {
-                        "$ref": "#/components/schemas/FullCatalog"
-                    }
-                }
-            },
-            "FullCatalog": {
-                "required": [
-                    "catalog"
-                ],
-                "type": "object",
-                "properties": {
-                    "catalog": {
-                        "$ref": "#/components/schemas/Catalog"
-                    },
-                    "locale": {
-                        "type": "string"
-                    },
-                    "storeId": {
-                        "type": "string"
-                    }
-                }
-            },
-            "MandatoryFieldAttribute": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "jsonPath": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "B2B",
-                            "B2C",
-                            "B2B_B2C"
-                        ]
-                    },
-                    "availableValues": {
-                        "uniqueItems": true,
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        }
-                    },
-                    "errorMessage": {
-                        "type": "string"
-                    },
-                    "validators": {
-                        "uniqueItems": true,
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Validator"
-                        }
-                    }
-                }
-            },
-            "Validator": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "CUSTOM",
-                            "REGEX"
-                        ]
-                    },
-                    "regex": {
-                        "type": "string"
-                    }
-                }
-            },
-            "SearchResultCart": {
+            "SearchResultDocument": {
                 "type": "object",
                 "properties": {
                     "items": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cart"
+                            "$ref": "#/components/schemas/Document"
                         }
                     },
                     "last": {
