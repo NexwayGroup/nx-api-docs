@@ -19,10 +19,10 @@
     "paths": {
         "/campaigns": {
             "get": {
+                "description": "Get items",
                 "tags": [
-                    "campaign"
+                    "Campaign"
                 ],
-                "summary": "List campaigns.",
                 "operationId": "listCampaign",
                 "parameters": [
                     {
@@ -68,7 +68,7 @@
                     },
                     {
                         "type": "string",
-                        "example": "enabled",
+                        "example": "ENABLED",
                         "x-go-name": "Status",
                         "description": "Filter result by status",
                         "name": "status",
@@ -125,10 +125,10 @@
                 }
             },
             "post": {
+                "description": "Create an item",
                 "tags": [
-                    "campaign"
+                    "Campaign"
                 ],
-                "summary": "Creates campaign.",
                 "operationId": "createCampaign",
                 "parameters": [
                     {
@@ -148,6 +148,12 @@
                                     "x-go-name": "CustomerID",
                                     "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
                                 },
+                                "description": {
+                                    "description": "Marketing description.\nDescribe marketing campaign operation.",
+                                    "type": "string",
+                                    "x-go-name": "Description",
+                                    "example": "Christman 2002 special cart, 10% off on most of products"
+                                },
                                 "endDate": {
                                     "description": "When the marketing campaign ends.\nTimestamp in milliseconds. Must be greater than startDate.\nWhen omitted campaign is infinite.",
                                     "type": "integer",
@@ -156,7 +162,7 @@
                                     "example": 1596261600000
                                 },
                                 "mandatoryProducts": {
-                                    "description": "Products mandatory in cart (if not,  marketing campaign will be disabled)",
+                                    "description": "DEPRECATED. Use LinkedProducts instead.\nProducts mandatory in cart (if not,  marketing campaign will be DISABLED)",
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/CampaignProduct"
@@ -232,10 +238,10 @@
         },
         "/campaigns/{id}": {
             "get": {
+                "description": "Get item",
                 "tags": [
-                    "campaign"
+                    "Campaign"
                 ],
-                "summary": "Gets campaign.",
                 "operationId": "getCampaign",
                 "parameters": [
                     {
@@ -269,10 +275,10 @@
                 }
             },
             "put": {
+                "description": "Update item",
                 "tags": [
-                    "campaign"
+                    "Campaign"
                 ],
-                "summary": "Updates campaign.",
                 "operationId": "updateCampaign",
                 "parameters": [
                     {
@@ -310,11 +316,282 @@
                 }
             },
             "delete": {
+                "description": "Delete item",
                 "tags": [
-                    "campaign"
+                    "Campaign"
                 ],
-                "summary": "Deletes campaign.",
                 "operationId": "deleteCampaign",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/linked": {
+            "get": {
+                "description": "Get items",
+                "tags": [
+                    "LinkedProducts"
+                ],
+                "operationId": "listLinkedProducts",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 50,
+                        "x-go-name": "Size",
+                        "description": "Amount of items returned per pagination page",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "default": 0,
+                        "x-go-name": "Page",
+                        "description": "Pagination page starting from 0",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "createDate,desc",
+                        "x-go-name": "Sort",
+                        "description": "Sort list results\nFormat: entity_field_name,order.\nFormat entity collection: entity_sub_object_name.sub_field_name,order.",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "431b946a-92ea-430a-984d-c3cd65d2bb77",
+                        "x-go-name": "CustomerID",
+                        "description": "Filter results by customerId",
+                        "name": "customerId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid4",
+                        "x-go-name": "MarketingCampaignId",
+                        "description": "Filter results by marketing campaign id",
+                        "name": "marketingCampaignId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid4",
+                        "x-go-name": "BaseProductId",
+                        "description": "Filter results by base product id",
+                        "name": "baseProduct.id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "variant",
+                        "x-go-name": "BaseProductMatchMode",
+                        "description": "Filter results by base product match mode (filter mode)",
+                        "name": "baseProduct.matchMode",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid4",
+                        "x-go-name": "LinkedProductId",
+                        "description": "Filter results by linked product id",
+                        "name": "linkedProduct.id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "alignedLessOrEqual",
+                        "x-go-name": "LinkedProductQuantitySelector",
+                        "description": "Filter results by linked product quantity selector",
+                        "name": "linkedProduct.quantitySelector",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listLinkedProductsSuccess"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "post": {
+                "description": "Create an item",
+                "tags": [
+                    "LinkedProducts"
+                ],
+                "operationId": "createLinkedProducts",
+                "parameters": [
+                    {
+                        "name": "Param",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "marketingCampaignId",
+                                "baseProduct",
+                                "linkedProduct"
+                            ],
+                            "properties": {
+                                "baseProduct": {
+                                    "$ref": "#/definitions/BaseProduct"
+                                },
+                                "customerId": {
+                                    "description": "Associates entity to certain customer.",
+                                    "type": "string",
+                                    "x-go-name": "CustomerID",
+                                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                                },
+                                "linkedProduct": {
+                                    "$ref": "#/definitions/LinkedProduct"
+                                },
+                                "marketingCampaignId": {
+                                    "description": "Marketing Campaign id.\nLinks to unique campaign",
+                                    "type": "string",
+                                    "x-go-name": "MarketingCampaignId",
+                                    "example": "bda56683-4641-4d8a-af46-28a73394a2ae"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/starterSuccessCreate"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            }
+        },
+        "/linked/{id}": {
+            "get": {
+                "description": "Get item",
+                "tags": [
+                    "LinkedProducts"
+                ],
+                "operationId": "getLinkedProducts",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/getLinkedProductsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/starterNotFound"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "put": {
+                "description": "Update item",
+                "tags": [
+                    "LinkedProducts"
+                ],
+                "operationId": "updateLinkedProducts",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "x-go-name": "ID",
+                        "description": "Entity id generated and returned in \"Location\" header upon creation (POST).",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/LinkedProducts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/putLinkedProductsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete item",
+                "tags": [
+                    "LinkedProducts"
+                ],
+                "operationId": "deleteLinkedProducts",
                 "parameters": [
                     {
                         "type": "string",
@@ -384,6 +661,26 @@
             },
             "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
         },
+        "BaseProduct": {
+            "description": "Defines a mandatory product in the cart",
+            "type": "object",
+            "required": [
+                "id",
+                "matchMode"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Product id.",
+                    "type": "string",
+                    "x-go-name": "Id",
+                    "example": "bda56683-4641-4d8a-af46-28a73394a2ae"
+                },
+                "matchMode": {
+                    "$ref": "#/definitions/LinkedProductMatchMode"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
         "Campaign": {
             "description": "Campaign\nSingle campaign entity.",
             "type": "object",
@@ -413,6 +710,12 @@
                     "x-go-name": "DbVersion",
                     "example": 0
                 },
+                "description": {
+                    "description": "Marketing description.\nDescribe marketing campaign operation.",
+                    "type": "string",
+                    "x-go-name": "Description",
+                    "example": "Christman 2002 special cart, 10% off on most of products"
+                },
                 "endDate": {
                     "description": "When the marketing campaign ends.\nTimestamp in milliseconds. Must be greater than startDate.\nWhen omitted campaign is infinite.",
                     "type": "integer",
@@ -427,7 +730,7 @@
                     "example": "d87e0973-980a-4485-a39d-682184a8988a"
                 },
                 "mandatoryProducts": {
-                    "description": "Products mandatory in cart (if not,  marketing campaign will be disabled)",
+                    "description": "DEPRECATED. Use LinkedProducts instead.\nProducts mandatory in cart (if not,  marketing campaign will be DISABLED)",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/CampaignProduct"
@@ -514,6 +817,7 @@
             "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
         },
         "CampaignStatus": {
+            "description": "Status of marketing campaign\nHas two values: ENABLED, DISABLED",
             "type": "string",
             "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
         },
@@ -593,6 +897,87 @@
             },
             "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
         },
+        "LinkedProduct": {
+            "description": "Defines a dependant product (product removed if base product not present in the cart)",
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Product id.",
+                    "type": "string",
+                    "x-go-name": "Id",
+                    "example": "bda56683-4641-4d8a-af46-28a73394a2ae"
+                },
+                "quantitySelector": {
+                    "$ref": "#/definitions/QuantitySelector"
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "LinkedProductMatchMode": {
+            "description": "Available match modes: variant, parent. The \"variant\" defines only one\nproduct (variant). The \"parent\" defines whole product with it's variants.",
+            "type": "string",
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
+        "LinkedProducts": {
+            "description": "LinkedProducts\nDefines relations between products linked to campaign.\nUsed to to set mandatory products, quantity selection behaviour of the dependant product.",
+            "type": "object",
+            "required": [
+                "marketingCampaignId",
+                "baseProduct",
+                "linkedProduct"
+            ],
+            "properties": {
+                "baseProduct": {
+                    "$ref": "#/definitions/BaseProduct"
+                },
+                "createDate": {
+                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "CreateDate",
+                    "example": 1593683684789
+                },
+                "customerId": {
+                    "description": "Associates entity to certain customer.",
+                    "type": "string",
+                    "x-go-name": "CustomerID",
+                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a"
+                },
+                "dbVersion": {
+                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "DbVersion",
+                    "example": 0
+                },
+                "id": {
+                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
+                    "type": "string",
+                    "x-go-name": "ID",
+                    "example": "d87e0973-980a-4485-a39d-682184a8988a"
+                },
+                "linkedProduct": {
+                    "$ref": "#/definitions/LinkedProduct"
+                },
+                "marketingCampaignId": {
+                    "description": "Marketing Campaign id.\nLinks to unique campaign",
+                    "type": "string",
+                    "x-go-name": "MarketingCampaignId",
+                    "example": "bda56683-4641-4d8a-af46-28a73394a2ae"
+                },
+                "updateDate": {
+                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "UpdateDate",
+                    "example": 1593685645385
+                }
+            },
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
+        },
         "NotFound": {
             "type": "object",
             "properties": {
@@ -630,6 +1015,11 @@
                 }
             },
             "x-go-package": "github.com/NexwayGroup/nx-go-starter/httphelper/swagger"
+        },
+        "QuantitySelector": {
+            "description": "Optional quantity selector type. Defines what quantity of LinkedProduct\nin relation to BaseProduct is allowed.\nAvailable selectors: alignedLessOrEqual",
+            "type": "string",
+            "x-go-package": "github.com/NexwayGroup/nx-iap-marketing-campaign/model"
         },
         "Unauthorized": {
             "type": "object",
@@ -675,6 +1065,12 @@
             "description": "successful",
             "schema": {
                 "$ref": "#/definitions/Campaign"
+            }
+        },
+        "getLinkedProductsSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/LinkedProducts"
             }
         },
         "listCampaignSuccess": {
@@ -733,10 +1129,72 @@
                 }
             }
         },
+        "listLinkedProductsSuccess": {
+            "description": "operation was successful",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "type": "string",
+                        "x-go-name": "Format",
+                        "example": "short"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/LinkedProducts"
+                        },
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage",
+                        "example": false
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Page",
+                        "example": 41
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "Size",
+                        "example": 10
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "TotalMatchingItems",
+                        "example": 100523
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "type": "integer",
+                        "format": "int64",
+                        "x-go-name": "ComputedTotalPages",
+                        "example": 10053
+                    }
+                }
+            }
+        },
         "putCampaignSuccess": {
             "description": "successful",
             "schema": {
                 "$ref": "#/definitions/Campaign"
+            }
+        },
+        "putLinkedProductsSuccess": {
+            "description": "successful",
+            "schema": {
+                "$ref": "#/definitions/LinkedProducts"
             }
         },
         "starterBadRequest": {
