@@ -90,77 +90,27 @@
                 "type": "object"
             },
             "CreditCard": {
-                "description": "List of credit cards",
-                "properties": {
-                    "active": {
-                        "type": "boolean"
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaymentMethod"
                     },
-                    "activeDetails": {
-                        "type": "boolean"
-                    },
-                    "bin": {
-                        "type": "string"
-                    },
-                    "expirationDate": {
-                        "description": "Expiration date",
-                        "example": "12/2050",
-                        "type": "string"
-                    },
-                    "hash": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "description": "Reference ID",
-                        "example": "147690b8-df3a-4622-be75-e71148f99b97",
-                        "type": "string"
-                    },
-                    "mainTransactionId": {
-                        "type": "string"
-                    },
-                    "paymentMethodType": {
-                        "description": "Payment method type ",
-                        "enum": [
-                            "CreditCard",
-                            "Sepa",
-                            "Paypal",
-                            "NonRecurringUnknown",
-                            "RecurringUnknown"
-                        ],
-                        "example": "CreditCard, Sepa, Paypal, NonRecurringUnknown, RecurringUnknown",
-                        "type": "string"
-                    },
-                    "paymentType": {
-                        "$ref": "#/components/schemas/PaymentType"
-                    },
-                    "status": {
-                        "description": "Activation status",
-                        "enum": [
-                            "ACTIVATED",
-                            "PENDING",
-                            "ERROR",
-                            "DEACTIVATED"
-                        ],
-                        "example": "ACTIVATED, PENDING, ERROR, DEACTIVATED",
-                        "type": "string"
-                    },
-                    "transactionIds": {
-                        "description": "List of transaction IDs",
-                        "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                        "items": {
-                            "description": "List of transaction IDs",
-                            "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                            "type": "string"
+                    {
+                        "properties": {
+                            "bin": {
+                                "type": "string"
+                            },
+                            "expirationDate": {
+                                "description": "Expiration date",
+                                "example": "12/2050",
+                                "type": "string"
+                            },
+                            "hash": {
+                                "type": "string"
+                            }
                         },
-                        "type": "array",
-                        "uniqueItems": true
-                    },
-                    "type": {
-                        "description": "Type in DP",
-                        "example": "visa",
-                        "type": "string"
+                        "type": "object"
                     }
-                },
-                "readOnly": true,
+                ],
                 "type": "object"
             },
             "DeactivateRequest": {
@@ -557,6 +507,9 @@
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "password": {
+                        "type": "string"
                     },
                     "phone": {
                         "description": "Phone",
@@ -1282,85 +1235,6 @@
                 "type": "object"
             },
             "JsonNode": {
-                "properties": {
-                    "array": {
-                        "type": "boolean"
-                    },
-                    "bigDecimal": {
-                        "type": "boolean"
-                    },
-                    "bigInteger": {
-                        "type": "boolean"
-                    },
-                    "binary": {
-                        "type": "boolean"
-                    },
-                    "boolean": {
-                        "type": "boolean"
-                    },
-                    "containerNode": {
-                        "type": "boolean"
-                    },
-                    "double": {
-                        "type": "boolean"
-                    },
-                    "empty": {
-                        "type": "boolean"
-                    },
-                    "float": {
-                        "type": "boolean"
-                    },
-                    "floatingPointNumber": {
-                        "type": "boolean"
-                    },
-                    "int": {
-                        "type": "boolean"
-                    },
-                    "integralNumber": {
-                        "type": "boolean"
-                    },
-                    "long": {
-                        "type": "boolean"
-                    },
-                    "missingNode": {
-                        "type": "boolean"
-                    },
-                    "nodeType": {
-                        "enum": [
-                            "ARRAY",
-                            "BINARY",
-                            "BOOLEAN",
-                            "MISSING",
-                            "NULL",
-                            "NUMBER",
-                            "OBJECT",
-                            "POJO",
-                            "STRING"
-                        ],
-                        "type": "string"
-                    },
-                    "null": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "type": "boolean"
-                    },
-                    "object": {
-                        "type": "boolean"
-                    },
-                    "pojo": {
-                        "type": "boolean"
-                    },
-                    "short": {
-                        "type": "boolean"
-                    },
-                    "textual": {
-                        "type": "boolean"
-                    },
-                    "valueNode": {
-                        "type": "boolean"
-                    }
-                },
                 "type": "object"
             },
             "LoginIAMRequest": {
@@ -1394,6 +1268,14 @@
                 ],
                 "type": "object"
             },
+            "NonRecurringUnknown": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaymentMethod"
+                    }
+                ],
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -1421,26 +1303,21 @@
             },
             "Pageable": {
                 "properties": {
-                    "offset": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "pageNumber": {
+                    "page": {
                         "format": "int32",
+                        "minimum": 0,
                         "type": "integer"
                     },
-                    "pageSize": {
+                    "size": {
                         "format": "int32",
+                        "minimum": 1,
                         "type": "integer"
-                    },
-                    "paged": {
-                        "type": "boolean"
                     },
                     "sort": {
-                        "$ref": "#/components/schemas/Sort"
-                    },
-                    "unpaged": {
-                        "type": "boolean"
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -1584,86 +1461,36 @@
                 "type": "object"
             },
             "Paypal": {
-                "description": "List of PayPal accounts",
-                "properties": {
-                    "active": {
-                        "type": "boolean"
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaymentMethod"
                     },
-                    "activeDetails": {
-                        "type": "boolean"
-                    },
-                    "id": {
-                        "description": "Reference ID",
-                        "example": "147690b8-df3a-4622-be75-e71148f99b97",
-                        "type": "string"
-                    },
-                    "mainTransactionId": {
-                        "type": "string"
-                    },
-                    "paymentMethodType": {
-                        "description": "Payment method type ",
-                        "enum": [
-                            "CreditCard",
-                            "Sepa",
-                            "Paypal",
-                            "NonRecurringUnknown",
-                            "RecurringUnknown"
-                        ],
-                        "example": "CreditCard, Sepa, Paypal, NonRecurringUnknown, RecurringUnknown",
-                        "type": "string"
-                    },
-                    "paymentType": {
-                        "$ref": "#/components/schemas/PaymentType"
-                    },
-                    "paypalPayerEmail": {
-                        "description": "PayPal payer email",
-                        "example": "john.doe@nexway.com",
-                        "type": "string"
-                    },
-                    "paypalPayerFirstName": {
-                        "description": "PayPal payer first name",
-                        "example": "John",
-                        "type": "string"
-                    },
-                    "paypalPayerLastName": {
-                        "description": "PayPal payer last name",
-                        "example": "Doe",
-                        "type": "string"
-                    },
-                    "paypalUser": {
-                        "description": "Paypal payer",
-                        "example": "sandrine-facilitator_api1.nexway.com",
-                        "type": "string"
-                    },
-                    "status": {
-                        "description": "Activation status",
-                        "enum": [
-                            "ACTIVATED",
-                            "PENDING",
-                            "ERROR",
-                            "DEACTIVATED"
-                        ],
-                        "example": "ACTIVATED, PENDING, ERROR, DEACTIVATED",
-                        "type": "string"
-                    },
-                    "transactionIds": {
-                        "description": "List of transaction IDs",
-                        "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                        "items": {
-                            "description": "List of transaction IDs",
-                            "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                            "type": "string"
+                    {
+                        "properties": {
+                            "paypalPayerEmail": {
+                                "description": "PayPal payer email",
+                                "example": "john.doe@nexway.com",
+                                "type": "string"
+                            },
+                            "paypalPayerFirstName": {
+                                "description": "PayPal payer first name",
+                                "example": "John",
+                                "type": "string"
+                            },
+                            "paypalPayerLastName": {
+                                "description": "PayPal payer last name",
+                                "example": "Doe",
+                                "type": "string"
+                            },
+                            "paypalUser": {
+                                "description": "Paypal payer",
+                                "example": "sandrine-facilitator_api1.nexway.com",
+                                "type": "string"
+                            }
                         },
-                        "type": "array",
-                        "uniqueItems": true
-                    },
-                    "type": {
-                        "description": "Type in DP",
-                        "example": "visa",
-                        "type": "string"
+                        "type": "object"
                     }
-                },
-                "readOnly": true,
+                ],
                 "type": "object"
             },
             "Product": {
@@ -1732,69 +1559,19 @@
                 "type": "object"
             },
             "RecurringUnknown": {
-                "description": "List of recurring unknown payment methods",
-                "properties": {
-                    "active": {
-                        "type": "boolean"
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PaymentMethod"
                     },
-                    "activeDetails": {
-                        "type": "boolean"
-                    },
-                    "id": {
-                        "description": "Reference ID",
-                        "example": "147690b8-df3a-4622-be75-e71148f99b97",
-                        "type": "string"
-                    },
-                    "mainTransactionId": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "paymentMethodType": {
-                        "description": "Payment method type ",
-                        "enum": [
-                            "CreditCard",
-                            "Sepa",
-                            "Paypal",
-                            "NonRecurringUnknown",
-                            "RecurringUnknown"
-                        ],
-                        "example": "CreditCard, Sepa, Paypal, NonRecurringUnknown, RecurringUnknown",
-                        "type": "string"
-                    },
-                    "paymentType": {
-                        "$ref": "#/components/schemas/PaymentType"
-                    },
-                    "status": {
-                        "description": "Activation status",
-                        "enum": [
-                            "ACTIVATED",
-                            "PENDING",
-                            "ERROR",
-                            "DEACTIVATED"
-                        ],
-                        "example": "ACTIVATED, PENDING, ERROR, DEACTIVATED",
-                        "type": "string"
-                    },
-                    "transactionIds": {
-                        "description": "List of transaction IDs",
-                        "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                        "items": {
-                            "description": "List of transaction IDs",
-                            "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
-                            "type": "string"
+                    {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
                         },
-                        "type": "array",
-                        "uniqueItems": true
-                    },
-                    "type": {
-                        "description": "Type in DP",
-                        "example": "visa",
-                        "type": "string"
+                        "type": "object"
                     }
-                },
-                "readOnly": true,
+                ],
                 "type": "object"
             },
             "ResetPasswordRequest": {
@@ -2099,20 +1876,6 @@
                 "readOnly": true,
                 "type": "object"
             },
-            "Sort": {
-                "properties": {
-                    "empty": {
-                        "type": "boolean"
-                    },
-                    "sorted": {
-                        "type": "boolean"
-                    },
-                    "unsorted": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "Subscription": {
                 "properties": {
                     "displayPriceFunctionParametersUpgrade": {
@@ -2222,8 +1985,24 @@
     "paths": {
         "/endusers": {
             "get": {
-                "operationId": "getItems_1",
+                "operationId": "getItems",
                 "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
                     {
                         "in": "query",
                         "name": "target",
@@ -2405,7 +2184,17 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_1",
+                "operationId": "createItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EndUser"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "201": {
                         "content": {
@@ -2468,6 +2257,32 @@
         "/endusers/distinct": {
             "get": {
                 "operationId": "distinct_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2529,8 +2344,24 @@
         },
         "/endusers/groups": {
             "get": {
-                "operationId": "getItems",
+                "operationId": "getItems_1",
                 "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
                     {
                         "in": "query",
                         "name": "target",
@@ -2620,7 +2451,17 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem",
+                "operationId": "createItem_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Group"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "201": {
                         "content": {
@@ -2683,6 +2524,32 @@
         "/endusers/groups/distinct": {
             "get": {
                 "operationId": "distinct",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2744,7 +2611,33 @@
         },
         "/endusers/groups/recap": {
             "get": {
-                "operationId": "recap",
+                "operationId": "recap_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2806,7 +2699,33 @@
         },
         "/endusers/groups/unwind": {
             "get": {
-                "operationId": "unwind",
+                "operationId": "unwind_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -2868,7 +2787,7 @@
         },
         "/endusers/groups/{id}": {
             "delete": {
-                "operationId": "deleteItem",
+                "operationId": "deleteItem_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -2938,7 +2857,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem",
+                "operationId": "getItem_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -3008,7 +2927,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem",
+                "operationId": "updateItem_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -3019,6 +2938,16 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Group"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "200": {
                         "content": {
@@ -3086,6 +3015,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -3094,6 +3024,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3318,6 +3249,7 @@
                         "description": "store host-name",
                         "in": "query",
                         "name": "storeHostname",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3326,6 +3258,7 @@
                         "description": "version",
                         "in": "query",
                         "name": "version",
+                        "required": false,
                         "schema": {
                             "format": "int64",
                             "type": "integer"
@@ -3335,6 +3268,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -3343,6 +3277,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3500,7 +3435,7 @@
         },
         "/endusers/portal/orders/{orderId}/creditnotes/{creditNoteId}": {
             "get": {
-                "operationId": "getEnduserCreditNoteAsPdf_1",
+                "operationId": "getEnduserCreditNoteAsPdf",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -3591,7 +3526,7 @@
         },
         "/endusers/portal/orders/{orderId}/invoice": {
             "get": {
-                "operationId": "getEnduserInvoiceAsPdfv2_1",
+                "operationId": "getEnduserInvoiceAsPdfv2",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -3689,6 +3624,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -3697,6 +3633,7 @@
                         "description": "pageable",
                         "in": "query",
                         "name": "pageable",
+                        "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Pageable"
                         }
@@ -3705,6 +3642,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3770,7 +3708,7 @@
         },
         "/endusers/portal/subscriptions/v0": {
             "get": {
-                "operationId": "getAllSubscriptionsV0_1",
+                "operationId": "getAllSubscriptionsV0",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -3785,6 +3723,7 @@
                         "description": "pageable",
                         "in": "query",
                         "name": "pageable",
+                        "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Pageable"
                         }
@@ -3850,7 +3789,7 @@
         },
         "/endusers/portal/subscriptions/{subscriptionId}": {
             "get": {
-                "operationId": "getEnduserSubscriptionDetails_1",
+                "operationId": "getEnduserSubscriptionDetails",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -3874,6 +3813,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3972,6 +3912,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -3980,6 +3921,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4129,7 +4071,7 @@
         },
         "/endusers/portal/updatepassword": {
             "put": {
-                "operationId": "updatePassword_1",
+                "operationId": "updatePassword",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -4144,6 +4086,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -4152,6 +4095,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4227,7 +4171,7 @@
         },
         "/endusers/portal/updatepassword/{id}": {
             "put": {
-                "operationId": "updatePassword",
+                "operationId": "updatePassword_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -4242,6 +4186,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -4250,6 +4195,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4351,7 +4297,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaymentMethod"
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreditCard"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NonRecurringUnknown"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Paypal"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RecurringUnknown"
+                                        }
+                                    ]
                                 }
                             }
                         },
@@ -4422,6 +4381,7 @@
                         "example": " ACTIVATED, PENDING, ERROR, DEACTIVATED",
                         "in": "query",
                         "name": "status",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4487,7 +4447,7 @@
         },
         "/endusers/portal/wallet/{paymentMethodId}": {
             "delete": {
-                "operationId": "deleteEnduserPaymentMethod_1",
+                "operationId": "deleteEnduserPaymentMethod",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -4511,6 +4471,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -4519,6 +4480,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4575,7 +4537,7 @@
                 ]
             },
             "get": {
-                "operationId": "getOnePaymentMethod_1",
+                "operationId": "getOnePaymentMethod",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -4601,7 +4563,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaymentMethod"
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreditCard"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NonRecurringUnknown"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Paypal"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RecurringUnknown"
+                                        }
+                                    ]
                                 }
                             }
                         },
@@ -4656,7 +4631,7 @@
         },
         "/endusers/portal/wallet/{paymentType}": {
             "post": {
-                "operationId": "addEndUserPaymentMethod_1",
+                "operationId": "addEndUserPaymentMethod",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -4681,6 +4656,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -4689,6 +4665,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4850,6 +4827,7 @@
                         "description": "store host-name",
                         "in": "query",
                         "name": "storeHostname",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4858,6 +4836,7 @@
                         "description": "version",
                         "in": "query",
                         "name": "version",
+                        "required": false,
                         "schema": {
                             "format": "int64",
                             "type": "integer"
@@ -4867,6 +4846,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -4875,6 +4855,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4950,7 +4931,7 @@
         },
         "/endusers/portal/{id}/orders/{orderId}/creditnotes/{creditNoteId}": {
             "get": {
-                "operationId": "getEnduserCreditNoteAsPdf",
+                "operationId": "getEnduserCreditNoteAsPdf_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5041,7 +5022,7 @@
         },
         "/endusers/portal/{id}/orders/{orderId}/invoice": {
             "get": {
-                "operationId": "getEnduserInvoiceAsPdfv2",
+                "operationId": "getEnduserInvoiceAsPdfv2_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5139,6 +5120,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -5147,6 +5129,7 @@
                         "description": "pageable",
                         "in": "query",
                         "name": "pageable",
+                        "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Pageable"
                         }
@@ -5155,6 +5138,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5220,7 +5204,7 @@
         },
         "/endusers/portal/{id}/subscriptions/v0": {
             "get": {
-                "operationId": "getAllSubscriptionsV0",
+                "operationId": "getAllSubscriptionsV0_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5235,6 +5219,7 @@
                         "description": "pageable",
                         "in": "query",
                         "name": "pageable",
+                        "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Pageable"
                         }
@@ -5300,7 +5285,7 @@
         },
         "/endusers/portal/{id}/subscriptions/{subscriptionId}": {
             "get": {
-                "operationId": "getEnduserSubscriptionDetails",
+                "operationId": "getEnduserSubscriptionDetails_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5324,6 +5309,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5422,6 +5408,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -5430,6 +5417,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5687,7 +5675,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaymentMethod"
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreditCard"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NonRecurringUnknown"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Paypal"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RecurringUnknown"
+                                        }
+                                    ]
                                 }
                             }
                         },
@@ -5758,6 +5759,7 @@
                         "example": " ACTIVATED, PENDING, ERROR, DEACTIVATED",
                         "in": "query",
                         "name": "status",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5823,7 +5825,7 @@
         },
         "/endusers/portal/{id}/wallet/{paymentMethodId}": {
             "delete": {
-                "operationId": "deleteEnduserPaymentMethod",
+                "operationId": "deleteEnduserPaymentMethod_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5847,6 +5849,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -5855,6 +5858,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5911,7 +5915,7 @@
                 ]
             },
             "get": {
-                "operationId": "getOnePaymentMethod",
+                "operationId": "getOnePaymentMethod_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -5937,7 +5941,20 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaymentMethod"
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/CreditCard"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/NonRecurringUnknown"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Paypal"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RecurringUnknown"
+                                        }
+                                    ]
                                 }
                             }
                         },
@@ -5992,7 +6009,7 @@
         },
         "/endusers/portal/{id}/wallet/{paymentType}": {
             "post": {
-                "operationId": "addEndUserPaymentMethod",
+                "operationId": "addEndUserPaymentMethod_1",
                 "parameters": [
                     {
                         "description": "end user id",
@@ -6017,6 +6034,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -6025,6 +6043,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6106,6 +6125,7 @@
                         "description": " Store host name",
                         "in": "query",
                         "name": "storeHostname",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6114,6 +6134,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6230,6 +6251,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -6238,6 +6260,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6324,6 +6347,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6420,6 +6444,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -6428,6 +6453,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6507,6 +6533,7 @@
                         "description": "dryRun or not dryRun",
                         "in": "query",
                         "name": "dryRun",
+                        "required": false,
                         "schema": {
                             "type": "boolean"
                         }
@@ -6515,6 +6542,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6586,7 +6614,33 @@
         },
         "/endusers/recap": {
             "get": {
-                "operationId": "recap_1",
+                "operationId": "recap",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -6723,7 +6777,33 @@
         },
         "/endusers/unwind": {
             "get": {
-                "operationId": "unwind_1",
+                "operationId": "unwind",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -6849,7 +6929,7 @@
         },
         "/endusers/{id}": {
             "delete": {
-                "operationId": "deleteItem_1",
+                "operationId": "deleteItem",
                 "parameters": [
                     {
                         "in": "path",
@@ -6919,7 +6999,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_1",
+                "operationId": "getItem",
                 "parameters": [
                     {
                         "in": "path",
@@ -6989,7 +7069,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_1",
+                "operationId": "updateItem",
                 "parameters": [
                     {
                         "in": "path",
@@ -7000,6 +7080,16 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EndUserPut"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "200": {
                         "content": {
@@ -7076,6 +7166,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7165,6 +7256,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7254,6 +7346,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7335,6 +7428,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7433,6 +7527,7 @@
                         "description": "reason of request",
                         "in": "query",
                         "name": "reason",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7580,6 +7675,17 @@
         {
             "description": "Generated server url",
             "url": "https://api.staging.nexway.build"
+        }
+    ],
+    "tags": [
+        {
+            "name": "EndUserPortal"
+        },
+        {
+            "name": "EndUser"
+        },
+        {
+            "name": "Group"
         }
     ]
 }
