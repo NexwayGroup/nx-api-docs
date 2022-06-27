@@ -123,23 +123,6 @@
                 },
                 "type": "object"
             },
-            "DoTransactionResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string"
-                    },
-                    "redirect": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "uuid": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "Document": {
                 "additionalProperties": {
                     "type": "object"
@@ -1430,6 +1413,26 @@
                     }
                 },
                 "readOnly": true,
+                "type": "object"
+            },
+            "PaymentMethodResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "paymentMethodId": {
+                        "type": "string"
+                    },
+                    "redirect": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "uuid": {
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "PaymentReplayData": {
@@ -4686,7 +4689,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DoTransactionResponse"
+                                    "$ref": "#/components/schemas/PaymentMethodResponse"
                                 }
                             }
                         },
@@ -6064,7 +6067,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DoTransactionResponse"
+                                    "$ref": "#/components/schemas/PaymentMethodResponse"
                                 }
                             }
                         },
