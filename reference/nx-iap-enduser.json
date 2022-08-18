@@ -34,7 +34,7 @@
                         "type": "string"
                     },
                     "companyName": {
-                        "description": "End-user company name",
+                        "description": "End user company name",
                         "example": "Nexway",
                         "maxLength": 255,
                         "minLength": 1,
@@ -135,7 +135,7 @@
                 "type": "object"
             },
             "Email": {
-                "description": "List of emails sent to end-user (contain: id, emailId, createDate, type)",
+                "description": "List of emails sent to end user (contain: id, emailId, createDate, type)",
                 "properties": {
                     "createDate": {
                         "description": "Creation date",
@@ -194,7 +194,7 @@
                         "$ref": "#/components/schemas/Company"
                     },
                     "consumerType": {
-                        "description": "End-user consumer type, company or personal",
+                        "description": "End user consumer type, company or personal",
                         "example": "company",
                         "type": "string"
                     },
@@ -228,7 +228,7 @@
                         "type": "string"
                     },
                     "emails": {
-                        "description": "List of emails sent to end-user (contain: id, emailId, createDate, type)",
+                        "description": "List of emails sent to end user (contain: id, emailId, createDate, type)",
                         "items": {
                             "$ref": "#/components/schemas/Email"
                         },
@@ -268,7 +268,7 @@
                         "type": "string"
                     },
                     "locale": {
-                        "description": "Locale used by end-user",
+                        "description": "Locale used by end user",
                         "example": "fr-FR",
                         "type": "string"
                     },
@@ -400,7 +400,7 @@
                         "$ref": "#/components/schemas/Company"
                     },
                     "consumerType": {
-                        "description": "End-user consumer type, company or personal",
+                        "description": "End user consumer type, company or personal",
                         "example": "company",
                         "type": "string"
                     },
@@ -434,7 +434,7 @@
                         "type": "string"
                     },
                     "emails": {
-                        "description": "List of emails sent to end-user (contain: id, emailId, createDate, type)",
+                        "description": "List of emails sent to end user (contain: id, emailId, createDate, type)",
                         "items": {
                             "$ref": "#/components/schemas/Email"
                         },
@@ -474,7 +474,7 @@
                         "type": "string"
                     },
                     "locale": {
-                        "description": "Locale used by end-user",
+                        "description": "Locale used by end user",
                         "example": "fr-FR",
                         "type": "string"
                     },
@@ -623,7 +623,7 @@
                         "$ref": "#/components/schemas/Consent"
                     },
                     "consumerType": {
-                        "description": "End-user consumer type, company or personal",
+                        "description": "End user consumer type, company or personal",
                         "example": "company",
                         "type": "string"
                     },
@@ -657,7 +657,7 @@
                         "type": "string"
                     },
                     "emails": {
-                        "description": "List of emails sent to end-user (contain: id, emailId, createDate, type)",
+                        "description": "List of emails sent to end user (contain: id, emailId, createDate, type)",
                         "items": {
                             "$ref": "#/components/schemas/Email"
                         },
@@ -697,7 +697,7 @@
                         "type": "string"
                     },
                     "locale": {
-                        "description": "Locale used by end-user",
+                        "description": "Locale used by end user",
                         "example": "fr-FR",
                         "type": "string"
                     },
@@ -867,7 +867,7 @@
                         "$ref": "#/components/schemas/Company"
                     },
                     "consumerType": {
-                        "description": "End-user consumer type, company or personal",
+                        "description": "End user consumer type, company or personal",
                         "example": "company",
                         "type": "string"
                     },
@@ -933,7 +933,7 @@
                         "type": "string"
                     },
                     "locale": {
-                        "description": "Locale used by end-user",
+                        "description": "Locale used by end user",
                         "example": "fr-FR",
                         "type": "string"
                     },
@@ -1204,7 +1204,7 @@
                         "type": "string"
                     },
                     "password": {
-                        "description": "End-user password",
+                        "description": "End user password",
                         "example": "mySecurePassword",
                         "type": "string"
                     },
@@ -1235,7 +1235,7 @@
                         "type": "string"
                     },
                     "password": {
-                        "description": "End-user password",
+                        "description": "End user password",
                         "example": "mySecurePassword",
                         "type": "string"
                     },
@@ -1243,7 +1243,7 @@
                         "type": "string"
                     },
                     "username": {
-                        "description": "End-user username",
+                        "description": "End user username",
                         "example": "myUserName",
                         "type": "string"
                     }
@@ -1312,7 +1312,7 @@
             "PasswordModification": {
                 "properties": {
                     "password": {
-                        "description": "End-user password",
+                        "description": "End user password",
                         "example": "mySecurePassword",
                         "type": "string"
                     },
@@ -1331,12 +1331,12 @@
             "PasswordRequest": {
                 "properties": {
                     "newPassword": {
-                        "description": "End-user new password",
+                        "description": "End user new password",
                         "example": "MyNewSecurePassword",
                         "type": "string"
                     },
                     "oldPassword": {
-                        "description": "End-user old password",
+                        "description": "End user old password",
                         "example": "mySecurePassword",
                         "type": "string"
                     },
@@ -1584,7 +1584,7 @@
             "ResetPasswordRequest": {
                 "properties": {
                     "email": {
-                        "description": "End-user email",
+                        "description": "End user email",
                         "example": "john.doe@nexway.com",
                         "maxLength": 150,
                         "minLength": 6,
@@ -1608,7 +1608,7 @@
                 "type": "object"
             },
             "Route": {
-                "description": "Store route used known by the end-user",
+                "description": "Store route used known by the end user",
                 "properties": {
                     "fullUrl": {
                         "type": "string"
@@ -2019,115 +2019,115 @@
                         }
                     },
                     {
-                        "description": "Filter enduser by its exact storeId",
+                        "description": "Filter end user by its exact storeId",
                         "in": "query",
                         "name": "storeId"
                     },
                     {
-                        "description": "Filter enduser by its exact email",
+                        "description": "Filter end user by its exact email",
                         "in": "query",
                         "name": "email"
                     },
                     {
-                        "description": "Filter enduser by its country (code iso 2) ",
+                        "description": "Filter end user by its country (code iso 2) ",
                         "example": "FR",
                         "in": "query",
                         "name": "country"
                     },
                     {
-                        "description": "Filter enduser by its zipCode ",
+                        "description": "Filter end user by its zipCode ",
                         "in": "query",
                         "name": "zipCode"
                     },
                     {
-                        "description": "Filter enduser by its  status (ENABLED, DISABLED) ",
+                        "description": "Filter end user by its  status (ENABLED, DISABLED) ",
                         "in": "query",
                         "name": "status"
                     },
                     {
-                        "description": "Filter enduser by its type (BUYER, RESELLER, RESELLER_NOT_APPROVED, RESELLER_DECLINED) ",
+                        "description": "Filter end user by its type (BUYER, RESELLER, RESELLER_NOT_APPROVED, RESELLER_DECLINED) ",
                         "in": "query",
                         "name": "type"
                     },
                     {
-                        "description": "Filter enduser by its groupId ",
+                        "description": "Filter end user by its groupId ",
                         "in": "query",
                         "name": "groupId"
                     },
                     {
-                        "description": "Filter enduser by its exact firstName",
+                        "description": "Filter end user by its exact firstName",
                         "in": "query",
                         "name": "firstName"
                     },
                     {
-                        "description": "Filter enduser by its exact lastName",
+                        "description": "Filter end user by its exact lastName",
                         "in": "query",
                         "name": "lastName"
                     },
                     {
-                        "description": "Filter enduser by its cpf",
+                        "description": "Filter end user by its cpf",
                         "example": "FR",
                         "in": "query",
                         "name": "cpf"
                     },
                     {
-                        "description": "Filter enduser by its city ",
+                        "description": "Filter end user by its city ",
                         "in": "query",
                         "name": "city"
                     },
                     {
-                        "description": "Filter enduser by its  locale",
+                        "description": "Filter end user by its  locale",
                         "in": "query",
                         "name": "locale"
                     },
                     {
-                        "description": "Filter enduser by its login",
+                        "description": "Filter end user by its login",
                         "in": "query",
                         "name": "login"
                     },
                     {
-                        "description": "Filter enduser by its phone ",
+                        "description": "Filter end user by its phone ",
                         "in": "query",
                         "name": "phone"
                     },
                     {
-                        "description": "Filter enduser by its title (MR, MRS) ",
+                        "description": "Filter end user by its title (MR, MRS) ",
                         "in": "query",
                         "name": "title"
                     },
                     {
-                        "description": "Filter enduser by its exact companyName",
+                        "description": "Filter end user by its exact companyName",
                         "in": "query",
                         "name": "company.companyName"
                     },
                     {
-                        "description": "Filter enduser by its exact vatNumber",
+                        "description": "Filter end user by its exact vatNumber",
                         "in": "query",
                         "name": "company.vatNumber"
                     },
                     {
-                        "description": "Filter enduser by its website",
+                        "description": "Filter end user by its website",
                         "example": "FR",
                         "in": "query",
                         "name": "company.website"
                     },
                     {
-                        "description": "Filter enduser by its cnpj ",
+                        "description": "Filter end user by its cnpj ",
                         "in": "query",
                         "name": "company.cnpj"
                     },
                     {
-                        "description": "Filter enduser by its  fullRegistrationNumber",
+                        "description": "Filter end user by its  fullRegistrationNumber",
                         "in": "query",
                         "name": "company.fullRegistrationNumber"
                     },
                     {
-                        "description": "Filter enduser by its registrationNumber",
+                        "description": "Filter end user by its registrationNumber",
                         "in": "query",
                         "name": "company.registrationNumber"
                     },
                     {
-                        "description": "Filter enduser by its apeCode ",
+                        "description": "Filter end user by its apeCode ",
                         "in": "query",
                         "name": "company.apeCode"
                     }
@@ -2378,23 +2378,23 @@
                         }
                     },
                     {
-                        "description": "Filter enduser by its exact name",
+                        "description": "Filter end user by its exact name",
                         "in": "query",
                         "name": "name"
                     },
                     {
-                        "description": "Filter enduser by its exact fallbackLocale",
+                        "description": "Filter end user by its exact fallbackLocale",
                         "in": "query",
                         "name": "fallbackLocale"
                     },
                     {
-                        "description": "Filter enduser by its country (code iso 2) ",
+                        "description": "Filter end user by its country (code iso 2) ",
                         "example": "FR",
                         "in": "query",
                         "name": "country"
                     },
                     {
-                        "description": "Filter enduser by its zipCode ",
+                        "description": "Filter end user by its zipCode ",
                         "in": "query",
                         "name": "zipCode"
                     }
@@ -3045,7 +3045,7 @@
                             }
                         }
                     },
-                    "description": "End-user to import",
+                    "description": "End user to import",
                     "required": true
                 },
                 "responses": {
@@ -3100,7 +3100,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Import end-user",
+                "summary": "Import end user",
                 "tags": [
                     "EndUser"
                 ]
@@ -3174,7 +3174,7 @@
                 "operationId": "getEnduser_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3235,7 +3235,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user portal by given end-user ID",
+                "summary": "Get end user portal by given end user ID",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3244,7 +3244,7 @@
                 "operationId": "put_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3352,7 +3352,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update end-user",
+                "summary": "Update end user",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3360,11 +3360,11 @@
         },
         "/endusers/portal/me": {
             "get": {
-                "description": "Get end-user public details by password token and store id of end-user",
+                "description": "Get end user public details by password token and store id of end user",
                 "operationId": "getEnduserPublicFromPasswordToken",
                 "parameters": [
                     {
-                        "description": "end user password token",
+                        "description": "End user password token",
                         "in": "query",
                         "name": "token",
                         "required": true,
@@ -3434,7 +3434,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user public details",
+                "summary": "Get end user public details",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3445,7 +3445,7 @@
                 "operationId": "getEnduserCreditNoteAsPdf",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3525,7 +3525,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user credit note as pdf",
+                "summary": "Get end user credit note as pdf",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3536,7 +3536,7 @@
                 "operationId": "getEnduserInvoiceAsPdfv2",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3607,7 +3607,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user Invoice as pdf(v2)",
+                "summary": "Get end user Invoice as pdf(v2)",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3619,7 +3619,7 @@
                 "operationId": "getAllSubscriptions_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3707,7 +3707,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get all subscriptions for given end-user id",
+                "summary": "Get all subscriptions for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3718,7 +3718,7 @@
                 "operationId": "getAllSubscriptionsV0",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3788,7 +3788,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get all subscriptions for given end-user id(V0)",
+                "summary": "Get all subscriptions for given end user id(V0)",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3799,7 +3799,7 @@
                 "operationId": "getEnduserSubscriptionDetails",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3878,7 +3878,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get subscription details of given end-user id",
+                "summary": "Get subscription details of given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3889,7 +3889,7 @@
                 "operationId": "updateSubscriptionPaymentMethod_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -3986,7 +3986,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update end-user subscription payment method",
+                "summary": "Update end user subscription payment method",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -3997,7 +3997,7 @@
                 "operationId": "toggleSubscription_2",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4081,7 +4081,7 @@
                 "operationId": "updatePassword",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4170,7 +4170,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update password for given end-user id",
+                "summary": "Update password for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4181,7 +4181,7 @@
                 "operationId": "updatePassword_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4270,7 +4270,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update password for given end-user id",
+                "summary": "Update password for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4281,7 +4281,7 @@
                 "operationId": "getOnePaymentMethodWithSubscriptionId_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4364,7 +4364,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user payment method for subscription",
+                "summary": "Get end user payment method for subscription",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4375,7 +4375,7 @@
                 "operationId": "getAllPaymentMethods_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4446,7 +4446,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get wallet view for given end-user id",
+                "summary": "Get wallet view for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4457,7 +4457,7 @@
                 "operationId": "deleteEnduserPaymentMethod",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4538,7 +4538,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Delete an end-user payment method",
+                "summary": "Delete an end user payment method",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4547,7 +4547,7 @@
                 "operationId": "getOnePaymentMethod",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4641,7 +4641,7 @@
                 "operationId": "addEndUserPaymentMethod",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4740,7 +4740,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Add payment method to end-user",
+                "summary": "Add payment method to end user",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4752,7 +4752,7 @@
                 "operationId": "getEnduser",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4813,7 +4813,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user portal by given end-user ID",
+                "summary": "Get end user portal by given end user ID",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4822,7 +4822,7 @@
                 "operationId": "put",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4930,7 +4930,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update end-user",
+                "summary": "Update end user",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -4941,7 +4941,7 @@
                 "operationId": "getEnduserCreditNoteAsPdf_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5021,7 +5021,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user credit note as pdf",
+                "summary": "Get end user credit note as pdf",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5032,7 +5032,7 @@
                 "operationId": "getEnduserInvoiceAsPdfv2_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5103,7 +5103,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user Invoice as pdf(v2)",
+                "summary": "Get end user Invoice as pdf(v2)",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5115,7 +5115,7 @@
                 "operationId": "getAllSubscriptions",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5203,7 +5203,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get all subscriptions for given end-user id",
+                "summary": "Get all subscriptions for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5214,7 +5214,7 @@
                 "operationId": "getAllSubscriptionsV0_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5284,7 +5284,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get all subscriptions for given end-user id(V0)",
+                "summary": "Get all subscriptions for given end user id(V0)",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5295,7 +5295,7 @@
                 "operationId": "getEnduserSubscriptionDetails_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5374,7 +5374,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get subscription details of given end-user id",
+                "summary": "Get subscription details of given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5385,7 +5385,7 @@
                 "operationId": "updateSubscriptionPaymentMethod",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5482,7 +5482,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Update end-user subscription payment method",
+                "summary": "Update end user subscription payment method",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5493,7 +5493,7 @@
                 "operationId": "toggleSubscription_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5578,7 +5578,7 @@
                 "operationId": "getUpgradeRecommendations",
                 "parameters": [
                     {
-                        "description": "end-user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5648,7 +5648,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get upgrade recommendations",
+                "summary": "Get upgrade recommendations of a previous item",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5659,7 +5659,7 @@
                 "operationId": "getOnePaymentMethodWithSubscriptionId",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5742,7 +5742,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get end-user payment method for subscription",
+                "summary": "Get end user payment method for subscription",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5753,7 +5753,7 @@
                 "operationId": "getAllPaymentMethods",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5824,7 +5824,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get wallet view for given end-user id",
+                "summary": "Get wallet view for given end user id",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5835,7 +5835,7 @@
                 "operationId": "deleteEnduserPaymentMethod_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5916,7 +5916,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Delete an end-user payment method",
+                "summary": "Delete an end user payment method",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -5925,7 +5925,7 @@
                 "operationId": "getOnePaymentMethod_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -6019,7 +6019,7 @@
                 "operationId": "addEndUserPaymentMethod_1",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -6118,7 +6118,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Add payment method to end-user",
+                "summary": "Add payment method to end user",
                 "tags": [
                     "EndUserPortal"
                 ]
@@ -6234,9 +6234,9 @@
                         "none": []
                     }
                 ],
-                "summary": "Create a new end-user",
+                "summary": "Create a new end user",
                 "tags": [
-                    "EndUserPortal"
+                    "Public"
                 ],
                 "x-operationWeight": "100"
             }
@@ -6246,7 +6246,7 @@
                 "operationId": "initEnduserPasswordAndLogin",
                 "parameters": [
                     {
-                        "description": "end-user password token",
+                        "description": "End user password token",
                         "in": "path",
                         "name": "passwordToken",
                         "required": true,
@@ -6330,9 +6330,9 @@
                         "none": []
                     }
                 ],
-                "summary": "End-user: Initialize password and login",
+                "summary": "Initialize password and login",
                 "tags": [
-                    "EndUserPortal"
+                    "Public"
                 ],
                 "x-operationWeight": "300"
             }
@@ -6342,7 +6342,7 @@
                 "operationId": "registerEnduser",
                 "parameters": [
                     {
-                        "description": "signed data",
+                        "description": "Base64 encoded data, contains end user information",
                         "in": "query",
                         "name": "data",
                         "required": true,
@@ -6436,9 +6436,9 @@
                         "none": []
                     }
                 ],
-                "summary": "Register a new end-user",
+                "summary": "Register a new end user",
                 "tags": [
-                    "EndUserPortal"
+                    "Public"
                 ],
                 "x-operationWeight": "10"
             }
@@ -6516,9 +6516,9 @@
                         "none": []
                     }
                 ],
-                "summary": "End-user: Request password reset",
+                "summary": "Reset end user password",
                 "tags": [
-                    "EndUserPortal"
+                    "Public"
                 ],
                 "x-operationWeight": "400"
             }
@@ -6528,7 +6528,7 @@
                 "operationId": "updateEnduserPassword",
                 "parameters": [
                     {
-                        "description": "end-user password token",
+                        "description": "End user password token",
                         "in": "path",
                         "name": "token",
                         "required": true,
@@ -6612,9 +6612,9 @@
                         "none": []
                     }
                 ],
-                "summary": "Update end-user password",
+                "summary": "Update end user password",
                 "tags": [
-                    "EndUserPortal"
+                    "Public"
                 ],
                 "x-operationWeight": "500"
             }
@@ -6928,7 +6928,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Deactivate Paypal",
+                "summary": "Deactivate Paypal payment method",
                 "tags": [
                     "EndUser"
                 ]
@@ -7161,7 +7161,7 @@
                 "operationId": "resetEndUserAccount",
                 "parameters": [
                     {
-                        "description": "end-user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7231,7 +7231,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Reset account of given end-usre id",
+                "summary": "Reset account of given end user id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7242,7 +7242,7 @@
                 "operationId": "getSubscription",
                 "parameters": [
                     {
-                        "description": "end-user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7321,7 +7321,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get subscription of given end-user by subscription id",
+                "summary": "Get subscription of given end user by subscription id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7332,7 +7332,7 @@
                 "operationId": "resyncSubscriptionByPaymentMethod",
                 "parameters": [
                     {
-                        "description": "end-user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7404,7 +7404,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Resynchronize subscription by payment method for given end-user id",
+                "summary": "Resynchronize subscription by payment method for given end user id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7415,7 +7415,7 @@
                 "operationId": "addTransactionId",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7493,7 +7493,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Add transaction in the wallet of given end-user id",
+                "summary": "Add transaction in the wallet of given end user id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7504,7 +7504,7 @@
                 "operationId": "addSubscriptionId",
                 "parameters": [
                     {
-                        "description": "end user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7592,7 +7592,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Link subscription Id to payment method by transactionId of a given end-user id",
+                "summary": "Link subscription Id to payment method by transactionId of a given end user id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7603,7 +7603,7 @@
                 "operationId": "getReplayData",
                 "parameters": [
                     {
-                        "description": "end-user id",
+                        "description": "End user id",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -7663,7 +7663,7 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get payment replay data for given end-user id and payment method id",
+                "summary": "Get payment replay data for given end user id and payment method id",
                 "tags": [
                     "EndUser"
                 ]
@@ -7690,6 +7690,9 @@
         },
         {
             "name": "EndUser"
+        },
+        {
+            "name": "Public"
         },
         {
             "name": "Group"
