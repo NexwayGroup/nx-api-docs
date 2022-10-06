@@ -1,0 +1,695 @@
+{
+    "basePath": "/customer-notifier",
+    "consumes": [
+        "application/json"
+    ],
+    "host": "api.staging.nexway.build",
+    "info": {
+        "description": "This service notify the customers about events that occurred. It lists events on RabbitMq and notifies customers by email and/or by REST calls, depending on configuration.",
+        "title": "Customer notifier.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/notification-definitions": {
+            "get": {
+                "description": "Get all notifications definitions",
+                "operationId": "GetAllNotificationDefinitions",
+                "parameters": [
+                    {
+                        "default": 50,
+                        "description": "Amount of items returned per pagination page",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "size",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    {
+                        "default": 0,
+                        "description": "Pagination page starting from 0",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listNotificationDefinitionsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get all notifications definitions",
+                "tags": [
+                    "NotificationDefinitions"
+                ]
+            },
+            "post": {
+                "description": "Create a notification definition",
+                "operationId": "createNotificationDefinitions",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/NotificationDefinitionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Create a notification definition",
+                "tags": [
+                    "NotificationDefinitions"
+                ]
+            }
+        },
+        "/notification-definitions/{definitionId}": {
+            "delete": {
+                "description": "Delete a notification definition by id",
+                "operationId": "DeleteNotificationDefinition",
+                "parameters": [
+                    {
+                        "description": "ID of notification definition",
+                        "in": "path",
+                        "name": "definitionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "DefinitionId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Delete a notification definition by id",
+                "tags": [
+                    "NotificationDefinitions"
+                ]
+            },
+            "get": {
+                "description": "Get a notification definition by id",
+                "operationId": "GetNotificationDefinition",
+                "parameters": [
+                    {
+                        "description": "ID of notification definition",
+                        "in": "path",
+                        "name": "definitionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "DefinitionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationDefinitionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get a notification definition by id",
+                "tags": [
+                    "NotificationDefinitions"
+                ]
+            },
+            "put": {
+                "description": "Update a notification definition by id",
+                "operationId": "updateNotificationDefinitions",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    },
+                    {
+                        "description": "ID of notification definition",
+                        "in": "path",
+                        "name": "definitionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "DefinitionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationDefinitionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Update a notification definition by id",
+                "tags": [
+                    "NotificationDefinitions"
+                ]
+            }
+        },
+        "/notifications": {
+            "get": {
+                "description": "Get all notifications",
+                "operationId": "GetAllNotifications",
+                "parameters": [
+                    {
+                        "default": 50,
+                        "description": "Amount of items returned per pagination page",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "size",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    {
+                        "default": 0,
+                        "description": "Pagination page starting from 0",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listNotificationsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get all notifications",
+                "tags": [
+                    "Notifications"
+                ]
+            },
+            "post": {
+                "description": "Create a notification",
+                "operationId": "createNotification",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/NotificationsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Create a notification",
+                "tags": [
+                    "Notifications"
+                ]
+            }
+        },
+        "/notifications/{notificationId}": {
+            "delete": {
+                "description": "Delete a notification by id",
+                "operationId": "DeleteNotification",
+                "parameters": [
+                    {
+                        "description": "ID of notification",
+                        "in": "path",
+                        "name": "notificationId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "NotificationId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Delete a notification by id",
+                "tags": [
+                    "Notifications"
+                ]
+            },
+            "get": {
+                "description": "Get a notification by id",
+                "operationId": "GetNotification",
+                "parameters": [
+                    {
+                        "description": "ID of notification",
+                        "in": "path",
+                        "name": "notificationId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "NotificationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get a notification by id",
+                "tags": [
+                    "Notifications"
+                ]
+            },
+            "put": {
+                "description": "Update a notification by id",
+                "operationId": "updateNotification",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    },
+                    {
+                        "description": "ID of notification",
+                        "in": "path",
+                        "name": "notificationId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "NotificationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Update a notification by id",
+                "tags": [
+                    "Notifications"
+                ]
+            }
+        },
+        "/receivers": {
+            "get": {
+                "description": "List all receivers",
+                "operationId": "GetAllNotificationReceivers",
+                "parameters": [
+                    {
+                        "default": 50,
+                        "description": "Amount of items returned per pagination page",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "size",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    {
+                        "default": 0,
+                        "description": "Pagination page starting from 0",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listReceiverSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get all notifications receivers",
+                "tags": [
+                    "NotificationReceivers"
+                ]
+            },
+            "post": {
+                "description": "Create a notification receiver",
+                "operationId": "CreateNotificationReceiver",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/NotificationReceiverSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Create a notification receiver",
+                "tags": [
+                    "NotificationReceivers"
+                ]
+            }
+        },
+        "/receivers/{receiverId}": {
+            "delete": {
+                "description": "Delete a notification receiver by id",
+                "operationId": "DeleteNotificationReceiver",
+                "parameters": [
+                    {
+                        "description": "ID of notification receiver",
+                        "in": "path",
+                        "name": "receiverId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "ReceiverId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Delete a notification receiver by id",
+                "tags": [
+                    "NotificationReceivers"
+                ]
+            },
+            "get": {
+                "description": "Get a notification receiver by id",
+                "operationId": "GetNotificationReceiver",
+                "parameters": [
+                    {
+                        "description": "ID of notification receiver",
+                        "in": "path",
+                        "name": "receiverId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "ReceiverId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationReceiverSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get a notification receiver by id",
+                "tags": [
+                    "NotificationReceivers"
+                ]
+            },
+            "put": {
+                "description": "Modify a notification receiver by id",
+                "operationId": "UpdateNotificationReceiver",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    },
+                    {
+                        "description": "ID of notification receiver",
+                        "in": "path",
+                        "name": "receiverId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "ReceiverId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/NotificationReceiverSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Modify a notification receiver by id",
+                "tags": [
+                    "NotificationReceivers"
+                ]
+            }
+        },
+        "/retryNotification/{notificationId}": {
+            "post": {
+                "description": "Retry to notify customer",
+                "operationId": "PostRetryNotification",
+                "parameters": [
+                    {
+                        "description": "ID of notification",
+                        "in": "path",
+                        "name": "notificationId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "NotificationId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "tags": [
+                    "RetryNotification"
+                ]
+            }
+        }
+    },
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "NotificationDefinitionsSuccessResponse": {
+            "description": ""
+        },
+        "NotificationReceiverSuccessResponse": {
+            "description": ""
+        },
+        "NotificationsSuccessResponse": {
+            "description": ""
+        },
+        "listNotificationDefinitionsSuccess": {
+            "description": "Success"
+        },
+        "listNotificationsSuccess": {
+            "description": "Success"
+        },
+        "listReceiverSuccess": {
+            "description": "Success"
+        },
+        "starterBadRequest": {
+            "description": "Bad request\n\nUsually indicates validation failure"
+        },
+        "starterForbidden": {
+            "description": "Forbidden"
+        },
+        "starterInternalServerError": {
+            "description": "Internal server error"
+        },
+        "starterNotFound": {
+            "description": "Not found"
+        },
+        "starterSuccessCreate": {
+            "description": "Successful",
+            "headers": {
+                "Location": {
+                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89",
+                    "type": "string"
+                }
+            }
+        },
+        "starterSuccessNoContent": {
+            "description": "Successful"
+        },
+        "starterUnauthorized": {
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource."
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "security": [
+        {
+            "JWT": []
+        }
+    ],
+    "securityDefinitions": {
+        "JWT": {
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
+    },
+    "swagger": "2.0"
+}
