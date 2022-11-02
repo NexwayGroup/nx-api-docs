@@ -257,6 +257,41 @@
                 },
                 "type": "object"
             },
+            "DuplicateProductRequest": {
+                "properties": {
+                    "duplicationOptions": {
+                        "$ref": "#/components/schemas/ProductDuplicationOptions"
+                    },
+                    "productName": {
+                        "description": "Product name of the new product",
+                        "example": "My Product",
+                        "type": "string"
+                    },
+                    "publisherRefId": {
+                        "description": "Publisher reference ID of the new product",
+                        "example": "49FD453",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "productName",
+                    "publisherRefId"
+                ],
+                "type": "object"
+            },
+            "DuplicateProductResponse": {
+                "properties": {
+                    "id": {
+                        "description": "Duplicated product ID",
+                        "example": "3584f058-fd8a-439e-be21-126a0b16c128",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id"
+                ],
+                "type": "object"
+            },
             "ExceptionDetail": {
                 "properties": {
                     "errorType": {
@@ -975,6 +1010,32 @@
                     "publisherRefId",
                     "sellingStores"
                 ],
+                "type": "object"
+            },
+            "ProductDuplicationOptions": {
+                "properties": {
+                    "duplicateFulfillment": {
+                        "type": "boolean"
+                    },
+                    "duplicateGeneral": {
+                        "type": "boolean"
+                    },
+                    "duplicateLocalizedContent": {
+                        "type": "boolean"
+                    },
+                    "duplicatePrices": {
+                        "type": "boolean"
+                    },
+                    "duplicateProductFiles": {
+                        "type": "boolean"
+                    },
+                    "duplicateProductVariations": {
+                        "type": "boolean"
+                    },
+                    "duplicateSubscription": {
+                        "type": "boolean"
+                    }
+                },
                 "type": "object"
             },
             "ProductUpdate": {
@@ -4029,6 +4090,77 @@
                     "Product"
                 ],
                 "x-operationWeight": "100"
+            }
+        },
+        "/products/duplicate/{id}": {
+            "post": {
+                "operationId": "duplicate_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DuplicateProductRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DuplicateProductResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DuplicateProductResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DuplicateProductResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DuplicateProductResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Duplicate a product, if the product has variants it will also duplicate all variants",
+                "tags": [
+                    "Product"
+                ]
             }
         },
         "/products/import": {
