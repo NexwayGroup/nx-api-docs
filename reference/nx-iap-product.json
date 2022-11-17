@@ -3181,18 +3181,17 @@
         },
         "/products/defaultcurrency": {
             "get": {
+                "description": "Get the default currencies for the given products ids",
                 "operationId": "getDefaultCurrency",
                 "parameters": [
                     {
+                        "description": "List of product id",
+                        "example": "productId1,productId2,productId3",
                         "in": "query",
                         "name": "productId",
                         "required": true,
                         "schema": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array",
-                            "uniqueItems": true
+                            "type": "string"
                         }
                     }
                 ],
@@ -3201,11 +3200,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array",
-                                    "uniqueItems": true
+                                    "type": "string"
                                 }
                             }
                         },
@@ -3215,25 +3210,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array",
-                                    "uniqueItems": true
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Bad Request"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array",
-                                    "uniqueItems": true
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -3243,11 +3240,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array",
-                                    "uniqueItems": true
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -3626,9 +3619,12 @@
         },
         "/products/descriptions/search": {
             "get": {
+                "description": "Search descriptions with text",
                 "operationId": "search",
                 "parameters": [
                     {
+                        "description": "Pageable parameters",
+                        "example": "size=150&page=0",
                         "in": "query",
                         "name": "pageable",
                         "required": true,
@@ -3637,6 +3633,8 @@
                         }
                     },
                     {
+                        "description": "A text in the description to search with",
+                        "example": "aTextToSearchWith",
                         "in": "query",
                         "name": "req",
                         "required": true,
@@ -3660,17 +3658,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDescription"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Bad Request"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDescription"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -3680,14 +3688,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDescription"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Failure"
                     }
                 },
-                "summary": "Search descriptions",
+                "summary": "Search descriptions with text",
                 "tags": [
                     "Description"
                 ],
@@ -4165,6 +4173,7 @@
         },
         "/products/import": {
             "post": {
+                "description": "Import a product",
                 "operationId": "post",
                 "parameters": [
                     {
@@ -4176,6 +4185,8 @@
                         }
                     },
                     {
+                        "description": "Store id",
+                        "example": "5a095a54-445c-4b57-ba6d-23fdc63df4c9",
                         "in": "query",
                         "name": "storeId",
                         "required": false,
@@ -4184,6 +4195,8 @@
                         }
                     },
                     {
+                        "description": "Determine if the operation will take effect in the database, if dryRun is true, product will not be import",
+                        "example": true,
                         "in": "query",
                         "name": "dryRun",
                         "required": false,
@@ -4192,11 +4205,21 @@
                         }
                     },
                     {
+                        "description": "Request reason",
+                        "example": "Import from old version to new version",
                         "in": "query",
                         "name": "reason",
                         "required": false,
                         "schema": {
-                            "default": "resource import thru REST Api",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Local of product",
+                        "example": "fr-FR",
+                        "in": "query",
+                        "name": "local",
+                        "schema": {
                             "type": "string"
                         }
                     }
@@ -4205,13 +4228,11 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "additionalProperties": {
-                                    "type": "object"
-                                },
-                                "type": "object"
+                                "type": "string"
                             }
                         }
                     },
+                    "description": "Product to be import",
                     "required": true
                 },
                 "responses": {
@@ -4245,7 +4266,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4255,7 +4276,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4265,7 +4286,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4275,7 +4296,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4557,9 +4578,12 @@
         },
         "/products/price-functions/duplicate/{customerId}/{id}": {
             "post": {
+                "description": "Duplicate a price function of given price function id to the customer of the given customer id",
                 "operationId": "duplicate",
                 "parameters": [
                     {
+                        "description": "Customer id to duplicate in",
+                        "example": "1a45d839-9c0f-4691-8b79-1d2b4797fe8d",
                         "in": "path",
                         "name": "customerId",
                         "required": true,
@@ -4568,6 +4592,8 @@
                         }
                     },
                     {
+                        "description": "Price function id",
+                        "example": "5ccdd01d-3a93-4fa6-b251-9434b9ca35ad",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -4603,11 +4629,21 @@
                             }
                         }
                     },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
                     "401": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4617,7 +4653,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4627,7 +4663,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -4637,14 +4673,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Failure"
                     }
                 },
-                "summary": "duplicate a price function",
+                "summary": "Duplicate a price function",
                 "tags": [
                     "PriceFunction"
                 ],
@@ -5294,9 +5330,12 @@
         },
         "/products/public/{customerId}/{publisherRefId}/nextgeneration-by-publisher-ref": {
             "get": {
+                "description": "Get the next generation of product according to customerId and publisher ref id",
                 "operationId": "getNextGenerationByCustomerIdAndPublisherRefId",
                 "parameters": [
                     {
+                        "description": "Customer id",
+                        "example": "17b42c23-1e34-4c8b-bfe4-c06fb64e0b95",
                         "in": "path",
                         "name": "customerId",
                         "required": true,
@@ -5305,6 +5344,8 @@
                         }
                     },
                     {
+                        "description": "publisherRef id",
+                        "example": "6b49bc08-242b-436d-9f5e-27aef67378dd",
                         "in": "path",
                         "name": "publisherRefId",
                         "required": true,
@@ -5313,6 +5354,8 @@
                         }
                     },
                     {
+                        "description": "version",
+                        "example": 22,
                         "in": "query",
                         "name": "version",
                         "required": false,
@@ -5322,11 +5365,12 @@
                         }
                     },
                     {
+                        "description": "If useProductVariationOnly is true, only search with product who has parent",
+                        "example": true,
                         "in": "query",
                         "name": "useProductVariationOnly",
                         "required": false,
                         "schema": {
-                            "default": true,
                             "type": "boolean"
                         }
                     }
@@ -5346,7 +5390,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5356,7 +5400,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5366,7 +5410,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5454,10 +5498,13 @@
         },
         "/products/public/{id}/descriptions": {
             "get": {
+                "description": "Get public description for the given product id",
                 "operationId": "getPublicDescription",
                 "parameters": [
                     {
-                        "in": "path",
+                        "description": "Product id",
+                        "example": "33447220-3716-4ce8-9694-1124b0f1a458",
+                        "in": "query",
                         "name": "id",
                         "required": true,
                         "schema": {
@@ -5480,7 +5527,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Description"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5490,7 +5537,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Description"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5500,7 +5547,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Description"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5516,9 +5563,12 @@
         },
         "/products/public/{id}/nextgeneration": {
             "get": {
+                "description": "Get the next generation of product for the given product id",
                 "operationId": "getNextGeneration_1",
                 "parameters": [
                     {
+                        "description": "Product id",
+                        "example": "9bc202c5-6b54-4ae9-8df9-6edb82759ed6",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -5527,6 +5577,8 @@
                         }
                     },
                     {
+                        "description": "Version",
+                        "example": 22,
                         "in": "query",
                         "name": "version",
                         "required": false,
@@ -5551,7 +5603,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5561,7 +5613,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5571,7 +5623,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PublicProduct"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -5985,9 +6037,12 @@
         },
         "/products/{id}/nextgeneration": {
             "get": {
+                "description": "Get the next generation of product according to the given product id",
                 "operationId": "getNextGeneration",
                 "parameters": [
                     {
+                        "description": "Product id",
+                        "example": "0966f613-5c17-4a7a-b1eb-1114164bc601",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -6011,17 +6066,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Bad Request"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -6031,14 +6096,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Product"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Failure"
                     }
                 },
-                "summary": "Get the next generation of product according to product id",
+                "summary": "Get the next generation of Product",
                 "tags": [
                     "Product"
                 ],
@@ -6047,9 +6112,12 @@
         },
         "/products/{id}/update-without-price": {
             "put": {
+                "description": "Be able to update the product without price information for the given product id",
                 "operationId": "updateWithoutPrice",
                 "parameters": [
                     {
+                        "description": "Existing product id",
+                        "example": "e1c2705a-58e0-4b9c-8d74-063521055a09",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -6120,6 +6188,7 @@
                         "description": "Failure"
                     }
                 },
+                "summary": "Update product without updating prices",
                 "tags": [
                     "Product"
                 ]
@@ -6131,6 +6200,8 @@
                 "operationId": "getVariantMatrix",
                 "parameters": [
                     {
+                        "description": "Product id",
+                        "example": "2b760279-a875-411d-9ebf-d90bfeb40c95",
                         "in": "path",
                         "name": "id",
                         "required": true,
@@ -6147,11 +6218,21 @@
                         }
                     },
                     {
+                        "description": "In which format that the variables in the matrix will be organized. Prefix and suffix are `[` and `]`, when the format is '1D', delimiter is `,`, when the format is 'ND', delimiter is `][`",
+                        "examples": {
+                            "1D": {
+                                "description": "Delimiter is `,`, [Test,lifeTime,seats,subscriptionTemplate]",
+                                "value": "1D"
+                            },
+                            "ND": {
+                                "description": "Delimiter is `][`, [Test][lifeTime][seats][subscriptionTemplate]",
+                                "value": "ND"
+                            }
+                        },
                         "in": "query",
                         "name": "format",
                         "required": false,
                         "schema": {
-                            "default": "1D",
                             "pattern": "^|1D|ND|(\\[[A-Za-z0-9,]+])+$",
                             "type": "string"
                         }
@@ -6172,17 +6253,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
                         "description": "Bad Request"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
@@ -6192,7 +6283,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Matrix"
+                                    "$ref": "#/components/schemas/NormalizeException"
                                 }
                             }
                         },
