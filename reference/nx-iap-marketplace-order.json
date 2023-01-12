@@ -1600,16 +1600,6 @@
                         "format": "double",
                         "type": "number"
                     },
-                    "source": {
-                        "description": "Source of price",
-                        "enum": [
-                            "INTERNAL",
-                            "EXTERNAL"
-                        ],
-                        "example": "INTERNAL",
-                        "readOnly": true,
-                        "type": "string"
-                    },
                     "vatAmount": {
                         "description": "VAT amount (grossPrice - netPrice)",
                         "example": 5,
@@ -2279,7 +2269,129 @@
                 "x-operationWeight": "100"
             }
         },
-        "/marketplaces-orders/line-item-data": {
+        "/marketplaces-orders/line-item-data/{id}/addevents": {
+            "put": {
+                "description": "Add an event from outside to a lineItemData",
+                "operationId": "addEventsOnLineItemData",
+                "parameters": [
+                    {
+                        "description": "Filter lineItemData with its own id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "reason",
+                        "required": false,
+                        "schema": {
+                            "default": "resource update thru REST Api",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProcessingEvents"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Add event on lineItemData",
+                "tags": [
+                    "ApiProcessingEvents"
+                ]
+            }
+        },
+        "/marketplaces-orders/lineitemsdata": {
             "get": {
                 "operationId": "getItems_1",
                 "parameters": [
@@ -2367,7 +2479,7 @@
                 "x-operationWeight": "300"
             }
         },
-        "/marketplaces-orders/line-item-data/distinct": {
+        "/marketplaces-orders/lineitemsdata/distinct": {
             "get": {
                 "operationId": "distinct",
                 "parameters": [
@@ -2455,7 +2567,7 @@
                 "x-operationWeight": "100"
             }
         },
-        "/marketplaces-orders/line-item-data/marketplace-order-id/{id}": {
+        "/marketplaces-orders/lineitemsdata/orderid/{id}": {
             "get": {
                 "description": "Get a list of lineItemData with the marketplace order id",
                 "operationId": "getLineItemsDataByMarketplaceOrderId",
@@ -2566,7 +2678,7 @@
                 ]
             }
         },
-        "/marketplaces-orders/line-item-data/recap": {
+        "/marketplaces-orders/lineitemsdata/recap": {
             "get": {
                 "operationId": "recap_1",
                 "parameters": [
@@ -2654,7 +2766,7 @@
                 "x-operationWeight": "150"
             }
         },
-        "/marketplaces-orders/line-item-data/unwind": {
+        "/marketplaces-orders/lineitemsdata/unwind": {
             "get": {
                 "operationId": "unwind_1",
                 "parameters": [
@@ -2742,7 +2854,7 @@
                 "x-operationWeight": "150"
             }
         },
-        "/marketplaces-orders/line-item-data/{id}": {
+        "/marketplaces-orders/lineitemsdata/{id}": {
             "delete": {
                 "operationId": "deleteItem_1",
                 "parameters": [
@@ -2962,128 +3074,6 @@
                     "api-crud-line-item-data"
                 ],
                 "x-operationWeight": "400"
-            }
-        },
-        "/marketplaces-orders/line-item-data/{id}/addevents": {
-            "put": {
-                "description": "Add an event from outside to a lineItemData",
-                "operationId": "addEventsOnLineItemData",
-                "parameters": [
-                    {
-                        "description": "Filter lineItemData with its own id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "reason",
-                        "required": false,
-                        "schema": {
-                            "default": "resource update thru REST Api",
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ProcessingEvents"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MarketplaceOrder"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "400": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "408": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Request Timeout"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    },
-                    "503": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Service Unavailable"
-                    }
-                },
-                "summary": "Add event on lineItemData",
-                "tags": [
-                    "ApiProcessingEvents"
-                ]
             }
         },
         "/marketplaces-orders/recap": {
