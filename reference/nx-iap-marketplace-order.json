@@ -321,6 +321,11 @@
                         "example": "TeleCharFR",
                         "type": "string"
                     },
+                    "externalId": {
+                        "description": "lineItem id from marketplace, such as ebay",
+                        "example": "eb1cdcad-f1e2-4a0d-a936-cbe6164ef3d0",
+                        "type": "string"
+                    },
                     "fulfillmentTemplate": {
                         "description": "Fulfillment template name or id depending on the fulfillment version",
                         "example": "1516e607-c41d-41ab-a8e6-f9cbbafd6426",
@@ -433,6 +438,7 @@
                     }
                 },
                 "required": [
+                    "externalId",
                     "fulfillmentTemplate",
                     "fulfillmentTemplateName",
                     "id",
@@ -452,6 +458,11 @@
                         "example": 14,
                         "format": "int32",
                         "type": "integer"
+                    },
+                    "cancellationReason": {
+                        "description": "Cancellation reason, must be one of the reasons provided by order-cancellation-reasons service",
+                        "example": "OCL, DBL",
+                        "type": "string"
                     },
                     "createDate": {
                         "deprecated": true,
@@ -570,7 +581,8 @@
                             "PENDING",
                             "PARTIAL_COMPLETED",
                             "FAILED",
-                            "COMPLETED"
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
                         ],
                         "type": "string"
                     },
@@ -636,7 +648,8 @@
                             "PENDING",
                             "PARTIAL_COMPLETED",
                             "FAILED",
-                            "COMPLETED"
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
                         ],
                         "type": "string"
                     },
@@ -1495,7 +1508,8 @@
                             "PENDING",
                             "PARTIAL_COMPLETED",
                             "FAILED",
-                            "COMPLETED"
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
                         ],
                         "example": "COMPLETED",
                         "type": "string"
@@ -1524,9 +1538,10 @@
                             "PENDING",
                             "PARTIAL_COMPLETED",
                             "FAILED",
-                            "COMPLETED"
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
                         ],
-                        "example": "COMPLETED",
+                        "example": "EXTERNAL_COMPLETED",
                         "type": "string"
                     },
                     "status": {
@@ -1538,7 +1553,8 @@
                             "PENDING",
                             "PARTIAL_COMPLETED",
                             "FAILED",
-                            "COMPLETED"
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
                         ],
                         "example": "COMPLETED",
                         "type": "string"
@@ -1630,7 +1646,6 @@
                 "type": "object"
             },
             "ProcessingEvent": {
-                "description": "Line item history of processing events",
                 "properties": {
                     "createDate": {
                         "description": "Date of creation",
@@ -1671,7 +1686,6 @@
                 "type": "object"
             },
             "ProcessingEvents": {
-                "description": "Line item history of processing events",
                 "items": {
                     "$ref": "#/components/schemas/ProcessingEvent"
                 },
@@ -2269,15 +2283,699 @@
                 "x-operationWeight": "100"
             }
         },
-        "/marketplaces-orders/line-item-data/{id}/addevents": {
+        "/marketplaces-orders/lineitemdata": {
+            "get": {
+                "operationId": "getItems_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultMarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/marketplaces-orders/lineitemdata/distinct": {
+            "get": {
+                "operationId": "distinct",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/marketplaces-orders/lineitemdata/orderid/{marketplaceOrderId}": {
+            "get": {
+                "description": "Get a list of lineItemData with the marketplace order id",
+                "operationId": "getLineItemsDataByMarketplaceOrderId",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "description": "Filter lineItemData by marketplace order id",
+                        "in": "path",
+                        "name": "marketplaceOrderId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultMarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Get a list of lineItemData",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ]
+            }
+        },
+        "/marketplaces-orders/lineitemdata/recap": {
+            "get": {
+                "operationId": "recap_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/marketplaces-orders/lineitemdata/unwind": {
+            "get": {
+                "operationId": "unwind_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/marketplaces-orders/lineitemdata/{id}": {
+            "delete": {
+                "operationId": "deleteItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MarketplaceOrder"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "ApiCRUDLineItemData"
+                ],
+                "x-operationWeight": "400"
+            }
+        },
+        "/marketplaces-orders/lineitemdata/{lineItemDataId}/addevents": {
             "put": {
                 "description": "Add an event from outside to a lineItemData",
                 "operationId": "addEventsOnLineItemData",
                 "parameters": [
                     {
-                        "description": "Filter lineItemData with its own id",
                         "in": "path",
-                        "name": "id",
+                        "name": "lineItemDataId",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2291,6 +2989,12 @@
                             "default": "resource update thru REST Api",
                             "type": "string"
                         }
+                    },
+                    {
+                        "description": "Filter lineItemData with its own id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -2389,691 +3093,6 @@
                 "tags": [
                     "ApiProcessingEvents"
                 ]
-            }
-        },
-        "/marketplaces-orders/lineitemsdata": {
-            "get": {
-                "operationId": "getItems_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultMarketplaceOrder"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get items",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "300"
-            }
-        },
-        "/marketplaces-orders/lineitemsdata/distinct": {
-            "get": {
-                "operationId": "distinct",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get distinct values for a given field",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "100"
-            }
-        },
-        "/marketplaces-orders/lineitemsdata/orderid/{id}": {
-            "get": {
-                "description": "Get a list of lineItemData with the marketplace order id",
-                "operationId": "getLineItemsDataByMarketplaceOrderId",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "description": "Filter lineItemData by marketplace order id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultMarketplaceOrder"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "400": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Bad Request"
-                    },
-                    "401": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "408": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Request Timeout"
-                    },
-                    "500": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    },
-                    "503": {
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Service Unavailable"
-                    }
-                },
-                "summary": "Get a list of lineItemData",
-                "tags": [
-                    "api-crud-line-item-data"
-                ]
-            }
-        },
-        "/marketplaces-orders/lineitemsdata/recap": {
-            "get": {
-                "operationId": "recap_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get recap quantities for a given field",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "150"
-            }
-        },
-        "/marketplaces-orders/lineitemsdata/unwind": {
-            "get": {
-                "operationId": "unwind_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Search unwind for a given field",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "150"
-            }
-        },
-        "/marketplaces-orders/lineitemsdata/{id}": {
-            "delete": {
-                "operationId": "deleteItem_1",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "No Content"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Delete item",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "500"
-            },
-            "get": {
-                "operationId": "getItem_1",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MarketplaceOrder"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get item",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "200"
-            },
-            "put": {
-                "operationId": "updateItem_1",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/MarketplaceOrder"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MarketplaceOrder"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Update item",
-                "tags": [
-                    "api-crud-line-item-data"
-                ],
-                "x-operationWeight": "400"
             }
         },
         "/marketplaces-orders/recap": {
@@ -3561,7 +3580,7 @@
                 ]
             }
         },
-        "/marketplaces-orders/{id}/addevent": {
+        "/marketplaces-orders/{marketplaceOrderId}/addevent": {
             "post": {
                 "description": "Add an event from outside to a marketplace order",
                 "operationId": "addEvent",
@@ -3569,7 +3588,7 @@
                     {
                         "description": "Filter a marketplace order by its own id",
                         "in": "path",
-                        "name": "id",
+                        "name": "marketplaceOrderId",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3682,6 +3701,116 @@
                     "ApiProcessingEvents"
                 ]
             }
+        },
+        "/marketplaces-orders/{orderId}/cancel": {
+            "post": {
+                "description": "Cancel a marketplace order by marketplaceOrderId",
+                "operationId": "cancelMarketplaceOrder",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "orderId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Cancellation reason, must be one of the reasons provided by order-cancellation-reasons service",
+                        "example": "OCL, DBL",
+                        "in": "query",
+                        "name": "cancellationReason",
+                        "required": false,
+                        "schema": {
+                            "default": "OCL",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Reason of this cancel operation",
+                        "example": "Manual cancellation, full cancel through REST Api, etc.",
+                        "in": "query",
+                        "name": "reason",
+                        "required": false,
+                        "schema": {
+                            "default": "full cancel thru REST Api",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Id of marketplace order to cancel",
+                        "in": "path",
+                        "name": "marketplaceOrderId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Accepted"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Cancel a marketplace order",
+                "tags": [
+                    "ApiCommand"
+                ]
+            }
         }
     },
     "security": [
@@ -3701,6 +3830,12 @@
     "tags": [
         {
             "name": "ApiProcessingEvents"
+        },
+        {
+            "name": "ApiCommand"
+        },
+        {
+            "name": "ApiCRUDLineItemData"
         },
         {
             "name": "ApiCRUDMarketplaceOrder"
