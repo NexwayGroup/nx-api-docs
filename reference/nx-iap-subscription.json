@@ -1,0 +1,472 @@
+{
+    "basePath": "/subscriptions",
+    "consumes": [
+        "application/json"
+    ],
+    "host": "api.staging.nexway.build",
+    "info": {
+        "description": "This service provides subscription resources and actions:",
+        "title": "Subscription Service.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/subscriptions": {
+            "get": {
+                "description": "Get all subscriptions",
+                "operationId": "GetAllSubscriptions",
+                "parameters": [
+                    {
+                        "default": 50,
+                        "description": "Amount of items returned per pagination page",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "size",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    {
+                        "default": 0,
+                        "description": "Pagination page starting from 0",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listSubscriptionsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get all subscriptions"
+            },
+            "post": {
+                "description": "Create a subscription",
+                "operationId": "createSubscription",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Create a subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/models": {
+            "get": {
+                "description": "Get all subscriptions models",
+                "operationId": "GetAllSubscriptionsModels",
+                "parameters": [
+                    {
+                        "default": 50,
+                        "description": "Amount of items returned per pagination page",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "size",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    {
+                        "default": 0,
+                        "description": "Pagination page starting from 0",
+                        "format": "int64",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/listSubscriptionsModelsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get all subscriptions models"
+            }
+        },
+        "/subscriptions/models/{model}": {
+            "get": {
+                "description": "Get a subscription model by name",
+                "operationId": "GetSubscriptionModel",
+                "parameters": [
+                    {
+                        "description": "Model name",
+                        "in": "path",
+                        "name": "model",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "Model"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get a subscription model by name",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}": {
+            "delete": {
+                "description": "Delete a subscription by id",
+                "operationId": "DeleteSubscription",
+                "parameters": [
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/starterSuccessNoContent"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Delete a subscription by id",
+                "tags": [
+                    "Subscriptions"
+                ]
+            },
+            "get": {
+                "description": "Get a subscription by id",
+                "operationId": "GetSubscription",
+                "parameters": [
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Get a subscription by id",
+                "tags": [
+                    "Subscriptions"
+                ]
+            },
+            "patch": {
+                "description": "Update a subscription by id",
+                "operationId": "updateSubscription",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    },
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Update a subscription by id",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/cancel": {
+            "post": {
+                "description": "Cancel subscription",
+                "operationId": "cancelSubscription",
+                "parameters": [
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    }
+                },
+                "summary": "Cancel subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/reactivate": {
+            "post": {
+                "description": "Reactivate subscription",
+                "operationId": "reactivateSubscription",
+                "parameters": [
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    }
+                },
+                "summary": "Reactivate subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/suspend": {
+            "post": {
+                "description": "Suspend subscription",
+                "operationId": "suspendSubscription",
+                "parameters": [
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    }
+                },
+                "summary": "Suspend subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/upgrade": {
+            "post": {
+                "description": "Upgrade subscription",
+                "operationId": "upgradeSubscription",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {}
+                    },
+                    {
+                        "description": "ID of subscription",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string",
+                        "x-go-name": "SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/SubscriptionsSuccessResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    }
+                },
+                "summary": "Upgrade subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        }
+    },
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "SubscriptionsSuccessResponse": {
+            "description": ""
+        },
+        "listSubscriptionsModelsSuccess": {
+            "description": "Success"
+        },
+        "listSubscriptionsSuccess": {
+            "description": "Success"
+        },
+        "starterBadRequest": {
+            "description": "Bad request\n\nUsually indicates validation failure"
+        },
+        "starterForbidden": {
+            "description": "Forbidden"
+        },
+        "starterInternalServerError": {
+            "description": "Internal server error"
+        },
+        "starterNotFound": {
+            "description": "Not found"
+        },
+        "starterSuccessCreate": {
+            "description": "Successful",
+            "headers": {
+                "Location": {
+                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89",
+                    "type": "string"
+                }
+            }
+        },
+        "starterSuccessNoContent": {
+            "description": "Successful"
+        },
+        "starterUnauthorized": {
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource."
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "security": [
+        {
+            "JWT": []
+        }
+    ],
+    "securityDefinitions": {
+        "JWT": {
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
+    },
+    "swagger": "2.0"
+}
