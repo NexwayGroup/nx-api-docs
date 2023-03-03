@@ -3,6 +3,458 @@
     "consumes": [
         "application/json"
     ],
+    "definitions": {
+        "BadRequest": {
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "example": "Bad Request",
+                    "type": "string",
+                    "x-go-name": "StatusLabel"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "example": "error: field can't be empty",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
+                    "type": "string",
+                    "x-go-name": "Path"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "example": 400,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Status"
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "example": 1593769514607,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        },
+        "Email": {
+            "properties": {
+                "date": {
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Date"
+                },
+                "emailId": {
+                    "type": "string",
+                    "x-go-name": "EmailID"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "message": {
+                    "type": "string",
+                    "x-go-name": "Message"
+                },
+                "templateName": {
+                    "type": "string",
+                    "x-go-name": "TemplateName"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
+        "Forbidden": {
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "example": "Forbidden",
+                    "type": "string",
+                    "x-go-name": "StatusLabel"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "example": "Forbidden",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
+                    "type": "string",
+                    "x-go-name": "Path"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "example": 403,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Status"
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "example": 1593769514607,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        },
+        "InternalServerError": {
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "example": "Internal Server Error",
+                    "type": "string",
+                    "x-go-name": "StatusLabel"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "example": "invalid memory address or nil pointer dereference",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
+                    "type": "string",
+                    "x-go-name": "Path"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "example": 500,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Status"
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "example": 1593769514607,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        },
+        "NotFound": {
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "example": "Not Found",
+                    "type": "string",
+                    "x-go-name": "StatusLabel"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "example": "item not found",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
+                    "type": "string",
+                    "x-go-name": "Path"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "example": 404,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Status"
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "example": 1593769514607,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        },
+        "Product": {
+            "properties": {
+                "dynamicVariables": {
+                    "additionalProperties": {},
+                    "type": "object",
+                    "x-go-name": "DynamicVariables"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "licenseId": {
+                    "type": "string",
+                    "x-go-name": "LicenseId"
+                },
+                "lineItemId": {
+                    "type": "string",
+                    "x-go-name": "LineItemID"
+                },
+                "previousLineItemId": {
+                    "type": "string",
+                    "x-go-name": "PreviousLineItemID"
+                },
+                "priceFunctionParameters": {
+                    "additionalProperties": {},
+                    "type": "object",
+                    "x-go-name": "PriceFunctionParameters"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
+        "Subscription": {
+            "properties": {
+                "createDate": {
+                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
+                    "example": 1593683684789,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "CreateDate"
+                },
+                "currency": {
+                    "type": "string",
+                    "x-go-name": "Currency"
+                },
+                "customerId": {
+                    "description": "Associates entity to certain customer.",
+                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a",
+                    "type": "string",
+                    "x-go-name": "CustomerID"
+                },
+                "dbVersion": {
+                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
+                    "example": 0,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "DbVersion"
+                },
+                "decodedExternalContext": {
+                    "additionalProperties": {},
+                    "type": "object",
+                    "x-go-name": "DecodedExternalContext"
+                },
+                "emails": {
+                    "items": {
+                        "$ref": "#/definitions/Email"
+                    },
+                    "type": "array",
+                    "x-go-name": "Emails"
+                },
+                "enduserId": {
+                    "description": "Associates entity to certain end user.",
+                    "example": "c84b801f-6f8d-4b32-8b8e-406e91a473d6",
+                    "type": "string",
+                    "x-go-name": "EnduserID"
+                },
+                "externalContext": {
+                    "type": "string",
+                    "x-go-name": "ExternalContext"
+                },
+                "id": {
+                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
+                    "example": "d87e0973-980a-4485-a39d-682184a8988a",
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "initialOrderId": {
+                    "type": "string",
+                    "x-go-name": "InitialOrderId"
+                },
+                "layout": {
+                    "type": "string",
+                    "x-go-name": "Layout"
+                },
+                "lifecycle": {
+                    "properties": {
+                        "anniversaryDate": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "AnniversaryDate"
+                        },
+                        "creationDate": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "CreationDate"
+                        },
+                        "daysBeforeAnniversary": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "DaysBeforeAnniversary"
+                        },
+                        "estimatedExpirationDate": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "EstimatedExpirationDate"
+                        },
+                        "expirationDate": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "ExpirationDate"
+                        },
+                        "generation": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "Generation"
+                        },
+                        "id": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "ID"
+                        },
+                        "modelId": {
+                            "type": "string",
+                            "x-go-name": "ModelID"
+                        },
+                        "nextBillingDate": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "NextBillingDate"
+                        },
+                        "paymentDeadline": {
+                            "format": "int64",
+                            "type": "integer",
+                            "x-go-name": "PaymentDeadline"
+                        },
+                        "sgSubId": {
+                            "type": "string",
+                            "x-go-name": "SGSubID"
+                        },
+                        "status": {
+                            "type": "string",
+                            "x-go-name": "Status"
+                        }
+                    },
+                    "type": "object",
+                    "x-go-name": "Lifecycle"
+                },
+                "model": {
+                    "$ref": "#/definitions/SubscriptionModel"
+                },
+                "modelId": {
+                    "type": "string",
+                    "x-go-name": "ModelID"
+                },
+                "name": {
+                    "type": "string",
+                    "x-go-name": "Name"
+                },
+                "nextProducts": {
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    },
+                    "type": "array",
+                    "x-go-name": "NextProducts"
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    },
+                    "type": "array",
+                    "x-go-name": "Products"
+                },
+                "storeId": {
+                    "type": "string",
+                    "x-go-name": "StoreID"
+                },
+                "updateDate": {
+                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
+                    "example": 1593685645385,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "UpdateDate"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
+        "SubscriptionModel": {
+            "properties": {
+                "customerId": {
+                    "type": "string",
+                    "x-go-name": "CustomerID"
+                },
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "name": {
+                    "type": "string",
+                    "x-go-name": "Name"
+                },
+                "term": {
+                    "$ref": "#/definitions/Term"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
+        "Term": {
+            "properties": {
+                "unit": {
+                    "type": "string",
+                    "x-go-name": "Unit"
+                },
+                "value": {
+                    "format": "int64",
+                    "type": "string",
+                    "x-go-name": "Value"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
+        "Unauthorized": {
+            "properties": {
+                "error": {
+                    "description": "HTTP response status codes label",
+                    "example": "Unauthorized",
+                    "type": "string",
+                    "x-go-name": "StatusLabel"
+                },
+                "message": {
+                    "description": "Detailed error message",
+                    "example": "Unauthorized",
+                    "type": "string",
+                    "x-go-name": "ErrorMessage"
+                },
+                "path": {
+                    "description": "Resource path",
+                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
+                    "type": "string",
+                    "x-go-name": "Path"
+                },
+                "status": {
+                    "description": "HTTP response error status codes",
+                    "example": 401,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Status"
+                },
+                "timestamp": {
+                    "description": "Error timestamp in milliseconds",
+                    "example": 1593769514607,
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "Timestamp"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        }
+    },
     "host": "api.staging.nexway.build",
     "info": {
         "description": "This service provides subscription resources and actions:",
@@ -61,7 +513,9 @@
                         "in": "body",
                         "name": "Body",
                         "required": true,
-                        "schema": {}
+                        "schema": {
+                            "$ref": "#/definitions/Subscription"
+                        }
                     }
                 ],
                 "responses": {
@@ -247,7 +701,9 @@
                         "in": "body",
                         "name": "Body",
                         "required": true,
-                        "schema": {}
+                        "schema": {
+                            "$ref": "#/definitions/Subscription"
+                        }
                     },
                     {
                         "description": "ID of subscription",
@@ -383,7 +839,9 @@
                         "in": "body",
                         "name": "Body",
                         "required": true,
-                        "schema": {}
+                        "schema": {
+                            "$ref": "#/definitions/Subscription"
+                        }
                     },
                     {
                         "description": "ID of subscription",
@@ -417,25 +875,146 @@
     ],
     "responses": {
         "SubscriptionsSuccessResponse": {
-            "description": ""
+            "description": "",
+            "schema": {
+                "$ref": "#/definitions/Subscription"
+            }
         },
         "listSubscriptionsModelsSuccess": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "example": "short",
+                        "type": "string",
+                        "x-go-name": "Format"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "items": {
+                            "$ref": "#/definitions/SubscriptionModel"
+                        },
+                        "type": "array",
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "example": false,
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage"
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "example": 41,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "example": 10,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "example": 100523,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "TotalMatchingItems"
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "example": 10053,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "ComputedTotalPages"
+                    }
+                },
+                "type": "object"
+            }
         },
         "listSubscriptionsSuccess": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+                "properties": {
+                    "format": {
+                        "description": "Available formats: short, full.\nDefault value: short.",
+                        "example": "short",
+                        "type": "string",
+                        "x-go-name": "Format"
+                    },
+                    "items": {
+                        "description": "List of found entities.",
+                        "items": {
+                            "$ref": "#/definitions/Subscription"
+                        },
+                        "type": "array",
+                        "x-go-name": "Items"
+                    },
+                    "last": {
+                        "description": "Pagination last page indicator.",
+                        "example": false,
+                        "type": "boolean",
+                        "x-go-name": "ComputedIsLastPage"
+                    },
+                    "number": {
+                        "description": "Current displayed pagination page.",
+                        "example": 41,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "Page"
+                    },
+                    "size": {
+                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
+                        "example": 10,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "Size"
+                    },
+                    "totalItems": {
+                        "description": "Total amount of items found for current search.",
+                        "example": 100523,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "TotalMatchingItems"
+                    },
+                    "totalPages": {
+                        "description": "Total amount of pages to paginate.",
+                        "example": 10053,
+                        "format": "int64",
+                        "type": "integer",
+                        "x-go-name": "ComputedTotalPages"
+                    }
+                },
+                "type": "object"
+            }
         },
         "starterBadRequest": {
-            "description": "Bad request\n\nUsually indicates validation failure"
+            "description": "Bad request\n\nUsually indicates validation failure",
+            "schema": {
+                "$ref": "#/definitions/BadRequest"
+            }
         },
         "starterForbidden": {
-            "description": "Forbidden"
+            "description": "Forbidden",
+            "schema": {
+                "$ref": "#/definitions/Forbidden"
+            }
         },
         "starterInternalServerError": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "schema": {
+                "$ref": "#/definitions/InternalServerError"
+            }
         },
         "starterNotFound": {
-            "description": "Not found"
+            "description": "Not found",
+            "schema": {
+                "$ref": "#/definitions/NotFound"
+            }
         },
         "starterSuccessCreate": {
             "description": "Successful",
@@ -450,7 +1029,10 @@
             "description": "Successful"
         },
         "starterUnauthorized": {
-            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource."
+            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
+            "schema": {
+                "$ref": "#/definitions/Unauthorized"
+            }
         }
     },
     "schemes": [
