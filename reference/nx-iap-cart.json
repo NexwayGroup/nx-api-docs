@@ -1927,6 +1927,14 @@
                         "readOnly": true,
                         "type": "object"
                     },
+                    "durationUntilTrialEnd": {
+                        "description": "Number of days before the end of trial reminder",
+                        "example": 7,
+                        "format": "int32",
+                        "maximum": 3,
+                        "minimum": 0,
+                        "type": "integer"
+                    },
                     "externalContext": {
                         "description": "External context",
                         "example": "external context",
@@ -2118,6 +2126,14 @@
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
                         "type": "string"
                     },
+                    "durationUntilTrialEnd": {
+                        "description": "Number of days before the end of trial reminder",
+                        "example": 7,
+                        "format": "int32",
+                        "maximum": 3,
+                        "minimum": 0,
+                        "type": "integer"
+                    },
                     "forcedBy": {
                         "description": "Product to force by another product",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
@@ -2156,6 +2172,9 @@
                         "description": "Indicator if a product quantity can not be increased (uses for the gift products in the marketing campaigns)",
                         "example": false,
                         "type": "boolean"
+                    },
+                    "subscriptionTemplate": {
+                        "type": "string"
                     },
                     "trial": {
                         "description": "Indicator if it is a product trial",
