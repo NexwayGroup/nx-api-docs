@@ -61,6 +61,23 @@
                 ],
                 "type": "object"
             },
+            "AdditionalFieldsAndRequirementsByEndUserCountry": {
+                "properties": {
+                    "additionalFieldAttributes": {
+                        "items": {
+                            "$ref": "#/components/schemas/AdditionalFieldAttribute"
+                        },
+                        "type": "array"
+                    },
+                    "endUserFieldRequirements": {
+                        "items": {
+                            "$ref": "#/components/schemas/EndUserFieldRequirement"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "ArrayNode": {
                 "type": "object"
             },
@@ -1281,6 +1298,21 @@
                     },
                     "startDate": {
                         "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EndUserFieldRequirement": {
+                "properties": {
+                    "i18nErrorToken": {
+                        "type": "string"
+                    },
+                    "minSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
                         "type": "string"
                     }
                 },
@@ -3363,10 +3395,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/AdditionalFieldAttribute"
-                                    },
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/AdditionalFieldsAndRequirementsByEndUserCountry"
                                 }
                             }
                         },
