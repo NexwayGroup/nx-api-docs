@@ -28,4 +28,4 @@ All connections are done through HTTPS (by default TLS 1.2;).
 
 All APIs are secured using [JWT Authentication](/nexway-monetize/reference/jwt-authentication) except for [Shopper APIs](/nexway-monetize/reference/shopper-apis).
 
-This is a test
+This is a test, suite
