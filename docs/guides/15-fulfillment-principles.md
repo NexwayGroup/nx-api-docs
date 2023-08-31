@@ -1,9 +1,8 @@
-
 # How fulfillment works
 
 Fulfillment is a part of the order processing workflow. Its primary objective is to obtain digital rights, such as license keys, activation codes, serial numbers, activation links, certificates, and so on, from the partner. If, for any reason, fulfillment encounters a problem, it can lead to the corresponding order not being completed, requiring intervention from the operations team. 
 
-The fulfillment callback is used to:
+The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
 * Optionally activate a license key to a partner's server
 
