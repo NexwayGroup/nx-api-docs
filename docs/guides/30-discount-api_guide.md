@@ -2,15 +2,13 @@
 Discount API allow you to manage discount rules.
 
 Service allows to create different types of discount rules :
-* Campaign
+* Campaign 
 * Coupon : reusable coupon code
 * Single use coupon : should be generated with a special endpoint post /discounts/{id}/generate
 
 ## Usage
 
-The "usage" endpoint will return you the detail of coupon usage of your discount rule :
-
-And another test
+The "usage" endpoint will return you the detail of coupon usage of your discount rule : 
 
 GET /discounts/usages?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8
 ```json
@@ -85,7 +83,7 @@ GET /discounts/usages?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8
 }
 ```
 
-You can also sum up coupons usages by using the "recap" end point. "target" will filter with the "used" field :
+You can also sum up coupons usages by using the "recap" end point. "target" will filter with the "used" field : 
 
 GET /discounts/usages/recap?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8&target=used
 ```json
@@ -105,3 +103,4 @@ GET /discounts/usages/recap?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8&targ
 ```
 
 So count:4 is the number of used coupons
+
