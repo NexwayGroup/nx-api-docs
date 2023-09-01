@@ -6,7 +6,7 @@ The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
 * Optionally activate a license key to a partner's server
 
-If you have an existing service for issuing licenses it can be integrated into the Monetize fulfillment (see below).
+If you have an existing service for issuing licenses it can be integrated into the Monetize fulfillment via custom fulfillment template (see below).
 
 If you don't have such a service, Nexway provides a sample fulfillment server for you to implement on your side to test expected behavior. Please ask your account manager.
 
