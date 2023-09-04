@@ -61,7 +61,7 @@
                 ],
                 "type": "object"
             },
-            "AdditionalFieldsAndRequirementsByEndUserCountry": {
+            "AdditionalFieldsAndRequirementsByCountry": {
                 "properties": {
                     "additionalFieldAttributes": {
                         "items": {
@@ -239,6 +239,9 @@
                         "description": "External context",
                         "type": "string"
                     },
+                    "flags": {
+                        "$ref": "#/components/schemas/Flags"
+                    },
                     "forcedCurrency": {
                         "description": "Currency forced by end user",
                         "example": "EUR",
@@ -291,9 +294,13 @@
                         "type": "string",
                         "writeOnly": true
                     },
-                    "marketingCampaignId": {
-                        "description": "Marketing campaign id",
-                        "type": "string"
+                    "marketingCampaignNames": {
+                        "description": "list of marketing campaign apply on the cart: value can be marketingCampaignId or marketingCampaignId",
+                        "items": {
+                            "description": "list of marketing campaign apply on the cart: value can be marketingCampaignId or marketingCampaignId",
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "maxPartialPaymentAmount": {
                         "format": "double",
@@ -312,6 +319,14 @@
                         "type": "string"
                     },
                     "notReadyForOrderCauseMessage": {
+                        "type": "string"
+                    },
+                    "offerSubSource": {
+                        "description": "offerSubSource",
+                        "enum": [
+                            "SUSPEND",
+                            "RESUME"
+                        ],
                         "type": "string"
                     },
                     "onPaymentClickRedirectUrl": {
@@ -402,7 +417,8 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN"
+                            "BILLING_PLAN",
+                            "OFFER"
                         ],
                         "type": "string"
                     },
@@ -499,6 +515,9 @@
             },
             "CartInput": {
                 "properties": {
+                    "Subscription Id": {
+                        "type": "string"
+                    },
                     "blockDiscounts": {
                         "description": "Block discounts on this cart",
                         "type": "boolean"
@@ -540,6 +559,9 @@
                         "example": "my external context",
                         "type": "string"
                     },
+                    "flags": {
+                        "$ref": "#/components/schemas/Flags"
+                    },
                     "forcedCurrency": {
                         "description": "Currency forced by end user",
                         "example": "EUR",
@@ -573,15 +595,17 @@
                         "example": "fr-FR",
                         "type": "string"
                     },
-                    "marketingCampaignId": {
-                        "description": "Marketing campaign id",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
-                        "type": "string"
-                    },
-                    "marketingCampaignName": {
-                        "description": "Marketing campaign name",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
-                        "type": "string"
+                    "marketingCampaignNames": {
+                        "description": "List of marketing campaign name",
+                        "example": [
+                            "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                        ],
+                        "items": {
+                            "description": "List of marketing campaign name",
+                            "example": "[\"21c6e727-3df5-45c1-9872-66c6af3c5e61\"]",
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "onPaymentClickRedirectUrl": {
                         "description": "redirection url once payment page is closed",
@@ -638,7 +662,8 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN"
+                            "BILLING_PLAN",
+                            "OFFER"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -742,15 +767,17 @@
                         "example": "fr-FR",
                         "type": "string"
                     },
-                    "marketingCampaignId": {
-                        "description": "Marketing campaign id",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
-                        "type": "string"
-                    },
-                    "marketingCampaignName": {
-                        "description": "Marketing campaign name",
-                        "example": "testMarketingCampaign",
-                        "type": "string"
+                    "marketingCampaignNames": {
+                        "description": "List of marketing campaign name",
+                        "example": [
+                            "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                        ],
+                        "items": {
+                            "description": "List of marketing campaign name",
+                            "example": "[\"21c6e727-3df5-45c1-9872-66c6af3c5e61\"]",
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "paymentMethod": {
                         "description": "Selected payment method",
@@ -1187,6 +1214,11 @@
                         "example": "fr-FR",
                         "type": "string"
                     },
+                    "maskedEmail": {
+                        "description": "Boolean to flag if the email needs to be masked in the public view",
+                        "example": false,
+                        "type": "boolean"
+                    },
                     "phone": {
                         "description": "Phone",
                         "example": "0123456789",
@@ -1375,6 +1407,11 @@
                         "example": "fr-FR",
                         "type": "string"
                     },
+                    "maskedEmail": {
+                        "description": "Boolean to flag if the email needs to be masked in the public view",
+                        "example": false,
+                        "type": "boolean"
+                    },
                     "phone": {
                         "description": "Phone",
                         "example": "0123456789",
@@ -1455,6 +1492,16 @@
                     },
                     "specific": {
                         "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Flags": {
+                "description": "Set of customer specific flags",
+                "properties": {
+                    "productSubstituted": {
+                        "description": "Flags to show if product was replaced by a new one or not",
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -1635,6 +1682,11 @@
                         "readOnly": true,
                         "type": "number"
                     },
+                    "marketingCampaignId": {
+                        "description": "marketing campaign id",
+                        "readOnly": true,
+                        "type": "string"
+                    },
                     "netMsrp": {
                         "description": "Net MSRP (Manufacturer Suggested Retail Price)",
                         "example": 9.4,
@@ -1701,6 +1753,9 @@
             },
             "PrivateCartInput": {
                 "properties": {
+                    "Subscription Id": {
+                        "type": "string"
+                    },
                     "billingPlanId": {
                         "type": "string"
                     },
@@ -1751,6 +1806,9 @@
                         "example": "my external context",
                         "type": "string"
                     },
+                    "flags": {
+                        "$ref": "#/components/schemas/Flags"
+                    },
                     "forcedCurrency": {
                         "description": "Currency forced by end user",
                         "example": "EUR",
@@ -1784,15 +1842,17 @@
                         "example": "fr-FR",
                         "type": "string"
                     },
-                    "marketingCampaignId": {
-                        "description": "Marketing campaign id",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
-                        "type": "string"
-                    },
-                    "marketingCampaignName": {
-                        "description": "Marketing campaign name",
-                        "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
-                        "type": "string"
+                    "marketingCampaignNames": {
+                        "description": "List of marketing campaign name",
+                        "example": [
+                            "21c6e727-3df5-45c1-9872-66c6af3c5e61"
+                        ],
+                        "items": {
+                            "description": "List of marketing campaign name",
+                            "example": "[\"21c6e727-3df5-45c1-9872-66c6af3c5e61\"]",
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "onPaymentClickRedirectUrl": {
                         "description": "redirection url once payment page is closed",
@@ -1849,7 +1909,8 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN"
+                            "BILLING_PLAN",
+                            "OFFER"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -1861,9 +1922,6 @@
                     },
                     "storeId": {
                         "description": "Reference ID of the store service",
-                        "type": "string"
-                    },
-                    "subscriptionId": {
                         "type": "string"
                     },
                     "subscriptionSubSource": {
@@ -2016,6 +2074,10 @@
                     "lifeTimeValue": {
                         "description": "Lifetime value",
                         "example": "1",
+                        "type": "string"
+                    },
+                    "marketingCampaignId": {
+                        "description": "marketing campaign id applied on the product",
                         "type": "string"
                     },
                     "name": {
@@ -2174,6 +2236,10 @@
                     "id": {
                         "description": "Product ID",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
+                        "type": "string"
+                    },
+                    "marketingCampaignId": {
+                        "description": "marketing campaign id use on the product",
                         "type": "string"
                     },
                     "parentId": {
@@ -2515,6 +2581,47 @@
                     "error",
                     "id"
                 ],
+                "type": "object"
+            },
+            "SubscriptionOfferRequest": {
+                "properties": {
+                    "subscriptionId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "subscriptionId"
+                ],
+                "type": "object"
+            },
+            "SubscriptionOfferResponse": {
+                "properties": {
+                    "cartId": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "offerSubSource": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    },
+                    "totalAmount": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
                 "type": "object"
             },
             "TaxType": {
@@ -3161,6 +3268,115 @@
                 "x-operationWeight": "300"
             }
         },
+        "/carts/public/{country}/expected-fields": {
+            "get": {
+                "description": "Get the additional expected fields with a valid ISO 3166-1 alpha-2 code",
+                "operationId": "getFieldsConfigByCountry",
+                "parameters": [
+                    {
+                        "description": "ISO 3166-1 alpha-2 code",
+                        "in": "path",
+                        "name": "country",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdditionalFieldsAndRequirementsByCountry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "Get the additional expected fields for a country",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
         "/carts/public/{id}": {
             "get": {
                 "description": "Get a cart by ID, can customize response whether we want the full fields of response data or not with 'format' parameter",
@@ -3377,8 +3593,9 @@
         },
         "/carts/public/{id}/expectedFields": {
             "get": {
+                "deprecated": true,
                 "description": "Get the additional expected fields by the end user country in the given cart id",
-                "operationId": "getFieldsConfigByCountry",
+                "operationId": "getFieldsConfigByCartId",
                 "parameters": [
                     {
                         "description": "Cart id",
@@ -3395,7 +3612,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdditionalFieldsAndRequirementsByEndUserCountry"
+                                    "$ref": "#/components/schemas/AdditionalFieldsAndRequirementsByCountry"
                                 }
                             }
                         },
@@ -3909,6 +4126,88 @@
                     "Cart"
                 ],
                 "x-operationWeight": "150"
+            }
+        },
+        "/carts/subscription-offers": {
+            "post": {
+                "description": "Create a Cart with a discounted offer for a subscription",
+                "operationId": "createSubscriptionOffer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SubscriptionOfferRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriptionOfferResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create a Subscription Offer",
+                "tags": [
+                    "Cart"
+                ]
             }
         },
         "/carts/unwind": {
