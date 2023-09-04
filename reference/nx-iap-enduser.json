@@ -4517,6 +4517,16 @@
                     "204": {
                         "description": "No Content"
                     },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request. Will be returned for example when the payment method is linked to an active subscription."
+                    },
                     "401": {
                         "content": {
                             "application/json": {
@@ -5894,6 +5904,16 @@
                 "responses": {
                     "204": {
                         "description": "No Content"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request. Will be returned for example when the payment method is linked to an active subscription."
                     },
                     "401": {
                         "content": {
