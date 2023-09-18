@@ -24,41 +24,96 @@ By default, the email body will use the same JSON format as the webhook body.
 
 
 ## Configure notifications
-You can configure notifications via Nexway Center or via APIs.
+You can configure notifications via APIs.
 
-### Create an order confirmation notification
-In this example, we want to send an order confirmation notification both by email and by webhook.
+### How to receive order confirmation notification by email.
+In this example, we want to receive an order confirmation notification by email.
 
-The customer ID is `06874434-4d42-423e-87c0-3290862809cc`.
+The customerId is `06874434-4d42-423e-87c0-3290862809cc`.
 
-Use the [Create notification rules](./create-notifier-rules.md) to `POST` the following rule:
+The notificationId is `19656f45-db84-4fa9-bd24-8917b88fb6b5`.
+
+POST receiver request on https://api.staging.nexway.build/notification/receivers
 ```json
 {
-    "customerId": "06874434-4d42-423e-87c0-3290862809cc",
-    "rules": [
-        {
-            "resource": "Order",
-            "eventType": "confirmed",
-            "isActive": true,
-            "emailChannel": {
-                "recipients": [
-                    "jdoe@com2us.com",
-                    "tmonk@com2us.com"
-                ]
-            },
-            "webHooks": {
-                "urlList": [
-                    {
-                        "Host": "backoffice.com2us.com",
-                        "Path": "/webhooks",
-                        "Scheme": "https"
-                    }
-                ]
-            }
-        }
-    ]
+  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
+  "name": "My Order Confirmation notification by email",
+  "status": "ACTIVE",
+  "targetedCustomerIds": [
+    "83b3d537-3687-4814-bdfc-6d3901dd2011"
+  ],
+  "notificationDefinitionIds": [
+    "19656f45-db84-4fa9-bd24-8917b88fb6b5"
+  ],
+  "emails": [
+    "email@domain.com"
+  ]
 }
 ```
 
-So notifications will be sent by email to jdoe@com2us.com and tmonk@com2us.com, and the same notification will appear on `https://backoffice.com2us.com/webhooks`.
-As the `isActive` value is true, the rule will be executed right after the `POST` request.
+So notifications will be sent by email to email@domain.com.
+As the status is `ACTIVE`, the notification receiver will start sending messages right after the `POST` request execution.
+
+### How to receive order confirmation notification by webhook
+
+In this example, we want to receive an order confirmation notification by webhook.
+
+The customerId is `06874434-4d42-423e-87c0-3290862809cc`.
+
+The notificationId is `19656f45-db84-4fa9-bd24-8917b88fb6b5`.
+
+POST receiver request on https://api.staging.nexway.build/notification/receivers
+
+* #### auth by oauth2
+```json
+{
+  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
+  "name": "My Order Confirmation notification by webhook",
+  "status": "ACTIVE",
+  "targetedCustomerIds": [
+    "83b3d537-3687-4814-bdfc-6d3901dd2011"
+  ],
+  "notificationDefinitionIds": [
+    "19656f45-db84-4fa9-bd24-8917b88fb6b5"
+  ],
+  "url": "https://notifications.your-domain.com/{webhooksPath}",
+  "httpClientConfiguration": {
+    "clientCredentialOauth2Config": {
+      "clientId": "client123456789",
+      "clientSecret": "secret123456789",
+      "tokenUrl": "https://auth.your-domain.com/token",
+      "scopes": [
+        "provided"
+      ],
+      "oauth2Type": "BASIC"
+    }
+  }
+}
+```
+
+* #### auth by TLS
+```json
+{
+  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
+  "name": "My Order Confirmation notification by webhook",
+  "status": "ACTIVE",
+  "targetedCustomerIds": [
+    "83b3d537-3687-4814-bdfc-6d3901dd2011"
+  ],
+  "notificationDefinitionIds": [
+    "19656f45-db84-4fa9-bd24-8917b88fb6b5"
+  ],
+  "url": "https://notifications.your-domain.com/{webhooksPath}",
+  "httpClientConfiguration": {
+    "tlsConfiguration": {
+      "tlsAuthMode": "CLIENT",
+      "clientCertificates": "-----BEGIN CERTIFICATE-----\n**********\n-----END CERTIFICATE-----",
+      "privateKey": "-----BEGIN PRIVATE KEY-----\n**********\n-----END PRIVATE KEY-----",
+      "serverCACertificates": "-----BEGIN CERTIFICATE-----\n**********\n-----END CERTIFICATE-----"
+    }
+  }
+}
+```
+
+So notifications will appear on `https://notifications.your-domain.com/{webhooksPath}`.
+As the status is `ACTIVE`, the notification receiver will start sending messages right after the `POST` request execution.
