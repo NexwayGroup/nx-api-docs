@@ -123,4 +123,3 @@ This is how both email and webhook notifications are structured:
 	}
 }
 ```
-
