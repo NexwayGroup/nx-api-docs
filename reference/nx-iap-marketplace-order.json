@@ -1515,11 +1515,6 @@
                         "example": "COMPLETED",
                         "type": "string"
                     },
-                    "methodType": {
-                        "description": "Reference ID of the payment method in end-user wallet used to process payment",
-                        "example": "visa",
-                        "type": "string"
-                    },
                     "paymentId": {
                         "description": "Reference ID of the payment coming from the marketplace (ebay's paymentReferenceId)",
                         "example": "3569VYDMRQ60",
@@ -1569,7 +1564,6 @@
                 "required": [
                     "amount",
                     "mailPaymentConfirmationStatus",
-                    "methodType",
                     "paymentTypeId",
                     "transactionId"
                 ],
@@ -3812,6 +3806,99 @@
                     "ApiCommand"
                 ]
             }
+        },
+        "/marketplaces-orders/{orderId}/repair": {
+            "post": {
+                "description": "Repair a marketplace order by marketplaceOrderId",
+                "operationId": "repairMarketplaceOrder",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "orderId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "dbVersion",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Id of marketplace order to cancel",
+                        "in": "path",
+                        "name": "marketplaceOrderId",
+                        "required": true
+                    },
+                    {
+                        "description": "Reason of this repair operation",
+                        "example": "Repair order, repair through REST Api.",
+                        "in": "query",
+                        "name": "reason"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MarketplaceOrder"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Repair a marketplace order",
+                "tags": [
+                    "ApiCommand"
+                ]
+            }
         }
     },
     "security": [
@@ -3825,7 +3912,7 @@
     "servers": [
         {
             "description": "Generated server url",
-            "url": "https://api.staging.nexway.build"
+            "url": "https://api.nexway.store"
         }
     ],
     "tags": [
