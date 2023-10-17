@@ -1,6 +1,18 @@
 {
     "components": {
         "schemas": {
+            "ActivationLink": {
+                "description": "Activation link",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "providerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "AdditionalFieldAttribute": {
                 "properties": {
                     "availableValues": {
@@ -1958,6 +1970,9 @@
             "Product": {
                 "description": "List of products in cart",
                 "properties": {
+                    "activationLink": {
+                        "$ref": "#/components/schemas/ActivationLink"
+                    },
                     "blackListedCountries": {
                         "description": "List of countries not authorized for this product",
                         "items": {
