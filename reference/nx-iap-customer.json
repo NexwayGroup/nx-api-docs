@@ -708,6 +708,73 @@
                 },
                 "type": "object"
             },
+            "Provider": {
+                "description": "The provider collection stores the providers data like query params used in activationLink feature",
+                "properties": {
+                    "createDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "hostname": {
+                        "description": "Provider hostname",
+                        "example": "http://www.hostname.com",
+                        "type": "string"
+                    },
+                    "id": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "modelVersion": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Provider name",
+                        "example": "My provider name",
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "parameters": {
+                        "additionalProperties": {
+                            "description": "Map of url parameters",
+                            "example": "\"parameters\": {\"param1\": \"hello world\"}",
+                            "type": "string"
+                        },
+                        "description": "Map of url parameters",
+                        "example": "\"parameters\": {\"param1\": \"hello world\"}",
+                        "type": "object"
+                    },
+                    "productSiteLink": {
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "hostname",
+                    "name",
+                    "parameters",
+                    "productSiteLink"
+                ],
+                "type": "object"
+            },
             "PublicCustomer": {
                 "properties": {
                     "blackListedPaymentTypes": {
@@ -907,6 +974,36 @@
                     "items": {
                         "items": {
                             "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultProvider": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Provider"
                         },
                         "type": "array"
                     },
@@ -1370,7 +1467,7 @@
         },
         "/customers/blacklistedsigneddata": {
             "get": {
-                "operationId": "getItems_1",
+                "operationId": "getItems_2",
                 "parameters": [
                     {
                         "in": "query",
@@ -1456,7 +1553,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_1",
+                "operationId": "createItem_2",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1528,7 +1625,7 @@
         },
         "/customers/blacklistedsigneddata/distinct": {
             "get": {
-                "operationId": "distinct_1",
+                "operationId": "distinct_2",
                 "parameters": [
                     {
                         "in": "query",
@@ -1616,7 +1713,7 @@
         },
         "/customers/blacklistedsigneddata/recap": {
             "get": {
-                "operationId": "recap_1",
+                "operationId": "recap_2",
                 "parameters": [
                     {
                         "in": "query",
@@ -1803,7 +1900,7 @@
         },
         "/customers/blacklistedsigneddata/unwind": {
             "get": {
-                "operationId": "unwind_1",
+                "operationId": "unwind_2",
                 "parameters": [
                     {
                         "in": "query",
@@ -1891,7 +1988,7 @@
         },
         "/customers/blacklistedsigneddata/{id}": {
             "delete": {
-                "operationId": "deleteItem_1",
+                "operationId": "deleteItem_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -1961,7 +2058,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_1",
+                "operationId": "getItem_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -2031,7 +2128,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_1",
+                "operationId": "updateItem_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -2113,7 +2210,7 @@
         },
         "/customers/distinct": {
             "get": {
-                "operationId": "distinct",
+                "operationId": "distinct_1",
                 "parameters": [
                     {
                         "in": "query",
@@ -2346,6 +2443,650 @@
                     "Customer"
                 ],
                 "x-operationWeight": "210"
+            }
+        },
+        "/customers/providers": {
+            "get": {
+                "operationId": "getItems_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultProvider"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Provider"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Provider"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/customers/providers/distinct": {
+            "get": {
+                "operationId": "distinct",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/customers/providers/recap": {
+            "get": {
+                "operationId": "recap_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/customers/providers/unwind": {
+            "get": {
+                "operationId": "unwind_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/customers/providers/{id}": {
+            "delete": {
+                "operationId": "deleteItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Provider"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Provider"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Provider"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Provider"
+                ],
+                "x-operationWeight": "400"
             }
         },
         "/customers/public": {
@@ -3769,6 +4510,9 @@
     "tags": [
         {
             "name": "Customer"
+        },
+        {
+            "name": "Provider"
         },
         {
             "name": "BlackedSignedData"
