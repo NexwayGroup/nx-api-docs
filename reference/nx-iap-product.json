@@ -1,6 +1,18 @@
 {
     "components": {
         "schemas": {
+            "ActivationLink": {
+                "description": "Activation link",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    },
+                    "providerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "CustomFields": {
                 "properties": {
                     "catalogId": {
@@ -849,6 +861,9 @@
             },
             "Product": {
                 "properties": {
+                    "activationLink": {
+                        "$ref": "#/components/schemas/ActivationLink"
+                    },
                     "availableVariables": {
                         "description": "Available product variables",
                         "items": {
@@ -1147,6 +1162,9 @@
             },
             "ProductUpdate": {
                 "properties": {
+                    "activationLink": {
+                        "$ref": "#/components/schemas/ActivationLink"
+                    },
                     "availableVariables": {
                         "description": "Available product variables",
                         "items": {
@@ -1513,6 +1531,9 @@
             },
             "PublicProduct": {
                 "properties": {
+                    "activationLink": {
+                        "$ref": "#/components/schemas/ActivationLink"
+                    },
                     "blackListedCountries": {
                         "description": "List of countries not authorized for this product",
                         "items": {
