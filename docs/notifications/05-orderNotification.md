@@ -60,14 +60,6 @@ The following attributes will be available in the order related events. If you n
 | items[].VATRate | Sold product applied sales tax rate |
 | items[].discountRate | Discount rate applied to product |
 | items[].subscriptionId | SubscriptionId if the line item has one |
-| items[].subscription | Some notification definitions like 'Order Completed With Content Including Subscription Data' may also contain information about created subscription. Although, subscription is a separate domain and has it's own [set of events](10-subscriptionNotification.md). |
-| items[].subscription.id | SubscriptionId |
-| items[].subscription.createDate | Creation date in ISO 8601 format |
-| items[].subscription.modelId | Subscription model |
-| items[].subscription.storeId | Selling store id |
-| items[].subscription.lifecycle | Lifecycle data |
-| items[].subscription.lifecycle.id | Lifecycle id string |
-| items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format |
 
 ### Example
 
@@ -123,3 +115,18 @@ The following attributes will be available in the order related events. If you n
 	}
 }
 ```
+
+## Additional fields for 'Order Completed With Content Including Subscription Data' notification
+
+Some notification definitions like 'Order Completed With Content Including Subscription Data' may also contain information about created subscription. Although, subscription is a separate domain and has it's own [set of events](10-subscriptionNotification.md).
+
+| Name | Description |
+| ---- | ----------- |
+| items[].subscription | Subscription object |
+| items[].subscription.id | SubscriptionId |
+| items[].subscription.createDate | Creation date in ISO 8601 format |
+| items[].subscription.modelId | Subscription model |
+| items[].subscription.storeId | Selling store id |
+| items[].subscription.lifecycle | Lifecycle data |
+| items[].subscription.lifecycle.id | Lifecycle id string |
+| items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format |
