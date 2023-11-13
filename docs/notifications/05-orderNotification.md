@@ -24,7 +24,7 @@ The following attributes will be available in the order related events. If you n
 | Name | Description |
 | ---- | ----------- |
 | id | Order unique identifier |
-| status | Order lifecycle status. The status corresponds to the event type. |
+| status | Order status corresponds to the event type. |
 | source | Order source: PURCHASE, SUBSCRIPTION, OFFER etc |
 | creationDate | Creation date in ISO 8601 format, ex.: 2024-01-01T01:02:03Z |
 | currency | Order's Currency, ex.: EUR |
