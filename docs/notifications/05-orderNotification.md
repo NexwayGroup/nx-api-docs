@@ -59,6 +59,7 @@ The following attributes will be available in the order related events. If you n
 | items[].unitPriceExclVAT | Product unit price, excluding sales tax |
 | items[].VATRate | Sold product applied sales tax rate |
 | items[].discountRate | Discount rate applied to product |
+| items[].subscriptionId | SubscriptionId if the line item has one |
 | items[].subscription | Some notification definitions like 'Order Completed With Content Including Subscription Data' may also contain information about created subscription. Although, subscription is a separate domain and has it's own [set of events](10-subscriptionNotification.md). |
 | items[].subscription.id | SubscriptionId |
 | items[].subscription.createDate | Creation date in ISO 8601 format |
@@ -110,6 +111,7 @@ The following attributes will be available in the order related events. If you n
 					"publisherReference": "SKU-0001",
 				},
 				"fulfillmentId":"fff994ac-2e29-4dce-a8dd-6c582eee7927",
+				"subscriptionId":"fffdddac-2e29-4dce-a8dd-052e25968b8b",
 				"activationCode":"XXXXX-4REZC-CV64B-XXX",
 				"quantity": 1,
 				"externalContext": "what the customer wants",
