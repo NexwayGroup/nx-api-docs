@@ -19,7 +19,9 @@ Below is a list of order-related notifications which you can subscribe to.
 
 ## List of fields
 
-The following attributes will be available in the order related events. If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities information.
+The generic notification body will have an 'order' object with the following fileds.
+
+If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities.
 
 | Name | Description |
 | ---- | ----------- |
@@ -116,7 +118,7 @@ The following attributes will be available in the order related events. If you n
 }
 ```
 
-## Additional fields for 'Order Completed With Content Including Subscription Data' notification
+### Additional fields for 'Order Completed With Content Including Subscription Data' notification
 
 Some notification definitions like 'Order Completed With Content Including Subscription Data' may also contain information about created subscription. Although, subscription is a separate domain and has it's own [set of events](10-subscriptionNotification.md).
 
