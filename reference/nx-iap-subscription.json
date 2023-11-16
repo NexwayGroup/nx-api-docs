@@ -183,6 +183,20 @@
             "type": "object",
             "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
         },
+        "PreBillingRequest": {
+            "properties": {
+                "cartId": {
+                    "type": "string",
+                    "x-go-name": "CartId"
+                },
+                "force": {
+                    "type": "boolean",
+                    "x-go-name": "Force"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
         "Product": {
             "properties": {
                 "dynamicVariables": {
@@ -768,6 +782,33 @@
                     }
                 },
                 "summary": "Cancel subscription",
+                "tags": [
+                    "Subscriptions"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/prebill": {
+            "post": {
+                "description": "This endpoint is used for creating pre-billed orders when pre-billings don't exist. For example, it is used for orders when discount source is OFFER\n\nThis endpoint may be used in the case of a discount OFFER process to pre-bill a subscription when pre-billing does not exist.",
+                "operationId": "pre-billing",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/PreBilledOrderResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/starterBadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/responses/starterUnauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/starterForbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/starterInternalServerError"
+                    }
+                },
+                "summary": "Pre-bill a subscription",
                 "tags": [
                     "Subscriptions"
                 ]
