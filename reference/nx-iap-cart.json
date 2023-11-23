@@ -343,11 +343,12 @@
                         "type": "string"
                     },
                     "offerSubSource": {
-                        "description": "offerSubSource",
+                        "description": "It defines which offer sub source that should be used if OFFER is the source. It is mandatory to use it, if OFFER is the discount source",
                         "enum": [
                             "SUSPEND",
                             "RESUME"
                         ],
+                        "example": "RESUME | SUSPEND",
                         "type": "string"
                     },
                     "onPaymentClickRedirectUrl": {
@@ -433,7 +434,7 @@
                         "uniqueItems": true
                     },
                     "source": {
-                        "description": "Source",
+                        "description": "It defines the source of the cart",
                         "enum": [
                             "PURCHASE",
                             "SUBSCRIPTION",
@@ -441,6 +442,7 @@
                             "BILLING_PLAN",
                             "OFFER"
                         ],
+                        "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN | OFFER",
                         "type": "string"
                     },
                     "storeHostname": {
