@@ -362,6 +362,9 @@
                         "description": "is subscription upgrade authorized on this customer",
                         "type": "boolean"
                     },
+                    "subscriptionUpgradeConfiguration": {
+                        "$ref": "#/components/schemas/SubscriptionUpgradeConfiguration"
+                    },
                     "subscriptions": {
                         "additionalProperties": {
                             "description": "Customer subscriptions",
@@ -602,6 +605,20 @@
                 "required": [
                     "realmName"
                 ],
+                "type": "object"
+            },
+            "MidTermUpgrade": {
+                "properties": {
+                    "enable": {
+                        "type": "boolean"
+                    },
+                    "mandatoryRemotePrice": {
+                        "type": "boolean"
+                    },
+                    "overrideExpirationDate": {
+                        "type": "boolean"
+                    }
+                },
                 "type": "object"
             },
             "NormalizeException": {
@@ -1132,6 +1149,16 @@
                         "type": "string"
                     }
                 },
+                "type": "object"
+            },
+            "SubscriptionUpgradeConfiguration": {
+                "description": "Mid-term upgrade configuration",
+                "properties": {
+                    "midTermUpgrade": {
+                        "$ref": "#/components/schemas/MidTermUpgrade"
+                    }
+                },
+                "readOnly": true,
                 "type": "object"
             }
         },
