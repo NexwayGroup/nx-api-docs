@@ -597,6 +597,59 @@
                 },
                 "type": "object"
             },
+            "NextGenerationsQueryParameters": {
+                "properties": {
+                    "country": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "endUserCity": {
+                        "type": "string"
+                    },
+                    "endUserStreet": {
+                        "type": "string"
+                    },
+                    "endUserZipCode": {
+                        "type": "string"
+                    },
+                    "numberOfNextGeneration": {
+                        "format": "int32",
+                        "maximum": 10,
+                        "minimum": 2,
+                        "type": "integer"
+                    },
+                    "priceFunctionParameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "region": {
+                        "type": "string"
+                    },
+                    "startAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "taxExempt": {
+                        "type": "boolean"
+                    },
+                    "trial": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "country",
+                    "currency",
+                    "storeId"
+                ],
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -1133,6 +1186,25 @@
                     "publisherRefId",
                     "sellingStores"
                 ],
+                "type": "object"
+            },
+            "ProductByGeneration": {
+                "properties": {
+                    "finalPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "productId": {
+                        "type": "string"
+                    },
+                    "subscriptionGeneration": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
                 "type": "object"
             },
             "ProductDuplicationOptions": {
@@ -7137,6 +7209,78 @@
                     "Public"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/products/public/{productId}/next-generations": {
+            "get": {
+                "operationId": "getNextGenerations",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "queryParams",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/NextGenerationsQueryParameters"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductByGeneration"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get the next generations information for a product",
+                "tags": [
+                    "Public"
+                ]
             }
         },
         "/products/recap": {
