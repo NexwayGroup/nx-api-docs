@@ -445,7 +445,8 @@
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
-                            "OFFER"
+                            "OFFER",
+                            "MID_TERM_UPGRADE"
                         ],
                         "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN | OFFER",
                         "type": "string"
@@ -696,7 +697,8 @@
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
-                            "OFFER"
+                            "OFFER",
+                            "MID_TERM_UPGRADE"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -1556,6 +1558,25 @@
                 ],
                 "type": "object"
             },
+            "MidTermUpgradeRequest": {
+                "properties": {
+                    "externalContext": {
+                        "description": "External context",
+                        "type": "string"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    },
+                    "wantedProduct": {
+                        "$ref": "#/components/schemas/ProductInput"
+                    }
+                },
+                "required": [
+                    "subscriptionId",
+                    "wantedProduct"
+                ],
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -1944,7 +1965,8 @@
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
-                            "OFFER"
+                            "OFFER",
+                            "MID_TERM_UPGRADE"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -3131,6 +3153,88 @@
                 "x-operationWeight": "100"
             }
         },
+        "/carts/mid-term-upgrade": {
+            "post": {
+                "description": "Create a Cart with a mid term upgrade for a subscription",
+                "operationId": "createMidTermUpgradeCart",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MidTermUpgradeRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create a mid term upgrade",
+                "tags": [
+                    "Cart"
+                ]
+            }
+        },
         "/carts/public": {
             "post": {
                 "description": "Create a cart with CartInput content in the request body",
@@ -4181,7 +4285,7 @@
         "/carts/subscription-offers": {
             "post": {
                 "description": "Create a Cart with a discounted offer for a subscription",
-                "operationId": "createSubscriptionOffer",
+                "operationId": "createSubscriptionOfferCart",
                 "requestBody": {
                     "content": {
                         "application/json": {
