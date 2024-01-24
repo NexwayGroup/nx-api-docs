@@ -2033,7 +2033,7 @@
                     {
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -2392,7 +2392,7 @@
                     {
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3192,17 +3192,7 @@
             "get": {
                 "deprecated": true,
                 "operationId": "getEnduser_1",
-                "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "responses": {
                     "200": {
                         "content": {
@@ -3263,15 +3253,6 @@
             "put": {
                 "operationId": "put_1",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "store host-name",
                         "in": "query",
@@ -3465,15 +3446,6 @@
                 "operationId": "getEnduserCreditNoteAsPdf",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "order id",
                         "in": "path",
                         "name": "orderId",
@@ -3556,15 +3528,6 @@
                 "operationId": "getEnduserInvoiceAsPdfv2",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "order id",
                         "in": "path",
                         "name": "orderId",
@@ -3638,15 +3601,6 @@
                 "deprecated": true,
                 "operationId": "getAllSubscriptions_1",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "dryRun or not dryRun",
                         "in": "query",
@@ -3738,15 +3692,6 @@
                 "operationId": "getAllSubscriptionsV0",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "pageable",
                         "in": "query",
                         "name": "pageable",
@@ -3818,15 +3763,6 @@
             "get": {
                 "operationId": "getEnduserSubscriptionDetails",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "subscription id",
                         "in": "path",
@@ -3908,15 +3844,6 @@
             "put": {
                 "operationId": "updateSubscriptionPaymentMethod_1",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "subscription id",
                         "in": "path",
@@ -4017,15 +3944,6 @@
                 "operationId": "toggleSubscription_2",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "subscription id",
                         "in": "path",
                         "name": "subscriptionId",
@@ -4046,6 +3964,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "201": {
                         "description": "Success"
                     },
@@ -4100,15 +4021,6 @@
             "put": {
                 "operationId": "updatePassword",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "dryRun or not dryRun",
                         "in": "query",
@@ -4301,15 +4213,6 @@
                 "operationId": "getOnePaymentMethodWithSubscriptionId_1",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "subscription id",
                         "in": "path",
                         "name": "subscriptionId",
@@ -4395,15 +4298,6 @@
                 "operationId": "getAllPaymentMethods_1",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "status of payment",
                         "example": " ACTIVATED, PENDING, ERROR, DEACTIVATED",
                         "in": "query",
@@ -4476,15 +4370,6 @@
             "delete": {
                 "operationId": "deleteEnduserPaymentMethod",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "payment Method id",
                         "in": "path",
@@ -4577,15 +4462,6 @@
                 "operationId": "getOnePaymentMethod",
                 "parameters": [
                     {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "description": "payment method id",
                         "in": "path",
                         "name": "paymentMethodId",
@@ -4670,15 +4546,6 @@
             "post": {
                 "operationId": "addEndUserPaymentMethod",
                 "parameters": [
-                    {
-                        "description": "End user id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "paymentType",
                         "example": "paypal, sepa",
@@ -5552,6 +5419,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "201": {
                         "description": "Success"
                     },
@@ -6772,6 +6642,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "201": {
                         "description": "Success"
                     },
@@ -7482,6 +7355,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EndUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
                     "201": {
                         "content": {
                             "application/json": {
@@ -7581,6 +7464,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EndUser"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
                     "201": {
                         "content": {
                             "application/json": {
@@ -7722,20 +7615,6 @@
         {
             "description": "Generated server url",
             "url": "https://api.nexway.store"
-        }
-    ],
-    "tags": [
-        {
-            "name": "EndUserPortal"
-        },
-        {
-            "name": "EndUser"
-        },
-        {
-            "name": "Public"
-        },
-        {
-            "name": "Group"
         }
     ]
 }
