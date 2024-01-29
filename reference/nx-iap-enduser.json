@@ -4643,6 +4643,88 @@
                 ]
             }
         },
+        "/endusers/portal/{endUserId}/licenses/{licenseId}/content": {
+            "get": {
+                "description": "Get the activation content of a fulfillment operation",
+                "operationId": "getActivationFileContentByLicenseId",
+                "parameters": [
+                    {
+                        "description": "End user id",
+                        "in": "path",
+                        "name": "endUserId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "nexway fulfillment id",
+                        "in": "path",
+                        "name": "licenseId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonNode"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get the activation content of a fulfillment operation",
+                "tags": [
+                    "EndUserPortal"
+                ]
+            }
+        },
         "/endusers/portal/{id}": {
             "get": {
                 "deprecated": true,
