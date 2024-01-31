@@ -166,8 +166,7 @@
                             "description": "List of stores selling this product",
                             "type": "string"
                         },
-                        "type": "array",
-                        "uniqueItems": true
+                        "type": "array"
                     },
                     "status": {
                         "description": "Product status",
@@ -2449,7 +2448,7 @@
                         "example": "lastUpdateReason,nextGenerationOf",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4069,7 +4068,7 @@
                         "example": "customerId,lifeTime,trialAllowed,type,...",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4853,7 +4852,7 @@
                         "example": "marketingName,fallbackLocale,localizedMarketingName,...",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5909,7 +5908,7 @@
                         "example": "name,parameters,productFields,...",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6684,7 +6683,7 @@
                         "example": "lastUpdateReason,nextGenerationOf",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7956,29 +7955,6 @@
         {
             "description": "Generated server url",
             "url": "https://api.nexway.store"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Custom Fields Definition"
-        },
-        {
-            "name": "CustomizedProduct"
-        },
-        {
-            "name": "PriceFunction"
-        },
-        {
-            "name": "Public"
-        },
-        {
-            "name": "Custom Fields"
-        },
-        {
-            "name": "Product"
-        },
-        {
-            "name": "Description"
         }
     ]
 }
