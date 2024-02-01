@@ -154,6 +154,7 @@
                     "availableAdditionalPaymentTypes": {
                         "deprecated": true,
                         "items": {
+                            "deprecated": true,
                             "type": "string"
                         },
                         "type": "array"
@@ -166,9 +167,6 @@
                         },
                         "type": "array",
                         "uniqueItems": true
-                    },
-                    "b64PrivateKey": {
-                        "type": "string"
                     },
                     "bannerEmail": {
                         "description": "Banner email",
@@ -187,6 +185,7 @@
                     "blackListedPaymentTypes": {
                         "deprecated": true,
                         "items": {
+                            "deprecated": true,
                             "type": "string"
                         },
                         "type": "array"
@@ -409,6 +408,7 @@
                     "features",
                     "iamClient",
                     "name",
+                    "subscriptionUpgradeConfiguration",
                     "vatNumber"
                 ],
                 "type": "object"
@@ -1206,7 +1206,7 @@
                         "example": "vatNumber,addressBook,fulfillments,...",
                         "in": "query",
                         "name": "target",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4460,6 +4460,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "204": {
                         "description": "Success"
                     },
@@ -4535,17 +4538,6 @@
         {
             "description": "Generated server url",
             "url": "https://api.nexway.store"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Customer"
-        },
-        {
-            "name": "Provider"
-        },
-        {
-            "name": "BlackedSignedData"
         }
     ]
 }
