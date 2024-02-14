@@ -2182,6 +2182,14 @@
                         "description": "Value parameters of the product",
                         "type": "object"
                     },
+                    "priceSource": {
+                        "enum": [
+                            "INTERNAL",
+                            "EXTERNAL",
+                            "INTERNAL_CONVERTED"
+                        ],
+                        "type": "string"
+                    },
                     "publisherRefId": {
                         "description": "Product publisher reference ID",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
@@ -2337,6 +2345,9 @@
                     "quantityMaxReached": {
                         "description": "Indicator if a product quantity can not be increased (uses for the gift products in the marketing campaigns)",
                         "example": false,
+                        "type": "boolean"
+                    },
+                    "remotePrice": {
                         "type": "boolean"
                     },
                     "subscriptionTemplate": {
