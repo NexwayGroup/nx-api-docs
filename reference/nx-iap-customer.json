@@ -607,6 +607,28 @@
                 ],
                 "type": "object"
             },
+            "LinkDefinition": {
+                "properties": {
+                    "baseLink": {
+                        "description": "link definition base link ",
+                        "example": "https://my-beautiful.site/path/to/honey",
+                        "type": "string"
+                    },
+                    "queryParameters": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/QueryParameter"
+                        },
+                        "description": "list of useful parameters to generate the activation link ",
+                        "example": "\"queryParameters\": { \"param1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"param2\": { \"type\": \"STATIC\", \"value\": \"staticval2\" }, \"ac\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"ACTIVATION_CODE\" }, \"param3\": { \"type\": \"LINK\", value: { \"base\": \"https://my-ugly.site/path/to/cement\", \"queryParameters\": { \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"email\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"email\" } } } }",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "baseLink",
+                    "queryParameters"
+                ],
+                "type": "object"
+            },
             "MidTermUpgrade": {
                 "properties": {
                     "enable": {
@@ -743,17 +765,15 @@
                         "format": "int64",
                         "type": "integer"
                     },
-                    "hostname": {
-                        "description": "Provider hostname",
-                        "example": "http://www.hostname.com",
-                        "type": "string"
-                    },
                     "id": {
                         "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
                         "type": "string"
+                    },
+                    "linkDefinition": {
+                        "$ref": "#/components/schemas/LinkDefinition"
                     },
                     "modelVersion": {
                         "deprecated": true,
@@ -768,19 +788,6 @@
                         "type": "string",
                         "writeOnly": true
                     },
-                    "parameters": {
-                        "additionalProperties": {
-                            "description": "Map of url parameters",
-                            "example": "\"parameters\": {\"param1\": \"hello world\"}",
-                            "type": "string"
-                        },
-                        "description": "Map of url parameters",
-                        "example": "\"parameters\": {\"param1\": \"hello world\"}",
-                        "type": "object"
-                    },
-                    "productSiteLink": {
-                        "type": "string"
-                    },
                     "updateDate": {
                         "deprecated": true,
                         "format": "date-time",
@@ -788,10 +795,8 @@
                     }
                 },
                 "required": [
-                    "hostname",
-                    "name",
-                    "parameters",
-                    "productSiteLink"
+                    "linkDefinition",
+                    "name"
                 ],
                 "type": "object"
             },
@@ -858,6 +863,36 @@
                         "type": "boolean"
                     }
                 },
+                "type": "object"
+            },
+            "QueryParameter": {
+                "description": "list of useful parameters to generate the activation link ",
+                "example": "\"queryParameters\": { \"param1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"param2\": { \"type\": \"STATIC\", \"value\": \"staticval2\" }, \"ac\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"ACTIVATION_CODE\" }, \"param3\": { \"type\": \"LINK\", value: { \"base\": \"https://my-ugly.site/path/to/cement\", \"queryParameters\": { \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"email\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"email\" } } } }",
+                "properties": {
+                    "type": {
+                        "description": "parameter type",
+                        "enum": [
+                            "STATIC",
+                            "DYNAMIC",
+                            "DYNAMIC_ENCRYPTED",
+                            "LINK",
+                            "STATIC",
+                            "DYNAMIC",
+                            "DYNAMIC_ENCRYPTED",
+                            "LINK"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "gven value to the query parameter, can be a text value or a query parameter json value",
+                        "example": "\"value\": \"staticval1\" or \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" },",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "value"
+                ],
                 "type": "object"
             },
             "RecapEntry": {
