@@ -63,8 +63,12 @@
                         "description": "Internal reference ID",
                         "type": "string"
                     },
+                    "monetizeCustomerId": {
+                        "description": "Monetize customer ID",
+                        "type": "string"
+                    },
                     "type": {
-                        "description": "Indicates if full or partial cancellation ( PARTIAL/TOTAL)",
+                        "description": "Indicates if full or partial cancellation (PARTIAL/TOTAL)",
                         "enum": [
                             "PARTIAL",
                             "TOTAL"
@@ -76,6 +80,7 @@
                     "cancellationReason",
                     "date",
                     "id",
+                    "monetizeCustomerId",
                     "type"
                 ],
                 "type": "object"
@@ -156,68 +161,76 @@
                 "description": "End-user information",
                 "properties": {
                     "city": {
-                        "description": "EndUser city",
+                        "description": "End user's city",
                         "example": "N\u00eemes",
                         "maxLength": 250,
                         "minLength": 0,
                         "type": "string"
                     },
                     "country": {
-                        "description": "EndUser country",
+                        "description": "End user's country",
                         "example": "FR",
                         "type": "string"
                     },
                     "email": {
-                        "description": "EndUser email",
+                        "description": "End user's email",
                         "example": "email.test@nexway.com",
                         "type": "string"
                     },
                     "firstName": {
-                        "description": "EndUser first name",
+                        "description": "End user's first name",
                         "example": "Doe",
                         "maxLength": 140,
                         "minLength": 0,
                         "type": "string"
                     },
                     "lastName": {
-                        "description": "EndUser last name",
+                        "description": "End user's last name",
                         "example": "John",
                         "maxLength": 140,
                         "minLength": 0,
                         "type": "string"
                     },
                     "locale": {
-                        "description": "EndUser locale",
+                        "description": "End user's locale",
                         "example": "fr-FR",
                         "type": "string"
                     },
                     "phone": {
-                        "description": "EndUser phone number",
+                        "description": "End user's phone number",
                         "example": "0600000000",
                         "type": "string"
                     },
+                    "region": {
+                        "description": "End user's region",
+                        "maxLength": 250,
+                        "minLength": 0,
+                        "type": "string"
+                    },
                     "streetAddress": {
-                        "description": "EndUser street address",
+                        "description": "End user's street address",
                         "example": "19 avenue Feuch\u00e8res",
                         "maxLength": 250,
                         "minLength": 0,
                         "type": "string"
                     },
                     "title": {
-                        "description": "EndUser title",
+                        "description": "End user's title",
                         "example": "Mr",
                         "type": "string"
                     },
                     "userName": {
-                        "description": "EndUser username on the marketplace",
+                        "description": "End user's username on the marketplace",
                         "example": "hello64",
                         "maxLength": 140,
                         "minLength": 0,
                         "type": "string"
                     },
                     "zipCode": {
-                        "description": "EndUser zip Code",
+                        "description": "End user's zip Code",
                         "example": "30000",
+                        "maxLength": 50,
+                        "minLength": 0,
                         "type": "string"
                     }
                 },
@@ -256,14 +269,34 @@
                     },
                     "sendOrderConfirmationEmail": {
                         "type": "boolean"
-                    },
-                    "usingFulfillmentV1": {
-                        "type": "boolean"
                     }
                 },
                 "type": "object"
             },
             "HttpRange": {
+                "type": "object"
+            },
+            "Invoice": {
+                "description": "Invoice information",
+                "properties": {
+                    "date": {
+                        "description": "Creation date",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Internal reference ID",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "date",
+                    "id"
+                ],
                 "type": "object"
             },
             "LineItem": {
@@ -592,6 +625,23 @@
                     },
                     "id": {
                         "deprecated": true,
+                        "type": "string"
+                    },
+                    "invoice": {
+                        "$ref": "#/components/schemas/Invoice"
+                    },
+                    "invoiceStatus": {
+                        "description": "Invoice status",
+                        "enum": [
+                            "ABORTED",
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED"
+                        ],
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -1826,6 +1876,11 @@
             "Store": {
                 "description": "Store information",
                 "properties": {
+                    "bannerInvoice": {
+                        "description": "Invoice banner",
+                        "example": "https://s3storage.nexway.com/iap-staticfiles/f454b53a15ee4568aee47604d02c4eae.png",
+                        "type": "string"
+                    },
                     "bannerOrderConfEmail": {
                         "description": "Order confirmation banner",
                         "example": "https://s3storage.nexway.com/iap-staticfiles/a3385ddb0f37ab9d4ffa4a6ae58bf2fe.png",
@@ -1833,7 +1888,7 @@
                     },
                     "displayName": {
                         "description": "Display name",
-                        "example": "Kaspersky France Test",
+                        "example": "Nexway France Test",
                         "type": "string"
                     },
                     "id": {
@@ -1845,7 +1900,7 @@
                     },
                     "name": {
                         "description": "Name",
-                        "example": "Kaspersky France",
+                        "example": "Nexway France",
                         "type": "string"
                     }
                 },
