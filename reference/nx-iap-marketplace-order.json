@@ -545,6 +545,20 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "dispatchStatus": {
+                        "description": "Dispatch notification status from an order on the marketplace",
+                        "enum": [
+                            "ABORTED",
+                            "CANCELED",
+                            "COMPLETED",
+                            "EXTERNAL_COMPLETED",
+                            "FAILED",
+                            "INITIALIZED",
+                            "PENDING",
+                            "SCHEDULED"
+                        ],
+                        "type": "string"
+                    },
                     "emailCancellationStatus": {
                         "description": "Global status for email cancellation workflow",
                         "enum": [
