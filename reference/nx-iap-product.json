@@ -153,6 +153,10 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "paidTrial": {
+                        "description": "Indicator if it is a paid trial product",
+                        "type": "boolean"
+                    },
                     "prices": {
                         "$ref": "#/components/schemas/Prices"
                     },
@@ -1031,6 +1035,10 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "paidTrial": {
+                        "description": "Flag for paid trial product",
+                        "type": "boolean"
+                    },
                     "parentId": {
                         "description": "Product parent ID",
                         "readOnly": true,
@@ -1392,6 +1400,10 @@
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "paidTrial": {
+                        "description": "Flag for paid trial product",
+                        "type": "boolean"
                     },
                     "parentId": {
                         "description": "Product parent ID",
@@ -1757,6 +1769,10 @@
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "paidTrial": {
+                        "description": "Flag for paid trial product",
+                        "type": "boolean"
                     },
                     "parentId": {
                         "description": "Product parent ID",
@@ -2297,6 +2313,28 @@
                         "type": "integer"
                     }
                 },
+                "type": "object"
+            },
+            "UpdateFulfillmentTemplatesRequest": {
+                "properties": {
+                    "customerId": {
+                        "description": "Customer ID",
+                        "type": "string"
+                    },
+                    "fulfillmentTemplateIdTarget": {
+                        "description": "ID of the fulfillment template to change in products",
+                        "type": "string"
+                    },
+                    "fulfillmentTemplateSource": {
+                        "description": "Source is the fulfillment template name or id depending on the fulfillment version - name for fulfillment v0 or id for fulfillment v1",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "customerId",
+                    "fulfillmentTemplateIdTarget",
+                    "fulfillmentTemplateSource"
+                ],
                 "type": "object"
             },
             "Variable": {
@@ -5748,6 +5786,67 @@
                     }
                 },
                 "summary": "Duplicate a product, if the product has variants it will also duplicate all variants",
+                "tags": [
+                    "Product"
+                ]
+            }
+        },
+        "/products/fulfillment-templates": {
+            "put": {
+                "operationId": "updateFulfillmentTemplates",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFulfillmentTemplatesRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Update all products fulfillment templates of a specific customer",
                 "tags": [
                     "Product"
                 ]
