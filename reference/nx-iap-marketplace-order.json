@@ -484,6 +484,41 @@
                 ],
                 "type": "object"
             },
+            "MailRequest": {
+                "properties": {
+                    "cancellationReason": {
+                        "description": "Cancellation reason",
+                        "type": "string"
+                    },
+                    "paymentId": {
+                        "description": "Payment id",
+                        "type": "string"
+                    },
+                    "preorderProductId": {
+                        "description": "Product if the email is about specific product (preorder case)",
+                        "type": "string"
+                    },
+                    "template": {
+                        "description": "Email template",
+                        "example": "ORDERCONFIRMATION",
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "to": {
+                        "description": "Email send to",
+                        "example": "nexway@nexway.com",
+                        "maxLength": 150,
+                        "minLength": 6,
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "template",
+                    "to"
+                ],
+                "type": "object"
+            },
             "MarketplaceOrder": {
                 "description": "Data structure used to store marketplaces orders information in mongodb",
                 "properties": {
@@ -3646,6 +3681,119 @@
                 "summary": "Update an existing order",
                 "tags": [
                     "ApiCRUDMarketplaceOrder"
+                ]
+            }
+        },
+        "/marketplaces-orders/{id}/email/send": {
+            "post": {
+                "description": "Resend an email for a marketplace order",
+                "operationId": "sendEmail",
+                "parameters": [
+                    {
+                        "description": "Id of marketplace order that needs a resend email",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Reason of the resend email action",
+                        "in": "query",
+                        "name": "reason",
+                        "required": false,
+                        "schema": {
+                            "default": "send email thru REST Api",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MailRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Resend an email",
+                "tags": [
+                    "ApiCommand"
                 ]
             }
         },
