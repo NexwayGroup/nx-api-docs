@@ -1308,6 +1308,27 @@
                 },
                 "type": "object"
             },
+            "Order": {
+                "description": "Order list",
+                "properties": {
+                    "generation": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "previousOrderIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "taxTransactionId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Pageable": {
                 "properties": {
                     "page": {
@@ -1914,6 +1935,13 @@
                     },
                     "id": {
                         "type": "string"
+                    },
+                    "orders": {
+                        "description": "Order list",
+                        "items": {
+                            "$ref": "#/components/schemas/Order"
+                        },
+                        "type": "array"
                     },
                     "paymentMethodDetails": {
                         "$ref": "#/components/schemas/PaymentMethod"
