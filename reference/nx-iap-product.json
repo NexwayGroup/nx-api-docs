@@ -1013,11 +1013,6 @@
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
                         "type": "string"
                     },
-                    "lifeTimeRemote": {
-                        "description": "lifeTimeRemote",
-                        "format": "date-time",
-                        "type": "string"
-                    },
                     "modelVersion": {
                         "deprecated": true,
                         "type": "string"
@@ -1341,11 +1336,6 @@
                         "description": "lifeTime",
                         "example": "1YEAR",
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
-                        "type": "string"
-                    },
-                    "lifeTimeRemote": {
-                        "description": "lifeTimeRemote",
-                        "format": "date-time",
                         "type": "string"
                     },
                     "localizedLongDesc": {
@@ -1748,11 +1738,6 @@
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
                         "type": "string"
                     },
-                    "lifeTimeRemote": {
-                        "description": "lifeTimeRemote",
-                        "format": "date-time",
-                        "type": "string"
-                    },
                     "modelVersion": {
                         "deprecated": true,
                         "type": "string"
@@ -1833,11 +1818,6 @@
                     },
                     "releaseDate": {
                         "description": "Planned product release date",
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "remoteLicenseNextExpirationDate": {
-                        "description": "Remote license current expiration date",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1986,8 +1966,8 @@
             "RemotePrice": {
                 "description": "Information of remote price",
                 "properties": {
-                    "lifeTimeRemote": {
-                        "description": "lifeTimeRemote",
+                    "licenseNextExpirationDate": {
+                        "description": "licenseNextExpirationDate",
                         "format": "date-time",
                         "type": "string"
                     },
