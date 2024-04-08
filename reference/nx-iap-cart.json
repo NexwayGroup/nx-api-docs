@@ -3760,6 +3760,88 @@
                 "x-operationWeight": "200"
             }
         },
+        "/carts/public/{id}/custom-fields": {
+            "get": {
+                "description": "Get product custom fields fora cart by ID, to store it in order.",
+                "operationId": "getCustomFields",
+                "parameters": [
+                    {
+                        "description": "Cart id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "Get product custom fields for a cart by ID",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
         "/carts/public/{id}/expectedFields": {
             "get": {
                 "deprecated": true,
