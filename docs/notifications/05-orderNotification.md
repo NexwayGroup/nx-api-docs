@@ -125,7 +125,7 @@ If you need to get additional data, which is not available in the event, please 
 
 ### Additional fields for 'Order Completed With Content Including Subscription Data' notification
 
-Certain notification types, like 'Order Completed with Subscription Data' and 'Order Cancelled with Subscription Data' include details about the subscription. Although, subscriptions are a separate domain with thir own [set of events](10-subscriptionNotification.md).
+Certain notification types, like 'Order Completed with Subscription Data' and 'Order Cancelled with Subscription Data' include details about the subscription. Although, subscriptions are a separate domain with their own [set of events](10-subscriptionNotification.md).
 
 | Name | Description | R/O |
 | ---- | ----------- | --- |
