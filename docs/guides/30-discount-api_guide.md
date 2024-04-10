@@ -2,11 +2,123 @@
 Discount API allow you to manage discount rules.
 
 Service allows to create different types of discount rules :
-* Campaign 
-* Coupon : reusable coupon code
-* Single use coupon : should be generated with a special endpoint post /discounts/{id}/generate
+* Campaign (don't mess it with Marketing campaigns - its a different things): get discounts/{id} ; put discounts/{id} ; post discounts/ ; delete discounts/{id}
+* Coupon: reusable coupon code
+* Single use coupon: should be generated with a special endpoint post /discounts/{id}/generate
 
-## Usage
+There is also a Marketing Campaing Operation Management fucntionality, which allows to override the price of product in cart by using specific marketing campaing identifier AND creates bundles, but it manages via different service, so its out of scope of this guide. To find more details about please revise 35-Marketing-campaigns-management-(MKTOP).md guide
+
+## Campaigns usage
+
+Campaign it's a discount rule which can help you to set different variation of discounts on different steps of end-user journey: at acquisition, at conversion from trial to full subscription, at subscription renew and so on.
+
+The main thing about campaing is that it should be just configured with proper "eligibility" to be automatically added into cart / applied on subscription renew. So no need to specify discount attributes in cart creation request - you should just to set it up properly and Monetize will choose the most profittbale to end-user discount and apply it automatically at the required step.
+
+### How to connect campaing with product in cart
+The basisc level of connection is on customer level - so the customerId is a mandatatory parameter for any discount rule we're creating.
+We can make connection more specific by specifing following additional attributes. All these attributes can be combined with each other and they work as as a filters to find corresponding discount rule for a exact cart.
+
+- End-user type (Buyer or/and Reseller) -> endUserTypes": ["RESELLER","BUYER"]
+- End-user group (Group has to be created first) ->  "endUserGroupIds": ["68f724f6-faa1-473a-8ba4-49aab287d879"]
+- Specific end-user (It has to be created first) -> "enduserId": "70225803-5593-46df-9af9-e68d773724cf",
+
+- Minumal cart amount (depending on currency) -> "thresholds": {"AED": 100}
+
+- Countires -> "countries": ["AF", "AG"]
+- Stores -> "storeIds": ["c838c437-163e-470f-9f80-6cc969b10756", "1258522f-3640-4595-acbf-319b359868e0"]
+- Products -> "productIds": ["d0a016b3-7620-4d0f-bb10-651f3929329d", "1064edd3-6bf3-4766-a242-ff7b4c853f4f"]
+- Parent products -> "parentProductIds": ["dcc37dde-caa6-45e4-bf7d-1729e55f9879"]
+- Product references ->  "publisherRefIds": ["11111111", "testcopyatca"]
+
+So if product in cart matches with combination of conditions which are set up for discount rule - this discount rule will be applied to a cart.
+If there are more than one discount rule found - Monetize will pick a rule with the biggest discount value. Its not possible for a moment to combine several discount rule with model "campaign" in one cart.
+
+Its also possible to configure on what level the discount will be applied - for whole cart, or for each line item in cart. It manages via "level": "FORCED_CROSS_SELL" attribute.
+
+We can manage on what price the discount will be applied - gross or net. It manages via "applyOnNetPrice": false attribute, which is false by default.
+
+### Capping and limits
+Its possible to limit when discount rule will be apllied by setting following attributes:
+- start date / end date and time zone for it if needed: "startDate": "2016-01-01T00:00:00Z", "endDate": "2030-01-01T00:00:00Z",
+- total maximum uses of a discount: "maxUsages": 1,
+- maximum uses per store: "maxUsePerStore": 2,
+- maximum uses per end-user: "maxUsePerEndUser": 3,
+
+Example:
+{
+  "model": "CAMPAIGN",
+  "id": "bfbd4e75-d692-4655-b318-7dda978e867b",
+  "customerId": "Nexway",
+  "enduserId": "70225803-5593-46df-9af9-e68d773724cf",
+  "createDate": 1657643597149,
+  "updateDate": 1712742442854,
+  "dbVersion": 6,
+  "lastUpdateReason": "resource update thru REST Api",
+  "startDate": "2016-01-01T00:00:00Z",
+  "endDate": "2030-01-01T00:00:00Z",
+  "storeIds": [
+    "c838c437-163e-470f-9f80-6cc969b10756",
+    "1258522f-3640-4595-acbf-319b359868e0"
+  ],
+  "productIds": [
+    "d0a016b3-7620-4d0f-bb10-651f3929329d",
+    "1064edd3-6bf3-4766-a242-ff7b4c853f4f"
+  ],
+  "parentProductIds": [
+    "dcc37dde-caa6-45e4-bf7d-1729e55f9879"
+  ],
+  "publisherRefIds": [
+    "11111111",
+    "testcopyatca"
+  ],
+  "sources": [
+    "MANUAL_RENEWAL"
+  ],
+  "testOrder": false,
+  "discountRate": 0.2,
+  "applyOnNetPrice": false,
+  "name": "name2862",
+  "countries": [
+    "AF",
+    "AG"
+  ],
+  "status": "ENABLED",
+  "maxUsages": 1,
+  "level": "FORCED_CROSS_SELL",
+  "thresholds": {
+    "AED": 100
+  },
+  "endUserTypes": [
+    "RESELLER",
+    "BUYER"
+  ],
+  "endUserGroupIds": [
+    "68f724f6-faa1-473a-8ba4-49aab287d879"
+  ],
+  "weight": 0,
+  "maxUsePerStore": 2,
+  "maxUsePerEndUser": 3,
+  "cumulative": false
+}
+
+### Campaign discount use cases
+
+Let's consider the most common use cases of discount rules with model "campaing"
+
+1. Discount acquisition price of product
+
+2. Discount renewal price of subscription
+
+3. Discount conversion from trial to full subscription price
+
+4. Set up discount per subscription generation renew
+
+5. Set up suspend/resume offer discount for subscriptions 
+
+6. Discount for manual renewal flow
+
+
+## Coupons Usage
 
 The "usage" endpoint will return you the detail of coupon usage of your discount rule : 
 
