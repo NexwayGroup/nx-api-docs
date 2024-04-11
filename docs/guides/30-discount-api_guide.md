@@ -18,31 +18,31 @@ The main thing about campaing is that it should be just configured with proper "
 The basisc level of connection is on customer level - so the customerId is a mandatatory parameter for any discount rule we're creating.
 We can make connection more specific by specifing following additional attributes. All these attributes can be combined with each other and they work as as a filters to find corresponding discount rule for a exact cart.
 
-- End-user type (Buyer or/and Reseller) -> endUserTypes": ```json["RESELLER","BUYER"]```
-- End-user group (Group has to be created first) ->  ```json"endUserGroupIds": ["68f724f6-faa1-473a-8ba4-49aab287d879"]```
-- Specific end-user (It has to be created first) -> ```json"enduserId": "70225803-5593-46df-9af9-e68d773724cf",```
+- End-user type (Buyer or/and Reseller) -> endUserTypes": ```["RESELLER","BUYER"]```
+- End-user group (Group has to be created first) ->  ```"endUserGroupIds": ["68f724f6-faa1-473a-8ba4-49aab287d879"]```
+- Specific end-user (It has to be created first) -> ```"enduserId": "70225803-5593-46df-9af9-e68d773724cf",```
 
-- Minumal cart amount (depending on currency) -> ```json"thresholds": {"AED": 100}```
+- Minumal cart amount (depending on currency) -> ```"thresholds": {"AED": 100}```
 
-- Countires -> "countries": ```json["AF", "AG"]```
-- Stores -> "storeIds": ```json["c838c437-163e-470f-9f80-6cc969b10756", "1258522f-3640-4595-acbf-319b359868e0"]```
-- Products -> "productIds": ```json["d0a016b3-7620-4d0f-bb10-651f3929329d", "1064edd3-6bf3-4766-a242-ff7b4c853f4f"]```
-- Parent products -> ```json"parentProductIds": ["dcc37dde-caa6-45e4-bf7d-1729e55f9879"]```
-- Product references ->  ```json"publisherRefIds": ["11111111", "testcopyatca"]```
+- Countires -> "countries": ```["AF", "AG"]```
+- Stores -> "storeIds": ```["c838c437-163e-470f-9f80-6cc969b10756", "1258522f-3640-4595-acbf-319b359868e0"]```
+- Products -> "productIds": ```["d0a016b3-7620-4d0f-bb10-651f3929329d", "1064edd3-6bf3-4766-a242-ff7b4c853f4f"]```
+- Parent products -> ```"parentProductIds": ["dcc37dde-caa6-45e4-bf7d-1729e55f9879"]```
+- Product references ->  ```"publisherRefIds": ["11111111", "testcopyatca"]```
 
 So if product in cart matches with combination of conditions which are set up for discount rule - this discount rule will be applied to a cart.
 If there are more than one discount rule found - Monetize will pick a rule with the biggest discount value. Its not possible for a moment to combine several discount rule with model "campaign" in one cart.
 
-Its also possible to configure on what level the discount will be applied - for whole cart, or for each line item in cart. It manages via ```json"level": "CART"``` attribute. Possible values are CART and PRODUCT. If the level is "CART" - discount rulle will be applied to total cart amount, if level is "PRODUCT" - discount rule will be applied to each lineitem in cart
+Its also possible to configure on what level the discount will be applied - for whole cart, or for each line item in cart. It manages via ```"level": "CART"``` attribute. Possible values are CART and PRODUCT. If the level is "CART" - discount rulle will be applied to total cart amount, if level is "PRODUCT" - discount rule will be applied to each lineitem in cart
 
-We can manage on what price the discount will be applied - gross or net. It manages via ```json"applyOnNetPrice": false``` attribute, which is false by default.
+We can manage on what price the discount will be applied - gross or net. It manages via ```"applyOnNetPrice": false``` attribute, which is false by default.
 
 ### Capping and limits
 Its possible to limit when discount rule will be apllied by setting following attributes:
-- start date / end date and time zone for it if needed: ```json"startDate": "2016-01-01T00:00:00Z", "endDate": "2030-01-01T00:00:00Z",```
-- total maximum uses of a discount: ```json"maxUsages": 1,```
-- maximum uses per store: ```json"maxUsePerStore": 2,```
-- maximum uses per end-user: ```json"maxUsePerEndUser": 3,```
+- start date / end date and time zone for it if needed: ```"startDate": "2016-01-01T00:00:00Z", "endDate": "2030-01-01T00:00:00Z",```
+- total maximum uses of a discount: ```"maxUsages": 1,```
+- maximum uses per store: ```"maxUsePerStore": 2,```
+- maximum uses per end-user: ```"maxUsePerEndUser": 3,```
 
 
 ### Test order flag
@@ -112,7 +112,7 @@ This feature allows you to create a test order with discount on production env. 
 
 Let's consider the most common use cases of discount rules with model "campaing"
 
-1. Acquisition discount
+### Acquisition discount ####
 - Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
 - Set required discount value
 - Set up sources = purchase
@@ -156,7 +156,7 @@ Let's consider the most common use cases of discount rules with model "campaing"
 
 **As the result this discount will be applied in the cart for each product for a given conditions**
 
-2. Discount conversion from trial to full subscription price
+#### Discount conversion from trial to full subscription price ####
 - Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
 - Set required discount value
 - Set up sources = subscription AND subscriptionSubSources = trial_conversion
@@ -202,7 +202,7 @@ Let's consider the most common use cases of discount rules with model "campaing"
 
 **As the result this discount will be applied at the moment of conversion from trial to full subscription. Its also possible to display it in the cart renewingPrice**
 
-3. Discount of subscription renewals
+#### Discount of subscription renewals ####
 - Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
 - Set required discount value
 - Set up sources = subscription AND subscriptionSubSources = renew
@@ -249,7 +249,7 @@ Let's consider the most common use cases of discount rules with model "campaing"
 
 **As the result this discount will be applied at each subscription renewal. Its also possible to see it in a cart renewingPrices**
 
-4. Set up discount per subscription generation renew
+#### Set up discount per subscription generation renew ####
 Almost the same as a discount for subscription renew, but with extra ability to specify on what renew this discount will be applied. F.e. its possible to specify discount applying on 1st and 2nd renew only, or on 2nd and 5th. The limit of renewal count is 10.
 
 ```json
@@ -316,7 +316,7 @@ Almost the same as a discount for subscription renew, but with extra ability to 
 ```
 **As the result this discount will be applied at 1st, 3rd, 4th and 10th renewal**
 
-5. Set up suspend offer discount for subscriptions
+#### Set up suspend offer discount for subscriptions ####
 
 <strong>Setting up discounts</strong>
 
