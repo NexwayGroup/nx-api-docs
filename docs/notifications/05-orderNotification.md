@@ -1,67 +1,71 @@
 
 # Order Notifications
 
+You can receive notifications whenever your order status changes.
+
 ## Order statuses
+The diagram below shows the main statuses of the order workflow.
 
 ![Order statuses](https://s3storage.nexway.com/iap-staticfiles/2d8a948f601d801a630c9d773f28dba2.png)
 
 ## Event list
 
-When the order changes its status an external notification can be sent.
-Below is a list of order-related notifications which you can subscribe to.
+Below is a list of order-related notifications which you can subscribe to:
 
 * Order created
 * Order payment failed
+* Order payment refused
 * Order completed
 * Order completed with error
+* Order fulfillment failed
 * Subscription renewal order completed
 * Order cancelled
 
 ## List of fields
 
-The generic notification body will have an 'order' object with the following fileds.
+The notification payload will include an 'order' object containing the following details:
+
+| Name | Description | R/O |
+| ---- | ----------- | --- |
+| id | Order unique identifier | R |
+| status | Order status corresponds to the event type. | R |
+| source | Order source: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL, etc | R |
+| creationDate | Creation date in ISO 8601 format, ex.: 2024-01-01T01:02:03Z | R |
+| currency | Order's Currency, ex.: EUR | R |
+| totalPriceIncVAT | Order total price, including sales tax | R |
+| totalPriceExclVAT | Order total price, excluding sales tax | R |
+| salesFlag | Sales flags is an array of strings provided in the cart. Similar to external context, but unencoded. | O |
+| externalContext | Based64 encoded string of cart parameters | O |
+| decodedExternalContext | Decoded map of cart string parameters if they were provided in the json format | O |
+| payment | Payment object | O |
+| payment.id | Payment id | R |
+| payment.method | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
+| payment.status | Payment status (COMPLETED, FAILED) | R |
+| user | Buyer's details object | O |
+| user.id | Buyer's id | O |
+| user.email | Buyer's email | R |
+| user.firstName | Buyer's first name | O |
+| user.lastName | Buyer's last name | O |
+| user.language | Buyer's language alpha-2 code, ex "pt" | O |
+| user.country | Buyer's country alpha-3 code, ex "BRA" | O |
+| user.street | Buyer's street address | O |
+| user.zipcode | Buyer's postal code | O |
+| user.city | Buyer's city | O |
+| items[] | List of items purchased (products, services, etc.) | R |
+| items[].id | Unique ID for order line item | R |
+| items[].product.name | Product name | R |
+| items[].product.uniqueReference | A unique ID for identifying your product on the Nexway Monetize platform | R |
+| items[].product.publisherReference | A unique ID for identifying your product in your information system, if defined | O |
+| items[].fulfillmentId | Fulfillment process identifier | O |
+| items[].quantity | Product quantity | R |
+| items[].activationCode | Product activation code | O |
+| items[].unitPriceIncVAT | Product unit price, including sales tax | R |
+| items[].unitPriceExclVAT | Product unit price, excluding sales tax | R |
+| items[].VATRate | Sold product applied sales tax rate | R |
+| items[].discountRate | Discount rate applied to product | O |
+| items[].subscriptionId | SubscriptionId if the line item has one | O |
 
 If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities.
-
-| Name | Description |
-| ---- | ----------- |
-| id | Order unique identifier |
-| status | Order status corresponds to the event type. |
-| source | Order source: PURCHASE, SUBSCRIPTION, OFFER etc |
-| creationDate | Creation date in ISO 8601 format, ex.: 2024-01-01T01:02:03Z |
-| currency | Order's Currency, ex.: EUR |
-| totalPriceIncVAT | Order total price, including sales tax |
-| totalPriceExclVAT | Order total price, excluding sales tax |
-| salesFlag | Sales flags is an array of strings provided in the cart. Similar to external context, but unencoded. |
-| externalContext | Based64 encoded string of cart parameters |
-| decodedExternalContext | Decoded map of cart string parameters if they were provided in the json format |
-| payment | Payment object |
-| payment.id | Payment id |
-| payment.method | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.)
-| payment.status | Payment status (COMPLETED, FAILED) |
-| user | Buyer's details object |
-| user.id | Buyer's id |
-| user.email | Buyer's email |
-| user.firstName | Buyer's first name |
-| user.lastName | Buyer's last name |
-| user.language | Buyer's language alpha-2 code, ex "pt" |
-| user.country | Buyer's country alpha-3 code, ex "BRA" |
-| user.street | Buyer's street address |
-| user.zipcode | Buyer's postal code |
-| user.city | Buyer's city |
-| items[] | List of items purchased (products, services, etc.) |
-| items[].id | Unique ID for order line item |
-| items[].product.name | Product name |
-| items[].product.uniqueReference | A unique ID for identifying your product on the Nexway Monetize platform |
-| items[].product.publisherReference | A unique ID for identifying your product in your information system, if defined |
-| items[].fulfillmentId | Fulfillment process identifier |
-| items[].quantity | Product quantity |
-| items[].activationCode | Product activation code |
-| items[].unitPriceIncVAT | Product unit price, including sales tax |
-| items[].unitPriceExclVAT | Product unit price, excluding sales tax |
-| items[].VATRate | Sold product applied sales tax rate |
-| items[].discountRate | Discount rate applied to product |
-| items[].subscriptionId | SubscriptionId if the line item has one |
 
 ### Example
 
@@ -87,6 +91,7 @@ If you need to get additional data, which is not available in the event, please 
 		],
 		"currency": "USD",
 		"user": {
+			"id": "037dbcbb-c5bd-4a81-8fd7-3420b440fdf3",
 			"email": "jdoe@com2us.com",
 			"firstName": "John",
 			"lastName": "Doe",
@@ -120,15 +125,15 @@ If you need to get additional data, which is not available in the event, please 
 
 ### Additional fields for 'Order Completed With Content Including Subscription Data' notification
 
-Some notification definitions like 'Order Completed With Content Including Subscription Data' may also contain information about created subscription. Although, subscription is a separate domain and has it's own [set of events](10-subscriptionNotification.md).
+Certain notification types, like 'Order Completed with Subscription Data' and 'Order Cancelled with Subscription Data' include details about the subscription. Although, subscriptions are a separate domain with their own [set of events](10-subscriptionNotification.md).
 
-| Name | Description |
-| ---- | ----------- |
-| items[].subscription | Subscription object |
-| items[].subscription.id | SubscriptionId |
-| items[].subscription.createDate | Creation date in ISO 8601 format |
-| items[].subscription.modelId | Subscription model |
-| items[].subscription.storeId | Selling store id |
-| items[].subscription.lifecycle | Lifecycle data |
-| items[].subscription.lifecycle.id | Lifecycle id string |
-| items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format |
+| Name | Description | R/O |
+| ---- | ----------- | --- |
+| items[].subscription | Subscription object | O |
+| items[].subscription.id | SubscriptionId | R |
+| items[].subscription.createDate | Creation date in ISO 8601 format | R |
+| items[].subscription.modelId | Subscription model | R |
+| items[].subscription.storeId | Selling store id | R |
+| items[].subscription.lifecycle | Lifecycle data | R |
+| items[].subscription.lifecycle.id | Lifecycle id string | O |
+| items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
