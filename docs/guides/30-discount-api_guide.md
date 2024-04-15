@@ -119,7 +119,7 @@ By specifying test flag you can create test orders which will be automatically c
     "RESELLER",
     "BUYER"
   ],
-  "endUserEmails": ["sergeybaranov@gmail.com", "georgekalashnikov@gmail.com"],
+  "endUserEmails": ["sb1@gmail.com", "test@gmail.com"],
   "weight": 0,
   "maxUsePerStore": 2,
   "maxUsePerEndUser": 3,
