@@ -385,6 +385,7 @@ Samples of discounts:
     "weight": 0,
     "cumulative": false
 }
+```
 
 <strong>Create subscription</strong>
 
