@@ -335,23 +335,16 @@ Almost the same as a discount for subscription renew, but with extra ability to 
 ```
 <em> As the result this discount will be applied at 1st, 3rd, 4th and 10th renewal </em>
 
-#### Set up suspend offer discount for subscriptions ####
+#### Set up discount for "Stay Subscribed" offer ####
 
 <strong>Setting up discounts</strong>
-"Stay subscribed" flow is designed to encourage end-user to keep subscription active in case if end-user wants to pause its by any reason. It achieves by providing a special discount for the next renew, which should be manually accepted by end-user.
+The "Stay Subscribed" flow incentivizes users to maintain their active subscription when considering suspending of it. This is achieved by offering a special discount on their next renewal, but only if they choose to remain subscribed.
 
-The process looks following:
-1. Configure stay subscribed offer: 
-- Create special discount
-- Create "offer" with this discount"
-2. Propose offer to end-user
-3. Execute offer acceptance
-
-In the Stay Subscribed flow, only discounts with the model "CAMPAIGN" & source "OFFER" & subSource "SUSPEND" should be taken into consideration, while discounts of any other sources & model should be ignored.
+In the "Stay Subscribed" flow, only discounts with the model "CAMPAIGN" & source "OFFER" & subSource "SUSPEND" should be taken into consideration, while discounts of any other sources & model should be ignored.
 
 The highest priority for applying a discount is given to the product.
 
-Samples of discounts:
+Sample of discount:
 
 ```json 
 {
@@ -387,24 +380,11 @@ Samples of discounts:
 }
 ```
 
-<strong>Create subscription</strong>
-
-On this step you have to select product with subscription and perform checkout for this product. After successful purchase you have to check if subscription is active and order is completed.
-
-<strong>Create offer</strong>
-
-During offer creation the product from subscription will be selected and discount applied. The result will be a new cart with a renewal product with discounted price.
-
- Only one discount can be applied, if any. If there are many discounts, which may be applied, then current algorithm will take discount with the nearest update date (not the discount value!)  
-
-There are 2 main cases for creating an offer.
-- When prebilling order is created before creating stay subscribed offe - price is taken from prebilling order and discount will be applied on it
-- When there is no prebilling order created before creating stay subscribed offer  - price is taken from product and discount will be applied on it
-
-<strong>Accept offer</strong>
-User accepts offer by creating a prebilling order from a subscription renewal offer. You need cartId and subsctiptionId from previous steps.
-
-Currently it’s implemented only for active subscriptions, next step is to implement it for trial and dunning ones.
+Expected end-user expirience:
+1. End-user opens end-user portal to suspend his subscription
+2. End-user initiates suspending
+3. End-user portal displays discount offer for the next renewal in case if auto-renewal will be kept
+4. End-user accepts the offer and keeps auto-renewal enabled
 
 
 ## Coupons Usage
