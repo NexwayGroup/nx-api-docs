@@ -36,7 +36,6 @@ Discounts target specific products through attributes:
 * Product Attribute(s)
 * Minimum/Maximum Order Value
 * Combine Filters: Target specific products for specific customers.
-* This ensures relevant discounts reach the right users, boosting their experience.
 
 Specifying additional attributes (product ID, category, etc.) refines the filter to find the exact discount rule for each cart:
 
