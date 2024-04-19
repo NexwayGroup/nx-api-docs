@@ -39,7 +39,7 @@ Discounts target specific products through attributes:
 
 Specifying additional attributes (product ID, category, etc.) refines the filter to find the exact discount rule for each cart:
 
-- End-users email(s) -> ```"endUserEmails": ["sergeybaranov@gmail.com", "georgekalashnikov@gmail.com"]```
+- End-users email(s) -> ```"endUserEmails": ["user134@mail.com", "user234@mail.com"]```
 - End-user type (Buyer or/and Reseller) -> endUserTypes": ```["RESELLER","BUYER"]```
 - End-user group (Group has to be created first) ->  ```"endUserGroupIds": ["68f724f6-faa1-473a-8ba4-49aab287d879"]```
 - Specific end-user (It has to be created first) -> ```"enduserId": "70225803-5593-46df-9af9-e68d773724cf",```
