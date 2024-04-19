@@ -18,7 +18,7 @@ Campaigns allow to define discount rules with various options. These rules can b
 * Trial to Paid Conversion: Encourage trial users to subscribe
 * Subscription Renewal: Retain existing customers
 
-<em>Automatic Application based on Eligibility</em>
+**Automatic Application based on Eligibility**
 
 Once configured with eligibility criteria, campaigns are automatically applied during relevant user actions. You don't need to specify discount details in each cart creation request.
 
