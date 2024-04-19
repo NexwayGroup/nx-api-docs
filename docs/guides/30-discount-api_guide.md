@@ -66,7 +66,7 @@ It is possible to additionally limit the discount rule by:
 - maximum uses per end-user: ```"maxUsePerEndUser": 3,```
 
 ### Test order flag
-By specifying test flag you can create test orders which will be automatically cancelled in 30 days.
+By specifying test flag you can create test orders which will be automatically cancelled in few days.
 
 ### Example of discount rule
 
