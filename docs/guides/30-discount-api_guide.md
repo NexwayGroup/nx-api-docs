@@ -31,10 +31,10 @@ Discounts target specific products through attributes:
 
 * Customer ID (mandatory): Ensures discounts reach the right customers.
 * Optional Filters:
-* Product ID(s)
-* Product Category
-* Product Attribute(s)
-* Minimum/Maximum Order Value
+   * Product ID(s)
+   * Product Category
+   * Product Attribute(s)
+   * Minimum/Maximum Order Value
 * Combine Filters: Target specific products for specific customers.
 
 Specifying additional attributes (product ID, category, etc.) refines the filter to find the exact discount rule for each cart:
