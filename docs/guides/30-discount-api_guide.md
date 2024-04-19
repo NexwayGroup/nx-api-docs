@@ -135,7 +135,6 @@ Let's review some common use cases for 'CAMPAIGN' discount rules.
 - Set required discount value
 - Set up sources = purchase
 
-<strong>Example</strong>:
 
 ```json 
 {
