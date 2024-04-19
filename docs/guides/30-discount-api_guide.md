@@ -2,7 +2,7 @@
 Discount API allow you to manage discount rules.
 
 Service allows to create different types of discount rules :
-* Campaign (please refrain from conflating it with Marketing Campaigns, as they are distinct entities)
+* Campaign (it's important to distinguish it from Marketing Campaigns, as they are different entities)
     * get discounts/{id} 
     * put discounts/{id}
     * post discounts/
