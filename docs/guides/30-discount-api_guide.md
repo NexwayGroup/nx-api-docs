@@ -52,7 +52,7 @@ Specifying additional attributes (product ID, category, etc.) refines the filter
 
 Matching product attributes with discount rule filters triggers its application in a cart.
 
-<strong>Multiple rules</strong>: Monetize prioritizes the rule with the highest discount value. Combining multiple campaign-based discounts within a cart is not currently supported.
+**Multiple rules**: Monetize prioritizes the rule with the highest discount value. Combining multiple campaign-based discounts within a cart is not currently supported.
 
 <strong>Discount level</strong>: The "level" attribute ( "CART" or "PRODUCT" ) defines where the discount applies: entire cart or individual line items.
 
