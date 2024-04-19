@@ -22,7 +22,7 @@ Campaigns allow to define discount rules with various options. These rules can b
 
 Once configured with eligibility criteria, campaigns are automatically applied during relevant user actions. You don't need to specify discount details in each cart creation request.
 
-<em>Monetize Selects Optimal Discount</em>
+**Monetize Selects Optimal Discount**
 
 Monetize analyzes your campaign configuration and selects the most profitable discount for each user. This ensures efficient discount application.
 
