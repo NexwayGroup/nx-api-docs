@@ -54,7 +54,7 @@ Matching product attributes with discount rule filters triggers its application 
 
 **Multiple rules**: Monetize prioritizes the rule with the highest discount value. Combining multiple campaign-based discounts within a cart is not currently supported.
 
-<strong>Discount level</strong>: The "level" attribute ( "CART" or "PRODUCT" ) defines where the discount applies: entire cart or individual line items.
+**Discount level**: The "level" attribute ( "CART" or "PRODUCT" ) defines where the discount applies: entire cart or individual line items.
 
 <strong>Price basis</strong>: The "applyOnNetPrice" attribute (default: false) determines if the discount applies to the gross or net price (currently defaults to gross).
 
