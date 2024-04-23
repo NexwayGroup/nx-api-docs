@@ -35,6 +35,8 @@ The notification payload will include an 'order' object containing the following
 | totalPriceIncVAT | Order total price, including sales tax | R |
 | totalPriceExclVAT | Order total price, excluding sales tax | R |
 | salesFlag | Sales flags is an array of strings provided in the cart. Similar to external context, but unencoded. | O |
+| consentFlags | Consent flags given by the end user | O |
+| consentFlags.newsletterOptin | Marketing newsletter consent flag | O |
 | externalContext | Based64 encoded string of cart parameters | O |
 | decodedExternalContext | Decoded map of cart string parameters if they were provided in the json format | O |
 | payment | Payment object | O |
@@ -89,6 +91,9 @@ If you need to get additional data, which is not available in the event, please 
 		"salesFlag":[
 			 "EXTMD_Daily_fr_XXXrenew-30"
 		],
+		"consentFlags": {
+			"newsletterOptin": true
+		},
 		"currency": "USD",
 		"user": {
 			"id": "037dbcbb-c5bd-4a81-8fd7-3420b440fdf3",
