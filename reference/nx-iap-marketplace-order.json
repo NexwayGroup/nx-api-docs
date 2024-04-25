@@ -681,6 +681,15 @@
                         "deprecated": true,
                         "type": "string"
                     },
+                    "integrator": {
+                        "description": "Name of the integrator that triggers the order creation",
+                        "enum": [
+                            "EBAY",
+                            "LENGOW"
+                        ],
+                        "example": "EBAY_INTEGRATOR",
+                        "type": "string"
+                    },
                     "invoice": {
                         "$ref": "#/components/schemas/Invoice"
                     },
@@ -725,9 +734,6 @@
                     },
                     "marketplace": {
                         "description": "Purchase type used for the order",
-                        "enum": [
-                            "EBAY"
-                        ],
                         "example": "EBAY",
                         "type": "string"
                     },
