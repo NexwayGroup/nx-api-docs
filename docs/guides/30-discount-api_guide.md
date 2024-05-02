@@ -56,7 +56,7 @@ Matching product attributes with discount rule filters triggers its application 
 
 **Discount level**: The "level" attribute ( "CART" or "PRODUCT" ) defines where the discount applies: entire cart or individual line items.
 
-<strong>Price basis</strong>: The "applyOnNetPrice" attribute (default: false) determines if the discount applies to the gross or net price (currently defaults to gross).
+**Price basis**: The "applyOnNetPrice" attribute (default: false) determines if the discount applies to the gross or net price (currently defaults to gross).
 
 ### Capping and limits
 It is possible to additionally limit the discount rule by:
