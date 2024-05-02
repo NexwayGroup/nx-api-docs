@@ -16,7 +16,7 @@ We have two kinds of APIs.:
 * Resource CRUD (**C**reate, **R**ead, **U**pdate, **D**elete; see [Using HTTP Methods for RESTful Services](http://www.restapitutorial.com/lessons/httpmethods.html) for more details)
     * **GET** - Get a resource or a collection of resources 
     * **POST** - Create a new resource
-    * **PATCH** - Partially update a resource
+    * **PUT** - Update a resource
     * **DELETE** - Delete a resource
 
 * Action
@@ -26,4 +26,4 @@ We have two kinds of APIs.:
 ## Security
 All connections are done through HTTPS (by default TLS 1.2;).
  
-All APIs are secured using [JWT Authentication](/nexway-monetize/reference/jwt-authentication) except for [Shopper APIs](/nexway-monetize/reference/shopper-apis). 
+All APIs are secured with [JWT Authentication](02-JWT-authentication.md) exept for the public endpoints.
