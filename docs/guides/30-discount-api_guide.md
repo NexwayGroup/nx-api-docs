@@ -1,7 +1,7 @@
 # Discount API guide
-Discount API allow you to manage discount rules.
+Discount API allows you to manage discount rules.
 
-Service allows to create different types of discount rules :
+The service supports the following types of discount rules:
 * Campaign (it's important to distinguish it from Marketing Campaigns, as they are different entities)
     * get discounts/{id} 
     * put discounts/{id}
@@ -10,7 +10,7 @@ Service allows to create different types of discount rules :
 * Coupon: reusable coupon code
 * Single use coupon: should be generated with a special endpoint post /discounts/{id}/generate
 
-## Campaigns usage
+## Campaigns
 
 Campaigns allow to define discount rules with various options. These rules can be applied at specific points in the user journey:
 
@@ -20,43 +20,26 @@ Campaigns allow to define discount rules with various options. These rules can b
 
 **Automatic Application based on Eligibility**
 
-Once configured with eligibility criteria, campaigns are automatically applied during relevant user actions. You don't need to specify discount details in each cart creation request.
+Once configured with eligibility criteria, campaigns are automatically applied during relevant user actions. You don't need to specify discountId in each cart creation request.
 
-**Monetize Selects Optimal Discount**
-
-Monetize analyzes your campaign configuration and selects the most profitable discount for each user. This ensures efficient discount application.
-
-### Campaign-Product Connection in Carts
-Discounts target specific products through attributes:
-
-* Customer ID (mandatory): Ensures discounts reach the right customers.
-* Optional Filters:
-   * Product ID(s)
-   * Product Category
-   * Product Attribute(s)
-   * Minimum/Maximum Order Value
-* Combine Filters: Target specific products for specific customers.
-
-Specifying additional attributes (product ID, category, etc.) refines the filter to find the exact discount rule for each cart:
-
+Matching cart attributes with discount rule filters triggers its application. The filters are:
+- Products -> "productIds": ```["d0a016b3-7620-4d0f-bb10-651f3929329d", "1064edd3-6bf3-4766-a242-ff7b4c853f4f"]```
+- Parent products -> ```"parentProductIds": ["dcc37dde-caa6-45e4-bf7d-1729e55f9879"]```
+- Product references ->  ```"publisherRefIds": ["11111111", "testcopyatca"]```
+- Stores -> "storeIds": ```["c838c437-163e-470f-9f80-6cc969b10756", "1258522f-3640-4595-acbf-319b359868e0"]```
+- Countires -> "countries": ```["AF", "AG"]```
 - End-users email(s) -> ```"endUserEmails": ["user134@mail.com", "user234@mail.com"]```
 - End-user type (Buyer or/and Reseller) -> endUserTypes": ```["RESELLER","BUYER"]```
 - End-user group (Group has to be created first) ->  ```"endUserGroupIds": ["68f724f6-faa1-473a-8ba4-49aab287d879"]```
 - Specific end-user (It has to be created first) -> ```"enduserId": "70225803-5593-46df-9af9-e68d773724cf",```
 - Minumal cart amount (depending on currency) -> ```"thresholds": {"AED": 100}```
-- Countires -> "countries": ```["AF", "AG"]```
-- Stores -> "storeIds": ```["c838c437-163e-470f-9f80-6cc969b10756", "1258522f-3640-4595-acbf-319b359868e0"]```
-- Products -> "productIds": ```["d0a016b3-7620-4d0f-bb10-651f3929329d", "1064edd3-6bf3-4766-a242-ff7b4c853f4f"]```
-- Parent products -> ```"parentProductIds": ["dcc37dde-caa6-45e4-bf7d-1729e55f9879"]```
-- Product references ->  ```"publisherRefIds": ["11111111", "testcopyatca"]```
+- Minimum/Maximum Order Value
 
-Matching product attributes with discount rule filters triggers its application in a cart.
+**Multiple campaigns match**: When searching for campaigns, if multiple are found, the one with the highest value will be applied. Combining multiple campaign-based discounts within a cart is not currently supported.
 
-**Multiple rules**: Monetize prioritizes the rule with the highest discount value. Combining multiple campaign-based discounts within a cart is not currently supported.
+**Application target**: The "level" attribute ("CART" or "PRODUCT") defines where the discount applies: entire cart or individual line items.
 
-**Discount level**: The "level" attribute ( "CART" or "PRODUCT" ) defines where the discount applies: entire cart or individual line items.
-
-**Price basis**: The "applyOnNetPrice" attribute (default: false) determines if the discount applies to the gross or net price (currently defaults to gross).
+**Tax dependency**: The "applyOnNetPrice" attribute (default: false) determines if the discount applies to the gross or net price (currently defaults to gross).
 
 ### Capping and limits
 It is possible to additionally limit the discount rule by:
@@ -131,10 +114,12 @@ By specifying test flag you can create test orders which will be automatically c
 Let's review some common use cases for 'CAMPAIGN' discount rules.
 
 #### Acquisition discount ####
-- Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
+- Create discount rule with model `CAMPAIGN`, set eligibilites and capping & limits as you need
 - Set required discount value
-- Set up sources = purchase
+- Set `sources = PURCHASE`
+- Set level `level = PRODUCT`
 
+This discount will be applied for each product in the cart:
 
 ```json 
 {
@@ -171,12 +156,12 @@ Let's review some common use cases for 'CAMPAIGN' discount rules.
 }
 ```
 
-<em> As the result this discount will be applied in the cart for each product for a given conditions </em>
-
 #### Discount conversion from trial to full subscription price ####
-- Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
+- Create discount rule with model `CAMPAIGN`, set eligibilites and capping & limits as you need
 - Set required discount value
-- Set up sources = subscription AND subscriptionSubSources = trial_conversion
+- Set `sources = subscription` AND `subscriptionSubSources = trial_conversion`
+
+This discount will be applied at the moment of conversion from trial to full subscription.
 
 ```json
 {
@@ -217,12 +202,12 @@ Let's review some common use cases for 'CAMPAIGN' discount rules.
 }
 ```
 
-<em> As the result this discount will be applied at the moment of conversion from trial to full subscription. Its also possible to display it in the cart renewingPrice </em>
-
 #### Discount of subscription renewals ####
-- Create discount rule with model "Campaign", set eligibilites and capping & limits as you need
+- Create discount rule with model `CAMPAIGN`, set eligibilites and capping & limits as you need
 - Set required discount value
-- Set up sources = subscription AND subscriptionSubSources = renew
+- Set up `sources = subscription` AND `subscriptionSubSources = renew`
+
+This discount will be applied at each subscription renewal.
 
 ```json
 {
@@ -264,11 +249,11 @@ Let's review some common use cases for 'CAMPAIGN' discount rules.
 }
 ```
 
-<em> As the result this discount will be applied at each subscription renewal. Its also possible to see it in a cart renewingPrices </em>
-
 #### Set up discount per subscription generation renew ####
-Almost the same as a discount for subscription renew, but with extra ability to specify on what renew this discount will be applied. F.e. its possible to specify discount applying on 1st and 2nd renew only, or on 2nd and 5th. The limit of renewal count is 10.
+Almost the same as a discount for subscription renew, but with extra ability to specify on what renew this discount will be applied. F.e. its possible to specify discount applying on the first and second renew only, OR on second and fifth. Renewal number is limiteid to 10.
 
+
+This discount will be applied at 1st, 3rd, 4th and 10th renewal
 ```json
 {
 {
@@ -331,7 +316,6 @@ Almost the same as a discount for subscription renew, but with extra ability to 
 }
 }
 ```
-<em> As the result this discount will be applied at 1st, 3rd, 4th and 10th renewal </em>
 
 #### Set up discount for "Stay Subscribed" offer ####
 
