@@ -207,7 +207,7 @@ This discount will be applied at the moment of conversion from trial to full sub
 - Create a discount rule with model `CAMPAIGN`
 - Set needed eligibility, capping and limits
 - Set required discount value
-- Set up `sources = subscription` AND `subscriptionSubSources = renew`
+- Set up `sources = [ "SUBSCRIPTION" ]` and `subscriptionSubSources = [ "RENEWAL" ]`
 
 This discount will be applied at each subscription renewal.
 
