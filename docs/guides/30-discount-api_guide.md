@@ -293,10 +293,6 @@ Example:
     "model": "CAMPAIGN",
     "id": "7146053f-fd0a-4cc3-9d04-8b042c957c37",
     "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
-    "createDate": 1690977177529,
-    "updateDate": 1695279908905,
-    "dbVersion": 3,
-    "lastUpdateReason": "Nexway-Center PUT : reason not specified",
     "endDate": "2023-12-31T11:53:00Z",
     "storeIds": [
         "36f48867-d6ca-42d3-bf55-5f54a6740803"
