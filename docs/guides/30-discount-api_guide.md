@@ -226,7 +226,7 @@ This discount will be applied at each subscription renewal.
 }
 ```
 
-#### Set up discount per subscription generation renew ####
+#### Set up discounts for different subscription renewal generations ####
 Almost the same as a discount for subscription renew, but with extra ability to specify on what renew this discount will be applied. F.e. its possible to specify discount applying on the first and second renew only, OR on second and fifth. Renewal number is limiteid to 10.
 
 
