@@ -233,7 +233,6 @@ This scenario is almost the same as the discount for subscription renew, but wit
 This discount will be applied at 1st, 3rd, 4th and 10th renewal
 ```json
 {
-{
   "model": "CAMPAIGN",
   "id": "bfbd4e75-d692-4655-b318-7dda978e867b",
   "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
