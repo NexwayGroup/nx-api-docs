@@ -286,7 +286,7 @@ To activate "Stay Subscribed" offer you need to create a discount with the `mode
 
 The highest priority for applying a discount is given to the product.
 
-Sample of discount:
+Example:
 
 ```json 
 {
