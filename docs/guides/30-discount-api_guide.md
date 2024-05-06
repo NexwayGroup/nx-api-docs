@@ -304,7 +304,6 @@ Example:
     "discountRate": 0.1,
     "applyOnNetPrice": false,
     "name": "Test discount offer",
-    "localizedLabels": {},
     "status": "ENABLED",
     "level": "PRODUCT",
     "endUserTypes": [
