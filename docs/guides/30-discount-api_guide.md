@@ -197,9 +197,6 @@ This discount will be applied at the moment of conversion from trial to full sub
         "RESELLER",
         "BUYER"
     ],
-    "endUserGroupIds": [],
-    "weight": 0,
-    "cumulative": false
 }
 ```
 
