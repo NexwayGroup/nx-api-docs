@@ -158,10 +158,6 @@ This discount will be applied at the moment of conversion from trial to full sub
     "model": "CAMPAIGN",
     "id": "be9ed61a-8758-4b81-a6bb-e6822433733f",
     "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
-    "createDate": 1631542438421,
-    "updateDate": 1633441363544,
-    "dbVersion": 8,
-    "lastUpdateReason": "Nexway-Center PUT : C.R.U.D. Helper operation",
     "endDate": "2021-10-31T22:59:59Z",
     "productIds": [
         "a88aa33d-90ce-4942-8fb5-5db08efba384"
