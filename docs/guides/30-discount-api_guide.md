@@ -250,10 +250,6 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
   "parentProductIds": [
     "dcc37dde-caa6-45e4-bf7d-1729e55f9879"
   ],
-  "publisherRefIds": [
-    "11111111",
-    "testcopyatca"
-  ],
   "sources": [
     "SUBSCRIPTION"
   ],
