@@ -157,7 +157,8 @@ This discount will be applied for each product in the cart:
 ```
 
 #### Discount conversion from trial to full subscription price ####
-- Create discount rule with model `CAMPAIGN`, set eligibilites and capping & limits as you need
+- Create a discount rule with model `CAMPAIGN`
+- Set needed eligibility, capping and limits
 - Set required discount value
 - Set `sources = subscription` AND `subscriptionSubSources = trial_conversion`
 
