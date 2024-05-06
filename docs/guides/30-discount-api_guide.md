@@ -305,7 +305,6 @@ Example:
         "OFFER"
     ],
     "offerSubSource": "SUSPEND",
-    "testOrder": false,
     "discountRate": 0.1,
     "applyOnNetPrice": false,
     "name": "Test discount offer",
