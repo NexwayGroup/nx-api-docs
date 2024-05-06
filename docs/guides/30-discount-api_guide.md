@@ -150,9 +150,6 @@ This discount will be applied for each product in the cart:
         "RESELLER",
         "BUYER"
     ],
-    "endUserGroupIds": [],
-    "weight": 0,
-    "cumulative": false
 }
 ```
 
