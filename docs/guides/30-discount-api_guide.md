@@ -223,9 +223,6 @@ This discount will be applied at each subscription renewal.
         "RESELLER",
         "BUYER"
     ],
-    "endUserGroupIds": [],
-    "weight": 0,
-    "cumulative": false
 }
 ```
 
