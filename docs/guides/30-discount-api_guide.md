@@ -185,7 +185,7 @@ This discount will be applied at the moment of conversion from trial to full sub
 }
 ```
 
-#### Discount of subscription renewals ####
+#### Discount for subscription renewals ####
 - Create a discount rule with model `CAMPAIGN`
 - Set needed eligibility, capping and limits
 - Set required discount value
