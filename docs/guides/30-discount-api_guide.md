@@ -122,10 +122,6 @@ This discount will be applied for each product in the cart:
     "model": "CAMPAIGN",
     "id": "3ce07e83-4902-4d31-b86e-7c5a2800d5d0",
     "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
-    "createDate": 1602226213085,
-    "updateDate": 1712827017195,
-    "dbVersion": 20,
-    "lastUpdateReason": "Nexway-Center PUT : reason not specified",
     "endDate": "2025-02-11T21:59:59Z",
     "storeIds": [
         "36f48867-d6ca-42d3-bf55-5f54a6740803"
