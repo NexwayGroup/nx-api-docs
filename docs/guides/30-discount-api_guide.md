@@ -198,10 +198,6 @@ This discount will be applied at each subscription renewal.
     "model": "CAMPAIGN",
     "id": "f2b4ae46-b65d-44e8-b1f3-a77d749a380d",
     "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
-    "createDate": 1650283181576,
-    "updateDate": 1650283181576,
-    "dbVersion": 0,
-    "lastUpdateReason": "Nexway-Center POST : reason not specified",
     "endDate": "2022-04-25T20:59:59Z",
     "productIds": [
         "6e07ce95-34f6-4e52-bbe1-f68eab1c9f91",
