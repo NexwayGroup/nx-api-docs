@@ -280,7 +280,6 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
 
 #### Set up a discount for "Stay Subscribed" offer ####
 
-<strong>Setting up discounts</strong>
 The "Stay Subscribed" flow incentivizes users to maintain their active subscription when considering suspending of it. This is achieved by offering a special discount on their next renewal, but only if they choose to remain subscribed.
 
 In the "Stay Subscribed" flow, only discounts with the model "CAMPAIGN" & source "OFFER" & subSource "SUSPEND" should be taken into consideration, while discounts of any other sources & model should be ignored.
