@@ -276,12 +276,6 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
     "RESELLER",
     "BUYER"
   ],
-  "endUserGroupIds": [
-    "68f724f6-faa1-473a-8ba4-49aab287d879"
-  ],
-  "weight": 0,
-  "cumulative": false
-}
 }
 ```
 
