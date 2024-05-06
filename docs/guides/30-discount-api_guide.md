@@ -237,11 +237,6 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
   "model": "CAMPAIGN",
   "id": "bfbd4e75-d692-4655-b318-7dda978e867b",
   "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
-  "enduserId": "70225803-5593-46df-9af9-e68d773724cf",
-  "createDate": 1657643597149,
-  "updateDate": 1712837768739,
-  "dbVersion": 8,
-  "lastUpdateReason": "resource update thru REST Api",
   "startDate": "2016-01-01T00:00:00Z",
   "endDate": "2030-01-01T00:00:00Z",
   "storeIds": [
