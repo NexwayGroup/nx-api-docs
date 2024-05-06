@@ -282,7 +282,7 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
 
 The "Stay Subscribed" offer appears at the cancellation point, aiming to **retain** users with active subscriptions. It incentivizes them to **continue** their subscription by offering a special discount on their next renewal **if they choose to stay subscribed** instead of cancelling.
 
-In the "Stay Subscribed" flow, only discounts with the model "CAMPAIGN" & source "OFFER" & subSource "SUSPEND" should be taken into consideration, while discounts of any other sources & model should be ignored.
+To activate "Stay Subscribed" offer you need to create a discount with the `model = "CAMPAIGN"`, `source = "OFFER"`  and `offerSubSource = "SUSPEND"`.
 
 The highest priority for applying a discount is given to the product.
 
