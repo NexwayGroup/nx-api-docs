@@ -352,6 +352,31 @@ In order to generate a batch of single use codes you need to create a discount r
     "name": "50off-sample",
     "status": "ENABLED"
 }
+```
+
+Once the discount rule is created you can generate a batch of coupon codes by calling the /generate method.
+The following parameters can be specified in a request json body:
+
+- `quantity`: there could be no more than 750 codes associated with one discount rule;
+- `size`: the length of the coupon code. Default is 8;
+- `prefix`: to start each coupon code with.
+
+`POST https://api.nexway.store/discounts/{id}/generate`
+
+{
+    "quantity": 200,
+    "size": 10,
+    "prefix": "xyz"
+}
+
+
+You'll receive the codes in the response:
+
+{
+    "remaining": 0,
+    "codes": ["ywI8XEy3"]
+}
+
 
 The "usage" endpoint will return the details of coupon usage associated with a discount rule: 
 
