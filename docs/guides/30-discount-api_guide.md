@@ -330,14 +330,14 @@ The API supports two discount models for coupon codes:
 
 ### Applying Coupon Codes:
 
-There are two main ways customers can apply coupon codes:
+There are two main ways coupon code can be applied:
 
-- **Shopping Cart**: Users can enter the coupon code into a designated field within the shopping cart interface.
-- **Buy Link**: You can create buy links with a `discounts` query parameter containing the coupon code. This allows users to redeem the discount automatically upon clicking the link.
+- **Shopping Cart**: End-users can enter the coupon code into a designated field within the shopping cart interface
+- **Buy Link**: You can create buy links with a `discounts` query parameter containing the coupon code. This allows users to redeem the discount automatically upon clicking the link
 
 ### Single Use Coupon Codes
 
-In order to generate a batch of single use codes you need to first create a discount rule:
+In order to generate a batch of single use codes you need to create a discount rule first:
 
 ```json
 {
@@ -353,9 +353,10 @@ In order to generate a batch of single use codes you need to first create a disc
     "status": "ENABLED"
 }
 
-The "usage" endpoint will return you the detail of coupon usage of your discount rule : 
+The "usage" endpoint will return you the detail of coupon usage of your discount rule: 
 
 GET /discounts/usages?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8
+
 ```json
 {
   "items": [
@@ -427,10 +428,12 @@ GET /discounts/usages?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8
   "number": 0
 }
 ```
+So `"used": true` means that coupon is already used, and you can see the `orderId` and `endUserEmail` of end-user who did it.
 
-You can also sum up coupons usages by using the "recap" end point. "target" will filter with the "used" field : 
+You can also sum up coupons usages by "recap" end point. "target" will filter with the "used" field: 
 
 GET /discounts/usages/recap?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8&target=used
+
 ```json
 {
   "items": [
@@ -447,4 +450,4 @@ GET /discounts/usages/recap?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8&targ
 }
 ```
 
-So count:4 is the number of used coupons
+So `"count": 4` is the number of used coupons
