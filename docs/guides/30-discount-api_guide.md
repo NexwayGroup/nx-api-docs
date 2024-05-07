@@ -353,7 +353,7 @@ In order to generate a batch of single use codes you need to create a discount r
     "status": "ENABLED"
 }
 
-The "usage" endpoint will return you the detail of coupon usage of your discount rule: 
+The "usage" endpoint will return the details of coupon usage associated with a discount rule: 
 
 GET /discounts/usages?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8
 
