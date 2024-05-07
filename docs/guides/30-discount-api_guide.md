@@ -178,10 +178,6 @@ This discount will be applied at the moment of conversion from trial to full sub
     },
     "status": "ENABLED",
     "level": "PRODUCT",
-    "endUserTypes": [
-        "RESELLER",
-        "BUYER"
-    ],
 }
 ```
 
