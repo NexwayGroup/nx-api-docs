@@ -319,7 +319,39 @@ Expected end-user expirience:
 4. End-user accepts the offer and keeps auto-renewal enabled
 
 
-## Coupons Usage
+## Coupons Codes
+
+Coupon codes allow you to offer targeted discounts to your customers.
+
+The API supports two discount models for coupon codes:
+
+- `COUPON`: This model represents a reusable coupon code. The same code can be used by multiple customers.
+- `SINGLE_USE_CODE`: This model represents a unique coupon code. Each code can only be used once.
+
+### Applying Coupon Codes:
+
+There are two main ways customers can apply coupon codes:
+
+- **Shopping Cart**: Users can enter the coupon code into a designated field within the shopping cart interface.
+- **Buy Link**: You can create buy links with a `discounts` query parameter containing the coupon code. This allows users to redeem the discount automatically upon clicking the link.
+
+### Single Use Coupon Codes
+
+In order to generate a batch of single use codes you need to first create a discount rule:
+
+```json
+{
+    "customerId": "55555555-9999-4999-baba-777777777777",
+    "discountRate": 0.5,
+    "endDate": "2025-07-08T16:58:00Z",
+    "productIds": ["77777777-ffff-49b0-9efa-777777777777"],
+    "endUserTypes": [ "BUYER" ],
+    "level": "PRODUCT",
+    "maxUsages": "1",
+    "model": "SINGLE_USE_CODE",
+    "name": "50off-sample",
+    "status": "ENABLED"
+}
 
 The "usage" endpoint will return you the detail of coupon usage of your discount rule : 
 
