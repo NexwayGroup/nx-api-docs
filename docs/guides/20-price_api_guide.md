@@ -253,7 +253,7 @@ When creating a new price with a validity period that overlaps existing prices, 
 
 ## Deleting prices
 
-The Price API allows you to delete prices. Prices with the validity periods are deleted completely. Prices that are currently active (startDate in the past and endDate in the future) are archived. 
+The Price API allows you to delete prices. Prices with the validity periods in the future are deleted completely. Prices that are currently active (startDate in the past and endDate in the future) are archived. 
 
 Here's what happens when you delete a price which has not started yet:
 
