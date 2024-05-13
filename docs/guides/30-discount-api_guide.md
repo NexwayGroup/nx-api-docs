@@ -369,6 +369,7 @@ The following parameters can be specified in a request json body:
     "size": 10,
     "prefix": "xyz"
 }
+```
 
 
 You'll receive the codes in the response:
@@ -379,7 +380,6 @@ You'll receive the codes in the response:
     "codes": ["ywI8XEy3"]
 }
 ```
-
 
 The "usage" endpoint will return the details of coupon usage associated with a discount rule: 
 
