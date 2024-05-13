@@ -372,6 +372,7 @@ The following parameters can be specified in a request json body:
 
 You'll receive the codes in the response:
 
+```json
 {
     "remaining": 0,
     "codes": ["ywI8XEy3"]
