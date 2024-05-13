@@ -27,3 +27,7 @@ We have two kinds of APIs.:
 All connections are done through HTTPS (by default TLS 1.2;).
  
 All APIs are secured with [JWT Authentication](02-JWT-authentication.md) except for the public endpoints.
+
+## Rate limits
+
+API calls are limited to 10 requests/second.
