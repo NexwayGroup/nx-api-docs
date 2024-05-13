@@ -378,6 +378,7 @@ You'll receive the codes in the response:
     "remaining": 0,
     "codes": ["ywI8XEy3"]
 }
+```
 
 
 The "usage" endpoint will return the details of coupon usage associated with a discount rule: 
