@@ -363,6 +363,7 @@ The following parameters can be specified in a request json body:
 
 `POST https://api.nexway.store/discounts/{id}/generate`
 
+```json
 {
     "quantity": 200,
     "size": 10,
