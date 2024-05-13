@@ -253,21 +253,16 @@ When creating a new price with a validity period that overlaps existing prices, 
 
 ## Deleting prices
 
-The Price API allows you to delete prices, but only for future validity periods. Prices that are currently active cannot be deleted. 
+The Price API allows you to delete prices. Prices with the validity periods are deleted completely. Prices that are currently active (startDate in the past and endDate in the future) are archived. 
 
-### Restoring Previous Prices on Deletion
+Here's what happens when you delete a price which has not started yet:
 
-When a price with an overlapping timeline is deleted, the Price API automatically restores the previously impacted prices. This is because the API maintains a history of all price changes.
-
-Here's what happens when you delete a price and how the Price API handles historical changes:
-
-### Case 1: Overlapping Price Deletion
 ```
 ....................Price A......................>
 adding price B:
 ........Price A........|........Price B..........>
 deleting price B:
-....................Price A......................>
+........Price A........|_________no price________>
 ```
 
 1. **Given**: Price A: `startDate: 2020-03-01`, `endDate: infinity`
@@ -275,86 +270,5 @@ deleting price B:
 3. **Result**:
    - A: `startDate: 2020-03-01`, `endDate: 2020-09-30`
    - B: `startDate: 2020-10-01`, `endDate: infinity`
-4. **After Deleting B**: Price A reverts to its original validity period.
-   - A: `startDate: 2020-03-01`, `endDate: infinity`
-
-
-### Case 2: Deleting Price inside a Sequence
-
-```
-given:
-......A.....|...X...|.......B.........>
-deleting X:
-..........A.........|.......B.........>
-```
-
-1. **Initial State**: Three prices, A, X, and B.
-   - A: `startDate: current`, `endDate: 2020-08-31`
-   - X: `startDate: 2020-09-01`, `endDate: 2020-11-30`
-   - B: `startDate: 2020-12-01`, `endDate: infinity`
-2. **Deletion**: Deleting X.
-3. **Result**: Price A's end date is extended to cover the gap left by X.
-   - A: `startDate: current`, `endDate: 2020-11-30`
-   - B: `startDate: 2020-12-01`, `endDate: infinity`
-
-
-### Case 3: Restoring Overlapped Prices
-
-```
-given:
-......Price A......|...........Price B.............>
-deletin C:
-......Price A......|...Price C...|.....Price B.....>
-expect:
-......Price A......|...........Price B.............>
-```
-
-1. **Initial State**: Two prices, A and B, added price C overlapping only B.
-   - A: `startDate: 2020-03-01`, `endDate: 2020-10-31`
-   - C: `startDate: 2020-11-01`, `endDate: 2020-11-30` (overlaps B)
-   - B: `startDate: 2020-12-01`, `endDate: infinity`
-2. **Deletion**: Deleting C.
-3. **Result**: Both A and B revert to their original end dates before C was created.
-   - A: `startDate: 2020-03-01`, `endDate: 2020-10-31`
-   - B: `startDate: 2020-11-01`, `endDate: infinity`
-
-
-### Case 4: Deleting a Price Leaving a Gap
-```
-given (NP - no price in this period)
-......Price A......|...NP...|......Price B.........>
-expect
-......Price A......|..............NP...............>
-```
-In this case between price A and B is a gap without price:
-
-   - `A - startDate: 2020-03-01, endDate: 2020-08-31`
-   - `B - startDate: 2020-11-01, endDate: infinity`
-
-Deleting price C will result in not having price from end of price A to infinity
-
-### Case 5: Restoring Multiple Overlapped Prices
-
-```
-given: 
-...Price A.....|..Price B..|..Price C..|....Price D....>
-                           +
-             |...........Price X..........|
-                           ⇓
-...Price A...|...........Price X..........|..Price D...>
-
-deleting X:
-...Price A.....|..Price B..|..Price C..|....Price D....>
-```
-
-1. **Initial State**: Prices A, B, C and D.
-2. **Adding**: X overlapping A and D partially and archiving B and C.
-3. **Deleting**: X
-4. **Result**: All previously archived prices (A, B, C, and D) are restored to their original states before X was created.
-
-### Limitations of Restoring Prices After Deletion
-
-The Price API's ability to restore previous prices when deleting an overlapping price has limitations. It can only restore prices based on the history of changes caused by the specific price being deleted.
-
-If a price that would be restored due to deletion (like price B in Case 3) was itself deleted in the past, it won't be brought back. This can result in gaps in the price timeline for those periods.
-
+4. **After Deleting B**: Price A endDate doesn't change
+   - A: `startDate: 2020-03-01`, `endDate: 2020-09-30`
