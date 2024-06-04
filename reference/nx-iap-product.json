@@ -356,6 +356,25 @@
                 ],
                 "type": "object"
             },
+            "DiscountPlan": {
+                "properties": {
+                    "discountStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "type": "boolean"
+                    },
+                    "tag": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "discountStep",
+                    "tag"
+                ],
+                "type": "object"
+            },
             "DiscountStatus": {
                 "description": "Discount status",
                 "type": "object"
@@ -1698,6 +1717,9 @@
                     "descriptionId": {
                         "description": "Description ID",
                         "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
                     },
                     "discountsStatus": {
                         "description": "Discount status",
