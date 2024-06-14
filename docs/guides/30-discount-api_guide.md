@@ -3,12 +3,12 @@ Discount API allows you to manage discount rules.
 
 The service supports the following types of discount rules:
 * Campaign (it's important to distinguish it from Marketing Campaigns, as they are different entities)
-    * get discounts/{id} 
-    * put discounts/{id}
+    * get discounts/&#123;id&#125; 
+    * put discounts/&#123;id&#125;
     * post discounts/
-    * delete discounts/{id}
+    * delete discounts/&#123;id&#125;
 * Coupon: reusable coupon code
-* Single use coupon: should be generated with a special endpoint post /discounts/{id}/generate
+* Single use coupon: should be generated with a special endpoint post /discounts/&#123;id&#125;/generate
 
 ## Campaigns
 
@@ -361,7 +361,7 @@ The following parameters can be specified in a request json body:
 - `size`: the length of the coupon code. Default is 8;
 - `prefix`: to start each coupon code with.
 
-`POST https://api.nexway.store/discounts/{id}/generate`
+`POST https://api.nexway.store/discounts/&#123;id&#125;/generate`
 
 ```json
 {
