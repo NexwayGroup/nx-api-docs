@@ -1043,6 +1043,58 @@
                 ],
                 "type": "object"
             },
+            "DiscountApplied": {
+                "description": "List of all discount applied",
+                "properties": {
+                    "discountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountId": {
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedGrossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "netPrice": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "DiscountPlan": {
+                "description": "Optional discount plan on a product",
+                "properties": {
+                    "discountStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "type": "boolean"
+                    },
+                    "tag": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "DiscountStatus": {
                 "description": "List of discount statuses",
                 "properties": {
@@ -1069,6 +1121,20 @@
             "DiscountedPrice": {
                 "description": "Discounted price",
                 "properties": {
+                    "allDiscountsApplied": {
+                        "description": "List of all discount applied",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountApplied"
+                        },
+                        "type": "array"
+                    },
+                    "cumulatedDiscountRate": {
+                        "description": "Discount rate of all discounts applied",
+                        "example": 0.35,
+                        "format": "double",
+                        "readOnly": true,
+                        "type": "number"
+                    },
                     "discountCode": {
                         "description": "Discount code",
                         "example": "MYDISCOUNTCODE",
@@ -1081,6 +1147,7 @@
                         "type": "string"
                     },
                     "discountId": {
+                        "deprecated": true,
                         "description": "External id from Discount resource",
                         "example": "85a2cfd6-510c-11eb-ae93-0242ac130002",
                         "readOnly": true,
@@ -1093,7 +1160,8 @@
                         "type": "string"
                     },
                     "discountRate": {
-                        "description": "Discount rate",
+                        "deprecated": true,
+                        "description": "Deprecated Discount rate, use cumulatedDiscountRate instead",
                         "example": 0.35,
                         "format": "double",
                         "readOnly": true,
@@ -1154,6 +1222,7 @@
                 },
                 "readOnly": true,
                 "required": [
+                    "cumulatedDiscountRate",
                     "discountId",
                     "discountLabel",
                     "discountRate",
@@ -2323,6 +2392,19 @@
                     "currentExpirationDate": {
                         "description": "Current expiration date",
                         "example": "1712906328000",
+                        "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
+                    },
+                    "discountPlanIgnorePurchaseDiscount": {
+                        "type": "boolean"
+                    },
+                    "discountPlanStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "discountPlanTag": {
                         "type": "string"
                     },
                     "durationUntilTrialEnd": {
