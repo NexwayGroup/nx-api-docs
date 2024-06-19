@@ -42,6 +42,21 @@
             "type": "object",
             "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
         },
+        "DiscountPlan": {
+            "properties": {
+                "startingStep": {
+                    "format": "int64",
+                    "type": "integer",
+                    "x-go-name": "StartingStep"
+                },
+                "tag": {
+                    "type": "string",
+                    "x-go-name": "Tag"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+        },
         "Email": {
             "properties": {
                 "date": {
@@ -259,6 +274,9 @@
                     "additionalProperties": {},
                     "type": "object",
                     "x-go-name": "DecodedExternalContext"
+                },
+                "discountPlan": {
+                    "$ref": "#/definitions/DiscountPlan"
                 },
                 "emails": {
                     "items": {
