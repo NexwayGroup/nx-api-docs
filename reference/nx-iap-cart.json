@@ -2382,6 +2382,20 @@
                 ],
                 "type": "object"
             },
+            "ProductCustomFields": {
+                "properties": {
+                    "customFields": {
+                        "type": "object"
+                    },
+                    "customFieldsId": {
+                        "type": "string"
+                    },
+                    "productId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ProductInput": {
                 "properties": {
                     "crossSellBy": {
@@ -3901,10 +3915,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductCustomFields"
                                     },
-                                    "type": "object"
+                                    "type": "array"
                                 }
                             }
                         },
