@@ -528,6 +528,14 @@
                         "format": "double",
                         "type": "number"
                     },
+                    "wantedProducts": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProductInput"
+                        },
+                        "readOnly": true,
+                        "type": "array",
+                        "uniqueItems": true
+                    },
                     "warnings": {
                         "description": "List of fields in warning after validation",
                         "items": {
