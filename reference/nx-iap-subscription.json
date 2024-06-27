@@ -160,6 +160,24 @@
             "type": "object",
             "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
         },
+        "LineItem": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "productId": {
+                    "type": "string",
+                    "x-go-name": "ProductId"
+                },
+                "subscriptionId": {
+                    "type": "string",
+                    "x-go-name": "SubscriptionID"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/order"
+        },
         "NotFound": {
             "properties": {
                 "error": {
@@ -197,6 +215,23 @@
             },
             "type": "object",
             "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        },
+        "Order": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "x-go-name": "ID"
+                },
+                "lineItems": {
+                    "items": {
+                        "$ref": "#/definitions/LineItem"
+                    },
+                    "type": "array",
+                    "x-go-name": "LineItems"
+                }
+            },
+            "type": "object",
+            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/order"
         },
         "PreBillingRequest": {
             "properties": {
@@ -947,6 +982,12 @@
         "application/json"
     ],
     "responses": {
+        "PreBilledOrderResponse": {
+            "description": "",
+            "schema": {
+                "$ref": "#/definitions/Order"
+            }
+        },
         "SubscriptionsSuccessResponse": {
             "description": "",
             "schema": {
