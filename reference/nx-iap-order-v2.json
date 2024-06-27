@@ -112,6 +112,20 @@
                 ],
                 "type": "object"
             },
+            "CartProductCustomFields": {
+                "properties": {
+                    "customFields": {
+                        "type": "object"
+                    },
+                    "customFieldsId": {
+                        "type": "string"
+                    },
+                    "productId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Company": {
                 "description": "EndUser company",
                 "properties": {
@@ -245,9 +259,84 @@
                 },
                 "type": "object"
             },
+            "DiscountApplied": {
+                "description": "List of all applied discounts for this price",
+                "properties": {
+                    "discountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountId": {
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedGrossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "model": {
+                        "enum": [
+                            "CAMPAIGN",
+                            "COUPON",
+                            "SINGLE_USE_CODE",
+                            "SUBSCRIPTION_PLAN"
+                        ],
+                        "type": "string"
+                    },
+                    "netPrice": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "DiscountPlan": {
+                "description": "Discount plan for product",
+                "properties": {
+                    "discountStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "type": "boolean"
+                    },
+                    "tag": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "discountStep",
+                    "tag"
+                ],
+                "type": "object"
+            },
             "DiscountedPrice": {
                 "description": "Discounted price",
                 "properties": {
+                    "allDiscountsApplied": {
+                        "description": "List of all applied discounts for this price",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountApplied"
+                        },
+                        "type": "array"
+                    },
+                    "cumulatedDiscountRate": {
+                        "description": "Cumulative discount rate",
+                        "format": "double",
+                        "readOnly": true,
+                        "type": "number"
+                    },
                     "discountCode": {
                         "description": "Discount promo code",
                         "readOnly": true,
@@ -269,6 +358,7 @@
                         "type": "string"
                     },
                     "discountRate": {
+                        "deprecated": true,
                         "description": "Discount rate",
                         "format": "double",
                         "readOnly": true,
@@ -829,6 +919,10 @@
             },
             "Lifecycle": {
                 "properties": {
+                    "generation": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
                     "paymentDeadline": {
                         "format": "int64",
                         "type": "integer"
@@ -886,6 +980,9 @@
                         "description": "Cost of product after discount",
                         "format": "double",
                         "type": "number"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
                     },
                     "discountRate": {
                         "description": "Discount rate",
@@ -2592,15 +2689,6 @@
                         "format": "date-time",
                         "type": "string"
                     },
-                    "customFields": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
-                        "type": "object"
-                    },
-                    "customFieldsId": {
-                        "type": "string"
-                    },
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
@@ -2622,6 +2710,12 @@
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "productCustomFields": {
+                        "items": {
+                            "$ref": "#/components/schemas/CartProductCustomFields"
+                        },
+                        "type": "array"
                     },
                     "updateDate": {
                         "deprecated": true,
@@ -3098,6 +3192,36 @@
                 },
                 "type": "object"
             },
+            "SearchResultProductCustomFields": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProductCustomFields"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "SearchResultRecapEntry": {
                 "properties": {
                     "items": {
@@ -3224,6 +3348,21 @@
                 ],
                 "type": "object"
             },
+            "SubDiscountPlan": {
+                "properties": {
+                    "startingStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "tag": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "tag"
+                ],
+                "type": "object"
+            },
             "Subscription": {
                 "properties": {
                     "amount": {
@@ -3279,6 +3418,9 @@
                     },
                     "customerId": {
                         "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/SubDiscountPlan"
                     },
                     "endUser": {
                         "$ref": "#/components/schemas/EndUser"
@@ -3538,6 +3680,9 @@
             },
             "WantedProduct": {
                 "properties": {
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
+                    },
                     "id": {
                         "type": "string"
                     },
@@ -3975,7 +4120,7 @@
         },
         "/ordersv2/cancellationReason/distinct": {
             "get": {
-                "operationId": "distinct_3",
+                "operationId": "distinct_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -4063,7 +4208,7 @@
         },
         "/ordersv2/cancellationReason/public": {
             "get": {
-                "operationId": "getItems_3",
+                "operationId": "getItems_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -4226,7 +4371,7 @@
         },
         "/ordersv2/cancellationReason/recap": {
             "get": {
-                "operationId": "recap_3",
+                "operationId": "recap_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -4314,7 +4459,7 @@
         },
         "/ordersv2/cancellationReason/unwind": {
             "get": {
-                "operationId": "unwind_3",
+                "operationId": "unwind_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -4402,7 +4547,7 @@
         },
         "/ordersv2/cancellationReason/{id}": {
             "delete": {
-                "operationId": "deleteItem_2",
+                "operationId": "deleteItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -4472,7 +4617,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_3",
+                "operationId": "getItem_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -4542,7 +4687,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_2",
+                "operationId": "updateItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -4618,6 +4763,580 @@
                 "summary": "Update item",
                 "tags": [
                     "CancellationReason"
+                ],
+                "x-operationWeight": "400"
+            }
+        },
+        "/ordersv2/customFields": {
+            "get": {
+                "operationId": "getItems_3",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultProductCustomFields"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/ordersv2/customFields/distinct": {
+            "get": {
+                "operationId": "distinct_3",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/ordersv2/customFields/recap": {
+            "get": {
+                "operationId": "recap_3",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/ordersv2/customFields/unwind": {
+            "get": {
+                "operationId": "unwind_3",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/ordersv2/customFields/{id}": {
+            "delete": {
+                "operationId": "deleteItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductCustomFields"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "customFields"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductCustomFields"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductCustomFields"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "customFields"
                 ],
                 "x-operationWeight": "400"
             }
