@@ -639,6 +639,13 @@
                     "currency": {
                         "type": "string"
                     },
+                    "discountPlanStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "discountPlanTag": {
+                        "type": "string"
+                    },
                     "endUserCity": {
                         "type": "string"
                     },
@@ -647,6 +654,9 @@
                     },
                     "endUserZipCode": {
                         "type": "string"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "type": "boolean"
                     },
                     "numberOfNextGeneration": {
                         "format": "int32",
@@ -678,9 +688,7 @@
                     }
                 },
                 "required": [
-                    "country",
-                    "currency",
-                    "storeId"
+                    "currency"
                 ],
                 "type": "object"
             },
