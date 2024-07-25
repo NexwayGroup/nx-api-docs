@@ -380,6 +380,10 @@
                         },
                         "type": "array"
                     },
+                    "piiDataSecureToken": {
+                        "description": "Secure token to protect end user personal information",
+                        "type": "string"
+                    },
                     "price": {
                         "$ref": "#/components/schemas/Price"
                     },
@@ -3720,6 +3724,15 @@
                         "example": "full, short",
                         "in": "query",
                         "name": "format",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "If secure token feature was activated for customer, this parameter should have token created when cart was created. Otherwise, end user information will not be present in response",
+                        "in": "query",
+                        "name": "piiDataSecureToken",
                         "required": false,
                         "schema": {
                             "type": "string"
