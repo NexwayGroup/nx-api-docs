@@ -59,6 +59,25 @@
                 },
                 "type": "object"
             },
+            "AttributePatternCriteria": {
+                "properties": {
+                    "fromDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "orderIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "toDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "CancellationReason": {
                 "properties": {
                     "cancellationReasonId": {
@@ -1432,6 +1451,27 @@
                 ],
                 "type": "object"
             },
+            "MultiValueMapStringString": {
+                "additionalProperties": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "properties": {
+                    "all": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object",
+                        "writeOnly": true
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -1929,8 +1969,7 @@
                         "type": "array"
                     },
                     "salesFlag": {
-                        "type": "string",
-                        "writeOnly": true
+                        "type": "string"
                     },
                     "salesFlags": {
                         "description": "List of sales flags",
@@ -1953,7 +1992,8 @@
                             "MID_TERM_UPGRADE",
                             "OFFER",
                             "PURCHASE",
-                            "SUBSCRIPTION"
+                            "SUBSCRIPTION",
+                            "UNKNOWN"
                         ],
                         "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN | OFFER",
                         "type": "string"
@@ -2934,6 +2974,17 @@
                 },
                 "type": "object"
             },
+            "SearchField": {
+                "properties": {
+                    "path": {
+                        "type": "string"
+                    },
+                    "pathAlias": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "SearchOrderView": {
                 "properties": {
                     "createdDate": {
@@ -3532,7 +3583,8 @@
                             "MID_TERM_UPGRADE",
                             "OFFER",
                             "PURCHASE",
-                            "SUBSCRIPTION"
+                            "SUBSCRIPTION",
+                            "UNKNOWN"
                         ],
                         "type": "string"
                     },
@@ -7651,6 +7703,128 @@
                     "Order"
                 ],
                 "x-operationWeight": "200"
+            }
+        },
+        "/ordersv2/search": {
+            "get": {
+                "operationId": "search",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "requestParams",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/MultiValueMapStringString"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "api-search"
+                ]
+            }
+        },
+        "/ordersv2/search/attribute-pattern": {
+            "get": {
+                "operationId": "attributePattern",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/SearchField"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "api-search"
+                ]
+            }
+        },
+        "/ordersv2/search/compute-attribute-pattern": {
+            "post": {
+                "operationId": "computeAttributePattern",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AttributePatternCriteria"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "api-search"
+                ]
+            }
+        },
+        "/ordersv2/search/reset-attribute-pattern": {
+            "post": {
+                "operationId": "resetAttributePattern",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AttributePatternCriteria"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "api-search"
+                ]
             }
         },
         "/ordersv2/subscription": {
