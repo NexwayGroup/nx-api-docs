@@ -707,6 +707,42 @@
                 },
                 "type": "object"
             },
+            "FulfillmentSummary": {
+                "properties": {
+                    "activationCode": {
+                        "type": "string"
+                    },
+                    "activationFileFulfillment": {
+                        "type": "boolean"
+                    },
+                    "activationLink": {
+                        "type": "string"
+                    },
+                    "expirationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "licenseId": {
+                        "type": "string"
+                    },
+                    "lineItemDataId": {
+                        "type": "string"
+                    },
+                    "lineItemId": {
+                        "type": "string"
+                    },
+                    "multipleLicensesFulfillment": {
+                        "type": "boolean"
+                    },
+                    "operationId": {
+                        "type": "string"
+                    },
+                    "preorder": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "FullPrice": {
                 "description": "All information related to amount",
                 "properties": {
@@ -2239,6 +2275,9 @@
                     "enduserId": {
                         "type": "string"
                     },
+                    "exportActivationCodeFileUrl": {
+                        "type": "string"
+                    },
                     "fullCreditNodeId": {
                         "type": "string"
                     },
@@ -2779,6 +2818,12 @@
             },
             "ProductSummary": {
                 "properties": {
+                    "fulfillments": {
+                        "items": {
+                            "$ref": "#/components/schemas/FulfillmentSummary"
+                        },
+                        "type": "array"
+                    },
                     "fullPrice": {
                         "$ref": "#/components/schemas/FullPrice"
                     },
