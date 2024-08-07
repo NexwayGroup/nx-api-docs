@@ -26,7 +26,7 @@ We have two kinds of APIs.:
 ## Security
 All connections are done through HTTPS (by default TLS 1.2;).
  
-All APIs are secured with [JWT Authentication](02-JWT-authentication.md) except for the public endpoints.
+All APIs are secured with [JWT Authentication](/docs/guides/JWT-authentication) except for the public endpoints.
 
 ## Rate limits
 

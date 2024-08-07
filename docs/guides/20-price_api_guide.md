@@ -1,4 +1,4 @@
-## Price API guide
+# Price API guide
 The Price API allows you to manage product prices for your store. It offers two methods for price management:
 
 ### 1. Through Product Creation/Update (Product API):
