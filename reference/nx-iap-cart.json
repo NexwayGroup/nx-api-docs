@@ -450,7 +450,8 @@
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
                             "OFFER",
-                            "MID_TERM_UPGRADE"
+                            "MID_TERM_UPGRADE",
+                            "UPGRADE"
                         ],
                         "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN | OFFER",
                         "type": "string"
@@ -711,7 +712,8 @@
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
                             "OFFER",
-                            "MID_TERM_UPGRADE"
+                            "MID_TERM_UPGRADE",
+                            "UPGRADE"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -2083,7 +2085,8 @@
                             "MANUAL_RENEWAL",
                             "BILLING_PLAN",
                             "OFFER",
-                            "MID_TERM_UPGRADE"
+                            "MID_TERM_UPGRADE",
+                            "UPGRADE"
                         ],
                         "example": "SUBSCRIPTION",
                         "type": "string"
@@ -2197,6 +2200,9 @@
                         },
                         "readOnly": true,
                         "type": "object"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
                     },
                     "durationUntilTrialEnd": {
                         "description": "Number of days before the end of trial reminder",
@@ -2523,6 +2529,27 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "id"
+                ],
+                "type": "object"
+            },
+            "ProductUpgradeRequest": {
+                "properties": {
+                    "previousLineItemId": {
+                        "type": "string"
+                    },
+                    "upgradeProductId": {
+                        "type": "string"
+                    },
+                    "upgradeRecoId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "previousLineItemId",
+                    "upgradeProductId"
+                ],
                 "type": "object"
             },
             "PublicParameter": {
@@ -3600,6 +3627,94 @@
                     "Public"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/carts/public/upgrade": {
+            "post": {
+                "description": "create a product upgrade cart",
+                "operationId": "createProductUpgradeCart",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductUpgradeRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cart"
+                                }
+                            }
+                        },
+                        "description": "Created"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "create a product upgrade cart",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "100"
             }
         },
         "/carts/public/{country}/expected-fields": {
