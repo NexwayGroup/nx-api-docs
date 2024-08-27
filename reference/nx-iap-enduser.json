@@ -16,6 +16,29 @@
                 },
                 "type": "object"
             },
+            "CloneEndUserRequest": {
+                "properties": {
+                    "fromCustomerId": {
+                        "type": "string"
+                    },
+                    "originalEndUserId": {
+                        "type": "string"
+                    },
+                    "toCustomerId": {
+                        "type": "string"
+                    },
+                    "toStoreId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "fromCustomerId",
+                    "originalEndUserId",
+                    "toCustomerId",
+                    "toStoreId"
+                ],
+                "type": "object"
+            },
             "Company": {
                 "description": "Company information",
                 "properties": {
@@ -190,6 +213,16 @@
                         "example": "Sens",
                         "type": "string"
                     },
+                    "cloneId": {
+                        "description": "end-user id from the clone which was cloned from this end-user",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
+                        "type": "string"
+                    },
+                    "clonedFromEndUser": {
+                        "description": "end-user id from where this end-user was cloned",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
+                        "type": "string"
+                    },
                     "company": {
                         "$ref": "#/components/schemas/Company"
                     },
@@ -256,6 +289,11 @@
                     "id": {
                         "deprecated": true,
                         "type": "string"
+                    },
+                    "isClone": {
+                        "description": "it determines if an end-user is cloned or not",
+                        "example": true,
+                        "type": "boolean"
                     },
                     "lastName": {
                         "description": "Last name",
@@ -392,6 +430,14 @@
                 ],
                 "type": "object"
             },
+            "EndUserDTO": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "EndUserImport": {
                 "properties": {
                     "accountCreated": {
@@ -409,6 +455,16 @@
                     "city": {
                         "description": "City",
                         "example": "Sens",
+                        "type": "string"
+                    },
+                    "cloneId": {
+                        "description": "end-user id from the clone which was cloned from this end-user",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
+                        "type": "string"
+                    },
+                    "clonedFromEndUser": {
+                        "description": "end-user id from where this end-user was cloned",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
                         "type": "string"
                     },
                     "company": {
@@ -477,6 +533,11 @@
                     "id": {
                         "deprecated": true,
                         "type": "string"
+                    },
+                    "isClone": {
+                        "description": "it determines if an end-user is cloned or not",
+                        "example": true,
+                        "type": "boolean"
                     },
                     "lastName": {
                         "description": "Last name",
@@ -646,6 +707,16 @@
                         "example": "Sens",
                         "type": "string"
                     },
+                    "cloneId": {
+                        "description": "end-user id from the clone which was cloned from this end-user",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
+                        "type": "string"
+                    },
+                    "clonedFromEndUser": {
+                        "description": "end-user id from where this end-user was cloned",
+                        "example": "e8ba8d13-0736-47ae-80ad-1927ee88d658",
+                        "type": "string"
+                    },
                     "company": {
                         "$ref": "#/components/schemas/Company"
                     },
@@ -715,6 +786,11 @@
                     "id": {
                         "deprecated": true,
                         "type": "string"
+                    },
+                    "isClone": {
+                        "description": "it determines if an end-user is cloned or not",
+                        "example": true,
+                        "type": "boolean"
                     },
                     "lastName": {
                         "description": "Last name",
@@ -2323,6 +2399,77 @@
                     "EndUser"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/endusers/clone": {
+            "post": {
+                "operationId": "cloneEndUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloneEndUserRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EndUserDTO"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Clone endUser from a customer to another customer.",
+                "tags": [
+                    "EndUser"
+                ]
             }
         },
         "/endusers/distinct": {
@@ -6580,7 +6727,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Success"
+                        "description": "Created"
                     },
                     "401": {
                         "content": {
@@ -6883,7 +7030,7 @@
                                 }
                             }
                         },
-                        "description": "Success"
+                        "description": "Created"
                     },
                     "401": {
                         "content": {
@@ -7155,7 +7302,7 @@
                                 }
                             }
                         },
-                        "description": "Success"
+                        "description": "Created"
                     },
                     "401": {
                         "content": {
@@ -7264,7 +7411,7 @@
                                 }
                             }
                         },
-                        "description": "Success"
+                        "description": "Created"
                     },
                     "401": {
                         "content": {
