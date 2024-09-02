@@ -513,6 +513,10 @@
                         "format": "date-time",
                         "type": "string"
                     },
+                    "useStrikeThroughPrice": {
+                        "description": "use strike through price",
+                        "type": "boolean"
+                    },
                     "userAgent": {
                         "description": "User-Agent",
                         "type": "string"
@@ -736,6 +740,10 @@
                         "example": "TRIAL_CONVERSION,RENEWAL",
                         "type": "string"
                     },
+                    "useStrikeThroughPrice": {
+                        "description": "use strike through price",
+                        "type": "boolean"
+                    },
                     "userAgent": {
                         "description": "User-Agent",
                         "example": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1",
@@ -868,6 +876,10 @@
                         "description": "Hostname of store",
                         "example": "storename.mydomain.fr",
                         "type": "string"
+                    },
+                    "useStrikeThroughPrice": {
+                        "description": "use strike through price",
+                        "type": "boolean"
                     },
                     "userAgent": {
                         "description": "User-Agent",
@@ -1886,6 +1898,13 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "strikeThroughPrice": {
+                        "description": "strike through price",
+                        "example": 1.0,
+                        "format": "double",
+                        "readOnly": true,
+                        "type": "number"
+                    },
                     "vatAmount": {
                         "description": "Tax amount",
                         "example": 1.59,
@@ -2113,6 +2132,10 @@
                         ],
                         "example": "TRIAL_CONVERSION,RENEWAL",
                         "type": "string"
+                    },
+                    "useStrikeThroughPrice": {
+                        "description": "use strike through price",
+                        "type": "boolean"
                     },
                     "userAgent": {
                         "description": "User-Agent",
@@ -2863,6 +2886,9 @@
                     },
                     "subscriptionId": {
                         "type": "string"
+                    },
+                    "useStrikeThroughPrice": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
