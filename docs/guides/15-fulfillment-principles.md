@@ -5,6 +5,7 @@ Fulfillment plays a crucial role in the order processing workflow. Its primary f
 The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
 * Optionally activate a license key to a partner's server
+* Activate a service on the partner's side
 
 If you have an existing service for issuing licenses it can be integrated into the Monetize fulfillment via custom fulfillment template (see below).
 
