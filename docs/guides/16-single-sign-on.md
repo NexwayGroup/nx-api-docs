@@ -27,3 +27,11 @@ Authorization Bearer {{accessToken}}
     "singleUse": false
 }
 ```
+
+Response
+
+If the deeplink is generated successfully you'l receive 201 HTTP response and Location header containing a deeplink. 
+
+Errors
+
+If the baseLink parameter contains an incorrect store URL (i.e., a URL that is not associated with the end user), the API will return a 400 HTTP response with the message: "baselink is not from the enduser's store." This indicates that you must retrieve the correct store URL linked to the end user from the EndUser resource.
