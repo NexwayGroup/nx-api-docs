@@ -1,16 +1,17 @@
 # How fulfillment works
 
-Fulfillment plays a crucial role in the order processing workflow. Its primary function is to secure a unique product key or similar confirmation of a digital sale from the partner. This confirmation can take various forms, including license keys, activation codes, serial numbers, activation links, certificates, and more. If fulfillment encounters an issue retrieving this confirmation, the corresponding order will stall and require intervention from the operations team.
+Fulfillment plays a crucial role in the order processing workflow. Its primary function is to secure a unique product key or similar confirmation of a digital sale from the partner. This confirmation can take various forms, including license keys, activation codes, serial numbers, activation links, certificates or just an acknowledgement received from the partner's server. If fulfillment encounters an issue retrieving this confirmation, the corresponding order will stall and require intervention from the operations team.
 
 The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
-* Optionally activate a license key to a partner's server
+* Activate a service or a license key to a partner's server
+* Confirm that the partner is able to provide a purchased product
 
 If you have an existing service for issuing licenses it can be integrated into the Monetize fulfillment via custom fulfillment template (see below).
 
 If you don't have such a service, Nexway provides a sample fulfillment server for you to implement on your side to test expected behavior. Please ask your account manager.
 
-Nexway also offers an integrated off-the-shelf license key provider service designed to handle batches of activation codes. This service can function effectively during the initial phase and facilitate key distribution. Nevertheless, it requires manual effort for license package maintenance, which may not be the most efficient solution for many partners. Therefore, opting for a dedicated fulfillment service is often the preferred choice to streamline the fulfillment process.
+Nexway also offers an integrated off-the-shelf license key provider service designed to handle batches of activation codes. You can provide a batch of keys for distribution. This service can function effectively during the initial phase and facilitate key distribution. Nevertheless, it requires manual effort for license package maintenance, which may not be the most efficient solution for many partners. Therefore, opting for a dedicated fulfillment service is often the preferred choice to streamline the fulfillment process.
 
 ## List of fulfillment actions
 Each action is associated with an order workflow event on the Nexway Monetize Platform. Some actions are only useful in a subscription context. We can map the action to a specific URL of your server.

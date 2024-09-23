@@ -13,12 +13,11 @@ The diagram below shows the main statuses of the order workflow.
 Below is a list of order-related notifications which you can subscribe to:
 
 * Order created
-* Order payment failed
-* Order payment refused
+* Order payment failed (usually internal technical issue)
+* Order payment refused (by payment gateway)
 * Order completed
 * Order completed with error
 * Order fulfillment failed
-* Subscription renewal order completed
 * Order cancelled
 
 ## List of fields
