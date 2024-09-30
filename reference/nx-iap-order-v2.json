@@ -2666,6 +2666,12 @@
                     "updateEndUser": {
                         "type": "boolean"
                     },
+                    "updateLayout": {
+                        "type": "boolean"
+                    },
+                    "updateLayoutRequest": {
+                        "$ref": "#/components/schemas/UpdateLayoutRequest"
+                    },
                     "updatePaymentDeadlineRequest": {
                         "$ref": "#/components/schemas/UpdatePaymentDeadlineRequest"
                     }
@@ -3746,6 +3752,17 @@
                     },
                     "taxName": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateLayoutRequest": {
+                "properties": {
+                    "layout": {
+                        "type": "string"
+                    },
+                    "removeLayout": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
