@@ -93,6 +93,9 @@
                     "name": {
                         "description": "Custom field name",
                         "example": "vpnIncludedFeature",
+                        "maxLength": 20,
+                        "minLength": 4,
+                        "pattern": "^[a-zA-Z0-9\u00c0-\u00ff\\s'_\\-]+$",
                         "type": "string"
                     },
                     "originalId": {
