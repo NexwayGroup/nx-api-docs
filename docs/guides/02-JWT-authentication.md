@@ -28,12 +28,12 @@ There are two different ways to get an `access_token`:
 }
 ```
 
-You can add realm to a client_id after two dashes `--` if you can't use non standard parameter `realm`:
+You can put realm into `client_id` attribute separating them with two dashes `--`: (`realm_name--client-id_value`) if you can't use non standard parameter `realm`:
 
 `POST /iam/tokens`
 ```json
 {
-  "client_id": "api-services--com2us",
+  "client_id": "com2us--api-services",
   "client_secret": "XXX-XXX-XXX-XXX",
   "grant_type": "client_credentials"
 }
