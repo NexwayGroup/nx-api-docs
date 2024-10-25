@@ -1,44 +1,53 @@
 ## JWTs (Json Web Tokens)
 ### Access token
-An Access [JWT](https://jwt.io/) is used for authentication and authorization:
-* Authentication requires verifying the signature of the Access JWT. If the signature is valid, access to the requested API resource is granted.
-* Authorization is done by looking up privileges within the scope attribute of the Access JWT. For this, you must first obtain the Access JWT and then enter it into the `Authorization` header of each API call. The value of the `Authorization` looks like this: `Bearer eyJhbGciOiJSUzI1NiIs.....`
+Most of the Nexway API endpoints require a valid Json Web Token [JWT](https://jwt.io/) for authentication and authorization:
+* Authentication verifies the signature of the Access JWT. Access to the requested API resource is granted if the token signature is valid and token is not expired.
+* Authorization checks the privileges within the scope attribute of the Access JWT. 
+
+For each non-public (secured) endpoint, after obtaining a valid access token, include the token in the Authorization header of the request as a Bearer token. The value of the `Authorization` will look like this: `Bearer eyJhbGciOiJSUzI1NiIs.....`
 
 ### Refresh Token
 A Refresh token is a long-lived token that you use to request new Access tokens. Its expiration time is longer than that of an Access token.
 
-## List of available APIs
 
-|Operation| 	HTTP Request| 	Resource Request| 	Description|
-|--|--|--|--|
-|getUserToken|`POST /iam/tokens`|[TokenRequest](https://nexway.stoplight.io/docs/nx-api-docs/reference/nx-iap-keycloack.json/components/schemas/TokenRequest)|	Get/refresh a token|
-|invalidateToken|`DELETE /iam/tokens/invalidate`|	|	Invalidate a token|
-|resetUsingDELETE| 	`DELETE /iam/tokens/reset`||	reset|
+## Two types of accounts
 
-## How to
-
-Nexway provides a POST [getUserToken](https://nexway.stoplight.io/docs/nx-api-docs/reference/nx-iap-keycloack.json/paths/~1iam~1tokens/post) endpoint to get and refresh JWTs.
-You can get a token two different ways:
-* By using realm name, client secret, and by specifying the grant type in *client_credentials*, if using an application interface.
-* By using realm name, username, password, and by specifying the grant type in *password*, if you are a human user.
+Nexway provides a POST `/iam/tokens` endpoint to create and refresh JWTs.
+There are two different ways to get an `access_token`:
+* For a service account specify `grant_type` as *client_credentials*, `client_id`, `realm`, `client_secret`.
+* For a user account use `grant_type` equal *password*, `realm`, `username` and `password`.
 
 ### Grant type "client_credentials" sample request
-
+`POST /iam/tokens`
 ```json
 {
-  "clientSecret": "XXX-XXX-XXX-XXX",
-  "realmName": "com2us",
-  "grantType": "client_credentials"
+  "client_id": "api-services",
+  "client_secret": "XXX-XXX-XXX-XXX",
+  "realm": "com2us",
+  "grant_type": "client_credentials"
+}
+```
+
+You can put realm into `client_id` attribute separating them with two dashes `--`: (`realm_name--client-id_value`) if you can't use non standard parameter `realm`:
+
+`POST /iam/tokens`
+```json
+{
+  "client_id": "com2us--api-services",
+  "client_secret": "XXX-XXX-XXX-XXX",
+  "grant_type": "client_credentials"
 }
 ```
 
 ### Grant type "password" sample request
-In this case, "grantType" is not mandatory, since the default value is "password".
+In this case, "grant_type" is not mandatory, since the default value is "password".
+
+`POST /iam/tokens`
 ```json
 {
   "username": "jdoe",
   "password": "987654321",
-  "realmName": "com2us"
+  "realm": "com2us"
 }
 ```
 
@@ -62,8 +71,8 @@ Going forward, use a Refresh token to extend your session instead of using clien
 ### Sample refresh request
 ```json
 {
-  "realmName": "com2us",
-  "grantType": "refresh_token",
-  "refreshToken": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzUlFuM0J4ZnRDakd0dTVBR0lEZkIyQ0pnQVprMnpwN1R2UGppc2JSN3NJIn0.eyJqdGkiOiI1ZTQ5OWM3OC0wYzc0LTQ5NWQtOGIxMy0zZGVkYTAxODg1OTMiLCJleHAiOjE1MDY1ODg4MTUsIm5iZiI6MCwiaWF0IjoxNTA2NTg3MDE1LCJpc3MiOiJodHRwOi8va2V5Y2xvYWs6ODA4MC9hdXRoL3JlYWxtcy9jb20ydXMiLCJhdWQiOiJuZXh3YXktY2VudGVyIiwic3ViIjoiMjhlNDU4MjYtNDlhYy00N2FmLWFkMTMtZmI5NjUyNGRiYWE5IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5leHdheS1jZW50ZXIiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI4MmI3NzE3OS05MGViLTQxMGEtYTBmNC1hYjM4OTQ0NWQ0ZmEiLCJjbGllbnRfc2Vzc2lvbiI6IjI1MjBhOWRlLWRhN2MtNDg5OS05ODdhLTEyYTVjM2I4NzM4MiIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY2FydC1zZXJ2aWNlIjp7InJvbGVzIjpbInBvc3QiLCJnZXQiLCJkZWxldGUiLCJnZXRzIiwiZ2V0QWxsQ2FydHMiLCJwdXQiLCJkZWxldGVDYXJ0Il19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbIm1hbmFnZS11c2VycyJdfSwiY3VzdG9tZXItc2VydmljZSI6eyJyb2xlcyI6WyJnZXRDdXN0b21lckJ5TmFtZSIsImdldCIsImdldEN1c3RvbWVyQnlSZWFsbU5hbWUiLCJwdXQiLCJnZXRDdXN0b21lciJdfSwib3JkZXJ2aWV3LXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0T3JkZXJEZXRhaWwiLCJwb3N0IiwiZ2V0IiwiZ2V0cyIsImRlbGV0ZSIsInB1dCJdfSwicHJvZHVjdC1zZXJ2aWNlIjp7InJvbGVzIjpbImdldFByb2R1Y3QiLCJkZWxldGVQcm9kdWN0QXNzZXQiLCJ1cGRhdGVQcm9kdWN0IiwiY3JlYXRlUHJvZHVjdCIsImdldEFsbFByb2R1Y3RBc3NldHMiLCJnZXRzIiwiZGVsZXRlIiwicHV0IiwiY3JlYXRlUHJvZHVjdEFzc2V0IiwiZ2V0QWxsUHJvZHVjdHMiLCJkZWxldGVQcm9kdWN0TG9jYWxlIiwiZ2V0UHJvZHVjdEFzc2V0IiwicG9zdCIsImdldCIsImRlbGV0ZVByb2R1Y3RDb3VudHJ5IiwiZGVsZXRlUHJvZHVjdCJdfSwiZW5kdXNlci1zZXJ2aWNlIjp7InJvbGVzIjpbInJlc2V0RW5kdXNlclBhc3N3b3JkIiwiZ2V0RW5kdXNlckJ5U3RvcmVBbmRFbWFpbCIsImNyZWF0ZUVuZHVzZXIiLCJwb3N0IiwidXBkYXRlRW5kdXNlciIsImdldCIsImdldEFsbEVuZHVzZXJzIiwiZGVsZXRlIiwiZ2V0cyIsInB1dCIsImdldEVuZHVzZXIiXX0sIm54LWZ1bGZpbGxtZW50Ijp7InJvbGVzIjpbInBvc3QiLCJnZXQiLCJnZXRzIiwicHV0Il19LCJlbWFpbC1idWlsZGVyLXNlcnZpY2UiOnsicm9sZXMiOlsicG9zdCIsImdldCIsImRlbGV0ZSIsImdldHMiLCJwdXQiXX0sIm54LWN1c3RvbWVyLW5vdGlmaWVyIjp7InJvbGVzIjpbInVwZGF0ZU5vdGlmaWVyUnVsZXMiLCJnZXROb3RpZmllclJ1bGVzIiwiZGVsZXRlTm90aWZpZXJSdWxlcyIsImNyZWF0ZU5vdGlmaWVyUnVsZXMiXX0sImtleWNsb2FrLXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0QWxsVXNlcnMiLCJwb3N0IiwiZ2V0VXNlciIsImdldCIsImRlbGV0ZVVzZXIiLCJ1cGRhdGVVc2VyIiwiY3JlYXRlVXNlciIsImdldHMiLCJkZWxldGUiLCJwdXQiXX0sIm54LWxpY2Vuc2Uta2V5LXByb3ZpZGVyIjp7InJvbGVzIjpbInBvc3QiLCJnZXQiXX0sIm54LWNhbXBhaWduLWNvbmZpZ3VyYXRvciI6eyJyb2xlcyI6WyJwb3N0IiwiZ2V0IiwiZGVsZXRlIiwicHV0Il19LCJzdG9yZS1zZXJ2aWNlIjp7InJvbGVzIjpbInVwZGF0ZVN0b3JlIiwiZ2V0U3RvcmVCeU5hbWUiLCJwb3N0IiwiZ2V0IiwiZ2V0QWxsU3RvcmVzIiwiZ2V0cyIsImRlbGV0ZSIsImNyZWF0ZVN0b3JlIiwicHV0IiwiZGVsZXRlU3RvcmUiXX0sInB1cmNoYXNlLXNlcnZpY2UiOnsicm9sZXMiOlsicG9zdCJdfSwicGVudGFobyI6eyJyb2xlcyI6WyJnZXQiXX0sIm9yZGVyLXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0T3JkZXJFbWFpbCIsImdldE9yZGVyIiwiZ2V0QWxsT3JkZXJzIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fX0.jUPnkNyaElkyNeVtcv6qapTk06-VDy2ddR04btCJBUhhQyl1KZY5fsSlRJXh3PZQcyU4_mSIZiIXMaFKH8WMOWbW6stnLSZMdPMLpwHIIlL14FOMifsz3nkacIk3L8ZIfZcXXn-jGNHJ0N_Toh15JTp_jbDfiaX-n7vNfurggQ8kHUrMXUDfXmB-vJbKgvc7uwKOLsopkVPXehq_FYMdst_oAqBWQzAFH1726S1XKINcluAtp_7ItYkNTZMgKH44vuBsu4EewvJE6hQw_TrzTSEz1ozDKbPQIrbbR0GI3Dz4cmZuHfMVE7-_6PPzrXRzT1eh31NZO8hjh-_ghzp6Vw"
+  "realm": "com2us",
+  "grant_type": "refresh_token",
+  "refresh_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzUlFuM0J4ZnRDakd0dTVBR0lEZkIyQ0pnQVprMnpwN1R2UGppc2JSN3NJIn0.eyJqdGkiOiI1ZTQ5OWM3OC0wYzc0LTQ5NWQtOGIxMy0zZGVkYTAxODg1OTMiLCJleHAiOjE1MDY1ODg4MTUsIm5iZiI6MCwiaWF0IjoxNTA2NTg3MDE1LCJpc3MiOiJodHRwOi8va2V5Y2xvYWs6ODA4MC9hdXRoL3JlYWxtcy9jb20ydXMiLCJhdWQiOiJuZXh3YXktY2VudGVyIiwic3ViIjoiMjhlNDU4MjYtNDlhYy00N2FmLWFkMTMtZmI5NjUyNGRiYWE5IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6Im5leHdheS1jZW50ZXIiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI4MmI3NzE3OS05MGViLTQxMGEtYTBmNC1hYjM4OTQ0NWQ0ZmEiLCJjbGllbnRfc2Vzc2lvbiI6IjI1MjBhOWRlLWRhN2MtNDg5OS05ODdhLTEyYTVjM2I4NzM4MiIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY2FydC1zZXJ2aWNlIjp7InJvbGVzIjpbInBvc3QiLCJnZXQiLCJkZWxldGUiLCJnZXRzIiwiZ2V0QWxsQ2FydHMiLCJwdXQiLCJkZWxldGVDYXJ0Il19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbIm1hbmFnZS11c2VycyJdfSwiY3VzdG9tZXItc2VydmljZSI6eyJyb2xlcyI6WyJnZXRDdXN0b21lckJ5TmFtZSIsImdldCIsImdldEN1c3RvbWVyQnlSZWFsbU5hbWUiLCJwdXQiLCJnZXRDdXN0b21lciJdfSwib3JkZXJ2aWV3LXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0T3JkZXJEZXRhaWwiLCJwb3N0IiwiZ2V0IiwiZ2V0cyIsImRlbGV0ZSIsInB1dCJdfSwicHJvZHVjdC1zZXJ2aWNlIjp7InJvbGVzIjpbImdldFByb2R1Y3QiLCJkZWxldGVQcm9kdWN0QXNzZXQiLCJ1cGRhdGVQcm9kdWN0IiwiY3JlYXRlUHJvZHVjdCIsImdldEFsbFByb2R1Y3RBc3NldHMiLCJnZXRzIiwiZGVsZXRlIiwicHV0IiwiY3JlYXRlUHJvZHVjdEFzc2V0IiwiZ2V0QWxsUHJvZHVjdHMiLCJkZWxldGVQcm9kdWN0TG9jYWxlIiwiZ2V0UHJvZHVjdEFzc2V0IiwicG9zdCIsImdldCIsImRlbGV0ZVByb2R1Y3RDb3VudHJ5IiwiZGVsZXRlUHJvZHVjdCJdfSwiZW5kdXNlci1zZXJ2aWNlIjp7InJvbGVzIjpbInJlc2V0RW5kdXNlclBhc3N3b3JkIiwiZ2V0RW5kdXNlckJ5U3RvcmVBbmRFbWFpbCIsImNyZWF0ZUVuZHVzZXIiLCJwb3N0IiwidXBkYXRlRW5kdXNlciIsImdldCIsImdldEFsbEVuZHVzZXJzIiwiZGVsZXRlIiwiZ2V0cyIsInB1dCIsImdldEVuZHVzZXIiXX0sIm54LWZ1bGZpbGxtZW50Ijp7InJvbGVzIjpbInBvc3QiLCJnZXQiLCJnZXRzIiwicHV0Il19LCJlbWFpbC1idWlsZGVyLXNlcnZpY2UiOnsicm9sZXMiOlsicG9zdCIsImdldCIsImRlbGV0ZSIsImdldHMiLCJwdXQiXX0sIm54LWN1c3RvbWVyLW5vdGlmaWVyIjp7InJvbGVzIjpbInVwZGF0ZU5vdGlmaWVyUnVsZXMiLCJnZXROb3RpZmllclJ1bGVzIiwiZGVsZXRlTm90aWZpZXJSdWxlcyIsImNyZWF0ZU5vdGlmaWVyUnVsZXMiXX0sImtleWNsb2FrLXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0QWxsVXNlcnMiLCJwb3N0IiwiZ2V0VXNlciIsImdldCIsImRlbGV0ZVVzZXIiLCJ1cGRhdGVVc2VyIiwiY3JlYXRlVXNlciIsImdldHMiLCJkZWxldGUiLCJwdXQiXX0sIm54LWxpY2Vuc2Uta2V5LXByb3ZpZGVyIjp7InJvbGVzIjpbInBvc3QiLCJnZXQiXX0sIm54LWNhbXBhaWduLWNvbmZpZ3VyYXRvciI6eyJyb2xlcyI6WyJwb3N0IiwiZ2V0IiwiZGVsZXRlIiwicHV0Il19LCJzdG9yZS1zZXJ2aWNlIjp7InJvbGVzIjpbInVwZGF0ZVN0b3JlIiwiZ2V0U3RvcmVCeU5hbWUiLCJwb3N0IiwiZ2V0IiwiZ2V0QWxsU3RvcmVzIiwiZ2V0cyIsImRlbGV0ZSIsImNyZWF0ZVN0b3JlIiwicHV0IiwiZGVsZXRlU3RvcmUiXX0sInB1cmNoYXNlLXNlcnZpY2UiOnsicm9sZXMiOlsicG9zdCJdfSwicGVudGFobyI6eyJyb2xlcyI6WyJnZXQiXX0sIm9yZGVyLXNlcnZpY2UiOnsicm9sZXMiOlsiZ2V0T3JkZXJFbWFpbCIsImdldE9yZGVyIiwiZ2V0QWxsT3JkZXJzIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fX0.jUPnkNyaElkyNeVtcv6qapTk06-VDy2ddR04btCJBUhhQyl1KZY5fsSlRJXh3PZQcyU4_mSIZiIXMaFKH8WMOWbW6stnLSZMdPMLpwHIIlL14FOMifsz3nkacIk3L8ZIfZcXXn-jGNHJ0N_Toh15JTp_jbDfiaX-n7vNfurggQ8kHUrMXUDfXmB-vJbKgvc7uwKOLsopkVPXehq_FYMdst_oAqBWQzAFH1726S1XKINcluAtp_7ItYkNTZMgKH44vuBsu4EewvJE6hQw_TrzTSEz1ozDKbPQIrbbR0GI3Dz4cmZuHfMVE7-_6PPzrXRzT1eh31NZO8hjh-_ghzp6Vw"
 }
 ```
