@@ -1800,6 +1800,33 @@
                         "deprecated": true,
                         "type": "string"
                     },
+                    "initialCurrency": {
+                        "description": "Initial currency requested, before conversion",
+                        "example": "EUR, USD, GBP ...",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
                     "invoice": {
                         "$ref": "#/components/schemas/Invoice"
                     },
@@ -2297,6 +2324,31 @@
                     "id": {
                         "type": "string"
                     },
+                    "initialCurrency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
                     "invoiceId": {
                         "type": "string"
                     },
@@ -2360,6 +2412,31 @@
             },
             "OrderView": {
                 "properties": {
+                    "Initial currency requested, before conversion": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
                     "Order currency": {
                         "properties": {
                             "currencyCode": {
@@ -3080,6 +3157,31 @@
                     "id": {
                         "type": "string"
                     },
+                    "initialCurrency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
                     "lifeCycleStatus": {
                         "enum": [
                             "PREBILLING_PENDING",
@@ -3568,6 +3670,31 @@
                     },
                     "id": {
                         "type": "string"
+                    },
+                    "initialCurrency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
                     },
                     "lifecycle": {
                         "$ref": "#/components/schemas/Lifecycle"
