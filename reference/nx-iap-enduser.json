@@ -2058,6 +2058,14 @@
                 },
                 "type": "object"
             },
+            "UpdateEndUserStoreRequest": {
+                "properties": {
+                    "storeRoute": {
+                        "$ref": "#/components/schemas/Route"
+                    }
+                },
+                "type": "object"
+            },
             "Wallet": {
                 "description": "List of payment methods",
                 "properties": {
@@ -7074,6 +7082,115 @@
                     }
                 },
                 "summary": "Reset account of given end user id",
+                "tags": [
+                    "EndUser"
+                ]
+            }
+        },
+        "/endusers/{id}/store/{storeId}": {
+            "put": {
+                "operationId": "updateStore",
+                "parameters": [
+                    {
+                        "description": "End user id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "reason of request",
+                        "in": "query",
+                        "name": "reason",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "storeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateEndUserStoreRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EndUser"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Change store route and storeId within the same customer for the enduser.",
                 "tags": [
                     "EndUser"
                 ]
