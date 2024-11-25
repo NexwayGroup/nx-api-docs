@@ -567,7 +567,8 @@
                         "items": {
                             "$ref": "#/components/schemas/Warning"
                         },
-                        "type": "array"
+                        "type": "array",
+                        "uniqueItems": true
                     }
                 },
                 "required": [
@@ -2964,7 +2965,8 @@
                         "items": {
                             "$ref": "#/components/schemas/Warning"
                         },
-                        "type": "array"
+                        "type": "array",
+                        "uniqueItems": true
                     }
                 },
                 "type": "object"
@@ -3085,6 +3087,7 @@
                         "enum": [
                             "ADDITIONAL_FIELD_PER_COUNTRY",
                             "SUBSCRIPTION_PLAN",
+                            "REMOTE_PRICE",
                             "ENCRYPTED_EMAIL"
                         ],
                         "type": "string"
