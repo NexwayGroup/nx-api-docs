@@ -1914,6 +1914,11 @@
                         "readOnly": true,
                         "type": "number"
                     },
+                    "productRecoType": {
+                        "description": "Product Reco Type",
+                        "example": "crossSell, upSell",
+                        "type": "string"
+                    },
                     "remotePrice": {
                         "$ref": "#/components/schemas/RemotePrice"
                     },
@@ -2465,6 +2470,25 @@
                     "renewingPrice",
                     "unitPrice"
                 ],
+                "type": "object"
+            },
+            "ProductByGeneration": {
+                "properties": {
+                    "finalPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/Price"
+                    },
+                    "productId": {
+                        "type": "string"
+                    },
+                    "subscriptionGeneration": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
                 "type": "object"
             },
             "ProductCustomFields": {
@@ -3799,6 +3823,95 @@
                     "Public"
                 ],
                 "x-operationWeight": "100"
+            }
+        },
+        "/carts/public/{cartId}/product/{productId}/next-generations": {
+            "get": {
+                "deprecated": true,
+                "description": "Get the next generations of product with cart context",
+                "operationId": "getNextGenerations",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "cartId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "numberOfNextGeneration",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductByGeneration"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "Get the next generations of product",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "300"
             }
         },
         "/carts/public/{country}/expected-fields": {
