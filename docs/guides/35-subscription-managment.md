@@ -172,6 +172,6 @@ The API converts the cart to order which will be used during auto-renewal. A `20
     ]
 }
 ```
-To monitor accepted offers, subscribe to [Order Notifications](05-orderNotification.md) with the event type `created` and source `offer`. This event notifies you when an order is created after a shopper accepts the offer. Shopper may also choose to decline the offer and cancel auto-renewal, the discount will not be applied than.
+To monitor accepted offers, subscribe to [Order Notifications](05-orderNotification.md) with the event `type = created` and `source = offer`. This event notifies you when an order is created after a shopper accepts the offer. Shopper may also choose to decline the offer and cancel auto-renewal, the discount will not be applied than.
 
-If shoppers cancel auto-renewal after accepting the offer, the discount will be removed from the renewal price. To track these changes, subscribe to Offer Notifications with the event type `aborted`. This ensures the system removes the discount order if the shopper changes their decision. 
+If shoppers cancel auto-renewal after accepting the offer, the discount will be removed from the renewal price. To track these changes, subscribe to Offer Notifications with the event `type = aborted`. This ensures the system removes the discount order if the shopper changes their decision. 
