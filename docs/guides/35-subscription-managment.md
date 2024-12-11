@@ -9,13 +9,13 @@ To use this feature, a [discount](30-discount-api_guide.md) with `source = OFFER
 ## Integration options
 Nexway provides two integration options to suit your business needs:
 
-## Option 1: Using the Nexway-hosted End-User portal
+### Option 1: Using the Nexway-hosted End-User portal
 
 
 This is the simplest integration method. Nexway’s portal presents the Stay Subscribed offer directly to shoppers. Your platform does not need to be involved in the offer process. When shopper logs into their account on the Nexway End-User portal and attempts to cancel auto-renewal, they will see the offer. If they accept it, the discount is applied to their upcoming subscription renewal, and an order is created in the Nexway system. At the time of auto-renewal, the created order will be processed with the applied discount.
 
 
-## Option 2: Integrating Nexway API
+### Option 2: Integrating Nexway API
 
 This option allows full control through your platform’s user interface. 
 
