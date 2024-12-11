@@ -27,8 +27,8 @@ When a shopper selects the option to cancel auto-renewal, your platform sends a 
 ```json
 POST /carts/subscription-offers
 {
- 		"subscriptionId": "18fc54b1-d07e-4d65-9f1f-d1ae6621a813",
-        "discountCode": "StaySubscribeddiscount" //optional
+ 	"subscriptionId": "18fc54b1-d07e-4d65-9f1f-d1ae6621a813",
+    "discountCode": "StaySubscribeddiscount" //optional
 }
 ```
 The API searches for the "Stay Subscribed" discount and applies it to the subscription renewal price. A `201 Created` response returns a cart object with `source = OFFER` and `offerSubSource = SUSPEND`. Response contains the offer details, including the discounted price, which you may use to display the offer on your user interface.
