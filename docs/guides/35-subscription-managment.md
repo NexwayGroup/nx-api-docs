@@ -2,26 +2,26 @@
 The subscription scenarios outlined below are designed to enhance the user experience, boost shopper retention, and provide greater flexibility in managing subscription options.
 
 ## Stay Subscribed Offer
-The Stay Subscribed Offer flow enables you to offer a discount on the upcoming subscription renewal to shoppers who wish to cancel their subscription's auto-renewal. This offer cannot be applied to subscriptions already in the renewal billing process or those in the trial period. When shoppers accept the offer, the discount is applied to their subscription renewal price, which will be charged during the auto-renewal process. Shoppers do not need to pay immediately when they accept the offer.
+The Stay Subscribed Offer flow enables you to offer a discount on the upcoming subscription renewal to shoppers who wish to cancel their subscription's auto-renewal. This offer cannot be applied to subscriptions already in the renewal billing period or those in the trial period. When shopper accepts the offer, the discount is applied to their subscription renewal price, which will be charged during the auto-renewal process. Shopper do not need to pay immediately when they accept the offer.
 
 To use this feature, a [discount](30-discount-api_guide.md) with `source = OFFER` and `offerSubSource = SUSPEND` must first be configured in Nexway. Please note that the discount for Stay Subscribed flow can only be defined as a percentage value, not as an absolute amount.
 
 ## Integration options
 Nexway provides two integration options to suit your business needs:
 
-##Option 1: Using the Nexway-hosted End-User portal
+## Option 1: Using the Nexway-hosted End-User portal
 
 
-This is the simplest integration method. Nexway’s portal presents the Stay Subscribed offer directly to shoppers. Your platform does not need to be involved in the offer process. When shopperы log into their accounts on the Nexway End-User portal and attempt to cancel auto-renewal, they will see the offer. If they accept it, the discount is applied to their upcoming subscription renewal, and an order is created in the Nexway system. At the time of auto-renewal, the created order will be processed with the applied discount.
+This is the simplest integration method. Nexway’s portal presents the Stay Subscribed offer directly to shoppers. Your platform does not need to be involved in the offer process. When shopper logs into their account on the Nexway End-User portal and attempts to cancel auto-renewal, they will see the offer. If they accept it, the discount is applied to their upcoming subscription renewal, and an order is created in the Nexway system. At the time of auto-renewal, the created order will be processed with the applied discount.
 
 
-##Option 2: Integrating Nexway API
+## Option 2: Integrating Nexway API
 
 This option allows full control through your platform’s user interface. 
 
 **Part 1. Create a Stay Subscribed Offer**
 
-When a shopper selects the option to cancel auto-renewal, your platform sends a request to the Nexway API to create the Stay Subscribed offer. This request includes the Nexway subscription identifier and, optionally, the [discount](30-discount-api_guide.md) identifier if you wish to explicitly specify the discount. 
+When a shopper selects the option to cancel auto-renewal, your platform sends a request to the Nexway API to create the Stay Subscribed offer. This request includes the Nexway subscription identifier and, optionally, the [discount](30-discount-api_guide.md) if you wish to explicitly specify the discount. 
 
 **API Request Example**
 ```json
