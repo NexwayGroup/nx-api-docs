@@ -1647,6 +1647,16 @@
                         },
                         "type": "object"
                     },
+                    "currencyFormatVariation": {
+                        "description": "define which variation of currency formatting should be used for currency display",
+                        "enum": [
+                            "DEFAULT",
+                            "SYMBOL_LEFT",
+                            "SYMBOL_RIGHT"
+                        ],
+                        "example": "DEFAULT, SYMBOL_LEFT",
+                        "type": "string"
+                    },
                     "customer": {
                         "$ref": "#/components/schemas/Customer"
                     },
