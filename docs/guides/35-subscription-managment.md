@@ -176,7 +176,9 @@ To monitor accepted offers, subscribe to [Order Notifications](05-orderNotificat
 
 If shoppers cancel auto-renewal after accepting the offer, the discount will be removed from the renewal price. To track these changes, subscribe to Offer Notifications with the event `type = aborted`. This ensures the system removes the discount order if the shopper changes their decision. 
 
+
 ## Mid-Term Upgrade
+
 The Mid-Term Upgrade flow enables shoppers to enhance their subscription by upgrading to a higher-tier plan or extending the number of devices. This feature applies only to subscriptions in their mid-cycle, before the Prebilling reminder has been sent. It also applies to subscriptions with auto-renewal disabled, in which case the Mid-Term upgrade will re-enable auto-renewal alongside the upgrade.
 
 Nexway offers a one-click payment solution, enabling shoppers to use their existing payment method without needing to re-enter their details. Alternatively, they can provide a new payment method, which will be used for the upgrade and subsequent renewals of the upgraded subscription. Shoppers are charged a prorated amount, ensuring they pay only for the upgraded service for the remaining duration of the current billing cycle.
@@ -379,16 +381,20 @@ POST /iam/deeplink/
     "single_use": false
 }
 ```
+
 The `Location` header in the `201 Created` response contains the authorized checkout URL.
+
 **API Response Example**
-```
+```json
 Headers
 Location: https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78
 ```
+
 Add the cart identifier received in the Create a Mod-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
-```
+```json
 https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78&cartid=0eb27503-674b-4855-b3bb-00f8386b64ea
 ```
+
 On the checkout page, the shopper reviews the order, confirms billing details, and selects a payment method (either from their wallet or by adding a new method).
 
 Once the shopper confirms the order, Nexway converts the checkout into an order with the `source = MID_TERM_UPGRADE` and processes the payment. If the subscription’s auto-renewal was disabled, it will be re-enabled. Upon successful order completion, the shopper is redirected to a Thank you page and receives an email with order details.
