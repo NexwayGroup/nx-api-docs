@@ -284,7 +284,7 @@ The highest priority for applying a discount is given to the product.
 
 If you want to specify explicitly what discount should be applied for the offer, you need to create a discount with the `model = "COUPON"`, `source = "OFFER"` and `offerSubSource = "SUSPEND"`.
 
-Example for stay subscribe campaign:
+Example for stay subscribed campaign:
 
 ```json 
 {
