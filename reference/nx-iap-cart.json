@@ -2398,6 +2398,9 @@
                     "renewingPrice": {
                         "$ref": "#/components/schemas/Price"
                     },
+                    "renewingProductDetails": {
+                        "$ref": "#/components/schemas/RenewingProductDetails"
+                    },
                     "signedProduct": {
                         "description": "Signed product",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
@@ -2753,6 +2756,16 @@
                     }
                 },
                 "readOnly": true,
+                "type": "object"
+            },
+            "RenewingProductDetails": {
+                "properties": {
+                    "lifeTime": {
+                        "description": "Lifetime",
+                        "example": "1 YEAR",
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "Route": {
