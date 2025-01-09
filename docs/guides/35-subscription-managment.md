@@ -399,4 +399,4 @@ On the checkout page, the shopper reviews the order, confirms billing details, a
 
 Once the shopper confirms the order, Nexway converts the checkout into an order with the `source = MID_TERM_UPGRADE` and processes the payment. If the subscription’s auto-renewal was disabled, it will be re-enabled. Upon successful order completion, the shopper is redirected to a Thank you page and receives an email with order details.
 
-To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](05-orderNotification.md). These events provide insights into the processing and status of the order.
+To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md). These events provide insights into the processing and status of the order.
