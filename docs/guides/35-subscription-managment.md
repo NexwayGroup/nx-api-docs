@@ -390,7 +390,7 @@ Headers
 Location: https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78
 ```
 
-Add the cart identifier received in the Create a Mod-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
+Add the cart identifier received in the Create a Mid-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
 ```json
 https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78&cartid=0eb27503-674b-4855-b3bb-00f8386b64ea
 ```
