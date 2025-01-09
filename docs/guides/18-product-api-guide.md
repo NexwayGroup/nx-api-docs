@@ -65,6 +65,8 @@ A successful request returns a Location header containing the product ID:
 
 Once the product is created, the response will include a descriptionId. Use this ID to add localized descriptions for the product:
 
+`PUT products/description/{descriptionId}`
+
 ### Payload Example
 
 ```json
@@ -202,8 +204,8 @@ Defines assets like box image `product_boxshot` or other images used in the cust
 #### 15. **Publisher Reference ID**
 - **Key**: `publisherRefId`
 - **Type**: String
-- **Required**: No  
-An optional identifier for linking the product to the customer's systems.
+- **Required**: Yes  
+An identifier (SKU) for linking the product to the customer's systems.
 
 #### 16. **External Context**
 - **Key**: `externalContext`
