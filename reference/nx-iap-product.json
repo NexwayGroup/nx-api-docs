@@ -388,7 +388,30 @@
             "DiscountedPrice": {
                 "description": "Discounted price",
                 "properties": {
+                    "cumulatedDiscountRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
                     "discountedGrossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPriceDiscountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPriceDiscountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "signedDiscount": {
+                        "type": "string"
+                    },
+                    "vatDiscountAmount": {
                         "format": "double",
                         "type": "number"
                     }
@@ -644,6 +667,15 @@
             },
             "NextGenerationsQueryParameters": {
                 "properties": {
+                    "additionalProperties": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "type": "object"
+                    },
                     "allPricesAtStartDate": {
                         "type": "boolean"
                     },

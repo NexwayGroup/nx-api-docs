@@ -567,8 +567,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Warning"
                         },
-                        "type": "array",
-                        "uniqueItems": true
+                        "type": "array"
                     }
                 },
                 "required": [
@@ -2399,6 +2398,9 @@
                     "renewingPrice": {
                         "$ref": "#/components/schemas/Price"
                     },
+                    "renewingProductDetails": {
+                        "$ref": "#/components/schemas/RenewingProductDetails"
+                    },
                     "signedProduct": {
                         "description": "Signed product",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
@@ -2756,6 +2758,16 @@
                 "readOnly": true,
                 "type": "object"
             },
+            "RenewingProductDetails": {
+                "properties": {
+                    "lifeTime": {
+                        "description": "Lifetime",
+                        "example": "1 YEAR",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Route": {
                 "properties": {
                     "builtHostname": {
@@ -2992,8 +3004,7 @@
                         "items": {
                             "$ref": "#/components/schemas/Warning"
                         },
-                        "type": "array",
-                        "uniqueItems": true
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -3859,6 +3870,14 @@
                         "schema": {
                             "format": "int32",
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "allPricesAtStartDate",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
                         }
                     }
                 ],
