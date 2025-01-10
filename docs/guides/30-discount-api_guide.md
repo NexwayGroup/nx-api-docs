@@ -35,7 +35,7 @@ Matching cart attributes with discount rule filters triggers its application. Th
 - Minumal cart amount (depending on currency) -> ```"thresholds": {"AED": 100}```
 - Minimum/Maximum Order Value
 
-**Multiple campaigns match**: When searching for campaigns, if multiple are found, the one with the highest value will be applied. Combining multiple campaign-based discounts within a cart is not currently supported.
+**Multiple campaigns match**: When searching for campaigns, if multiple are found, the most recently updated one will be used. Combining multiple campaign-based discounts within a cart is not currently supported.
 
 **Application target**: The "level" attribute ("CART" or "PRODUCT") defines where the discount applies: entire cart or individual line items.
 
@@ -278,11 +278,13 @@ This discount will be applied at 1st, 3rd, 4th and 10th renewal
 
 The "Stay Subscribed" offer appears at the cancellation point, aiming to **retain** users with active subscriptions. It incentivizes them to **continue** their subscription by offering a special discount on their next renewal **if they choose to stay subscribed** instead of cancelling.
 
-To activate "Stay Subscribed" offer you need to create a discount with the `model = "CAMPAIGN"`, `source = "OFFER"`  and `offerSubSource = "SUSPEND"`.
+To activate "Stay Subscribed" offer you need to create a discount with the `model = "CAMPAIGN"`, `source = "OFFER"`  and `offerSubSource = "SUSPEND"`. In this case the discount will be found automatically during the offer creation.
 
 The highest priority for applying a discount is given to the product.
 
-Example:
+If you want to specify explicitly what discount should be applied for the offer, you need to create a discount with the `model = "COUPON"`, `source = "OFFER"` and `offerSubSource = "SUSPEND"`.
+
+Example for stay subscribed campaign:
 
 ```json 
 {
@@ -310,6 +312,38 @@ Example:
     "weight": 0,
     "cumulative": false
 }
+```
+
+Example for coupon:
+
+```json
+{
+  "model": "COUPON",
+  "id": "eac96d45-a392-4507-9966-d30617fbcb6b",
+  "customerId": "82223530-f443-4c15-a901-b4a88f994ac7",
+  "lastUpdateReason": "resource update thru REST Api",
+  "endDate": "2027-01-02T07:48:00Z",
+  "sources": [
+    "OFFER"
+  ],
+  "offerSubSource": "SUSPEND",
+  "testOrder": false,
+  "discountRate": 0.3,
+  "applyOnNetPrice": false,
+  "name": "myTestStaySubscribedCoupon",
+  "status": "ENABLED",
+  "level": "PRODUCT",
+  "endUserTypes": [
+    "RESELLER",
+    "BUYER"
+  ],
+  "weight": 0,
+  "codes": {
+    "STAY1": "default"
+  },
+  "cumulative": true
+}
+
 ```
 
 Expected end-user expirience:
