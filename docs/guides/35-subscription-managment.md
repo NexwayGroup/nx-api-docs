@@ -175,3 +175,228 @@ The API converts the cart to order which will be used during auto-renewal. A `20
 To monitor accepted offers, subscribe to [Order Notifications](../notifications/05-orderNotification.md) with the event `type = created` and `source = offer`. This event notifies you when an order is created after a shopper accepts the offer. Shopper may also choose to decline the offer and cancel auto-renewal, the discount will not be applied than.
 
 If shoppers cancel auto-renewal after accepting the offer, the discount will be removed from the renewal price. To track these changes, subscribe to Offer Notifications with the event `type = aborted`. This ensures the system removes the discount order if the shopper changes their decision. 
+
+
+## Mid-Term Upgrade
+
+The Mid-Term Upgrade flow enables shoppers to enhance their subscription by upgrading to a higher-tier plan or extending the number of devices. This feature applies only to subscriptions in their mid-cycle, before the Prebilling reminder has been sent. It also applies to subscriptions with auto-renewal disabled, in which case the Mid-Term upgrade will re-enable auto-renewal alongside the upgrade.
+
+Nexway offers a one-click payment solution, enabling shoppers to use their existing payment method without needing to re-enter their details. Alternatively, they can provide a new payment method, which will be used for the upgrade and subsequent renewals of the upgraded subscription. Shoppers are charged a prorated amount, ensuring they pay only for the upgraded service for the remaining duration of the current billing cycle.
+
+The upgrade takes effect immediately, updating the product while keeping the subscription term length unchanged.
+
+### Part 1: Create a Mid-Term Upgrade Cart 
+
+After shopper accepts for mid-term upgrade of their subscription, send a request to the Nexway API to create a shopping cart. Include the subscription identifier and details of the product the subscription is being upgraded to. The new product price must exceed the current subscription price.
+
+**API Request Example**
+```json
+POST /carts/mid-term-upgrade
+{
+  "subscriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
+  "wantedProduct" : {
+    "id": "8c7115e2-6fa2-454e-be09-50dd20ecacc4"
+  }
+}
+```
+The `201 Created` response includes product details and prorated price in `cart.price.discountedPrice`. 
+
+**API Response Example**
+```json
+{
+    "id": "0eb27503-674b-4855-b3bb-00f8386b64ea",
+    "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
+    "enduserId": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
+    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+    "products": [
+        {
+            "publisherRefId": "123",
+            "id": "8c7115e2-6fa2-454e-be09-50dd20ecacc4",
+            "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
+            "quantityMaxReached": false,
+            "price": {
+                "currency": "AUD",
+                "netPrice": 40.91,
+                "grossPrice": 45.0,
+                "vatIncluded": true,
+                "vatRate": 0.1,
+                "vatAmount": 4.09,
+                "discountedPrice": {
+                    "discountedNetPrice": 4.59,
+                    "discountedGrossPrice": 5.05,
+                    "netPriceDiscountAmount": 36.32,
+                    "grossPriceDiscountAmount": 39.95,
+                    "vatDiscountAmount": 0.46,
+                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
+                },
+                "source": "INTERNAL"
+            },
+            "defaultCurrency": "BRL",
+            "unitPrice": {
+                "currency": "AUD",
+                "netPrice": 40.91,
+                "grossPrice": 45.0,
+                "vatIncluded": true,
+                "vatRate": 0.1,
+                "vatAmount": 4.09,
+                "discountedPrice": {
+                    "discountedNetPrice": 4.59,
+                    "discountedGrossPrice": 5.05,
+                    "netPriceDiscountAmount": 36.32,
+                    "grossPriceDiscountAmount": 39.95,
+                    "vatDiscountAmount": 0.46,
+                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
+                },
+                "source": "INTERNAL"
+            },
+            "renewingPrice": {
+                "currency": "AUD",
+                "netPrice": 40.91,
+                "grossPrice": 45.0,
+                "vatIncluded": true,
+                "vatRate": 0.1,
+                "vatAmount": 4.09,
+                "source": "INTERNAL"
+            },
+            "type": "SOFTWARE",
+            "businessSegment": "B2C",
+            "fullPrice": {
+                "currency": "AUD",
+                "netPrice": 40.91,
+                "grossPrice": 45.0,
+                "vatIncluded": true,
+                "vatRate": 0.1,
+                "vatAmount": 4.09,
+                "discountedPrice": {
+                    "discountedNetPrice": 4.59,
+                    "discountedGrossPrice": 5.05,
+                    "netPriceDiscountAmount": 36.32,
+                    "grossPriceDiscountAmount": 39.95,
+                    "vatDiscountAmount": 0.46,
+                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
+                }
+            },
+            "lifeTime": "1YEAR",
+            "licenseNextExpirationDate": 1765536344000,
+            "subscriptionTemplate": "NEXWAY_1Y",
+            "fulfillmentTemplate": "42c365e5-32c2-47a9-87eb-a6ce09086762",
+            "trial": false,
+            "taxExempt": false,
+            "renewingProductDetails": {
+                "lifeTime": "1YEAR"
+            },
+            "previousLineItemId": "2f3d2c41-af75-458c-b881-d76eb19526d6",
+            "quantity": 1,
+            "name": "Product for upgrade",
+            "priceSource": "INTERNAL",
+            "subscriptionProduct": true,
+            "paidTrial": false,
+            "productFamily": "",
+            "discountsStatus": [
+                {
+                    "discount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy",
+                    "status": "APPLIED"
+                }
+            ],
+            "salesMode": "STANDARD",
+            "fulfillmentTemplateName": "wiremock",
+            "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+            "nextGenerationOf": [],
+            "catalogId": "aa720d46-840a-418c-a0b5-b5356f31315b",
+            "descriptionId": "99f22922-17db-4c0b-bfa6-065166dcf312",
+            "trialAllowed": false,
+            "unifiedRegisterSoftware": false,
+            "physical": false,
+            "expirationDate": 1765537224050
+        }
+    ],
+    "locale": "en-US",
+    "country": "AU",
+    "endUser": {
+        "email": "userEmail@domain.com",
+        "maskedEmail": false,
+        "lastName": "lastName",
+        "firstName": "firstName",
+        "city": "city",
+        "zipCode": "51034",
+        "country": "AU",
+        "locale": "en-US",
+        "taxExemptionEligible": false,
+        "id": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
+        "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
+        "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+        "storeRoute": {
+            "hostname": "testdomain.nexway.build",
+            "fullUrl": "https://testdomain.nexway.build",
+            "builtHostname": "testdomain.nexway.build"
+        },
+        "wallet": {
+            "creditCards": [
+                {
+                    "id": "c1a30e53-9485-44f2-b8b0-7a28d3b0a38a",
+                    "paymentMethodType": "CreditCard",
+                    "type": "visa",
+                    "bin": "411111",
+                    "expirationDate": "01/2032"
+                }
+            ]
+        },
+            "paypals": []
+        },
+        "type": "BUYER"
+    },
+    "price": {
+        "currency": "AUD",
+        "netPrice": 40.91,
+        "grossPrice": 45.0,
+        "vatAmount": 4.09,
+        "discountedPrice": {
+            "discountedNetPrice": 4.59,
+            "discountedGrossPrice": 5.05,
+            "netPriceDiscountAmount": 36.32,
+            "grossPriceDiscountAmount": 39.95,
+            "vatDiscountAmount": 0.46
+        }
+    },
+    "subsidiaryId": "1",
+    "storeHostname": "testdomain.nexway.build",
+    "checkoutUrl": "https://testdomain.nexway.build/checkout/add?cartId=0eb27503-674b-4855-b3bb-00f8386b64ea",
+    "subscriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
+    "source": "MID_TERM_UPGRADE",
+    "totalAmount": 5.05
+}
+```
+
+### Part 2. Initiate Checkout
+Use the checkoutUrl, endUserId, and storeId from the Create a Mod-Term Upgrade Cart response to create an authorized checkout. This allows the display of payment methods from the shopper's Wallet and auto-prefilling of their billing details.
+
+**API Request Example**
+```json
+POST /iam/deeplink/
+{
+    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+    "enduserId": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
+    "baseLink": "https://testdomain.nexway.build/checkout/selfrenew",
+    "expiration_time": 1000,
+    "single_use": false
+}
+```
+
+The `Location` header in the `201 Created` response contains the authorized checkout URL.
+
+**API Response Example**
+```json
+Headers
+Location: https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78
+```
+
+Add the cart identifier received in the Create a Mid-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
+```json
+https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78&cartid=0eb27503-674b-4855-b3bb-00f8386b64ea
+```
+
+On the checkout page, the shopper reviews the order, confirms billing details, and selects a payment method (either from their wallet or by adding a new method).
+
+Once the shopper confirms the order, Nexway converts the checkout into an order with the `source = MID_TERM_UPGRADE` and processes the payment. If the subscription’s auto-renewal was disabled, it will be re-enabled. Upon successful order completion, the shopper is redirected to a Thank you page and receives an email with order details.
+
+To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md). These events provide insights into the processing and status of the order.
