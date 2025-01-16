@@ -7385,6 +7385,80 @@
                 ]
             }
         },
+        "/endusers/{id}/transaction/{transactionId}/resync": {
+            "post": {
+                "operationId": "resyncEndUserPaymentMethodByTransaction",
+                "parameters": [
+                    {
+                        "description": "End user id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Transaction id",
+                        "in": "path",
+                        "name": "transactionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Resynchronize transaction info (payment method) by transactionId for a given end user id",
+                "tags": [
+                    "EndUser"
+                ]
+            }
+        },
         "/endusers/{id}/transactions/{transactionId}": {
             "post": {
                 "operationId": "addTransactionId",
