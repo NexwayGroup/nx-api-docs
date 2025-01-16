@@ -400,3 +400,102 @@ On the checkout page, the shopper reviews the order, confirms billing details, a
 Once the shopper confirms the order, Nexway converts the checkout into an order with the `source = MID_TERM_UPGRADE` and processes the payment. If the subscription’s auto-renewal was disabled, it will be re-enabled. Upon successful order completion, the shopper is redirected to a Thank you page and receives an email with order details.
 
 To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md). These events provide insights into the processing and status of the order.
+
+
+## Retail to subscription
+
+The "Retail to Subscription" flow encourages shoppers who purchase non-renewable products to convert them into auto-renewal subscriptions anytime from purchase until expiration. This helps improve retention rates and keeps shoppers subscribed.
+
+After purchasing a non-renewable product, shoppers is offered through your platform’s user interface to activate auto-renewal with a zero-cost setup and receive a discount on the renewal. After accepting the offer, the shopper is redirected to the Nexway shopping cart to provide payment details and confirm the zero-price order. As a result of scenario the product’s validity remains unchanged, while auto-renewal is enabled. The discount applied during checkout will automatically take effect on the renewal.
+
+**Key Details**
+
+* The zero-price setup can be implemented either by integrating with your platform or by configuring it directly in Nexway through the Marketing Operations functionality
+* The expiration date of the current product is determined and provided by your platform
+* To apply a discount for renewal, set up a [discount](../guides/30-discount-api_guide.md) using either the Campaign model or the Subscription discount plan model.
+
+### Part 1: Create a shopping cart 
+
+You can create a shopping cart for the "Retail to Subscription" flow in to ways:
+
+1. Using the API, which provides greater flexibility, including the ability to pass billing information and other advanced configurations
+
+2. Using a Buy-Link, that is a simpler integration method but comes with some limitations (e.g., inability to pre-fill billing details).
+
+## Option 1: Using AP
+
+Send a request to create a shopping cart with the following key attributes to enable the "Retail to Subscription" flow:
+* `productId`: The targeted product for the transition
+* `scenario = subscriptionimport`: Specifies the "Retail to Subscription" shopping cart.
+
+**Optional Parameters**
+* `marketingCampaignNames`: Include this if you’re using Marketing Operations to ensure the zero-price configuration
+* `discountPlan`: Provide these attributes to apply a Subscription discount plan for multiple renewals
+Pass billing information via API to streamline the checkout process for shoppers.
+
+**API Request Example**
+```json
+POST /carts
+{
+    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+     "endUser": {
+        "email": "email@domain.com",
+        "lastName": "lastName",
+        "firstName": "firstName,
+        "streetAddress": "street",
+        "city": "city",
+        "zipCode": "12345",
+        "country": "FR",
+        "locale": "fr-FR",
+        "maskedEmail": true
+    },
+    "wantedProducts": [
+        {
+        "id": "2f9bb37b-3558-49f0-bea6-69ab834013de"
+        }
+    ],
+    "discountPlan": { 
+    "tag": "testDiscountPlan", 
+    "discountStep": 0
+    },
+    "marketingCampaignNames": [
+    "testCampaign"
+  ],
+    "externalContext": "eyJzbiI6ICJhMWE5ZGU5MC00ZjljLTQ5OTMtOWE5Yi1jNTUyMzc2N2E0MzgifQ==",
+    "country": "FR",
+    "currency": "EUR",
+    "locale": "fr-FR",
+    "scenario": "subscriptionimport"
+}      
+```
+The `201 Created` response includes the `cartId` in the `Location` header.
+
+**API Response Example**
+```json
+Headers
+Location: /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
+```
+To retrieve the cart content, use the `cartId` with the API request below.
+
+**API Request Example**
+```json
+GET /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
+```
+The `201 Created` response contains the `checkoutUrl` attribute. Use this URL to redirect the end-user to the shopping cart. 
+
+## Option 2: Using a buy-link
+
+Build a buy-link that directs the shopper straight to the shopping cart for review and checkout. 
+
+**Buy-link Example**
+```json
+https://storeName.mydomain.fr/checkout/add?products=2f9bb37b-3558-49f0-bea6-69ab834013de&mktop=testCampaign&scenario=subscriptionimport&&discountTag=testDiscountPlan&discountStep=0&theme=theme&layout=layout
+```
+
+### Part 2: Initiate Checkout
+
+On the checkout page, the total price is displayed as zero, meaning the shopper does not have to pay immediately. However, shoppers are required to select a recurring payment option and enter payment details for this payment method to be used during subscription renewals. If billing information was provided during the cart creation process, it will be pre-filled on the checkout page.
+
+After the shopper confirms the order, Nexway processes the checkout and converts it into an order. As part of this process, the subscription is created. Once the order is successfully completed, the shopper is redirected to a Thank You page and receives a confirmation email. On the scheduled renewal date, the shopper will be charged with the applied discount, and the subscription will renew automatically for the next period.
+
+To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md). These events provide insights into the processing and status of the order.
