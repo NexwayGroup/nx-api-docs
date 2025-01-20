@@ -422,7 +422,7 @@ You can create a shopping cart for the "Retail to Subscription" flow in to ways:
 
 2. Using a Buy-Link, that is a simpler integration method but comes with some limitations (e.g., inability to pre-fill billing details).
 
-## Option 1: Using AP
+## Option 1: Using the Cart API
 
 Send a request to create a shopping cart with the following key attributes to enable the "Retail to Subscription" flow:
 * `productId`: The targeted product for the transition
