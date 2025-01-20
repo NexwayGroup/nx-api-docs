@@ -461,7 +461,7 @@ POST /carts
     "marketingCampaignNames": [
     "testCampaign"
   ],
-    "externalContext": "eyJzbiI6ICJhMWE5ZGU5MC00ZjljLTQ5OTMtOWE5Yi1jNTUyMzc2N2E0MzgifQ==",
+    "externalContext": "eyd5b3VyQ29udGV4dEtleTEnOidzb21lLXZhbHVlLXlvdS13YW50LXRvLXJlY2VpdmUtYWZ0ZXItdGhlLXB1cmNoYXNlJ30=",
     "country": "FR",
     "currency": "EUR",
     "locale": "fr-FR",
