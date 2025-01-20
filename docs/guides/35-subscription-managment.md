@@ -404,7 +404,7 @@ To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event 
 
 ## Retail to subscription
 
-The "Retail to Subscription" flow encourages shoppers who purchase non-renewable products to convert them into auto-renewal subscriptions anytime from purchase until expiration. This helps improve retention rates and keeps shoppers subscribed.
+The "Retail to Subscription" flow encourages shoppers who purchase non-renewable products (in the retail channel) to convert them into auto-renewal subscriptions. This helps improve retention rates and keeps shoppers subscribed.
 
 After purchasing a non-renewable product, shoppers is offered through your platform’s user interface to activate auto-renewal with a zero-cost setup and receive a discount on the renewal. After accepting the offer, the shopper is redirected to the Nexway shopping cart to provide payment details and confirm the zero-price order. As a result of scenario the product’s validity remains unchanged, while auto-renewal is enabled. The discount applied during checkout will automatically take effect on the renewal.
 
