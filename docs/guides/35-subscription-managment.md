@@ -410,22 +410,23 @@ After purchasing a non-renewable product, shoppers is offered through your platf
 
 **Key Details**
 
-* The zero-price setup can be implemented either by integrating with your platform or by configuring it directly in Nexway through the Marketing Operations functionality
-* The expiration date of the current product is determined and provided by your platform
-* To apply a discount for renewal, set up a [discount](../guides/30-discount-api_guide.md) using either the Campaign model or the Subscription discount plan model.
+* The zero-price setup can be achieved by either integrating with your platform or by configuring it directly in Nexway through the Marketing Operations functionality
+* To apply a renewal discount, set up a [discount](../guides/30-discount-api_guide.md) using either the Campaign model or the Subscription discount plan model
+* The expiration date of the current product is determined and provided by your platform, either through integrating with your platform or via API inputs when creating a shopping cart, as outlined below.
 
 ### Part 1: Create a shopping cart 
 
 You can create a shopping cart for the "Retail to Subscription" flow in to ways:
 
-1. Using the API, which provides greater flexibility, including the ability to pass billing information and other advanced configurations
+1. Using the API: This method provides greater flexibility, including the ability to pass the current expiration date and other advanced configurations
 
-2. Using a Buy-Link, that is a simpler integration method but comes with some limitations (e.g., inability to pre-fill billing details).
+2. Using a Buy-Link: This method comes with some limitations, such as inability to pre-fill billing address and the current expiration date.
 
 ## Option 1: Using the Cart API
 
 Send a request to create a shopping cart with the following key attributes to enable the "Retail to Subscription" flow:
-* `productId`: The targeted product for the transition
+* `wantedProducts.id`: The targeted product for the transition
+* `wantedProducts.currentExpirationDate`: The expiration date of the current product
 * `scenario = subscriptionimport`: Specifies the "Retail to Subscription" shopping cart.
 
 **Optional Parameters**
@@ -451,7 +452,8 @@ POST /carts
     },
     "wantedProducts": [
         {
-        "id": "2f9bb37b-3558-49f0-bea6-69ab834013de"
+        "id": "2f9bb37b-3558-49f0-bea6-69ab834013de",
+        "currentExpirationDate": "1713268338000
         }
     ],
     "discountPlan": { 
