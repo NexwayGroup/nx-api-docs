@@ -492,7 +492,7 @@ Build a buy-link that directs the shopper straight to the shopping cart for revi
 https://storeName.mydomain.fr/checkout/add?products=2f9bb37b-3558-49f0-bea6-69ab834013de&mktop=testCampaign&scenario=subscriptionimport&&discountTag=testDiscountPlan&discountStep=0&theme=theme&layout=layout
 ```
 
-### Part 2: Initiate Checkout
+### Part 2: Checkout
 
 On the checkout page, the total price is displayed as zero, meaning the shopper does not have to pay immediately. However, shoppers are required to enter payment method details to be used during subscription renewals. If billing address was provided during the cart creation process, it will be pre-filled on the checkout page.
 
