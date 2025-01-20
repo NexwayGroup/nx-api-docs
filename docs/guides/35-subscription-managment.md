@@ -494,7 +494,7 @@ https://storeName.mydomain.fr/checkout/add?products=2f9bb37b-3558-49f0-bea6-69ab
 
 ### Part 2: Initiate Checkout
 
-On the checkout page, the total price is displayed as zero, meaning the shopper does not have to pay immediately. However, shoppers are required to select a recurring payment option and enter payment details for this payment method to be used during subscription renewals. If billing information was provided during the cart creation process, it will be pre-filled on the checkout page.
+On the checkout page, the total price is displayed as zero, meaning the shopper does not have to pay immediately. However, shoppers are required to enter payment method details to be used during subscription renewals. If billing address was provided during the cart creation process, it will be pre-filled on the checkout page.
 
 After the shopper confirms the order, Nexway processes the checkout and converts it into an order. As part of this process, the subscription is created. Once the order is successfully completed, the shopper is redirected to a Thank You page and receives a confirmation email. On the scheduled renewal date, the shopper will be charged with the applied discount, and the subscription will renew automatically for the next period.
 
