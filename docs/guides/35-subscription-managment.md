@@ -498,4 +498,3 @@ On the checkout page, the total price is displayed as zero, meaning the shopper 
 
 After the shopper confirms the order, Nexway processes the checkout and converts it into an order. As part of this process, the subscription is created. Once the order is successfully completed, the shopper is redirected to a Thank You page and receives a confirmation email. On the scheduled renewal date, the shopper will be charged with the applied discount, and the subscription will renew automatically for the next period.
 
-To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md). These events provide insights into the processing and status of the order.
