@@ -273,6 +273,9 @@
                 },
                 "type": "object"
             },
+            "HttpMethod": {
+                "type": "object"
+            },
             "HttpRange": {
                 "type": "object"
             },
@@ -955,53 +958,6 @@
                                     "type": "object"
                                 },
                                 "type": "array"
-                            },
-                            "suppressed": {
-                                "items": {
-                                    "properties": {
-                                        "localizedMessage": {
-                                            "type": "string"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "stackTrace": {
-                                            "items": {
-                                                "properties": {
-                                                    "classLoaderName": {
-                                                        "type": "string"
-                                                    },
-                                                    "className": {
-                                                        "type": "string"
-                                                    },
-                                                    "fileName": {
-                                                        "type": "string"
-                                                    },
-                                                    "lineNumber": {
-                                                        "format": "int32",
-                                                        "type": "integer"
-                                                    },
-                                                    "methodName": {
-                                                        "type": "string"
-                                                    },
-                                                    "moduleName": {
-                                                        "type": "string"
-                                                    },
-                                                    "moduleVersion": {
-                                                        "type": "string"
-                                                    },
-                                                    "nativeMethod": {
-                                                        "type": "boolean"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "type": "array"
                             }
                         },
                         "type": "object"
@@ -1145,17 +1101,7 @@
                             },
                             "accessControlAllowMethods": {
                                 "items": {
-                                    "enum": [
-                                        "GET",
-                                        "HEAD",
-                                        "POST",
-                                        "PUT",
-                                        "PATCH",
-                                        "DELETE",
-                                        "OPTIONS",
-                                        "TRACE"
-                                    ],
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/HttpMethod"
                                 },
                                 "type": "array"
                             },
@@ -1179,17 +1125,7 @@
                                 "type": "array"
                             },
                             "accessControlRequestMethod": {
-                                "enum": [
-                                    "GET",
-                                    "HEAD",
-                                    "POST",
-                                    "PUT",
-                                    "PATCH",
-                                    "DELETE",
-                                    "OPTIONS",
-                                    "TRACE"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/HttpMethod"
                             },
                             "all": {
                                 "additionalProperties": {
@@ -1200,17 +1136,7 @@
                             },
                             "allow": {
                                 "items": {
-                                    "enum": [
-                                        "GET",
-                                        "HEAD",
-                                        "POST",
-                                        "PUT",
-                                        "PATCH",
-                                        "DELETE",
-                                        "OPTIONS",
-                                        "TRACE"
-                                    ],
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/HttpMethod"
                                 },
                                 "type": "array",
                                 "uniqueItems": true
@@ -1474,6 +1400,7 @@
                             "100 CONTINUE",
                             "101 SWITCHING_PROTOCOLS",
                             "102 PROCESSING",
+                            "103 EARLY_HINTS",
                             "103 CHECKPOINT",
                             "200 OK",
                             "201 CREATED",
@@ -1816,6 +1743,12 @@
                 "properties": {
                     "empty": {
                         "type": "boolean"
+                    },
+                    "first": {
+                        "$ref": "#/components/schemas/ProcessingEvent"
+                    },
+                    "last": {
+                        "$ref": "#/components/schemas/ProcessingEvent"
                     }
                 },
                 "type": "array"
@@ -3123,12 +3056,6 @@
                             "default": "resource update thru REST Api",
                             "type": "string"
                         }
-                    },
-                    {
-                        "description": "Filter lineItemData with its own id",
-                        "in": "path",
-                        "name": "id",
-                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -4086,12 +4013,6 @@
                             "default": "full cancel thru REST Api",
                             "type": "string"
                         }
-                    },
-                    {
-                        "description": "Id of marketplace order to cancel",
-                        "in": "path",
-                        "name": "marketplaceOrderId",
-                        "required": true
                     }
                 ],
                 "responses": {
@@ -4185,12 +4106,6 @@
                         }
                     },
                     {
-                        "description": "Id of marketplace order to cancel",
-                        "in": "path",
-                        "name": "marketplaceOrderId",
-                        "required": true
-                    },
-                    {
                         "description": "Reason of this repair operation",
                         "example": "Repair order, repair through REST Api.",
                         "in": "query",
@@ -4268,20 +4183,6 @@
         {
             "description": "Generated server url",
             "url": "https://api.nexway.store"
-        }
-    ],
-    "tags": [
-        {
-            "name": "ApiProcessingEvents"
-        },
-        {
-            "name": "ApiCommand"
-        },
-        {
-            "name": "ApiCRUDLineItemData"
-        },
-        {
-            "name": "ApiCRUDMarketplaceOrder"
         }
     ]
 }
