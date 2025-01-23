@@ -199,6 +199,11 @@
                     "accountCreated": {
                         "type": "boolean"
                     },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
+                        "type": "boolean"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "format": "date-time",
@@ -274,7 +279,7 @@
                     "firstName": {
                         "description": "First name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -298,7 +303,7 @@
                     "lastName": {
                         "description": "Last name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -423,8 +428,6 @@
                     "country",
                     "cpf",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale",
                     "storeId"
                 ],
@@ -441,6 +444,11 @@
             "EndUserImport": {
                 "properties": {
                     "accountCreated": {
+                        "type": "boolean"
+                    },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
                         "type": "boolean"
                     },
                     "birthDate": {
@@ -518,7 +526,7 @@
                     "firstName": {
                         "description": "First name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -542,7 +550,7 @@
                     "lastName": {
                         "description": "Last name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -681,8 +689,6 @@
                     "country",
                     "cpf",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale",
                     "storeId"
                 ],
@@ -691,6 +697,11 @@
             "EndUserPortal": {
                 "properties": {
                     "accountCreated": {
+                        "type": "boolean"
+                    },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
                         "type": "boolean"
                     },
                     "birthDate": {
@@ -771,7 +782,7 @@
                     "firstName": {
                         "description": "First name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -795,7 +806,7 @@
                     "lastName": {
                         "description": "Last name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -920,8 +931,6 @@
                     "country",
                     "cpf",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale",
                     "storeId"
                 ],
@@ -969,6 +978,11 @@
                     "accountCreated": {
                         "type": "boolean",
                         "writeOnly": true
+                    },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
+                        "type": "boolean"
                     },
                     "birthDate": {
                         "description": "Birth date",
@@ -1027,7 +1041,7 @@
                     "firstName": {
                         "description": "First name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -1046,7 +1060,7 @@
                     "lastName": {
                         "description": "Last name",
                         "example": "John",
-                        "maxLength": 50,
+                        "maxLength": 250,
                         "minLength": 1,
                         "type": "string"
                     },
@@ -1155,8 +1169,6 @@
                     "country",
                     "cpf",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale"
                 ],
                 "type": "object"
