@@ -522,6 +522,11 @@
                     "accountExists": {
                         "type": "boolean"
                     },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
+                        "type": "boolean"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "format": "date-time",
@@ -562,7 +567,7 @@
                         "description": "EndUser first name",
                         "example": "John",
                         "maxLength": 160,
-                        "minLength": 1,
+                        "minLength": 0,
                         "type": "string"
                     },
                     "id": {
@@ -574,7 +579,7 @@
                         "description": "EndUser last name",
                         "example": "Doe",
                         "maxLength": 160,
-                        "minLength": 1,
+                        "minLength": 0,
                         "type": "string"
                     },
                     "locale": {
