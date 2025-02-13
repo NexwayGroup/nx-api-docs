@@ -1320,6 +1320,11 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
+                        "type": "boolean"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "format": "date-time",
@@ -1468,8 +1473,6 @@
                 "required": [
                     "country",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale",
                     "wallet",
                     "zipCode"
@@ -1530,6 +1533,11 @@
             "EndUserPut": {
                 "description": "End-user who owns this cart",
                 "properties": {
+                    "anonymousEndUser": {
+                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "example": true,
+                        "type": "boolean"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "format": "date-time",
@@ -1655,8 +1663,6 @@
                 "required": [
                     "country",
                     "email",
-                    "firstName",
-                    "lastName",
                     "locale",
                     "zipCode"
                 ],
