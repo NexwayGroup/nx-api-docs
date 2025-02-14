@@ -316,7 +316,8 @@
                             "CAMPAIGN",
                             "COUPON",
                             "SINGLE_USE_CODE",
-                            "SUBSCRIPTION_PLAN"
+                            "SUBSCRIPTION_PLAN",
+                            "MANDATE_VALUE"
                         ],
                         "type": "string"
                     },
@@ -826,7 +827,8 @@
                         "enum": [
                             "INTERNAL",
                             "EXTERNAL",
-                            "INTERNAL_CONVERTED"
+                            "INTERNAL_CONVERTED",
+                            "MANDATE_VALUE"
                         ],
                         "readOnly": true,
                         "type": "string"
@@ -3750,6 +3752,10 @@
                     },
                     "locale": {
                         "type": "string"
+                    },
+                    "mandateValue": {
+                        "format": "double",
+                        "type": "number"
                     },
                     "maxPaymentsParts": {
                         "format": "int32",
