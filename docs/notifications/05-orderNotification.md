@@ -65,6 +65,10 @@ The notification payload will include an 'order' object containing the following
 | items[].VATRate | Sold product applied sales tax rate | R |
 | items[].discountRate | Discount rate applied to product | O |
 | items[].subscriptionId | SubscriptionId if the line item has one | O |
+| items[].discountPlan | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
+| items[].discountPlan.tag | Subscription discount plan tag | R |
+| items[].discountPlan.discountStep | Subscription discount plan step is used on acquisition | R |
+| items[].discountPlan.ignorePurchaseDiscount | Only in case if this flag was set on acquisition | O |
 
 If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities.
 
@@ -72,58 +76,90 @@ If you need to get additional data, which is not available in the event, please 
 
 ```json
 {
-	"subject": "order",
-	"type": "completed",
-	"objectId": "3KTEY9K4AAA",
-	"eventDate": "2017-08-17T11:25:33.606Z",
-	"order": {
-		"id": "3KTEY9K4AAA",
-		"status": "COMPLETED",
-		"creationDate": "2017-08-17T11:25:31Z",
-		"payment": {
-			"method": "visa",
-			"automaticBilling": false
-		},
-		"totalPriceIncVAT": 357,
-		"totalPriceExclVAT": 297.5,
-		"externalContext":"eyJzcGFnZSI6==",
-		"salesFlag":[
-			 "EXTMD_Daily_fr_XXXrenew-30"
-		],
-		"consentFlags": {
-			"newsletterOptin": true
-		},
-		"currency": "USD",
-		"user": {
-			"id": "037dbcbb-c5bd-4a81-8fd7-3420b440fdf3",
-			"email": "jdoe@com2us.com",
-			"firstName": "John",
-			"lastName": "Doe",
-			"language": "en",
-			"country": "USA",
-			"street": "587 Main Street",
-			"zipcode": "20005",
-			"city": "Washington"
-		},
-		"items": [
-			{
-				"id": "fd58a2e5-548c-44a7-b78d-5b246c1a25cd",
-				"product": {
-					"name": "My product name",
-					"uniqueReference": "82165493-486f-54fa-a454-65458da64c53",
-					"publisherReference": "SKU-0001",
-				},
-				"fulfillmentId":"fff994ac-2e29-4dce-a8dd-6c582eee7927",
-				"subscriptionId":"fffdddac-2e29-4dce-a8dd-052e25968b8b",
-				"activationCode":"XXXXX-4REZC-CV64B-XXX",
-				"quantity": 1,
-				"externalContext": "what the customer wants",
-				"unitPriceIncVAT": 178.5,
-				"unitPriceExclVAT": 148.75,
-				"VATRate": 0.2
-			}
-		]
-	}
+  "subject" : "order",
+  "type" : "completed",
+  "objectId" : "42WRNTVCTVJ",
+  "eventDate" : "2025-02-07T07:00:20Z",
+  "order" : {
+    "id" : "42WRNTVCTVJ",
+    "status" : "COMPLETED",
+    "source" : "PURCHASE",
+    "creationDate" : "2025-02-07T07:00:00Z",
+    "payment" : {
+      "id" : "42WRNTVCTVJ0",
+      "method" : "visa",
+      "amount" : 55.0,
+      "status" : "COMPLETED",
+      "transitionPaymentDate" : "2025-02-07T07:00:08Z",
+      "automaticBilling" : false
+    },
+    "payments" : [ {
+      "id" : "42WRNTVCTVJ0",
+      "method" : "visa",
+      "amount" : 55.0,
+      "status" : "COMPLETED",
+      "transitionPaymentDate" : "2025-02-07T07:00:08Z",
+      "automaticBilling" : false
+    } ],
+    "currency" : "AUD",
+    "totalPriceIncVAT" : 55.0,
+    "totalPriceExclVAT" : 50.0,
+    "externalContext" : "e30=",
+    "decodedExternalContext" : { },
+    "salesFlag" : [ ],
+    "consentFlags" : {
+      "newsletterOptin" : false
+    },
+    "user" : {
+      "id" : "b8dccf29-6f3b-4551-8ebf-98d3ef47f40a",
+      "email" : "vtsukanov@nexway.com",
+      "firstName" : "Victor",
+      "lastName" : "Tsukanov",
+      "language" : "en",
+      "country" : "AUS",
+      "zipcode" : "3249",
+      "city" : "Gerangamete"
+    },
+    "items" : [ {
+      "id" : "f4fc4d98-30f1-427e-9953-6a6966654d71",
+      "product" : {
+        "name" : "Kaspersky Standard",
+        "uniqueReference" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
+        "publisherReference" : "KL1041EDCFG"
+      },
+      "quantity" : 1,
+      "expirationDate" : "2026-05-07T06:59:54Z",
+      "unitPriceExclVAT" : 50.0,
+      "unitPriceIncVAT" : 55.0,
+      "trial" : false,
+      "trialDuration" : 7,
+      "subscriptionId" : "c37570f9-ebc3-4817-8da6-a77339224739",
+      "fulfillmentId" : "6c0edf3e-b73e-46b7-944b-f424708d5b2f",
+      "activationCode" : "PC4J7-5AEG3-9YUUE-DM3HD",
+      "subscription" : {
+        "id" : "c37570f9-ebc3-4817-8da6-a77339224739",
+        "createDate" : "2025-02-07T07:00:10Z",
+        "modelId" : "NEXWAY_1Y",
+        "name" : "Kaspersky Standard",
+        "storeId" : "59409482-9719-4d76-97ad-c679acc7d14a",
+        "lifecycle" : {
+          "id" : "9141850",
+          "anniversaryDate" : "2026-05-07T06:59:54Z"
+        },
+        "products" : [ {
+          "id" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
+          "lineItemId" : "93c9b6a3-e33e-4b88-bb1b-75134f23e298"
+        } ]
+      },
+      "subItems" : [ ],
+      "discountPlan" : {
+        "tag" : "newtyptag",
+        "discountStep" : 0,
+        "ignorePurchaseDiscount" : false
+      },
+      "VATRate" : 0.1
+    } ]
+  }
 }
 ```
 
