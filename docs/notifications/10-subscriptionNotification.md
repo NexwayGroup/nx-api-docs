@@ -47,7 +47,7 @@ You can receive notifications whenever your subscription status changes.
    }
 }
 ```
-## Subscription plan is changed
+## Subscription discount plan is changed
 This is special notification which will be send in case if subscription plan is changed for subscription. The payload is following:
 
 | Name | Description | R/O |
