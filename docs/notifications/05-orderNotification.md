@@ -140,7 +140,7 @@ If you need to get additional data, which is not available in the event, please 
         "id" : "c37570f9-ebc3-4817-8da6-a77339224739",
         "createDate" : "2025-02-07T07:00:10Z",
         "modelId" : "NEXWAY_1Y",
-        "name" : "Kaspersky Standard",
+        "name" : "Acme Standard",
         "storeId" : "59409482-9719-4d76-97ad-c679acc7d14a",
         "lifecycle" : {
           "id" : "9141850",
