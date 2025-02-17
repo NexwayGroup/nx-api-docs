@@ -126,8 +126,6 @@ If you need to get additional data, which is not available in the event, please 
         "name" : "Acme Standard",
         "uniqueReference" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
         "publisherReference" : "ACME_XYZ"
-        "uniqueReference" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
-        "publisherReference" : "KL1041EDCFG"
       },
       "quantity" : 1,
       "expirationDate" : "2026-05-07T06:59:54Z",
