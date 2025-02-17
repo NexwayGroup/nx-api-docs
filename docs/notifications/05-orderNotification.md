@@ -137,7 +137,7 @@ If you need to get additional data, which is not available in the event, please 
       "trialDuration" : 7,
       "subscriptionId" : "c37570f9-ebc3-4817-8da6-a77339224739",
       "fulfillmentId" : "6c0edf3e-b73e-46b7-944b-f424708d5b2f",
-      "activationCode" : "PC4J7-5AEG3-9YUUE-DM3HD",
+      "activationCode" : "XXXX-YYYY-ZZZZ-JSJSK",
       "subscription" : {
         "id" : "c37570f9-ebc3-4817-8da6-a77339224739",
         "createDate" : "2025-02-07T07:00:10Z",
