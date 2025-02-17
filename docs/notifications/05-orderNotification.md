@@ -123,7 +123,9 @@ If you need to get additional data, which is not available in the event, please 
     "items" : [ {
       "id" : "f4fc4d98-30f1-427e-9953-6a6966654d71",
       "product" : {
-        "name" : "Kaspersky Standard",
+        "name" : "Acme Standard",
+        "uniqueReference" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
+        "publisherReference" : "ACME_XYZ"
         "uniqueReference" : "a7c55bec-b1b1-401e-b6cb-d6121ca1f66b",
         "publisherReference" : "KL1041EDCFG"
       },
