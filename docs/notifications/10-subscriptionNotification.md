@@ -6,6 +6,7 @@ You can receive notifications whenever your subscription status changes.
 * suspended
 * reactivated
 * canceled
+* subscription discount plan is changed
 
 ## List of fields
 
@@ -44,5 +45,32 @@ You can receive notifications whenever your subscription status changes.
          }
       ]
    }
+}
+```
+## Subscription discount plan is changed
+This is special notification which will be send in case if subscription plan is changed for subscription. The payload is following:
+
+| Name | Description | R/O |
+| ---- | ----------- | --- |
+| subscription.id | Subscription unique identifier | R |
+| subscription.discountPlan | Node with subscription plan is added / changed for a given subscription | R |
+| subscription.discountPlan.tag | Subscription discount plan tag is added / chagned | R |
+| subscription.discountPlan.nextDiscountStep | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
+
+
+### Example
+```json
+{
+  "subject" : "subscription",
+  "type" : "discount plan updated",
+  "objectId" : "d888ff3b-0381-4b35-9cbe-f9c73666524f",
+  "eventDate" : "2025-01-28T08:58:42Z",
+  "subscription" : {
+    "id" : "d888ff3b-0381-4b35-9cbe-f9c73666524f",
+    "discountPlan": {
+      "tag": "tag"
+      "nextDiscountStep": 1
+    }
+  }
 }
 ```
