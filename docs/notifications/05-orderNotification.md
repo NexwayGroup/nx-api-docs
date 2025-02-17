@@ -112,9 +112,9 @@ If you need to get additional data, which is not available in the event, please 
     },
     "user" : {
       "id" : "b8dccf29-6f3b-4551-8ebf-98d3ef47f40a",
-      "email" : "vtsukanov@nexway.com",
-      "firstName" : "Victor",
-      "lastName" : "Tsukanov",
+      "email" : "billyjoe@nexway.com",
+      "firstName" : "Billy",
+      "lastName" : "Joe",
       "language" : "en",
       "country" : "AUS",
       "zipcode" : "3249",
