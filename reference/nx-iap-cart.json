@@ -323,6 +323,11 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "mandateValue": {
+                        "description": "Subscription generation",
+                        "format": "double",
+                        "type": "number"
+                    },
                     "manualUpdateDate": {
                         "description": "Date of last manual modification, timestamp in milliseconds",
                         "format": "date-time",
@@ -1935,7 +1940,8 @@
                         "enum": [
                             "INTERNAL",
                             "EXTERNAL",
-                            "INTERNAL_CONVERTED"
+                            "INTERNAL_CONVERTED",
+                            "MANDATE_VALUE"
                         ],
                         "readOnly": true,
                         "type": "string"
@@ -2076,6 +2082,11 @@
                         "description": "Locale of cart",
                         "example": "fr-FR",
                         "type": "string"
+                    },
+                    "mandateValue": {
+                        "description": "subscription mandate value.",
+                        "format": "double",
+                        "type": "number"
                     },
                     "marketingCampaignNames": {
                         "description": "List of marketing campaign name",
@@ -2364,7 +2375,8 @@
                         "enum": [
                             "INTERNAL",
                             "EXTERNAL",
-                            "INTERNAL_CONVERTED"
+                            "INTERNAL_CONVERTED",
+                            "MANDATE_VALUE"
                         ],
                         "type": "string"
                     },
