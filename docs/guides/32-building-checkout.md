@@ -23,19 +23,27 @@ https://{storeHostName}/checkout/add?products={productId1}&products={productId2}
 Optional attributes allow customization of the checkout experience and enable Nexway functionalities. See the Optional Checkout Customization Parameters section for details.
 
 
-## Option 2: Using API 
+## Option 2: API Integration 
+
 For API-based integration, after a shopper initiates a checkout, you need to:
 1. **Create a shopping cart** using the Nexway API
 2. **Redirect the shopper** to the checkout URL returned in the API response.
 
-To create a shopping cart, send a request with the following attributes.
+
+1. **Create a shopping cart** 
+
+There are two available API methods for creating a shopping cart:
+- **Standard Cart Creation** (`POST /carts`): Use this if your product catalog is managed within Nexway. This method requires a valid productId from the catalog.
+- **Custom Cart Creation** (`POST /carts/createCheckout`): Use this method when selling products that are not in the Nexway catalog. This method creates a new catalog entry and assigns product IDs with the generated catalog as a prefix.
+
+**Standard Cart Creation**
 
 ### Required Parameters
-- `wantedProducts.id`: Array of product IDs from the Nexway catalog
+- `wantedProducts.id`: An array of product IDs from the Nexway catalog
 - Either `storeId` or `storeHostName`: Identifies the store on Nexway side.
 
 ### Optional Parameters
-See the Optional Checkout Customization Parameters section for details.
+See the _Optional Checkout Customization Parameters_ section for details.
 
 
 **API Request Example**
@@ -50,6 +58,43 @@ POST /carts
     ]
 }   
 ```
+
+**Custom Cart Creation**
+
+### Required Parameters
+- `fulCatalog`: Object is used to create a catalog dynamically within Nexway
+- `products`: Object is used to define the products to be added to the created catalog.
+
+
+**API Request Example**
+```json
+POST /carts/createCheckout
+{
+  "cart": {
+    "fullCatalog": {
+        "catalog": {
+            "name": "test",
+            "status": "ENABLED",
+            "type": "INTERNAL",
+            "singleUse": true
+            },
+        "products": [
+        {
+            "id": "product#1",
+            "name": "Test product",
+            "publisherRefId": "123456",
+            "price": {
+                "value": 10.00,
+                "currency": "EUR",
+                "vatIncluded": true
+                }
+            }
+            ]
+        }
+    } 
+}
+```
+
 A successful `201 Created` response includes the `cartId` in the **Location** header.
 
 **API Response Example**
@@ -57,7 +102,10 @@ A successful `201 Created` response includes the `cartId` in the **Location** he
 Headers
 Location: /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
 ```
-To retrieve the cart content, use the `cartId` with the following API request:
+
+2. **Redirect the shopper** to the checkout URL returned in the API response.
+
+Retrieve the cart content, using the `cartId` with the following API request:
 ```
 GET /carts/{cartId}
 ```
