@@ -2,11 +2,7 @@
 # Order Notifications
 
 You can receive notifications whenever your order status changes.
-
-## Order statuses
-The diagram below shows the main statuses of the order workflow.
-
-![Order statuses](https://s3storage.nexway.com/iap-staticfiles/2d8a948f601d801a630c9d773f28dba2.png)
+See the details of the [order processing here](../guides/40-order-processing.md).
 
 ## Event list
 
