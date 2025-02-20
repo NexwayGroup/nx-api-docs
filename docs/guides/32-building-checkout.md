@@ -277,7 +277,7 @@ POST /carts
 
 ### Price management
 
-**Discount**: Applies specified discount.
+**Discount**: Applies specified discount (used only for Coupons).
 
 Buy-Link Setup: `/add?discounts=sale`
 
