@@ -16,7 +16,7 @@ https://{storeHostName}/checkout/add?productId={productId}
 
 To add multiple products:
 ```
-https://{storeHostName}/checkout/add?products={productId1}&products={productId2}
+https://{storeHostName}/checkout/add?productId={productId1}&productId={productId2}
 ```
 
 ### Optional Parameters
