@@ -86,7 +86,7 @@ POST /carts/createCheckout
         "status": "ENABLED",
         "type": "INTERNAL",
         "singleUse": true
-        },
+    },
     "products": [
     {
         "id": "product0",
@@ -96,12 +96,10 @@ POST /carts/createCheckout
             "value": 10.00,
             "currency": "EUR",
             "vatIncluded": true
-            }
         }
-        ]
-    }
- } 
-}
+    }]
+  }
+} 
 ```
 
 A successful `201 Created` response includes the `cartId` in the **Location** header.
