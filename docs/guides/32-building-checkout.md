@@ -12,7 +12,7 @@ https://{storeHostName}/checkout/add?productId={productId}
 
 ### Required Parameters
 - `storeHostName`: Refers to your brand or website hostname
-- `products`: Specifies the product ID from the Nexway catalog.
+- `productId`: Specifies the product ID from the Nexway catalog.
 
 To add multiple products:
 ```
