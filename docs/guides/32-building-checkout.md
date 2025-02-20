@@ -47,8 +47,8 @@ See the _Optional Checkout Customization Parameters_ section for details.
 
 
 **API Request Example**
+`POST /carts`
 ```json
-POST /carts
 {
     "storeHostName": "hostname.com",
     "wantedProducts": [
