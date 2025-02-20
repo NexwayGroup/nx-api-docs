@@ -62,7 +62,7 @@ POST /carts
 **Custom Cart Creation**
 
 ### Required Parameters
-- `fulCatalog`: Object is used to create a catalog dynamically within Nexway
+- `fullCatalog`: Object is used to create a catalog dynamically within Nexway
 - `products`: Object is used to define the products to be added to the created catalog.
 
 
@@ -71,27 +71,36 @@ POST /carts
 POST /carts/createCheckout
 {
   "cart": {
-    "fullCatalog": {
-        "catalog": {
-            "name": "test",
-            "status": "ENABLED",
-            "type": "INTERNAL",
-            "singleUse": true
-            },
-        "products": [
-        {
-            "id": "product#1",
-            "name": "Test product",
-            "publisherRefId": "123456",
-            "price": {
-                "value": 10.00,
-                "currency": "EUR",
-                "vatIncluded": true
-                }
+    "locale": "fr-FR",
+    "country": "FR",
+    "storeId": "6fdd8d20-b31b-4e24-83c1-30681f112b5c",
+    "products": {
+      "product0": {
+        "quantity": 1
+      }
+    }
+  },
+  "fullCatalog": {
+    "catalog": {
+        "name": "test",
+        "status": "ENABLED",
+        "type": "INTERNAL",
+        "singleUse": true
+        },
+    "products": [
+    {
+        "id": "product0",
+        "name": "Test product",
+        "publisherRefId": "123456",
+        "price": {
+            "value": 10.00,
+            "currency": "EUR",
+            "vatIncluded": true
             }
-            ]
         }
-    } 
+        ]
+    }
+ } 
 }
 ```
 
