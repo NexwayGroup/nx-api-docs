@@ -7,7 +7,7 @@ Nexway provides multiple integration options for checkout, enabling businesses t
 ## Option 1: Buy-Link Integration
 When shoppers visit your storefront, they can initiate checkout by clicking a UI element containing a Buy-Link in the following format:
 ```
-https://{storeHostName}/checkout/add?products={productId}
+https://{storeHostName}/checkout/add?productId={productId}
 ```
 
 ### Required Parameters
