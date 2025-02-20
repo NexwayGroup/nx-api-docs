@@ -67,8 +67,8 @@ See the _Optional Checkout Customization Parameters_ section for details.
 
 
 **API Request Example**
-```json
 POST /carts/createCheckout
+```json
 {
   "cart": {
     "locale": "fr-FR",
