@@ -1,4 +1,4 @@
-# API Documentation: Product Management
+# Product API guide
 
 ## Overview
 
@@ -65,7 +65,7 @@ A successful request returns a Location header containing the product ID:
 
 Once the product is created, the response will include a descriptionId. Use this ID to add localized descriptions for the product:
 
-`PUT products/description/{descriptionId}`
+`PUT products/descriptions/{descriptionId}`
 
 ### Payload Example
 
@@ -137,7 +137,7 @@ A list of store IDs where the product will be available for sale.
 - **Type**: Enum
   - `ENABLED`: Active and available for purchase.
   - `DISABLED`: Inactive and hidden from customers.
-- **Required**: Yes  
+- **Required**: No  
 
 #### 5. **Lifetime**
 - **Key**: `lifeTime`
