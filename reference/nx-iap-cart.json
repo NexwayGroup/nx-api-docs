@@ -1504,6 +1504,9 @@
                         },
                         "type": "array"
                     },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
+                    },
                     "endDate": {
                         "format": "date-time",
                         "type": "string"
@@ -1517,8 +1520,26 @@
                         },
                         "type": "object"
                     },
+                    "sources": {
+                        "items": {
+                            "enum": [
+                                "PURCHASE",
+                                "SUBSCRIPTION",
+                                "MANUAL_RENEWAL",
+                                "BILLING_PLAN",
+                                "OFFER",
+                                "MID_TERM_UPGRADE",
+                                "UPGRADE"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
                     "startDate": {
                         "format": "date-time",
+                        "type": "string"
+                    },
+                    "status": {
                         "type": "string"
                     }
                 },
