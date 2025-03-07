@@ -115,9 +115,9 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 **5. Authorized Cart**  
 Creates a shopping cart with prefilled shopper's billing information.  
 [`POST /carts`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createItem)  
-**API Request Example**
---header 'Authorization: Bearer <API_key>'
+**API Request Example**  
 ```json
+--header 'Authorization: Bearer <API_key>'
 {
     "country": "FR",
     "locale": "fr-FR",
@@ -142,7 +142,7 @@ Creates a shopping cart with prefilled shopper's billing information.
 ```
 
 **6. Custom Cart** 
-Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. However, this method is not suitable for carts containing subscription products with recurring renewals, as product instances are removed from Nexway after purchase.
+Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. However, this method is not suitable for carts containing subscription products with recurring renewals, as product instances are removed from Nexway after purchase.  
 [`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createCheckout)  
 **API Request Example**
 ```json
