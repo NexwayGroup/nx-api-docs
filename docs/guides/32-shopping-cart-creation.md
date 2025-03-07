@@ -14,27 +14,24 @@ https://{storeHostName}/checkout/add?productId={productId}
 ```
 ### Buy-link Parameters
 
-| Property         | Description                                                                                                                                                                                                                                                                                                       | Required | Buy-Link Setup |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------------|
-| **storeHostName** | Refers to your brand or website hostname                                                                                                                                                                                                                                                                       | Yes      | `https://www.yourBrandName.store/checkout/` |
-| **productId**    | Specifies the product ID from the Nexway catalog. Multiple product IDs can be added                                                                                                                                                                                                                             | Yes      | `/add?productId=e187828b-e7cb-4cdb-bc42-66b51c1fff87&productId=e187828b-e7cb-4cdb-bc42-66b51c1fff88` |
-| **Layout and Theme** | Customizes the checkout layout and design                                                                                                                                                                                                                                                         | No | `/add?layout=acquisition&theme=acquisition` |
-| **Locale**       | Defines the checkout language. If not specified, the default store locale applies                                                                                                                                                                                                                              | No       | `/add?locale=fr-FR` |
-| **Country**      | Sets the checkout country. Defaults to GeoIP location or the store's default country if not specified                                                                                                                                                                                                        | No       | `/add?country=FR` |
-| **New Cart**     | Creates a new cart instance                                                                                                                                                                                                                                               | No       | `/add?newCart=true` |
-| **Scenario**     | Activates a specific checkout flow. Some scenarios may require additional attributes                                                                                                                                                                                                                          | No       | `/add?scenario=retention&licenseId=123456789` |
-| **Sales Flag**   | Activates sales performance tracking                                                                                                                                                                                                                                                                           | No       | `/add?salesFlag=OE,AZ` |
-| **Quantity**     | Sets the product quantity                                                                                                                                                                                                                                                                                      | No       | `/add?productId=2f9bb37b-3558-49f0-bea6-69ab834013de[quantity=2]` |
-| **Tiers**        | Specifies product tiers                                                                                                                                                                                                                                                                                        | No       | `/add?productId=2f9bb37b-3558-49f0-bea6-69ab834013de[tier=20]` |
-| **Lock Selector** | Prevents tier selection in the UI                                                                                                                                                                                                                                                                            | No       | `/add?lockSelector=true` |
-| **License ID**   | Assigns an external license ID                                                                                                                                                                                                                                                                                 | No       | `/add?licenseId=123456789` |
-| **Discount**     | Applies a specified discount (used only for coupons)  | No       | `/add?discounts=sale` |
-| **Discount Plan** | Applies a discount plan to a subscription. `discountTag` specifies the name of the subscription discount plan. `discountStep` specifies the step (or subscription term) from which the discount should apply (step count starts at zero). `ignorePurchaseDiscount` (optional) prevents the discount from applying to the initial purchase price, ensuring it only takes effect from the first renewal. By default, the discount applies to the acquisition price as well | No | `/add?discountTag=test&discountStep=0&ignorePurchaseDiscount=true` |
-| **Remote Price** | Fetches a price from an external service. `isRemotePrice=true` activates the functionality. `offer-id` specifies the identifier in the external service Nexway uses to retrieve the price. If multiple products exist in the Buy-link, the remote price applies only to the first product ID in alphabetical order | No       | `/add?isRemotePrice=true&offer-id=externalOfferId` |
-| **Upsell/Cross-sell** | Hides upsell or cross-sell recommendations in the UI. Defaults to showing if configured in Nexway                                                                                                                                                                              | No       | `/add?upsell=false&crosssell=false` |
-| **Marketing Ads** | Displays pre-configured marketing ads                                                                                                                                                                                                                                                                        | No       | `/add?optmons=exit` |
-| **Name**         | Pre-fills the first name and last name fields                                                                                                                                                                                                                                                                | No       | `/add?firstName=John&lastName=Smith` |
-| **Email**        | Pre-fills the email field. `obfuscated=true` obfuscates the email. `readonly=true` sets the email to read-only (only available through a Buy-link) | No       | `/add?email=John.Smith@domain.com&obfuscated=true`<br>`/add?email=John.Smith@domain.com&readonly=true` |
+| Query Parameter | Description | Required |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| **productId** or **product**   | Specifies the product ID from the Nexway catalog. Multiple product IDs can be added  like `checkout/add?productId=e187828b-e7cb-4cdb-bc42-66b51c1fff87&productId=e187828b-e7cb-4cdb-bc42-66b51c1fff88`. | Yes      |
+| **layout and theme** | Customizes the checkout layout and design. | No       |
+| **locale**       | Defines the checkout language. If not specified, the default store locale applies.                                                     | No       |
+| **country**      | Sets the end-user billing address country. Defaults to GeoIP location or the store's default country (depending on your store configuration) if not specified.                                                   | No       |
+| **newCart=true**     | Ensures the creation of a new cart instance. If not specified, the system first checks whether a cart already exists based on the given parameters, the end-user's IP, and additional conditions. If a cart is already present, the product from the Buy-Link will be added to it.                                                | No       |
+| **scenario**     | Activates a specific checkout flow. Some scenarios may require additional attributes. Scenarios: `acquisition` (default), `retention`, `upgrade`, `subscriptionimport`. | No       |
+| **salesFlag**   | Used mostly for tracking purposes. Multiple flags could be provided: `/add?salesFlag=OE,AZ`. The flags will be added to order. | No       |
+| **quantity**     | Sets the product quantity. `/add?productId=2f9bb37b-3558-49f0-bea6-69ab834013de&quantity=2`. Will not work if you have multiple products in a buy-link. Use cart api for the case of multiple products customization.     | No       |
+| **seats** or **nodes** any price function parameter  | If the product has custom price function parameter (say `seats`), you can specify it like this: `products=a8eee7f3-0e3b-4119-adaf-3151c3f43fc8[seats=50]`.   | No       |
+| **lockSelector=true** | Prevents tier or any other product variation parameter (seats, nodes, years, etc.) selection in the UI.            | No       |
+| **discount**     | Applies a specified coupon code.  | No       |
+| **discountPlan** | Applies a discount plan tag to a subscription.  As a value specify the name of the subscription discount plan tag. `discountStep` specifies the step from which the discount plan should start (by default step count starts at zero). `ignorePurchaseDiscount` (optional) prevents the discount from applying to the initial purchase price, ensuring it only takes effect from the first renewal. By default, the discount applies to the acquisition price as well. Sample: `/add?discountTag=test&discountStep=0&ignorePurchaseDiscount=true`. | No  |
+| **isRemotePrice=true** | Fetches a price from an external service. `isRemotePrice=true` activates the functionality `offerId` specifies the identifier in the external service Nexway uses to retrieve the price. If multiple products exist in the Buy-link, the remote price applies only to the first product ID in alphabetical order. Use cart API to fine-tune remote price for each product. Sample: `/add?isRemotePrice=true&offerId=externalOfferId`. | No       |
+| **upsell/crosssell=false** | Hides upsell or cross-sell recommendations in the UI. Defaults to true if configured in Nexway.        | No       |
+| **optmons=exit** | Optinmonster Pop Up parameter. Allows the presentation of certain marketing ads in the shopping cart. [optmons=exit] leads to popup being raised.                                                                                                                                                                                                                                                                    | No       |                                                                                                                              | **firstName**  and **lastName**       | Pre-fills the buyer's first name and last name fields.  | No       |                                                                                                                                    | No       |
+| **email**        | Pre-fills the email field. Use with caution due to personal data exposure. Use cart API to set up obfuscated email address. | No       | 
 
 
 ## Option 2: API Integration 
@@ -43,7 +40,7 @@ A shopping cart can also be created via API. The `cartId` is returned in the `Lo
 
 ### API Use Cases 
 
-**1. Standard Cart**  
+#### 1. Public Cart Creation API  
 Creates a cart using products from the Nexway catalog.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -58,7 +55,7 @@ Creates a cart using products from the Nexway catalog.
 }   
 ```
 
-**2. Product Upgrade Cart** 
+#### 2. Thank you page upgrade offer (cart)  
 This endpoint allows upgrading a license immediately after purchase with a more functional product at a higher price. The shopper is charged only the difference between the current and upgraded product prices, without using a prorated formula.
 The request should include the ID of the line item from the purchase order.  
 [`POST /carts/public/upgrade`](https://apidoc.nexway.store/api/cart#tag/Public/operation/createProductUpgradeCart)  
@@ -71,7 +68,7 @@ The request should include the ID of the line item from the purchase order.
 ```
 
 
-**3. Cart with Remote Price**  
+#### 3. Cart with Remote Price  
 Creates a shopping cart with a product price retrieved from an external service.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -90,7 +87,7 @@ Creates a shopping cart with a product price retrieved from an external service.
 }   
 ```
 
-**4. Cart with Discount plan**  
+#### 4. Cart with Discount plan
 Creates a shopping cart with a discount plan applied to the subscription. The `tag` and `discountStep` attributes are required.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -112,7 +109,7 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 }   
 ```
 
-**5. Authorized Cart**  
+#### 5. Authorized Cart
 Creates a shopping cart with prefilled shopper's billing information.  
 [`POST /carts`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createItem)  
 **API Request Example**  
@@ -141,8 +138,8 @@ Creates a shopping cart with prefilled shopper's billing information.
 }   
 ```
 
-**6. Custom Cart** 
-Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. However, this method is not suitable for carts containing subscription products with recurring renewals, as product instances are removed from Nexway after purchase.  
+#### 6. Custom Cart
+Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. This method cannot be used to create a cart with subscription products. The method also has other business related limitations. Please discuss usage with your account manager first.  
 [`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createCheckout)  
 **API Request Example**
 ```json
