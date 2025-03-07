@@ -62,6 +62,7 @@ Creates a cart using products from the Nexway catalog.
 This endpoint allows upgrading a license immediately after purchase with a more functional product at a higher price. The shopper is charged only the difference between the current and upgraded product prices, without using a prorated formula.
 The request should include the ID of the line item from the purchase order.  
 [`POST /carts/public/upgrade`](https://apidoc.nexway.store/api/cart#tag/Public/operation/createProductUpgradeCart)  
+**API Request Example**
 ```json
 {
     "previousLineItemId": "36f48867-d6ca-42d3-bf55-5f54a6740803",
@@ -113,8 +114,9 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 
 **5. Authorized Cart**  
 Creates a shopping cart with prefilled shopper's billing information.  
-[`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Cart/operation/createItem)  
+[`POST /carts`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createItem)  
 **API Request Example**
+--header 'Authorization: Bearer <API_key>'
 ```json
 {
     "country": "FR",
@@ -141,7 +143,7 @@ Creates a shopping cart with prefilled shopper's billing information.
 
 **6. Custom Cart** 
 Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. However, this method is not suitable for carts containing subscription products with recurring renewals, as product instances are removed from Nexway after purchase.
-[`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart#tag/Cart/operation/createItem)  
+[`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createCheckout)  
 **API Request Example**
 ```json
 --header 'Authorization: Bearer <API_key>'
