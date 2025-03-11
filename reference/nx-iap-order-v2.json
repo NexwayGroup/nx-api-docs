@@ -2080,6 +2080,10 @@
                         "example": "acquisition",
                         "type": "string"
                     },
+                    "skipPrebillingEmail": {
+                        "description": "flag to skip sending prebilling email",
+                        "type": "boolean"
+                    },
                     "source": {
                         "description": "Purchase type used for the order",
                         "enum": [
@@ -2262,6 +2266,10 @@
                     "previousOrderId": {
                         "description": "Previous order reference ID to re-use payment method to process payment",
                         "type": "string"
+                    },
+                    "skipPrebillingEmail": {
+                        "description": "Skip sending prebilling email",
+                        "type": "boolean"
                     },
                     "subscriptionId": {
                         "description": "Reference ID of subscription service",
