@@ -2342,6 +2342,11 @@
                     "fullPrice": {
                         "$ref": "#/components/schemas/Price"
                     },
+                    "gift": {
+                        "description": "Indicator if the product is a gift",
+                        "example": false,
+                        "type": "boolean"
+                    },
                     "id": {
                         "description": "External ID from Product resource",
                         "example": "2f06e154-5039-11eb-ae93-0242ac130002",
@@ -3171,7 +3176,8 @@
                             "SUBSCRIPTION_PLAN",
                             "REMOTE_PRICE",
                             "ENCRYPTED_EMAIL",
-                            "END_USER"
+                            "END_USER",
+                            "GIFT_PRODUCT"
                         ],
                         "type": "string"
                     }
