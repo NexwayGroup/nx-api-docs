@@ -1427,6 +1427,9 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
                     "storeId": {
                         "type": "string"
                     },
@@ -1463,6 +1466,10 @@
                         "example": "RESELLER",
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "usingShippingAddress": {
+                        "description": "If end user choice to use a shipping address",
+                        "type": "boolean"
                     },
                     "validVatNumber": {
                         "type": "boolean",
@@ -1653,6 +1660,9 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
                     "streetAddress": {
                         "description": "Address book street address",
                         "example": "Street name",
@@ -1677,6 +1687,10 @@
                         ],
                         "example": "MR",
                         "type": "string"
+                    },
+                    "usingShippingAddress": {
+                        "description": "If end user choice to use a shipping address",
+                        "type": "boolean"
                     },
                     "validVatNumber": {
                         "type": "boolean",
@@ -2998,6 +3012,59 @@
                 ],
                 "type": "object"
             },
+            "ShippingAddress": {
+                "description": "End-user Shipping address",
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Phone",
+                        "example": "0612345678",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "example": "FR-MQ",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": "75001",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "city",
+                    "firstName",
+                    "lastName",
+                    "phone",
+                    "streetAddress",
+                    "zipCode"
+                ],
+                "type": "object"
+            },
             "SubscriptionOfferRequest": {
                 "properties": {
                     "discountCode": {
@@ -3177,6 +3244,7 @@
                             "REMOTE_PRICE",
                             "ENCRYPTED_EMAIL",
                             "END_USER",
+                            "SHIPPING_ADDRESS",
                             "GIFT_PRODUCT"
                         ],
                         "type": "string"
