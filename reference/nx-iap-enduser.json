@@ -2040,6 +2040,33 @@
                 "readOnly": true,
                 "type": "object"
             },
+            "SignInWithoutPasswordRequest": {
+                "properties": {
+                    "email": {
+                        "description": "End user email",
+                        "example": "john.doe@nexway.com",
+                        "maxLength": 150,
+                        "minLength": 6,
+                        "type": "string"
+                    },
+                    "storeHostname": {
+                        "description": "Store hostname",
+                        "example": "reselleruk-store.staging.nexway.build",
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "description": "Store unique identifier",
+                        "example": "f2c419a5-e486-44ef-b0c4-3c4368c6c74f",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "email",
+                    "storeHostname",
+                    "storeId"
+                ],
+                "type": "object"
+            },
             "Subscription": {
                 "properties": {
                     "displayPriceFunctionParametersUpgrade": {
@@ -6404,6 +6431,66 @@
                     }
                 ],
                 "summary": "Reset end user password",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "400"
+            }
+        },
+        "/endusers/public/signin-passwordless": {
+            "post": {
+                "operationId": "signInWithoutPassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignInWithoutPasswordRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "signIn without password",
                 "tags": [
                     "Public"
                 ],
