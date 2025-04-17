@@ -373,6 +373,68 @@
                 ],
                 "type": "object"
             },
+            "DiscountOfferProduct": {
+                "properties": {
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "lifeTime": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/FullPrice"
+                    },
+                    "publisherRefId": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "DiscountOfferQueryParameters": {
+                "properties": {
+                    "additionalProperties": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "type": "object"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "discountOfferId": {
+                        "type": "string"
+                    },
+                    "discountPlanStep": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "discountPlanTag": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "taxExempt": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "DiscountPlan": {
                 "properties": {
                     "discountStep": {
@@ -7422,6 +7484,75 @@
                     "Public"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/products/public/{productId}/discount-offer": {
+            "get": {
+                "operationId": "getDiscountOfferByParameters",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "productId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "queryParams",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/DiscountOfferQueryParameters"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DiscountOfferProduct"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get discount offer product by product filters",
+                "tags": [
+                    "Public"
+                ]
             }
         },
         "/products/public/{productId}/next-generations": {
