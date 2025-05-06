@@ -503,7 +503,16 @@ After the shopper confirms the order, Nexway processes the checkout and converts
 
 ## Updating Subscription Renewal Product
 
-You can update the product associated with a subscription's renewal, allowing for upgrades or downgrades. Note that the changes made through this process will take effect at the next subscription renewal.
+You can update the product associated with a subscription's renewal, allowing for upgrades or downgrades. 
+
+:::note
+ Changes made through this process will take effect at the next subscription renewal.
+:::
+
+:::note
+ The target product must have the same term as the current subscription product.
+:::
+
 
 ```json
 POST /purchases/{subscriptionId}/
