@@ -506,7 +506,7 @@ After the shopper confirms the order, Nexway processes the checkout and converts
 You can update the product associated with a subscription's renewal, allowing for upgrades or downgrades. 
 
 :::note
- Changes made through this process will take effect at the next subscription renewal.
+ Changes made through this process will take effect at the next subscription renewal. The change can be done only before the prebilling of the subscription.
 :::
 
 :::note
