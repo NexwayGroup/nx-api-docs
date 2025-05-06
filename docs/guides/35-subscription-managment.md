@@ -368,7 +368,7 @@ The `201 Created` response includes product details and prorated price in `cart.
 ```
 
 ### Part 2. Initiate Checkout
-Use the checkoutUrl, endUserId, and storeId from the Create a Mod-Term Upgrade Cart response to create an authorized checkout. This allows the display of payment methods from the shopper's Wallet and auto-prefilling of their billing details.
+Use the checkoutUrl, endUserId, and storeId from the Create a Mid-Term Upgrade Cart response to create an authorized checkout. This allows the display of payment methods from the shopper's Wallet and auto-prefilling of their billing details.
 
 **API Request Example**
 ```json
@@ -385,13 +385,13 @@ POST /iam/deeplink/
 The `Location` header in the `201 Created` response contains the authorized checkout URL.
 
 **API Response Example**
-```json
+```
 Headers
 Location: https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78
 ```
 
 Add the cart identifier received in the Create a Mid-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
-```json
+```
 https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78&cartid=0eb27503-674b-4855-b3bb-00f8386b64ea
 ```
 
@@ -402,9 +402,9 @@ Once the shopper confirms the order, Nexway converts the checkout into an order 
 To track the lifecycle of the Mid-Term upgrade order, subscribe to [Order event notifications](../notifications/05-orderNotification.md).
 
 
-## Retail to subscription
+## Subscription import
 
-The "Retail to Subscription" flow encourages shoppers who purchase non-renewable products (in the retail channel) to convert them into auto-renewal subscriptions. This helps improve retention rates and keeps shoppers subscribed.
+The "Subscription import" or "Retail to Subscription" flow encourages shoppers who purchase non-renewable products (in the retail channel) to convert them into auto-renewal subscriptions. This helps improve retention rates and keeps shoppers subscribed.
 
 After purchasing a non-renewable product, shoppers is offered through your platform’s user interface to activate auto-renewal with a zero-cost setup and receive a discount on the renewal. After accepting the offer, the shopper is redirected to the Nexway shopping cart to provide payment details and confirm the zero-price order. As a result of scenario the product’s validity remains unchanged, while auto-renewal is enabled. The discount applied during checkout will automatically take effect on the renewal.
 
@@ -473,14 +473,14 @@ POST /carts
 The `201 Created` response includes the `cartId` in the `Location` header.
 
 **API Response Example**
-```json
+```
 Headers
 Location: /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
 ```
 To retrieve the cart content, use the `cartId` with the API request below.
 
 **API Request Example**
-```json
+```
 GET /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
 ```
 The `201 Created` response contains the `checkoutUrl` attribute. Use this URL to redirect the end-user to the shopping cart. 
@@ -490,7 +490,7 @@ The `201 Created` response contains the `checkoutUrl` attribute. Use this URL to
 Build a buy-link that directs the shopper straight to the shopping cart for review and checkout. 
 
 **Buy-link Example**
-```json
+```
 https://storeName.mydomain.fr/checkout/add?products=2f9bb37b-3558-49f0-bea6-69ab834013de&mktop=testCampaign&scenario=subscriptionimport&&discountTag=testDiscountPlan&discountStep=0&theme=theme&layout=layout
 ```
 
@@ -500,3 +500,28 @@ On the checkout page, the total price is displayed as zero, meaning the shopper 
 
 After the shopper confirms the order, Nexway processes the checkout and converts it into an order. As part of this process, the subscription is created. Once the order is successfully completed, the shopper is redirected to a Thank You page and receives a confirmation email. On the scheduled renewal date, the shopper will be charged with the applied discount, and the subscription will renew automatically for the next period.
 
+
+## Updating Subscription Renewal Product
+
+You can update the product associated with a subscription's renewal, allowing for upgrades or downgrades. Note that the changes made through this process will take effect at the next subscription renewal.
+
+```json
+POST /purchases/{subscriptionId}/
+
+{
+  "productId": "downgradedProductId"
+}
+```
+
+**Input Parameter**
+
+`productid` (Required, string): Product identifier.
+
+**Response Codes**
+
+- 200: Subscription renewal product is updated.
+- 400: Request validation failure (e.g., subscription suspended, prebilling order exists, invalid product ID).
+- 401: Authentication failed.
+- 403: Forbidden (user not entitled to call the service).
+- 404: Requested subscription not found.
+- 500: Internal server error.

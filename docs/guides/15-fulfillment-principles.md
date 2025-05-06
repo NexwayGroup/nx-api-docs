@@ -21,6 +21,7 @@ Action |Event on Nexway side | Endpoint called on your side | Result
 Create | Order is confirmed | http://yourserver.com/licenses/new | Activate or get a license key for a product
 Cancel | Order is canceled | http://yourserver.com/licenses/cancel | Cancel/Revoke a license key
 Renew (subscription only) | Renewal of subscription product | http://yourserver.com/licenses/renew | Get a new key or extend key validity
+Upgrade (subscription [mid-term upgrade](35-subscription-managment.md)) | Upgrade of subscription product | http://yourserver.com/licenses/upgrade | Upgrade the license
 
 ## Fulfillment request payload
 Nexway can configure the payload sent to the partner's server to a certain extent. The fulfillment request is sent as a POST HTTP request and has the following attributes:
@@ -28,31 +29,31 @@ Nexway can configure the payload sent to the partner's server to a certain exten
 | Property                | R/O | Type                | Description                                                                                                                    |
 |-------------------------|-----|---------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | licenseId               | R   | UUID                | Fulfillment Id, identifier of the fulfillment process                                                                          |
-| operation               | R   | string              | One of the supported operations: create, renew, cancel                                                                         |
+| operation               | R   | string              | One of the supported operations: create, renew, upgrade, cancel                                                                         |
 | checkout                | R   | object              | Has some order related attributes (see below):                                                                                 |
-| orderId                 | R   | string              |                                                                                                                                |
-| lineItemId              | R   | string              | UUID of the order line item                                                                                                    |
-| cartExternalContext     | O   | string              | base64 encoded plain json map. Taken from the external context of a shopping cart.  Used to pass customer specific parameters. Example: eyJjdXN0b21QYXJhbSI6dHJ1ZX0 |
-| subscriptionId          | O   | string              | UUID of a subscription                                                                                                         |
-| trialContext            | O   | string              | CREATION\|CONVERSION                                                                                                           |
+| ↳ orderId                 | R   | string              |                                                                                                                                |
+| ↳ lineItemId              | R   | string              | UUID of the order line item                                                                                                    |
+| ↳ cartExternalContext     | O   | string              | base64 encoded plain json map. Taken from the external context of a shopping cart.  Used to pass customer specific parameters. Example: eyJjdXN0b21QYXJhbSI6dHJ1ZX0 |
+| ↳ subscriptionId          | O   | string              | UUID of a subscription                                                                                                         |
+| ↳ trialContext            | O   | string              | CREATION\|CONVERSION                                                                                                           |
 | user                    | R   | object              | Buyer attributes:                                                                                                              |
-| id                      | R   | string              | End-user Id                                                                                                                    |
-| companyName             | O   | string              |                                                                                                                                |
-| companyIdentifier       | O   | string              | CNPJ or VAT number. Tax identifier                                                                                             |
-| firstName               | O   | string              |                                                                                                                                |
-| lastName                | O   | string              |                                                                                                                                |
-| email                   | R   | string              |                                                                                                                                |
-| city                    | O   | string              |                                                                                                                                |
-| zipCode                 | O   | string              |                                                                                                                                |
-| country                 | R   | string              | 2 letter ISO code                                                                                                              |
-| locale                  | R   | string              | Shopping cart locale                                                                                                           |
+| ↳ id                      | R   | string              | End-user Id                                                                                                                    |
+| ↳ companyName             | O   | string              |                                                                                                                                |
+| ↳ companyIdentifier       | O   | string              | CNPJ or VAT number. Tax identifier                                                                                             |
+| ↳ firstName               | O   | string              |                                                                                                                                |
+| ↳ lastName                | O   | string              |                                                                                                                                |
+| ↳ email                   | R   | string              |                                                                                                                                |
+| ↳ city                    | O   | string              |                                                                                                                                |
+| ↳ zipCode                 | O   | string              |                                                                                                                                |
+| ↳ country                 | R   | string              | 2 letter ISO code                                                                                                              |
+| ↳ locale                  | R   | string              | Shopping cart locale                                                                                                           |
 | product                 | R   | object              | Product related attributes:                                                                                                    |
-| id                      | R   | string              | Product Id                                                                                                                     |
-| publisherProductId      | O   | string              | Publisher/ customer specific product id (if defined)                                                                           |
-| name                    | R   | string              | Internal product name                                                                                                          |
-| externalContext         | O   | string              | Product external context. Defined in the catalog                                                                               |
-| priceFunctionParameters | O   | map(string, string) | Map of price function parameters (if defined on the product level)                                                             |
-| variables               | O   | map(string, string) | Map of variables (if defined)                                                                                                  |
+| ↳ id                      | R   | string              | Product Id                                                                                                                     |
+| ↳ publisherProductId      | O   | string              | Publisher/ customer specific product id (if defined)                                                                           |
+| ↳ name                    | R   | string              | Internal product name                                                                                                          |
+| ↳ externalContext         | O   | string              | Product external context. Defined in the catalog                                                                               |
+| ↳ priceFunctionParameters | O   | map(string, string) | Map of price function parameters (if defined on the product level)                                                             |
+| ↳ variables               | O   | map(string, string) | Map of variables (if defined)                                                                                                  |
 
 Nexway has the capability to initiate a customized call to the partner's server, likely including fields with different names but similar information to those mentioned above. We can create a dedicated fulfillment template that will effectively map these values to attributes recognized by your existing service.
 
