@@ -1216,6 +1216,11 @@
                     "prices": {
                         "$ref": "#/components/schemas/Prices"
                     },
+                    "priority": {
+                        "description": "Product sort order priority",
+                        "format": "int32",
+                        "type": "integer"
+                    },
                     "productFamily": {
                         "description": "Product family",
                         "maxLength": 128,
@@ -1590,6 +1595,11 @@
                     },
                     "prices": {
                         "$ref": "#/components/schemas/Prices"
+                    },
+                    "priority": {
+                        "description": "Product sort order priority",
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "productFamily": {
                         "description": "Product family",
@@ -1984,6 +1994,11 @@
                         },
                         "description": "Product value parameters",
                         "type": "object"
+                    },
+                    "priority": {
+                        "description": "Product sort order priority",
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "productFamily": {
                         "description": "Product family",
