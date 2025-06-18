@@ -1,0 +1,320 @@
+{
+    "components": {
+        "schemas": {
+            "CancelCommandFilterRequest": {
+                "properties": {
+                    "entityId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "entityId"
+                ],
+                "type": "object"
+            },
+            "Command": {
+                "properties": {
+                    "commandName": {
+                        "type": "string"
+                    },
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "entity": {
+                        "$ref": "#/components/schemas/CommandEntity"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "retryCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "enum": [
+                            "SCHEDULED",
+                            "IN_PROGRESS",
+                            "CANCELLED",
+                            "SENT"
+                        ],
+                        "type": "string"
+                    },
+                    "triggerDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CommandEntity": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateCommandRequest": {
+                "properties": {
+                    "commandName": {
+                        "type": "string"
+                    },
+                    "entityId": {
+                        "type": "string"
+                    },
+                    "entityType": {
+                        "type": "string"
+                    },
+                    "retryCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "triggerDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "entityId",
+                    "entityType",
+                    "triggerDate"
+                ],
+                "type": "object"
+            },
+            "Pageable": {
+                "properties": {
+                    "page": {
+                        "format": "int32",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultCommand": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Command"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "openapi": "3.0.1",
+    "paths": {
+        "/command-scheduler/api/commands": {
+            "get": {
+                "operationId": "getCommands",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultCommand"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Get Commands with pagination and filtering",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            },
+            "post": {
+                "operationId": "createCommand",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCommandRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Command"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Create Command",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
+        "/command-scheduler/api/commands/cancel": {
+            "put": {
+                "operationId": "cancelCommands",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CancelCommandFilterRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Cancel Commands",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
+        "/command-scheduler/api/commands/replace": {
+            "post": {
+                "operationId": "cancelPreviousCommandsAndCreateNewOnes",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/CreateCommandRequest"
+                                },
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Cancel previous commands and create new ones for one entity",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
+        "/command-scheduler/api/commands/{commandId}": {
+            "get": {
+                "operationId": "getCommandById",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "commandId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Command"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Get Command by Id",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
+        "/command-scheduler/api/commands/{commandId}/cancel": {
+            "put": {
+                "operationId": "cancelCommand",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "commandId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Cancel Command by Id",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        }
+    },
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
+        }
+    ]
+}
