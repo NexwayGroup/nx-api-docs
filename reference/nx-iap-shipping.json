@@ -1,0 +1,147 @@
+{
+    "components": {
+        "schemas": {
+            "Price": {
+                "description": "Shipping method price",
+                "properties": {
+                    "currency": {
+                        "description": "Currency code in ISO-4217 format",
+                        "example": "EUR",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "grossPrice": {
+                        "description": "Gross price",
+                        "example": 9.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "description": "Net price",
+                        "example": 8.4,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmount": {
+                        "description": "Tax amount",
+                        "example": 1.59,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatIncluded": {
+                        "description": "Tax included / not included",
+                        "example": true,
+                        "type": "boolean"
+                    },
+                    "vatRate": {
+                        "description": "Tax rate",
+                        "example": 0.19,
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "currency",
+                    "grossPrice",
+                    "netPrice",
+                    "vatAmount",
+                    "vatIncluded",
+                    "vatRate"
+                ],
+                "type": "object"
+            },
+            "ShippingMethod": {
+                "properties": {
+                    "carrierId": {
+                        "description": "Shipping carrier ID",
+                        "example": "37f8165b-b0a2-470d-a2bb-9e29dbf7c36f",
+                        "type": "string"
+                    },
+                    "carrierTitle": {
+                        "description": "Shipping carrier title",
+                        "example": "DHL",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Shipping method description",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Shipping method ID",
+                        "example": "37f8165b-b0a2-470d-a2bb-9e29dbf7c36f",
+                        "type": "string"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/Price"
+                    }
+                },
+                "required": [
+                    "carrierId",
+                    "carrierTitle",
+                    "description",
+                    "id",
+                    "price"
+                ],
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "openapi": "3.0.1",
+    "paths": {
+        "/shipping-manager/shipping/methods": {
+            "get": {
+                "operationId": "getShippingMethods",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ShippingMethod"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Returns shipping methods",
+                "tags": [
+                    "Shipping"
+                ]
+            }
+        }
+    },
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
+        }
+    ]
+}
