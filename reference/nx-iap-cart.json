@@ -460,6 +460,9 @@
                         "type": "array",
                         "uniqueItems": true
                     },
+                    "shipping": {
+                        "$ref": "#/components/schemas/Shipping"
+                    },
                     "source": {
                         "description": "It defines the source of the cart",
                         "enum": [
@@ -740,6 +743,9 @@
                         "example": "acquisition",
                         "type": "string"
                     },
+                    "shipping": {
+                        "$ref": "#/components/schemas/Shipping"
+                    },
                     "source": {
                         "description": "Source",
                         "enum": [
@@ -913,6 +919,9 @@
                         "description": "To be able to display different elements in the order workflow",
                         "example": "acquisition",
                         "type": "string"
+                    },
+                    "shipping": {
+                        "$ref": "#/components/schemas/Shipping"
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
@@ -1908,7 +1917,6 @@
                 "type": "object"
             },
             "Price": {
-                "description": "All information related to prices",
                 "properties": {
                     "currency": {
                         "description": "Currency code in ISO-4217 format",
@@ -2233,6 +2241,9 @@
                         "example": "acquisition",
                         "type": "string"
                     },
+                    "shipping": {
+                        "$ref": "#/components/schemas/Shipping"
+                    },
                     "source": {
                         "description": "Source",
                         "enum": [
@@ -2447,6 +2458,10 @@
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
                         "readOnly": true,
                         "type": "string"
+                    },
+                    "physical": {
+                        "description": "How do we deliver product : physical/digital",
+                        "type": "boolean"
                     },
                     "previousLineItemId": {
                         "description": "Previous line item ID",
@@ -2694,6 +2709,10 @@
                         "description": "Product parent ID",
                         "example": "2a196c8f-089d-4196-a8f9-16ad61e70b25",
                         "type": "string"
+                    },
+                    "physical": {
+                        "description": "How do we deliver product : physical/digital",
+                        "type": "boolean"
                     },
                     "previousLineItemId": {
                         "description": "Previous line item ID",
@@ -3091,6 +3110,23 @@
                 ],
                 "type": "object"
             },
+            "Shipping": {
+                "description": "Shipping information for physical goods",
+                "properties": {
+                    "selectedShippingMethod": {
+                        "description": "Shipping method ID chosen by user",
+                        "type": "string"
+                    },
+                    "shippingMethods": {
+                        "description": "List of shipping method eligible for specific shopping cart",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippingMethod"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "ShippingAddress": {
                 "description": "End-user Shipping address",
                 "properties": {
@@ -3142,6 +3178,27 @@
                     "streetAddress",
                     "zipCode"
                 ],
+                "type": "object"
+            },
+            "ShippingMethod": {
+                "description": "List of shipping method eligible for specific shopping cart",
+                "properties": {
+                    "carrierId": {
+                        "type": "string"
+                    },
+                    "carrierTitle": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/Price"
+                    }
+                },
                 "type": "object"
             },
             "SubscriptionOfferRequest": {
