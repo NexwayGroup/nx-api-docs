@@ -784,6 +784,10 @@
                     "discountedPrice": {
                         "$ref": "#/components/schemas/DiscountedPrice"
                     },
+                    "grossMsrp": {
+                        "format": "double",
+                        "type": "number"
+                    },
                     "grossPrice": {
                         "description": "Cost of product with taxes included",
                         "format": "double",
@@ -814,6 +818,10 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "netMsrp": {
+                        "format": "double",
+                        "type": "number"
+                    },
                     "netPrice": {
                         "description": "Net price",
                         "format": "double",
@@ -840,6 +848,10 @@
                     },
                     "vatAmount": {
                         "description": "VAT amount (grossPrice - netPrice) ",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmountMsrp": {
                         "format": "double",
                         "type": "number"
                     },
