@@ -1771,6 +1771,34 @@
                 ],
                 "type": "object"
             },
+            "ResellerCompany": {
+                "description": "Company information",
+                "properties": {
+                    "cnpj": {
+                        "description": "CPNJ",
+                        "example": "34.517.518/0001-19",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "description": "End user company name",
+                        "example": "Nexway",
+                        "maxLength": 255,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "vatNumber": {
+                        "description": "VAT number",
+                        "example": "FR0012346789",
+                        "maxLength": 32,
+                        "minLength": 0,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "companyName"
+                ],
+                "type": "object"
+            },
             "ResetPasswordRequest": {
                 "properties": {
                     "email": {
@@ -1810,6 +1838,94 @@
                         "type": "string"
                     },
                     "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SSOResellerRequest": {
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "company": {
+                        "$ref": "#/components/schemas/ResellerCompany"
+                    },
+                    "country": {
+                        "description": "Country",
+                        "example": "FR",
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "description": "CPF value",
+                        "example": "984.789.857-00",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "example": "jhon.doe@nexway.com",
+                        "maxLength": 150,
+                        "minLength": 6,
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "Doe",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "locale": {
+                        "description": "Locale used by end user",
+                        "example": "fr-FR",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Street address",
+                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "type": "string"
+                    },
+                    "resellerPIN": {
+                        "description": "Reseller PIN",
+                        "example": "XXXXX",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": "75001",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "city",
+                    "country",
+                    "email",
+                    "firstName",
+                    "lastName",
+                    "resellerPIN",
+                    "zipCode"
+                ],
+                "type": "object"
+            },
+            "SSOResellerResponse": {
+                "properties": {
+                    "redirectionURL": {
+                        "description": "SSO Redirection URL",
+                        "example": "https://www.nexway.com",
                         "type": "string"
                     }
                 },
@@ -6682,6 +6798,77 @@
                     "EndUser"
                 ],
                 "x-operationWeight": "150"
+            }
+        },
+        "/endusers/sso/reseller": {
+            "post": {
+                "operationId": "createOrUpdateResellerBySSORequest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SSOResellerRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOResellerResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create or update a Reseller by SSO",
+                "tags": [
+                    "EndUser"
+                ]
             }
         },
         "/endusers/subscriptions/{subscriptionId}/{action}": {
