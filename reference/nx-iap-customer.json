@@ -2,7 +2,6 @@
     "components": {
         "schemas": {
             "AddressBook": {
-                "description": "Customer addressbook",
                 "properties": {
                     "city": {
                         "description": "Address book city",
@@ -28,7 +27,7 @@
                     },
                     "streetAddress": {
                         "description": "Address book street address",
-                        "example": "1 rue de la paix",
+                        "example": 1,
                         "maxLength": 150,
                         "minLength": 1,
                         "type": "string"
@@ -142,7 +141,8 @@
             "Customer": {
                 "properties": {
                     "addressBook": {
-                        "$ref": "#/components/schemas/AddressBook"
+                        "$ref": "#/components/schemas/AddressBook",
+                        "description": "Customer addressbook"
                     },
                     "authorizedCustomers": {
                         "items": {
@@ -162,7 +162,6 @@
                     "availableLocales": {
                         "description": "Available locales",
                         "items": {
-                            "description": "Available locales",
                             "type": "string"
                         },
                         "type": "array",
@@ -176,8 +175,6 @@
                         "description": "List of countries not authorized for this customer",
                         "example": "[AF,AX]",
                         "items": {
-                            "description": "List of countries not authorized for this customer",
-                            "example": "[AF,AX]",
                             "type": "string"
                         },
                         "type": "array"
@@ -219,15 +216,14 @@
                         "type": "integer"
                     },
                     "defaultOnboardingProperties": {
-                        "$ref": "#/components/schemas/DefaultOnboardingProperties"
+                        "$ref": "#/components/schemas/DefaultOnboardingProperties",
+                        "description": "Default onboarding properties"
                     },
                     "features": {
                         "$ref": "#/components/schemas/Features"
                     },
                     "fulfillments": {
                         "additionalProperties": {
-                            "description": "Map of customer fulfillments",
-                            "example": "{\"fulfilmentName\"  \"fulfillmentName\"}",
                             "type": "string"
                         },
                         "description": "Map of customer fulfillments",
@@ -235,7 +231,9 @@
                         "type": "object"
                     },
                     "iamClient": {
-                        "$ref": "#/components/schemas/IamClient"
+                        "$ref": "#/components/schemas/IamClient",
+                        "description": "iam client information",
+                        "readOnly": true
                     },
                     "id": {
                         "deprecated": true,
@@ -250,7 +248,6 @@
                     },
                     "localizedPaymentDescriptors": {
                         "additionalProperties": {
-                            "description": "Payment descriptors",
                             "type": "string"
                         },
                         "description": "Payment descriptors",
@@ -364,11 +361,12 @@
                         "type": "boolean"
                     },
                     "subscriptionUpgradeConfiguration": {
-                        "$ref": "#/components/schemas/SubscriptionUpgradeConfiguration"
+                        "$ref": "#/components/schemas/SubscriptionUpgradeConfiguration",
+                        "description": "Mid-term upgrade configuration",
+                        "readOnly": true
                     },
                     "subscriptions": {
                         "additionalProperties": {
-                            "description": "Customer subscriptions",
                             "type": "string"
                         },
                         "description": "Customer subscriptions",
@@ -415,7 +413,6 @@
                 "type": "object"
             },
             "DefaultOnboardingProperties": {
-                "description": "Default onboarding properties",
                 "properties": {
                     "customerStatus": {
                         "type": "string"
@@ -587,7 +584,6 @@
                 "type": "object"
             },
             "IamClient": {
-                "description": "iam client information",
                 "properties": {
                     "clientSecret": {
                         "description": "Customer auth client secret",
@@ -613,7 +609,6 @@
                         "uniqueItems": true
                     }
                 },
-                "readOnly": true,
                 "required": [
                     "realmName"
                 ],
@@ -631,7 +626,7 @@
                             "$ref": "#/components/schemas/QueryParameter"
                         },
                         "description": "list of useful parameters to generate the activation link ",
-                        "example": "\"queryParameters\": { \"param1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"param2\": { \"type\": \"STATIC\", \"value\": \"staticval2\" }, \"ac\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"ACTIVATION_CODE\" }, \"param3\": { \"type\": \"LINK\", value: { \"base\": \"https://my-ugly.site/path/to/cement\", \"queryParameters\": { \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"email\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"email\" } } } }",
+                        "example": "queryParameters",
                         "type": "object"
                     }
                 },
@@ -706,7 +701,6 @@
                     "availableAdditionalPaymentTypes": {
                         "description": "List of available payment types authorized for this customer",
                         "items": {
-                            "description": "List of available payment types authorized for this customer",
                             "type": "string"
                         },
                         "type": "array"
@@ -714,7 +708,6 @@
                     "blackListedPaymentTypes": {
                         "description": "List of payment types not authorized for this customer",
                         "items": {
-                            "description": "List of payment types not authorized for this customer",
                             "type": "string"
                         },
                         "type": "array"
@@ -723,8 +716,6 @@
                         "description": "List of forced payment types for this customer",
                         "example": "sepa, payal",
                         "items": {
-                            "description": "List of forced payment types for this customer",
-                            "example": "sepa, payal",
                             "type": "string"
                         },
                         "type": "array"
@@ -878,16 +869,10 @@
                 "type": "object"
             },
             "QueryParameter": {
-                "description": "list of useful parameters to generate the activation link ",
-                "example": "\"queryParameters\": { \"param1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"param2\": { \"type\": \"STATIC\", \"value\": \"staticval2\" }, \"ac\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"ACTIVATION_CODE\" }, \"param3\": { \"type\": \"LINK\", value: { \"base\": \"https://my-ugly.site/path/to/cement\", \"queryParameters\": { \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"email\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"email\" } } } }",
                 "properties": {
                     "type": {
                         "description": "parameter type",
                         "enum": [
-                            "STATIC",
-                            "DYNAMIC",
-                            "DYNAMIC_ENCRYPTED",
-                            "LINK",
                             "STATIC",
                             "DYNAMIC",
                             "DYNAMIC_ENCRYPTED",
@@ -897,7 +882,7 @@
                     },
                     "value": {
                         "description": "gven value to the query parameter, can be a text value or a query parameter json value",
-                        "example": "\"value\": \"staticval1\" or \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" },",
+                        "example": "value",
                         "type": "object"
                     }
                 },
@@ -925,7 +910,8 @@
                         "type": "string"
                     },
                     "details": {
-                        "$ref": "#/components/schemas/RemittanceAccount"
+                        "$ref": "#/components/schemas/RemittanceAccount",
+                        "description": "Details of remittance account, used by the partner payment account"
                     },
                     "name": {
                         "description": "Customer name of this Remittable",
@@ -943,7 +929,6 @@
                 "type": "object"
             },
             "RemittanceAccount": {
-                "description": "Details of remittance account, used by the partner payment account",
                 "type": "object"
             },
             "SearchResultBlackListedSignedData": {
@@ -1157,7 +1142,6 @@
                 "type": "object"
             },
             "SecretKey": {
-                "description": "Client secret list",
                 "properties": {
                     "createDate": {
                         "description": "Creation date of this secret",
@@ -1199,13 +1183,11 @@
                 "type": "object"
             },
             "SubscriptionUpgradeConfiguration": {
-                "description": "Mid-term upgrade configuration",
                 "properties": {
                     "midTermUpgrade": {
                         "$ref": "#/components/schemas/MidTermUpgrade"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             }
         },
@@ -1226,7 +1208,7 @@
         "title": "Customer",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/customers": {
             "get": {
@@ -1485,13 +1467,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Customer"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -1643,13 +1618,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BlackListedSignedData"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -2623,13 +2591,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Provider"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
