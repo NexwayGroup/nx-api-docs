@@ -2,7 +2,6 @@
     "components": {
         "schemas": {
             "DiscountPlan": {
-                "description": "Discount plan",
                 "properties": {
                     "discountStep": {
                         "format": "int32",
@@ -86,8 +85,7 @@
                     "startDate",
                     "status",
                     "type"
-                ],
-                "type": "object"
+                ]
             },
             "NormalizeException": {
                 "properties": {
@@ -145,7 +143,6 @@
                             "productIds": {
                                 "description": "Product ids to be recommended",
                                 "items": {
-                                    "description": "Product ids to be recommended",
                                     "type": "string"
                                 },
                                 "type": "array",
@@ -165,8 +162,7 @@
                     "startDate",
                     "status",
                     "type"
-                ],
-                "type": "object"
+                ]
             },
             "Price": {
                 "type": "object"
@@ -192,12 +188,12 @@
                         "type": "integer"
                     },
                     "discountPlan": {
-                        "$ref": "#/components/schemas/DiscountPlan"
+                        "$ref": "#/components/schemas/DiscountPlan",
+                        "description": "Discount plan"
                     },
                     "eligibleParentProductIds": {
                         "description": "Parent product ids on which recommendation can be applied",
                         "items": {
-                            "description": "Parent product ids on which recommendation can be applied",
                             "type": "string"
                         },
                         "type": "array",
@@ -206,7 +202,6 @@
                     "eligibleProductIds": {
                         "description": "Variant product ids on which recommendation can be applied",
                         "items": {
-                            "description": "Variant product ids on which recommendation can be applied",
                             "type": "string"
                         },
                         "type": "array",
@@ -215,7 +210,6 @@
                     "eligibleStoreIds": {
                         "description": "Store ids on which recommendation can be applied",
                         "items": {
-                            "description": "Store ids on which recommendation can be applied",
                             "type": "string"
                         },
                         "type": "array",
@@ -223,6 +217,7 @@
                     },
                     "endDate": {
                         "description": "Rule end date timestamp in milliseconds",
+                        "example": 1589439239780,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -250,13 +245,11 @@
                             "CART, PRODUCT, PURCHASE, INTERSTITIAL"
                         ],
                         "items": {
-                            "description": "Level on which recommendation will be displayed",
                             "enum": [
                                 "CART",
                                 "PRODUCT",
                                 "PURCHASE",
-                                "INTERSTITIAL",
-                                "CART, PRODUCT, PURCHASE, INTERSTITIAL"
+                                "INTERSTITIAL"
                             ],
                             "type": "string"
                         },
@@ -265,7 +258,6 @@
                     },
                     "localizedDesc": {
                         "additionalProperties": {
-                            "description": "Localized descriptions",
                             "type": "string"
                         },
                         "description": "Localized descriptions",
@@ -293,14 +285,12 @@
                             "PURCHASE, SUBSCRIPTION, MANUAL_RENEWAL, BILLING_PLAN"
                         ],
                         "items": {
-                            "description": "Restriction of recommendation to specific sources",
                             "enum": [
                                 "PURCHASE",
                                 "SUBSCRIPTION",
                                 "MANUAL_RENEWAL",
                                 "BILLING_PLAN",
-                                "UPGRADE",
-                                "PURCHASE, SUBSCRIPTION, MANUAL_RENEWAL, BILLING_PLAN"
+                                "UPGRADE"
                             ],
                             "type": "string"
                         },
@@ -309,6 +299,7 @@
                     },
                     "startDate": {
                         "description": "Rule start date timestamp in milliseconds",
+                        "example": 1589439239780,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -323,10 +314,6 @@
                     "type": {
                         "description": "Recommendation type",
                         "enum": [
-                            "CROSS_SELL",
-                            "UP_SELL",
-                            "UPGRADE",
-                            "DEFAULT",
                             "CROSS_SELL, UP_SELL, UPGRADE"
                         ],
                         "type": "string"
@@ -632,7 +619,7 @@
         "title": "Product Recommendation",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/product-recommendations": {
             "get": {
@@ -742,20 +729,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "oneOf": [
-                                        {
-                                            "$ref": "#/components/schemas/IdToIdsRecoRule"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/PredefinedIdsRecoRule"
-                                        }
-                                    ]
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
