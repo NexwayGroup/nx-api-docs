@@ -63,7 +63,6 @@
                 "type": "object"
             },
             "Event": {
-                "description": "Historical data on the price",
                 "properties": {
                     "affectedIds": {
                         "items": {
@@ -87,7 +86,6 @@
                         "type": "string"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "ExceptionDetail": {
@@ -309,6 +307,7 @@
                     },
                     "endDate": {
                         "description": "Price end date timestamp in milliseconds",
+                        "example": 1589439239780,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -362,7 +361,8 @@
                         "type": "string"
                     },
                     "remotePrice": {
-                        "$ref": "#/components/schemas/RemotePrice"
+                        "$ref": "#/components/schemas/RemotePrice",
+                        "description": "Remote price information"
                     },
                     "source": {
                         "description": "Source of the price",
@@ -376,6 +376,7 @@
                     },
                     "startDate": {
                         "description": "Price start date timestamp in milliseconds",
+                        "example": 1589439239780,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -440,7 +441,6 @@
                 "type": "object"
             },
             "RemotePrice": {
-                "description": "Remote price information",
                 "properties": {
                     "licenseNextExpirationDate": {
                         "description": "the date of end date of license",
@@ -596,7 +596,7 @@
         "title": "Price",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/prices": {
             "get": {
@@ -760,13 +760,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Price"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -884,7 +877,7 @@
                         "name": "date",
                         "required": false,
                         "schema": {
-                            "default": "2025-07-10T15:03:01.975Z",
+                            "default": "2025-08-04T15:26:02.146Z",
                             "format": "date-time",
                             "type": "string"
                         }
