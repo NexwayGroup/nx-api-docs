@@ -2,7 +2,6 @@
     "components": {
         "schemas": {
             "ActivationLink": {
-                "description": "Activation link",
                 "properties": {
                     "enabled": {
                         "type": "boolean"
@@ -168,7 +167,8 @@
                         "type": "boolean"
                     },
                     "prices": {
-                        "$ref": "#/components/schemas/Prices"
+                        "$ref": "#/components/schemas/Prices",
+                        "description": "Sale price of product by currency and country"
                     },
                     "productId": {
                         "description": "Product ID of merchant",
@@ -177,7 +177,6 @@
                     "sellingStores": {
                         "description": "List of stores selling this product",
                         "items": {
-                            "description": "List of stores selling this product",
                             "type": "string"
                         },
                         "type": "array"
@@ -249,7 +248,6 @@
                     },
                     "localizedBulletPoints": {
                         "additionalProperties": {
-                            "description": "localized bullet points",
                             "type": "string"
                         },
                         "description": "localized bullet points",
@@ -257,7 +255,6 @@
                     },
                     "localizedLongDesc": {
                         "additionalProperties": {
-                            "description": "Localized long descriptions",
                             "type": "string"
                         },
                         "description": "Localized long descriptions",
@@ -265,7 +262,6 @@
                     },
                     "localizedManualRenewalEmailDesc": {
                         "additionalProperties": {
-                            "description": "Localized manual Renewal email descriptions",
                             "type": "string"
                         },
                         "description": "Localized manual Renewal email descriptions",
@@ -273,7 +269,6 @@
                     },
                     "localizedMarketingName": {
                         "additionalProperties": {
-                            "description": "Localized marketing name descriptions",
                             "type": "string"
                         },
                         "description": "Localized marketing name descriptions",
@@ -281,7 +276,6 @@
                     },
                     "localizedPurchaseEmailDesc": {
                         "additionalProperties": {
-                            "description": "Localized purchase email descriptions",
                             "type": "string"
                         },
                         "description": "Localized purchase email descriptions",
@@ -289,7 +283,6 @@
                     },
                     "localizedShortDesc": {
                         "additionalProperties": {
-                            "description": "Localized short descriptions",
                             "type": "string"
                         },
                         "description": "Localized short descriptions",
@@ -297,7 +290,6 @@
                     },
                     "localizedSubscriptionEmailDesc": {
                         "additionalProperties": {
-                            "description": "Localized subscription email descriptions",
                             "type": "string"
                         },
                         "description": "Localized subscription email descriptions",
@@ -305,7 +297,6 @@
                     },
                     "localizedThankYouDesc": {
                         "additionalProperties": {
-                            "description": "Localized thank you page descriptions",
                             "type": "string"
                         },
                         "description": "Localized thank you page descriptions",
@@ -455,11 +446,9 @@
                 "type": "object"
             },
             "DiscountStatus": {
-                "description": "Discount status",
                 "type": "object"
             },
             "DiscountedPrice": {
-                "description": "Discounted price",
                 "properties": {
                     "cumulatedDiscountRate": {
                         "format": "double",
@@ -489,7 +478,6 @@
                         "type": "number"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "Document": {
@@ -559,7 +547,6 @@
                 "type": "object"
             },
             "FullPrice": {
-                "description": "Unit price of the product",
                 "properties": {
                     "crossSell": {
                         "description": "The cross sell price; enter -1 to use the currency cross sell price for this country",
@@ -593,7 +580,9 @@
                         "type": "object"
                     },
                     "discountedPrice": {
-                        "$ref": "#/components/schemas/DiscountedPrice"
+                        "$ref": "#/components/schemas/DiscountedPrice",
+                        "description": "Discounted price",
+                        "readOnly": true
                     },
                     "grossMsrp": {
                         "description": "MSRP (Manufacturer Suggested Retail Price) with taxes included",
@@ -654,7 +643,8 @@
                         "type": "string"
                     },
                     "remotePrice": {
-                        "$ref": "#/components/schemas/RemotePrice"
+                        "$ref": "#/components/schemas/RemotePrice",
+                        "description": "Information of remote price"
                     },
                     "source": {
                         "description": "Source of price",
@@ -862,7 +852,6 @@
                 "type": "object"
             },
             "Parameter": {
-                "description": "Parameters of the expression",
                 "properties": {
                     "defaultValue": {
                         "description": "Parameter default value",
@@ -878,7 +867,6 @@
                     },
                     "labels": {
                         "additionalProperties": {
-                            "description": "Parameter labels",
                             "type": "string"
                         },
                         "description": "Parameter labels",
@@ -964,7 +952,6 @@
                     "productFields": {
                         "description": "Product fields used in the expression",
                         "items": {
-                            "description": "Product fields used in the expression",
                             "type": "string"
                         },
                         "type": "array",
@@ -978,7 +965,6 @@
                     "variables": {
                         "description": "Variables used in the expression",
                         "items": {
-                            "description": "Variables used in the expression",
                             "type": "string"
                         },
                         "type": "array",
@@ -992,7 +978,6 @@
                 "type": "object"
             },
             "PriceInformation": {
-                "description": "Product price by currency (ISO-4217) and country (ISO-3166-1 alpha-2); each currency requires a default price",
                 "properties": {
                     "crossSell": {
                         "description": "The cross sell price; enter -1 to use the currency cross sell price for this country",
@@ -1032,7 +1017,6 @@
                 "type": "object"
             },
             "Prices": {
-                "description": "Price of product by currency and country",
                 "properties": {
                     "defaultCurrency": {
                         "description": "Product default currency (ISO-4217 format)",
@@ -1065,7 +1049,6 @@
                             "additionalProperties": {
                                 "$ref": "#/components/schemas/PriceInformation"
                             },
-                            "description": "Product price by currency (ISO-4217) and country (ISO-3166-1 alpha-2); each currency requires a default price",
                             "type": "object"
                         },
                         "description": "Product price by currency (ISO-4217) and country (ISO-3166-1 alpha-2); each currency requires a default price",
@@ -1081,7 +1064,8 @@
             "Product": {
                 "properties": {
                     "activationLink": {
-                        "$ref": "#/components/schemas/ActivationLink"
+                        "$ref": "#/components/schemas/ActivationLink",
+                        "description": "Activation link"
                     },
                     "availableVariables": {
                         "description": "Available product variables",
@@ -1093,7 +1077,6 @@
                     "blackListedCountries": {
                         "description": "List of countries not authorized for this product",
                         "items": {
-                            "description": "List of countries not authorized for this product",
                             "type": "string"
                         },
                         "type": "array",
@@ -1144,7 +1127,6 @@
                     "forcedCrossSaleProductIds": {
                         "description": "List of forced cross-sales product IDs",
                         "items": {
-                            "description": "List of forced cross-sales product IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1186,7 +1168,6 @@
                     "nextGenerationOf": {
                         "description": "List of old generation IDs",
                         "items": {
-                            "description": "List of old generation IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1214,7 +1195,8 @@
                         "type": "string"
                     },
                     "prices": {
-                        "$ref": "#/components/schemas/Prices"
+                        "$ref": "#/components/schemas/Prices",
+                        "description": "Price of product by currency and country"
                     },
                     "priority": {
                         "description": "Product sort order priority",
@@ -1271,7 +1253,6 @@
                     "sellingStores": {
                         "description": "List of stores selling this product",
                         "items": {
-                            "description": "List of stores selling this product",
                             "type": "string"
                         },
                         "type": "array",
@@ -1292,7 +1273,6 @@
                     "subProducts": {
                         "description": "List of sub-product IDs",
                         "items": {
-                            "description": "List of sub-product IDs",
                             "type": "string"
                         },
                         "type": "array"
@@ -1346,9 +1326,7 @@
                     },
                     "visualTags": {
                         "additionalProperties": {
-                            "description": "Visual tags linked to product",
                             "items": {
-                                "description": "Visual tags linked to product",
                                 "type": "string"
                             },
                             "type": "array",
@@ -1423,7 +1401,8 @@
             "ProductUpdate": {
                 "properties": {
                     "activationLink": {
-                        "$ref": "#/components/schemas/ActivationLink"
+                        "$ref": "#/components/schemas/ActivationLink",
+                        "description": "Activation link"
                     },
                     "availableVariables": {
                         "description": "Available product variables",
@@ -1435,7 +1414,6 @@
                     "blackListedCountries": {
                         "description": "List of countries not authorized for this product",
                         "items": {
-                            "description": "List of countries not authorized for this product",
                             "type": "string"
                         },
                         "type": "array",
@@ -1491,7 +1469,6 @@
                     "forcedCrossSaleProductIds": {
                         "description": "List of forced cross-sales product IDs",
                         "items": {
-                            "description": "List of forced cross-sales product IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1528,7 +1505,6 @@
                     },
                     "localizedLongDesc": {
                         "additionalProperties": {
-                            "description": "List of localized long descriptions of the product",
                             "type": "string"
                         },
                         "description": "List of localized long descriptions of the product",
@@ -1537,7 +1513,6 @@
                     },
                     "localizedShortDesc": {
                         "additionalProperties": {
-                            "description": "List of localized short descriptions of the product",
                             "type": "string"
                         },
                         "description": "List of localized short descriptions of the product",
@@ -1546,7 +1521,6 @@
                     },
                     "localizedThankYouDesc": {
                         "additionalProperties": {
-                            "description": "List of localized thank you descriptions of the product",
                             "type": "string"
                         },
                         "description": "List of localized thank you descriptions of the product",
@@ -1555,7 +1529,6 @@
                     },
                     "marketingName": {
                         "additionalProperties": {
-                            "description": "List of localized marketing names of the product",
                             "type": "string"
                         },
                         "description": "List of localized marketing names of the product",
@@ -1569,7 +1542,6 @@
                     "nextGenerationOf": {
                         "description": "List of old generation IDs",
                         "items": {
-                            "description": "List of old generation IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1597,7 +1569,8 @@
                         "type": "string"
                     },
                     "prices": {
-                        "$ref": "#/components/schemas/Prices"
+                        "$ref": "#/components/schemas/Prices",
+                        "description": "Price of product by currency and country"
                     },
                     "priority": {
                         "description": "Product sort order priority",
@@ -1654,7 +1627,6 @@
                     "sellingStores": {
                         "description": "List of stores selling this product",
                         "items": {
-                            "description": "List of stores selling this product",
                             "type": "string"
                         },
                         "type": "array",
@@ -1675,7 +1647,6 @@
                     "subProducts": {
                         "description": "List of sub-product IDs",
                         "items": {
-                            "description": "List of sub-product IDs",
                             "type": "string"
                         },
                         "type": "array"
@@ -1729,9 +1700,7 @@
                     },
                     "visualTags": {
                         "additionalProperties": {
-                            "description": "Visual tags linked to product",
                             "items": {
-                                "description": "Visual tags linked to product",
                                 "type": "string"
                             },
                             "type": "array",
@@ -1750,7 +1719,6 @@
                 "type": "object"
             },
             "PublicParameter": {
-                "description": "Product parameters",
                 "properties": {
                     "defaultValue": {
                         "description": "Parameter default value",
@@ -1805,12 +1773,12 @@
             "PublicProduct": {
                 "properties": {
                     "activationLink": {
-                        "$ref": "#/components/schemas/ActivationLink"
+                        "$ref": "#/components/schemas/ActivationLink",
+                        "description": "Activation link"
                     },
                     "blackListedCountries": {
                         "description": "List of countries not authorized for this product",
                         "items": {
-                            "description": "List of countries not authorized for this product",
                             "type": "string"
                         },
                         "type": "array",
@@ -1837,7 +1805,6 @@
                     },
                     "customFields": {
                         "additionalProperties": {
-                            "description": "Product custom fields",
                             "type": "object"
                         },
                         "description": "Product custom fields",
@@ -1906,7 +1873,6 @@
                     "forcedCrossSaleProductIds": {
                         "description": "List of forced cross-sales product IDs",
                         "items": {
-                            "description": "List of forced cross-sales product IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1949,7 +1915,6 @@
                     "nextGenerationOf": {
                         "description": "List of old generation IDs",
                         "items": {
-                            "description": "List of old generation IDs",
                             "type": "string"
                         },
                         "type": "array",
@@ -1977,7 +1942,8 @@
                         "type": "string"
                     },
                     "price": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "Unit price of the product with price function"
                     },
                     "priceFunctionExecutionErrorMessage": {
                         "description": "Error when executing the price function",
@@ -1992,7 +1958,6 @@
                     },
                     "priceFunctionParametersValues": {
                         "additionalProperties": {
-                            "description": "Product value parameters",
                             "type": "string"
                         },
                         "description": "Product value parameters",
@@ -2096,7 +2061,8 @@
                         "type": "boolean"
                     },
                     "unitPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "Unit price of the product"
                     },
                     "updateDate": {
                         "deprecated": true,
@@ -2105,7 +2071,6 @@
                     },
                     "variableValues": {
                         "additionalProperties": {
-                            "description": "Product variable values",
                             "type": "object"
                         },
                         "description": "Product variable values",
@@ -2124,9 +2089,7 @@
                     },
                     "visualTags": {
                         "additionalProperties": {
-                            "description": "Visual tags linked to product",
                             "items": {
-                                "description": "Visual tags linked to product",
                                 "type": "string"
                             },
                             "type": "array",
@@ -2155,7 +2118,6 @@
                 "type": "object"
             },
             "RelatedContent": {
-                "description": "Links for downloading product-related content file",
                 "properties": {
                     "file": {
                         "description": "Download link or filename with extension",
@@ -2173,7 +2135,6 @@
                 "type": "object"
             },
             "RemotePrice": {
-                "description": "Information of remote price",
                 "properties": {
                     "licenseNextExpirationDate": {
                         "description": "licenseNextExpirationDate",
@@ -2192,7 +2153,6 @@
                 "type": "object"
             },
             "Resource": {
-                "description": "Product resources",
                 "properties": {
                     "url": {
                         "description": "URL of the asset",
@@ -2527,7 +2487,6 @@
                 "type": "object"
             },
             "Variable": {
-                "description": "Available product variables",
                 "properties": {
                     "defaultValue": {
                         "description": "Name of variable",
@@ -2543,7 +2502,6 @@
                     },
                     "labels": {
                         "additionalProperties": {
-                            "description": "Variable labels",
                             "type": "string"
                         },
                         "description": "Variable labels",
@@ -2552,10 +2510,8 @@
                     "localizedValue": {
                         "additionalProperties": {
                             "additionalProperties": {
-                                "description": "Variable localized value",
                                 "type": "string"
                             },
-                            "description": "Variable localized value",
                             "type": "object"
                         },
                         "description": "Variable localized value",
@@ -2585,7 +2541,6 @@
                 "type": "object"
             },
             "VariableDescription": {
-                "description": "Variable Descriptions",
                 "properties": {
                     "description": {
                         "description": "Description",
@@ -2596,7 +2551,6 @@
                     },
                     "labels": {
                         "additionalProperties": {
-                            "description": "Short descriptions",
                             "type": "string"
                         },
                         "description": "Short descriptions",
@@ -2616,7 +2570,6 @@
                 "type": "object"
             },
             "VariableValueDescription": {
-                "description": "Descriptions of variable values",
                 "properties": {
                     "descValue": {
                         "type": "string"
@@ -2627,7 +2580,6 @@
                     },
                     "localizedValue": {
                         "additionalProperties": {
-                            "description": "Localized values of the variable",
                             "type": "string"
                         },
                         "description": "Localized values of the variable",
@@ -2657,7 +2609,7 @@
         "title": "Product",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/products": {
             "get": {
@@ -2934,13 +2886,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -2993,7 +2938,7 @@
         },
         "/products/customFields": {
             "get": {
-                "operationId": "getItems_5",
+                "operationId": "getItems_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -3092,13 +3037,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomFields"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -3485,7 +3423,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_6",
+                "operationId": "getItem_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -3637,7 +3575,7 @@
         },
         "/products/customFieldsDefinition": {
             "get": {
-                "operationId": "getItems_6",
+                "operationId": "getItems_5",
                 "parameters": [
                     {
                         "in": "query",
@@ -3736,13 +3674,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomFieldsDefinition"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -4129,7 +4060,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_5",
+                "operationId": "getItem_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -4281,7 +4212,7 @@
         },
         "/products/customized-products": {
             "get": {
-                "operationId": "getItems_4",
+                "operationId": "getItems_3",
                 "parameters": [
                     {
                         "in": "query",
@@ -4445,13 +4376,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CustomizedProduct"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -4838,7 +4762,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_4",
+                "operationId": "getItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -5065,7 +4989,7 @@
         },
         "/products/descriptions": {
             "get": {
-                "operationId": "getItems_3",
+                "operationId": "getItems_2",
                 "parameters": [
                     {
                         "in": "query",
@@ -5193,13 +5117,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Description"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -5671,7 +5588,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_3",
+                "operationId": "getItem_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -6182,7 +6099,7 @@
         },
         "/products/price-functions": {
             "get": {
-                "operationId": "getItems_2",
+                "operationId": "getItems_1",
                 "parameters": [
                     {
                         "in": "query",
@@ -6301,13 +6218,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PriceFunction"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -6805,7 +6715,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_2",
+                "operationId": "getItem_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -6957,7 +6867,7 @@
         },
         "/products/public": {
             "get": {
-                "operationId": "getItems_1",
+                "operationId": "getItems_6",
                 "parameters": [
                     {
                         "in": "query",
@@ -7296,7 +7206,7 @@
         },
         "/products/public/{id}": {
             "get": {
-                "operationId": "getItem_1",
+                "operationId": "getItem_6",
                 "parameters": [
                     {
                         "in": "path",
