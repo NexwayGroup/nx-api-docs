@@ -2,7 +2,6 @@
     "components": {
         "schemas": {
             "Asset": {
-                "description": "Banner",
                 "properties": {
                     "href": {
                         "description": "Link's destination",
@@ -40,7 +39,6 @@
                 "type": "object"
             },
             "Company": {
-                "description": "Company information",
                 "properties": {
                     "apeCode": {
                         "description": "APE/NAF code",
@@ -65,13 +63,13 @@
                     },
                     "fullRegistrationNumber": {
                         "description": "Siret Number",
-                        "example": "12345678900000",
+                        "example": 12345678900000,
                         "pattern": "^\\d{14}$",
                         "type": "string"
                     },
                     "registrationNumber": {
                         "description": "Siren Number",
-                        "example": "123456789",
+                        "example": 123456789,
                         "pattern": "^\\d{9}$",
                         "type": "string"
                     },
@@ -133,13 +131,13 @@
                         },
                         "type": "object"
                     }
-                ],
-                "type": "object"
+                ]
             },
             "DeactivateRequest": {
                 "properties": {
                     "deactivationDateLimit": {
                         "description": "End date of deactivation",
+                        "example": "2022-06-08 08:40:11",
                         "format": "date-time",
                         "type": "string"
                     }
@@ -158,17 +156,17 @@
                 "type": "object"
             },
             "Email": {
-                "description": "List of emails sent to end user (contain: id, emailId, createDate, type)",
                 "properties": {
                     "createDate": {
                         "description": "Creation date",
+                        "example": 1610375836393,
                         "format": "date-time",
                         "readOnly": true,
                         "type": "string"
                     },
                     "emailId": {
                         "description": "Reference in email storage",
-                        "example": "12345",
+                        "example": 12345,
                         "readOnly": true,
                         "type": "string"
                     },
@@ -191,7 +189,6 @@
                         "type": "string"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "EndUser": {
@@ -206,6 +203,7 @@
                     },
                     "birthDate": {
                         "description": "Birth date",
+                        "example": "2002-01-09",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -229,7 +227,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/Company",
+                        "description": "Company information"
                     },
                     "consumerType": {
                         "description": "End user consumer type, company or personal",
@@ -359,6 +358,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
+                        "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -378,11 +378,12 @@
                         "type": "string"
                     },
                     "storeRoute": {
-                        "$ref": "#/components/schemas/Route"
+                        "$ref": "#/components/schemas/Route",
+                        "description": "Store route used known by the end user"
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -424,11 +425,12 @@
                         "type": "string"
                     },
                     "wallet": {
-                        "$ref": "#/components/schemas/Wallet"
+                        "$ref": "#/components/schemas/Wallet",
+                        "description": "List of payment methods"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": "75001",
+                        "example": 75001,
                         "type": "string"
                     }
                 },
@@ -462,6 +464,7 @@
                     },
                     "birthDate": {
                         "description": "Birth date",
+                        "example": "2002-01-09",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -485,7 +488,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/Company",
+                        "description": "Company information"
                     },
                     "consumerType": {
                         "description": "End user consumer type, company or personal",
@@ -618,6 +622,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
+                        "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -641,11 +646,12 @@
                         "type": "string"
                     },
                     "storeRoute": {
-                        "$ref": "#/components/schemas/Route"
+                        "$ref": "#/components/schemas/Route",
+                        "description": "Store route used known by the end user"
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "subscriptionsToImport": {
@@ -694,11 +700,12 @@
                         "type": "string"
                     },
                     "wallet": {
-                        "$ref": "#/components/schemas/Wallet"
+                        "$ref": "#/components/schemas/Wallet",
+                        "description": "List of payment methods"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": "75001",
+                        "example": 75001,
                         "type": "string"
                     }
                 },
@@ -724,6 +731,7 @@
                     },
                     "birthDate": {
                         "description": "Birth date",
+                        "example": "2002-01-09",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -747,7 +755,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/Company",
+                        "description": "Company information"
                     },
                     "consent": {
                         "$ref": "#/components/schemas/Consent"
@@ -880,6 +889,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
+                        "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -899,11 +909,12 @@
                         "type": "string"
                     },
                     "storeRoute": {
-                        "$ref": "#/components/schemas/Route"
+                        "$ref": "#/components/schemas/Route",
+                        "description": "Store route used known by the end user"
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -945,11 +956,12 @@
                         "type": "string"
                     },
                     "wallet": {
-                        "$ref": "#/components/schemas/Wallet"
+                        "$ref": "#/components/schemas/Wallet",
+                        "description": "List of payment methods"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": "75001",
+                        "example": 75001,
                         "type": "string"
                     }
                 },
@@ -1013,6 +1025,7 @@
                     },
                     "birthDate": {
                         "description": "Birth date",
+                        "example": "2002-01-09",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1026,7 +1039,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/Company",
+                        "description": "Company information"
                     },
                     "consumerType": {
                         "description": "End user consumer type, company or personal",
@@ -1139,6 +1153,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
+                        "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1154,7 +1169,7 @@
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -1192,7 +1207,7 @@
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": "75001",
+                        "example": 75001,
                         "type": "string"
                     }
                 },
@@ -1228,7 +1243,9 @@
             "Group": {
                 "properties": {
                     "banner": {
-                        "$ref": "#/components/schemas/Asset"
+                        "$ref": "#/components/schemas/Asset",
+                        "deprecated": true,
+                        "description": "Banner"
                     },
                     "createDate": {
                         "deprecated": true,
@@ -1259,7 +1276,7 @@
                             "$ref": "#/components/schemas/Asset"
                         },
                         "description": "Localized banners group (map)",
-                        "example": "\"en-US\" : \"my asset\"",
+                        "example": "en-US",
                         "type": "object"
                     },
                     "localizedLogo": {
@@ -1267,31 +1284,29 @@
                             "$ref": "#/components/schemas/Asset"
                         },
                         "description": "Localized logos group (map)",
-                        "example": "\"en-US\" : \"my asset\"",
+                        "example": "en-US",
                         "type": "object"
                     },
                     "localizedLongDesc": {
                         "additionalProperties": {
-                            "description": "Localized long descriptions (map)",
-                            "example": "\"en-US\" : \"my html description\"",
                             "type": "string"
                         },
                         "description": "Localized long descriptions (map)",
-                        "example": "\"en-US\" : \"my html description\"",
+                        "example": "en-US",
                         "type": "object"
                     },
                     "localizedShortDesc": {
                         "additionalProperties": {
-                            "description": "Localized short descriptions (map)",
-                            "example": "\"en-US\" : \"my html description\"",
                             "type": "string"
                         },
                         "description": "Localized short descriptions (map)",
-                        "example": "\"en-US\" : \"my html description\"",
+                        "example": "en-US",
                         "type": "object"
                     },
                     "logo": {
-                        "$ref": "#/components/schemas/Asset"
+                        "$ref": "#/components/schemas/Asset",
+                        "deprecated": true,
+                        "description": "Logo"
                     },
                     "modelVersion": {
                         "deprecated": true,
@@ -1439,8 +1454,7 @@
                     {
                         "$ref": "#/components/schemas/PaymentMethod"
                     }
-                ],
-                "type": "object"
+                ]
             },
             "NormalizeException": {
                 "properties": {
@@ -1468,7 +1482,6 @@
                 "type": "object"
             },
             "Order": {
-                "description": "Order list",
                 "properties": {
                     "generation": {
                         "type": "string"
@@ -1554,7 +1567,6 @@
                 "type": "object"
             },
             "PaymentMethod": {
-                "description": "Payment method structure",
                 "discriminator": {
                     "propertyName": "paymentMethodType"
                 },
@@ -1586,7 +1598,8 @@
                         "type": "string"
                     },
                     "paymentType": {
-                        "$ref": "#/components/schemas/PaymentType"
+                        "$ref": "#/components/schemas/PaymentType",
+                        "readOnly": true
                     },
                     "status": {
                         "description": "Activation status",
@@ -1603,8 +1616,6 @@
                         "description": "List of transaction IDs",
                         "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
                         "items": {
-                            "description": "List of transaction IDs",
-                            "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
                             "type": "string"
                         },
                         "type": "array",
@@ -1616,7 +1627,6 @@
                         "type": "string"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "PaymentMethodResponse": {
@@ -1703,11 +1713,9 @@
                         },
                         "type": "object"
                     }
-                ],
-                "type": "object"
+                ]
             },
             "Product": {
-                "description": "Product structure list",
                 "properties": {
                     "activationCode": {
                         "description": "Product activation code",
@@ -1736,7 +1744,7 @@
                     },
                     "price": {
                         "description": "Product price",
-                        "example": "99",
+                        "example": 99,
                         "type": "string"
                     },
                     "priceFunctionParameters": {
@@ -1784,11 +1792,9 @@
                         },
                         "type": "object"
                     }
-                ],
-                "type": "object"
+                ]
             },
             "ResellerCompany": {
-                "description": "Company information",
                 "properties": {
                     "cnpj": {
                         "description": "CPNJ",
@@ -1842,7 +1848,6 @@
                 "type": "object"
             },
             "Route": {
-                "description": "Store route used known by the end user",
                 "properties": {
                     "fullUrl": {
                         "type": "string"
@@ -1867,7 +1872,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/ResellerCompany"
+                        "$ref": "#/components/schemas/ResellerCompany",
+                        "description": "Company information"
                     },
                     "country": {
                         "description": "Country",
@@ -1907,7 +1913,7 @@
                     },
                     "phone": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "resellerPIN": {
@@ -1917,12 +1923,12 @@
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "example": 2,
                         "type": "string"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": "75001",
+                        "example": 75001,
                         "type": "string"
                     }
                 },
@@ -2098,7 +2104,6 @@
                 "type": "object"
             },
             "Sepa": {
-                "description": "List of sepa accounts",
                 "properties": {
                     "accountHolderName": {
                         "description": "Account holder's name",
@@ -2142,7 +2147,8 @@
                         "type": "string"
                     },
                     "paymentType": {
-                        "$ref": "#/components/schemas/PaymentType"
+                        "$ref": "#/components/schemas/PaymentType",
+                        "readOnly": true
                     },
                     "status": {
                         "description": "Activation status",
@@ -2159,8 +2165,6 @@
                         "description": "List of transaction IDs",
                         "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
                         "items": {
-                            "description": "List of transaction IDs",
-                            "example": "['88bd2803-9550-4077-8c41-4a05b03bb38d', '0dcf2166-8be7-4b98-840f-e02b31f17009']",
                             "type": "string"
                         },
                         "type": "array",
@@ -2172,7 +2176,6 @@
                         "type": "string"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "SignInWithoutPasswordRequest": {
@@ -2222,7 +2225,22 @@
                         "type": "array"
                     },
                     "paymentMethodDetails": {
-                        "$ref": "#/components/schemas/PaymentMethod"
+                        "description": "Payment method structure",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/CreditCard"
+                            },
+                            {
+                                "$ref": "#/components/schemas/NonRecurringUnknown"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Paypal"
+                            },
+                            {
+                                "$ref": "#/components/schemas/RecurringUnknown"
+                            }
+                        ],
+                        "readOnly": true
                     },
                     "products": {
                         "description": "Product structure list",
@@ -2253,7 +2271,6 @@
                 "type": "object"
             },
             "Wallet": {
-                "description": "List of payment methods",
                 "properties": {
                     "creditCards": {
                         "description": "List of credit cards",
@@ -2269,8 +2286,6 @@
                     },
                     "paymentMethodIdToUseForSubscriptionId": {
                         "additionalProperties": {
-                            "description": "List of credit card use for each subscription",
-                            "readOnly": true,
                             "type": "string"
                         },
                         "description": "List of credit card use for each subscription",
@@ -2322,7 +2337,7 @@
         "title": "EndUser",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/endusers": {
             "get": {
@@ -2538,13 +2553,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EndUser"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -2876,13 +2884,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Group"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
