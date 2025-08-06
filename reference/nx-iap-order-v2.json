@@ -47,11 +47,8 @@
                         "type": "string"
                     },
                     "qrCodeBase64": {
-                        "items": {
-                            "format": "byte",
-                            "type": "string"
-                        },
-                        "type": "array"
+                        "format": "byte",
+                        "type": "string"
                     },
                     "qrCodeDisabled": {
                         "type": "boolean"
@@ -183,7 +180,6 @@
                 "type": "object"
             },
             "CreditNote": {
-                "description": "List of credit notes",
                 "properties": {
                     "cancellationReason": {
                         "description": "Cancellation reason reference ID",
@@ -282,7 +278,6 @@
                 "type": "object"
             },
             "DiscountApplied": {
-                "description": "List of all applied discounts for this price",
                 "properties": {
                     "discountAmount": {
                         "format": "double",
@@ -340,7 +335,6 @@
                 "type": "object"
             },
             "DiscountPlan": {
-                "description": "Discount plan for product",
                 "properties": {
                     "discountStep": {
                         "format": "int32",
@@ -360,7 +354,6 @@
                 "type": "object"
             },
             "DiscountedPrice": {
-                "description": "Discounted price",
                 "properties": {
                     "allDiscountsApplied": {
                         "description": "List of all applied discounts for this price",
@@ -403,7 +396,7 @@
                         "type": "number"
                     },
                     "discountTestOrder": {
-                        "default": false,
+                        "default": "false",
                         "description": "Show if order is test",
                         "readOnly": true,
                         "type": "boolean"
@@ -456,10 +449,11 @@
                         "type": "number"
                     },
                     "voucher": {
-                        "$ref": "#/components/schemas/Voucher"
+                        "$ref": "#/components/schemas/Voucher",
+                        "description": "Discount list and voucher total amount",
+                        "readOnly": true
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "Document": {
@@ -474,7 +468,6 @@
                 "type": "object"
             },
             "Email": {
-                "description": "List of emails sent",
                 "properties": {
                     "createDate": {
                         "description": "Email creation date timestamp in milliseconds",
@@ -533,6 +526,7 @@
                     },
                     "birthDate": {
                         "description": "Birth date",
+                        "example": "2002-01-09",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -544,7 +538,8 @@
                         "type": "string"
                     },
                     "company": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/Company",
+                        "description": "EndUser company"
                     },
                     "consumerType": {
                         "description": "End-user consumer type, company or personal",
@@ -618,7 +613,7 @@
                     },
                     "streetAddress": {
                         "description": "EndUser street address",
-                        "example": "19 Avenue Feuch\u00e8res",
+                        "example": 19,
                         "maxLength": 255,
                         "minLength": 0,
                         "type": "string"
@@ -641,7 +636,7 @@
                     },
                     "zipCode": {
                         "description": "EndUser zip Code",
-                        "example": "30000",
+                        "example": 30000,
                         "maxLength": 50,
                         "minLength": 0,
                         "type": "string"
@@ -789,7 +784,9 @@
                         "type": "object"
                     },
                     "discountedPrice": {
-                        "$ref": "#/components/schemas/DiscountedPrice"
+                        "$ref": "#/components/schemas/DiscountedPrice",
+                        "description": "Discounted price",
+                        "readOnly": true
                     },
                     "grossMsrp": {
                         "format": "double",
@@ -835,7 +832,9 @@
                         "type": "number"
                     },
                     "remotePrice": {
-                        "$ref": "#/components/schemas/RemotePrice"
+                        "$ref": "#/components/schemas/RemotePrice",
+                        "description": "Remote price information",
+                        "readOnly": true
                     },
                     "source": {
                         "description": "Source of price",
@@ -1036,7 +1035,6 @@
                 "type": "object"
             },
             "LineItem": {
-                "description": "List of products",
                 "properties": {
                     "activationLink": {
                         "$ref": "#/components/schemas/ActivationLink"
@@ -1084,7 +1082,8 @@
                         "type": "number"
                     },
                     "discountPlan": {
-                        "$ref": "#/components/schemas/DiscountPlan"
+                        "$ref": "#/components/schemas/DiscountPlan",
+                        "description": "Discount plan for product"
                     },
                     "discountRate": {
                         "description": "Discount rate",
@@ -1582,7 +1581,7 @@
                 "properties": {
                     "allowPaymentMethodRegistration": {
                         "description": "Payment method registration authorized",
-                        "example": false,
+                        "example": true,
                         "type": "boolean"
                     },
                     "avaTaxStatus": {
@@ -1632,7 +1631,8 @@
                         "type": "string"
                     },
                     "consentFlags": {
-                        "$ref": "#/components/schemas/ConsentFlags"
+                        "$ref": "#/components/schemas/ConsentFlags",
+                        "description": "Consent flags"
                     },
                     "consentId": {
                         "description": "External ID from Consent resource",
@@ -1694,7 +1694,8 @@
                         "type": "string"
                     },
                     "customer": {
-                        "$ref": "#/components/schemas/Customer"
+                        "$ref": "#/components/schemas/Customer",
+                        "description": "Customer information"
                     },
                     "customerName": {
                         "type": "string"
@@ -1760,7 +1761,8 @@
                         "uniqueItems": true
                     },
                     "endUser": {
-                        "$ref": "#/components/schemas/EndUser"
+                        "$ref": "#/components/schemas/EndUser",
+                        "description": "End-user information"
                     },
                     "endUserCreationStatus": {
                         "description": "Global status for endUser workflow",
@@ -1824,19 +1826,18 @@
                         "type": "string"
                     },
                     "fullTotalAmount": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "All information related to amount"
                     },
                     "generationId": {
                         "description": "Subscription number generation",
-                        "example": "1",
+                        "example": 1,
                         "type": "string"
                     },
                     "geoZones": {
                         "description": "Set of geoZones label",
                         "example": "Africa",
                         "items": {
-                            "description": "Set of geoZones label",
-                            "example": "Africa",
                             "type": "string"
                         },
                         "type": "array",
@@ -1874,7 +1875,8 @@
                         "type": "object"
                     },
                     "invoice": {
-                        "$ref": "#/components/schemas/Invoice"
+                        "$ref": "#/components/schemas/Invoice",
+                        "description": "Invoice information"
                     },
                     "invoiceStatus": {
                         "description": "Global status for invoice workflow",
@@ -1941,8 +1943,6 @@
                             "mktop1"
                         ],
                         "items": {
-                            "description": "marketing campaign names",
-                            "example": "[\"mktop1\"]",
                             "type": "string"
                         },
                         "type": "array"
@@ -2056,9 +2056,12 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "processingEvent": {
+                        "description": "List of order processing events"
+                    },
                     "promoteOneClickPayment": {
                         "description": "Payment method registration authorized",
-                        "example": false,
+                        "example": true,
                         "type": "boolean"
                     },
                     "registerPaymentMethodStatus": {
@@ -2096,7 +2099,6 @@
                     "salesFlags": {
                         "description": "List of sales flags",
                         "items": {
-                            "description": "List of sales flags",
                             "type": "string"
                         },
                         "type": "array"
@@ -2147,7 +2149,8 @@
                         "type": "string"
                     },
                     "store": {
-                        "$ref": "#/components/schemas/Store"
+                        "$ref": "#/components/schemas/Store",
+                        "description": "Store information"
                     },
                     "storeHostname": {
                         "description": "Store hostname",
@@ -2193,7 +2196,8 @@
                         "type": "string"
                     },
                     "taxDeclaration": {
-                        "$ref": "#/components/schemas/TaxDeclaration"
+                        "$ref": "#/components/schemas/TaxDeclaration",
+                        "description": "Tax declaration details"
                     },
                     "taxTransactionId": {
                         "description": "Avalara transaction code",
@@ -2208,7 +2212,7 @@
                         "type": "array"
                     },
                     "testOrder": {
-                        "default": false,
+                        "default": "false",
                         "description": "To show if the order is test",
                         "type": "boolean"
                     },
@@ -2558,7 +2562,8 @@
                         "type": "number"
                     },
                     "fullTotalAmount": {
-                        "$ref": "#/components/schemas/FullPriceView"
+                        "$ref": "#/components/schemas/FullPriceView",
+                        "description": "All information related to amount"
                     }
                 },
                 "type": "object"
@@ -2884,7 +2889,6 @@
                 "type": "object"
             },
             "ProcessingEvent": {
-                "description": "List of payment processing events",
                 "properties": {
                     "createDate": {
                         "description": "Date of creation",
@@ -3073,10 +3077,12 @@
                         "type": "object"
                     },
                     "price": {
-                        "$ref": "#/components/schemas/FullPriceView"
+                        "$ref": "#/components/schemas/FullPriceView",
+                        "description": "All information related to amount"
                     },
                     "renewingPrice": {
-                        "$ref": "#/components/schemas/FullPriceView"
+                        "$ref": "#/components/schemas/FullPriceView",
+                        "description": "All information related to renewing price"
                     },
                     "resources": {
                         "items": {
@@ -3101,7 +3107,6 @@
                 "type": "object"
             },
             "RelatedContent": {
-                "description": "Links for downloading product-related content file",
                 "properties": {
                     "file": {
                         "description": "URL or file name with extension for downloading",
@@ -3115,7 +3120,6 @@
                 "type": "object"
             },
             "Remitted": {
-                "description": "List of remitteds",
                 "properties": {
                     "id": {
                         "type": "string"
@@ -3139,7 +3143,6 @@
                 "type": "object"
             },
             "RemotePrice": {
-                "description": "Remote price information",
                 "properties": {
                     "response": {
                         "description": "The response of the remote price",
@@ -3150,7 +3153,6 @@
                         "type": "string"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "RenewingProductDetails": {
@@ -3162,7 +3164,7 @@
                     },
                     "lifeTimeUnit": {
                         "description": "LifetimeUnit",
-                        "example": "1",
+                        "example": 1,
                         "type": "string"
                     },
                     "lifeTimeValue": {
@@ -3196,7 +3198,6 @@
                 "type": "object"
             },
             "Route": {
-                "description": "routes list",
                 "properties": {
                     "hostname": {
                         "type": "string"
@@ -3909,7 +3910,6 @@
                 "properties": {
                     "additionalProperties": {
                         "additionalProperties": {
-                            "description": "Map of broker-specific information",
                             "type": "string"
                         },
                         "description": "Map of broker-specific information",
@@ -3972,7 +3972,6 @@
                 "type": "object"
             },
             "TaxType": {
-                "description": "Tax type",
                 "properties": {
                     "amount": {
                         "format": "double",
@@ -4012,7 +4011,6 @@
                 "type": "object"
             },
             "VariableDetails": {
-                "description": "Product variables",
                 "properties": {
                     "desc": {
                         "type": "string"
@@ -4027,7 +4025,6 @@
                 "type": "object"
             },
             "Voucher": {
-                "description": "Discount list and voucher total amount",
                 "properties": {
                     "discounts": {
                         "items": {
@@ -4041,7 +4038,6 @@
                         "type": "number"
                     }
                 },
-                "readOnly": true,
                 "type": "object"
             },
             "WantedProduct": {
@@ -4078,7 +4074,6 @@
                 "type": "object"
             },
             "Warning": {
-                "description": "List of additional fields with a wrong format",
                 "properties": {
                     "field": {
                         "type": "string"
@@ -4107,7 +4102,7 @@
         "title": "Order",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/ordersv2": {
             "get": {
@@ -4355,13 +4350,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Order"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -4427,13 +4415,6 @@
                 },
                 "responses": {
                     "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CancellationReason"
-                                }
-                            }
-                        },
                         "description": "Success"
                     },
                     "401": {
@@ -4983,7 +4964,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_4",
+                "operationId": "getItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -5557,7 +5538,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_3",
+                "operationId": "getItem_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -6149,7 +6130,7 @@
         },
         "/ordersv2/events-history/{id}": {
             "get": {
-                "operationId": "getItem_2",
+                "operationId": "getItem_4",
                 "parameters": [
                     {
                         "in": "path",
