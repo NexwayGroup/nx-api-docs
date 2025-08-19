@@ -59,6 +59,7 @@ The notification payload will include an 'order' object containing the following
 | items[].unitPriceIncVAT | Product unit price, including sales tax | R |
 | items[].unitPriceExclVAT | Product unit price, excluding sales tax | R |
 | items[].VATRate | Sold product applied sales tax rate | R |
+| items[].isUpsell | Boolean which marks a product as upsold or not | R |
 | items[].discountRate | Discount rate applied to product | O |
 | items[].subscriptionId | SubscriptionId if the line item has one | O |
 | items[].discountPlan | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
@@ -153,7 +154,8 @@ If you need to get additional data, which is not available in the event, please 
         "discountStep" : 0,
         "ignorePurchaseDiscount" : false
       },
-      "VATRate" : 0.1
+      "VATRate" : 0.1,
+      "isUpsell" : true
     } ]
   }
 }
