@@ -38,6 +38,11 @@ The notification payload will include an 'order' object containing the following
 | payment.id | Payment id | R |
 | payment.method | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
 | payment.status | Payment status (COMPLETED, FAILED) | R |
+| payment.transitionPaymentDate | Transaction date | R |
+| payment.automaticBilling | Boolean which highlights if payment was automatically charged or not | R |
+| payment.lastError | Last error object | O |
+| payment.lastError.code | Error code | O |
+| payment.lastError.message | Error message | O |
 | user | Buyer's details object | O |
 | user.id | Buyer's id | O |
 | user.email | Buyer's email | R |
