@@ -2,7 +2,6 @@
     "components": {
         "schemas": {
             "Price": {
-                "description": "Shipping method price",
                 "properties": {
                     "currency": {
                         "description": "Currency code in ISO-4217 format",
@@ -93,7 +92,8 @@
                         "type": "string"
                     },
                     "price": {
-                        "$ref": "#/components/schemas/Price"
+                        "$ref": "#/components/schemas/Price",
+                        "description": "Shipping method price"
                     }
                 },
                 "required": [
@@ -111,7 +111,7 @@
         "title": "OpenAPI definition",
         "version": "v0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/shipping-manager/shipping/methods": {
             "get": {
