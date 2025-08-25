@@ -1022,6 +1022,14 @@
                 ],
                 "type": "object"
             },
+            "JweResponse": {
+                "properties": {
+                    "jwe": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "LastPaymentError": {
                 "properties": {
                     "code": {
@@ -7499,6 +7507,37 @@
                     }
                 },
                 "summary": "Get custom fields",
+                "tags": [
+                    "ApiPublicCommand"
+                ]
+            }
+        },
+        "/ordersv2/public/{orderId}/jwe": {
+            "get": {
+                "operationId": "generateJwe",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "orderId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JweResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Create JWE for order",
                 "tags": [
                     "ApiPublicCommand"
                 ]
