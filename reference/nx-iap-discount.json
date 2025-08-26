@@ -63,6 +63,13 @@
             },
             "Cart": {
                 "properties": {
+                    "availablePaymentMethodDiscounts": {
+                        "items": {
+                            "$ref": "#/components/schemas/PaymentMethodDiscount"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
                     "buyerBehavior": {
                         "$ref": "#/components/schemas/BuyerBehavior"
                     },
@@ -127,6 +134,19 @@
                             "RESUME"
                         ],
                         "type": "string"
+                    },
+                    "paymentMethod": {
+                        "type": "string"
+                    },
+                    "paymentMethodDiscountId": {
+                        "type": "string"
+                    },
+                    "paymentTypes": {
+                        "items": {
+                            "$ref": "#/components/schemas/PaymentType"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "price": {
                         "$ref": "#/components/schemas/Price"
@@ -228,6 +248,7 @@
                     "mapping": {
                         "CAMPAIGN": "#/components/schemas/Campaign",
                         "COUPON": "#/components/schemas/Coupon",
+                        "PAYMENT_METHOD": "#/components/schemas/PaymentMethod",
                         "SINGLE_USE_CODE": "#/components/schemas/SingleUseCode",
                         "SUBSCRIPTION_PLAN": "#/components/schemas/SubscriptionPlan"
                     },
@@ -257,6 +278,15 @@
                         "default": "false",
                         "description": "Apply discount on net price instead gross",
                         "type": "boolean"
+                    },
+                    "businessSegment": {
+                        "enum": [
+                            "B2B",
+                            "B2C",
+                            "STRICT_B2B",
+                            "STRICT_B2C"
+                        ],
+                        "type": "string"
                     },
                     "buyerBehaviorTriggers": {
                         "items": {
@@ -364,6 +394,9 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "hasSubscriptionModel": {
+                        "type": "boolean"
+                    },
                     "id": {
                         "deprecated": true,
                         "type": "string"
@@ -395,6 +428,7 @@
                         "enum": [
                             "CAMPAIGN",
                             "COUPON",
+                            "PAYMENT_METHOD",
                             "SINGLE_USE_CODE",
                             "SUBSCRIPTION_PLAN"
                         ],
@@ -573,6 +607,7 @@
                         "enum": [
                             "CAMPAIGN",
                             "COUPON",
+                            "PAYMENT_METHOD",
                             "SINGLE_USE_CODE",
                             "SUBSCRIPTION_PLAN"
                         ],
@@ -642,6 +677,13 @@
                     },
                     "discountLabel": {
                         "type": "string"
+                    },
+                    "productIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "status": {
                         "enum": [
@@ -1038,6 +1080,65 @@
                 },
                 "type": "object"
             },
+            "PaymentMethod": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Discount"
+                    },
+                    {
+                        "properties": {
+                            "paymentMethod": {
+                                "type": "string"
+                            },
+                            "recurring": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ],
+                "required": [
+                    "endDate",
+                    "level",
+                    "name"
+                ]
+            },
+            "PaymentMethodDiscount": {
+                "properties": {
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "discountId": {
+                        "type": "string"
+                    },
+                    "paymentTypeId": {
+                        "type": "string"
+                    },
+                    "rate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "recurring": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "PaymentType": {
+                "properties": {
+                    "category": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "registrable": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "Price": {
                 "properties": {
                     "currency": {
@@ -1116,6 +1217,9 @@
             },
             "Product": {
                 "properties": {
+                    "businessSegment": {
+                        "type": "string"
+                    },
                     "crossSellBy": {
                         "type": "string"
                     },
@@ -1158,6 +1262,9 @@
                     "quantity": {
                         "format": "double",
                         "type": "number"
+                    },
+                    "subscriptionTemplate": {
+                        "type": "string"
                     },
                     "taxExempt": {
                         "type": "boolean"
@@ -1601,6 +1708,7 @@
                             "enum": [
                                 "CAMPAIGN",
                                 "COUPON",
+                                "PAYMENT_METHOD",
                                 "SINGLE_USE_CODE",
                                 "SUBSCRIPTION_PLAN"
                             ],
@@ -1728,6 +1836,98 @@
                     "Discount"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/discounts/available-payment-method-discounts": {
+            "post": {
+                "description": "Find available payment method discounts for cart",
+                "operationId": "getAvailablePaymentMethodDiscounts",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cart"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMethodDiscount"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMethodDiscount"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMethodDiscount"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMethodDiscount"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMethodDiscount"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "getAvailablePaymentMethodDiscounts",
+                "tags": [
+                    "Discount"
+                ]
             }
         },
         "/discounts/discount/cart": {
