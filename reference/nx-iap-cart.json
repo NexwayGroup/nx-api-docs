@@ -129,6 +129,14 @@
                         "type": "array",
                         "uniqueItems": true
                     },
+                    "availablePaymentMethodDiscounts": {
+                        "description": "List of available discounts by payment method",
+                        "items": {
+                            "$ref": "#/components/schemas/PaymentMethodDiscount"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
                     "billingPlanId": {
                         "description": "Billing plan ID",
                         "type": "string"
@@ -383,6 +391,10 @@
                     "paymentMethod": {
                         "description": "Cart payment method",
                         "example": "credit_card",
+                        "type": "string"
+                    },
+                    "paymentMethodDiscountId": {
+                        "description": "Selected payment method discount",
                         "type": "string"
                     },
                     "paymentTypes": {
@@ -707,6 +719,10 @@
                         "example": "payPal",
                         "type": "string"
                     },
+                    "paymentMethodDiscountId": {
+                        "description": "Selected payment method discount",
+                        "type": "string"
+                    },
                     "productRecoId": {
                         "description": "Product recommendation  id",
                         "example": "21c6e727-3df5-45c1-9872-66c6af3c5e61",
@@ -897,6 +913,10 @@
                     "paymentMethod": {
                         "description": "Selected payment method",
                         "example": "payPal",
+                        "type": "string"
+                    },
+                    "paymentMethodDiscountId": {
+                        "description": "Selected payment method discount",
                         "type": "string"
                     },
                     "productRecoId": {
@@ -1873,6 +1893,24 @@
                 },
                 "type": "object"
             },
+            "PaymentMethodDiscount": {
+                "properties": {
+                    "discountId": {
+                        "type": "string"
+                    },
+                    "paymentTypeId": {
+                        "type": "string"
+                    },
+                    "rate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "recurring": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "PaymentType": {
                 "properties": {
                     "category": {
@@ -2209,6 +2247,10 @@
                     },
                     "paymentMethod": {
                         "description": "payment method used by the end-user",
+                        "type": "string"
+                    },
+                    "paymentMethodDiscountId": {
+                        "description": "Selected payment method discount",
                         "type": "string"
                     },
                     "productRecoId": {
