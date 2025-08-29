@@ -1,4 +1,49 @@
 # Subscription management
+
+
+## Subscription Statuses
+
+Every subscription always has a specific status. Below is a table describing each status and its lifecycle.
+
+
+| Status | Description |
+|--------|-------------|
+| **Active** | An active, paid subscription. |
+| **Trial** | A free trial period. |
+| **Dunning** | The period of payment attempts. This may include a grace period. It precedes the `Expired` status if payment ultimately fails. |
+| **Renewing** | The standard renewal process for an `Active` subscription. |
+| **TrialConversion** | The renewal process (conversion to paid) for a `Trial` subscription. Similar to `Renewing`. |
+| **Suspended** | A "soft" cancellation. The subscription can be reactivated before its expiration date. |
+| **Canceled** | **Terminal status.** The subscription was canceled by the user and will not be renewed. |
+| **Expired** | **Terminal status.** The subscription expires after the grace period ends and all payment attempts during the `Dunning` phase have failed. Subscription `Expiration date` is the date when grace period starts so the status of the subscription doesn't change to `Expired` at the `Expiration date`. |
+
+## Subscription Lifecycle
+
+Subscription statuses can change according to the following main scenarios:
+
+1. New trial subscription:
+   `Trial` -> `TrialConversion` -> `Active`
+
+2. Active subscription renewal:
+   `Active` -> `Dunning` -> `Renewing` -> `Active`
+
+3. Failed renewal:
+   `Dunning` -> `Expired`
+
+4. Suspending and reactivating:
+   `Active` -> `Suspended` -> `Active` or
+   `Suspended` -> `Expired`
+
+**Special Transitions:**
+* **Cancellation and Suspension:** A subscription can be moved to `Canceled` from any status. `Suspended` is a soft-cancellation status meaning that subscription will not be renewed automatically. A `Suspended` subscription is considered active and paid until the `ExpirationDate`.
+* **Terminal Statuses:** `Canceled` and `Expired` are final. Once a subscription enters these statuses, it cannot be reactivated.
+
+**Note on Payment Methods:**
+* Some subscriptions may be linked to non-recurring payment methods. Such subscriptions will not be able to auto-renew, although the system will attempt to process the renewal until it fails and moves to the `Expired` status.
+
+
+# Subscription Retention & Flexibility Features
+
 The subscription scenarios outlined below are designed to enhance the user experience, boost shopper retention, and provide greater flexibility in managing subscription options.
 
 ## Stay Subscribed Offer
@@ -6,18 +51,19 @@ The Stay Subscribed Offer flow enables you to offer a discount on the upcoming s
 
 To use this feature, a [discount](30-discount-api_guide.md) with `source = OFFER` and `offerSubSource = SUSPEND` must first be configured in Nexway. Please note that the discount for Stay Subscribed flow can only be defined as a percentage value, not as an absolute amount.
 
-## Integration options
+**Integration options**
+
 Nexway provides two integration options to suit your business needs:
 
 ### Option 1: Using the Nexway-hosted End-User portal
 
 
-This is the simplest integration method. Nexway’s portal presents the Stay Subscribed offer directly to shoppers. Your platform does not need to be involved in the offer process. When shopper logs into their account on the Nexway End-User portal and attempts to cancel auto-renewal, they will see the offer. If they accept it, the discount is applied to their upcoming subscription renewal, and an order is created in the Nexway system. At the time of auto-renewal, the created order will be processed with the applied discount.
+This is the simplest integration method. Nexway's portal presents the Stay Subscribed offer directly to shoppers. When shopper logs into their account on the Nexway End-User portal and attempts to cancel auto-renewal, they will see the offer. If they accept it, the discount will be applied to their upcoming subscription renewal, and a prebilling order will be created.
 
 
 ### Option 2: Integrating Nexway API
 
-This option allows full control through your platform’s user interface. 
+This option allows full control through your platform's user interface. 
 
 **Part 1. Create a Stay Subscribed Offer**
 
