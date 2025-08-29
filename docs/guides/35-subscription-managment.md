@@ -38,9 +38,9 @@ Subscription statuses can change according to the following main scenarios:
 * **Cancellation and Suspension:** A subscription can be moved to `Canceled` from any status. `Suspended` is a soft-cancellation status meaning that subscription will not be renewed automatically. A `Suspended` subscription is considered active and paid until the `ExpirationDate`.
 * **Terminal Statuses:** `Canceled` and `Expired` are final. Once a subscription enters these statuses, it cannot be reactivated.
 
-**Note on Payment Methods:**
+:::note [Note on Payment Methods:]
 * Some subscriptions may be linked to non-recurring payment methods. Such subscriptions will not be able to auto-renew, although the system will attempt to process the renewal until it fails and moves to the `Expired` status.
-
+:::
 
 # Subscription Retention & Flexibility Features
 
