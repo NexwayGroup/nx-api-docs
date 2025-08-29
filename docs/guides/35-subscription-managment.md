@@ -65,7 +65,7 @@ This is the simplest integration method. Nexway's portal presents the Stay Subsc
 
 This option allows full control through your platform's user interface. 
 
-**Part 1. Create a Stay Subscribed Offer**
+#### Part 1. Create a Stay Subscribed Offer
 
 When a shopper selects the option to cancel auto-renewal, your platform sends a request to the Nexway API to create the Stay Subscribed offer. This request includes the Nexway subscription identifier and, optionally, the [discount](30-discount-api_guide.md) if you wish to explicitly specify the discount. 
 
@@ -130,7 +130,7 @@ The API searches for the Stay Subscribed discount and applies it to the subscrip
     "warnings": []
 }
 ```
-**Part 2. Create an Order**
+#### Part 2. Create an Order
 When the shopper accepts the Stay Subscribed offer, your platform must create an order by making the following request providing Nexway subscription identifier and cart identifier from the response of the previous call. 
 
 **API Request Example**
