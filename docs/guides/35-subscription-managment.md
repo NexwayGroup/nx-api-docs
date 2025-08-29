@@ -468,7 +468,7 @@ You can create a shopping cart for the "Retail to Subscription" flow in to ways:
 
 2. Using a Buy-Link: This method comes with some limitations, such as inability to pre-fill billing address and the current expiration date.
 
-## Option 1: Using the Cart API
+#### Option 1: Using the Cart API
 
 Send a request to create a shopping cart with the following key attributes to enable the "Retail to Subscription" flow:
 * `wantedProducts.id`: The targeted product for the transition
@@ -531,7 +531,7 @@ GET /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
 ```
 The `201 Created` response contains the `checkoutUrl` attribute. Use this URL to redirect the end-user to the shopping cart. 
 
-## Option 2: Using a buy-link
+#### Option 2: Using a buy-link
 
 Build a buy-link that directs the shopper straight to the shopping cart for review and checkout. 
 
