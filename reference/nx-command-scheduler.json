@@ -3,6 +3,9 @@
         "schemas": {
             "CancelCommandFilterRequest": {
                 "properties": {
+                    "commandName": {
+                        "type": "string"
+                    },
                     "entityId": {
                         "type": "string"
                     }
@@ -142,7 +145,7 @@
         "title": "OpenAPI definition",
         "version": "v0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/command-scheduler/api/commands": {
             "get": {
