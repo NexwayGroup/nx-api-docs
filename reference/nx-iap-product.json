@@ -15,6 +15,39 @@
                 },
                 "type": "object"
             },
+            "AllDiscountApplied": {
+                "properties": {
+                    "discountedGrossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPriceDiscountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPriceDiscountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatDiscountAmount": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
             "CustomFields": {
                 "properties": {
                     "catalogId": {
@@ -450,6 +483,12 @@
             },
             "DiscountedPrice": {
                 "properties": {
+                    "allDiscountsApplied": {
+                        "items": {
+                            "$ref": "#/components/schemas/AllDiscountApplied"
+                        },
+                        "type": "array"
+                    },
                     "cumulatedDiscountRate": {
                         "format": "double",
                         "type": "number"
