@@ -231,6 +231,20 @@
                 ]
             }
         },
+        "/command-scheduler/api/commands/process": {
+            "post": {
+                "operationId": "processCommands",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Process Scheduled Commands",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
         "/command-scheduler/api/commands/replace": {
             "post": {
                 "operationId": "cancelPreviousCommandsAndCreateNewOnes",
