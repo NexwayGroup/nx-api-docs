@@ -6820,7 +6820,7 @@
         },
         "/endusers/sso/reseller": {
             "post": {
-                "operationId": "createOrUpdateResellerBySSORequest",
+                "operationId": "createOrUpdateResellerBySSORequest_1",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -6884,6 +6884,77 @@
                     }
                 },
                 "summary": "Create or update a Reseller by SSO",
+                "tags": [
+                    "EndUser"
+                ]
+            }
+        },
+        "/endusers/sso/update-reseller": {
+            "put": {
+                "operationId": "createOrUpdateResellerBySSORequest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SSOResellerRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EndUser"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "update a partial Reseller data by JWE",
                 "tags": [
                     "EndUser"
                 ]
