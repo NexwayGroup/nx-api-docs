@@ -841,6 +841,21 @@
                         "description": "Remote price information",
                         "readOnly": true
                     },
+                    "shippingGrossPrice": {
+                        "description": "Cost of shipping with taxes included",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "shippingNetPrice": {
+                        "description": "Shipping net price",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "shippingVatAmount": {
+                        "description": "Shipping VAT amount (grossPrice - netPrice) ",
+                        "format": "double",
+                        "type": "number"
+                    },
                     "source": {
                         "description": "Source of price",
                         "enum": [
@@ -886,6 +901,9 @@
                     "initialNetPrice",
                     "initialVatAmount",
                     "netPrice",
+                    "shippingGrossPrice",
+                    "shippingNetPrice",
+                    "shippingVatAmount",
                     "strikeThroughPrice",
                     "vatAmount",
                     "vatIncluded",
@@ -1026,6 +1044,9 @@
             "JweResponse": {
                 "properties": {
                     "jwe": {
+                        "type": "string"
+                    },
+                    "redirectUrl": {
                         "type": "string"
                     }
                 },
@@ -1255,6 +1276,12 @@
                     },
                     "renewingProductDetails": {
                         "$ref": "#/components/schemas/RenewingProductDetails"
+                    },
+                    "shipping": {
+                        "items": {
+                            "$ref": "#/components/schemas/Shipping"
+                        },
+                        "type": "array"
                     },
                     "shortDesc": {
                         "description": "Short description",
@@ -2139,6 +2166,10 @@
                         "description": "To be able to display different elements in workflow",
                         "example": "acquisition",
                         "type": "string"
+                    },
+                    "shippingDetails": {
+                        "$ref": "#/components/schemas/ShippingDetails",
+                        "description": "Order shipping information"
                     },
                     "skipPrebillingEmail": {
                         "description": "flag to skip sending prebilling email",
@@ -3635,6 +3666,102 @@
                     "totalPages": {
                         "format": "int32",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Shipping": {
+                "properties": {
+                    "shippedQuantity": {
+                        "description": "The number of units of that specific line item included in this particular shipment.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "Shipping status",
+                        "enum": [
+                            "CREATED",
+                            "ACCEPTED",
+                            "IN_TRANSIT",
+                            "DELIVERED",
+                            "FINISHED"
+                        ],
+                        "example": "DELIVERED",
+                        "type": "string"
+                    },
+                    "trackingId": {
+                        "description": "A carrier-generated tracking identifier originally returned by the shipping manager.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ShippingDetails": {
+                "properties": {
+                    "id": {
+                        "description": "The shipment identifier originally returned by the shipping manager.",
+                        "type": "string"
+                    },
+                    "shippingMethod": {
+                        "description": "The shipping method originally selected by the end user in shopping cart.",
+                        "type": "string"
+                    },
+                    "shippingPrice": {
+                        "$ref": "#/components/schemas/ShippingPrice",
+                        "description": "The full shipping cost."
+                    }
+                },
+                "required": [
+                    "shippingMethod",
+                    "shippingPrice"
+                ],
+                "type": "object"
+            },
+            "ShippingPrice": {
+                "properties": {
+                    "currency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "grossPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatIncluded": {
+                        "type": "boolean"
+                    },
+                    "vatRate": {
+                        "format": "double",
+                        "type": "number"
                     }
                 },
                 "type": "object"
