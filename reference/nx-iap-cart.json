@@ -3958,6 +3958,82 @@
                 "x-operationWeight": "100"
             }
         },
+        "/carts/public/next-generations/{cartId}": {
+            "get": {
+                "description": "get product next generation by cartId",
+                "operationId": "getProductNextGenByCartId",
+                "parameters": [
+                    {
+                        "description": "Cart id",
+                        "in": "path",
+                        "name": "cartId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "items": {
+                                            "$ref": "#/components/schemas/ProductByGeneration"
+                                        },
+                                        "type": "array",
+                                        "uniqueItems": true
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "get product next generation by cartId",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
         "/carts/public/products/{productId}/variants/matrix": {
             "get": {
                 "description": "Get matrix of all available product variants of given product id, such as seats, subscription information",
@@ -4175,7 +4251,8 @@
                                     "items": {
                                         "$ref": "#/components/schemas/ProductByGeneration"
                                     },
-                                    "type": "array"
+                                    "type": "array",
+                                    "uniqueItems": true
                                 }
                             }
                         },
