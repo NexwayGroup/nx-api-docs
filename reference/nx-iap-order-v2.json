@@ -1063,6 +1063,23 @@
                 },
                 "type": "object"
             },
+            "LicenseExpirationReminderParameters": {
+                "properties": {
+                    "productName": {
+                        "type": "string"
+                    },
+                    "renewingProductId": {
+                        "type": "string"
+                    },
+                    "selfRenewLinkAdditionalQueryParameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
             "Lifecycle": {
                 "properties": {
                     "generation": {
@@ -1560,6 +1577,10 @@
                     "cancellationReason": {
                         "description": "Cancellation reason",
                         "type": "string"
+                    },
+                    "licenseExpirationReminderParameters": {
+                        "$ref": "#/components/schemas/LicenseExpirationReminderParameters",
+                        "description": "LicenseExpirationReminderParameters coming from campaign configurator notifications"
                     },
                     "paymentId": {
                         "description": "Payment id",
