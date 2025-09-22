@@ -513,3 +513,124 @@ GET /discounts/usages/recap?discountId=2a52b404-0bb0-4a14-99f7-7d1fe2717eb8&targ
 ```
 
 So `"count": 4` is the number of used coupons
+
+
+## Subscription plans
+
+A subscription plan is a discount mechanism that allows you to create flexible pricing for any subscription product. This can be achieved by assigning a dedicated discount for each subscription term, including the trial period, acquisition price, and renewal prices.
+
+You can configure up to 10 different discounts — one for each period of the subscription lifecycle. It’s also possible to skip a discount for any period by setting the discount value to 0.
+
+The key feature of a subscription plan is the ability to add it directly to the shopping cart during its creation, or later to an already existing subscription. It can be applied either via a buy link or an API request.
+
+For this purpose, the tag attribute is used. It’s a human-readable string that allows linking a subscription plan with a shopping cart or subscription.
+
+A subscription plan also has a step parameter, which indicates the subscription period when a particular discount value should be applied:
+
+- step=0 — acquisition
+- step=1 — first renewal
+- step=2 — second renewal
+
+etc.
+
+It’s also possible to skip the acquisition discount, even if it’s configured in the subscription plan, by using the ignorePurchaseDiscount boolean parameter in the cart creation request.
+
+### Subscription plan example
+
+```json
+{
+  "model": "SUBSCRIPTION_PLAN",
+  "id": "11871240-f7ee-4505-a352-00000000",
+  "customerId": "82223530-f443-4c15-a901-00000000",
+  "endDate": "2025-10-10T09:15:00Z",
+  "sources": [
+    "PURCHASE",
+    "SUBSCRIPTION"
+  ],
+  "testOrder": false,
+  "applyOnNetPrice": false,
+  "name": "Just a name",
+  "status": "ENABLED",
+  "level": "PRODUCT",
+  "endUserTypes": [
+    "RESELLER",
+    "BUYER"
+  ],
+  "discountPlan": {
+    "tag": "yourTagName",
+    "steps": [
+      {
+        "step": 0,
+        "discountRate": 0.1
+      },
+      {
+        "step": 1,
+        "discountRate": 0.5
+      },
+      {
+        "step": 2,
+        "discountRate": 0.4
+      }
+    ]
+  },
+  "cumulative": false
+}
+```
+
+[Applying subscription plan to a cart example](../32-shopping-cart-creation.md)
+
+## Payment method discount
+
+This type of discount is designed to encourage end-users to use a specific type of payment method — recurring or non-recurring — at the acquisition step. This discount type only supports percentage values.
+
+The following filters are supported:
+
+1. By having a subscription model for a product in the cart
+2. By payment method recurrence — recurring or non-recurring
+3. By product — productId, parent product, or product reference
+4. By store
+5. By product segment — B2B/B2C
+
+This discount can be combined with any other discount model and is usually applied last.
+
+Possible use cases include:
+
+1. Payment method discount applied to product(s) in the cart
+2. Subscription plan + payment method discount
+3. Campaign + payment method discount
+4. Coupon + payment method discount
+5. Subscription plan + coupon + payment method discount
+6. Subscription plan + campaign + payment method discount
+
+### Payment method discount example
+
+```json
+{
+  "model": "PAYMENT_METHOD",
+  "id": "aa38daed-5998-446c-9c28-00000000000",
+  "customerId": "02c53694-09cf-4848-b47c-000000000",
+  "startDate": "2025-09-18T10:28:50Z",
+  "endDate": "2028-10-30T12:37:00Z",
+  "storeIds": [
+    "317e0215-75a7-4476-a9b2-00000000000"
+  ],
+  "sources": [
+    "PURCHASE"
+  ],
+  "testOrder": false,
+  "discountRate": 0.1,
+  "applyOnNetPrice": false,
+  "name": "10% Off for AR",
+  "businessSegment": "B2C",
+  "hasSubscriptionModel": true,
+  "status": "ENABLED",
+  "level": "PRODUCT",
+  "endUserTypes": [
+    "BUYER"
+  ],
+  "recurring": true,
+  "cumulative": true
+}
+```
+
+[Applying payment method discount example](../32-shopping-cart-creation.md)

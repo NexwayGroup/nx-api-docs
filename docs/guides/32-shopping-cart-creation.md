@@ -108,6 +108,7 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
     ]
 }   
 ```
+Learn more about subscription plan [here](../30-discount-api_guide.md)
 
 #### 5. Authorized Cart
 Creates a shopping cart with prefilled shopper's billing information.  
@@ -177,3 +178,16 @@ Creates a shopping cart with a custom catalog that is not managed by Nexway. Thi
     }
 } 
 ```
+
+#### 7. Apply payment method discount
+[Here](../30-discount-api_guide.md) you can find a description of what a payment method discount is.
+
+In a cart, it is normally applied during `PUT /carts` or `PUT /carts/public`. However, it is also possible to apply it during `POST /carts` or `POST /carts/public`.
+
+The discount is managed via a specific field in the request body: `paymentMethodDiscountId": "{your payment method discount id}"`
+
+There is a validation step that checks the payment method type applied to the cart. Its recurrence must match the one defined in the discount.
+
+For example:
+- If a credit card (recurring) is applied to the shopping cart, the payment method discount must have `"recurring": true`.
+- If the recurrence does not match, the discount cannot be applied and the backend will return an error.
