@@ -88,7 +88,7 @@ This notification allows to be notified if end-user changes payment method for s
 | expirationDate | New payment method expiration date | O |
 
 ## Subscription enters prebilling period
-This notification allows to track when is subscription reached of prebilling period
+This notification is sent when subscription enters prebilling.
 
 | Name | Description | R/O |
 | ---- | ----------- | --- |
