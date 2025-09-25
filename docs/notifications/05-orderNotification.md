@@ -194,4 +194,4 @@ Certain notification types, like 'Order Completed with Subscription Data' and 'O
 | items[].subscription.lifecycle.id | Lifecycle id string | O |
 | items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
 | items[].subscription.lifecycle.generation | Subscription generation | R |
-| items[].subscription.lifecycle.status | Subscription status  | O |
+| items[].subscription.lifecycle.status | Subscription status  | R |
