@@ -34,11 +34,16 @@ The notification payload will include an 'order' object containing the following
 | consentFlags.newsletterOptin | Marketing newsletter consent flag | O |
 | externalContext | Based64 encoded string of cart parameters | O |
 | decodedExternalContext | Decoded map of cart string parameters if they were provided in the json format | O |
+| customer.id | customer id connected to the order | R |
+| customer.customerAccount | customer realm name  connected to the order | R |
+| customer.name | customer  name  connected to the order | R |
+| store.id| store id from an order | R |
+| cartId| cartId from an order | O |
 | payment | Payment object | O |
 | payment.id | Payment id | R |
 | payment.method | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
 | payment.status | Payment status (COMPLETED, FAILED) | R |
-| payment.transitionPaymentDate | Transaction date | R |
+| payment.transitionPaymentDate | Transaction date, equal to transaction creation date | R |
 | payment.automaticBilling | Boolean which highlights if payment was automatically charged or not | R |
 | payment.lastError | Last error object | O |
 | payment.lastError.code | Error code | O |
@@ -53,6 +58,7 @@ The notification payload will include an 'order' object containing the following
 | user.street | Buyer's street address | O |
 | user.zipcode | Buyer's postal code | O |
 | user.city | Buyer's city | O |
+| user.region | Buyer's region | O |
 | items[] | List of items purchased (products, services, etc.) | R |
 | items[].id | Unique ID for order line item | R |
 | items[].product.name | Product name | R |
@@ -61,11 +67,18 @@ The notification payload will include an 'order' object containing the following
 | items[].fulfillmentId | Fulfillment process identifier | O |
 | items[].quantity | Product quantity | R |
 | items[].activationCode | Product activation code | O |
-| items[].unitPriceIncVAT | Product unit price, including sales tax | R |
-| items[].unitPriceExclVAT | Product unit price, excluding sales tax | R |
-| items[].VATRate | Sold product applied sales tax rate | R |
+| items[].expirationDate | Expiration date of a product (if any) | O |
+| items[].pricing.unitPriceIncVAT | Product unit price, including sales tax | R |
+| items[].pricing.unitPriceExclVAT | Product unit price, excluding sales tax | R |
+| items[].pricing.vatAmount | Vat amount | R |
+| items[].pricing.VATRate | Sold product applied sales tax rate | R |
+| items[].pricing.allDiscountsApplied[] | Array of all applied discounts. Each discount represneted as object | O |
+| items[].pricing.allDiscountsApplied[].discountRate | Discount rate, f.e. 0.2 | O |
+| items[].pricing.allDiscountsApplied[].discountId | Identifier of discount in Monetize | O |
+| items[].pricing.allDiscountsApplied[].discountCode | Discount code (if any) | O |
+| items[].pricing.allDiscountsApplied[].discountAmount | Amount of discount | O |
 | items[].isUpsell | Boolean which marks a product as upsold or not | R |
-| items[].discountRate | Discount rate applied to product | O |
+| items[].cumulatedDiscountRate | Discount rate applied to product | O |
 | items[].subscriptionId | SubscriptionId if the line item has one | O |
 | items[].discountPlan | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
 | items[].discountPlan.tag | Subscription discount plan tag | R |
@@ -180,3 +193,5 @@ Certain notification types, like 'Order Completed with Subscription Data' and 'O
 | items[].subscription.lifecycle | Lifecycle data | R |
 | items[].subscription.lifecycle.id | Lifecycle id string | O |
 | items[].subscription.lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
+| items[].subscription.lifecycle.generation | Subscription generation | R |
+| items[].subscription.lifecycle.status | Subscription status  | R |

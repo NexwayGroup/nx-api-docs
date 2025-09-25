@@ -18,6 +18,9 @@ You can receive notifications whenever your subscription status changes.
 | lifecycle |  | R |
 | lifecycle.id | internal id | O |
 | lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
+| lifecycle.generation | Subscription generation | R |
+| lifecycle.status | Subscription status  | R |
+| lifecycle.endUserId | Id of end-user, connected to subscription  | R |
 | products[] | List of products in subscription | R |
 | products[].id | product id | R |
 | products[].lineItemId | original order line item id | R |
@@ -74,3 +77,20 @@ This is special notification which will be send in case if subscription plan is 
   }
 }
 ```
+
+## Payment method is changed for subscription
+This notification is sent when the end-user changes subscription payment method.
+
+| Name | Description | R/O |
+| ---- | ----------- | --- |
+| id | Subscription unique identifier | R |
+| paymentMethod | New payment method | O |
+| expirationDate | New payment method expiration date | O |
+
+## Subscription enters prebilling period
+This notification is sent when subscription enters prebilling.
+
+| Name | Description | R/O |
+| ---- | ----------- | --- |
+| subscriptionId | Subscription unique identifier | R |
+| subscriptionStatus; | Subscription status | R |
