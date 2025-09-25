@@ -79,7 +79,7 @@ This is special notification which will be send in case if subscription plan is 
 ```
 
 ## Payment method is changed for subscription
-This notification allows to be notified if end-user changes payment method for subscription
+This notification is sent when the end-user changes subscription payment method.
 
 | Name | Description | R/O |
 | ---- | ----------- | --- |
