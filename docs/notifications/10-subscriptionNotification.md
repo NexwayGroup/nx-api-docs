@@ -18,6 +18,8 @@ You can receive notifications whenever your subscription status changes.
 | lifecycle |  | R |
 | lifecycle.id | internal id | O |
 | lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
+| lifecycle.generation | Subscription generation | O |
+| lifecycle.status | Subscription status  | O |
 | products[] | List of products in subscription | R |
 | products[].id | product id | R |
 | products[].lineItemId | original order line item id | R |
