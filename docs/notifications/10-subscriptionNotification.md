@@ -6,7 +6,12 @@ You can receive notifications whenever your subscription status changes.
 * suspended
 * reactivated
 * canceled
+* renewed
+* expired
 * subscription discount plan is changed
+* subscription expiration date is updated
+* payment method is changed
+* subscription enters prebilling period
 
 ## List of fields
 
@@ -78,7 +83,7 @@ This is special notification which will be send in case if subscription plan is 
 }
 ```
 
-## Payment method is changed for subscription
+## Payment method is changed
 This notification is sent when the end-user changes subscription payment method.
 
 | Name | Description | R/O |
