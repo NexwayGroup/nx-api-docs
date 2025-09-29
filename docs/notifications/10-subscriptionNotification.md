@@ -26,7 +26,7 @@ You can receive notifications whenever your subscription status changes.
 | **subscription.name** | `Kaspersky Endpoint Security Cloud` | O |
 | **subscription.storeId** | `36f48867-d6ca-42d3-bf55-5f54a6740803` | R |
 | **subscription.lifecycle {}** | | R |
-| **subscription.lifecycle.id** | `9191920` | O |
+| **subscription.lifecycle.id** | `9191920` Deprecated. | O |
 | **subscription.lifecycle.generation** | 0 | R |
 | **subscription.products {}** | | R |
 | **subscription.products.id** | `ecaa7302-6686-4527-a034-26931397d7ca` | R |
