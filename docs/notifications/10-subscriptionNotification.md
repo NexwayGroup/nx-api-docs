@@ -6,7 +6,6 @@ You can receive notifications whenever your subscription status changes.
 * suspended
 * reactivated
 * canceled
-* renewed
 * expired
 * subscription discount plan is changed
 * subscription expiration date is updated

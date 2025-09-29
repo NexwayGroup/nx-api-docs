@@ -34,7 +34,7 @@ The notification payload will include an 'order' object containing the following
 | **order.cancellationReason** | | O |
 | **order.cancellationDate** | | O |
 | **order.source** | Order source: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL, etc | R |
-| **order.offerSubSource** | | O |
+| **order.offerSubSource** | Order sub source: SUSPEND, RESUME | O |
 | **order.creationDate** | Creation date in ISO 8601 format, ex.: 2024-01-01T01:02:03Z | R |
 | **order.currency** | Order's Currency, ex.: EUR | R |
 | **order.salesFlag [string]** | Sales flags is an array of strings provided in the cart. Similar to external context, but unencoded. | O |
