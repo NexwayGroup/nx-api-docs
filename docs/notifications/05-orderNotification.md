@@ -213,20 +213,20 @@ Certain notification types, like 'Order Completed with Subscription Data' and 'O
 | Name | Description | R / O |
 | :--- | :--- | :---: |
 | **order.items[].subscription {object}** | | O |
-| **order.items.subscription.id** | Subscription identifier | R |
-| **order.items.subscription.createDate** | The date when subscription is created | R |
-| **order.items.subscription.modelId** | Internal subscription model identifier | R |
-| **order.items.subscription.name** | The name of subscription. Usually the same as the product name | R |
-| **order.items.subscription.storeId** | Internal store identifier | R |
-| **order.items.subscription.lifecycle {object}** | | R |
-| **order.items.subscription.lifecycle.id** | Nexway back-office subscription identifier | O |
-| **order.items.subscription.lifecycle.anniversaryDate**| | R |
-| **order.items.subscription.lifecycle.generation**| F.e. after a purchase the generation is 0, after first renewal its 1 and so on | O |
-| **order.items.subscription.lifecycle.status** | Internal status | O |
-| **order.items.subscription.products [ {object} ]** | | R |
-| **order.items.subscription.products[].id** | Product identifier | R |
-| **order.items.subscription.products[].lineItemId** | | R |
-| **order.items.subscription.discountPlan {object}** | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
-| **order.items.subscription.discountPlan.tag** | Subscription discount plan tag | O |
-| **order.items.subscription.discountPlan.startingStep**| | O |
-| **order.items.subscription.enduserId** | Internal id of end-user | R |
+| **order.items[].subscription.id** | Subscription identifier | R |
+| **order.items[].subscription.createDate** | The date when subscription is created | R |
+| **order.items[].subscription.modelId** | Internal subscription model identifier | R |
+| **order.items[].subscription.name** | The name of subscription. Usually the same as the product name | R |
+| **order.items[].subscription.storeId** | Internal store identifier | R |
+| **order.items[].subscription.lifecycle {object}** | | R |
+| **order.items[].subscription.lifecycle.id** | Nexway back-office subscription identifier | O |
+| **order.items[].subscription.lifecycle.anniversaryDate**| | R |
+| **order.items[].subscription.lifecycle.generation**| F.e. after a purchase the generation is 0, after first renewal its 1 and so on | O |
+| **order.items[].subscription.lifecycle.status** | Internal status | O |
+| **order.items[].subscription.products [ {object} ]** | | R |
+| **order.items[].subscription.products[].id** | Product identifier | R |
+| **order.items[].subscription.products[].lineItemId** | | R |
+| **order.items[].subscription.discountPlan {object}** | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
+| **order.items[].subscription.discountPlan.tag** | Subscription discount plan tag | O |
+| **order.items[].subscription.discountPlan.startingStep**| | O |
+| **order.items[].subscription.enduserId** | Internal id of end-user | R |
