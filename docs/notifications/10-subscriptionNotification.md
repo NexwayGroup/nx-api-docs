@@ -6,7 +6,7 @@ You can receive notifications whenever your subscription status changes.
 * suspended
 * reactivated
 * canceled
-* expired
+* expired (sends when grace period is ended)
 * subscription discount plan is changed
 * subscription expiration date is updated
 * payment method is changed
@@ -65,10 +65,10 @@ This is special notification which will be send in case if subscription plan is 
 
 | Name | Description | R/O |
 | :--- | :--- | :---: |
-| subscription.id | Subscription unique identifier | R |
-| subscription.discountPlan | Node with subscription plan is added / changed for a given subscription | R |
-| subscription.discountPlan.tag | Subscription discount plan tag is added / chagned | R |
-| subscription.discountPlan.nextDiscountStep | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
+| **subscription.id** | Subscription unique identifier | R |
+| **subscription.discountPlan** | Node with subscription plan is added / changed for a given subscription | R |
+| **subscription.discountPlan.tag** | Subscription discount plan tag is added / chagned | R |
+| **subscription.discountPlan.nextDiscountStep** | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
 
 
 ### Example
