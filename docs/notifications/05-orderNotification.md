@@ -54,7 +54,7 @@ The notification payload will include an 'order' object containing the following
 | **order.user.street** | Buyer's street address | O |
 | **order.user.zipcode** | Buyer's postal code | O |
 | **order.items [ {object} ]** | List of items purchased (products, services, etc.) | R |
-| **order.items.id** | Unique ID for order line item | R |
+| **order.items[].id** | Unique ID for order line item | R |
 | **order.items.product {object}** | | R |
 | **order.items.product.name** | Product name | R |
 | **order.items.product.uniqueReference** | A unique ID for identifying your product on the Nexway Monetize platform | R |
