@@ -6,24 +6,37 @@ You can receive notifications whenever your subscription status changes.
 * suspended
 * reactivated
 * canceled
+* expired (sends when grace period is ended)
 * subscription discount plan is changed
+* subscription expiration date is updated
+* payment method is changed
 
 ## List of fields
 
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| id | subscription unique identifier | R |
-| modelId | subscription model id | R |
-| name | subscription product name | O |
-| lifecycle |  | R |
-| lifecycle.id | internal id | O |
-| lifecycle.anniversaryDate | Subscription anniversary (expiration) date in ISO 8601 format | R |
-| lifecycle.generation | Subscription generation | R |
-| lifecycle.status | Subscription status  | R |
-| lifecycle.endUserId | Id of end-user, connected to subscription  | R |
-| products[] | List of products in subscription | R |
-| products[].id | product id | R |
-| products[].lineItemId | original order line item id | R |
+| Name | Description | R / O |
+| :--- | :--- | :---: |
+| **subject** | subscription | R |
+| **type** | Depending on event:<br>• expiredsubscription<br>• expirationdateupdated<br>• expiration date updated<br>• reactivated<br>• suspended<br>• canceled<br>etc | R |
+| **objectId** | subscriptonId: `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
+| **eventDate** | `2025-07-25T11:30:03Z` | |
+| **subscription {object}** | | R |
+| **subscription.id** | `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
+| **subscription.createDate** | `2025-07-25T11:30:03Z` | R |
+| **subscription.modelId** | `NEXWAY_1Y` | R |
+| **subscription.name** | `Kaspersky Endpoint Security Cloud` | O |
+| **subscription.storeId** | `36f48867-d6ca-42d3-bf55-5f54a6740803` | R |
+| **subscription.lifecycle {object}** | | R |
+| **subscription.lifecycle.id** | `9191920` Deprecated. | O |
+| **subscription.lifecycle.generation** | 0 | R |
+| **subscription.products [{object}]** | | R |
+| **subscription.products[].id** | `ecaa7302-6686-4527-a034-26931397d7ca` | R |
+| **subscription.products[].lineItemId**| `b60928b9-523e-42b7-9780-2527e5bdcb1e` | R |
+| **subscirption.lifecycle.anniversaryDate**| | R |
+| **subscirption.lifecycle.status** | | R |
+|**subscirption.discountPlan {object}** | | O |
+|**subscirption.discountPlan.tag** | | R |
+|**subscirption.discountPlan.startingStep** | | R |
+| **subscription.endUserId** | | R |
 
 ### Example
 ```json
@@ -54,11 +67,15 @@ You can receive notifications whenever your subscription status changes.
 This is special notification which will be send in case if subscription plan is changed for subscription. The payload is following:
 
 | Name | Description | R/O |
-| ---- | ----------- | --- |
-| subscription.id | Subscription unique identifier | R |
-| subscription.discountPlan | Node with subscription plan is added / changed for a given subscription | R |
-| subscription.discountPlan.tag | Subscription discount plan tag is added / chagned | R |
-| subscription.discountPlan.nextDiscountStep | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
+| :--- | :--- | :---: |
+| **subscription.id** | Subscription unique identifier | R |
+| **subject** | `subscription` | R |
+| **type** | `discount plan updated` | R |
+| **objectId** | UUID of an object (subscription ID in this case) | R |
+| **eventDate** | `2025-09-29T07:34:06Z` | R |
+| **subscription.discountPlan {object}** | Node with subscription plan is added / changed for a given subscription | R |
+| **subscription.discountPlan.tag** | Subscription discount plan tag is added / chagned | R |
+| **subscription.discountPlan.nextDiscountStep** | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
 
 
 ### Example
@@ -79,18 +96,17 @@ This is special notification which will be send in case if subscription plan is 
 ```
 
 ## Payment method is changed for subscription
-This notification is sent when the end-user changes subscription payment method.
+This notification is sent when the end-user changes subscription payment method. 
 
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| id | Subscription unique identifier | R |
-| paymentMethod | New payment method | O |
-| expirationDate | New payment method expiration date | O |
+| Name | Description | R / O |
+| :--- | :--- | :---: |
+| **subject** | `endUser` | R |
+| **type** | `subscriptionPaymentMethodUpdated` | R |
+| **objectId** | UUID of an object (enduser ID in this case) | R |
+| **eventDate** | `2025-09-29T07:34:06Z` | R |
+| **enduser {object}** | | R |
+| **enduser.id** | payment method UUID: `8d2eaaf6-9eba-4400-9927-516672d4693b` | R |
+| **enduser.subscriptionId** | subscription id | R |
+| **enduser.paymentMethod** | payment method type, f.e. creditCard | O |
+| **enduser.expirationDate** | `11/2028` | O |
 
-## Subscription enters prebilling period
-This notification is sent when subscription enters prebilling.
-
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| subscriptionId | Subscription unique identifier | R |
-| subscriptionStatus; | Subscription status | R |
