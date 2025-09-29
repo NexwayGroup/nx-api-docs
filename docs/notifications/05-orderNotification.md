@@ -109,6 +109,7 @@ The notification payload will include an 'order' object containing the following
 | **order.payments[].amount** | | O |
 | **order.payments[].status** | | R |
 | **order.payments[].transitionPaymentDate** | | R |
+| **order.ConsentFlags {object}** | Consent flags object | R |
 | **order.ConsentFlags.newstellerOption** | Marketing newsletter consent flag | R |
 | **order.subscriptionStatus** | | O |
 
