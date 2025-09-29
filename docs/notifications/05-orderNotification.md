@@ -25,7 +25,7 @@ The notification payload will include an 'order' object containing the following
 | Name | Description | R / O |
 | :--- | :--- | :---: |
 | **subject** | | R |
-| **type** | | R |
+| **type** | Depends on the type of the notification | R |
 | **objectId** | | R |
 | **eventDate** | | R |
 | **order {object}** | | R |
