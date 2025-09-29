@@ -212,7 +212,7 @@ Certain notification types, like 'Order Completed with Subscription Data' and 'O
 
 | Name | Description | R / O |
 | :--- | :--- | :---: |
-| **order.items.subscription {object}** | | O |
+| **order.items[].subscription {object}** | | O |
 | **order.items.subscription.id** | Subscription identifier | R |
 | **order.items.subscription.createDate** | The date when subscription is created | R |
 | **order.items.subscription.modelId** | Internal subscription model identifier | R |
