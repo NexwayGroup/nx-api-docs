@@ -31,7 +31,7 @@ The notification payload will include an 'order' object containing the following
 | **order {object}** | | R |
 | **order.id** | Order unique identifier | R |
 | **order.status** | Order status corresponds to the event type. | R |
-| **order.cancellationReason** | | O |
+| **order.cancellationReason** | Will be provided only if order is canceled event is sent AND reason was set for cancelation | O |
 | **order.cancellationDate** | | O |
 | **order.source** | Order source: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL, etc | R |
 | **order.offerSubSource** | Order sub source: SUSPEND, RESUME | O |
@@ -70,22 +70,22 @@ The notification payload will include an 'order' object containing the following
 | **order.items[].pricing.cumulatedDiscountRate** | Discount rate applied to product | O |
 | **order.items[].pricing.allDiscountsApplied [{object}]**| Array of all applied discounts. Each discount represneted as object | O |
 | **order.items[].pricing.allDiscountsApplied[].discountRate**| Discount rate, f.e. 0.2 | O |
-| **order.items.pricing.allDiscountsApplied[].discountId**| Identifier of discount in Monetize | R |
-| **order.items.pricing.allDiscountsApplied[].discountCode**| Discount code (if any) | O |
-| **order.items.pricing.allDiscountsApplied[].discountAmount**| Amount of discount | O |
-| **order.items.pricing.VATRate** | Sold product applied sales tax rate | R |
-| **order.items.unitPriceExclVAT** | Product unit price, excluding sales tax | R |
-| **order.items.unitPriceIncVAT** | Product unit price, including sales tax | R |
-| **order.items.trial** | | R |
-| **order.items.subscriptionId** | SubscriptionId if the line item has one | O |
-| **order.items.activationCode** | Product activation code | O |
-| **order.items.subItems []** | | R |
-| **order.items.isUpsell** | Boolean which marks a product as upsold or not | R |
-| **order.items.VATRate** | Sold product applied sales tax rate | R |
-| **order.items.DiscountPlan {object}** | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
-| **order.items.DiscountPlan.tag** | Subscription discount plan tag | R |
-| **order.items.DiscountPlan.discountStep** | Subscription discount plan step is used on acquisition | O |
-| **order.items.DiscountPlan.ignorePurchaseDiscount**| Only in case if this flag was set on acquisition | O |
+| **order.items[].pricing.allDiscountsApplied[].discountId**| Identifier of discount in Monetize | R |
+| **order.items[].pricing.allDiscountsApplied[].discountCode**| Discount code (if any) | O |
+| **order.items[].pricing.allDiscountsApplied[].discountAmount**| Amount of discount | O |
+| **order.items[].pricing.VATRate** | Sold product applied sales tax rate | R |
+| **order.items[].unitPriceExclVAT** | Product unit price, excluding sales tax | R |
+| **order.items[].unitPriceIncVAT** | Product unit price, including sales tax | R |
+| **order.items[].trial** | | R |
+| **order.items[].subscriptionId** | SubscriptionId if the line item has one | O |
+| **order.items[].activationCode** | Product activation code | O |
+| **order.items[].subItems []** | | R |
+| **order.items[].isUpsell** | Boolean which marks a product as upsold or not | R |
+| **order.items[].VATRate** | Sold product applied sales tax rate | R |
+| **order.items[].DiscountPlan {object}** | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
+| **order.items[].DiscountPlan.tag** | Subscription discount plan tag | R |
+| **order.items[].DiscountPlan.discountStep** | Subscription discount plan step is used on acquisition | O |
+| **order.items[].DiscountPlan.ignorePurchaseDiscount**| Only in case if this flag was set on acquisition | O |
 | **order.customer {object}** | | R |
 | **customer.id** | customer id connected to the order | R |
 | **order.customer.customerAccount** | customer realm name  connected to the order | R |
@@ -93,7 +93,7 @@ The notification payload will include an 'order' object containing the following
 | **order.store {object}** | | R |
 | **order.store.Id** | store id from an order | R |
 | **order.cartId** | cartId from an order | O |
-| **order.payment** | Payment object (last) | O |
+| **order.payment {object}** | Payment object (last) | O |
 | **order.payment.id** | Payment id | R |
 | **order.payment.method** | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
 | **order.payment.amount** | | O |
