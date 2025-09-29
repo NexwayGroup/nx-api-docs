@@ -42,7 +42,6 @@ The notification payload will include an 'order' object containing the following
 | **order.totalPriceExclVAT** | Order total price, excluding sales tax | R |
 | **order.externalContext** | Based64 encoded string of cart parameters | O |
 | **order.decodedExternalContext** | Decoded map of cart string parameters if they were provided in the json format | O |
-| **order.decodedExternalContext.{"keyName": "keyValue"}**| | O |
 | **order.user {object}** | Buyer's details object | R |
 | **order.user.id** | Buyer's id | O |
 | **order.user.email** | Buyer's email | R |
