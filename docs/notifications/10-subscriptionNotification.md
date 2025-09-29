@@ -30,7 +30,7 @@ You can receive notifications whenever your subscription status changes.
 | **subscription.lifecycle.generation** | 0 | R |
 | **subscription.products [{object}]** | | R |
 | **subscription.products[].id** | `ecaa7302-6686-4527-a034-26931397d7ca` | R |
-| **subscription.products.lineItemId**| `b60928b9-523e-42b7-9780-2527e5bdcb1e` | R |
+| **subscription.products[].lineItemId**| `b60928b9-523e-42b7-9780-2527e5bdcb1e` | R |
 | **subscirption.lifecycle.anniversaryDate**| | R |
 | **subscirption.lifecycle.status** | | R |
 |**subscirption.discountPlan {object}** | | O |
