@@ -69,7 +69,7 @@ The notification payload will include an 'order' object containing the following
 | **order.items.pricing.vatAmount** | Vat amount | O |
 | **order.items.pricing.cumulatedDiscountRate** | Discount rate applied to product | O |
 | **order.items.pricing.allDiscountsApplied [{object}]**| Array of all applied discounts. Each discount represneted as object | O |
-| **order.items.pricing.allDiscountsApplied.discountRate**| Discount rate, f.e. 0.2 | O |
+| **order.items[].pricing.allDiscountsApplied[].discountRate**| Discount rate, f.e. 0.2 | O |
 | **order.items.pricing.allDiscountsApplied.discountId**| Identifier of discount in Monetize | R |
 | **order.items.pricing.allDiscountsApplied.discountCode**| Discount code (if any) | O |
 | **order.items.pricing.allDiscountsApplied.discountAmount**| Amount of discount | O |
