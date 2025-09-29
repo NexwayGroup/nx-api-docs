@@ -93,7 +93,7 @@ The notification payload will include an 'order' object containing the following
 | **order.store {object}** | | R |
 | **order.store.Id** | store id from an order | R |
 | **order.cartId** | cartId from an order | O |
-| **order.payment** | Payment object | O |
+| **order.payment** | Payment object (last) | O |
 | **order.payment.id** | Payment id | R |
 | **order.payment.method** | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
 | **order.payment.amount** | | O |
