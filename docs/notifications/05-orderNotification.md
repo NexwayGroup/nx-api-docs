@@ -104,7 +104,7 @@ The notification payload will include an 'order' object containing the following
 | **order.payment.lastError.code** | Error code | O |
 | **order.payment.lastError.message** | Error message | O |
 | **order.payments []** | | O |
-| **order.payments.id** | | R |
+| **order.payments[].id** | | R |
 | **order.payments.method** | | O |
 | **order.payments.amount** | | O |
 | **order.payments.status** | | R |
