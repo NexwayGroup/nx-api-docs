@@ -96,7 +96,7 @@ This notification is sent when the end-user changes subscription payment method.
 | :--- | :--- | :---: |
 | **subject** | `endUser` | R |
 | **type** | `subscriptionPaymentMethodUpdated` | R |
-| **objectId** | guide of an object (enduser in this case) | R |
+| **objectId** | UUID of an object (enduser ID in this case) | R |
 | **eventDate** | `2025-09-29T07:34:06Z` | R |
 | **enduser {}** | | R |
 | **enduser.id** | payment method id, guide: `8d2eaaf6-9eba-4400-9927-516672d4693b` | R |
