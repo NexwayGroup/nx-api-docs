@@ -55,24 +55,24 @@ The notification payload will include an 'order' object containing the following
 | **order.user.zipcode** | Buyer's postal code | O |
 | **order.items [ {object} ]** | List of items purchased (products, services, etc.) | R |
 | **order.items[].id** | Unique ID for order line item | R |
-| **order.items.product {object}** | | R |
-| **order.items.product.name** | Product name | R |
-| **order.items.product.uniqueReference** | A unique ID for identifying your product on the Nexway Monetize platform | R |
-| **order.items.product.publisherReference** | A unique ID for identifying your product in your information system, if defined | O |
-| **order.items.fulfillmentId** | Fulfillment process identifier | O |
-| **order.items.quantity** | Product quantity | R |
-| **order.items.activationCode** | Product activation code | O |
-| **order.items.expirationDate** | Expiration date of a product (if any) | O |
-| **order.items.pricing {object}** | | R |
-| **order.items.pricing.unitPriceExclVAT** | Product unit price, excluding sales tax | R |
-| **order.items.pricing.unitPriceIncVAT** | Product unit price, including sales tax | R |
-| **order.items.pricing.vatAmount** | Vat amount | O |
-| **order.items.pricing.cumulatedDiscountRate** | Discount rate applied to product | O |
-| **order.items.pricing.allDiscountsApplied [{object}]**| Array of all applied discounts. Each discount represneted as object | O |
+| **order.items[].product {object}** | | R |
+| **order.items[].product.name** | Product name | R |
+| **order.items[].product.uniqueReference** | A unique ID for identifying your product on the Nexway Monetize platform | R |
+| **order.items[].product.publisherReference** | A unique ID for identifying your product in your information system, if defined | O |
+| **order.items[].fulfillmentId** | Fulfillment process identifier | O |
+| **order.items[].quantity** | Product quantity | R |
+| **order.items[].activationCode** | Product activation code | O |
+| **order.items[].expirationDate** | Expiration date of a product (if any) | O |
+| **order.items[].pricing {object}** | | R |
+| **order.items[].pricing.unitPriceExclVAT** | Product unit price, excluding sales tax | R |
+| **order.items[].pricing.unitPriceIncVAT** | Product unit price, including sales tax | R |
+| **order.items[].pricing.vatAmount** | Vat amount | O |
+| **order.items[].pricing.cumulatedDiscountRate** | Discount rate applied to product | O |
+| **order.items[].pricing.allDiscountsApplied [{object}]**| Array of all applied discounts. Each discount represneted as object | O |
 | **order.items[].pricing.allDiscountsApplied[].discountRate**| Discount rate, f.e. 0.2 | O |
-| **order.items.pricing.allDiscountsApplied.discountId**| Identifier of discount in Monetize | R |
-| **order.items.pricing.allDiscountsApplied.discountCode**| Discount code (if any) | O |
-| **order.items.pricing.allDiscountsApplied.discountAmount**| Amount of discount | O |
+| **order.items.pricing.allDiscountsApplied[].discountId**| Identifier of discount in Monetize | R |
+| **order.items.pricing.allDiscountsApplied[].discountCode**| Discount code (if any) | O |
+| **order.items.pricing.allDiscountsApplied[].discountAmount**| Amount of discount | O |
 | **order.items.pricing.VATRate** | Sold product applied sales tax rate | R |
 | **order.items.unitPriceExclVAT** | Product unit price, excluding sales tax | R |
 | **order.items.unitPriceIncVAT** | Product unit price, including sales tax | R |
@@ -103,12 +103,12 @@ The notification payload will include an 'order' object containing the following
 | **order.payment.lastError {object}** | Last error object | O |
 | **order.payment.lastError.code** | Error code | O |
 | **order.payment.lastError.message** | Error message | O |
-| **order.payments []** | | O |
+| **order.payments[]** | | O |
 | **order.payments[].id** | | R |
-| **order.payments.method** | | O |
-| **order.payments.amount** | | O |
-| **order.payments.status** | | R |
-| **order.payments.transitionPaymentDate** | | R |
+| **order.payments[].method** | | O |
+| **order.payments[].amount** | | O |
+| **order.payments[].status** | | R |
+| **order.payments[].transitionPaymentDate** | | R |
 | **order.ConsentFlags.newstellerOption** | Marketing newsletter consent flag | R |
 | **order.subscriptionStatus** | | O |
 
@@ -223,9 +223,9 @@ Certain notification types, like 'Order Completed with Subscription Data' and 'O
 | **order.items.subscription.lifecycle.anniversaryDate**| | R |
 | **order.items.subscription.lifecycle.generation**| F.e. after a purchase the generation is 0, after first renewal its 1 and so on | O |
 | **order.items.subscription.lifecycle.status** | Internal status | O |
-| **order.items.subscription.products {object}** | | R |
-| **order.items.subscription.products.id** | Product identifier | R |
-| **order.items.subscription.products.lineItemId** | | R |
+| **order.items.subscription.products [ {object} ]** | | R |
+| **order.items.subscription.products[].id** | Product identifier | R |
+| **order.items.subscription.products[].lineItemId** | | R |
 | **order.items.subscription.discountPlan {object}** | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
 | **order.items.subscription.discountPlan.tag** | Subscription discount plan tag | O |
 | **order.items.subscription.discountPlan.startingStep**| | O |
