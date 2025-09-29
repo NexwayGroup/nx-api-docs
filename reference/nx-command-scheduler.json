@@ -231,6 +231,30 @@
                 ]
             }
         },
+        "/command-scheduler/api/commands/delete": {
+            "post": {
+                "operationId": "deleteCommands",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CancelCommandFilterRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Delete Commands",
+                "tags": [
+                    "Command Scheduler API"
+                ]
+            }
+        },
         "/command-scheduler/api/commands/process": {
             "post": {
                 "operationId": "processCommands",
