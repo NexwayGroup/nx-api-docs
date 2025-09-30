@@ -332,6 +332,10 @@
                     "remittableId": {
                         "type": "string"
                     },
+                    "remotePriceFiltering": {
+                        "$ref": "#/components/schemas/RemotePriceFiltering",
+                        "description": "remote price filtering"
+                    },
                     "retryPaymentValidityDuration": {
                         "description": "Retry payment validity duration",
                         "example": 30,
@@ -934,6 +938,33 @@
             "RemittanceAccount": {
                 "type": "object"
             },
+            "RemotePriceFiltering": {
+                "properties": {
+                    "filteringFieldsForB2B": {
+                        "description": "filtering fields for B2B",
+                        "example": [
+                            "seats",
+                            "licenseId"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "filteringFieldsForB2C": {
+                        "description": "filtering fields for B2C",
+                        "example": [
+                            "seats",
+                            "licenseId"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "SearchResultBlackListedSignedData": {
                 "properties": {
                     "items": {
@@ -1191,6 +1222,20 @@
                         "$ref": "#/components/schemas/MidTermUpgrade"
                     }
                 },
+                "type": "object"
+            },
+            "UpdateRemotePriceFilteringRequest": {
+                "properties": {
+                    "remotePriceFilteringDataByCustomerId": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/RemotePriceFiltering"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "remotePriceFilteringDataByCustomerId"
+                ],
                 "type": "object"
             }
         },
@@ -2347,7 +2392,7 @@
         "/customers/my": {
             "get": {
                 "description": "Get my customer using my JWT",
-                "operationId": "getMy_1",
+                "operationId": "getMy_2",
                 "responses": {
                     "200": {
                         "content": {
@@ -3323,7 +3368,7 @@
         "/customers/public/{pathOrId}": {
             "get": {
                 "description": "Get a customer with public access, by customer realm name or id",
-                "operationId": "getMy",
+                "operationId": "getMy_1",
                 "parameters": [
                     {
                         "description": "Customer realm name or id",
@@ -3796,6 +3841,72 @@
                     "Customer"
                 ],
                 "x-operationWeight": "150"
+            }
+        },
+        "/customers/updateRemotePriceFiltering": {
+            "post": {
+                "description": "Update remote price filtering by customerId",
+                "operationId": "getMy",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRemotePriceFilteringRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update remote price filtering by customerId",
+                "tags": [
+                    "Customer"
+                ],
+                "x-operationWeight": "210"
             }
         },
         "/customers/verify": {
