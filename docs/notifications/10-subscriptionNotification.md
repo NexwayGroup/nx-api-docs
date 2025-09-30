@@ -2,21 +2,23 @@
 You can receive notifications whenever your subscription status changes.
 
 ## Event list
-* created
-* suspended
-* reactivated
-* canceled
-* expired (sends when grace period is ended)
-* subscription discount plan is changed
-* subscription expiration date is updated
-* payment method is changed
+
+* **Subscription Created**
+* **Subscription Suspended**
+* **Subscription Reactivated**
+* **Subscription Canceled**
+* **Subscription Discount Plan Updated**
+* **Subscription Expiration Date Updated** - triggered only when the date is shifted outside of the normal renewal process
+* **Subscription Unpaid** - triggered with the email reminder about the unpaid subscription, which depends on the subscription model
+* **Subscription expired** - sent when the grace period ends
+* **Payment Method Changed**
 
 ## List of fields
 
 | Name | Description | R / O |
 | :--- | :--- | :---: |
 | **subject** | subscription | R |
-| **type** | Depending on event:<br>• expiredsubscription<br>• expirationdateupdated<br>• expiration date updated<br>• reactivated<br>• suspended<br>• canceled<br>etc | R |
+| **type** | Depending on event:<br/>• expiredsubscription<br/>• expirationdateupdated<br/>• expiration date updated<br/>• reactivated<br/>• suspended<br/>• canceled<br/>etc | R |
 | **objectId** | subscriptonId: `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
 | **eventDate** | `2025-07-25T11:30:03Z` | |
 | **subscription {object}** | | R |
@@ -95,8 +97,9 @@ This is special notification which will be send in case if subscription plan is 
 }
 ```
 
-## Payment method is changed for subscription
-This notification is sent when the end-user changes subscription payment method. 
+
+## Subscription Payment Method Changed
+This notification is sent when the end-user changes subscription payment method.
 
 | Name | Description | R / O |
 | :--- | :--- | :---: |
