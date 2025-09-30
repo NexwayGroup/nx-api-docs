@@ -240,6 +240,9 @@
                         "type": "integer",
                         "writeOnly": true
                     },
+                    "remotePriceFiltering": {
+                        "$ref": "#/components/schemas/RemotePriceFiltering"
+                    },
                     "retryPaymentValidityDuration": {
                         "format": "int64",
                         "type": "integer",
@@ -1287,6 +1290,12 @@
                     "remoteLicenseExpirationDate": {
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "remotePriceParameters": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
                     },
                     "renewingPrice": {
                         "$ref": "#/components/schemas/FullPrice"
@@ -3242,6 +3251,33 @@
                 },
                 "type": "object"
             },
+            "RemotePriceFiltering": {
+                "properties": {
+                    "filteringFieldsForB2B": {
+                        "description": "filtering fields for B2B",
+                        "example": [
+                            "seats",
+                            "licenseId"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "filteringFieldsForB2C": {
+                        "description": "filtering fields for B2B",
+                        "example": [
+                            "seats",
+                            "licenseId"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "RenewingProductDetails": {
                 "properties": {
                     "lifeTime": {
@@ -4043,6 +4079,12 @@
                             "$ref": "#/components/schemas/Remitted"
                         },
                         "type": "array"
+                    },
+                    "remotePriceParameters": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
                     },
                     "salesFlags": {
                         "items": {
