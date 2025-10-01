@@ -15,30 +15,30 @@ You can receive notifications whenever your subscription status changes.
 
 ## List of fields
 
-| Name | Description | R / O |
-| :--- | :--- | :---: |
+| Name | Description | R/O |
+| ---- | ----------- | --- |
 | **subject** | subscription | R |
-| **type** | Depending on event:<br/>• expiredsubscription<br/>• expirationdateupdated<br/>• expiration date updated<br/>• reactivated<br/>• suspended<br/>• canceled<br/>etc | R |
+| **type** | Depending on the event:<br/>• expiredsubscription<br/>• expirationdateupdated<br/>•  reactivated<br/>• suspended<br/>• canceled<br/>etc | R |
 | **objectId** | subscriptonId: `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
 | **eventDate** | `2025-07-25T11:30:03Z` | |
-| **subscription {object}** | | R |
-| **subscription.id** | `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
-| **subscription.createDate** | `2025-07-25T11:30:03Z` | R |
-| **subscription.modelId** | `NEXWAY_1Y` | R |
-| **subscription.name** | `Kaspersky Endpoint Security Cloud` | O |
+| **subscription** `{object}` | Subscription details object | R |
+| **subscription.id** | Subscription UUID | R |
+| **subscription.createDate** | Creation date in ISO 8601 format ex. `2025-07-25T11:30:03Z` | R |
+| **subscription.modelId** | Subscription model, ex: `NEXWAY_1Y` | R |
+| **subscription.name** | Subscription name, usually taken from the product `Kaspersky Endpoint Security Cloud` | O |
 | **subscription.storeId** | `36f48867-d6ca-42d3-bf55-5f54a6740803` | R |
-| **subscription.lifecycle {object}** | | R |
-| **subscription.lifecycle.id** | `9191920` Deprecated. | O |
-| **subscription.lifecycle.generation** | 0 | R |
-| **subscription.products [{object}]** | | R |
-| **subscription.products[].id** | `ecaa7302-6686-4527-a034-26931397d7ca` | R |
-| **subscription.products[].lineItemId**| `b60928b9-523e-42b7-9780-2527e5bdcb1e` | R |
-| **subscirption.lifecycle.anniversaryDate**| | R |
-| **subscirption.lifecycle.status** | | R |
-|**subscirption.discountPlan {object}** | | O |
+| **subscription.lifecycle** `{object}` | Lifecycle details object | R |
+| **subscription.lifecycle.id** | `9191920` **Deprecated** | O |
+| **subscription.lifecycle.generation** | Number of term `int` | R |
+| **subscription.products** `[{object}]` | Subscription currently may have only one product | R |
+| **subscription.products[].id** | Product UUID | R |
+| **subscription.products[].lineItemId**| Order lineItem UUID | R |
+| **subscirption.lifecycle.anniversaryDate**| Anniversary date (or the date until the subscription is paid) | R |
+| **subscirption.lifecycle.status** | `Active`, `Suspended`, `Dunning`, `Canceled`, `Expired` | R |
+|**subscirption.discountPlan** `{object}` | Discount plan associated with the subscription| O |
 |**subscirption.discountPlan.tag** | | R |
 |**subscirption.discountPlan.startingStep** | | R |
-| **subscription.endUserId** | | R |
+| **subscription.endUserId** | Enduser UUID | R |
 
 ### Example
 ```json
@@ -75,7 +75,7 @@ This is special notification which will be send in case if subscription plan is 
 | **type** | `discount plan updated` | R |
 | **objectId** | UUID of an object (subscription ID in this case) | R |
 | **eventDate** | `2025-09-29T07:34:06Z` | R |
-| **subscription.discountPlan {object}** | Node with subscription plan is added / changed for a given subscription | R |
+| **subscription.discountPlan** `{object}` | Node with subscription plan is added / changed for a given subscription | R |
 | **subscription.discountPlan.tag** | Subscription discount plan tag is added / chagned | R |
 | **subscription.discountPlan.nextDiscountStep** | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
 
@@ -107,7 +107,7 @@ This notification is sent when the end-user changes subscription payment method.
 | **type** | `subscriptionPaymentMethodUpdated` | R |
 | **objectId** | UUID of an object (enduser ID in this case) | R |
 | **eventDate** | `2025-09-29T07:34:06Z` | R |
-| **enduser {object}** | | R |
+| **enduser** `{object}` | | R |
 | **enduser.id** | payment method UUID: `8d2eaaf6-9eba-4400-9927-516672d4693b` | R |
 | **enduser.subscriptionId** | subscription id | R |
 | **enduser.paymentMethod** | payment method type, f.e. creditCard | O |

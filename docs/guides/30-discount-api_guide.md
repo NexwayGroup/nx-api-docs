@@ -577,7 +577,7 @@ It’s also possible to skip the acquisition discount, even if it’s configured
 }
 ```
 
-[Applying subscription plan to a cart example](../32-shopping-cart-creation.md)
+[Applying subscription plan to a cart example](32-shopping-cart-creation.md)
 
 ## Payment method discount
 
@@ -633,4 +633,4 @@ Possible use cases include:
 }
 ```
 
-[Applying payment method discount example](../32-shopping-cart-creation.md)
+[Applying payment method discount example](32-shopping-cart-creation.md)

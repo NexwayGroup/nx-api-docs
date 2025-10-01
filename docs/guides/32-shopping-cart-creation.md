@@ -108,7 +108,7 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
     ]
 }   
 ```
-Learn more about subscription plan [here](../30-discount-api_guide.md)
+Learn more about subscription plan [here](30-discount-api_guide.md)
 
 #### 5. Authorized Cart
 Creates a shopping cart with prefilled shopper's billing information.  
@@ -180,7 +180,7 @@ Creates a shopping cart with a custom catalog that is not managed by Nexway. Thi
 ```
 
 #### 7. Apply payment method discount
-[Here](../30-discount-api_guide.md) you can find a description of what a payment method discount is.
+[Here](30-discount-api_guide.md) you can find a description of what a payment method discount is.
 
 In a cart, it is normally applied during `PUT /carts` or `PUT /carts/public`. However, it is also possible to apply it during `POST /carts` or `POST /carts/public`.
 
