@@ -8,15 +8,16 @@ See the details of the [order processing here](../guides/40-order-processing.md)
 
 Below is a list of order-related notifications which you can subscribe to:
 
-* Order created: type=created
-* Order payment failed (usually internal technical issue): type=paymentRefused
-* Order payment refused (by payment gateway): type=paymentRefused
-* Order completed: type=completed
-* Order completed with error: type=partiallyCompleted
-* Order fulfillment failed: type=fulfillmentFailed
-* Order cancelled: type=canceled
-* Subscription order renewal complete: type=renewCompleted
-* Subscription prebilling order is created: type=created AND order.source=SUBSCRIPTION
+* Order Created: type=created
+* Order Payment Failed (usually internal technical issue): type=paymentRefused
+* Order Payment Refused (by payment gateway): type=paymentRefused
+* Order Completed: type=completed
+* Order Completed With Error: type=partiallyCompleted
+* Order Fulfillment Failed: type=fulfillmentFailed
+* Order Cancelled: type=canceled
+* Order Aborted: type=aborted
+* Subscription Order Renewal Complete: type=renewCompleted
+* Subscription Prebiling Order Created: type=created AND order.source=SUBSCRIPTION
 
 ## List of fields
 
@@ -206,6 +207,13 @@ If you need to get additional data, which is not available in the event, please 
   }
 }
 ```
+
+## Additional order events with subscription details
+
+These are the same events as main order events listed above, but with additional information, which may be included if the order has subscription information:
+
+* Order Completed With Content Including Subscription Data
+* Order Canceled With Content Including Subscription Data
 
 ### Additional fields for 'Order Completed With Content Including Subscription Data' notification
 
