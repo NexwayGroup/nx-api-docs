@@ -1,0 +1,2851 @@
+{
+    "components": {
+        "schemas": {
+            "Document": {
+                "additionalProperties": {
+                    "type": "object"
+                },
+                "properties": {
+                    "empty": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "EventMatcher": {
+                "description": "Notification definition's eventMatcher",
+                "properties": {
+                    "fact": {
+                        "description": "Event matcher's fact",
+                        "example": "updated",
+                        "type": "string"
+                    },
+                    "filters": {
+                        "description": "Event matcher's filters list",
+                        "example": [
+                            {
+                                "jsonPath": "$.what.delta.lifeCycleStatus",
+                                "value": "COMPLETED"
+                            }
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/EventMatcherFilter"
+                        },
+                        "type": "array"
+                    },
+                    "subject": {
+                        "description": "Event matcher's subject",
+                        "example": "order-v2",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "fact",
+                    "subject"
+                ],
+                "type": "object"
+            },
+            "EventMatcherFilter": {
+                "description": "Event matcher's filters list",
+                "example": [
+                    {
+                        "jsonPath": "$.what.delta.lifeCycleStatus",
+                        "value": "COMPLETED"
+                    }
+                ],
+                "properties": {
+                    "jsonPath": {
+                        "description": "Json path of the event matcher filter",
+                        "example": "$.what.delta.status",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Value of the event matcher filter",
+                        "example": "COMPLETED",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonPath",
+                    "value"
+                ],
+                "type": "object"
+            },
+            "ExceptionDetail": {
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "HttpClientConfig": {
+                "properties": {
+                    "clientCredentialOauth2Config": {
+                        "$ref": "#/components/schemas/Oauth2Config",
+                        "description": "receiver oauth2 configuration"
+                    },
+                    "httpHeaders": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "description": "http headers to add in the request",
+                        "type": "object"
+                    },
+                    "tlsConfiguration": {
+                        "$ref": "#/components/schemas/TlsConfig",
+                        "description": "receiver tls configuration"
+                    }
+                },
+                "type": "object"
+            },
+            "NormalizeException": {
+                "properties": {
+                    "details": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        },
+                        "type": "array"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Notification": {
+                "properties": {
+                    "createDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "emails": {
+                        "description": "emails which have been notified",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "items": {
+                            "$ref": "#/components/schemas/NotificationError"
+                        },
+                        "maxItems": 10,
+                        "minItems": 0,
+                        "type": "array"
+                    },
+                    "eventDate": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "eventFact": {
+                        "description": "What happened with the resource",
+                        "example": "updated",
+                        "type": "string"
+                    },
+                    "eventMainObjectId": {
+                        "description": "event object ID",
+                        "example": "180119e71cfc",
+                        "type": "string"
+                    },
+                    "eventSubject": {
+                        "description": "Subject of the event",
+                        "example": "order",
+                        "type": "string"
+                    },
+                    "id": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "lastTryTimestamp": {
+                        "description": "last retry date",
+                        "example": 1516370825,
+                        "type": "number"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "mailBody": {
+                        "description": "Email Body",
+                        "example": "This is a body",
+                        "type": "string"
+                    },
+                    "mailStorageId": {
+                        "description": "mail storage ID",
+                        "example": "36459336-730b-4951-b3d9-d03fff704b37",
+                        "type": "string"
+                    },
+                    "mailSubject": {
+                        "description": "Email Subject",
+                        "example": "Notification Order 3A8G6KR8ARY Completed",
+                        "type": "string"
+                    },
+                    "modelVersion": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "notificationDefinitionId": {
+                        "description": "notification definition ID",
+                        "example": "f98c1deb-808e-4a6d-bebd-77735593c75e",
+                        "type": "string"
+                    },
+                    "notificationReceiverId": {
+                        "description": "receiver ID",
+                        "example": "c9d2d1a7-4a97-4d9d-8fec-cdf258534af0",
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "processedEvent": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "content of the event",
+                        "properties": {
+                            "empty": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "processingDate": {
+                        "description": "event processing date",
+                        "example": 1516370825,
+                        "type": "number"
+                    },
+                    "retryCount": {
+                        "description": "number of retry",
+                        "example": 0,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "retryLeft": {
+                        "description": "the remaining number of retries",
+                        "example": 10,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "InProgress|Done|Error",
+                        "example": "Done",
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "Receiver Url",
+                        "example": "http://receiver-url.com",
+                        "type": "string"
+                    },
+                    "webHookPayload": {
+                        "description": "web hook payload",
+                        "type": "string"
+                    },
+                    "webHookResponse": {
+                        "description": "web hook response",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationDefinition": {
+                "properties": {
+                    "createDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "eventMatcher": {
+                        "$ref": "#/components/schemas/EventMatcher",
+                        "description": "Notification definition's eventMatcher"
+                    },
+                    "id": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "mainIdJsonPath": {
+                        "description": "Notification definition's main json path",
+                        "example": "$.involved.order-v2.id",
+                        "type": "string"
+                    },
+                    "modelVersion": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Notification definition's name",
+                        "example": "Order Completed",
+                        "type": "string"
+                    },
+                    "notificationPayload": {
+                        "$ref": "#/components/schemas/NotificationPayload",
+                        "description": "Notification definition's payload"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "updateDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventMatcher",
+                    "mainIdJsonPath",
+                    "name",
+                    "notificationPayload"
+                ],
+                "type": "object"
+            },
+            "NotificationError": {
+                "properties": {
+                    "error": {
+                        "description": "event error",
+                        "example": "notification definition with id 3d5d63a9-e87e-4a68-a583-702f61a9c54c not found",
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "description": "event error date",
+                        "example": 1516370825,
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "NotificationPayload": {
+                "description": "Notification definition's payload",
+                "properties": {
+                    "content": {
+                        "description": "Notification definition's content",
+                        "enum": [
+                            "ORDER",
+                            "SUBSCRIPTION",
+                            "ORDER_AND_SUBSCRIPTION",
+                            "RESELLER",
+                            "PAYMENT_METHOD_ADDED",
+                            "PAYMENT_METHOD_DELETED",
+                            "END_USER_DELETED",
+                            "LICENSE_KEY_PACKAGE",
+                            "PRIVILEGE",
+                            "ROLE",
+                            "META_ROLE",
+                            "SKEEPERS_PURCHASE_EVENT",
+                            "ABANDONED_CART",
+                            "CONSENT_CREATED",
+                            "CONSENT_UPDATED",
+                            "DISCOUNT_PLAN_UPDATED"
+                        ],
+                        "example": "ORDER",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification definition's subject",
+                        "example": "order",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Notification definition's type",
+                        "example": "completed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "content",
+                    "subject",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "Oauth2Config": {
+                "properties": {
+                    "clientId": {
+                        "description": "clientId of oauth2 authentication",
+                        "example": "clientIdXXXXXXXX",
+                        "type": "string"
+                    },
+                    "clientSecret": {
+                        "description": "clientSecret of oauth2 authentication",
+                        "example": "secretXXXXXXXX",
+                        "type": "string"
+                    },
+                    "oauth2Type": {
+                        "description": "oauth2 type",
+                        "enum": [
+                            "X_WWW_FORM_URLENCODED",
+                            "BASIC"
+                        ],
+                        "example": "BASIC",
+                        "type": "string"
+                    },
+                    "scopes": {
+                        "description": "list of scopes",
+                        "example": [
+                            "provided"
+                        ],
+                        "items": {
+                            "description": "list of scopes",
+                            "example": "[\"provided\"]",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "tokenUrl": {
+                        "description": "url of oauth2 authentication",
+                        "example": "https://tokenUrl.com",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Pageable": {
+                "properties": {
+                    "page": {
+                        "format": "int32",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "RecapEntry": {
+                "properties": {
+                    "count": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "targetValue": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Receiver": {
+                "properties": {
+                    "createDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "emails": {
+                        "description": "Email which receives the notification's payload",
+                        "example": [
+                            "test@test.com"
+                        ],
+                        "type": "string"
+                    },
+                    "httpClientConfiguration": {
+                        "$ref": "#/components/schemas/HttpClientConfig",
+                        "description": "http client configuration that may includes headers and client credential Oauth2 config"
+                    },
+                    "id": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "modelVersion": {
+                        "deprecated": true,
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name of the receiver",
+                        "example": "Order Completed Receiver",
+                        "type": "string"
+                    },
+                    "notificationDefinitionIds": {
+                        "description": "List of notifications that receiver is listening",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "status": {
+                        "description": "Status of the receiver ACTIVE|INACTIVE",
+                        "example": "ACTIVE",
+                        "type": "string"
+                    },
+                    "targetedCustomerIds": {
+                        "description": "Receiver is listening only notification from these customers",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "updateDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "Url which receives the notification's payload",
+                        "example": "https://receiver.com",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "status"
+                ],
+                "type": "object"
+            },
+            "SearchResultDocument": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultNotification": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Notification"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultNotificationDefinition": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/NotificationDefinition"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultObject": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultRecapEntry": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/RecapEntry"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultReceiver": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Receiver"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "TlsConfig": {
+                "properties": {
+                    "clientCertificates": {
+                        "description": "client public certificate",
+                        "example": "-----BEGIN CERTIFICATE----- XXXX\n -----END CERTIFICATE-----",
+                        "type": "string"
+                    },
+                    "clientCertificatesExpirationDate": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastCertificatesExpirationNotificationTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "privateKey": {
+                        "description": "private key",
+                        "example": "-----BEGIN PRIVATE KEY----- XXXX\n -----END PRIVATE KEY-----",
+                        "type": "string"
+                    },
+                    "serverCACertificates": {
+                        "description": "server ca certificate",
+                        "example": "-----BEGIN CERTIFICATE----- XXXX\n -----END CERTIFICATE-----",
+                        "type": "string"
+                    },
+                    "serverCACertificatesExpirationDate": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "tlsAuthMode": {
+                        "description": "tls authentication mode",
+                        "example": "CLIENT",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "tlsAuthMode"
+                ],
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "bearerFormat": "JWT",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    },
+    "info": {
+        "description": "API to send notification to customers",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        },
+        "title": "Notification API",
+        "version": "1.0"
+    },
+    "openapi": "3.1.0",
+    "paths": {
+        "/notification/definitions": {
+            "get": {
+                "operationId": "getItems_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultNotificationDefinition"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotificationDefinition"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/notification/definitions/distinct": {
+            "get": {
+                "operationId": "distinct_2",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/notification/definitions/recap": {
+            "get": {
+                "operationId": "recap_2",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/definitions/unwind": {
+            "get": {
+                "operationId": "unwind_2",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/definitions/{id}": {
+            "delete": {
+                "operationId": "deleteItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotificationDefinition"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotificationDefinition"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotificationDefinition"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Notification Definitions"
+                ],
+                "x-operationWeight": "400"
+            }
+        },
+        "/notification/notifications": {
+            "get": {
+                "operationId": "getItems_2",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultNotification"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Notifications"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/notification/notifications/distinct": {
+            "get": {
+                "operationId": "distinct_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "Notifications"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/notification/notifications/recap": {
+            "get": {
+                "operationId": "recap_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "Notifications"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/notifications/send-entity": {
+            "post": {
+                "operationId": "sendEntity",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "entityId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "receiverId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "notificationDefinitionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Sends current entity state as a notification. Only Order is supported.",
+                "tags": [
+                    "Notifications"
+                ]
+            }
+        },
+        "/notification/notifications/unwind": {
+            "get": {
+                "operationId": "unwind_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "Notifications"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/notifications/{id}": {
+            "get": {
+                "operationId": "getItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notification"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Notifications"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/notification/notifications/{id}/add-retries/{nbRetries}": {
+            "put": {
+                "operationId": "addRetries",
+                "parameters": [
+                    {
+                        "description": "id of the notification",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "number of retries ",
+                        "in": "path",
+                        "name": "nbRetries",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "maximum": 20,
+                            "minimum": 0,
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Add retries to a notification",
+                "tags": [
+                    "Notifications"
+                ]
+            }
+        },
+        "/notification/receivers": {
+            "get": {
+                "operationId": "getItems",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultReceiver"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Receiver"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/notification/receivers/distinct": {
+            "get": {
+                "operationId": "distinct",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultObject"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get distinct values for a given field",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/notification/receivers/recap": {
+            "get": {
+                "operationId": "recap",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get recap quantities for a given field",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/receivers/unwind": {
+            "get": {
+                "operationId": "unwind",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultDocument"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Search unwind for a given field",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "150"
+            }
+        },
+        "/notification/receivers/{id}": {
+            "delete": {
+                "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Receiver"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Receiver"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Receiver"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Receivers"
+                ],
+                "x-operationWeight": "400"
+            }
+        }
+    },
+    "security": [
+        {
+            "Bearer": [
+                "read",
+                "write"
+            ]
+        }
+    ],
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
+        }
+    ],
+    "x-notification-reference": {
+        "generatedAt": "Mon Oct 06 15:14:15 GMT 2025",
+        "notificationDefinitions": {
+            "ABANDONED_CART": {
+                "cart": [
+                    "abandoned"
+                ]
+            },
+            "CONSENT_CREATED": {
+                "consent": [
+                    "created"
+                ]
+            },
+            "CONSENT_UPDATED": {
+                "consent": [
+                    "updated"
+                ]
+            },
+            "DISCOUNT_PLAN_UPDATED": {
+                "subscription": [
+                    "discount plan updated"
+                ]
+            },
+            "END_USER_DELETED": {
+                "endUser": [
+                    "deleted"
+                ]
+            },
+            "LICENSE_KEY_PACKAGE": {
+                "licenseKeyPackage": [
+                    "threshold_reached"
+                ]
+            },
+            "META_ROLE": {
+                "metarole": [
+                    "created",
+                    "deleted",
+                    "updated"
+                ]
+            },
+            "ORDER": {
+                "order": [
+                    "aborted",
+                    "canceled",
+                    "completed",
+                    "created",
+                    "fulfillmentFailed",
+                    "partialCompleted",
+                    "partiallyCompleted",
+                    "paymentFailed",
+                    "paymentRefused"
+                ]
+            },
+            "ORDER_AND_SUBSCRIPTION": {
+                "order": [
+                    "canceled",
+                    "completed",
+                    "renewCompleted"
+                ]
+            },
+            "PAYMENT_METHOD_ADDED": {
+                "endUser": [
+                    "paymentMethodAddedToWallet"
+                ]
+            },
+            "PRIVILEGE": {
+                "privilege": [
+                    "created",
+                    "deleted",
+                    "updated"
+                ]
+            },
+            "RESELLER": {
+                "endUser": [
+                    "completed",
+                    "declined",
+                    "onBoardingRequest"
+                ]
+            },
+            "ROLE": {
+                "role": [
+                    "created",
+                    "deleted",
+                    "updated"
+                ]
+            },
+            "SKEEPERS_PURCHASE_EVENT": {
+                "order": [
+                    "completed"
+                ]
+            },
+            "SUBSCRIPTION": {
+                "subscription": [
+                    "canceled",
+                    "expiration date updated",
+                    "expired",
+                    "reactivated",
+                    "suspended",
+                    "unpaid"
+                ]
+            }
+        },
+        "totalDefinitions": 44,
+        "uniqueContents": 15
+    }
+}
