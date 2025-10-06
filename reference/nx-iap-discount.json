@@ -211,6 +211,9 @@
                     },
                     {
                         "properties": {
+                            "caseInsensitive": {
+                                "type": "boolean"
+                            },
                             "codes": {
                                 "additionalProperties": {
                                     "type": "object"
@@ -1105,8 +1108,7 @@
             },
             "PaymentMethodDiscount": {
                 "properties": {
-                    "createDate": {
-                        "format": "date-time",
+                    "categoryId": {
                         "type": "string"
                     },
                     "discountId": {
@@ -1121,6 +1123,10 @@
                     },
                     "recurring": {
                         "type": "boolean"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -1477,6 +1483,14 @@
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/Discount"
+                    },
+                    {
+                        "properties": {
+                            "caseInsensitive": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
                     }
                 ],
                 "required": [
