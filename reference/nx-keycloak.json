@@ -1,0 +1,2234 @@
+{
+    "components": {
+        "schemas": {
+            "AccessToken": {
+                "properties": {
+                    "access_token": {
+                        "type": "string"
+                    },
+                    "expires_in": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "id_token": {
+                        "type": "string"
+                    },
+                    "not-before-policy": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "otherClaims": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object",
+                        "writeOnly": true
+                    },
+                    "refresh_expires_in": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "refresh_token": {
+                        "type": "string"
+                    },
+                    "session_state": {
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "type": "string"
+                    },
+                    "twoFA": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "Create2FASecretKeyAndBackupCodeResponse": {
+                "properties": {
+                    "twoFactorAuthBackupCodes": {
+                        "items": {
+                            "maxLength": 10,
+                            "minLength": 0,
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "twoFactorAuthGeneratedSecretKey": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "DeepLinkRequest": {
+                "properties": {
+                    "baseLink": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "enduserId": {
+                        "type": "string"
+                    },
+                    "linkDuration": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "realm": {
+                        "type": "string"
+                    },
+                    "singleUse": {
+                        "type": "boolean"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "baseLink"
+                ],
+                "type": "object"
+            },
+            "DeepLinkValidityResponse": {
+                "properties": {
+                    "expirationDate": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "valid": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "JwtByTokenAnd2faCode": {
+                "properties": {
+                    "code2fa": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code2fa",
+                    "token"
+                ],
+                "type": "object"
+            },
+            "ProviderTokenRequest": {
+                "properties": {
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "clientSecret": {
+                        "type": "string"
+                    },
+                    "client_id": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "client_secret": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "grantType": {
+                        "enum": [
+                            "password",
+                            "refresh_token",
+                            "client_credentials",
+                            "end_user_credentials",
+                            "google_login",
+                            "sso_login",
+                            "sso_post_registration"
+                        ],
+                        "type": "string"
+                    },
+                    "grant_type": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "provider": {
+                        "$ref": "#/components/schemas/TokenProvider"
+                    },
+                    "realm": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "realmName": {
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "tokenId": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SSOConnectRequest": {
+                "properties": {
+                    "idToken": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idToken",
+                    "storeId"
+                ],
+                "type": "object"
+            },
+            "SSOCreateSessionRequest": {
+                "properties": {
+                    "redirectUrl": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "redirectUrl"
+                ],
+                "type": "object"
+            },
+            "SSOCreateSessionResponse": {
+                "properties": {
+                    "redirectUrl": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TokenByBackupCodeRequest": {
+                "properties": {
+                    "backupCode": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "realm": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "backupCode",
+                    "customerId",
+                    "email",
+                    "realm"
+                ],
+                "type": "object"
+            },
+            "TokenProvider": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TokenRequest": {
+                "properties": {
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "clientSecret": {
+                        "type": "string"
+                    },
+                    "client_id": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "client_secret": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "grantType": {
+                        "enum": [
+                            "password",
+                            "refresh_token",
+                            "client_credentials",
+                            "end_user_credentials",
+                            "google_login",
+                            "sso_login",
+                            "sso_post_registration"
+                        ],
+                        "type": "string"
+                    },
+                    "grant_type": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "realm": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "realmName": {
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TwoFactorCodeResponse": {
+                "properties": {
+                    "authorized": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "bearerFormat": "JWT",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    },
+    "info": {
+        "description": "API to manage tokens",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        },
+        "title": "Keycloak",
+        "version": "1.0"
+    },
+    "openapi": "3.1.0",
+    "paths": {
+        "/iam/2fa/generate-secret-key": {
+            "post": {
+                "description": "Create the 2fa secret key",
+                "operationId": "create2FASecretKeyAndBackupCode",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Create2FASecretKeyAndBackupCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Create2FASecretKeyAndBackupCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Create2FASecretKeyAndBackupCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Create2FASecretKeyAndBackupCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Create2FASecretKeyAndBackupCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "create 2FA secret key",
+                "tags": [
+                    "2FA"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/2fa/get-qr-code": {
+            "get": {
+                "description": "Get QR Code",
+                "operationId": "getQrCode2FA",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "height",
+                        "required": false,
+                        "schema": {
+                            "default": 300,
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "width",
+                        "required": false,
+                        "schema": {
+                            "default": 300,
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get QR Code",
+                "tags": [
+                    "2FA"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/iam/2fa/public/recovery": {
+            "post": {
+                "description": "get token by backup code recovery",
+                "operationId": "getJWTByBackupCode",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TokenByBackupCodeRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "get token by backup code recovery",
+                "tags": [
+                    "2FA"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/2fa/verify-2fa-code/{code}": {
+            "post": {
+                "description": "Verify 2FA",
+                "operationId": "verify2FA",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "code",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TwoFactorCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TwoFactorCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TwoFactorCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TwoFactorCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TwoFactorCodeResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Verify 2FA",
+                "tags": [
+                    "2FA"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/iam/SSO/kaspersky/connect": {
+            "post": {
+                "operationId": "connectKLSSOConnection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SSOConnectRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "tags": [
+                    "SSO"
+                ]
+            }
+        },
+        "/iam/SSO/kaspersky/createSession": {
+            "post": {
+                "operationId": "createKLSSOConnection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SSOCreateSessionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "tags": [
+                    "SSO"
+                ]
+            }
+        },
+        "/iam/deeplink": {
+            "post": {
+                "description": "Create a deeplink and return the hyperlink.",
+                "operationId": "createDeepLink",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeepLinkRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "get a deeplink hyperlink",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/deeplink/{id}": {
+            "delete": {
+                "description": "Delete a deepLink and invalidate it's token",
+                "operationId": "deleteDeepLink",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete a deepLink",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "200"
+            },
+            "post": {
+                "description": "Create a JWT deeplink token based on deeplink ID",
+                "operationId": "createUserTokenFromDeepLinkId",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "create a deeplink token from id",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/deeplink/{id}/check-validity": {
+            "get": {
+                "description": "Check if a deeplink is still valid or not and provide the expiration date",
+                "operationId": "checkValidityById_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Check a deepLink validity",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/iam/deeplinks": {
+            "post": {
+                "description": "Create a deeplink and return the hyperlink.",
+                "operationId": "createDeepLink_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeepLinkRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "get a deeplink hyperlink",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/deeplinks/{id}": {
+            "delete": {
+                "description": "Delete a deepLink and invalidate it's token",
+                "operationId": "deleteDeepLink_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete a deepLink",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "200"
+            },
+            "post": {
+                "description": "Create a JWT deeplink token based on deeplink ID",
+                "operationId": "createUserTokenFromDeepLinkId_1",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "create a deeplink token from id",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/deeplinks/{id}/check-validity": {
+            "get": {
+                "description": "Check if a deeplink is still valid or not and provide the expiration date",
+                "operationId": "checkValidityById",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeepLinkValidityResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Check a deepLink validity",
+                "tags": [
+                    "DeepLink"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/iam/oauth2/tokens": {
+            "post": {
+                "description": "Create or refresh a JWT token.",
+                "operationId": "createGoogleUserTokenWithBody",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProviderTokenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "create/refresh a token",
+                "tags": [
+                    "GoogleToken"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/token": {
+            "post": {
+                "description": "Create a JWT token or refresh a new one.",
+                "operationId": "createUserToken",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "client_id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "client_secret",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "password",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "refresh_token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "grant_type",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "scope",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "realm",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TokenRequest"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "type": "string"
+                                    },
+                                    "grant_type": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "realm": {
+                                        "type": "string"
+                                    },
+                                    "refresh_token": {
+                                        "type": "string"
+                                    },
+                                    "scope": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "type": "string"
+                                    },
+                                    "grant_type": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "realm": {
+                                        "type": "string"
+                                    },
+                                    "refresh_token": {
+                                        "type": "string"
+                                    },
+                                    "scope": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "create/refresh a token",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/token/2fa": {
+            "post": {
+                "description": "Create a JWT token with 2FA process",
+                "operationId": "createUserTokenWith2FA",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JwtByTokenAnd2faCode"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get access token with verify 2FA code",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/token/invalidate": {
+            "delete": {
+                "description": "Invalidate a token from a user during a logout process",
+                "operationId": "invalidate_1",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "Invalidate a token",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/iam/tokens": {
+            "post": {
+                "description": "Create a JWT token or refresh a new one.",
+                "operationId": "createUserToken_1",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "client_id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "client_secret",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "username",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "password",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "refresh_token",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "grant_type",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "scope",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "realm",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TokenRequest"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "type": "string"
+                                    },
+                                    "grant_type": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "realm": {
+                                        "type": "string"
+                                    },
+                                    "refresh_token": {
+                                        "type": "string"
+                                    },
+                                    "scope": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "type": "string"
+                                    },
+                                    "grant_type": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "realm": {
+                                        "type": "string"
+                                    },
+                                    "refresh_token": {
+                                        "type": "string"
+                                    },
+                                    "scope": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "create/refresh a token",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/tokens/2fa": {
+            "post": {
+                "description": "Create a JWT token with 2FA process",
+                "operationId": "createUserTokenWith2FA_1",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JwtByTokenAnd2faCode"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get access token with verify 2FA code",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/iam/tokens/invalidate": {
+            "delete": {
+                "description": "Invalidate a token from a user during a logout process",
+                "operationId": "invalidate",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Failure"
+                    }
+                },
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "summary": "Invalidate a token",
+                "tags": [
+                    "Token"
+                ],
+                "x-operationWeight": "200"
+            }
+        }
+    },
+    "security": [
+        {
+            "Bearer": [
+                "read",
+                "write"
+            ]
+        }
+    ],
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
+        }
+    ]
+}
