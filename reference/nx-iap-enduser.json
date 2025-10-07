@@ -2279,6 +2279,20 @@
                 },
                 "type": "object"
             },
+            "SubscriptionPaymentDetails": {
+                "properties": {
+                    "paymentMethodType": {
+                        "type": "string"
+                    },
+                    "replayable": {
+                        "type": "boolean"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "UpdateEndUserStoreRequest": {
                 "properties": {
                     "storeRoute": {
@@ -7684,6 +7698,95 @@
                     }
                 },
                 "summary": "Change store route and storeId within the same customer for the enduser.",
+                "tags": [
+                    "EndUser"
+                ]
+            }
+        },
+        "/endusers/{id}/subscription/{subscriptionId}/replayable-payment-info": {
+            "get": {
+                "operationId": "getSubscriptionPaymentDetails",
+                "parameters": [
+                    {
+                        "description": "End user id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "subscription id",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "reason of request",
+                        "in": "query",
+                        "name": "reason",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriptionPaymentDetails"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get replayable payment info attached to subscription of given end user by subscription id",
                 "tags": [
                     "EndUser"
                 ]
