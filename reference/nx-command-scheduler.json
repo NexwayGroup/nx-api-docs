@@ -88,6 +88,20 @@
                 ],
                 "type": "object"
             },
+            "DeleteCommandFilterRequest": {
+                "properties": {
+                    "commandName": {
+                        "type": "string"
+                    },
+                    "entityId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "entityId"
+                ],
+                "type": "object"
+            },
             "Pageable": {
                 "properties": {
                     "page": {
@@ -107,6 +121,27 @@
                         "type": "array"
                     }
                 },
+                "type": "object"
+            },
+            "ReplaceCommandsRequest": {
+                "properties": {
+                    "commands": {
+                        "items": {
+                            "$ref": "#/components/schemas/Command"
+                        },
+                        "type": "array"
+                    },
+                    "entityId": {
+                        "type": "string"
+                    },
+                    "entityType": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "entityId",
+                    "entityType"
+                ],
                 "type": "object"
             },
             "SearchResultCommand": {
@@ -238,7 +273,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CancelCommandFilterRequest"
+                                "$ref": "#/components/schemas/DeleteCommandFilterRequest"
                             }
                         }
                     },
@@ -271,15 +306,12 @@
         },
         "/command-scheduler/api/commands/replace": {
             "post": {
-                "operationId": "cancelPreviousCommandsAndCreateNewOnes",
+                "operationId": "replaceCommands",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "items": {
-                                    "$ref": "#/components/schemas/CreateCommandRequest"
-                                },
-                                "type": "array"
+                                "$ref": "#/components/schemas/ReplaceCommandsRequest"
                             }
                         }
                     },
@@ -290,7 +322,7 @@
                         "description": "OK"
                     }
                 },
-                "summary": "Cancel previous commands and create new ones for one entity",
+                "summary": "Delete previous commands and create new commands for one entity",
                 "tags": [
                     "Command Scheduler API"
                 ]
