@@ -10,10 +10,12 @@ Below is a list of order-related notifications which you can subscribe to:
 
 * **Order Created**
 `type=created`
-* **Order Payment Failed (usually internal technical issue)**
+* **Order Payment Failed**
 `type=paymentRefused`
-* **Order Payment Refused (by payment gateway)**
+Usually caused by an internal technical issue
+* **Order Payment Refused**
 `type=paymentRefused`
+By a payment gateway or bank
 * **Order Completed**
 `type=completed`
 * **Order Completed With Error**
