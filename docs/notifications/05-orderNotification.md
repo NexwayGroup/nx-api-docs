@@ -8,16 +8,29 @@ See the details of the [order processing here](../guides/40-order-processing.md)
 
 Below is a list of order-related notifications which you can subscribe to:
 
-* Order Created: type=created
-* Order Payment Failed (usually internal technical issue): type=paymentRefused
-* Order Payment Refused (by payment gateway): type=paymentRefused
-* Order Completed: type=completed
-* Order Completed With Error: type=partiallyCompleted
-* Order Fulfillment Failed: type=fulfillmentFailed
-* Order Cancelled: type=canceled
-* Order Aborted: type=aborted
-* Subscription Order Renewal Complete: type=renewCompleted
-* Subscription Prebiling Order Created: type=created AND order.source=SUBSCRIPTION
+* **Order Created**
+`type=created`
+* **Order Payment Failed (usually internal technical issue)**
+`type=paymentRefused`
+* **Order Payment Refused (by payment gateway)**
+`type=paymentRefused`
+* **Order Completed**
+`type=completed`
+* **Order Completed With Error**
+`type=partiallyCompleted`
+* **Order Fulfillment Failed**
+`type=fulfillmentFailed`
+* **Order Cancelled**
+`type=canceled`
+* **Order Aborted**
+`type=aborted`
+* **Subscription Order Renew Completed**
+`type=renewCompleted`
+* **Prebilling Order Created**
+`type=prebillingStarted`
+* **Offer Prebilling Started**
+`type=prebillingStarted`
+Same as Prebilling Order Created, but triggered if a prebilling order with source `OFFER` already exists
 
 ## List of fields
 
@@ -112,7 +125,6 @@ The notification payload will include an 'order' object containing the following
 | **order.payments[].transitionPaymentDate** | | R |
 | **order.ConsentFlags** `{object}` | Consent flags object | R |
 | **order.ConsentFlags.newstellerOption** | Marketing newsletter consent flag | R |
-| **order.subscriptionStatus** | | O |
 
 If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities.
 
