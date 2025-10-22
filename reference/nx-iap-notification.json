@@ -378,6 +378,7 @@
                             "RESELLER",
                             "PAYMENT_METHOD_ADDED",
                             "PAYMENT_METHOD_DELETED",
+                            "PAYMENT_METHOD_UPDATED",
                             "END_USER_DELETED",
                             "LICENSE_KEY_PACKAGE",
                             "PRIVILEGE",
@@ -2750,7 +2751,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Thu Oct 16 12:44:16 GMT 2025",
+        "generatedAt": "Wed Oct 22 14:58:11 GMT 2025",
         "notificationDefinitions": {
             "ABANDONED_CART": {
                 "cart": [
@@ -2806,12 +2807,18 @@
                 "order": [
                     "canceled",
                     "completed",
+                    "prebillingStarted",
                     "renewCompleted"
                 ]
             },
             "PAYMENT_METHOD_ADDED": {
                 "endUser": [
                     "paymentMethodAddedToWallet"
+                ]
+            },
+            "PAYMENT_METHOD_UPDATED": {
+                "endUser": [
+                    "subscriptionPaymentMethodUpdated"
                 ]
             },
             "PRIVILEGE": {
@@ -2851,7 +2858,7 @@
                 ]
             }
         },
-        "totalDefinitions": 45,
-        "uniqueContents": 15
+        "totalDefinitions": 48,
+        "uniqueContents": 16
     }
 }
