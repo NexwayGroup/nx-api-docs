@@ -365,6 +365,16 @@
                         "format": "date-time",
                         "type": "string"
                     },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
+                    "shippingAddresses": {
+                        "description": "List of shipping address",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippingAddress"
+                        },
+                        "type": "array"
+                    },
                     "status": {
                         "description": "Status",
                         "enum": [
@@ -636,6 +646,16 @@
                         "format": "date-time",
                         "type": "string"
                     },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
+                    "shippingAddresses": {
+                        "description": "List of shipping address",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippingAddress"
+                        },
+                        "type": "array"
+                    },
                     "status": {
                         "description": "Status",
                         "enum": [
@@ -901,6 +921,16 @@
                         "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
+                    "shippingAddresses": {
+                        "description": "List of shipping address",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippingAddress"
+                        },
+                        "type": "array"
                     },
                     "status": {
                         "description": "Status",
@@ -1169,6 +1199,16 @@
                         "example": 1756290932000,
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/ShippingAddress"
+                    },
+                    "shippingAddresses": {
+                        "description": "List of shipping address",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippingAddress"
+                        },
+                        "type": "array"
                     },
                     "status": {
                         "description": "Status",
@@ -2193,6 +2233,73 @@
                         "type": "string"
                     }
                 },
+                "type": "object"
+            },
+            "ShippingAddress": {
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Country",
+                        "example": "FR",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Phone",
+                        "example": "0612345678",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "example": "FR-MQ",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": 2,
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title",
+                        "enum": [
+                            "MR",
+                            "MRS"
+                        ],
+                        "example": "MR, MRS",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": 75001,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "city",
+                    "country",
+                    "firstName",
+                    "lastName",
+                    "phone",
+                    "streetAddress",
+                    "zipCode"
+                ],
                 "type": "object"
             },
             "SignInWithoutPasswordRequest": {
