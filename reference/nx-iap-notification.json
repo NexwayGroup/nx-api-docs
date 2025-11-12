@@ -2751,114 +2751,250 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Wed Oct 22 14:58:11 GMT 2025",
+        "generatedAt": "Wed Nov 12 17:38:28 GMT 2025",
         "notificationDefinitions": {
-            "ABANDONED_CART": {
-                "cart": [
-                    "abandoned"
-                ]
+            "Consent Created": {
+                "content": "CONSENT_CREATED",
+                "subject": "consent",
+                "type": "created"
             },
-            "CONSENT_CREATED": {
-                "consent": [
-                    "created"
-                ]
+            "Consent Updated": {
+                "content": "CONSENT_UPDATED",
+                "subject": "consent",
+                "type": "updated"
             },
-            "CONSENT_UPDATED": {
-                "consent": [
-                    "updated"
-                ]
+            "Credit Card Added": {
+                "content": "PAYMENT_METHOD_ADDED",
+                "subject": "endUser",
+                "type": "paymentMethodAddedToWallet"
             },
-            "DISCOUNT_PLAN_UPDATED": {
-                "subscription": [
-                    "discount plan updated"
-                ]
+            "EndUser Deleted": {
+                "content": "END_USER_DELETED",
+                "subject": "endUser",
+                "type": "deleted"
             },
-            "END_USER_DELETED": {
-                "endUser": [
-                    "deleted"
-                ]
+            "Offer Order Aborted": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "aborted"
             },
-            "LICENSE_KEY_PACKAGE": {
-                "licenseKeyPackage": [
-                    "threshold_reached"
-                ]
+            "Offer Order Created": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "created"
             },
-            "META_ROLE": {
-                "metarole": [
-                    "created",
-                    "deleted",
-                    "updated"
-                ]
+            "Offer Prebilling Started": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "prebillingStarted"
             },
-            "ORDER": {
-                "order": [
-                    "aborted",
-                    "canceled",
-                    "completed",
-                    "created",
-                    "fulfillmentFailed",
-                    "partialCompleted",
-                    "partiallyCompleted",
-                    "paymentFailed",
-                    "paymentRefused"
-                ]
+            "Order Aborted": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "aborted"
             },
-            "ORDER_AND_SUBSCRIPTION": {
-                "order": [
-                    "canceled",
-                    "completed",
-                    "prebillingStarted",
-                    "renewCompleted"
-                ]
+            "Order Canceled": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "canceled"
             },
-            "PAYMENT_METHOD_ADDED": {
-                "endUser": [
-                    "paymentMethodAddedToWallet"
-                ]
+            "Order Canceled With Content Including Subscription Data": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "canceled"
             },
-            "PAYMENT_METHOD_UPDATED": {
-                "endUser": [
-                    "subscriptionPaymentMethodUpdated"
-                ]
+            "Order Completed": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "completed"
             },
-            "PRIVILEGE": {
-                "privilege": [
-                    "created",
-                    "deleted",
-                    "updated"
-                ]
+            "Order Completed With Content Including Subscription Data": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "completed"
             },
-            "RESELLER": {
-                "endUser": [
-                    "completed",
-                    "declined",
-                    "onBoardingRequest"
-                ]
+            "Order Completed With Error": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "partiallyCompleted"
             },
-            "ROLE": {
-                "role": [
-                    "created",
-                    "deleted",
-                    "updated"
-                ]
+            "Order Created": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "created"
             },
-            "SKEEPERS_PURCHASE_EVENT": {
-                "order": [
-                    "completed"
-                ]
+            "Order Fulfillment Failed": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "fulfillmentFailed"
             },
-            "SUBSCRIPTION": {
-                "subscription": [
-                    "canceled",
-                    "expiration date updated",
-                    "expired",
-                    "reactivated",
-                    "suspended",
-                    "unpaid"
-                ]
+            "Order Partial Completed": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "partialCompleted"
+            },
+            "Order Payment Failed": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "paymentFailed"
+            },
+            "Order Payment Refused": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "paymentRefused"
+            },
+            "Package Threshold Reached": {
+                "content": "LICENSE_KEY_PACKAGE",
+                "subject": "licenseKeyPackage",
+                "type": "threshold_reached"
+            },
+            "Payment Method Deleted": {
+                "content": "PAYMENT_METHOD_ADDED",
+                "subject": "endUser",
+                "type": "paymentMethodAddedToWallet"
+            },
+            "Permission - privilege created": {
+                "content": "PRIVILEGE",
+                "subject": "privilege",
+                "type": "created"
+            },
+            "Permission - privilege deleted": {
+                "content": "PRIVILEGE",
+                "subject": "privilege",
+                "type": "deleted"
+            },
+            "Permission - privilege updated": {
+                "content": "PRIVILEGE",
+                "subject": "privilege",
+                "type": "updated"
+            },
+            "Permission - profile created": {
+                "content": "META_ROLE",
+                "subject": "metarole",
+                "type": "created"
+            },
+            "Permission - profile deleted": {
+                "content": "META_ROLE",
+                "subject": "metarole",
+                "type": "deleted"
+            },
+            "Permission - profile updated": {
+                "content": "META_ROLE",
+                "subject": "metarole",
+                "type": "updated"
+            },
+            "Permission - role created": {
+                "content": "ROLE",
+                "subject": "role",
+                "type": "created"
+            },
+            "Permission - role deleted": {
+                "content": "ROLE",
+                "subject": "role",
+                "type": "deleted"
+            },
+            "Permission - role updated": {
+                "content": "ROLE",
+                "subject": "role",
+                "type": "updated"
+            },
+            "Prebilling Order Created": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "prebillingStarted"
+            },
+            "Recurring Payment Method Added": {
+                "content": "PAYMENT_METHOD_ADDED",
+                "subject": "endUser",
+                "type": "paymentMethodAddedToWallet"
+            },
+            "Reseller Request Approved": {
+                "content": "RESELLER",
+                "subject": "endUser",
+                "type": "completed"
+            },
+            "Reseller Request Declined": {
+                "content": "RESELLER",
+                "subject": "endUser",
+                "type": "declined"
+            },
+            "Reseller Request OnBoarding": {
+                "content": "RESELLER",
+                "subject": "endUser",
+                "type": "onBoardingRequest"
+            },
+            "SEPA Payment Method Added": {
+                "content": "PAYMENT_METHOD_ADDED",
+                "subject": "endUser",
+                "type": "paymentMethodAddedToWallet"
+            },
+            "Send abandoned cart email": {
+                "content": "ABANDONED_CART",
+                "subject": "cart",
+                "type": "abandoned"
+            },
+            "Skeepers Purchase Event": {
+                "content": "SKEEPERS_PURCHASE_EVENT",
+                "subject": "order",
+                "type": "completed"
+            },
+            "Subscription Canceled": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "canceled"
+            },
+            "Subscription Discount Plan Updated": {
+                "content": "DISCOUNT_PLAN_UPDATED",
+                "subject": "subscription",
+                "type": "discount plan updated"
+            },
+            "Subscription Expiration Date Updated": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "expiration date updated"
+            },
+            "Subscription Expired": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "expired"
+            },
+            "Subscription Order Renew Completed": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "renewCompleted"
+            },
+            "Subscription Order Renew Completed (offer)": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "subject": "order",
+                "type": "renewCompleted"
+            },
+            "Subscription Payment Method Updated": {
+                "content": "PAYMENT_METHOD_UPDATED",
+                "subject": "endUser",
+                "type": "subscriptionPaymentMethodUpdated"
+            },
+            "Subscription Reactivated": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "reactivated"
+            },
+            "Subscription Suspended": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "suspended"
+            },
+            "Subscription Unpaid": {
+                "content": "SUBSCRIPTION",
+                "subject": "subscription",
+                "type": "unpaid"
+            },
+            "discount plan updated": {
+                "content": "DISCOUNT_PLAN_UPDATED",
+                "subject": "subscription",
+                "type": "discount plan updated"
             }
         },
         "totalDefinitions": 48,
-        "uniqueContents": 16
+        "uniqueContents": 48
     }
 }
