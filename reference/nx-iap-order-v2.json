@@ -1684,6 +1684,9 @@
                     "Indicates if subscription was renewed manually by the end user via self renew flow": {
                         "type": "boolean"
                     },
+                    "Indicates if the payment method is non recurring for the subscription in the order.": {
+                        "type": "boolean"
+                    },
                     "allowPaymentMethodRegistration": {
                         "description": "Payment method registration authorized",
                         "example": true,
@@ -2363,6 +2366,9 @@
             },
             "OrderCreationRequest": {
                 "properties": {
+                    "Indicates if the payment method is non recurring for the subscription in the order.": {
+                        "type": "boolean"
+                    },
                     "allowPaymentMethodRegistration": {
                         "description": "Payment method registration authorized",
                         "type": "boolean"
