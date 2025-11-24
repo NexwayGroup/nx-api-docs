@@ -2320,6 +2320,11 @@
                         "description": "Store unique identifier",
                         "example": "f2c419a5-e486-44ef-b0c4-3c4368c6c74f",
                         "type": "string"
+                    },
+                    "target": {
+                        "$ref": "#/components/schemas/Target",
+                        "description": "it regroups where the deeplink should redirect and the type of url",
+                        "example": "reselleruk-store.staging.nexway.build"
                     }
                 },
                 "required": [
@@ -2401,6 +2406,32 @@
                         "type": "string"
                     }
                 },
+                "type": "object"
+            },
+            "Target": {
+                "properties": {
+                    "parameters": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "type": {
+                        "enum": [
+                            "CHECKOUT",
+                            "END_USER_PORTAL"
+                        ],
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "parameters",
+                    "type",
+                    "url"
+                ],
                 "type": "object"
             },
             "UpdateEndUserStoreRequest": {
