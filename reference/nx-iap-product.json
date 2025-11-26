@@ -2785,6 +2785,17 @@
                 },
                 "type": "object"
             },
+            "ShiftProductRequest": {
+                "properties": {
+                    "parentId": {
+                        "type": "string"
+                    },
+                    "variantId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "UpdateFulfillmentTemplatesRequest": {
                 "properties": {
                     "customerId": {
@@ -6592,6 +6603,69 @@
                     "Product"
                 ],
                 "x-operationWeight": "500"
+            }
+        },
+        "/products/move-variation-to-parent": {
+            "post": {
+                "description": "Shift variant to another parent product",
+                "operationId": "moveVariationToParent",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ShiftProductRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Shift variant",
+                "tags": [
+                    "Product"
+                ],
+                "x-operationWeight": "400"
             }
         },
         "/products/price-functions": {
