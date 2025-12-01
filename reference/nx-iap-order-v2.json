@@ -2019,6 +2019,7 @@
                         "enum": [
                             "PREBILLING_PENDING",
                             "PREBILLING_FAILED",
+                            "PAYMENT_PREAUTHORIZATION_PENDING",
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
@@ -2141,6 +2142,21 @@
                         },
                         "type": "array",
                         "uniqueItems": true
+                    },
+                    "preAuthorizedPaymentStatus": {
+                        "description": "Global status for pre authorized payment workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ],
+                        "type": "string"
                     },
                     "prebillingStatus": {
                         "description": "Global status for pre-billing processing workflow",
@@ -2540,6 +2556,7 @@
                         "enum": [
                             "PREBILLING_PENDING",
                             "PREBILLING_FAILED",
+                            "PAYMENT_PREAUTHORIZATION_PENDING",
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
@@ -3436,6 +3453,7 @@
                         "enum": [
                             "PREBILLING_PENDING",
                             "PREBILLING_FAILED",
+                            "PAYMENT_PREAUTHORIZATION_PENDING",
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
@@ -8485,6 +8503,7 @@
                             "enum": [
                                 "PREBILLING_PENDING",
                                 "PREBILLING_FAILED",
+                                "PAYMENT_PREAUTHORIZATION_PENDING",
                                 "WAITING_FOR_PAYMENT",
                                 "PAYMENT_PENDING",
                                 "INVOICE_PENDING",
