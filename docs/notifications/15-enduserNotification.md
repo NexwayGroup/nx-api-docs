@@ -1,4 +1,4 @@
-# End-user (Buyer) Notifications
+# End-user (Shopper) Notifications
 
 These notifications are triggered when the End-user data changes. 
 
