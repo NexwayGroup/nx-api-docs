@@ -360,6 +360,10 @@
                         "description": "Product identifier",
                         "type": "string"
                     },
+                    "productRecoId": {
+                        "description": "product recommendation id",
+                        "type": "string"
+                    },
                     "remotePrice": {
                         "$ref": "#/components/schemas/RemotePrice",
                         "description": "Remote price information"
@@ -420,6 +424,9 @@
                         "type": "string"
                     },
                     "marketingCampaignId": {
+                        "type": "string"
+                    },
+                    "productRecoId": {
                         "type": "string"
                     }
                 },
@@ -987,7 +994,7 @@
                         "name": "date",
                         "required": false,
                         "schema": {
-                            "default": "2025-10-22T15:26:06.234Z",
+                            "default": "2025-12-02T14:42:13.242Z",
                             "format": "date-time",
                             "type": "string"
                         }
@@ -1028,6 +1035,14 @@
                     {
                         "in": "query",
                         "name": "source",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "productRecoId",
                         "required": false,
                         "schema": {
                             "type": "string"
