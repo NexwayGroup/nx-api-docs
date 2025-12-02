@@ -580,3 +580,38 @@ POST /purchases/{subscriptionId}/
 - 403: Forbidden (user not entitled to call the service).
 - 404: Requested subscription not found.
 - 500: Internal server error.
+
+
+## Extending Subscription Expiration Date
+
+You can extend the expiration date of an active subscription to give users additional time before their subscription expires or renews. This is useful for customer service scenarios, promotional extensions, or other business needs.
+
+:::note
+The expiration date can only be extended forward in time. It is not possible to shorten a subscription's expiration date using this endpoint.
+This operation only works for active subscriptions. It cannot be applied to expired or canceled subscriptions.
+:::
+
+**API Request Example**
+```json 
+POST /subscription-manager/subscriptions/{subscriptionId}/upgrade
+{
+  "id": "{subscriptionId}",
+  "lifecycle": {
+    "expirationDate": 1729382400000
+  }
+}
+```
+
+**Input Parameters**
+
+- `id` (Required, string): The subscription identifier.
+- `lifecycle.expirationDate` (Required, number): The new expiration date in Unix timestamp format (milliseconds). This value must be later than the current expiration date.
+
+**Response Codes**
+
+- 200: Subscription expiration date successfully extended.
+- 400: Request validation failure (e.g., new date is earlier than current date, subscription is expired or canceled).
+- 401: Authentication failed.
+- 403: Forbidden (user not entitled to call the service).
+- 404: Requested subscription not found.
+- 500: Internal server error.
