@@ -21,7 +21,7 @@ By default, the email body will use the same JSON format as the webhook body.
 All notifications are generated when the state of some domain entity changes. Currently we support notifications about:
 * [Orders](05-orderNotification.md)
 * [Subscriptions](10-subscriptionNotification.md)
-* End users
+* [End users](15-enduserNotification.md)
 
 ## Notification format
 
