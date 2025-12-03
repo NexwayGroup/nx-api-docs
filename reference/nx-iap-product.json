@@ -1192,6 +1192,11 @@
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
                         "type": "string"
                     },
+                    "maxQuantityAllowed": {
+                        "description": "Optional maximum quantity allowed for a product in a single cart",
+                        "format": "int32",
+                        "type": "integer"
+                    },
                     "modelVersion": {
                         "deprecated": true,
                         "type": "string"
@@ -1566,6 +1571,11 @@
                         "type": "object",
                         "writeOnly": true
                     },
+                    "maxQuantityAllowed": {
+                        "description": "Optional maximum quantity allowed for a product in a single cart",
+                        "format": "int32",
+                        "type": "integer"
+                    },
                     "modelVersion": {
                         "deprecated": true,
                         "type": "string"
@@ -1848,6 +1858,11 @@
                         "example": "1YEAR",
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
                         "type": "string"
+                    },
+                    "maxQuantityAllowed": {
+                        "description": "Optional maximum quantity allowed for a product in a single cart",
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "modelVersion": {
                         "deprecated": true,
@@ -2205,6 +2220,11 @@
                         "example": "1YEAR",
                         "pattern": "^(((?<duration>[0-9]*)(?<period>MONTH|YEAR|DAY|MONTHS|YEARS|DAYS))|PERMANENT)$",
                         "type": "string"
+                    },
+                    "maxQuantityAllowed": {
+                        "description": "Optional maximum quantity allowed for a product in a single cart",
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "modelVersion": {
                         "deprecated": true,
