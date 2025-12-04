@@ -11,7 +11,7 @@ Below is a list of order-related notifications which you can subscribe to:
 * **Order Created**
 `type=created`
 * **Order Payment Failed**
-`type=paymentRefused`
+`type=paymentFailed`
 Usually caused by an internal technical issue
 * **Order Payment Refused**
 `type=paymentRefused`
