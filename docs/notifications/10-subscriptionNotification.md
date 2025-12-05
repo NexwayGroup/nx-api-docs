@@ -18,7 +18,7 @@ You can receive notifications whenever your subscription status changes.
 | Name | Description | R/O |
 | ---- | ----------- | --- |
 | **subject** | subscription | R |
-| **type** | Depending on the event:<br/>• expiredsubscription<br/>• expiration date updated<br/>•  reactivated<br/>• suspended<br/>• canceled<br/>etc | R |
+| **type** | Depending on the event:<br/>•  reactivated<br/>• suspended<br/>• canceled<br/> [see notifications with subject=`subscription`](20-notificationReference.md)  | R |
 | **objectId** | subscriptonId: `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
 | **eventDate** | `2025-07-25T11:30:03Z` | |
 | **subscription** `{object}` | Subscription details object | R |
