@@ -34,7 +34,7 @@ By a payment gateway or bank
 `type=prebillingStarted`
 Same as Prebilling Order Created, but triggered if a prebilling order with source `OFFER` already exists
 
-## List of fields
+## List of fields 
 
 The notification payload will include an 'order' object containing the following details:
 
