@@ -4682,6 +4682,92 @@
             }
         },
         "/ordersv2/cancellationReason": {
+            "get": {
+                "operationId": "getItems_1",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pageable",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "predicate",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultCancellationReason"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "CancellationReason"
+                ],
+                "x-operationWeight": "300"
+            },
             "post": {
                 "operationId": "createItem_1",
                 "requestBody": {
@@ -4836,7 +4922,7 @@
         },
         "/ordersv2/cancellationReason/public": {
             "get": {
-                "operationId": "getItems_4",
+                "operationId": "getItems_5",
                 "parameters": [
                     {
                         "in": "query",
@@ -4844,22 +4930,6 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 ],
@@ -4872,54 +4942,12 @@
                                 }
                             }
                         },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
+                        "description": "OK"
                     }
                 },
-                "summary": "Get items",
                 "tags": [
                     "CancellationReason"
-                ],
-                "x-operationWeight": "300"
+                ]
             }
         },
         "/ordersv2/cancellationReason/public/{cancellationReasonId}": {
@@ -5397,7 +5425,7 @@
         },
         "/ordersv2/customFields": {
             "get": {
-                "operationId": "getItems_3",
+                "operationId": "getItems_4",
                 "parameters": [
                     {
                         "in": "query",
@@ -6059,7 +6087,7 @@
         },
         "/ordersv2/events-history": {
             "get": {
-                "operationId": "getItems_2",
+                "operationId": "getItems_3",
                 "parameters": [
                     {
                         "in": "query",
@@ -6675,7 +6703,7 @@
         },
         "/ordersv2/lineitemdata": {
             "get": {
-                "operationId": "getItems_1",
+                "operationId": "getItems_2",
                 "parameters": [
                     {
                         "in": "query",
