@@ -151,6 +151,9 @@
                     "price": {
                         "$ref": "#/components/schemas/Price"
                     },
+                    "productRecoId": {
+                        "type": "string"
+                    },
                     "products": {
                         "items": {
                             "$ref": "#/components/schemas/Product"
@@ -477,6 +480,10 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "productRecoId": {
+                        "description": "Product recommendation id where this discount should be applied",
+                        "type": "string"
+                    },
                     "publisherRefIds": {
                         "description": "Product publisher references to which discount can be applied",
                         "items": {
@@ -623,6 +630,9 @@
                     "netPriceDiscountAmount": {
                         "format": "double",
                         "type": "number"
+                    },
+                    "signedDiscount": {
+                        "type": "boolean"
                     },
                     "vatDiscountAmount": {
                         "format": "double",
