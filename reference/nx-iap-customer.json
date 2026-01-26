@@ -51,7 +51,6 @@
             "BlackListRequest": {
                 "properties": {
                     "createDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -63,7 +62,6 @@
                         "type": "integer"
                     },
                     "id": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -82,7 +80,6 @@
                         "type": "string"
                     },
                     "updateDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -98,7 +95,6 @@
                         "type": "string"
                     },
                     "createDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -110,7 +106,6 @@
                         "type": "integer"
                     },
                     "id": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -131,7 +126,6 @@
                         "type": "string"
                     },
                     "updateDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -195,7 +189,6 @@
                         "type": "integer"
                     },
                     "createDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -245,7 +238,6 @@
                         "readOnly": true
                     },
                     "id": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -397,7 +389,6 @@
                         "type": "string"
                     },
                     "updateDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -773,16 +764,21 @@
                 "description": "The provider collection stores the providers data like query params used in activationLink feature",
                 "properties": {
                     "createDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "customerIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
                     },
                     "id": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -805,7 +801,6 @@
                         "writeOnly": true
                     },
                     "updateDate": {
-                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
