@@ -1289,6 +1289,9 @@
                         "format": "int32",
                         "type": "integer"
                     },
+                    "refund": {
+                        "$ref": "#/components/schemas/Refund"
+                    },
                     "relatedContents": {
                         "description": "Links for downloading product-related content file",
                         "items": {
@@ -1571,6 +1574,29 @@
                 ],
                 "type": "object"
             },
+            "LineItemRefundOrderRequest": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "licenseStartDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "partialRefundMethod": {
+                        "enum": [
+                            "FULL",
+                            "LIFE_TIME"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "partialRefundMethod"
+                ],
+                "type": "object"
+            },
             "LineItemView": {
                 "properties": {
                     "businessSegment": {
@@ -1819,10 +1845,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -1879,10 +1906,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -1922,10 +1950,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -1992,12 +2021,17 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
+                        "type": "string"
+                    },
+                    "lastPartialRefundDate": {
+                        "format": "date-time",
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -2031,7 +2065,10 @@
                             "CANCELED",
                             "FORCE_COMPLETED",
                             "FORCE_CANCELED",
-                            "FORCE_ABORTED"
+                            "FORCE_ABORTED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR",
+                            "PARTIAL_REFUND_COMPLETED"
                         ],
                         "type": "string"
                     },
@@ -2097,6 +2134,40 @@
                         "example": "2G4NAYY4K23",
                         "type": "string"
                     },
+                    "partialCreditNoteStatus": {
+                        "description": "Global status for partial credit note workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
+                        ],
+                        "type": "string"
+                    },
+                    "partialRefundEmailStatus": {
+                        "description": "Global status for email cancellation workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "CREATION_PENDING",
+                            "CREATION_FAILURE",
+                            "CREATION_SCHEDULED",
+                            "CREATION_ACCEPTED",
+                            "CANCEL_PENDING",
+                            "CANCEL_FAILURE",
+                            "CANCEL_ACCEPTED"
+                        ],
+                        "type": "string"
+                    },
                     "payment": {
                         "$ref": "#/components/schemas/Payment"
                     },
@@ -2123,10 +2194,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2164,10 +2236,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2194,10 +2267,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2271,7 +2345,9 @@
                             "PAYMENT_REFUSED",
                             "CREATED",
                             "FORCE_COMPLETED",
-                            "FORCE_CANCELED"
+                            "FORCE_CANCELED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR"
                         ],
                         "type": "string"
                     },
@@ -2346,6 +2422,10 @@
                     "totalAmount": {
                         "description": "Total amount",
                         "example": 102.5,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "totalRefundedAmount": {
                         "format": "double",
                         "type": "number"
                     },
@@ -2567,7 +2647,10 @@
                             "CANCELED",
                             "FORCE_COMPLETED",
                             "FORCE_CANCELED",
-                            "FORCE_ABORTED"
+                            "FORCE_ABORTED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR",
+                            "PARTIAL_REFUND_COMPLETED"
                         ],
                         "type": "string"
                     },
@@ -2593,7 +2676,9 @@
                             "PAYMENT_REFUSED",
                             "CREATED",
                             "FORCE_COMPLETED",
-                            "FORCE_CANCELED"
+                            "FORCE_CANCELED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR"
                         ],
                         "type": "string"
                     },
@@ -2683,7 +2768,9 @@
                             "PAYMENT_REFUSED",
                             "CREATED",
                             "FORCE_COMPLETED",
-                            "FORCE_CANCELED"
+                            "FORCE_CANCELED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR"
                         ],
                         "type": "string"
                     },
@@ -2744,6 +2831,10 @@
                         "format": "double",
                         "type": "number"
                     },
+                    "amountToRefund": {
+                        "format": "double",
+                        "type": "number"
+                    },
                     "asyncContext": {
                         "type": "string"
                     },
@@ -2787,10 +2878,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2804,10 +2896,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2827,6 +2920,9 @@
                     "onPaymentClickRedirectUrl": {
                         "description": "redirection url once payment page is closed",
                         "type": "string"
+                    },
+                    "partiallyRefundable": {
+                        "type": "boolean"
                     },
                     "paymentId": {
                         "description": "Reference ID of the payment attempt",
@@ -2863,10 +2959,11 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
@@ -2899,13 +2996,18 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "type": "string"
+                    },
+                    "totalAmountRefunded": {
+                        "format": "double",
+                        "type": "number"
                     },
                     "transactionId": {
                         "description": "Reference ID of payment service",
@@ -3245,6 +3347,81 @@
                 },
                 "type": "object"
             },
+            "Refund": {
+                "properties": {
+                    "amount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "details": {
+                        "items": {
+                            "$ref": "#/components/schemas/RefundDetail"
+                        },
+                        "type": "array"
+                    },
+                    "ratio": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "RefundDetail": {
+                "properties": {
+                    "amount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "ratio": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "reason": {
+                        "type": "string"
+                    },
+                    "refundMethod": {
+                        "enum": [
+                            "FULL",
+                            "LIFE_TIME"
+                        ],
+                        "type": "string"
+                    },
+                    "status": {
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
+                        ],
+                        "type": "string"
+                    },
+                    "triggerDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RefundOrderRequest": {
+                "properties": {
+                    "lineItems": {
+                        "items": {
+                            "$ref": "#/components/schemas/LineItemRefundOrderRequest"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "RelatedContent": {
                 "properties": {
                     "file": {
@@ -3464,7 +3641,10 @@
                             "CANCELED",
                             "FORCE_COMPLETED",
                             "FORCE_CANCELED",
-                            "FORCE_ABORTED"
+                            "FORCE_ABORTED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR",
+                            "PARTIAL_REFUND_COMPLETED"
                         ],
                         "type": "string"
                     },
@@ -3490,7 +3670,9 @@
                             "PAYMENT_REFUSED",
                             "CREATED",
                             "FORCE_COMPLETED",
-                            "FORCE_CANCELED"
+                            "FORCE_CANCELED",
+                            "PARTIAL_REFUND_PENDING",
+                            "PARTIAL_REFUND_WITH_ERROR"
                         ],
                         "type": "string"
                     },
@@ -4186,8 +4368,10 @@
                 "properties": {
                     "additionalProperties": {
                         "additionalProperties": {
+                            "deprecated": true,
                             "type": "string"
                         },
+                        "deprecated": true,
                         "description": "Map of broker-specific information",
                         "type": "object"
                     },
@@ -4197,7 +4381,8 @@
                         "type": "string"
                     },
                     "refundStatus": {
-                        "description": "Credit note / refund declaration status",
+                        "deprecated": true,
+                        "description": "tax declaration transaction id",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -4206,22 +4391,24 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "example": "FAILED",
                         "type": "string"
                     },
                     "refundTransactionId": {
+                        "deprecated": true,
                         "description": "Credit note / refund declaration transaction id",
                         "example": "FR-20-001261481",
                         "type": "string"
                     },
                     "status": {
-                        "description": "Invoice / purchase declaration status",
+                        "description": "tax declaration status",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -4230,18 +4417,55 @@
                             "FAILED",
                             "COMPLETED",
                             "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
                             "COMMITTED",
                             "NOT_COMMITTED",
                             "COMMITMENT_FAILED",
-                            "REFUNDED",
                             "REFUND_FAILED"
                         ],
                         "example": "COMPLETED",
                         "type": "string"
                     },
+                    "taxTransactions": {
+                        "items": {
+                            "$ref": "#/components/schemas/TaxTransaction"
+                        },
+                        "type": "array"
+                    },
                     "transactionId": {
-                        "description": "Invoice / purchase declaration transaction id",
+                        "deprecated": true,
+                        "description": "tax declaration transaction id",
                         "example": "FR-21-001514102",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TaxTransaction": {
+                "properties": {
+                    "additionalProperties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Map of broker-specific information",
+                        "type": "object"
+                    },
+                    "date": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    },
+                    "transactionId": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "TAX_DECLARATION",
+                            "REFUND_DECLARATION"
+                        ],
                         "type": "string"
                     }
                 },
@@ -8546,7 +8770,10 @@
                                 "CANCELED",
                                 "FORCE_COMPLETED",
                                 "FORCE_CANCELED",
-                                "FORCE_ABORTED"
+                                "FORCE_ABORTED",
+                                "PARTIAL_REFUND_PENDING",
+                                "PARTIAL_REFUND_WITH_ERROR",
+                                "PARTIAL_REFUND_COMPLETED"
                             ],
                             "type": "string"
                         }
@@ -9385,6 +9612,179 @@
                 "summary": "Cancel completely an order without email sending",
                 "tags": [
                     "Order"
+                ],
+                "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/ordersv2/{id}/partial-refund": {
+            "post": {
+                "operationId": "partialRefundOrder",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "partialRefundReason",
+                        "required": false,
+                        "schema": {
+                            "default": "OCL",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "skipEmail",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RefundOrderRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        },
+                        "description": "Accepted"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "partial refund order",
+                "tags": [
+                    "RefundOrder"
+                ],
+                "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/ordersv2/{id}/partial-refund-eligibility": {
+            "get": {
+                "operationId": "partialRefundOrderEligibility",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        },
+                        "description": "Accepted"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "partial refund order eligibility",
+                "tags": [
+                    "RefundOrder"
                 ],
                 "x-operationWeight": "300",
                 "x-privateApi": "true"
