@@ -492,6 +492,11 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "emailTemplateName": {
+                        "maxLength": 120,
+                        "minLength": 10,
+                        "type": "string"
+                    },
                     "emails": {
                         "description": "Email which receives the notification's payload",
                         "example": [
@@ -507,6 +512,9 @@
                         "type": "string"
                     },
                     "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "locale": {
                         "type": "string"
                     },
                     "modelVersion": {
@@ -549,6 +557,9 @@
                         "description": "Url which receives the notification's payload",
                         "example": "https://receiver.com",
                         "type": "string"
+                    },
+                    "useEmailTemplate": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
@@ -2742,7 +2753,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Mon Jan 26 14:08:17 GMT 2026",
+        "generatedAt": "Thu Jan 29 10:35:31 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
