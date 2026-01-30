@@ -179,7 +179,7 @@
                         "type": "string"
                     },
                     "date": {
-                        "description": "Invoice creation date",
+                        "description": "Credit note creation date",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -188,7 +188,7 @@
                         "type": "string"
                     },
                     "type": {
-                        "description": "Indicates if full or partial cancellation ( PARTIAL/TOTAL)",
+                        "description": "Indicates if full or partial cancellation (PARTIAL/TOTAL)",
                         "enum": [
                             "PARTIAL",
                             "TOTAL"
@@ -211,7 +211,8 @@
                         "type": "string"
                     },
                     "features": {
-                        "$ref": "#/components/schemas/Features"
+                        "$ref": "#/components/schemas/Features",
+                        "description": "Customer features configuration"
                     },
                     "id": {
                         "description": "Customer service reference ID",
@@ -219,27 +220,33 @@
                         "type": "string"
                     },
                     "multiplePaymentsValidityDuration": {
+                        "description": "Duration in days for multiple payments validity",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "name": {
+                        "description": "Customer name",
                         "type": "string"
                     },
                     "quoteSubscriptionValidityDuration": {
+                        "description": "Duration in days for quote subscription validity",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "quoteValidityDuration": {
+                        "description": "Duration in days for quote validity",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "remotePriceFiltering": {
-                        "$ref": "#/components/schemas/RemotePriceFiltering"
+                        "$ref": "#/components/schemas/RemotePriceFiltering",
+                        "description": "Remote price configuration"
                     },
                     "retryPaymentValidityDuration": {
+                        "description": "Duration in days to define payment deadline",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
@@ -501,7 +508,7 @@
                 "description": "End-user information",
                 "properties": {
                     "accountCreated": {
-                        "description": "If account is created : TRUE",
+                        "description": "Indicates if an account was created by the end-user",
                         "example": true,
                         "type": "boolean"
                     },
@@ -509,7 +516,7 @@
                         "type": "boolean"
                     },
                     "anonymousEndUser": {
-                        "description": "The boolean is used in order to know if an end-user is anonymous or not",
+                        "description": "Indicates if the end-user is anonymous. Anonymous end-users may have no first name or last name.",
                         "example": true,
                         "type": "boolean"
                     },
@@ -537,7 +544,7 @@
                         "type": "string"
                     },
                     "country": {
-                        "description": "EndUser country",
+                        "description": "End-user country code (ISO 3166-1 alpha-2)",
                         "example": "FR",
                         "type": "string"
                     },
@@ -556,31 +563,31 @@
                         "type": "string"
                     },
                     "firstName": {
-                        "description": "EndUser first name",
+                        "description": "EndUser first name. Could be null for an anonymous end-user",
                         "example": "John",
                         "maxLength": 160,
                         "minLength": 0,
                         "type": "string"
                     },
                     "id": {
-                        "description": "EndUser id",
+                        "description": "EndUser id. End-user is created if it doesn't exist after the order is paid during the order processing. It will remain null until the end-user creation step is completed. It may be initialized at the time of order creation.",
                         "example": "0da71031-d6e5-48b4-bd28-7094f3c71a0b",
                         "type": "string"
                     },
                     "lastName": {
-                        "description": "EndUser last name",
+                        "description": "EndUser last name. Could be null for an anonymous end-user",
                         "example": "Doe",
                         "maxLength": 160,
                         "minLength": 0,
                         "type": "string"
                     },
                     "locale": {
-                        "description": "EndUser locale",
+                        "description": "End-user locale (e.g., fr-FR)",
                         "example": "fr-FR",
                         "type": "string"
                     },
                     "newUser": {
-                        "description": "Flag for newly created end-user",
+                        "description": "Indicates if the end-user is newly created",
                         "type": "boolean"
                     },
                     "phone": {
@@ -589,28 +596,29 @@
                         "type": "string"
                     },
                     "recipientCode": {
-                        "description": "Recipient code",
+                        "description": "Recipient code. Used in certain countries for e-invoicing purposes if the store setting is enabled.",
                         "type": "string"
                     },
                     "region": {
-                        "description": "EndUser region",
+                        "description": "End-user region code",
                         "example": "FR-RE",
                         "maxLength": 50,
                         "minLength": 0,
                         "type": "string"
                     },
                     "regionName": {
-                        "description": "EndUser region's name",
+                        "description": "Name of the end-user's region",
                         "example": "Occitanie",
                         "maxLength": 50,
                         "minLength": 0,
                         "type": "string"
                     },
                     "resellerPIN": {
+                        "description": "Reseller PIN",
                         "type": "string"
                     },
                     "storeId": {
-                        "description": "EndUser storeId",
+                        "description": "ID of the store associated with the end-user",
                         "example": "9762480d-4c3d-4aea-9a75-236eb5f482c3",
                         "type": "string"
                     },
@@ -622,7 +630,7 @@
                         "type": "string"
                     },
                     "taxExemptionEligible": {
-                        "description": "Tax exemption eligible : TRUE/FALSE",
+                        "description": "Indicates if the end-user is eligible for tax exemption",
                         "type": "boolean"
                     },
                     "title": {
@@ -631,6 +639,7 @@
                         "type": "string"
                     },
                     "token": {
+                        "description": "EndUser token",
                         "type": "string"
                     },
                     "type": {
@@ -638,7 +647,7 @@
                         "type": "string"
                     },
                     "zipCode": {
-                        "description": "EndUser zip Code",
+                        "description": "End-user Zip Code",
                         "example": 30000,
                         "maxLength": 50,
                         "minLength": 0,
@@ -648,9 +657,6 @@
                 "required": [
                     "country",
                     "email",
-                    "firstName",
-                    "id",
-                    "lastName",
                     "locale",
                     "storeId",
                     "type"
@@ -707,15 +713,16 @@
             "Features": {
                 "properties": {
                     "createInvoice": {
+                        "description": "Indicates if invoices should be created",
                         "type": "boolean"
                     },
                     "sendOrderConfirmationEmail": {
+                        "description": "Indicates if order confirmation emails should be sent",
                         "type": "boolean"
                     },
                     "usingFulfillmentV1": {
-                        "type": "boolean"
-                    },
-                    "usingSubscriptionV1": {
+                        "deprecated": true,
+                        "description": "Indicates if Fulfillment V1 is used",
                         "type": "boolean"
                     }
                 },
@@ -758,7 +765,7 @@
                 "type": "object"
             },
             "FullPrice": {
-                "description": "All information related to amount",
+                "description": "Detailed breakdown of the amount",
                 "properties": {
                     "currency": {
                         "description": "Purchase currency (ISO-4217 format)",
@@ -792,6 +799,7 @@
                         "readOnly": true
                     },
                     "grossMsrp": {
+                        "description": "Gross MSRP",
                         "format": "double",
                         "type": "number"
                     },
@@ -820,16 +828,17 @@
                         "type": "number"
                     },
                     "mandateValue": {
-                        "description": "mandateValue",
+                        "description": "Mandate value",
                         "format": "double",
                         "type": "number"
                     },
                     "marketingCampaignId": {
-                        "description": "marketing campaign id",
+                        "description": "Marketing campaign ID",
                         "readOnly": true,
                         "type": "string"
                     },
                     "netMsrp": {
+                        "description": "Net MSRP",
                         "format": "double",
                         "type": "number"
                     },
@@ -854,7 +863,7 @@
                         "type": "number"
                     },
                     "shippingVatAmount": {
-                        "description": "Shipping VAT amount (grossPrice - netPrice) ",
+                        "description": "Shipping VAT amount (Gross Price - Net Price)",
                         "format": "double",
                         "type": "number"
                     },
@@ -875,16 +884,17 @@
                         "type": "number"
                     },
                     "vatAmount": {
-                        "description": "VAT amount (grossPrice - netPrice) ",
+                        "description": "VAT amount (Gross Price - Net Price)",
                         "format": "double",
                         "type": "number"
                     },
                     "vatAmountMsrp": {
+                        "description": "VAT amount MSRP",
                         "format": "double",
                         "type": "number"
                     },
                     "vatIncluded": {
-                        "description": "Tax included / not included",
+                        "description": "Indicates if tax is included",
                         "example": true,
                         "readOnly": true,
                         "type": "boolean"
@@ -1018,7 +1028,7 @@
                 "description": "Invoice information",
                 "properties": {
                     "date": {
-                        "description": "Creation date",
+                        "description": "Invoice creation date",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1027,7 +1037,7 @@
                         "type": "string"
                     },
                     "type": {
-                        "description": "Type",
+                        "description": "Invoice type",
                         "type": "string"
                     }
                 },
@@ -1048,6 +1058,7 @@
                 "type": "object"
             },
             "LastPaymentError": {
+                "description": "Last payment error",
                 "properties": {
                     "code": {
                         "type": "string"
@@ -1097,18 +1108,20 @@
             "LineItem": {
                 "properties": {
                     "activationLink": {
-                        "$ref": "#/components/schemas/ActivationLink"
+                        "$ref": "#/components/schemas/ActivationLink",
+                        "description": "Activation link"
                     },
                     "amount": {
-                        "description": "Cost of product",
+                        "description": "Gross amount of the line item",
                         "format": "double",
                         "type": "number"
                     },
                     "businessSegment": {
+                        "description": "Business segment",
                         "type": "string"
                     },
                     "currency": {
-                        "description": "Currency of product",
+                        "description": "Currency of the line item",
                         "properties": {
                             "currencyCode": {
                                 "type": "string"
@@ -1134,30 +1147,33 @@
                         "type": "object"
                     },
                     "customFieldsId": {
+                        "description": "Custom Fields ID",
                         "type": "string"
                     },
                     "discountAmount": {
-                        "description": "Cost of product after discount",
+                        "description": "Discount amount applied to the line item",
                         "format": "double",
                         "type": "number"
                     },
                     "discountPlan": {
                         "$ref": "#/components/schemas/DiscountPlan",
-                        "description": "Discount plan for product"
+                        "description": "Discount plan applied to the line item"
                     },
                     "discountRate": {
-                        "description": "Discount rate",
+                        "description": "Discount rate applied to the line item",
                         "format": "double",
                         "type": "number"
                     },
                     "emailDesc": {
-                        "description": "Email description",
+                        "description": "Description for email communications",
                         "type": "string"
                     },
                     "existingLicenseId": {
+                        "description": "Existing License ID (for renewals/upgrades)",
                         "type": "string"
                     },
                     "expirationDate": {
+                        "description": "Expiration date",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1166,6 +1182,7 @@
                         "type": "string"
                     },
                     "fraudPoints": {
+                        "description": "Fraud points",
                         "format": "int32",
                         "type": "integer"
                     },
@@ -1178,7 +1195,7 @@
                         "type": "string"
                     },
                     "gift": {
-                        "description": "true if the product is a gift - false otherwise",
+                        "description": "Indicates if the line item is a gift",
                         "type": "boolean"
                     },
                     "id": {
@@ -1186,7 +1203,7 @@
                         "type": "string"
                     },
                     "initialAmount": {
-                        "description": "Initial cost of product with taxes included",
+                        "description": "Initial gross amount of the line item (including taxes)",
                         "format": "double",
                         "type": "number"
                     },
@@ -1201,10 +1218,11 @@
                         "type": "number"
                     },
                     "licenseId": {
+                        "description": "License ID",
                         "type": "string"
                     },
                     "licenseNextExpirationDate": {
-                        "description": "licenseNextExpirationDate",
+                        "description": "Next expiration date of the license",
                         "type": "string"
                     },
                     "lifeTime": {
@@ -1212,11 +1230,11 @@
                         "type": "string"
                     },
                     "longDesc": {
-                        "description": "Long description",
+                        "description": "Long description of the product",
                         "type": "string"
                     },
                     "multipleLicensesFulfillment": {
-                        "description": "True if you want to handle a multiple fulfillment",
+                        "description": "Indicates if fulfilment has multiple licenses",
                         "type": "boolean"
                     },
                     "name": {
@@ -1224,35 +1242,41 @@
                         "type": "string"
                     },
                     "netAmount": {
-                        "description": "Cost of product with no taxes included",
+                        "description": "Net amount of the line item (excluding taxes)",
                         "format": "double",
                         "type": "number"
                     },
                     "numberOfDaysBeforeRenewalRemote": {
+                        "description": "Number of days before renewal (Remote)",
                         "format": "int64",
                         "type": "integer"
                     },
                     "paidTrial": {
-                        "description": "Indicator if this is a subscription paid trial period",
+                        "description": "Indicates if this is a paid subscription trial period",
                         "type": "boolean"
                     },
                     "physical": {
+                        "description": "Indicates if the product is physical",
                         "type": "boolean"
                     },
                     "price": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "Full price details"
                     },
                     "priceFunctionParameters": {
                         "additionalProperties": {
                             "type": "string"
                         },
+                        "description": "Price function parameters",
                         "type": "object"
                     },
                     "priority": {
+                        "description": "Priority level",
                         "format": "int32",
                         "type": "integer"
                     },
                     "productFamily": {
+                        "description": "Product family",
                         "type": "string"
                     },
                     "productId": {
@@ -1260,6 +1284,7 @@
                         "type": "string"
                     },
                     "productType": {
+                        "description": "Product type",
                         "type": "string"
                     },
                     "publisherRefId": {
@@ -1267,14 +1292,16 @@
                         "type": "string"
                     },
                     "quantity": {
+                        "description": "Quantity",
                         "format": "int32",
                         "type": "integer"
                     },
                     "refund": {
-                        "$ref": "#/components/schemas/Refund"
+                        "$ref": "#/components/schemas/Refund",
+                        "description": "Refund information"
                     },
                     "relatedContents": {
-                        "description": "Links for downloading product-related content file",
+                        "description": "List of links for downloading product-related content files",
                         "items": {
                             "$ref": "#/components/schemas/RelatedContent"
                         },
@@ -1286,6 +1313,7 @@
                         "type": "string"
                     },
                     "remoteLicenseExpirationDate": {
+                        "description": "Remote license expiration date",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1293,25 +1321,30 @@
                         "additionalProperties": {
                             "type": "object"
                         },
+                        "description": "Remote price parameters",
                         "type": "object"
                     },
                     "renewingPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "Renewing price details"
                     },
                     "renewingProductDetails": {
-                        "$ref": "#/components/schemas/RenewingProductDetails"
+                        "$ref": "#/components/schemas/RenewingProductDetails",
+                        "description": "Renewing product details"
                     },
                     "shipping": {
+                        "description": "Shipping information",
                         "items": {
                             "$ref": "#/components/schemas/Shipping"
                         },
                         "type": "array"
                     },
                     "shortDesc": {
-                        "description": "Short description",
+                        "description": "Short description of the product",
                         "type": "string"
                     },
                     "signedProduct": {
+                        "description": "Signed product data",
                         "type": "string"
                     },
                     "subscriptionTemplate": {
@@ -1323,15 +1356,15 @@
                         "type": "string"
                     },
                     "taxExempt": {
-                        "description": "Indicator if the product is tax exempt",
+                        "description": "Indicates if the line item is tax-exempt",
                         "type": "boolean"
                     },
                     "thankYouDesc": {
-                        "description": "Thank-you description",
+                        "description": "Thank-you page description",
                         "type": "string"
                     },
                     "trial": {
-                        "description": "Indicator if this is a subscription trial period",
+                        "description": "Indicates if this is a subscription trial period",
                         "type": "boolean"
                     },
                     "trialDuration": {
@@ -1340,25 +1373,27 @@
                         "type": "integer"
                     },
                     "unitPrice": {
-                        "$ref": "#/components/schemas/FullPrice"
+                        "$ref": "#/components/schemas/FullPrice",
+                        "description": "Unit price details"
                     },
                     "upsell": {
+                        "description": "Indicates if this is an upsell",
                         "type": "boolean"
                     },
                     "variablesDetails": {
                         "additionalProperties": {
                             "$ref": "#/components/schemas/VariableDetails"
                         },
-                        "description": "Product variables",
+                        "description": "Map of product variable details",
                         "type": "object"
                     },
                     "vatAmount": {
-                        "description": "VAT amount (grossPrice - netPrice)",
+                        "description": "VAT amount (Gross Price - Net Price)",
                         "format": "double",
                         "type": "number"
                     },
                     "vatRate": {
-                        "description": "VAT rate for product",
+                        "description": "VAT rate applicable to the line item",
                         "format": "double",
                         "type": "number"
                     }
@@ -1682,14 +1717,8 @@
             },
             "Order": {
                 "properties": {
-                    "Indicates if subscription was renewed manually by the end user via self renew flow": {
-                        "type": "boolean"
-                    },
-                    "Indicates if the payment method is non recurring for the subscription in the order.": {
-                        "type": "boolean"
-                    },
                     "allowPaymentMethodRegistration": {
-                        "description": "Payment method registration authorized",
+                        "description": "Indicates if payment method registration is authorized",
                         "example": true,
                         "type": "boolean"
                     },
@@ -1698,28 +1727,34 @@
                         "enum": [
                             "NONE",
                             "INITIALIZED",
-                            "CREATION_PENDING",
-                            "CREATION_FAILURE",
-                            "CREATION_SCHEDULED",
-                            "CREATION_ACCEPTED",
-                            "CANCEL_PENDING",
-                            "CANCEL_FAILURE",
-                            "CANCEL_ACCEPTED"
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
                         ],
                         "type": "string"
                     },
                     "billingPlanId": {
+                        "deprecated": true,
                         "description": "External ID from Billing plan resource",
                         "example": "25aaceea-5a34-11eb-ae93-0242ac130002",
                         "type": "string"
                     },
                     "billingPlanPeriod": {
+                        "deprecated": true,
                         "description": "Billing plan period",
                         "example": "2023-12",
                         "type": "string"
                     },
                     "cancelPeriod": {
-                        "description": "Cancel period in days",
+                        "description": "Cancellation period in days",
                         "example": 14,
                         "format": "int32",
                         "type": "integer"
@@ -1792,7 +1827,7 @@
                         "type": "object"
                     },
                     "currencyFormatVariation": {
-                        "description": "define which variation of currency formatting should be used for currency display",
+                        "description": "Defines which variation of currency formatting should be used for currency display",
                         "enum": [
                             "DEFAULT",
                             "SYMBOL_LEFT",
@@ -1938,7 +1973,7 @@
                     },
                     "fullTotalAmount": {
                         "$ref": "#/components/schemas/FullPrice",
-                        "description": "All information related to amount"
+                        "description": "Detailed breakdown of the amount"
                     },
                     "generationId": {
                         "description": "Subscription number generation",
@@ -1946,8 +1981,10 @@
                         "type": "string"
                     },
                     "geoZones": {
-                        "description": "Set of geoZones label",
-                        "example": "Africa",
+                        "description": "Set of geoZone labels",
+                        "example": [
+                            "Africa"
+                        ],
                         "items": {
                             "type": "string"
                         },
@@ -2008,6 +2045,7 @@
                         "type": "string"
                     },
                     "lastPartialRefundDate": {
+                        "description": "Date of the last partial refund",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -2019,10 +2057,11 @@
                         "type": "string"
                     },
                     "layoutName": {
-                        "description": "Real layout name provided in NC",
+                        "description": "Real layout name provided for the cart",
                         "type": "string"
                     },
                     "lifeCycleStatus": {
+                        "description": "Global lifecycle status of the order",
                         "enum": [
                             "PREBILLING_PENDING",
                             "PREBILLING_FAILED",
@@ -2050,14 +2089,14 @@
                         "type": "string"
                     },
                     "lineItems": {
-                        "description": "List of products",
+                        "description": "List of line items",
                         "items": {
                             "$ref": "#/components/schemas/LineItem"
                         },
                         "type": "array"
                     },
                     "marketingCampaignNames": {
-                        "description": "marketing campaign names",
+                        "description": "Marketing campaign names. Derived from cart",
                         "example": [
                             "mktop1"
                         ],
@@ -2078,6 +2117,10 @@
                         "format": "double",
                         "type": "number"
                     },
+                    "nonRecurringPaymentMethodForSubscription": {
+                        "description": "Indicates if the payment method for the subscription in the order is non-recurring",
+                        "type": "boolean"
+                    },
                     "numberOfInstallments": {
                         "description": "Number of installments",
                         "example": 1,
@@ -2094,7 +2137,7 @@
                         "type": "string"
                     },
                     "onPaymentClickRedirectUrl": {
-                        "description": "redirection url used after a purchase",
+                        "description": "Redirection url used after a purchase",
                         "example": "https://my.website.com/confirmation",
                         "type": "string"
                     },
@@ -2154,7 +2197,7 @@
                         "type": "boolean"
                     },
                     "paymentOfflineReminderSent": {
-                        "description": "boolean to lock the send payment offline email",
+                        "description": "Indicates if the offline payment reminder email has been sent",
                         "type": "boolean"
                     },
                     "paymentStatus": {
@@ -2226,7 +2269,7 @@
                         "description": "List of order processing events"
                     },
                     "promoteOneClickPayment": {
-                        "description": "Payment method registration authorized",
+                        "description": "Indicates if one-click payment is promoted",
                         "example": true,
                         "type": "boolean"
                     },
@@ -2254,13 +2297,15 @@
                         "type": "number"
                     },
                     "remitteds": {
-                        "description": "List of remitteds",
+                        "description": "List of remitted amounts",
                         "items": {
                             "$ref": "#/components/schemas/Remitted"
                         },
                         "type": "array"
                     },
                     "resellerPIN": {
+                        "description": "Reseller PIN",
+                        "example": 123456,
                         "type": "string"
                     },
                     "salesFlag": {
@@ -2274,16 +2319,20 @@
                         "type": "array"
                     },
                     "scenario": {
-                        "description": "To be able to display different elements in workflow",
+                        "description": "A dynamic token used to customize the frontend UI and communication templates. Common values include 'acquisition', 'retention', and 'upgrade', though others may be supported.",
                         "example": "acquisition",
                         "type": "string"
+                    },
+                    "selfRenew": {
+                        "description": "Indicates if the subscription was renewed manually by the end user via the self-renew flow",
+                        "type": "boolean"
                     },
                     "shippingDetails": {
                         "$ref": "#/components/schemas/ShippingDetails",
                         "description": "Order shipping information"
                     },
                     "skipPrebillingEmail": {
-                        "description": "flag to skip sending prebilling email",
+                        "description": "Indicates if sending the prebilling email should be skipped",
                         "type": "boolean"
                     },
                     "source": {
@@ -2339,7 +2388,7 @@
                         "type": "string"
                     },
                     "subscriptionLayout": {
-                        "description": "Only used for subscription receipt confirmation if true",
+                        "description": "Indicates if the subscription layout is used for receipt confirmation",
                         "type": "boolean"
                     },
                     "subscriptionStatus": {
@@ -2381,7 +2430,7 @@
                         "type": "string"
                     },
                     "taxTypes": {
-                        "description": "Tax type",
+                        "description": "List of tax types",
                         "items": {
                             "$ref": "#/components/schemas/TaxType"
                         },
@@ -2389,7 +2438,7 @@
                     },
                     "testOrder": {
                         "default": "false",
-                        "description": "To show if the order is test",
+                        "description": "Indicates if the order is a test order",
                         "type": "boolean"
                     },
                     "totalAmount": {
@@ -2399,6 +2448,8 @@
                         "type": "number"
                     },
                     "totalRefundedAmount": {
+                        "description": "Total amount refunded",
+                        "example": 10.0,
                         "format": "double",
                         "type": "number"
                     },
@@ -2413,7 +2464,7 @@
                         "type": "number"
                     },
                     "warnings": {
-                        "description": "List of additional fields with a wrong format",
+                        "description": "List of warnings regarding fields with incorrect format",
                         "items": {
                             "$ref": "#/components/schemas/Warning"
                         },
@@ -2796,7 +2847,7 @@
             "Payment": {
                 "properties": {
                     "actionRequired": {
-                        "description": "end user action is required for this payment",
+                        "description": "Indicates if an end-user action is required for this payment",
                         "type": "boolean"
                     },
                     "amount": {
@@ -2805,18 +2856,20 @@
                         "type": "number"
                     },
                     "amountToRefund": {
+                        "description": "Amount to be refunded",
                         "format": "double",
                         "type": "number"
                     },
                     "asyncContext": {
+                        "description": "Async Context",
                         "type": "string"
                     },
                     "captured": {
-                        "description": "Is payment captured",
+                        "description": "Indicates if the payment has been captured",
                         "type": "boolean"
                     },
                     "delayToNotify": {
-                        "description": "delay to notify enduser if an action is required",
+                        "description": "Delay to notify the end-user if an action is required",
                         "format": "int32",
                         "type": "integer"
                     },
@@ -2825,6 +2878,7 @@
                         "type": "string"
                     },
                     "ics": {
+                        "description": "ICS",
                         "type": "string"
                     },
                     "informativeDPStatus": {
@@ -2832,17 +2886,19 @@
                         "type": "string"
                     },
                     "informativeFraudCheck": {
-                        "description": "Has Fraud step",
+                        "description": "Indicates if a fraud check was performed",
                         "type": "boolean"
                     },
                     "lastError": {
-                        "$ref": "#/components/schemas/LastPaymentError"
+                        "$ref": "#/components/schemas/LastPaymentError",
+                        "description": "Last payment error"
                     },
                     "magicalCardDetected": {
-                        "description": "Is magical card",
+                        "description": "Indicates if a magical test card was detected",
                         "type": "boolean"
                     },
                     "mailPaymentConfirmationStatus": {
+                        "description": "Status of the payment confirmation email",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -2861,6 +2917,7 @@
                         "type": "string"
                     },
                     "mailPaymentFailureStatus": {
+                        "description": "Status of the payment failure email",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -2879,6 +2936,7 @@
                         "type": "string"
                     },
                     "mandatePdfUrl": {
+                        "description": "URL to the mandate PDF",
                         "type": "string"
                     },
                     "methodId": {
@@ -2891,18 +2949,16 @@
                         "type": "string"
                     },
                     "onPaymentClickRedirectUrl": {
-                        "description": "redirection url once payment page is closed",
+                        "description": "Redirection URL once the payment page is closed",
                         "type": "string"
                     },
                     "partiallyRefundable": {
+                        "description": "Indicates if the payment is partially refundable",
                         "type": "boolean"
                     },
                     "paymentId": {
                         "description": "Reference ID of the payment attempt",
                         "type": "string"
-                    },
-                    "paymentInstructions": {
-                        "$ref": "#/components/schemas/PaymentInfo"
                     },
                     "paymentTypeId": {
                         "description": "Payment type used (Visa, PayPal, etc.)",
@@ -2921,12 +2977,15 @@
                         "uniqueItems": true
                     },
                     "proformaError": {
+                        "description": "Proforma Invoice Error",
                         "type": "string"
                     },
                     "proformaId": {
+                        "description": "Proforma ID",
                         "type": "string"
                     },
                     "refundStatus": {
+                        "description": "Refund status",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -2956,6 +3015,7 @@
                         "type": "string"
                     },
                     "rum": {
+                        "description": "RUM",
                         "type": "string"
                     },
                     "sessionId": {
@@ -2963,7 +3023,7 @@
                         "type": "string"
                     },
                     "status": {
-                        "description": "Payment status NONE/INITIALIZED/PENDING/PARTIAL_COMPLETED/FAILED/COMPLETED/ABORTED",
+                        "description": "Current status of the payment (e.g., NONE, INITIALIZED, PENDING, COMPLETED, FAILED)",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -2982,6 +3042,7 @@
                         "type": "string"
                     },
                     "totalAmountRefunded": {
+                        "description": "Total amount refunded",
                         "format": "double",
                         "type": "number"
                     },
@@ -2990,38 +3051,9 @@
                         "type": "string"
                     },
                     "transitionPaymentDate": {
+                        "description": "Date of the payment transition",
                         "format": "date-time",
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "PaymentInfo": {
-                "properties": {
-                    "amount": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "bankTransfer": {
-                        "type": "object"
-                    },
-                    "boleto": {
-                        "type": "object"
-                    },
-                    "cash": {
-                        "type": "object"
-                    },
-                    "cheque": {
-                        "type": "object"
-                    },
-                    "convenienceVoucherInfo": {
-                        "type": "object"
-                    },
-                    "paymentType": {
-                        "type": "string"
-                    },
-                    "pix": {
-                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -3455,7 +3487,7 @@
                         "type": "string"
                     },
                     "url": {
-                        "description": "URL use to get the remote price",
+                        "description": "URL used to get the remote price",
                         "type": "string"
                     }
                 },
@@ -3464,10 +3496,9 @@
             "RemotePriceFiltering": {
                 "properties": {
                     "filteringFieldsForB2B": {
-                        "description": "filtering fields for B2B",
-                        "example": [
-                            "seats",
-                            "licenseId"
+                        "description": "List of fields used to fetch remote price for B2B",
+                        "examples": [
+                            "[\"seats\",\"licenseId\"]"
                         ],
                         "items": {
                             "type": "string"
@@ -3475,10 +3506,9 @@
                         "type": "array"
                     },
                     "filteringFieldsForB2C": {
-                        "description": "filtering fields for B2B",
-                        "example": [
-                            "seats",
-                            "licenseId"
+                        "description": "List of fields used to fetch remote price for B2C",
+                        "examples": [
+                            "[\"seats\",\"licenseId\"]"
                         ],
                         "items": {
                             "type": "string"
@@ -3983,20 +4013,20 @@
                 "description": "Store information",
                 "properties": {
                     "allowOrderDetailsOnCheckoutConfirmation": {
-                        "description": "Allow order Details on checkout confirmation (TRUE/FALSE)",
+                        "description": "Indicates if order details are allowed on checkout confirmation",
                         "type": "boolean"
                     },
                     "allowQuotes": {
-                        "description": "Allow quotes (TRUE/FALSE)",
+                        "description": "Indicates if quotes are allowed",
                         "type": "boolean",
                         "writeOnly": true
                     },
                     "bannerInvoice": {
-                        "description": "Invoice banner",
+                        "description": "Invoice banner URL",
                         "type": "string"
                     },
                     "bannerOrderConfEmail": {
-                        "description": "Order confirmation banner",
+                        "description": "Order confirmation email banner URL",
                         "type": "string"
                     },
                     "id": {
@@ -4004,7 +4034,7 @@
                         "type": "string"
                     },
                     "multiplePaymentsValidityDuration": {
-                        "description": "Multiple payments validity duration ( days )",
+                        "description": "Multiple payments validity duration in days",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
@@ -4014,25 +4044,25 @@
                         "type": "string"
                     },
                     "quoteSubscriptionValidityDuration": {
-                        "description": "Quote subscription validity duration ( days )",
+                        "description": "Quote subscription validity duration in days",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "quoteValidityDuration": {
-                        "description": "Quote validity duration ( days )",
+                        "description": "Quote validity duration in days",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "retryPaymentValidityDuration": {
-                        "description": "Retry payment validity duration ( days )",
+                        "description": "Retry payment validity duration in days",
                         "format": "int64",
                         "type": "integer",
                         "writeOnly": true
                     },
                     "routes": {
-                        "description": "routes list",
+                        "description": "List of routes",
                         "items": {
                             "$ref": "#/components/schemas/Route"
                         },
@@ -4040,7 +4070,7 @@
                         "writeOnly": true
                     },
                     "usePaymentPreAuthorization": {
-                        "description": "Defines whether we pre-authorize a future payment or make the payment directly.",
+                        "description": "Indicates if payment pre-authorization is used",
                         "type": "boolean"
                     }
                 },
@@ -4312,7 +4342,7 @@
                     },
                     "refundStatus": {
                         "deprecated": true,
-                        "description": "tax declaration transaction id",
+                        "description": "Refund declaration status",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -4333,12 +4363,12 @@
                     },
                     "refundTransactionId": {
                         "deprecated": true,
-                        "description": "Credit note / refund declaration transaction id",
+                        "description": "Credit note / refund declaration transaction ID",
                         "example": "FR-20-001261481",
                         "type": "string"
                     },
                     "status": {
-                        "description": "tax declaration status",
+                        "description": "Tax declaration status",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -4358,6 +4388,7 @@
                         "type": "string"
                     },
                     "taxTransactions": {
+                        "description": "List of tax transactions",
                         "items": {
                             "$ref": "#/components/schemas/TaxTransaction"
                         },
@@ -4365,7 +4396,7 @@
                     },
                     "transactionId": {
                         "deprecated": true,
-                        "description": "tax declaration transaction id",
+                        "description": "Tax declaration transaction ID",
                         "example": "FR-21-001514102",
                         "type": "string"
                     }
