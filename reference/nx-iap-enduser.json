@@ -2426,6 +2426,16 @@
                     "expirationDate": {
                         "type": "string"
                     },
+                    "paymentMethod": {
+                        "enum": [
+                            "CreditCard",
+                            "Sepa",
+                            "Paypal",
+                            "NonRecurringUnknown",
+                            "RecurringUnknown"
+                        ],
+                        "type": "string"
+                    },
                     "paymentMethodId": {
                         "type": "string"
                     },
