@@ -144,17 +144,6 @@
                 },
                 "type": "object"
             },
-            "Document": {
-                "additionalProperties": {
-                    "type": "object"
-                },
-                "properties": {
-                    "empty": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "Email": {
                 "properties": {
                     "createDate": {
@@ -327,10 +316,6 @@
                         "deprecated": true,
                         "description": "Login",
                         "example": "jhon_doe",
-                        "type": "string"
-                    },
-                    "modelVersion": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "originalId": {
@@ -608,10 +593,6 @@
                         "deprecated": true,
                         "description": "Login",
                         "example": "jhon_doe",
-                        "type": "string"
-                    },
-                    "modelVersion": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "originalId": {
@@ -900,10 +881,6 @@
                         "example": "jhon_doe",
                         "type": "string"
                     },
-                    "modelVersion": {
-                        "deprecated": true,
-                        "type": "string"
-                    },
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
@@ -1185,10 +1162,6 @@
                         "example": "jhon_doe",
                         "type": "string"
                     },
-                    "modelVersion": {
-                        "deprecated": true,
-                        "type": "string"
-                    },
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
@@ -1386,10 +1359,6 @@
                         "$ref": "#/components/schemas/Asset",
                         "deprecated": true,
                         "description": "Logo"
-                    },
-                    "modelVersion": {
-                        "deprecated": true,
-                        "type": "string"
                     },
                     "name": {
                         "description": "Name",
@@ -1845,18 +1814,6 @@
                 },
                 "type": "object"
             },
-            "RecapEntry": {
-                "properties": {
-                    "count": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "targetValue": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "RecurringUnknown": {
                 "allOf": [
                     {
@@ -2040,36 +1997,6 @@
                 },
                 "type": "object"
             },
-            "SearchResultDocument": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Document"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
             "SearchResultEndUser": {
                 "properties": {
                     "items": {
@@ -2105,66 +2032,6 @@
                     "items": {
                         "items": {
                             "$ref": "#/components/schemas/Group"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchResultObject": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchResultRecapEntry": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/RecapEntry"
                         },
                         "type": "array"
                     },
@@ -2889,94 +2756,6 @@
                 ]
             }
         },
-        "/endusers/distinct": {
-            "get": {
-                "operationId": "distinct_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get distinct values for a given field",
-                "tags": [
-                    "EndUser"
-                ],
-                "x-operationWeight": "100"
-            }
-        },
         "/endusers/groups": {
             "get": {
                 "operationId": "getItems_1",
@@ -3147,270 +2926,6 @@
                     "Group"
                 ],
                 "x-operationWeight": "300"
-            }
-        },
-        "/endusers/groups/distinct": {
-            "get": {
-                "operationId": "distinct",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get distinct values for a given field",
-                "tags": [
-                    "Group"
-                ],
-                "x-operationWeight": "100"
-            }
-        },
-        "/endusers/groups/recap": {
-            "get": {
-                "operationId": "recap_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get recap quantities for a given field",
-                "tags": [
-                    "Group"
-                ],
-                "x-operationWeight": "150"
-            }
-        },
-        "/endusers/groups/unwind": {
-            "get": {
-                "operationId": "unwind_1",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Search unwind for a given field",
-                "tags": [
-                    "Group"
-                ],
-                "x-operationWeight": "150"
             }
         },
         "/endusers/groups/{id}": {
@@ -6944,94 +6459,6 @@
                 "x-operationWeight": "500"
             }
         },
-        "/endusers/recap": {
-            "get": {
-                "operationId": "recap",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get recap quantities for a given field",
-                "tags": [
-                    "EndUser"
-                ],
-                "x-operationWeight": "150"
-            }
-        },
         "/endusers/sso/my": {
             "get": {
                 "operationId": "getEnduser_2",
@@ -7321,94 +6748,6 @@
                 "tags": [
                     "EndUser"
                 ]
-            }
-        },
-        "/endusers/unwind": {
-            "get": {
-                "operationId": "unwind",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Search unwind for a given field",
-                "tags": [
-                    "EndUser"
-                ],
-                "x-operationWeight": "150"
             }
         },
         "/endusers/wallet/payments/paypal/deactivate": {
