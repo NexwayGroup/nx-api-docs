@@ -4565,123 +4565,35 @@
                 "operationId": "getItems",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "description": "Filter orders by endUser email",
-                        "in": "query",
-                        "name": "endUser.email"
-                    },
-                    {
-                        "description": "Filter orders by endUser country",
-                        "in": "query",
-                        "name": "endUser.country"
-                    },
-                    {
-                        "description": "Filter orders by endUser accountCreated",
-                        "in": "query",
-                        "name": "endUser.accountCreated"
-                    },
-                    {
                         "description": "Filter orders by customer id",
                         "in": "query",
-                        "name": "customer.id"
-                    },
-                    {
-                        "description": "Filter orders by lineItem id",
-                        "in": "query",
-                        "name": "lineItem.id"
-                    },
-                    {
-                        "description": "Filter orders by lineItem previousLineItemId",
-                        "in": "query",
-                        "name": "lineItem.previousLineItemId"
-                    },
-                    {
-                        "description": "Filter orders by lineItem subscriptionTemplate",
-                        "in": "query",
-                        "name": "lineItem.subscriptionTemplate"
-                    },
-                    {
-                        "description": "Filter orders by lineItem subscriptionId",
-                        "in": "query",
-                        "name": "lineItem.subscriptionId"
-                    },
-                    {
-                        "description": "Filter orders by lineItem publisherRefId",
-                        "in": "query",
-                        "name": "lineItem.publisherRefId"
-                    },
-                    {
-                        "description": "Filter orders by lineItem nexwayFulfillmentId",
-                        "in": "query",
-                        "name": "lineItem.nexwayFulfillmentId"
-                    },
-                    {
-                        "description": "Filter orders by lineItem publisherFulfillmentId",
-                        "in": "query",
-                        "name": "lineItem.publisherFulfillmentId"
-                    },
-                    {
-                        "description": "Filter orders by lineItem fulfillmentTemplate",
-                        "in": "query",
-                        "name": "lineItem.fulfillmentTemplate"
-                    },
-                    {
-                        "description": "Filter orders by lineItem activationCode",
-                        "in": "query",
-                        "name": "lineItem.activationCode"
-                    },
-                    {
-                        "description": "Filter orders by emailId",
-                        "in": "query",
-                        "name": "email.emailId"
-                    },
-                    {
-                        "description": "Filter orders by invoice id",
-                        "in": "query",
-                        "name": "invoice.id"
-                    },
-                    {
-                        "description": "Filter orders by creditNote id",
-                        "in": "query",
-                        "name": "creditNote.id"
-                    },
-                    {
-                        "description": "Filter orders  creditNote cancellationReason",
-                        "in": "query",
-                        "name": "creditNote.cancellationReason"
-                    },
-                    {
-                        "description": "Filter orders  creditNote date",
-                        "in": "query",
-                        "name": "creditNote.date"
-                    },
-                    {
-                        "description": "Filter orders by currency",
-                        "in": "query",
-                        "name": "currency"
+                        "name": "customerId"
                     },
                     {
                         "description": "Filter orders by cartId",
@@ -4694,14 +4606,39 @@
                         "name": "subscriptionId"
                     },
                     {
-                        "description": "Filter orders by generationId ",
+                        "description": "Filter orders by endUser id",
                         "in": "query",
-                        "name": "generationId"
+                        "name": "endUser.id"
                     },
                     {
-                        "description": "Filter orders by status (CANCELED_WITH_ERROR/CANCEL_PENDING/CANCELED/PARTIAL_CANCELED/PARTIAL_COMPLETED/COMPLETED/ABORTED/PENDING_WITH_ERROR/PENDING/FRAUD_PENDING/PAYMENT_PENDING/PAYMENT_REFUSED/CREATED/FORCE_COMPLETED/FORCE_CANCELED)",
+                        "description": "Filter orders by endUser email",
                         "in": "query",
-                        "name": "status"
+                        "name": "endUser.email"
+                    },
+                    {
+                        "description": "Filter orders by lifeCycleStatus (PREBILLING_PENDING/PREBILLING_FAILED/WAITING_FOR_PAYMENT/PARTIAL_COMPLETED/PAYMENT_PENDING/INVOICE_PENDING/ENDUSER_PENDING/SUBSCRIPTION_PENDING/FULFILLMENT_PENDING/EMAILCONFIRMATION_PENDING/COMPLETED_WITH_ERROR/COMPLETED/CANCEL_PENDING/CANCELED_WITH_ERROR/CANCELED/FORCE_COMPLETED/FORCE_CANCELED/FORCE_ABORTED)",
+                        "in": "query",
+                        "name": "lifeCycleStatus"
+                    },
+                    {
+                        "description": "Filter orders by payment paymentId",
+                        "in": "query",
+                        "name": "payments.paymentId"
+                    },
+                    {
+                        "description": "Filter orders by endUser company name",
+                        "in": "query",
+                        "name": "endUser.company.companyName"
+                    },
+                    {
+                        "description": "Filter orders by lineItem id",
+                        "in": "query",
+                        "name": "lineItems.id"
+                    },
+                    {
+                        "description": "Filter orders by invoice id",
+                        "in": "query",
+                        "name": "invoice.id"
                     },
                     {
                         "description": "Filter orders by source (PURCHASE/SUBSCRIPTION/MANUAL_RENEWAL/BILLING_PLAN)",
@@ -4709,29 +4646,19 @@
                         "name": "source"
                     },
                     {
-                        "description": "Filter orders by catalogId",
+                        "description": "Filter orders by createDate. Allows range queries (e.g., from a date: 'creationDate=1735686000000%3C', to a date: 'creationDate=%3C1735772400000', between two dates: 'creationDate=1735686000000%3C%3C1736463600000')",
                         "in": "query",
-                        "name": "catalogId"
+                        "name": "creationDate"
                     },
                     {
-                        "description": "Filter orders by consentId",
+                        "description": "Filter orders by updateDate.  Allows range queries (e.g., from a date: 'updatingDate=1735686000000%3C', to a date: 'updatingDate=%3C1735772400000', between two dates: 'updatingDate=1735686000000%3C%3C1736463600000')",
                         "in": "query",
-                        "name": "consentId"
+                        "name": "updatingDate"
                     },
                     {
-                        "description": "Filter orders by billingPlanId",
+                        "description": "Filter orders by status (CANCELED_WITH_ERROR/CANCEL_PENDING/CANCELED/PARTIAL_CANCELED/PARTIAL_COMPLETED/COMPLETED/ABORTED/PENDING_WITH_ERROR/PENDING/FRAUD_PENDING/PAYMENT_PENDING/PAYMENT_REFUSED/CREATED/FORCE_COMPLETED/FORCE_CANCELED)",
                         "in": "query",
-                        "name": "billingPlanId"
-                    },
-                    {
-                        "description": "Filter orders by billingPlanPeriod You can use date ranges by using < or << operator, examples: billingPlanPeriod=XXXX< will return orders starting after XXXX, billingPlanPeriod=<XXXX will return orders starting before XXXX, billingPlanPeriod=XXXX<<YYYYY will return orders starting between XXXX and YYYY",
-                        "in": "query",
-                        "name": "billingPlanPeriod"
-                    },
-                    {
-                        "description": "Filter orders by status (PREBILLING_PENDING/PREBILLING_FAILED/PREBILLING_FAILED/WAITING_FOR_PAYMENT/PARTIAL_COMPLETED/PAYMENT_PENDING/INVOICE_PENDING/ENDUSER_PENDING/SUBSCRIPTION_PENDING/FULFILLMENT_PENDING/EMAILCONFIRMATION_PENDING/COMPLETED_WITH_ERROR/COMPLETED/CANCEL_PENDING/CANCELED_WITH_ERROR/CANCELED/FORCE_COMPLETED/FORCE_CANCELED/FORCE_ABORTED)",
-                        "in": "query",
-                        "name": "lifeCycleStatus"
+                        "name": "status"
                     }
                 ],
                 "responses": {
@@ -4861,25 +4788,27 @@
                 "operationId": "getItems_1",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -5339,25 +5268,27 @@
                 "operationId": "getItems_4",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -5649,25 +5580,27 @@
                 "operationId": "getItems_3",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -6001,25 +5934,27 @@
                 "operationId": "getItems_2",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
