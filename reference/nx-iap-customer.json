@@ -1136,27 +1136,27 @@
                 "operationId": "getItems",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "vatNumber,addressBook,fulfillments,...",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -1314,6 +1314,15 @@
                             "format": "int64",
                             "type": "integer"
                         }
+                    },
+                    {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "vatNumber,addressBook,fulfillments,...",
+                        "in": "query",
+                        "name": "target",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1443,25 +1452,27 @@
                 "operationId": "getItems_2",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -2064,25 +2075,27 @@
                 "operationId": "getItems_1",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
