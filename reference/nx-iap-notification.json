@@ -363,7 +363,8 @@
                             "ABANDONED_CART",
                             "CONSENT_CREATED",
                             "CONSENT_UPDATED",
-                            "DISCOUNT_PLAN_UPDATED"
+                            "DISCOUNT_PLAN_UPDATED",
+                            "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED"
                         ],
                         "example": "ORDER",
                         "type": "string"
@@ -423,27 +424,6 @@
                         "description": "url of oauth2 authentication",
                         "example": "https://tokenUrl.com",
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Pageable": {
-                "properties": {
-                    "page": {
-                        "format": "int32",
-                        "minimum": 0,
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "minimum": 1,
-                        "type": "integer"
-                    },
-                    "sort": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -688,25 +668,27 @@
                 "operationId": "getItems_1",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -1061,25 +1043,27 @@
                 "operationId": "getItems_2",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -1452,25 +1436,27 @@
                 "operationId": "getItems",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -1836,12 +1822,17 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Thu Jan 29 16:45:26 GMT 2026",
+        "generatedAt": "Wed Feb 11 08:29:01 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
                 "subject": "cart",
                 "type": "abandoned"
+            },
+            "Check payment method replayability on updated subscription": {
+                "content": "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED",
+                "subject": "subscription",
+                "type": "subscriptionPaymentMethodReplayabilityChanged"
             },
             "Consent Created": {
                 "content": "CONSENT_CREATED",
@@ -2079,7 +2070,7 @@
                 "type": "unpaid"
             }
         },
-        "totalDefinitions": 48,
-        "uniqueContents": 48
+        "totalDefinitions": 49,
+        "uniqueContents": 49
     }
 }
