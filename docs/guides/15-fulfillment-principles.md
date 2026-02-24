@@ -5,7 +5,7 @@ Fulfillment plays a crucial role in the order processing workflow. Its primary f
 The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
 * Activate a service or a license key to a partner's server
-* Confirm that the partner is able to provide a purchased produc
+* Confirm that the partner is able to provide a purchased product
 
 ## What is the difference between a fulfilment call and an order notification?
 
