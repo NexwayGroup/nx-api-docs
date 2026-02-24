@@ -7,6 +7,21 @@ The fulfillment call is used to:
 * Activate a service or a license key to a partner's server
 * Confirm that the partner is able to provide a purchased product
 
+## What is the difference between a fulfilment call and an order notification?
+
+**Fulfilment:**
+To generate licenses and officially fulfil an order, you should rely exclusively on the "fulfilment" call.
+This call is specifically designed to trigger the delivery of your product.
+- If successful, it confirms that a license (or another product type) has been assigned to the order and that the transaction is finalised.
+- If your API endpoint is down or returns an error, our fulfilment system will automatically retry several times, and the order status will be set to `PARTIAL_COMPLETED`.
+- This triggers an internal alert for our team to perform a manual intervention, ensuring no end user is left without their product.
+
+**Notifications:**
+Notifications are "fire and forget" updates, useful for secondary actions. Their delivery does not impact our internal workflows.
+- Like fulfilment calls, notifications have a retry mechanism.
+- However, if the call fails, order processing is not affected.
+- They are ideal for updating internal BI tools, sales dashboards, or CRM systems to track real-time performance without any risk to customer delivery.
+
 If you have an existing service for issuing licenses it can be integrated into the Monetize fulfillment via custom fulfillment template (see below).
 
 If you don't have such a service, Nexway provides a sample fulfillment server for you to implement on your side to test expected behavior. Please ask your account manager.
@@ -36,6 +51,9 @@ Nexway can configure the payload sent to the partner's server to a certain exten
 | ↳ cartExternalContext     | O   | string              | base64 encoded plain json map. Taken from the external context of a shopping cart.  Used to pass customer specific parameters. Example: eyJjdXN0b21QYXJhbSI6dHJ1ZX0 |
 | ↳ subscriptionId          | O   | string              | UUID of a subscription                                                                                                         |
 | ↳ trialContext            | O   | string              | CREATION\|CONVERSION                                                                                                           |
+| ↳ price                  | R   | object              | Order price                                                                                                                     |
+| ¯↳ grossPrice            | R   | number              | Order gross price                                                                                                               |
+| ¯↳ currency              | R   | string              | 3-char currency code                                                                                                            |
 | user                    | R   | object              | Buyer attributes:                                                                                                              |
 | ↳ id                      | R   | string              | End-user Id                                                                                                                    |
 | ↳ companyName             | O   | string              |                                                                                                                                |
@@ -54,6 +72,9 @@ Nexway can configure the payload sent to the partner's server to a certain exten
 | ↳ externalContext         | O   | string              | Product external context. Defined in the catalog                                                                               |
 | ↳ priceFunctionParameters | O   | map(string, string) | Map of price function parameters (if defined on the product level)                                                             |
 | ↳ variables               | O   | map(string, string) | Map of variables (if defined)                                                                                                  |
+| ↳ price                  | R   | object              | Product price                                                                                                                   |
+| ¯↳ grossPrice            | R   | number              | Gross price                                                                                                                     |
+| ¯↳ currency              | R   | string              | 3-char currency code                                                                                                            |
 
 Nexway has the capability to initiate a customized call to the partner's server, likely including fields with different names but similar information to those mentioned above. We can create a dedicated fulfillment template that will effectively map these values to attributes recognized by your existing service.
 
