@@ -1712,6 +1712,9 @@
             },
             "Order": {
                 "properties": {
+                    "Indicates if send email or not in when fail in payment process failed": {
+                        "type": "boolean"
+                    },
                     "allowPaymentMethodRegistration": {
                         "description": "Indicates if payment method registration is authorized",
                         "example": true,
@@ -3016,6 +3019,9 @@
                     "sessionId": {
                         "description": "Session ID of payment service",
                         "type": "string"
+                    },
+                    "silentOnFailure": {
+                        "type": "boolean"
                     },
                     "status": {
                         "description": "Current status of the payment (e.g., NONE, INITIALIZED, PENDING, COMPLETED, FAILED)",
