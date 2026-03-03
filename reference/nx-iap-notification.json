@@ -359,6 +359,7 @@
                             "PRIVILEGE",
                             "ROLE",
                             "META_ROLE",
+                            "IDENTITY",
                             "SKEEPERS_PURCHASE_EVENT",
                             "ABANDONED_CART",
                             "CONSENT_CREATED",
@@ -1822,7 +1823,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Wed Feb 11 08:29:01 GMT 2026",
+        "generatedAt": "Tue Mar 03 15:20:23 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
@@ -1853,6 +1854,21 @@
                 "content": "END_USER_DELETED",
                 "subject": "endUser",
                 "type": "deleted"
+            },
+            "Identity created": {
+                "content": "IDENTITY",
+                "subject": "identity",
+                "type": "created"
+            },
+            "Identity deleted": {
+                "content": "IDENTITY",
+                "subject": "identity",
+                "type": "deleted"
+            },
+            "Identity updated": {
+                "content": "IDENTITY",
+                "subject": "identity",
+                "type": "updated"
             },
             "Offer Order Aborted": {
                 "content": "ORDER",
@@ -2070,7 +2086,7 @@
                 "type": "unpaid"
             }
         },
-        "totalDefinitions": 49,
-        "uniqueContents": 49
+        "totalDefinitions": 52,
+        "uniqueContents": 52
     }
 }
