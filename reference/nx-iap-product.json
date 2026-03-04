@@ -2804,120 +2804,32 @@
     },
     "openapi": "3.1.0",
     "paths": {
-        "/": {
-            "get": {
-                "operationId": "getItems_7",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultProductView"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get items",
-                "tags": [
-                    "api-crud-product-view"
-                ],
-                "x-operationWeight": "300"
-            }
-        },
         "/products": {
             "get": {
                 "operationId": "getItems",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "lastUpdateReason,nextGenerationOf",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -3085,6 +2997,15 @@
                         }
                     },
                     {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "lastUpdateReason,nextGenerationOf",
+                        "in": "query",
+                        "name": "target",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "description": "Planned product release date",
                         "example": 1668456000,
                         "in": "query",
@@ -3222,25 +3143,27 @@
                 "operationId": "getItems_4",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -3595,25 +3518,27 @@
                 "operationId": "getItems_5",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -3968,27 +3893,27 @@
                 "operationId": "getItems_3",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "customerId,lifeTime,trialAllowed,type,...",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -4054,6 +3979,15 @@
                         "name": "status",
                         "schema": {
                             "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "customerId,lifeTime,trialAllowed,type,...",
+                        "in": "query",
+                        "name": "target",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -4481,27 +4415,27 @@
                 "operationId": "getItems_2",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "marketingName,fallbackLocale,localizedMarketingName,...",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -4529,6 +4463,15 @@
                         "example": "en-US",
                         "in": "query",
                         "name": "fallbackLocale",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "marketingName,fallbackLocale,localizedMarketingName,...",
+                        "in": "query",
+                        "name": "target",
                         "schema": {
                             "type": "string"
                         }
@@ -5302,27 +5245,27 @@
                 "operationId": "getItems_1",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "name,parameters,productFields,...",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -5341,6 +5284,15 @@
                         "example": "myPriceFunctionName",
                         "in": "query",
                         "name": "name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "name,parameters,productFields,...",
+                        "in": "query",
+                        "name": "target",
                         "schema": {
                             "type": "string"
                         }
@@ -5803,30 +5755,30 @@
         },
         "/products/public": {
             "get": {
-                "operationId": "getItems_6",
+                "operationId": "getItems_7",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
-                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
-                        "example": "lastUpdateReason,nextGenerationOf",
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -5980,6 +5932,15 @@
                         "example": "FR,DE",
                         "in": "query",
                         "name": "blackListedCountries",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)",
+                        "example": "lastUpdateReason,nextGenerationOf",
+                        "in": "query",
+                        "name": "target",
                         "schema": {
                             "type": "string"
                         }
@@ -6573,6 +6534,168 @@
                 ]
             }
         },
+        "/products/view": {
+            "get": {
+                "operationId": "getItems_6",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultProductView"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "api-crud-product-view"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/view/{id}": {
+            "get": {
+                "operationId": "getItem_6",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductView"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "api-crud-product-view"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
         "/products/{id}": {
             "delete": {
                 "operationId": "deleteItem",
@@ -7055,78 +7178,6 @@
                     "Product"
                 ],
                 "x-operationWeight": "400"
-            }
-        },
-        "/{id}": {
-            "get": {
-                "operationId": "getItem_6",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProductView"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get item",
-                "tags": [
-                    "api-crud-product-view"
-                ],
-                "x-operationWeight": "200"
             }
         }
     },
