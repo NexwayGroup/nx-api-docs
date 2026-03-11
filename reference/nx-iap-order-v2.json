@@ -3370,6 +3370,17 @@
                 },
                 "type": "object"
             },
+            "RecalculationRequest": {
+                "properties": {
+                    "orderIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "Refund": {
                 "properties": {
                     "amount": {
@@ -4097,29 +4108,6 @@
             },
             "Subscription": {
                 "properties": {
-                    "amount": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "billingPlanId": {
-                        "type": "string"
-                    },
-                    "billingPlanPeriod": {
-                        "type": "string"
-                    },
-                    "cancelPeriod": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "cartIp": {
-                        "type": "string"
-                    },
-                    "catalogId": {
-                        "type": "string"
-                    },
-                    "consentFlags": {
-                        "$ref": "#/components/schemas/ConsentFlags"
-                    },
                     "country": {
                         "type": "string"
                     },
@@ -4148,81 +4136,25 @@
                         },
                         "type": "object"
                     },
-                    "customerId": {
-                        "type": "string"
-                    },
                     "discountPlan": {
                         "$ref": "#/components/schemas/SubDiscountPlan"
                     },
-                    "endUser": {
-                        "$ref": "#/components/schemas/EndUser"
-                    },
-                    "endUserId": {
-                        "type": "string"
-                    },
                     "enduserId": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "expirationDate": {
-                        "format": "date-time",
                         "type": "string"
                     },
                     "externalContext": {
                         "type": "string"
                     },
-                    "externalEndUserId": {
-                        "type": "string"
-                    },
                     "externalRefId": {
-                        "type": "string"
-                    },
-                    "generationId": {
                         "type": "string"
                     },
                     "id": {
                         "type": "string"
                     },
-                    "initialCurrency": {
-                        "properties": {
-                            "currencyCode": {
-                                "type": "string"
-                            },
-                            "defaultFractionDigits": {
-                                "format": "int32",
-                                "type": "integer"
-                            },
-                            "displayName": {
-                                "type": "string"
-                            },
-                            "numericCode": {
-                                "format": "int32",
-                                "type": "integer"
-                            },
-                            "numericCodeAsString": {
-                                "type": "string"
-                            },
-                            "symbol": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object"
-                    },
                     "lifecycle": {
                         "$ref": "#/components/schemas/Lifecycle"
                     },
-                    "locale": {
-                        "type": "string"
-                    },
                     "mandateValue": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "maxPaymentsParts": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "minPartialPaymentAmount": {
                         "format": "double",
                         "type": "number"
                     },
@@ -4232,42 +4164,13 @@
                         },
                         "type": "array"
                     },
-                    "notReadyForOrderCauseMessage": {
-                        "type": "string"
-                    },
-                    "numberOfInstallments": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "offerSubSource": {
-                        "enum": [
-                            "SUSPEND",
-                            "RESUME"
-                        ],
-                        "type": "string"
-                    },
-                    "onPaymentClickRedirectUrl": {
-                        "type": "string"
-                    },
                     "paymentDeadline": {
                         "format": "int64",
                         "type": "integer"
                     },
-                    "price": {
-                        "$ref": "#/components/schemas/FullPrice"
-                    },
                     "products": {
                         "items": {
                             "$ref": "#/components/schemas/WantedProduct"
-                        },
-                        "type": "array"
-                    },
-                    "promoteOneClickPayment": {
-                        "type": "boolean"
-                    },
-                    "remitteds": {
-                        "items": {
-                            "$ref": "#/components/schemas/Remitted"
                         },
                         "type": "array"
                     },
@@ -4277,49 +4180,8 @@
                         },
                         "type": "object"
                     },
-                    "salesFlags": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "scenario": {
-                        "type": "string"
-                    },
-                    "source": {
-                        "enum": [
-                            "BILLING_PLAN",
-                            "MANUAL_RENEWAL",
-                            "MID_TERM_UPGRADE",
-                            "OFFER",
-                            "PURCHASE",
-                            "SUBSCRIPTION",
-                            "UPGRADE",
-                            "UNKNOWN"
-                        ],
-                        "type": "string"
-                    },
-                    "storeHostname": {
-                        "type": "string"
-                    },
                     "storeId": {
                         "type": "string"
-                    },
-                    "subscriptionId": {
-                        "type": "string"
-                    },
-                    "subsidiaryId": {
-                        "type": "string"
-                    },
-                    "taxTypes": {
-                        "items": {
-                            "$ref": "#/components/schemas/TaxType"
-                        },
-                        "type": "array"
-                    },
-                    "totalAmount": {
-                        "format": "double",
-                        "type": "number"
                     }
                 },
                 "type": "object"
@@ -7157,6 +7019,29 @@
                 ],
                 "x-operationWeight": "700",
                 "x-privateApi": "true"
+            }
+        },
+        "/ordersv2/technical-operations/fix-order-prices": {
+            "post": {
+                "operationId": "fixOrderPrices",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecalculationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Technical Operations"
+                ]
             }
         },
         "/ordersv2/views/orders": {
