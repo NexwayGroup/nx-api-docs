@@ -1823,7 +1823,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Tue Mar 17 13:33:03 GMT 2026",
+        "generatedAt": "Tue Mar 17 16:22:29 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
@@ -1949,6 +1949,16 @@
                 "content": "LICENSE_KEY_PACKAGE",
                 "subject": "licenseKeyPackage",
                 "type": "thresholdReached"
+            },
+            "Partial refund completed successfully": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "partialRefundCompleted"
+            },
+            "Partial refund completed with errors": {
+                "content": "ORDER",
+                "subject": "order",
+                "type": "partialRefundFailed"
             },
             "Payment Method Deleted": {
                 "content": "PAYMENT_METHOD_ADDED",
@@ -2086,7 +2096,7 @@
                 "type": "unpaid"
             }
         },
-        "totalDefinitions": 52,
-        "uniqueContents": 52
+        "totalDefinitions": 54,
+        "uniqueContents": 54
     }
 }
