@@ -8449,7 +8449,7 @@
         },
         "/ordersv2/{id}/repair-refund": {
             "post": {
-                "operationId": "repairRefundOrder",
+                "operationId": "repairRefundOrder_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -8590,6 +8590,88 @@
                     "Order"
                 ],
                 "x-operationWeight": "300",
+                "x-privateApi": "true"
+            }
+        },
+        "/ordersv2/{id}/resync-refund-failed": {
+            "post": {
+                "operationId": "repairRefundOrder",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "cancellationReason",
+                        "required": false,
+                        "schema": {
+                            "default": "OCL",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        },
+                        "description": "Accepted"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "order resync or repair refund",
+                "tags": [
+                    "RefundOrder"
+                ],
+                "x-operationWeight": "400",
                 "x-privateApi": "true"
             }
         },
