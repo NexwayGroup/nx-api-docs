@@ -2487,6 +2487,12 @@
                         "description": "marketing campaign id applied on the product",
                         "type": "string"
                     },
+                    "maxQuantityAllowed": {
+                        "description": "Optional maximum quantity allowed for a product in a single cart",
+                        "example": 1,
+                        "format": "int32",
+                        "type": "integer"
+                    },
                     "name": {
                         "description": "Product name",
                         "example": "product name",
@@ -3293,7 +3299,8 @@
                             "NONE",
                             "NOT_VALID",
                             "NOT_APPLIED",
-                            "MISSING"
+                            "MISSING",
+                            "MODIFIED"
                         ],
                         "type": "string"
                     },
@@ -3320,7 +3327,8 @@
                             "ENCRYPTED_EMAIL",
                             "END_USER",
                             "SHIPPING_ADDRESS",
-                            "GIFT_PRODUCT"
+                            "GIFT_PRODUCT",
+                            "QUANTITY"
                         ],
                         "type": "string"
                     }
