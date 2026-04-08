@@ -106,6 +106,39 @@
                 },
                 "type": "object"
             },
+            "GoogleConnectRequest": {
+                "properties": {
+                    "idToken": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idToken"
+                ],
+                "type": "object"
+            },
+            "GoogleCreateSessionRequest": {
+                "properties": {
+                    "realm": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "realm"
+                ],
+                "type": "object"
+            },
+            "GoogleCreateSessionResponse": {
+                "properties": {
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "nonce": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "JwtByTokenAnd2faCode": {
                 "properties": {
                     "code2fa": {
@@ -119,6 +152,40 @@
                     "code2fa",
                     "token"
                 ],
+                "type": "object"
+            },
+            "KLConnectRequest": {
+                "properties": {
+                    "idToken": {
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idToken",
+                    "storeId"
+                ],
+                "type": "object"
+            },
+            "KLCreateSessionRequest": {
+                "properties": {
+                    "redirectUrl": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "redirectUrl"
+                ],
+                "type": "object"
+            },
+            "KLCreateSessionResponse": {
+                "properties": {
+                    "redirectUrl": {
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "ProviderTokenRequest": {
@@ -195,40 +262,6 @@
                         "type": "string"
                     },
                     "username": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "SSOConnectRequest": {
-                "properties": {
-                    "idToken": {
-                        "type": "string"
-                    },
-                    "storeId": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "idToken",
-                    "storeId"
-                ],
-                "type": "object"
-            },
-            "SSOCreateSessionRequest": {
-                "properties": {
-                    "redirectUrl": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "redirectUrl"
-                ],
-                "type": "object"
-            },
-            "SSOCreateSessionResponse": {
-                "properties": {
-                    "redirectUrl": {
                         "type": "string"
                     }
                 },
@@ -665,6 +698,146 @@
                 "x-operationWeight": "200"
             }
         },
+        "/iam/SSO/google/connect": {
+            "post": {
+                "operationId": "connectGoogleSSOConnection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GoogleConnectRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessToken"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "tags": [
+                    "SSO"
+                ]
+            }
+        },
+        "/iam/SSO/google/createSession": {
+            "post": {
+                "operationId": "createGoogleSSOConnection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GoogleCreateSessionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GoogleCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GoogleCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GoogleCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GoogleCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GoogleCreateSessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "tags": [
+                    "SSO"
+                ]
+            }
+        },
         "/iam/SSO/kaspersky/connect": {
             "post": {
                 "operationId": "connectKLSSOConnection",
@@ -672,7 +845,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/SSOConnectRequest"
+                                "$ref": "#/components/schemas/KLConnectRequest"
                             }
                         }
                     },
@@ -742,7 +915,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/SSOCreateSessionRequest"
+                                "$ref": "#/components/schemas/KLCreateSessionRequest"
                             }
                         }
                     },
@@ -753,7 +926,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                    "$ref": "#/components/schemas/KLCreateSessionResponse"
                                 }
                             }
                         },
@@ -763,7 +936,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                    "$ref": "#/components/schemas/KLCreateSessionResponse"
                                 }
                             }
                         },
@@ -773,7 +946,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                    "$ref": "#/components/schemas/KLCreateSessionResponse"
                                 }
                             }
                         },
@@ -783,7 +956,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                    "$ref": "#/components/schemas/KLCreateSessionResponse"
                                 }
                             }
                         },
@@ -793,7 +966,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SSOCreateSessionResponse"
+                                    "$ref": "#/components/schemas/KLCreateSessionResponse"
                                 }
                             }
                         },
@@ -1423,6 +1596,7 @@
         },
         "/iam/oauth2/tokens": {
             "post": {
+                "deprecated": true,
                 "description": "Create or refresh a JWT token.",
                 "operationId": "createGoogleUserTokenWithBody",
                 "parameters": [
