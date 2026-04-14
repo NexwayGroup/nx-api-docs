@@ -24,11 +24,21 @@
             },
             "Consent": {
                 "properties": {
+                    "abandonedCartConsentChangeDate": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "brand": {
                         "type": "string"
                     },
                     "consentStatus": {
                         "$ref": "#/components/schemas/ConsentData"
+                    },
+                    "consentsHistory": {
+                        "items": {
+                            "$ref": "#/components/schemas/ConsentHistory"
+                        },
+                        "type": "array"
                     },
                     "createDate": {
                         "format": "date-time",
@@ -57,6 +67,10 @@
                     },
                     "lastUpdateReason": {
                         "type": "string"
+                    },
+                    "newsLetterConsentChangeDate": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "originalId": {
                         "type": "string",
@@ -106,6 +120,25 @@
                     },
                     "newsletterOptout": {
                         "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "ConsentHistory": {
+                "properties": {
+                    "actions": {
+                        "additionalProperties": {
+                            "type": "boolean"
+                        },
+                        "type": "object"
+                    },
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "legalActionTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
