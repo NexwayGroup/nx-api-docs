@@ -2043,9 +2043,15 @@
                         "type": "string"
                     },
                     "lastPartialRefundDate": {
+                        "deprecated": true,
                         "description": "Date of the last partial refund",
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "lastRefundedAmount": {
+                        "description": "the last amountRefunded",
+                        "format": "double",
+                        "type": "number"
                     },
                     "lastUpdateReason": {
                         "type": "string"
@@ -2271,6 +2277,10 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "refund": {
+                        "$ref": "#/components/schemas/Refund",
+                        "description": "order refund"
+                    },
                     "registerPaymentMethodStatus": {
                         "description": "Global status for payment method registration workflow",
                         "enum": [
@@ -2446,6 +2456,7 @@
                         "type": "number"
                     },
                     "totalRefundedAmount": {
+                        "deprecated": true,
                         "description": "Total amount refunded",
                         "example": 10.0,
                         "format": "double",
