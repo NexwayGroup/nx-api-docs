@@ -4223,6 +4223,26 @@
                         "example": "AVALARA",
                         "type": "string"
                     },
+                    "receiptStatus": {
+                        "description": "Receipt creation status",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
+                        ],
+                        "example": "COMPLETED",
+                        "type": "string"
+                    },
                     "refundStatus": {
                         "deprecated": true,
                         "description": "Refund declaration status",
