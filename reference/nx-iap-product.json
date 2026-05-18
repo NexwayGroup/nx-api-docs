@@ -1309,6 +1309,12 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "variantCount": {
+                        "description": "Number of variant products for this product (when requested)",
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "variantOf": {
                         "type": "string",
                         "writeOnly": true
@@ -1681,6 +1687,12 @@
                         "type": "string",
                         "writeOnly": true
                     },
+                    "variantCount": {
+                        "description": "Number of variant products for this product (when requested)",
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
+                    },
                     "variantOf": {
                         "type": "string",
                         "writeOnly": true
@@ -1961,6 +1973,12 @@
                     "var": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "variantCount": {
+                        "description": "Number of variant products for this product (when requested)",
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "variantOf": {
                         "type": "string",
@@ -2336,6 +2354,12 @@
                             "$ref": "#/components/schemas/Variable"
                         },
                         "type": "array"
+                    },
+                    "variantCount": {
+                        "description": "Number of variant products for this product (when requested)",
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
                     },
                     "variantOf": {
                         "description": "Variant of",
@@ -3013,6 +3037,15 @@
                         "schema": {
                             "format": "date-time",
                             "type": "string"
+                        }
+                    },
+                    {
+                        "description": "When true, include `variantCount` in the response instead of embedding variant children where applicable",
+                        "example": true,
+                        "in": "query",
+                        "name": "countVariant",
+                        "schema": {
+                            "type": "boolean"
                         }
                     }
                 ],
@@ -5944,6 +5977,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "description": "When true, include `variantCount` in the response",
+                        "example": true,
+                        "in": "query",
+                        "name": "countVariant",
+                        "schema": {
+                            "type": "boolean"
+                        }
                     }
                 ],
                 "responses": {
@@ -6473,6 +6515,15 @@
                         "required": true,
                         "schema": {
                             "type": "object"
+                        }
+                    },
+                    {
+                        "description": "When true, do not embed `variationList` and instead return `variantCount` for each parent product",
+                        "example": true,
+                        "in": "query",
+                        "name": "countVariant",
+                        "schema": {
+                            "type": "boolean"
                         }
                     }
                 ],
