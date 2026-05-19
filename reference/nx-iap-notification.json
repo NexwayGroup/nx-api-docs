@@ -1,6 +1,319 @@
 {
     "components": {
         "schemas": {
+            "AbandonedCartNotification": {
+                "properties": {
+                    "checkoutUrl": {
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "newsletterOptin": {
+                        "type": "boolean"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "storeHostname": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "userEmailAddress": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "BaseNotificationContent": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Company": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "vatNumber": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Consent": {
+                "properties": {
+                    "consents": {
+                        "items": {
+                            "$ref": "#/components/schemas/ConsentItem"
+                        },
+                        "type": "array"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "userEmail": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ConsentFlags": {
+                "description": "Consent flags",
+                "properties": {
+                    "newsletterOptin": {
+                        "description": "Marketing newsletter consent indicator",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "newsletterOptin"
+                ]
+            },
+            "ConsentItem": {
+                "properties": {
+                    "lastLegalActionTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ConsentNotification": {
+                "properties": {
+                    "consent": {
+                        "$ref": "#/components/schemas/Consent"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Consumer": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Customer": {
+                "description": "Customer (reseller) information",
+                "properties": {
+                    "customerAccount": {
+                        "description": "Realm/account name",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Customer identifier",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "serveur": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "customerAccount",
+                    "id"
+                ]
+            },
+            "DiscountApplied": {
+                "description": "All discounts applied to this item",
+                "properties": {
+                    "discountAmount": {
+                        "description": "Discount value",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountCode": {
+                        "description": "Customer-facing discount code",
+                        "type": "string"
+                    },
+                    "discountId": {
+                        "description": "Monetize discount identifier",
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "description": "Discount percentage, e.g. 0.2 for 20%",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "discountAmount",
+                    "discountId"
+                ]
+            },
+            "DiscountPlan": {
+                "description": "Discount plan applied to this line item",
+                "properties": {
+                    "discountStep": {
+                        "description": "Step in the discount plan",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "description": "Whether to ignore discount on the initial purchase",
+                        "type": "boolean"
+                    },
+                    "tag": {
+                        "description": "Plan designation tag",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "discountStep",
+                    "tag"
+                ]
+            },
+            "EndUser": {
+                "description": "Buyer information",
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "description": "Company name",
+                        "type": "string"
+                    },
+                    "companyRegistrationNumber": {
+                        "description": "Company registration number",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Alpha-3 country code",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Buyer email address",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Buyer identifier",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Alpha-2 language code",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "type": "string"
+                    },
+                    "street": {
+                        "description": "Street address",
+                        "type": "string"
+                    },
+                    "zipcode": {
+                        "description": "Postal code",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "country",
+                    "email",
+                    "id"
+                ]
+            },
             "EventMatcher": {
                 "description": "Notification definition's eventMatcher",
                 "properties": {
@@ -108,6 +421,205 @@
                     }
                 },
                 "type": "object"
+            },
+            "LastPaymentError": {
+                "description": "Error details if payment failed",
+                "properties": {
+                    "code": {
+                        "description": "Error code",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "Error description",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code"
+                ]
+            },
+            "LifeCycle": {
+                "description": "Subscription lifecycle data",
+                "properties": {
+                    "anniversaryDate": {
+                        "description": "Renewal/expiration date in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "generation": {
+                        "description": "Renewal generation (term number)",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "description": "Back-office subscription identifier (deprecated)",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Status: Active, Suspended, Dunning, Canceled, Expired",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "anniversaryDate",
+                    "generation",
+                    "status"
+                ]
+            },
+            "LineItem": {
+                "description": "Order line items",
+                "properties": {
+                    "VATRate": {
+                        "description": "Applied sales tax rate",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "activationCode": {
+                        "description": "Product activation code",
+                        "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
+                    },
+                    "discountRate": {
+                        "description": "Discount rate applied",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "expirationDate": {
+                        "description": "Product expiration timestamp in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "externalContext": {
+                        "description": "External context data",
+                        "type": "string"
+                    },
+                    "fulfillmentId": {
+                        "description": "Fulfillment process identifier",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Unique line item identifier",
+                        "type": "string"
+                    },
+                    "isUpsell": {
+                        "description": "Upsell status marker",
+                        "type": "boolean"
+                    },
+                    "lineItemId": {
+                        "description": "Line item identifier",
+                        "type": "string"
+                    },
+                    "pricing": {
+                        "$ref": "#/components/schemas/Pricing"
+                    },
+                    "priority": {
+                        "description": "Line item priority",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "publisherFulfillmentId": {
+                        "description": "Publisher fulfillment identifier",
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "description": "Product quantity",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "subItems": {
+                        "description": "Nested line items",
+                        "items": {
+                            "$ref": "#/components/schemas/SubItem"
+                        },
+                        "type": "array"
+                    },
+                    "subscription": {
+                        "$ref": "#/components/schemas/Subscription"
+                    },
+                    "subscriptionId": {
+                        "description": "Associated subscription identifier",
+                        "type": "string"
+                    },
+                    "trial": {
+                        "description": "Trial status indicator",
+                        "type": "boolean"
+                    },
+                    "trialDuration": {
+                        "description": "Trial duration in days",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "unitPriceExclVAT": {
+                        "description": "Unit price excluding tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "unitPriceIncVAT": {
+                        "description": "Unit price including tax",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "VATRate",
+                    "externalContext",
+                    "id",
+                    "lineItemId",
+                    "pricing",
+                    "product",
+                    "quantity",
+                    "trial",
+                    "unitPriceExclVAT",
+                    "unitPriceIncVAT"
+                ]
+            },
+            "MetaRole": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MetaRoleNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "metaRole": {
+                        "$ref": "#/components/schemas/MetaRole"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
             },
             "NormalizeException": {
                 "properties": {
@@ -365,7 +877,9 @@
                             "CONSENT_CREATED",
                             "CONSENT_UPDATED",
                             "DISCOUNT_PLAN_UPDATED",
-                            "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED"
+                            "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED",
+                            "TAX_RATE",
+                            "SCHEDULED_TAX_RATE"
                         ],
                         "example": "ORDER",
                         "type": "string"
@@ -428,6 +942,527 @@
                     }
                 },
                 "type": "object"
+            },
+            "Order": {
+                "description": "Primary order data container",
+                "properties": {
+                    "cancellationDate": {
+                        "description": "Cancellation timestamp in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "cancellationReason": {
+                        "description": "Reason for order cancellation",
+                        "type": "string"
+                    },
+                    "cartId": {
+                        "description": "Associated cart identifier",
+                        "type": "string"
+                    },
+                    "consentFlags": {
+                        "$ref": "#/components/schemas/ConsentFlags"
+                    },
+                    "creationDate": {
+                        "description": "Order creation date in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "currency": {
+                        "description": "Currency code, e.g. EUR, USD",
+                        "type": "string"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Customer"
+                    },
+                    "decodedExternalContext": {
+                        "description": "Decoded cart parameters",
+                        "type": "object"
+                    },
+                    "externalContext": {
+                        "description": "Base64 encoded string of cart parameters",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Order identifier",
+                        "type": "string"
+                    },
+                    "items": {
+                        "description": "Order line items",
+                        "items": {
+                            "$ref": "#/components/schemas/LineItem"
+                        },
+                        "type": "array"
+                    },
+                    "offerSubSource": {
+                        "description": "Sub-source designation, e.g. SUSPEND, RESUME",
+                        "type": "string"
+                    },
+                    "payment": {
+                        "$ref": "#/components/schemas/Payment"
+                    },
+                    "payments": {
+                        "description": "All payment attempts",
+                        "items": {
+                            "$ref": "#/components/schemas/Payment"
+                        },
+                        "type": "array"
+                    },
+                    "refund": {
+                        "$ref": "#/components/schemas/Refund"
+                    },
+                    "salesFlag": {
+                        "description": "Sales flags",
+                        "items": {
+                            "description": "Sales flags",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "source": {
+                        "description": "Order origin: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Current order status",
+                        "type": "string"
+                    },
+                    "store": {
+                        "$ref": "#/components/schemas/Store"
+                    },
+                    "totalPriceExclVAT": {
+                        "description": "Total price excluding sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "totalPriceIncVAT": {
+                        "description": "Total price including sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/EndUser"
+                    }
+                },
+                "required": [
+                    "consentFlags",
+                    "creationDate",
+                    "currency",
+                    "customer",
+                    "id",
+                    "items",
+                    "source",
+                    "status",
+                    "store",
+                    "totalPriceExclVAT",
+                    "totalPriceIncVAT",
+                    "user"
+                ]
+            },
+            "OrderNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "order": {
+                        "$ref": "#/components/schemas/Order"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "order",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Package": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PackageThresholdReachedNotification": {
+                "properties": {
+                    "customerName": {
+                        "type": "string"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "licenseKeyPackage": {
+                        "$ref": "#/components/schemas/Package"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "threshold": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Payment": {
+                "description": "All payment attempts",
+                "properties": {
+                    "amount": {
+                        "description": "Payment amount",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "automaticBilling": {
+                        "description": "Whether the payment was automatically charged",
+                        "type": "boolean"
+                    },
+                    "externalContext": {
+                        "description": "External context data",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Payment identifier",
+                        "type": "string"
+                    },
+                    "lastError": {
+                        "$ref": "#/components/schemas/LastPaymentError"
+                    },
+                    "method": {
+                        "description": "Payment method, e.g. visa, mastercard, sepa, pix, boleto",
+                        "type": "string"
+                    },
+                    "silentOnFailure": {
+                        "description": "Whether to suppress failure notifications",
+                        "type": "boolean"
+                    },
+                    "status": {
+                        "description": "Payment status: COMPLETED, FAILED",
+                        "type": "string"
+                    },
+                    "transitionPaymentDate": {
+                        "description": "Transaction timestamp in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "automaticBilling",
+                    "id",
+                    "status",
+                    "transitionPaymentDate"
+                ]
+            },
+            "PaymentMethod": {
+                "description": "List of added payment instruments",
+                "properties": {
+                    "_id": {
+                        "description": "Unique payment method identifier",
+                        "type": "string"
+                    },
+                    "expirationDate": {
+                        "description": "Expiration date",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Payment method identifier",
+                        "type": "string"
+                    },
+                    "paymentMethodType": {
+                        "description": "Broad classification, e.g. CreditCard",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Activation state, e.g. ACTIVATED",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Specific variant, e.g. visa, mastercard",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "_id",
+                    "id",
+                    "paymentMethodType",
+                    "status",
+                    "type"
+                ]
+            },
+            "PaymentMethodAddedNotification": {
+                "properties": {
+                    "addedPaymentMethods": {
+                        "description": "List of added payment instruments",
+                        "items": {
+                            "$ref": "#/components/schemas/PaymentMethod"
+                        },
+                        "type": "array"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "addedPaymentMethods",
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "PaymentMethodDeletedNotification": {
+                "properties": {
+                    "deletedPaymentMethod": {
+                        "description": "List of deleted payment instruments",
+                        "items": {
+                            "$ref": "#/components/schemas/PaymentMethod"
+                        },
+                        "type": "array"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deletedPaymentMethod",
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "PaymentMethodReplayabilityChangedNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "paymentMethod": {
+                        "$ref": "#/components/schemas/PaymentMethod"
+                    },
+                    "paymentMethodNonReplayable": {
+                        "type": "boolean"
+                    },
+                    "reasonDescription": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "warningReason": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "PaymentMethodUpdatedNotification": {
+                "properties": {
+                    "endUser": {
+                        "$ref": "#/components/schemas/EndUser"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Pricing": {
+                "description": "Pricing breakdown",
+                "properties": {
+                    "VATRate": {
+                        "description": "Tax rate percentage",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "allDiscountsApplied": {
+                        "description": "All discounts applied to this item",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountApplied"
+                        },
+                        "type": "array"
+                    },
+                    "cumulatedDiscountRate": {
+                        "description": "Total cumulated discount percentage",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "unitPriceExclVAT": {
+                        "description": "Pre-tax unit cost",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "unitPriceIncVAT": {
+                        "description": "Post-tax unit cost",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmount": {
+                        "description": "Tax amount",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "VATRate",
+                    "unitPriceExclVAT",
+                    "unitPriceIncVAT"
+                ]
+            },
+            "Privilege": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "serviceName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PrivilegeNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "privilege": {
+                        "$ref": "#/components/schemas/Privilege"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Product": {
+                "properties": {
+                    "name": {
+                        "description": "Product name",
+                        "type": "string"
+                    },
+                    "publisherReference": {
+                        "description": "Publisher's internal product identifier",
+                        "type": "string"
+                    },
+                    "uniqueReference": {
+                        "description": "Unique product identifier on the Nexway Monetize platform",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "uniqueReference"
+                ]
             },
             "Receiver": {
                 "properties": {
@@ -513,6 +1548,129 @@
                     "status"
                 ],
                 "type": "object"
+            },
+            "Refund": {
+                "description": "Refund details",
+                "properties": {
+                    "lineItems": {
+                        "items": {
+                            "$ref": "#/components/schemas/RefundDetails"
+                        },
+                        "type": "array"
+                    },
+                    "totalAmountRefunded": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "RefundDetails": {
+                "properties": {
+                    "initialAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "productId": {
+                        "type": "string"
+                    },
+                    "productName": {
+                        "type": "string"
+                    },
+                    "ratio": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "refundAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "refundMethod": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ResellerNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "reseller": {
+                        "$ref": "#/components/schemas/EndUser"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "Role": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "RoleNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "role": {
+                        "$ref": "#/components/schemas/Role"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "SalesChannel": {
+                "properties": {
+                    "channel": {
+                        "type": "string"
+                    },
+                    "website_id": {
+                        "type": "string"
+                    }
+                }
             },
             "SearchResultNotification": {
                 "properties": {
@@ -604,6 +1762,217 @@
                 },
                 "type": "object"
             },
+            "SkeepersPurchaseEvent": {
+                "properties": {
+                    "consumer": {
+                        "$ref": "#/components/schemas/Consumer"
+                    },
+                    "purchase_date": {
+                        "type": "string"
+                    },
+                    "purchase_reference": {
+                        "type": "string"
+                    },
+                    "sales_channel": {
+                        "$ref": "#/components/schemas/SalesChannel"
+                    },
+                    "solicitation_parameters": {
+                        "$ref": "#/components/schemas/SolicitationParameters"
+                    }
+                }
+            },
+            "SolicitationParameters": {
+                "properties": {
+                    "delay": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "purchase_event_type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Store": {
+                "description": "Store information",
+                "properties": {
+                    "id": {
+                        "description": "Store identifier",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "SubItem": {
+                "description": "Nested line items",
+                "properties": {
+                    "activationCode": {
+                        "type": "string"
+                    },
+                    "externalContext": {
+                        "type": "string"
+                    },
+                    "fulfillmentId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/Product"
+                    },
+                    "publisherFulfillmentId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Subscription": {
+                "description": "Subscription details if applicable",
+                "properties": {
+                    "createDate": {
+                        "description": "Creation date in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan"
+                    },
+                    "enduserId": {
+                        "description": "End-user UUID",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Subscription UUID",
+                        "type": "string"
+                    },
+                    "lifecycle": {
+                        "$ref": "#/components/schemas/LifeCycle"
+                    },
+                    "modelId": {
+                        "description": "Model identifier, e.g. NEXWAY_1Y",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Product name",
+                        "type": "string"
+                    },
+                    "paymentMethodIsNoLongerReplayable": {
+                        "description": "Whether the payment method is no longer replayable",
+                        "type": "boolean"
+                    },
+                    "paymentMethodIsNoLongerReplayableReason": {
+                        "description": "Reason why the payment method is no longer replayable",
+                        "type": "string"
+                    },
+                    "products": {
+                        "description": "Associated products",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        },
+                        "type": "array"
+                    },
+                    "source": {
+                        "description": "Subscription source",
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "description": "Store UUID",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "createDate",
+                    "enduserId",
+                    "id",
+                    "lifecycle",
+                    "modelId",
+                    "products",
+                    "storeId"
+                ]
+            },
+            "SubscriptionNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "subscription": {
+                        "$ref": "#/components/schemas/Subscription"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "subscription",
+                    "type"
+                ]
+            },
+            "TaxRate": {
+                "properties": {
+                    "taxCategory": {
+                        "type": "string"
+                    },
+                    "taxName": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "TaxRateNotification": {
+                "properties": {
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    },
+                    "vatRate": {
+                        "$ref": "#/components/schemas/VatRate"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "TextNotification": {
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            },
             "TlsConfig": {
                 "properties": {
                     "clientCertificates": {
@@ -643,6 +2012,32 @@
                     "tlsAuthMode"
                 ],
                 "type": "object"
+            },
+            "VatRate": {
+                "properties": {
+                    "failed": {
+                        "type": "boolean"
+                    },
+                    "iso2CountryCode": {
+                        "type": "string"
+                    },
+                    "newTaxRates": {
+                        "items": {
+                            "$ref": "#/components/schemas/TaxRate"
+                        },
+                        "type": "array"
+                    },
+                    "operation": {
+                        "type": "string"
+                    },
+                    "regionCode": {
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -1823,285 +3218,459 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Tue May 12 13:33:33 GMT 2026",
+        "generatedAt": "Tue May 19 19:03:55 GMT 2026",
         "notificationDefinitions": {
-            "BenjTest1": {
-                "content": "LICENSE_KEY_PACKAGE",
-                "subject": "licenseKeyPackage",
-                "type": "thresholdReached"
-            },
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
+                "payloadSchema": "AbandonedCartNotification",
+                "payloadSchemaRef": "#/components/schemas/AbandonedCartNotification",
                 "subject": "cart",
                 "type": "abandoned"
             },
             "Check payment method replayability on updated subscription": {
                 "content": "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED",
+                "payloadSchema": "PaymentMethodReplayabilityChangedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodReplayabilityChangedNotification",
                 "subject": "subscription",
                 "type": "subscriptionPaymentMethodReplayabilityChanged"
             },
             "Consent Created": {
                 "content": "CONSENT_CREATED",
+                "payloadSchema": "ConsentNotification",
+                "payloadSchemaRef": "#/components/schemas/ConsentNotification",
                 "subject": "consent",
                 "type": "created"
             },
             "Consent Updated": {
                 "content": "CONSENT_UPDATED",
+                "payloadSchema": "ConsentNotification",
+                "payloadSchemaRef": "#/components/schemas/ConsentNotification",
                 "subject": "consent",
                 "type": "updated"
             },
             "Credit Card Added": {
                 "content": "PAYMENT_METHOD_ADDED",
+                "payloadSchema": "PaymentMethodAddedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
             "EndUser Deleted": {
                 "content": "END_USER_DELETED",
+                "payloadSchema": "BaseNotificationContent",
+                "payloadSchemaRef": "#/components/schemas/BaseNotificationContent",
                 "subject": "endUser",
                 "type": "deleted"
             },
             "Identity created": {
                 "content": "IDENTITY",
+                "payloadSchema": "TextNotification",
+                "payloadSchemaRef": "#/components/schemas/TextNotification",
                 "subject": "identity",
                 "type": "created"
             },
             "Identity deleted": {
                 "content": "IDENTITY",
+                "payloadSchema": "TextNotification",
+                "payloadSchemaRef": "#/components/schemas/TextNotification",
                 "subject": "identity",
                 "type": "deleted"
             },
             "Identity updated": {
                 "content": "IDENTITY",
+                "payloadSchema": "TextNotification",
+                "payloadSchemaRef": "#/components/schemas/TextNotification",
                 "subject": "identity",
                 "type": "updated"
             },
             "Offer Order Aborted": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "aborted"
             },
             "Offer Order Created": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "created"
             },
             "Offer Prebilling Started": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "prebillingStarted"
             },
             "Order Aborted": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "aborted"
             },
             "Order Canceled": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "canceled"
             },
             "Order Canceled With Content Including Subscription Data": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "canceled"
             },
             "Order Completed": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "completed"
             },
             "Order Completed With Content Including Subscription Data": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "completed"
             },
             "Order Completed With Error": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "partiallyCompleted"
             },
             "Order Created": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "created"
             },
             "Order Fulfillment Failed": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "fulfillmentFailed"
             },
             "Order Partial Completed": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "partialCompleted"
             },
             "Order Payment Failed": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "paymentFailed"
             },
             "Order Payment Refused": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "paymentRefused"
             },
             "Order payment refused with last error code": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "paymentRefusedWithLastErrorCode"
             },
             "Package Threshold Reached": {
                 "content": "LICENSE_KEY_PACKAGE",
+                "payloadSchema": "PackageThresholdReachedNotification",
+                "payloadSchemaRef": "#/components/schemas/PackageThresholdReachedNotification",
                 "subject": "licenseKeyPackage",
                 "type": "thresholdReached"
             },
             "Partial refund completed successfully": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "partialRefundCompleted"
             },
             "Partial refund completed with errors": {
                 "content": "ORDER",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "partialRefundFailed"
             },
             "Payment Method Deleted": {
                 "content": "PAYMENT_METHOD_ADDED",
+                "payloadSchema": "PaymentMethodAddedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
             "Permission - privilege created": {
                 "content": "PRIVILEGE",
+                "payloadSchema": "PrivilegeNotification",
+                "payloadSchemaRef": "#/components/schemas/PrivilegeNotification",
                 "subject": "privilege",
                 "type": "created"
             },
             "Permission - privilege deleted": {
                 "content": "PRIVILEGE",
+                "payloadSchema": "PrivilegeNotification",
+                "payloadSchemaRef": "#/components/schemas/PrivilegeNotification",
                 "subject": "privilege",
                 "type": "deleted"
             },
             "Permission - privilege updated": {
                 "content": "PRIVILEGE",
+                "payloadSchema": "PrivilegeNotification",
+                "payloadSchemaRef": "#/components/schemas/PrivilegeNotification",
                 "subject": "privilege",
                 "type": "updated"
             },
             "Permission - profile created": {
                 "content": "META_ROLE",
+                "payloadSchema": "MetaRoleNotification",
+                "payloadSchemaRef": "#/components/schemas/MetaRoleNotification",
                 "subject": "metarole",
                 "type": "created"
             },
             "Permission - profile deleted": {
                 "content": "META_ROLE",
+                "payloadSchema": "MetaRoleNotification",
+                "payloadSchemaRef": "#/components/schemas/MetaRoleNotification",
                 "subject": "metarole",
                 "type": "deleted"
             },
             "Permission - profile updated": {
                 "content": "META_ROLE",
+                "payloadSchema": "MetaRoleNotification",
+                "payloadSchemaRef": "#/components/schemas/MetaRoleNotification",
                 "subject": "metarole",
                 "type": "updated"
             },
             "Permission - role created": {
                 "content": "ROLE",
+                "payloadSchema": "RoleNotification",
+                "payloadSchemaRef": "#/components/schemas/RoleNotification",
                 "subject": "role",
                 "type": "created"
             },
             "Permission - role deleted": {
                 "content": "ROLE",
+                "payloadSchema": "RoleNotification",
+                "payloadSchemaRef": "#/components/schemas/RoleNotification",
                 "subject": "role",
                 "type": "deleted"
             },
             "Permission - role updated": {
                 "content": "ROLE",
+                "payloadSchema": "RoleNotification",
+                "payloadSchemaRef": "#/components/schemas/RoleNotification",
                 "subject": "role",
                 "type": "updated"
             },
             "Prebilling Order Created": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "prebillingStarted"
             },
             "Recurring Payment Method Added": {
                 "content": "PAYMENT_METHOD_ADDED",
+                "payloadSchema": "PaymentMethodAddedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
             "Reseller Request Approved": {
                 "content": "RESELLER",
+                "payloadSchema": "ResellerNotification",
+                "payloadSchemaRef": "#/components/schemas/ResellerNotification",
                 "subject": "endUser",
                 "type": "completed"
             },
             "Reseller Request Declined": {
                 "content": "RESELLER",
+                "payloadSchema": "ResellerNotification",
+                "payloadSchemaRef": "#/components/schemas/ResellerNotification",
                 "subject": "endUser",
                 "type": "declined"
             },
             "Reseller Request OnBoarding": {
                 "content": "RESELLER",
+                "payloadSchema": "ResellerNotification",
+                "payloadSchemaRef": "#/components/schemas/ResellerNotification",
                 "subject": "endUser",
                 "type": "onBoardingRequest"
             },
             "SEPA Payment Method Added": {
                 "content": "PAYMENT_METHOD_ADDED",
+                "payloadSchema": "PaymentMethodAddedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
+            "Scheduled Tax Rate Change Created": {
+                "content": "SCHEDULED_TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "scheduled_tax_rate"
+            },
+            "Scheduled Tax Rate Change Failed": {
+                "content": "SCHEDULED_TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "scheduled_tax_rate"
+            },
+            "Scheduled Tax Rate Change Updated": {
+                "content": "SCHEDULED_TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "scheduled_tax_rate"
+            },
             "Skeepers Purchase Event": {
                 "content": "SKEEPERS_PURCHASE_EVENT",
+                "payloadSchema": "SkeepersPurchaseEvent",
+                "payloadSchemaRef": "#/components/schemas/SkeepersPurchaseEvent",
                 "subject": "order",
                 "type": "completed"
             },
             "Subscription Canceled": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "canceled"
             },
             "Subscription Discount Plan Updated": {
                 "content": "DISCOUNT_PLAN_UPDATED",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "discountPlanUpdated"
             },
             "Subscription Expiration Date Updated": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "expirationDateUpdated"
             },
             "Subscription Expired": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "expired"
             },
             "Subscription Order Renew Completed": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "renewCompleted"
             },
             "Subscription Order Renew Completed (offer)": {
                 "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/OrderNotification",
                 "subject": "order",
                 "type": "renewCompleted"
             },
             "Subscription Payment Method Updated": {
                 "content": "PAYMENT_METHOD_UPDATED",
+                "payloadSchema": "PaymentMethodUpdatedNotification",
+                "payloadSchemaRef": "#/components/schemas/PaymentMethodUpdatedNotification",
                 "subject": "endUser",
                 "type": "subscriptionPaymentMethodUpdated"
             },
             "Subscription Reactivated": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "reactivated"
             },
             "Subscription Suspended": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "suspended"
             },
             "Subscription Unpaid": {
                 "content": "SUBSCRIPTION",
+                "payloadSchema": "SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/SubscriptionNotification",
                 "subject": "subscription",
                 "type": "unpaid"
+            },
+            "Tax Rate Created": {
+                "content": "TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "tax_rate"
+            },
+            "Tax Rate Deleted": {
+                "content": "TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "tax_rate"
+            },
+            "Tax Rate Failed": {
+                "content": "TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "tax_rate"
+            },
+            "Tax Rate Updated": {
+                "content": "TAX_RATE",
+                "payloadSchema": "TaxRateNotification",
+                "payloadSchemaRef": "#/components/schemas/TaxRateNotification",
+                "subject": "tax-management",
+                "type": "tax_rate"
             }
         },
-        "totalDefinitions": 55,
-        "uniqueContents": 55
+        "payloadSchemas": {
+            "ABANDONED_CART": "#/components/schemas/AbandonedCartNotification",
+            "CONSENT_CREATED": "#/components/schemas/ConsentNotification",
+            "CONSENT_UPDATED": "#/components/schemas/ConsentNotification",
+            "DISCOUNT_PLAN_UPDATED": "#/components/schemas/SubscriptionNotification",
+            "END_USER_DELETED": "#/components/schemas/BaseNotificationContent",
+            "IDENTITY": "#/components/schemas/TextNotification",
+            "LICENSE_KEY_PACKAGE": "#/components/schemas/PackageThresholdReachedNotification",
+            "META_ROLE": "#/components/schemas/MetaRoleNotification",
+            "ORDER": "#/components/schemas/OrderNotification",
+            "ORDER_AND_SUBSCRIPTION": "#/components/schemas/OrderNotification",
+            "PAYMENT_METHOD_ADDED": "#/components/schemas/PaymentMethodAddedNotification",
+            "PAYMENT_METHOD_UPDATED": "#/components/schemas/PaymentMethodUpdatedNotification",
+            "PRIVILEGE": "#/components/schemas/PrivilegeNotification",
+            "RESELLER": "#/components/schemas/ResellerNotification",
+            "ROLE": "#/components/schemas/RoleNotification",
+            "SCHEDULED_TAX_RATE": "#/components/schemas/TaxRateNotification",
+            "SKEEPERS_PURCHASE_EVENT": "#/components/schemas/SkeepersPurchaseEvent",
+            "SUBSCRIPTION": "#/components/schemas/SubscriptionNotification",
+            "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED": "#/components/schemas/PaymentMethodReplayabilityChangedNotification",
+            "TAX_RATE": "#/components/schemas/TaxRateNotification"
+        },
+        "totalDefinitions": 61,
+        "uniqueContents": 61
     }
 }
