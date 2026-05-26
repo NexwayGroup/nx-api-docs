@@ -1,1839 +1,2214 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "Stores",
-    "version": "v0",
-    "description": "API to manage stores"
-  },
-  "servers": [
-    {
-      "url": "http://localhost:8080",
-      "description": "Generated server url"
-    }
-  ],
-  "paths": {
-    "/stores": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Get items",
-        "operationId": "getItems",
-        "parameters": [
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
+    "components": {
+        "schemas": {
+            "AppleDomainAssociation": {
+                "properties": {
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "storeId": {
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CartFieldsValidation": {
+                "properties": {
+                    "errorMessage": {
+                        "type": "string"
+                    },
+                    "jsonPath": {
+                        "type": "string"
+                    },
+                    "level": {
+                        "enum": [
+                            "ERROR",
+                            "WARNING"
+                        ],
+                        "type": "string"
+                    },
+                    "mandatoryFor": {
+                        "enum": [
+                            "B2B",
+                            "B2B_B2C",
+                            "B2C"
+                        ],
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "B2B",
+                            "B2B_B2C",
+                            "B2C"
+                        ],
+                        "type": "string"
+                    },
+                    "validators": {
+                        "items": {
+                            "$ref": "#/components/schemas/Validator"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "jsonPath",
+                    "mandatoryFor",
+                    "name",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "CurrencyRestriction": {
+                "properties": {
+                    "max": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "min": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "restrictionByResellerId": {
+                        "items": {
+                            "$ref": "#/components/schemas/ResellerRestriction"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "Design": {
+                "properties": {
+                    "dpTheme": {
+                        "type": "string"
+                    },
+                    "dpThemeRef": {
+                        "$ref": "#/components/schemas/DesignRef",
+                        "description": "References of the DP theme to use in this context"
+                    },
+                    "font": {
+                        "type": "string"
+                    },
+                    "fontRef": {
+                        "$ref": "#/components/schemas/DesignRef",
+                        "description": "References of the font to use in this context"
+                    },
+                    "i18nRef": {
+                        "$ref": "#/components/schemas/I18nDesignRef",
+                        "description": "References of the i18n to use in this context"
+                    },
+                    "layout": {
+                        "type": "string"
+                    },
+                    "layoutRef": {
+                        "$ref": "#/components/schemas/DesignRef",
+                        "description": "References of the layout to use in this context"
+                    },
+                    "theme": {
+                        "type": "string"
+                    },
+                    "themeRef": {
+                        "$ref": "#/components/schemas/DesignRef",
+                        "description": "References of the theme to use in this context"
+                    }
+                },
+                "type": "object"
+            },
+            "DesignRef": {
+                "properties": {
+                    "customerId": {
+                        "description": "customerId of the design to use in this context",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "name of the design to use in this context",
+                        "example": "My design",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Designs": {
+                "properties": {
+                    "checkout": {
+                        "$ref": "#/components/schemas/Design",
+                        "description": "Design of store checkout UI"
+                    },
+                    "endUserPortal": {
+                        "$ref": "#/components/schemas/Design",
+                        "description": "Design of store end-user portal UI"
+                    },
+                    "paymentComponent": {
+                        "$ref": "#/components/schemas/PaymentComponent",
+                        "description": "Design of payment component UI"
+                    },
+                    "resellerCheckout": {
+                        "$ref": "#/components/schemas/Design",
+                        "description": "Design of store checkout include in reseller portal UI"
+                    }
+                },
+                "type": "object"
+            },
+            "ExceptionDetail": {
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "I18nDesignRef": {
+                "properties": {
+                    "customerId": {
+                        "description": "customerId of the design to use in this context",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "name of the design to use in this context",
+                        "example": "My design",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NormalizeException": {
+                "properties": {
+                    "details": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        },
+                        "type": "array"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PaymentComponent": {
+                "properties": {
+                    "rankedPaymentTabsByCountriesList": {
+                        "description": "Ranked list of payment tabs by country",
+                        "items": {
+                            "$ref": "#/components/schemas/RankedPaymentTabsByCountries"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "PublicStore": {
+                "properties": {
+                    "additionalPaymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "allowInstallments": {
+                        "type": "boolean"
+                    },
+                    "allowMultipleDiscounts": {
+                        "type": "boolean"
+                    },
+                    "allowOrderDetailsOnCheckoutConfirmation": {
+                        "type": "boolean"
+                    },
+                    "allowSubscriptionUpgrade": {
+                        "type": "boolean"
+                    },
+                    "bannerInvoice": {
+                        "type": "string"
+                    },
+                    "bannerOrderConfEmail": {
+                        "type": "string"
+                    },
+                    "baseProduct": {
+                        "type": "string"
+                    },
+                    "blackListedCountries": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "blackListedPaymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "blacklistedPaymentMethodsByLayout": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "type": "object"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "defaultLocale": {
+                        "type": "string"
+                    },
+                    "designs": {
+                        "$ref": "#/components/schemas/Designs"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "eligibleEndUserTypes": {
+                        "items": {
+                            "enum": [
+                                "RESELLER_AUTHENTICATION_REQUIRED",
+                                "BUYER_AUTHENTICATION_REQUIRED",
+                                "AUTHENTICATION_NOT_REQUIRED"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "externalContextAlias": {
+                        "type": "string"
+                    },
+                    "externalContextGenerationParams": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "fallbackCartCountry": {
+                        "type": "string"
+                    },
+                    "forceGeoipLocalization": {
+                        "type": "boolean"
+                    },
+                    "forcedPaymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gtmId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "installmentOptions": {
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "localizedPaymentDescriptors": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "localizedZendeskGuideUrls": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "logoFavicon": {
+                        "type": "string"
+                    },
+                    "logoStore": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "nexwayGtmId": {
+                        "type": "string"
+                    },
+                    "promoteOneClickPayment": {
+                        "type": "boolean"
+                    },
+                    "recipientCodeMandatory": {
+                        "type": "boolean"
+                    },
+                    "saleLocales": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "sortedPaymentMethodByFilters": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortedPaymentMethodsByFilters"
+                        },
+                        "type": "array"
+                    },
+                    "status": {
+                        "enum": [
+                            "ENABLED",
+                            "DISABLED"
+                        ],
+                        "type": "string"
+                    },
+                    "storeWebsite": {
+                        "type": "string"
+                    },
+                    "thankYouDesc": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "RankedPaymentTabsByCountries": {
+                "properties": {
+                    "countries": {
+                        "description": "Set of Countries",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "customerType": {
+                        "description": "Customer type",
+                        "enum": [
+                            "PERSONAL",
+                            "COMPANY",
+                            "COMPANY_PERSONAL"
+                        ],
+                        "example": "PERSONAL",
+                        "type": "string"
+                    },
+                    "rankedPaymentTabs": {
+                        "description": "Ranked list of payment tabs",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "ResellerRestriction": {
+                "properties": {
+                    "max": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "min": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "resellerId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Route": {
+                "properties": {
+                    "fullUrl": {
+                        "type": "string"
+                    },
+                    "hostname": {
+                        "description": "Hostname",
+                        "example": "www.domain.com",
+                        "type": "string"
+                    },
+                    "pathPrefix": {
+                        "description": "Path prefix",
+                        "example": "domain",
+                        "type": "string"
+                    },
+                    "rawHostname": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "url": {
+                        "description": "Url",
+                        "example": "https://www.domain.com",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "hostname"
+                ],
+                "type": "object"
+            },
+            "SearchResultAppleDomainAssociation": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/AppleDomainAssociation"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultStore": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Store"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SortedPaymentMethodsByFilters": {
+                "properties": {
+                    "countries": {
+                        "description": "Set of Countries",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "customerTypes": {
+                        "description": "Customer type",
+                        "example": "b2b",
+                        "items": {
+                            "enum": [
+                                "b2b",
+                                "b2c",
+                                "reseller"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "layoutNames": {
+                        "description": "Set of layout's name",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "sortedPaymentTypes": {
+                        "description": "sorted list of payment tabs",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "countries",
+                    "layoutNames",
+                    "sortedPaymentTypes"
+                ],
+                "type": "object"
+            },
+            "Store": {
+                "properties": {
+                    "additionalPaymentTypes": {
+                        "description": "List of payment types authorized for this store",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "allowCartLoadingInIframe": {
+                        "description": "Indicates if the cart can be displayed into an iframe",
+                        "type": "boolean"
+                    },
+                    "allowInstallments": {
+                        "description": "Indicates if installments are allowed on this store",
+                        "type": "boolean"
+                    },
+                    "allowMultipleDiscounts": {
+                        "description": "Allow multiple discounts",
+                        "type": "boolean"
+                    },
+                    "allowOrderDetailsOnCheckoutConfirmation": {
+                        "description": "Allow order details on checkout confirmation",
+                        "type": "boolean"
+                    },
+                    "allowPasswordlessLogin": {
+                        "description": "Indicates if the store is passwordless",
+                        "type": "boolean"
+                    },
+                    "allowQuotes": {
+                        "description": "Allow quotes on this store",
+                        "type": "boolean"
+                    },
+                    "allowSubscriptionUpgrade": {
+                        "description": "Indicates if subscription upgrade is allowed on this store",
+                        "type": "boolean"
+                    },
+                    "allowedDomains": {
+                        "description": "List of domain allowed to display a cart in an iframe (cannot be empty if allowCartLoadingInIframe is true)",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "allowedMarketplaces": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "List of allowed marketplaces with associated external selling store ID",
+                        "type": "object"
+                    },
+                    "applyPriceFunctionAfterDiscountBeautifier": {
+                        "description": "Indicates if we apply price function after discount beautifier or not.",
+                        "type": "boolean"
+                    },
+                    "availableCurrenciesForCurrencyConversion": {
+                        "description": "List of available currencies for this store, used to be displayed in checkout, and used for currency conversion",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "avalaraCustomerCode": {
+                        "description": "Used to override the customerCode in avalara transaction",
+                        "type": "string"
+                    },
+                    "bannerInvoice": {
+                        "description": "Invoice banner",
+                        "example": "https://www.domain.com/bannerInvoice/image.png",
+                        "type": "string"
+                    },
+                    "bannerOrderConfEmail": {
+                        "description": "Order confirmation banner",
+                        "example": "https://www.domain.com/bannerOrderConfEmail/image.png",
+                        "type": "string"
+                    },
+                    "baseProduct": {
+                        "description": "Product ID of store",
+                        "type": "string"
+                    },
+                    "blackListedCountries": {
+                        "description": "List of countries not authorized for this store",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "blackListedPaymentTypes": {
+                        "description": "List of payment types not authorized for this store",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "blacklistedPaymentMethodsByLayout": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "description": "blacklist payment method by layout",
+                        "type": "object"
+                    },
+                    "cartFieldsValidation": {
+                        "additionalProperties": {
+                            "items": {
+                                "$ref": "#/components/schemas/CartFieldsValidation"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Cart field validation for specific stores",
+                        "example": "cartFieldsValidation",
+                        "type": "object"
+                    },
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "defaultLocale": {
+                        "description": "Store default locale",
+                        "example": "fr-FR",
+                        "type": "string"
+                    },
+                    "deprecatedHostnames": {
+                        "deprecated": true,
+                        "items": {
+                            "deprecated": true,
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "designs": {
+                        "$ref": "#/components/schemas/Designs",
+                        "description": "Designs of store UIs"
+                    },
+                    "displayName": {
+                        "description": "Display name",
+                        "example": "My displayed store name",
+                        "maxLength": 150,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "eCommercePartner": {
+                        "description": "E-Commerce Partner",
+                        "example": "AI Marche",
+                        "type": "string"
+                    },
+                    "eligibleEndUserTypes": {
+                        "description": "Eligible end-user types",
+                        "items": {
+                            "enum": [
+                                "RESELLER_AUTHENTICATION_REQUIRED",
+                                "BUYER_AUTHENTICATION_REQUIRED",
+                                "AUTHENTICATION_NOT_REQUIRED"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "emailSenderOverride": {
+                        "description": "Value to used to build email sender; for example, if set to xxx, the sender will be: noreply.xxx@nexway.com",
+                        "pattern": "^[\\w-+]+(\\.[\\w]+)*(@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$)?",
+                        "type": "string"
+                    },
+                    "externalContextAlias": {
+                        "description": "Alternative name for externalContext query param",
+                        "type": "string"
+                    },
+                    "externalContextGenerationParams": {
+                        "description": "List of query params to use to generate an externalContext (a base64Encoded string of the query params map as json string)",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "fallbackCartCountry": {
+                        "description": "Fallback cart country",
+                        "type": "string"
+                    },
+                    "forceGeoipLocalization": {
+                        "description": "Limit end-user country to GeoIP location",
+                        "type": "boolean"
+                    },
+                    "forcedPaymentTypes": {
+                        "description": "List of forced payment types for this store",
+                        "example": "sepa, paypal",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gtmId": {
+                        "description": "Google Tag Manager ID",
+                        "type": "string"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "hostnames": {
+                        "deprecated": true,
+                        "items": {
+                            "deprecated": true,
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "installmentOptions": {
+                        "description": "List of installment options (1-12)",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "layout": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "localizedPaymentDescriptors": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Payment descriptors",
+                        "type": "object"
+                    },
+                    "localizedZendeskGuideUrls": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Map of localized urls for reseller portal",
+                        "type": "object"
+                    },
+                    "logoFavicon": {
+                        "description": "Favicon logo",
+                        "example": "https://www.domain.com/logoFavicon/image.png",
+                        "type": "string"
+                    },
+                    "logoStore": {
+                        "description": "Store logo",
+                        "example": "https://www.domain.com/logo/image.png",
+                        "type": "string"
+                    },
+                    "marketplaceStore": {
+                        "description": "Indicate if the store is a market place",
+                        "type": "boolean"
+                    },
+                    "multiplePaymentsValidityDuration": {
+                        "description": "multiple payment validity duration",
+                        "format": "int64",
+                        "maximum": 90,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Store name",
+                        "example": "My store name",
+                        "maxLength": 150,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "nexwayGtmId": {
+                        "description": "Nexway Google Tag Manager ID",
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "pathPrefix": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "paymentRestrictionByPaymentTypeAndCurrency": {
+                        "additionalProperties": {
+                            "additionalProperties": {
+                                "$ref": "#/components/schemas/CurrencyRestriction"
+                            },
+                            "type": "object"
+                        },
+                        "description": "Payment restriction by currency and reseller id",
+                        "type": "object"
+                    },
+                    "promoteOneClickPayment": {
+                        "description": "Promote one-click payment",
+                        "type": "boolean"
+                    },
+                    "quoteSubscriptionValidityDuration": {
+                        "description": "quote subscription payment validity duration",
+                        "format": "int64",
+                        "maximum": 90,
+                        "type": "integer"
+                    },
+                    "quoteValidityDuration": {
+                        "description": "quote payment validity duration",
+                        "format": "int64",
+                        "maximum": 90,
+                        "type": "integer"
+                    },
+                    "recipientCodeMandatory": {
+                        "description": "Defines if the recipientCode field is mandatory or not",
+                        "type": "boolean"
+                    },
+                    "restrictedCountries": {
+                        "description": "List of countries restricted for this store",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "retryPaymentValidityDuration": {
+                        "description": "Retry payment validity duration",
+                        "format": "int64",
+                        "maximum": 90,
+                        "type": "integer"
+                    },
+                    "route": {
+                        "$ref": "#/components/schemas/Route"
+                    },
+                    "routes": {
+                        "description": "List of routeUrls for accessing checkout and portal",
+                        "items": {
+                            "$ref": "#/components/schemas/Route"
+                        },
+                        "type": "array"
+                    },
+                    "saleLocale": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "saleLocales": {
+                        "description": "Locale where store is available",
+                        "example": "en-US, fr-FR",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "sendAlternativeCommunicationsForSubscriptionWithNonRecurringPayment": {
+                        "type": "boolean"
+                    },
+                    "sortedPaymentMethodsByFilters": {
+                        "description": "Sorted payment method by filter (layout, country, customer types",
+                        "items": {
+                            "$ref": "#/components/schemas/SortedPaymentMethodsByFilters"
+                        },
+                        "type": "array"
+                    },
+                    "status": {
+                        "description": "Store status",
+                        "enum": [
+                            "ENABLED",
+                            "DISABLED"
+                        ],
+                        "type": "string"
+                    },
+                    "storeWebsite": {
+                        "description": "Store website",
+                        "example": "https://www.domain.com",
+                        "type": "string"
+                    },
+                    "targetNonRecurrentPaymentMethodsForSubscriptions": {
+                        "description": "Target non-recurrent payment methods for subscriptions",
+                        "enum": [
+                            "NOBODY",
+                            "COMPANY",
+                            "EVERYBODY"
+                        ],
+                        "type": "string"
+                    },
+                    "thankYouDesc": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Thank you description",
+                        "type": "object"
+                    },
+                    "theme": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "useBlackListedCountriesForRenewal": {
+                        "description": "Define if we use the blacklisted countries for renewal for this store",
+                        "type": "boolean"
+                    },
+                    "useDiscountedPriceBeautifier": {
+                        "type": "boolean"
+                    },
+                    "useMandateValue": {
+                        "description": "Indicates if we use a mandate value for a subscription and payment request.",
+                        "type": "boolean"
+                    },
+                    "usePaymentPreAuthorization": {
+                        "description": "Defines whether we pre-authorize a future payment or make the payment directly.",
+                        "type": "boolean"
+                    },
+                    "useSenderEmailFromSubsidiary": {
+                        "description": "Define if emails sent for this store must use the sender email from the subsidiary configuration",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "defaultLocale",
+                    "displayName",
+                    "name",
+                    "routes",
+                    "saleLocales"
+                ],
+                "type": "object"
+            },
+            "Validator": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "CUSTOM",
+                            "REGEX"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultStore"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
         },
-        "x-operationWeight": "300"
-      },
-      "post": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Create an item",
-        "operationId": "createItem",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Store"
-              }
+        "securitySchemes": {
+            "Bearer": {
+                "bearerFormat": "JWT",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "type": "http"
             }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Store"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "300"
-      }
-    },
-    "/stores/{id}": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Get item",
-        "operationId": "getItem",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Store"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "200"
-      },
-      "put": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Update item",
-        "operationId": "updateItem",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Store"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Store"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "400"
-      },
-      "delete": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Delete item",
-        "operationId": "deleteItem",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "500"
-      }
-    },
-    "/stores/distinct": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Get distinct values for a given field",
-        "operationId": "distinct",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultObject"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "100"
-      }
-    },
-    "/stores/recap": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Get recap quantities for a given field",
-        "operationId": "recap",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultRecapEntry"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "150"
-      }
-    },
-    "/stores/unwind": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Search unwind for a given field",
-        "operationId": "unwind",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultDocument"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "150"
-      }
-    },
-    "/stores/public/distinct": {
-      "get": {
-        "tags": [
-          "public"
-        ],
-        "summary": "Get distinct values for a given field",
-        "operationId": "distinct_1",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultObject"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "100"
-      }
-    },
-    "/stores/public/recap": {
-      "get": {
-        "tags": [
-          "public"
-        ],
-        "summary": "Get recap quantities for a given field",
-        "operationId": "recap_1",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultRecapEntry"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "150"
-      }
-    },
-    "/stores/public/unwind": {
-      "get": {
-        "tags": [
-          "public"
-        ],
-        "summary": "Search unwind for a given field",
-        "operationId": "unwind_1",
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultDocument"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "150"
-      }
-    },
-    "/stores/public": {
-      "get": {
-        "tags": [
-          "public"
-        ],
-        "summary": "Get items",
-        "operationId": "getItems_1",
-        "parameters": [
-          {
-            "name": "pageable",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Pageable"
-            }
-          },
-          {
-            "name": "predicate",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResultStore"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "300"
-      }
-    },
-    "/stores/public/{id}": {
-      "get": {
-        "tags": [
-          "public"
-        ],
-        "summary": "Get item",
-        "operationId": "getItem_1",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Store"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failure",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NormalizeException"
-                }
-              }
-            }
-          }
-        },
-        "x-operationWeight": "200"
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Design": {
-        "type": "object",
-        "properties": {
-          "layoutRef": {
-            "$ref": "#/components/schemas/DesignRef"
-          },
-          "themeRef": {
-            "$ref": "#/components/schemas/DesignRef"
-          },
-          "fontRef": {
-            "$ref": "#/components/schemas/DesignRef"
-          },
-          "i18nRef": {
-            "$ref": "#/components/schemas/I18nDesignRef"
-          },
-          "layout": {
-            "type": "string"
-          },
-          "theme": {
-            "type": "string"
-          },
-          "font": {
-            "type": "string"
-          }
         }
-      },
-      "DesignRef": {
-        "type": "object",
-        "properties": {
-          "customerId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "Designs": {
-        "type": "object",
-        "properties": {
-          "checkout": {
-            "$ref": "#/components/schemas/Design"
-          },
-          "endUserPortal": {
-            "$ref": "#/components/schemas/Design"
-          },
-          "resellerCheckout": {
-            "$ref": "#/components/schemas/Design"
-          },
-          "paymentComponent": {
-            "$ref": "#/components/schemas/PaymentComponent"
-          }
-        }
-      },
-      "I18nDesignRef": {
-        "type": "object",
-        "properties": {
-          "customerId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "PaymentComponent": {
-        "type": "object",
-        "properties": {
-          "rankedPaymentTabsByCountriesList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RankedPaymentTabsByCountries"
+    },
+    "info": {
+        "description": "API to manage stores",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        },
+        "title": "Store",
+        "version": "1.0"
+    },
+    "openapi": "3.1.0",
+    "paths": {
+        "/stores": {
+            "get": {
+                "operationId": "getItems",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter stores by name",
+                        "in": "query",
+                        "name": "name"
+                    },
+                    {
+                        "description": "Filter stores by displayName",
+                        "in": "query",
+                        "name": "displayName"
+                    },
+                    {
+                        "description": "Filter stores by storeWebsite (full url)",
+                        "in": "query",
+                        "name": "storeWebsite"
+                    },
+                    {
+                        "description": "Filter stores by defaultLocale",
+                        "in": "query",
+                        "name": "defaultLocale"
+                    },
+                    {
+                        "description": "Filter stores by gtmId",
+                        "in": "query",
+                        "name": "gtmId"
+                    },
+                    {
+                        "description": "Filter stores by nexwayGtmId",
+                        "in": "query",
+                        "name": "nexwayGtmId"
+                    },
+                    {
+                        "description": "Filter stores by allowMultipleDiscounts",
+                        "in": "query",
+                        "name": "allowMultipleDiscounts"
+                    },
+                    {
+                        "description": "Filter stores by allowInstallments",
+                        "in": "query",
+                        "name": "allowInstallments"
+                    },
+                    {
+                        "description": "Filter stores by allowSubscriptionUpgrade",
+                        "in": "query",
+                        "name": "allowSubscriptionUpgrade"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultStore"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Store"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Store"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Store"
+                ],
+                "x-operationWeight": "300"
             }
-          }
+        },
+        "/stores/apple-domain-associations": {
+            "get": {
+                "operationId": "getItems_1",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultAppleDomainAssociation"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "AppleDomainAssociation"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppleDomainAssociation"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "AppleDomainAssociation"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/stores/apple-domain-associations/{id}": {
+            "delete": {
+                "operationId": "deleteItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "AppleDomainAssociation"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppleDomainAssociation"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "AppleDomainAssociation"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppleDomainAssociation"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppleDomainAssociation"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "AppleDomainAssociation"
+                ],
+                "x-operationWeight": "400"
+            }
+        },
+        "/stores/marketplace/{marketplaceName}/{externalId}": {
+            "get": {
+                "description": "Get one store with a marketplace name and an external id",
+                "operationId": "getStoreByMarketplaceAndSellerID",
+                "parameters": [
+                    {
+                        "description": "marketplace name",
+                        "in": "path",
+                        "name": "marketplaceName",
+                        "required": true,
+                        "schema": {
+                            "enum": [
+                                "EBAY",
+                                "LENGOW"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "marketplace external selling store ID",
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Store"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "408": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Service Unavailable"
+                    }
+                },
+                "summary": "Get one store",
+                "tags": [
+                    "Store"
+                ]
+            }
+        },
+        "/stores/public": {
+            "get": {
+                "operationId": "getItems_2",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultStore"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/stores/public/.well-known/apple-pay-public-key": {
+            "get": {
+                "operationId": "getAppleDomainAssociation",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Store-Hostname",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "format": "binary",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Public"
+                ]
+            }
+        },
+        "/stores/public/hostname/{hostname}": {
+            "get": {
+                "operationId": "getPublicStoreByHostname",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "hostname",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublicStore"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Public"
+                ]
+            }
+        },
+        "/stores/public/{id}": {
+            "get": {
+                "operationId": "getItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Store"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Public"
+                ],
+                "x-operationWeight": "200"
+            }
+        },
+        "/stores/{id}": {
+            "delete": {
+                "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "Store"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Store"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Store"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Store"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Store"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Store"
+                ],
+                "x-operationWeight": "400"
+            }
         }
-      },
-      "RankedPaymentTabsByCountries": {
-        "type": "object",
-        "properties": {
-          "countries": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "rankedPaymentTabs": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "Route": {
-        "required": [
-          "hostname"
-        ],
-        "type": "object",
-        "properties": {
-          "hostname": {
-            "type": "string"
-          },
-          "pathPrefix": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "rawHostname": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "fullUrl": {
-            "type": "string"
-          }
-        }
-      },
-      "Store": {
-        "required": [
-          "defaultLocale",
-          "displayName",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "deprecated": true
-          },
-          "customerId": {
-            "type": "string"
-          },
-          "createDate": {
-            "type": "string",
-            "format": "date-time",
-            "deprecated": true
-          },
-          "updateDate": {
-            "type": "string",
-            "format": "date-time",
-            "deprecated": true
-          },
-          "modelVersion": {
-            "type": "string",
-            "deprecated": true
-          },
-          "dbVersion": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "lastUpdateReason": {
-            "type": "string"
-          },
-          "originalId": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "name": {
-            "maxLength": 150,
-            "minLength": 1,
-            "type": "string"
-          },
-          "displayName": {
-            "maxLength": 150,
-            "minLength": 1,
-            "type": "string"
-          },
-          "baseProduct": {
-            "type": "string"
-          },
-          "logoStore": {
-            "type": "string"
-          },
-          "bannerInvoice": {
-            "type": "string"
-          },
-          "bannerOrderConfEmail": {
-            "type": "string"
-          },
-          "logoFavicon": {
-            "type": "string"
-          },
-          "storeWebsite": {
-            "type": "string"
-          },
-          "defaultLocale": {
-            "type": "string"
-          },
-          "saleLocales": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "hostnames": {
-            "uniqueItems": true,
-            "type": "array",
-            "deprecated": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "routes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Route"
-            }
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "ENABLED",
-              "DISABLED"
+    },
+    "security": [
+        {
+            "Bearer": [
+                "read",
+                "write"
             ]
-          },
-          "designs": {
-            "$ref": "#/components/schemas/Designs"
-          },
-          "gtmId": {
-            "type": "string"
-          },
-          "nexwayGtmId": {
-            "type": "string"
-          },
-          "blackListedPaymentTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "additionalPaymentTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "blackListedCountries": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "restrictedCountries": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "fallbackCartCountry": {
-            "type": "string"
-          },
-          "forceGeoipLocalization": {
-            "type": "boolean"
-          },
-          "promoteOneClickPayment": {
-            "type": "boolean"
-          },
-          "allowOrderDetailsOnCheckoutConfirmation": {
-            "type": "boolean"
-          },
-          "allowQuotes": {
-            "type": "boolean"
-          },
-          "recipientCodeMandatory": {
-            "type": "boolean"
-          },
-          "allowMultipleDiscounts": {
-            "type": "boolean"
-          },
-          "retryPaymentValidityDuration": {
-            "maximum": 90,
-            "type": "integer",
-            "format": "int64"
-          },
-          "quoteValidityDuration": {
-            "maximum": 90,
-            "type": "integer",
-            "format": "int64"
-          },
-          "quoteSubscriptionValidityDuration": {
-            "maximum": 90,
-            "type": "integer",
-            "format": "int64"
-          },
-          "multiplePaymentsValidityDuration": {
-            "maximum": 90,
-            "type": "integer",
-            "format": "int64"
-          },
-          "targetNonRecurrentPaymentMethodsForSubscriptions": {
-            "type": "string",
-            "enum": [
-              "NOBODY",
-              "COMPANY",
-              "EVERYBODY"
-            ]
-          },
-          "eligibleEndUserTypes": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "RESELLER_AUTHENTICATION_REQUIRED",
-                "BUYER_AUTHENTICATION_REQUIRED",
-                "AUTHENTICATION_NOT_REQUIRED"
-              ]
-            }
-          },
-          "thankYouDesc": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "emailSenderOverride": {
-            "pattern": "^[\\w-+]+(\\.[\\w]+)*(@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$)?",
-            "type": "string"
-          },
-          "localizedPaymentDescriptors": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "externalContextAlias": {
-            "type": "string"
-          },
-          "externalContextGenerationParams": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "allowInstallments": {
-            "type": "boolean"
-          },
-          "installmentOptions": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          "allowSubscriptionUpgrade": {
-            "type": "boolean"
-          },
-          "hostname": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "pathPrefix": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "route": {
-            "$ref": "#/components/schemas/Route"
-          },
-          "saleLocale": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "layout": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "theme": {
-            "type": "string",
-            "writeOnly": true
-          },
-          "deprecatedHostnames": {
-            "uniqueItems": true,
-            "type": "array",
-            "deprecated": true,
-            "items": {
-              "type": "string"
-            }
-          }
         }
-      },
-      "ExceptionDetail": {
-        "type": "object",
-        "properties": {
-          "errorType": {
-            "type": "string"
-          },
-          "resourceType": {
-            "type": "string"
-          },
-          "resourceId": {
-            "type": "string"
-          },
-          "resourceDisplayName": {
-            "type": "string"
-          },
-          "specific": {
-            "type": "object"
-          }
+    ],
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
         }
-      },
-      "NormalizeException": {
-        "type": "object",
-        "properties": {
-          "timestamp": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "error": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExceptionDetail"
-            }
-          }
-        }
-      },
-      "Pageable": {
-        "type": "object",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "sort": {
-            "$ref": "#/components/schemas/Sort"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unpaged": {
-            "type": "boolean"
-          },
-          "paged": {
-            "type": "boolean"
-          }
-        }
-      },
-      "Sort": {
-        "type": "object",
-        "properties": {
-          "sorted": {
-            "type": "boolean"
-          },
-          "unsorted": {
-            "type": "boolean"
-          },
-          "empty": {
-            "type": "boolean"
-          }
-        }
-      },
-      "SearchResultObject": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "RecapEntry": {
-        "type": "object",
-        "properties": {
-          "targetValue": {
-            "type": "string"
-          },
-          "count": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "SearchResultRecapEntry": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RecapEntry"
-            }
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Document": {
-        "type": "object",
-        "properties": {
-          "empty": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "SearchResultDocument": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Document"
-            }
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "SearchResultStore": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Store"
-            }
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "UiConfiguration": {
-        "type": "object",
-        "properties": {
-          "deepLinking": {
-            "type": "boolean"
-          },
-          "displayOperationId": {
-            "type": "boolean"
-          },
-          "defaultModelsExpandDepth": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "defaultModelExpandDepth": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "defaultModelRendering": {
-            "type": "string",
-            "enum": [
-              "EXAMPLE",
-              "MODEL"
-            ]
-          },
-          "displayRequestDuration": {
-            "type": "boolean"
-          },
-          "docExpansion": {
-            "type": "string",
-            "enum": [
-              "NONE",
-              "LIST",
-              "FULL"
-            ]
-          },
-          "filter": {
-            "type": "object"
-          },
-          "maxDisplayedTags": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "operationsSorter": {
-            "type": "string",
-            "enum": [
-              "ALPHA",
-              "METHOD"
-            ]
-          },
-          "showExtensions": {
-            "type": "boolean"
-          },
-          "tagsSorter": {
-            "type": "string",
-            "enum": [
-              "ALPHA"
-            ]
-          },
-          "validatorUrl": {
-            "type": "string"
-          },
-          "apisSorter": {
-            "type": "string",
-            "deprecated": true
-          },
-          "jsonEditor": {
-            "type": "boolean",
-            "deprecated": true
-          },
-          "showRequestHeaders": {
-            "type": "boolean",
-            "deprecated": true
-          },
-          "supportedSubmitMethods": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "SwaggerResource": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "swaggerVersion": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string",
-            "deprecated": true
-          }
-        }
-      },
-      "SecurityConfiguration": {
-        "type": "object",
-        "properties": {
-          "apiKey": {
-            "type": "string",
-            "deprecated": true
-          },
-          "apiKeyVehicle": {
-            "type": "string",
-            "deprecated": true
-          },
-          "apiKeyName": {
-            "type": "string",
-            "deprecated": true
-          },
-          "clientId": {
-            "type": "string"
-          },
-          "clientSecret": {
-            "type": "string"
-          },
-          "realm": {
-            "type": "string"
-          },
-          "appName": {
-            "type": "string"
-          },
-          "scopeSeparator": {
-            "type": "string"
-          },
-          "additionalQueryStringParams": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "useBasicAuthenticationWithAccessCodeGrant": {
-            "type": "boolean"
-          }
-        }
-      }
-    }
-  }
+    ]
 }
