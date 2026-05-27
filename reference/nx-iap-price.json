@@ -429,16 +429,6 @@
                         },
                         "type": "array"
                     },
-                    "customerTypes": {
-                        "items": {
-                            "enum": [
-                                "B2B",
-                                "B2C"
-                            ],
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
@@ -464,6 +454,16 @@
                     "originalId": {
                         "type": "string",
                         "writeOnly": true
+                    },
+                    "productTypes": {
+                        "items": {
+                            "enum": [
+                                "B2B",
+                                "B2C"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
                     "queryParam": {
                         "additionalProperties": {
@@ -852,7 +852,7 @@
                         "name": "date",
                         "required": false,
                         "schema": {
-                            "default": "2026-05-27T09:39:34.35Z",
+                            "default": "2026-05-27T14:56:05.369Z",
                             "format": "date-time",
                             "type": "string"
                         }
