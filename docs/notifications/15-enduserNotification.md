@@ -36,10 +36,10 @@ These events are fired when some payment is added or deleted from the wallet. Th
 | objectId | string | EndUser identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
 | addedPaymentMethods | enduser.PaymentMethod[] | List of added payment instruments | R |
+| → type | string | Specific variant, e.g. visa, mastercard | R |
 | → _id | string | Unique payment method identifier | R |
 | → expirationDate | string | Expiration date | O |
 | → id | string | Payment method identifier | R |
 | → paymentMethodType | string | Broad classification, e.g. CreditCard | R |
 | → status | string | Activation state, e.g. ACTIVATED | R |
-| → type | string | Specific variant, e.g. visa, mastercard | R |
 <!-- /GEN:notification:PaymentMethodAddedNotification -->

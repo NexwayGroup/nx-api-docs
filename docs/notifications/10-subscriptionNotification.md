@@ -109,21 +109,18 @@ This notification is sent when a discount plan is added or changed for a subscri
 ## Subscription Payment Method Changed
 This notification is sent when the end-user changes subscription payment method.
 
+<!-- GEN:notification:subscription.PaymentMethodUpdatedNotification subject="`endUser`" type="`subscriptionPaymentMethodUpdated`" objectId="EndUser identifier" -->
 | Field | Type | Description | R/O |
 |---|---|---|---|
 | subject | string | `endUser` | R |
 | type | string | `subscriptionPaymentMethodUpdated` | R |
 | objectId | string | EndUser identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
-
-<!-- GEN:body:subscription.PaymentMethodUpdatedNotification -->
-| Field | Type | Description | R/O |
-|---|---|---|---|
 | endUser | subscription.EndUser |  | R |
 | → expirationDate | string | The expiration date of the payment method mm/YY | O |
 | → id | string | The end user id | R |
 | → paymentMethod | string | Broad classification, e.g. CreditCard | O |
 | → paymentMethodName | string | Specific variant, e.g. visa, mastercard | O |
 | → subscriptionId | string | The subscription Id | R |
-<!-- /GEN:body:subscription.PaymentMethodUpdatedNotification -->
+<!-- /GEN:notification:subscription.PaymentMethodUpdatedNotification -->
 

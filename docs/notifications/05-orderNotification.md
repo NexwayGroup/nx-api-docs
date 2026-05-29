@@ -34,6 +34,18 @@ By a payment gateway or bank
 `type=prebillingStarted`
 Same as Prebilling Order Created, but triggered if a prebilling order with source `OFFER` already exists
 
+:::note
+Order related notifications listed above don't include subscription details.
+:::
+
+The following notifications include details about the subscription. Although, subscriptions are a separate domain with their own [set of events](10-subscriptionNotification.md).:
+
+* **Order Completed With Content Including Subscription Data**
+`type=completed`
+* **Order Canceled With Content Including Subscription Data**
+`type=canceled`
+
+
 ## List of fields 
 
 <!-- GEN:notification:OrderNotification subject="`order`" type="Event type — see [Event list](#event-list)" objectId="Order identifier" -->
@@ -279,15 +291,3 @@ If you need to get additional data, which is not available in the event, please 
 }
 ```
 
-## Additional order events with subscription details
-
-These are the same events as main order events listed above, but with additional information, which may be included if the order has subscription information:
-
-* Order Completed With Content Including Subscription Data
-* Order Canceled With Content Including Subscription Data
-
-### Additional fields for 'Order Completed With Content Including Subscription Data' notification
-
-Certain notification types, like 'Order Completed with Subscription Data' and 'Order Cancelled with Subscription Data' include details about the subscription. Although, subscriptions are a separate domain with their own [set of events](10-subscriptionNotification.md).
-
-The same `OrderNotification` schema (see table above) covers subscription fields within the order payload.
