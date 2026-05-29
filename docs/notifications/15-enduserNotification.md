@@ -9,12 +9,16 @@ when an end-user account is deleted
 
 ## EndUser Deleted Payload Structure
 
+<!-- GEN:basenotificationcontent -->
 | Name | Description | R / O |
 | :--- | :---------- | :---: |
-| **subject** | `endUser` | R |
-| **type** | `deleted` | R |
-| **objectId** | EndUser identifier | R |
-| **eventDate** | ISO date of the event | R |
+| **subject** | Event entity type (`order`, `subscription`, `endUser`, etc.) | R |
+| **type** | Notification event type (e.g. `completed`, `deleted`) | R |
+| **objectId** | Entity identifier (orderId, subscriptionId, endUserId, etc.) | R |
+| **eventDate** | ISO 8601 date of the event | R |
+<!-- /GEN:basenotificationcontent -->
+
+For this event: `subject` = `endUser`, `type` = `deleted`, `objectId` = EndUser identifier.
 
 
 ## Wallet Event list
