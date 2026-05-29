@@ -36,97 +36,154 @@ Same as Prebilling Order Created, but triggered if a prebilling order with sourc
 
 ## List of fields 
 
-The notification payload will include an 'order' object containing the following details:
-
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| **subject** | For order notifications the subject is `order` | R |
-| **type** | Depends on the type of the notification | R |
-| **objectId** | Order unique identifier | R |
-| **eventDate** | date in ISO 8601 format | R |
-| **order** `{object}`| Order object | R |
-| **order.id** | Order unique identifier | R |
-| **order.status** | Order status corresponds to the event type. | R |
-| **order.cancellationReason** | Will be provided only if order is canceled event is sent AND reason was set for cancelation | O |
-| **order.cancellationDate** | | O |
-| **order.source** | Order source: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL, etc | R |
-| **order.offerSubSource** | Order sub source: SUSPEND, RESUME | O |
-| **order.creationDate** | Creation date in ISO 8601 format, ex.: 2024-01-01T01:02:03Z | R |
-| **order.currency** | Order's Currency, ex.: EUR | R |
-| **order.salesFlag** `[string]` | Sales flags is an array of strings provided in the cart. Similar to external context, but unencoded. | O |
-| **order.totalPriceIncVAT** | Order total price, including sales tax | R |
-| **order.totalPriceExclVAT** | Order total price, excluding sales tax | R |
-| **order.externalContext** | Based64 encoded string of cart parameters | O |
-| **order.decodedExternalContext** | Decoded map of cart string parameters if they were provided in the json format | O |
-| **order.user** `{object}` | Buyer's details object | R |
-| **order.user.id** | Buyer's id | O |
-| **order.user.email** | Buyer's email | R |
-| **order.user.firstName** | Buyer's first name | O |
-| **order.user.lastName** | Buyer's last name | O |
-| **order.user.language** | Buyer's language alpha-2 code, ex "pt" | O |
-| **order.user.country** | Buyer's country alpha-3 code, ex "BRA" | R |
-| **order.user.city** | Buyer's city | O |
-| **order.user.region** | Buyer's region | O |
-| **order.user.street** | Buyer's street address | O |
-| **order.user.zipcode** | Buyer's postal code | O |
-| **order.items** `[{object}]` | List of items purchased (products, services, etc.) | R |
-| **order.items[].id** | Unique ID for order line item | R |
-| **order.items[].product** `{object}`| Product object | R |
-| **order.items[].product.name** | Product name | R |
-| **order.items[].product.uniqueReference** | A unique ID for identifying your product on the Nexway Monetize platform | R |
-| **order.items[].product.publisherReference** | A unique ID for identifying your product in your information system, if defined | O |
-| **order.items[].fulfillmentId** | Fulfillment process identifier | O |
-| **order.items[].quantity** | Product quantity | R |
-| **order.items[].activationCode** | Product activation code | O |
-| **order.items[].expirationDate** | Expiration date of a product (if any) | O |
-| **order.items[].pricing** `{object}` | Price object | R |
-| **order.items[].pricing.unitPriceExclVAT** | Product unit price, excluding sales tax | R |
-| **order.items[].pricing.unitPriceIncVAT** | Product unit price, including sales tax | R |
-| **order.items[].pricing.vatAmount** | Vat amount | O |
-| **order.items[].pricing.cumulatedDiscountRate** | Discount rate applied to product | O |
-| **order.items[].pricing.allDiscountsApplied** `[{object}]`| Array of all applied discounts. Each discount represneted as object | O |
-| **order.items[].pricing.allDiscountsApplied[].discountRate**| Discount rate, f.e. 0.2 | O |
-| **order.items[].pricing.allDiscountsApplied[].discountId**| Identifier of discount in Monetize | R |
-| **order.items[].pricing.allDiscountsApplied[].discountCode**| Discount code (if any) | O |
-| **order.items[].pricing.allDiscountsApplied[].discountAmount**| Amount of discount | O |
-| **order.items[].pricing.VATRate** | Sold product applied sales tax rate | R |
-| **order.items[].unitPriceExclVAT** | Product unit price, excluding sales tax | R |
-| **order.items[].unitPriceIncVAT** | Product unit price, including sales tax | R |
-| **order.items[].trial** | | R |
-| **order.items[].subscriptionId** | SubscriptionId if the line item has one | O |
-| **order.items[].activationCode** | Product activation code | O |
-| **order.items[].subItems []** | | R |
-| **order.items[].isUpsell** | Boolean which marks a product as upsold or not | R |
-| **order.items[].VATRate** | Sold product applied sales tax rate | R |
-| **order.items[].DiscountPlan** `{object}` | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
-| **order.items[].DiscountPlan.tag** | Subscription discount plan tag | R |
-| **order.items[].DiscountPlan.discountStep** | Subscription discount plan step is used on acquisition | O |
-| **order.items[].DiscountPlan.ignorePurchaseDiscount**| Only in case if this flag was set on acquisition | O |
-| **order.customer** `{object}` | Customer object | R |
-| **customer.id** | customer id connected to the order | R |
-| **order.customer.customerAccount** | customer realm name  connected to the order | R |
-| **order.customer.serveur** | customer  name  connected to the order | R |
-| **order.store** `{object}` | Store object | R |
-| **order.store.Id** | store id from an order | R |
-| **order.cartId** | cartId from an order | O |
-| **order.payment** `{object}` | Payment object (last) | O |
-| **order.payment.id** | Payment id | R |
-| **order.payment.method** | Payment method id (visa, mastercard, sepa, visa_electron, visa_inst4, diners, pix, boleto etc.) | O |
-| **order.payment.amount** | | O |
-| **order.payment.status** | Payment status (COMPLETED, FAILED) | R |
-| **order.payment.transitionPaymentDate** | Transaction date, equal to transaction creation date | R |
-| **order.payment.automaticBilling** | Boolean which highlights if payment was automatically charged or not | R |
-| **order.payment.lastError** `{object}` | Last error object | O |
-| **order.payment.lastError.code** | Error code | O |
-| **order.payment.lastError.message** | Error message | O |
-| **order.payments[]** | | O |
-| **order.payments[].id** | | R |
-| **order.payments[].method** | | O |
-| **order.payments[].amount** | | O |
-| **order.payments[].status** | | R |
-| **order.payments[].transitionPaymentDate** | | R |
-| **order.ConsentFlags** `{object}` | Consent flags object | R |
-| **order.ConsentFlags.newstellerOption** | Marketing newsletter consent flag | R |
+<!-- GEN:notification:OrderNotification subject="`order`" type="Event type — see [Event list](#event-list)" objectId="Order identifier" -->
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | `order` | R |
+| type | string | Event type — see [Event list](#event-list) | R |
+| objectId | string | Order identifier | R |
+| eventDate | string (date-time) | ISO 8601 timestamp | R |
+| order | order.Order |  | R |
+| → cancellationDate | string (date-time) | Cancellation timestamp in ISO 8601 format | O |
+| → cancellationReason | string | Reason for order cancellation | O |
+| → cartId | string | Associated cart identifier | O |
+| → consentFlags | order.ConsentFlags |  | R |
+| — → newsletterOptin | boolean | Marketing newsletter consent indicator | R |
+| → creationDate | string (date-time) | Order creation date in ISO 8601 format | R |
+| → currency | string | Currency code, e.g. EUR, USD | R |
+| → customer | order.Customer |  | R |
+| — → customerAccount | string | Realm/account name | R |
+| — → id | string | Customer identifier | R |
+| — → name | string |  | O |
+| — → serveur | string |  | O |
+| → decodedExternalContext | object | Decoded cart parameters | O |
+| → externalContext | string | Base64 encoded string of cart parameters | O |
+| → id | string | Order identifier | R |
+| → items | order.LineItem[] | Order line items | R |
+| — → activationCode | string | Product activation code | O |
+| — → discountPlan | order.DiscountPlan |  | O |
+| — — → discountStep | integer (int32) | Step in the discount plan | R |
+| — — → ignorePurchaseDiscount | boolean | Whether to ignore discount on the initial purchase | O |
+| — — → tag | string | Plan designation tag | R |
+| — → discountRate | number (double) | Discount rate applied | O |
+| — → expirationDate | string (date-time) | Product expiration timestamp in ISO 8601 format | O |
+| — → externalContext | string | External context data | R |
+| — → fulfillmentId | string | Fulfillment process identifier | O |
+| — → id | string | Unique line item identifier | R |
+| — → isUpsell | boolean | Upsell status marker | O |
+| — → lineItemId | string | Line item identifier | R |
+| — → pricing | order.Pricing |  | R |
+| — — → allDiscountsApplied | com.nx.notification.externalapi.DiscountApplied[] | All discounts applied to this item | O |
+| — — — → discountAmount | number (double) | Discount value | R |
+| — — — → discountCode | string | Customer-facing discount code | O |
+| — — — → discountId | string | Monetize discount identifier | R |
+| — — — → discountRate | number (double) | Discount percentage, e.g. 0.2 for 20% | O |
+| — — → cumulatedDiscountRate | number (double) | Total cumulated discount percentage | O |
+| — — → unitPriceExclVAT | number (double) | Pre-tax unit cost | R |
+| — — → unitPriceIncVAT | number (double) | Post-tax unit cost | R |
+| — — → vatAmount | number (double) | Tax amount | O |
+| — — → VATRate | number (double) | Tax rate percentage | R |
+| — → priority | integer (int32) | Line item priority | O |
+| — → product | order.Product |  | R |
+| — — → name | string | Product name | R |
+| — — → publisherReference | string | Publisher's internal product identifier | O |
+| — — → uniqueReference | string | Unique product identifier on the Nexway Monetize platform | R |
+| — → publisherFulfillmentId | string | Publisher fulfillment identifier | O |
+| — → quantity | integer (int32) | Product quantity | R |
+| — → subItems | order.SubItem[] | Nested line items | O |
+| — — → activationCode | string |  | O |
+| — — → externalContext | string |  | O |
+| — — → fulfillmentId | string |  | O |
+| — — → id | string |  | O |
+| — — → product | order.Product |  | O |
+| — — — → name | string | Product name | R |
+| — — — → publisherReference | string | Publisher's internal product identifier | O |
+| — — — → uniqueReference | string | Unique product identifier on the Nexway Monetize platform | R |
+| — — → publisherFulfillmentId | string |  | O |
+| — → subscription | subscription.Subscription |  | O |
+| — — → createDate | string (date-time) | Creation date in ISO 8601 format | R |
+| — — → discountPlan | subscription.DiscountPlan |  | O |
+| — — — → nextDiscountStep | integer (int32) | Calculated next discount step value | R |
+| — — — → startingStep | integer (int32) | Starting step | O |
+| — — — → tag | string | Plan identifier | R |
+| — — → enduserId | string | End-user UUID | R |
+| — — → id | string | Subscription UUID | R |
+| — — → lifecycle | subscription.LifeCycle |  | R |
+| — — — → anniversaryDate | string (date-time) | Renewal/expiration date in ISO 8601 format | R |
+| — — — → generation | integer (int32) | Renewal generation (term number) | R |
+| — — — → id | string | Back-office subscription identifier (deprecated) | O |
+| — — — → status | string | Status: Active, Suspended, Dunning, Canceled, Expired | R |
+| — — → modelId | string | Model identifier, e.g. NEXWAY_1Y | R |
+| — — → name | string | Product name | O |
+| — — → paymentMethodIsNoLongerReplayable | boolean | Whether the payment method is no longer replayable | O |
+| — — → paymentMethodIsNoLongerReplayableReason | string | Reason why the payment method is no longer replayable | O |
+| — — → products | subscription.Product[] | Associated products | R |
+| — — — → id | string | Product UUID | R |
+| — — — → licenseId | string | License identifier | O |
+| — — — → lineItemId | string | Order line item UUID | R |
+| — — → source | string | Subscription source | O |
+| — — → storeId | string | Store UUID | R |
+| — → subscriptionId | string | Associated subscription identifier | O |
+| — → trial | boolean | Trial status indicator | R |
+| — → trialDuration | integer (int32) | Trial duration in days | O |
+| — → unitPriceExclVAT | number (double) | Unit price excluding tax | R |
+| — → unitPriceIncVAT | number (double) | Unit price including tax | R |
+| — → VATRate | number (double) | Applied sales tax rate | R |
+| → offerSubSource | string | Sub-source designation, e.g. SUSPEND, RESUME | O |
+| → payment | order.Payment |  | O |
+| — → amount | number (double) | Payment amount | O |
+| — → automaticBilling | boolean | Whether the payment was automatically charged | R |
+| — → externalContext | string | External context data | O |
+| — → id | string | Payment identifier | R |
+| — → lastError | order.LastPaymentError |  | O |
+| — — → code | string | Error code | R |
+| — — → message | string | Error description | O |
+| — → method | string | Payment method, e.g. visa, mastercard, sepa, pix, boleto | O |
+| — → silentOnFailure | boolean | Whether to suppress failure notifications | O |
+| — → status | string | Payment status: COMPLETED, FAILED | R |
+| — → transitionPaymentDate | string (date-time) | Transaction timestamp in ISO 8601 format | R |
+| → payments | order.Payment[] | All payment attempts | O |
+| — → amount | number (double) | Payment amount | O |
+| — → automaticBilling | boolean | Whether the payment was automatically charged | R |
+| — → externalContext | string | External context data | O |
+| — → id | string | Payment identifier | R |
+| — → lastError | order.LastPaymentError |  | O |
+| — — → code | string | Error code | R |
+| — — → message | string | Error description | O |
+| — → method | string | Payment method, e.g. visa, mastercard, sepa, pix, boleto | O |
+| — → silentOnFailure | boolean | Whether to suppress failure notifications | O |
+| — → status | string | Payment status: COMPLETED, FAILED | R |
+| — → transitionPaymentDate | string (date-time) | Transaction timestamp in ISO 8601 format | R |
+| → refund | order.Refund |  | O |
+| — → lineItems | order.RefundDetails[] |  | O |
+| — — → initialAmount | number (double) |  | O |
+| — — → productId | string |  | O |
+| — — → productName | string |  | O |
+| — — → ratio | number (double) |  | O |
+| — — → refundAmount | number (double) |  | O |
+| — — → refundMethod | string |  | O |
+| — → totalAmountRefunded | number (double) |  | O |
+| → salesFlag | string[] | Sales flags | O |
+| → source | string | Order origin: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL | R |
+| → status | string | Current order status | R |
+| → store | order.Store |  | R |
+| — → id | string | Store identifier | R |
+| → totalPriceExclVAT | number (double) | Total price excluding sales tax | R |
+| → totalPriceIncVAT | number (double) | Total price including sales tax | R |
+| → user | order.EndUser |  | R |
+| — → city | string | City | O |
+| — → companyName | string | Company name | O |
+| — → companyRegistrationNumber | string | Company registration number | O |
+| — → country | string | Alpha-3 country code | R |
+| — → email | string | Buyer email address | R |
+| — → firstName | string | First name | O |
+| — → id | string | Buyer identifier | R |
+| — → language | string | Alpha-2 language code | O |
+| — → lastName | string | Last name | O |
+| — → region | string | Region | O |
+| — → street | string | Street address | O |
+| — → zipcode | string | Postal code | O |
+<!-- /GEN:notification:OrderNotification -->
 
 If you need to get additional data, which is not available in the event, please refer to the REST API methods to get order or other entities.
 
@@ -233,23 +290,4 @@ These are the same events as main order events listed above, but with additional
 
 Certain notification types, like 'Order Completed with Subscription Data' and 'Order Cancelled with Subscription Data' include details about the subscription. Although, subscriptions are a separate domain with their own [set of events](10-subscriptionNotification.md).
 
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| **order.items[].subscription** | Subscription object | O |
-| **order.items[].subscription.id** | Subscription identifier | R |
-| **order.items[].subscription.createDate** | The date when subscription is created | R |
-| **order.items[].subscription.modelId** | Internal subscription model identifier | R |
-| **order.items[].subscription.name** | The name of subscription. Usually the same as the product name | R |
-| **order.items[].subscription.storeId** | Internal store identifier | R |
-| **order.items[].subscription.lifecycle** `{object}` | Lifecycle object | R |
-| **order.items[].subscription.lifecycle.id** | Nexway back-office subscription identifier | O |
-| **order.items[].subscription.lifecycle.anniversaryDate**| | R |
-| **order.items[].subscription.lifecycle.generation**| F.e. after a purchase the generation is 0, after first renewal its 1 and so on | O |
-| **order.items[].subscription.lifecycle.status** | Internal status | O |
-| **order.items[].subscription.products** `[{object}]` | Array of Products  | R |
-| **order.items[].subscription.products[].id** | Product identifier | R |
-| **order.items[].subscription.products[].lineItemId** | | R |
-| **order.items[].subscription.discountPlan** `{object}` | Subscription discount plan node will exist in case if discount plan is applied to subscription | O |
-| **order.items[].subscription.discountPlan.tag** | Subscription discount plan tag | O |
-| **order.items[].subscription.discountPlan.startingStep**| | O |
-| **order.items[].subscription.enduserId** | Internal id of end-user | R |
+The same `OrderNotification` schema (see table above) covers subscription fields within the order payload.
