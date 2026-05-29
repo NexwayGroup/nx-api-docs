@@ -9,12 +9,12 @@ when an end-user account is deleted
 
 ## EndUser Deleted Payload Structure
 
-| Name | Description | R / O |
-| :--- | :---------- | :---: |
-| **subject** | `endUser` | R |
-| **type** | `deleted` | R |
-| **objectId** | EndUser identifier | R |
-| **eventDate** | ISO date of the event | R |
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | `endUser` | R |
+| type | string | `deleted` | R |
+| objectId | string | EndUser identifier | R |
+| eventDate | string (date-time) | ISO 8601 timestamp | R |
 
 
 ## Wallet Event list
@@ -28,14 +28,18 @@ These events are fired when some payment is added or deleted from the wallet. Th
 
 ## Payment Method Event Payload Structure
 
-| Name | Description | R / O |
-| :--- | :---------- | :---: |
-| **subject** | `endUser` | R |
-| **type** | `deleted` | R |
-| **objectId** | EndUser identifier | R |
-| **eventDate** | ISO date of the event | R |
-| **addedPaymentMethods** `[{object}]` | One element in case of added payment method | O |
-| **addedPaymentMethods[].id** | Payment method Id | R |
-| **addedPaymentMethods[].status** | Usually `ACTIVATED` | R |
-| **addedPaymentMethods[].paymentMethodType** | Broad category type like `CreditCard` etc. | O |
-| **addedPaymentMethods[].type** | Specific type `visa`, `mastercard` etc. | R |
+<!-- GEN:notification:PaymentMethodAddedNotification subject="endUser" type="paymentMethodAddedToWallet / paymentMethodDeletedFromWallet" objectId="EndUser identifier" -->
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | endUser | R |
+| type | string | paymentMethodAddedToWallet / paymentMethodDeletedFromWallet | R |
+| objectId | string | EndUser identifier | R |
+| eventDate | string (date-time) | ISO 8601 timestamp | R |
+| addedPaymentMethods | enduser.PaymentMethod[] | List of added payment instruments | R |
+| → type | string | Specific variant, e.g. visa, mastercard | R |
+| → _id | string | Unique payment method identifier | R |
+| → expirationDate | string | Expiration date | O |
+| → id | string | Payment method identifier | R |
+| → paymentMethodType | string | Broad classification, e.g. CreditCard | R |
+| → status | string | Activation state, e.g. ACTIVATED | R |
+<!-- /GEN:notification:PaymentMethodAddedNotification -->

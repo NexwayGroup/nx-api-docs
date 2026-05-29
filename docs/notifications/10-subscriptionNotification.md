@@ -15,30 +15,37 @@ You can receive notifications whenever your subscription status changes.
 
 ## List of fields
 
-| Name | Description | R/O |
-| ---- | ----------- | --- |
-| **subject** | subscription | R |
-| **type** | Depending on the event:<br/>•  reactivated<br/>• suspended<br/>• canceled<br/> [see notifications with subject=`subscription`](20-notificationReference.md)  | R |
-| **objectId** | subscriptonId: `afe09ab2-25d0-4fdb-857e-dc22ff21ce8f` | R |
-| **eventDate** | `2025-07-25T11:30:03Z` | |
-| **subscription** `{object}` | Subscription details object | R |
-| **subscription.id** | Subscription UUID | R |
-| **subscription.createDate** | Creation date in ISO 8601 format ex. `2025-07-25T11:30:03Z` | R |
-| **subscription.modelId** | Subscription model, ex: `NEXWAY_1Y` | R |
-| **subscription.name** | Subscription name, usually taken from the product `Kaspersky Endpoint Security Cloud` | O |
-| **subscription.storeId** | `36f48867-d6ca-42d3-bf55-5f54a6740803` | R |
-| **subscription.lifecycle** `{object}` | Lifecycle details object | R |
-| **subscription.lifecycle.id** | `9191920` **Deprecated** | O |
-| **subscription.lifecycle.generation** | Number of term `int` | R |
-| **subscription.products** `[{object}]` | Subscription currently may have only one product | R |
-| **subscription.products[].id** | Product UUID | R |
-| **subscription.products[].lineItemId**| Order lineItem UUID | R |
-| **subscirption.lifecycle.anniversaryDate**| Anniversary date (or the date until the subscription is paid) | R |
-| **subscirption.lifecycle.status** | `Active`, `Suspended`, `Dunning`, `Canceled`, `Expired` | R |
-|**subscirption.discountPlan** `{object}` | Discount plan associated with the subscription| O |
-|**subscirption.discountPlan.tag** | | R |
-|**subscirption.discountPlan.startingStep** | | R |
-| **subscription.endUserId** | Enduser UUID | R |
+<!-- GEN:notification:SubscriptionNotification subject="`subscription`" type="Event type — see [Event list](#event-list)" objectId="Subscription identifier" -->
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | `subscription` | R |
+| type | string | Event type — see [Event list](#event-list) | R |
+| objectId | string | Subscription identifier | R |
+| eventDate | string (date-time) | ISO 8601 timestamp | R |
+| subscription | subscription.Subscription |  | R |
+| → createDate | string (date-time) | Creation date in ISO 8601 format | R |
+| → discountPlan | subscription.DiscountPlan |  | O |
+| — → nextDiscountStep | integer (int32) | Calculated next discount step value | R |
+| — → startingStep | integer (int32) | Starting step | O |
+| — → tag | string | Plan identifier | R |
+| → enduserId | string | End-user UUID | R |
+| → id | string | Subscription UUID | R |
+| → lifecycle | subscription.LifeCycle |  | R |
+| — → anniversaryDate | string (date-time) | Renewal/expiration date in ISO 8601 format | R |
+| — → generation | integer (int32) | Renewal generation (term number) | R |
+| — → id | string | Back-office subscription identifier (deprecated) | O |
+| — → status | string | Status: Active, Suspended, Dunning, Canceled, Expired | R |
+| → modelId | string | Model identifier, e.g. NEXWAY_1Y | R |
+| → name | string | Product name | O |
+| → paymentMethodIsNoLongerReplayable | boolean | Whether the payment method is no longer replayable | O |
+| → paymentMethodIsNoLongerReplayableReason | string | Reason why the payment method is no longer replayable | O |
+| → products | subscription.Product[] | Associated products | R |
+| — → id | string | Product UUID | R |
+| — → licenseId | string | License identifier | O |
+| — → lineItemId | string | Order line item UUID | R |
+| → source | string | Subscription source | O |
+| → storeId | string | Store UUID | R |
+<!-- /GEN:notification:SubscriptionNotification -->
 
 ### Example
 ```json
@@ -66,18 +73,19 @@ You can receive notifications whenever your subscription status changes.
 }
 ```
 ## Subscription discount plan is changed
-This is special notification which will be send in case if subscription plan is changed for subscription. The payload is following:
+This notification is sent when a discount plan is added or changed for a subscription.
 
-| Name | Description | R/O |
-| :--- | :--- | :---: |
-| **subscription.id** | Subscription unique identifier | R |
-| **subject** | `subscription` | R |
-| **type** | `discount plan updated` | R |
-| **objectId** | UUID of an object (subscription ID in this case) | R |
-| **eventDate** | `2025-09-29T07:34:06Z` | R |
-| **subscription.discountPlan** `{object}` | Node with subscription plan is added / changed for a given subscription | R |
-| **subscription.discountPlan.tag** | Subscription discount plan tag is added / chagned | R |
-| **subscription.discountPlan.nextDiscountStep** | The number of next discount plan step will be used for subscription discounting. Calculates by formula nextDiscountStep=startingStep + generation + 1 | R |
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | `subscription` | R |
+| type | string | `discountPlanUpdated` | R |
+| objectId | string | Subscription UUID | R |
+| eventDate | string (date-time) | Timestamp of the event in ISO 8601 format | R |
+| subscription | object | | R |
+| → id | string | Subscription UUID | R |
+| → discountPlan | object | Discount plan added or changed for this subscription | R |
+| — → tag | string | Discount plan tag | R |
+| — → nextDiscountStep | integer | Next step value. Calculated as `startingStep + generation + 1` | R |
 
 
 ### Example
@@ -101,15 +109,18 @@ This is special notification which will be send in case if subscription plan is 
 ## Subscription Payment Method Changed
 This notification is sent when the end-user changes subscription payment method.
 
-| Name | Description | R / O |
-| :--- | :--- | :---: |
-| **subject** | `endUser` | R |
-| **type** | `subscriptionPaymentMethodUpdated` | R |
-| **objectId** | UUID of an object (enduser ID in this case) | R |
-| **eventDate** | `2025-09-29T07:34:06Z` | R |
-| **enduser** `{object}` | | R |
-| **enduser.id** | payment method UUID: `8d2eaaf6-9eba-4400-9927-516672d4693b` | R |
-| **enduser.subscriptionId** | subscription id | R |
-| **enduser.paymentMethod** | payment method type, f.e. creditCard | O |
-| **enduser.expirationDate** | `11/2028` | O |
+<!-- GEN:notification:subscription.PaymentMethodUpdatedNotification subject="`endUser`" type="`subscriptionPaymentMethodUpdated`" objectId="EndUser identifier" -->
+| Field | Type | Description | R/O |
+|---|---|---|---|
+| subject | string | `endUser` | R |
+| type | string | `subscriptionPaymentMethodUpdated` | R |
+| objectId | string | EndUser identifier | R |
+| eventDate | string (date-time) | ISO 8601 timestamp | R |
+| endUser | subscription.EndUser |  | R |
+| → expirationDate | string | The expiration date of the payment method mm/YY | O |
+| → id | string | The end user id | R |
+| → paymentMethod | string | Broad classification, e.g. CreditCard | O |
+| → paymentMethodName | string | Specific variant, e.g. visa, mastercard | O |
+| → subscriptionId | string | The subscription Id | R |
+<!-- /GEN:notification:subscription.PaymentMethodUpdatedNotification -->
 

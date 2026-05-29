@@ -27,12 +27,17 @@ All notifications are generated when the state of some domain entity changes. Cu
 
 The notifications are sent in the JSON format with some common fields:
 
+<!-- GEN:basenotificationcontent -->
+| Name | Description | R / O |
+| :--- | :---------- | :---: |
+| **subject** | Event entity type (`order`, `subscription`, `endUser`, etc.) | R |
+| **type** | Notification event type (e.g. `completed`, `deleted`) | R |
+| **objectId** | Entity identifier (orderId, subscriptionId, endUserId, etc.) | R |
+| **eventDate** | ISO 8601 date of the event | R |
+<!-- /GEN:basenotificationcontent -->
+
 | Name | Description |
 | ---- | ----------- |
-| subject | Event entity: order, sbscription, endUser |
-| type | Event name |
-| objectId | Entity Id (orderId, subscriptionId or endUserId) |
-| eventDate | Date in ISO 8601 format |
 | entity | Entity object. See details in the corresponding subject type article. |
 
 ```json
