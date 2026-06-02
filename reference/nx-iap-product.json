@@ -529,6 +529,47 @@
                 ],
                 "type": "object"
             },
+            "EligibilityRules": {
+                "properties": {
+                    "parentProductIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "productByReference": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "productIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "sources": {
+                        "items": {
+                            "enum": [
+                                "PURCHASE",
+                                "MANUAL_RENEWAL",
+                                "MID_TERM_UPGRADE",
+                                "UPGRADE"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "storeId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "storeId"
+                ],
+                "type": "object"
+            },
             "ExceptionDetail": {
                 "properties": {
                     "errorType": {
@@ -545,6 +586,93 @@
                     },
                     "specific": {
                         "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ExtraTermBonus": {
+                "properties": {
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "eligibilityRules": {
+                        "$ref": "#/components/schemas/EligibilityRules"
+                    },
+                    "extraTermBonusTag": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "status": {
+                        "enum": [
+                            "ENABLED",
+                            "DISABLED"
+                        ],
+                        "type": "string"
+                    },
+                    "unit": {
+                        "enum": [
+                            "DAY",
+                            "MONTH"
+                        ],
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int32",
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "eligibilityRules",
+                    "extraTermBonusTag",
+                    "status",
+                    "unit"
+                ],
+                "type": "object"
+            },
+            "ExtraTermBonusDetails": {
+                "properties": {
+                    "extraTermBonusTag": {
+                        "type": "string"
+                    },
+                    "initialLicenseNextExpirationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "initialLifeTime": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "enum": [
+                            "DAY",
+                            "MONTH"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int32",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2139,6 +2267,14 @@
                         "description": "External context",
                         "type": "string"
                     },
+                    "extraTerm": {
+                        "$ref": "#/components/schemas/ExtraTermBonusDetails",
+                        "description": "extra term bonus"
+                    },
+                    "extraTermId": {
+                        "description": "extra term id",
+                        "type": "string"
+                    },
                     "forcedCrossSaleProductIds": {
                         "description": "List of forced cross-sales product IDs",
                         "items": {
@@ -2525,6 +2661,36 @@
                     "items": {
                         "items": {
                             "$ref": "#/components/schemas/Description"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultExtraTermBonus": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExtraTermBonus"
                         },
                         "type": "array"
                     },
@@ -3173,7 +3339,7 @@
         },
         "/products/customFields": {
             "get": {
-                "operationId": "getItems_4",
+                "operationId": "getItems_5",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -3261,7 +3427,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_4",
+                "operationId": "createItem_5",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3326,7 +3492,7 @@
         },
         "/products/customFields/{id}": {
             "delete": {
-                "operationId": "deleteItem_5",
+                "operationId": "deleteItem_6",
                 "parameters": [
                     {
                         "in": "path",
@@ -3396,7 +3562,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_5",
+                "operationId": "getItem_6",
                 "parameters": [
                     {
                         "in": "path",
@@ -3466,7 +3632,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_5",
+                "operationId": "updateItem_6",
                 "parameters": [
                     {
                         "in": "path",
@@ -3548,7 +3714,7 @@
         },
         "/products/customFieldsDefinition": {
             "get": {
-                "operationId": "getItems_5",
+                "operationId": "getItems_6",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -3636,7 +3802,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_5",
+                "operationId": "createItem_6",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3701,7 +3867,7 @@
         },
         "/products/customFieldsDefinition/{id}": {
             "delete": {
-                "operationId": "deleteItem_4",
+                "operationId": "deleteItem_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -3771,7 +3937,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_4",
+                "operationId": "getItem_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -3841,7 +4007,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_4",
+                "operationId": "updateItem_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -3923,7 +4089,7 @@
         },
         "/products/customized-products": {
             "get": {
-                "operationId": "getItems_3",
+                "operationId": "getItems_4",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -4083,7 +4249,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_3",
+                "operationId": "createItem_4",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4148,7 +4314,7 @@
         },
         "/products/customized-products/{id}": {
             "delete": {
-                "operationId": "deleteItem_3",
+                "operationId": "deleteItem_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -4218,7 +4384,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_3",
+                "operationId": "getItem_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -4288,7 +4454,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_3",
+                "operationId": "updateItem_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -4445,7 +4611,7 @@
         },
         "/products/descriptions": {
             "get": {
-                "operationId": "getItems_2",
+                "operationId": "getItems_3",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -4569,7 +4735,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_2",
+                "operationId": "createItem_3",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4719,7 +4885,7 @@
         },
         "/products/descriptions/{id}": {
             "delete": {
-                "operationId": "deleteItem_2",
+                "operationId": "deleteItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -4789,7 +4955,7 @@
                 "x-operationWeight": "500"
             },
             "get": {
-                "operationId": "getItem_2",
+                "operationId": "getItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -4859,7 +5025,7 @@
                 "x-operationWeight": "200"
             },
             "put": {
-                "operationId": "updateItem_2",
+                "operationId": "updateItem_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -5008,6 +5174,381 @@
                 "tags": [
                     "Product"
                 ]
+            }
+        },
+        "/products/extraTermBonus": {
+            "get": {
+                "operationId": "getItems_2",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultExtraTermBonus"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "ExtraTermBonus"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem_2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExtraTermBonus"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "ExtraTermBonus"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/products/extraTermBonus/{id}": {
+            "delete": {
+                "operationId": "deleteItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "ExtraTermBonus"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExtraTermBonus"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "ExtraTermBonus"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExtraTermBonus"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExtraTermBonus"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "ExtraTermBonus"
+                ],
+                "x-operationWeight": "400"
             }
         },
         "/products/fulfillment-templates": {
@@ -5788,7 +6329,7 @@
         },
         "/products/public": {
             "get": {
-                "operationId": "getItems_7",
+                "operationId": "getItems_8",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -6145,7 +6686,7 @@
         },
         "/products/public/{id}": {
             "get": {
-                "operationId": "getItem_7",
+                "operationId": "getItem_8",
                 "parameters": [
                     {
                         "in": "path",
@@ -6587,7 +7128,7 @@
         },
         "/products/view": {
             "get": {
-                "operationId": "getItems_6",
+                "operationId": "getItems_7",
                 "parameters": [
                     {
                         "description": "Page number (zero-based)",
@@ -6677,7 +7218,7 @@
         },
         "/products/view/{id}": {
             "get": {
-                "operationId": "getItem_6",
+                "operationId": "getItem_7",
                 "parameters": [
                     {
                         "in": "path",
