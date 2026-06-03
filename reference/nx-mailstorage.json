@@ -235,6 +235,23 @@
                 ],
                 "type": "object"
             },
+            "MigrateResponse": {
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -869,7 +886,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/mail"
+                                    "$ref": "#/components/schemas/MigrateResponse"
                                 }
                             }
                         },
@@ -879,7 +896,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/mail"
+                                    "$ref": "#/components/schemas/MigrateResponse"
                                 }
                             }
                         },
@@ -889,7 +906,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/mail"
+                                    "$ref": "#/components/schemas/MigrateResponse"
                                 }
                             }
                         },
@@ -899,17 +916,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/mail"
+                                    "$ref": "#/components/schemas/MigrateResponse"
                                 }
                             }
                         },
                         "description": "Missing or invalid migration secret"
                     },
+                    "429": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MigrateResponse"
+                                }
+                            }
+                        },
+                        "description": "Too many concurrent migration requests"
+                    },
                     "500": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/mail"
+                                    "$ref": "#/components/schemas/MigrateResponse"
                                 }
                             }
                         },
