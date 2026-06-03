@@ -710,6 +710,16 @@
         "/iam/SSO/google/connect": {
             "post": {
                 "operationId": "connectGoogleSSOConnection",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -850,6 +860,16 @@
         "/iam/SSO/kaspersky/connect": {
             "post": {
                 "operationId": "connectKLSSOConnection",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Real-Ip",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
