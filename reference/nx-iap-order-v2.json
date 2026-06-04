@@ -1736,6 +1736,9 @@
             },
             "Order": {
                 "properties": {
+                    "Indicates if cancel the order without cancel subscription and fulfillment": {
+                        "type": "boolean"
+                    },
                     "Indicates if send email or not in when fail in payment process failed": {
                         "type": "boolean"
                     },
@@ -7993,6 +7996,15 @@
                     },
                     {
                         "in": "query",
+                        "name": "cancelWithoutSubscriptionAndFulfillmentCancellation",
+                        "required": false,
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
                         "name": "cancellationReason",
                         "required": false,
                         "schema": {
@@ -8089,6 +8101,15 @@
                         "schema": {
                             "format": "int64",
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "cancelWithoutSubscriptionAndFulfillmentCancellation",
+                        "required": false,
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
                         }
                     },
                     {
