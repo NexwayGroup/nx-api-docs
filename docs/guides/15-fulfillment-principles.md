@@ -57,7 +57,7 @@ The Nexway team can configure a fulfillment template to call your server. Nexway
 
 ### Request payload
 
-The fulfillment request is sent as a POST HTTP request. For the full field reference including all optional and integration-specific fields, see [Request payload](15a-fulfillment-templating.md#request-payload) in the Fulfillment templating article.
+The fulfillment request is sent as a POST HTTP request. For the full field reference including all optional and integration-specific fields, see [Request payload](15-fulfillment-templating.md#request-payload) in the Fulfillment templating article.
 
 ### Default template
 
@@ -110,13 +110,13 @@ Content-Type: application/json
 }
 ```
 
-The underlying template used to render this payload, along with the full templating reference (syntax, variables, custom functions, response extraction), is in [Fulfillment templating](15a-fulfillment-templating.md#default-fulfillment-template).
+The underlying template used to render this payload, along with the full templating reference (syntax, variables, custom functions, response extraction), is in [Fulfillment templating](15-fulfillment-templating.md#default-fulfillment-template).
 
 ### Security
 
 - **Authentication.** Basic HTTP auth is the default. Credentials are configured per integration during onboarding.
 - **TLS.** Production endpoints must use HTTPS. Self-signed certificates are accepted provided you supply your CA root.
-- **Request signing.** If your server needs to verify that a fulfillment call originated from Nexway, you can enable HMAC-SHA256 request signing. Nexway computes a signature over a declared set of request fields and delivers it as an HTTP header (`X-Nexway-Signature` by default) or as a value inside the request body. See [Outbound request signing](15a-fulfillment-templating.md#outbound-request-signing) for setup and the algorithm specification.
+- **Request signing.** If your server needs to verify that a fulfillment call originated from Nexway, you can enable HMAC-SHA256 request signing. Nexway computes a signature over a declared set of request fields and delivers it as an HTTP header (`X-Nexway-Signature` by default) or as a value inside the request body. See [Outbound request signing](15-fulfillment-templating.md#outbound-request-signing) for setup and the algorithm specification.
 
 ## Response format
 
@@ -171,5 +171,5 @@ The order is set to [`PARTIAL_COMPLETED`](40-order-processing.md) from the first
 
 ## See also
 
-- [Fulfillment templating](15a-fulfillment-templating.md) — full reference for template syntax, variables, custom functions, and response extraction.
+- [Fulfillment templating](15-fulfillment-templating.md) — full reference for template syntax, variables, custom functions, and response extraction.
 - [Notifications](../notifications/01-notificationPrinciples.md) — subscribe to other events about the order or subscription lifecycle.
