@@ -125,9 +125,49 @@ Each operation defines a `responsePaths` map. Keys are extraction names; values 
 
 Any other extraction names are also captured and stored alongside the fulfillment as additional data.
 
-### JSONPath suffix
+### JSONPath examples
 
-A path ending in `+` (for example `$.licenses[0].activationCode+`) is treated as a list-extraction — Nexway captures all matching values rather than the first one.
+Given the following response body:
+
+```json
+{
+  "licenses": [
+    {
+      "key": "ABCD-1234-EFGH-5678",
+      "downloadUrl": "https://cdn.example.com/files/ABCD-1234-EFGH-5678",
+      "expiresAt": "2027-06-04T00:00:00Z"
+    }
+  ],
+  "error": {
+    "code": "",
+    "message": ""
+  }
+}
+```
+
+| Extraction name  | JSONPath expression           | Extracted value                                   |
+|------------------|-------------------------------|---------------------------------------------------|
+| `activationCode` | `$.licenses[0].key`           | `ABCD-1234-EFGH-5678`                             |
+| `activationLink` | `$.licenses[0].downloadUrl`   | `https://cdn.example.com/files/ABCD-1234-EFGH-5678` |
+| `errorCode`      | `$.error.code`                | *(empty — treated as success)*                    |
+| `errorMessage`   | `$.error.message`             | *(empty)*                                         |
+
+To extract all keys from a multi-license response:
+
+```json
+{
+  "licenses": [
+    { "key": "ABCD-1234-EFGH-5678" },
+    { "key": "WXYZ-9876-MNOP-4321" }
+  ]
+}
+```
+
+| Extraction name  | JSONPath expression    | Extracted values                                  |
+|------------------|------------------------|---------------------------------------------------|
+| `activationCode` | `$.licenses[*].key+`   | `["ABCD-1234-EFGH-5678", "WXYZ-9876-MNOP-4321"]` |
+
+A path ending in `+` is treated as a list-extraction — Nexway captures all matching values rather than the first one.
 
 ### Response value conversion
 
