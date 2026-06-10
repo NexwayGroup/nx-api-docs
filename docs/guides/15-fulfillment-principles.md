@@ -10,7 +10,7 @@ Fulfillment is the step in the order workflow where Nexway delivers a purchased 
 * QR codes
 * or simply an acknowledgement from your server
 
-If fulfillment cannot retrieve this confirmation, the order stalls and requires intervention from the operations team.
+If fulfillment fails, the order is set to [`PARTIAL_COMPLETED`](40-order-processing.md) and the operations team is alerted. If the product cannot ultimately be delivered, the order is canceled and the end user is reimbursed.
 
 The fulfillment call is used to:
 * Get a license key/activation code/serial number from a partner's server
