@@ -1,12 +1,13 @@
 # How fulfillment works
 
-Fulfillment is the step in the order workflow that confirms the partner can deliver a purchased product, including triggering physical delivery via ERP integration. Confirmation can take various forms:
+Fulfillment is the step in the order workflow where Nexway delivers a purchased product after a successful payment. Depending on the integration, Nexway either calls your server to retrieve a deliverable or activate paid functionality on your platform, or issues a key from a pre-loaded batch. The deliverable can be:
 
 * license keys
 * activation codes
 * serial numbers
 * activation links
 * certificates
+* QR codes
 * or simply an acknowledgement from your server
 
 If fulfillment cannot retrieve this confirmation, the order stalls and requires intervention from the operations team.
@@ -133,6 +134,8 @@ Your server can return any JSON shape. Nexway extracts the values it needs with 
 
 ### Sample response
 
+Success:
+
 ```json
 {
   "licenses": [
@@ -141,6 +144,17 @@ Your server can return any JSON shape. Nexway extracts the values it needs with 
       "expiresAt": "2027-06-04T00:00:00Z"
     }
   ]
+}
+```
+
+Error:
+
+```json
+{
+  "error": {
+    "code": "LICENSE_POOL_EXHAUSTED",
+    "message": "No available licenses for product ACME-PRO-2026"
+  }
 }
 ```
 
