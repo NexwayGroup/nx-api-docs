@@ -56,42 +56,7 @@ The Nexway team can configure a fulfillment template to call your server. Nexway
 
 ### Request payload
 
-The fulfillment request is sent as a POST HTTP request and has the following attributes:
-
-| Property                | R/O | Type                | Description                                                                                                                    |
-|-------------------------|-----|---------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| licenseId               | R   | UUID                | Fulfillment Id, identifier of the fulfillment process                                                                          |
-| operation               | R   | string              | One of the supported operations: create, renew, upgrade, cancel                                                                         |
-| checkout                | R   | object              | Has some order related attributes (see below):                                                                                 |
-| → orderId                 | R   | string              |                                                                                                                                |
-| → lineItemId              | R   | string              | UUID of the order line item                                                                                                    |
-| → cartExternalContext     | O   | string              | base64 encoded plain json map. Taken from the external context of a shopping cart.  Used to pass customer specific parameters. Example: `eyJjdXN0b21QYXJhbSI6dHJ1ZX0` (decodes to `{"customParam":true}`) |
-| → subscriptionId          | O   | string              | UUID of a subscription                                                                                                         |
-| → trialContext            | O   | string              | `CREATION` or `CONVERSION`                                                                                                     |
-| → price                  | R   | object              | Order price                                                                                                                     |
-| -→ grossPrice            | R   | number              | Order gross price                                                                                                               |
-| -→ currency              | R   | string              | 3-char currency code                                                                                                            |
-| user                    | R   | object              | Buyer attributes:                                                                                                              |
-| → id                      | R   | string              | End-user Id                                                                                                                    |
-| → companyName             | O   | string              |                                                                                                                                |
-| → companyIdentifier       | O   | string              | CNPJ or VAT number. Tax identifier                                                                                             |
-| → firstName               | O   | string              |                                                                                                                                |
-| → lastName                | O   | string              |                                                                                                                                |
-| → email                   | R   | string              |                                                                                                                                |
-| → city                    | O   | string              |                                                                                                                                |
-| → zipCode                 | O   | string              |                                                                                                                                |
-| → country                 | R   | string              | 2 letter ISO code                                                                                                              |
-| → locale                  | R   | string              | Shopping cart locale                                                                                                           |
-| product                 | R   | object              | Product related attributes:                                                                                                    |
-| → id                      | R   | string              | Product Id                                                                                                                     |
-| → publisherProductId      | O   | string              | Publisher/ customer specific product id (if defined)                                                                           |
-| → name                    | R   | string              | Internal product name                                                                                                          |
-| → externalContext         | O   | string              | Any string. Defined in the catalog                                                                                             |
-| → priceFunctionParameters | O   | map(string, string) | Map of price function parameters (if defined on the product level)                                                             |
-| → variables               | O   | map(string, string) | Map of variables (if defined)                                                                                                  |
-| → price                  | R   | object              | Product price                                                                                                                   |
-| — → grossPrice            | R   | number              | Gross price                                                                                                                     |
-| — → currency              | R   | string              | 3-char currency code                                                                                                            |
+The fulfillment request is sent as a POST HTTP request. For the full field reference including all optional and integration-specific fields, see [Request payload](15a-fulfillment-templating.md#request-payload) in the Fulfillment templating article.
 
 ### Default template
 
@@ -99,7 +64,7 @@ Unless customized, Nexway sends the following payload. All payload-table fields 
 
 ```http
 POST https://yourserver.com/licenses/new
-Authorization: Basic <base64(user:password)>
+Authorization: Basic AuthToken
 Content-Type: application/json
 ```
 
@@ -150,6 +115,7 @@ The underlying template used to render this payload, along with the full templat
 
 - **Authentication.** Basic HTTP auth is the default. Credentials are configured per integration during onboarding.
 - **TLS.** Production endpoints must use HTTPS. Self-signed certificates are accepted provided you supply your CA root.
+- **Request signing.** If your server needs to verify that a fulfillment call originated from Nexway, you can enable HMAC-SHA256 request signing. Nexway computes a signature over a declared set of request fields and delivers it as an HTTP header (`X-Nexway-Signature` by default) or as a value inside the request body. See [Outbound request signing](15a-fulfillment-templating.md#outbound-request-signing) for setup and the algorithm specification.
 
 ## Response format
 
@@ -190,4 +156,6 @@ Your server can return any JSON shape. Nexway extracts the values it needs with 
 The order is set to [`PARTIAL_COMPLETED`](40-order-processing.md) from the first failure, and the operations team is alerted. Retries continue in the background. If the order cannot ultimately be fulfilled, it is canceled and the customer is reimbursed.
 
 ## See also
-You may subscribe to our [notifications](../notifications/01-notificationPrinciples.md) to get other events about the order or subscription lifecycle.
+
+- [Fulfillment templating](15a-fulfillment-templating.md) — full reference for template syntax, variables, custom functions, and response extraction.
+- [Notifications](../notifications/01-notificationPrinciples.md) — subscribe to other events about the order or subscription lifecycle.

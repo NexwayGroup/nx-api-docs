@@ -6,23 +6,24 @@ For the high-level fulfillment flow and request payload field reference, see [Ho
 
 ## How a template is used
 
-Each integration carries one template definition per fulfillment operation (`create`, `cancel`, `renew`, `upgrade`, `pause`, `resume`). At call time Nexway:
+Each integration carries one template definition per fulfillment operation (`create`, `cancel`, `renew`, `upgrade`) or a single `fallback` template for all operations. At call time Nexway:
 
-1. Picks the template matching the operation. If no per-operation template is defined, a fallback template is used.
+1. Picks the template matching the operation. If no per-operation template is defined, a `fallback`  template is used.
 2. Renders the URL path and request body against the order's data context.
 3. Sends a `POST` request with the rendered body and the operation's configured headers.
 4. Parses the response with the operation's JSONPath extractors and stores the extracted values on the fulfillment.
 
 ## Template configuration
 
-A template definition has four parts, each scoped to one operation:
+A template definition has five parts, each scoped to one operation:
 
-| Part            | Purpose                                                                                  |
-|-----------------|------------------------------------------------------------------------------------------|
-| `urlComplement` | The URL path appended to the partner's base URL. Supports template syntax.               |
-| `bodyTemplate`  | The request body, rendered to JSON. Supports template syntax.                            |
-| `httpHeaders`   | Map of request headers added on top of the integration's default headers.                |
-| `responsePaths` | Map of JSONPath expressions used to extract values from the partner's response.          |
+| Part                  | Purpose                                                                                  |
+|-----------------------|------------------------------------------------------------------------------------------|
+| `urlComplement`       | The URL path appended to the partner's base URL. Supports template syntax.               |
+| `bodyTemplate`        | The request body, rendered to JSON. Supports [template syntax](#template-syntax).        |
+| `httpHeaders`         | Map of request headers added on top of the integration's default headers.                |
+| `responsePaths`       | Map of JSONPath expressions used to extract values from the partner's response.          |
+| `signatureDefinition` | Optional HMAC-SHA256 signing config. See [Outbound request signing](#outbound-request-signing). |
 
 ## Template syntax
 
@@ -33,83 +34,63 @@ Templates use Go-style `text/template` syntax. The runtime supports the construc
 - **Optional field.** `{{- with .User.FirstName -}}, "firstName": "{{.}}"{{- end -}}` — emits the block only when the field is non-empty. The dash trims surrounding whitespace.
 - **Pipes.** `{{ convertToJson .Product.Variables }}` — passes a value through a function.
 
-## Template context
+## Request payload
 
-The data context is the root object passed to the template. All fields are referenced with PascalCase identifiers (matching the underlying struct).
+These are all the fields available in the template data context. Field names here match template variable names directly (e.g. `{{.Checkout.OrderID}}`). The [default template](#default-fulfillment-template) includes all required fields and the standard optional ones; custom templates can include any subset.
 
-### Top level
-
-| Field                  | Type    | Description                                                       |
-|------------------------|---------|-------------------------------------------------------------------|
-| `LicenseID`            | string  | Fulfillment identifier (UUID)                                     |
-| `Operation`            | string  | One of `create`, `cancel`, `renew`, `upgrade`, `pause`, `resume`  |
-| `OperationExecutionID` | string  | Identifier of this specific execution attempt                     |
-| `RequestTimestamp`     | number  | Epoch milliseconds when the request was queued                    |
-| `Checkout`             | object  | Order-level data (see below)                                      |
-| `User`                 | object  | Buyer data (see below)                                            |
-| `Product`              | object  | Product data (see below)                                          |
-| `AdditionalData`       | map     | Arbitrary key-value pairs; values are lists of strings            |
-
-### `Checkout`
-
-| Field                   | Type            |
-|-------------------------|-----------------|
-| `OrderID`               | string          |
-| `SubscriptionID`        | string          |
-| `CartExternalContext`   | string          |
-| `StoreExternalContext`  | string          |
-| `AffiliateID`           | string          |
-| `ResellerID`            | string          |
-| `BillingPlanID`         | string          |
-| `ProductUsageID`        | string          |
-| `TrialContext`          | string          |
-| `Price.GrossPrice`      | number          |
-| `Price.Currency`        | string          |
-
-### `User`
-
-| Field          | Type   |
-|----------------|--------|
-| `ID`           | string |
-| `Email`        | string |
-| `FirstName`    | string |
-| `LastName`     | string |
-| `CompanyName`  | string |
-| `Street`       | string |
-| `City`         | string |
-| `ZipCode`      | string |
-| `Country`      | string |
-| `Locale`       | string |
-
-### `Product`
-
-| Field                     | Type               |
-|---------------------------|--------------------|
-| `ID`                      | string             |
-| `PublisherProductID`      | string             |
-| `PublisherFulfillmentID`  | string             |
-| `LineItemID`              | string             |
-| `Name`                    | string             |
-| `ExternalContext`         | string             |
-| `StartTimestamp`          | number (epoch ms)  |
-| `ExpirationTimestamp`     | number (epoch ms)  |
-| `Quantity`                | number             |
-| `Price.GrossPrice`        | number             |
-| `Price.Currency`          | string             |
-| `PriceFunctionParameters` | map(string,string) |
-| `Variables`               | map(string,string) |
-| `ActivationLink`          | string             |
-
-### `AdditionalData`
-
-A flat map of arbitrary keys to lists of strings. Common entries:
-
-| Key                  | Origin                                                   |
-|----------------------|----------------------------------------------------------|
-| `ActivationCode`     | Activation code from a previous fulfillment (renewals)   |
-| `PublisherLicenseID` | License identifier returned by the partner               |
-
-Other keys may be present depending on the integration.
+| Field                     | R/O | Type                | Description                                                                                                                    |
+|---------------------------|-----|---------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| LicenseID                 | R   | UUID                | Fulfillment identifier                                                                                                         |
+| OperationExecutionID      | O   | string              | Identifier of this specific execution attempt                                                                                  |
+| RequestTimestamp          | O   | number              | Epoch milliseconds when the request was queued                                                                                 |
+| Operation                 | R   | string              | One of: `create`, `cancel`, `renew` (subscription only), `upgrade` (subscription only)                                        |
+| Checkout                  | R   | object              | Order-level data                                                                                                               |
+| → OrderID                 | R   | string              |                                                                                                                                |
+| → LineItemID              | R   | string              | UUID of the order line item                                                                                                    |
+| → SubscriptionID          | O   | string              | UUID of a subscription                                                                                                         |
+| → CartExternalContext     | O   | string              | Base64-encoded JSON map from the shopping cart's external context. Used to pass customer-specific parameters. Example: `eyJjdXN0b21QYXJhbSI6dHJ1ZX0` (decodes to `{"customParam":true}`) |
+| → TrialContext            | O   | string              | `CREATION` or `CONVERSION`                                                                                                     |
+| → Price                   | R   | object              | Order price                                                                                                                    |
+| –→ GrossPrice             | R   | number              |                                                                                                                                |
+| –→ Currency               | R   | string              | 3-char currency code                                                                                                           |
+| –→ DiscountedPrice        | O   | object              | Present when a discount was applied                                                                                            |
+| ––→ DiscountedGrossPrice  | O   | number              | Post-discount gross price                                                                                                      |
+| ––→ DiscountedNetPrice    | O   | number              |                                                                                                                                |
+| ––→ DiscountRate          | O   | number              | Discount percentage                                                                                                            |
+| User                      | R   | object              | Buyer attributes                                                                                                               |
+| → ID                      | R   | string              | End-user Id                                                                                                                    |
+| → Email                   | R   | string              |                                                                                                                                |
+| → FirstName               | O   | string              |                                                                                                                                |
+| → LastName                | O   | string              |                                                                                                                                |
+| → CompanyName             | O   | string              |                                                                                                                                |
+| → CompanyIdentifier       | O   | string              | CNPJ or VAT number. Tax identifier                                                                                             |
+| → Street                  | O   | string              |                                                                                                                                |
+| → City                    | O   | string              |                                                                                                                                |
+| → ZipCode                 | O   | string              |                                                                                                                                |
+| → Country                 | R   | string              | 2-letter ISO code                                                                                                              |
+| → Locale                  | R   | string              | Shopping cart locale                                                                                                           |
+| Product                   | R   | object              | Product attributes                                                                                                             |
+| → ID                      | R   | UUID                | Product Id                                                                                                                     |
+| → Name                    | R   | string              | Internal product name                                                                                                          |
+| → PublisherProductID      | O   | string              | Publisher/customer-specific product id (if defined)                                                                            |
+| → PublisherFulfillmentID  | O   | string              | Publisher-side fulfillment identifier                                                                                          |
+| → ExternalContext         | O   | string              | Any string. Defined in the catalog                                                                                             |
+| → StartTimestamp          | O   | number              | Epoch milliseconds                                                                                                             |
+| → ExpirationTimestamp     | O   | number              | Epoch milliseconds                                                                                                             |
+| → Quantity                | O   | number              |                                                                                                                                |
+| → ActivationLink          | O   | string              |                                                                                                                                |
+| → PriceFunctionParameters | O   | map(string, string) | Map of price function parameters (if defined on the product level)                                                             |
+| → Variables               | O   | map(string, string) | Map of variables (if defined)                                                                                                  |
+| → Price                   | R   | object              | Product price                                                                                                                  |
+| –→ GrossPrice             | R   | number              |                                                                                                                                |
+| –→ Currency               | R   | string              | 3-char currency code                                                                                                           |
+| –→ DiscountedPrice        | O   | object              | Present when a discount was applied                                                                                            |
+| ––→ DiscountedGrossPrice  | O   | number              | Post-discount gross price                                                                                                      |
+| ––→ DiscountedNetPrice    | O   | number              |                                                                                                                                |
+| ––→ DiscountRate          | O   | number              | Discount percentage                                                                                                            |
+| ––→ DiscountID            | O   | string              |                                                                                                                                |
+| ––→ DiscountCode          | O   | string              |                                                                                                                                |
+| AdditionalData            | O   | map(string, list)   | Arbitrary key-value pairs; values are lists of strings. Common keys: `ActivationCode` (activation code from a previous fulfillment, used in renewals), `PublisherLicenseID` (license identifier returned by the partner). Other keys may be present depending on the integration. |
 
 ## Custom functions
 
@@ -125,6 +106,7 @@ Other keys may be present depending on the integration.
 | `index`                      | `index collection key`             | Indexes into a list or map.                     |
 | `slice`                      | `slice value start end`            | Substring or sublist.                           |
 | `print`, `printf`, `println` | string formatting                  | Format helpers.                                 |
+| `signature`                  | `{{ signature }}`                  | Emits the computed HMAC-SHA256 signature as lowercase hex. Only available when `signatureDefinition.injectInBody = true`. |
 
 ## Response extraction
 
@@ -255,3 +237,119 @@ A partner exposes one endpoint that handles all operations, distinguishing them 
 | `activationCode` | `$.result.licenseKey` |
 | `errorCode`      | `$.error.code`        |
 | `errorMessage`   | `$.error.message`     |
+
+---
+
+## Outbound request signing
+
+If your server needs to verify that a fulfillment call originated from Nexway, you can enable HMAC-SHA256 request signing. Nexway computes a signature over a declared set of request fields and delivers it as an HTTP header, a value in the request body, or both.
+
+### 1. Generate a signing key
+
+A single signing key is held per integration. The 256-bit secret is generated server-side and returned **once** in the creation response — it is never returned again.
+
+| Method   | Path                      | Purpose                                                                                  |
+|----------|---------------------------|------------------------------------------------------------------------------------------|
+| `POST`   | `/signing-keys`           | Generate a new key, discarding any existing one. Returns the secret plaintext once.      |
+| `GET`    | `/signing-keys`           | Returns key metadata (`id`, `algorithm`, `createdAt`). Never returns the secret.         |
+| `DELETE` | `/signing-keys`           | Revoke the active key.                                                                   |
+| `POST`   | `/signing-keys/verify`    | Self-test endpoint — see [Verifying during integration](#verifying-during-integration).  |
+
+Store the secret securely on first creation. To rotate, call `POST /signing-keys` again — the previous secret is discarded immediately and all subsequent fulfillment calls use the new one.
+
+### 2. Configure signing on an operation
+
+Add a `signatureDefinition` block to the relevant operation in the integration's template definition:
+
+| Field           | Type           | Description                                                                                     |
+|-----------------|----------------|-------------------------------------------------------------------------------------------------|
+| `enabled`       | boolean        | Must be `true` to activate signing for this operation.                                          |
+| `signedFields`  | list of string | JSONPath expressions into the fulfillment request (e.g. `$.checkout.orderId`). Sorted and deduplicated on save. |
+| `headerName`    | string         | Header to inject the signature into. Defaults to `X-Nexway-Signature`. Leave blank to suppress. |
+| `injectInBody`  | boolean        | When `true`, the `{{ signature }}` token in `bodyTemplate` is replaced with the hex signature.  |
+
+At least one of `headerName` (non-blank) or `injectInBody = true` must be set when `enabled = true`. Both can be active simultaneously — the same hex value is emitted in each location.
+
+**Validation on save:**
+- `enabled = true` with an empty `signedFields` list is rejected.
+- `injectInBody = true` without a `{{ signature }}` token in `bodyTemplate` is rejected.
+- Each path in `signedFields` must be a valid JSONPath expression that resolves to a scalar.
+
+### Signature algorithm
+
+Both Nexway and your server must produce identical results from the same inputs. The algorithm is fixed at HMAC-SHA256.
+
+**Inputs:** the fulfillment request, the operation's `signedFields` list (in stored order — already sorted), the HMAC secret.
+
+**Steps:**
+
+1. **Resolve** each JSONPath in `signedFields` against the fulfillment request JSON.
+2. **Stringify** each resolved value:
+   - String → raw UTF-8, no quoting.
+   - Integer → decimal with no leading zeros (`3`).
+   - Decimal with no fractional part → integer form (`3.0` → `"3"`).
+   - Decimal with fractional part → shortest form, no trailing zeros (`1.50` → `"1.5"`).
+   - Boolean → `"true"` or `"false"` (lowercase).
+   - `null` or missing path → empty string `""`.
+3. **Build canonical input** — a compact JSON object whose keys are the JSONPath strings (in stored sort order) and whose values are the stringified strings from step 2. No insignificant whitespace. UTF-8, no BOM.
+4. **Compute** `HMAC-SHA256(secretBytes, canonicalInputBytes)`. The secret is used as raw UTF-8 bytes.
+5. **Encode** the 32-byte digest as 64-character **lowercase hex**.
+
+**Reference test vector:**
+
+Request:
+```json
+{
+  "checkout": { "orderId": "ORD-42" },
+  "product":  { "publisherProductId": "PRD-9", "quantity": 3 }
+}
+```
+
+`signedFields` (after save-time sort):
+```
+["$.checkout.orderId", "$.product.publisherProductId", "$.product.quantity"]
+```
+
+Canonical input (exact bytes, no whitespace):
+```
+{"$.checkout.orderId":"ORD-42","$.product.publisherProductId":"PRD-9","$.product.quantity":"3"}
+```
+
+With secret `s3cret`:
+```
+X-Nexway-Signature: a66ccb600993e538aa50cc7b612785b8919bae518242dbd96c8fde8e4558cc9b
+```
+
+### Verifying during integration
+
+Use `POST /signing-keys/verify` to test your implementation without triggering a real fulfillment:
+
+**Request:**
+
+```json
+{
+  "licenseProviderDefinitionId": "<your-integration-id>",
+  "operation": "create",
+  "operationRequest": { ... },
+  "expectedSignature": "<your-computed-hex>"
+}
+```
+
+**Response:**
+
+```json
+{
+  "canonicalInput": "{\"$.checkout.orderId\":\"ORD-42\",...}",
+  "signature": "a66ccb600993e538aa50cc7b612785b8919bae518242dbd96c8fde8e4558cc9b",
+  "match": true
+}
+```
+
+`match` is only present when `expectedSignature` was supplied. Use `canonicalInput` to diff your canonicalization against Nexway's if signatures diverge.
+
+### Security notes
+
+- The secret is returned **once** on key creation and never again — store it immediately.
+- A missing signing key while `enabled = true` causes a **permanent error** on the fulfillment call; no retry is attempted.
+- Keys are scoped per customer — one key cannot be used for another customer's fulfillments.
+- The secret is never included in logs, traces, or error messages.
