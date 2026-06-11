@@ -49,6 +49,18 @@ Upgrade (subscription [mid-term upgrade](35-subscription-management.md)) | Upgra
 | **Typical use**        | Issuing licenses, activating services                        | Updating BI tools, dashboards, CRM systems        |
 | **Delivery guarantee** | Required — blocks order completion                           | Fire-and-forget                                   |
 
+:::tip
+Prefer Fulfillment over Notifications
+
+Even if your product doesn't deliver an activation code or digital asset, we'd still encourage you to use a Fulfillment Call rather than Notifications alone.
+
+Why does this matter?
+
+With Notifications: If a webhook fails while your server is down, the order status on Nexway's side isn't affected — so the order isn't monitored by our operations team, and the buyer may be left waiting without updates.
+
+With a Fulfillment Call: Fulfillment is part of the order workflow itself. If the call fails, the order is automatically flagged and monitored, and end-buyers are kept informed about the delay — helping reduce frustration, cancellations, and chargebacks.
+:::
+
 For details on order notifications, see [Order notification](../notifications/05-orderNotification.md).
 
 ## Custom fulfillment template
