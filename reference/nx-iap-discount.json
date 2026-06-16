@@ -131,7 +131,8 @@
                     "offerSubSource": {
                         "enum": [
                             "SUSPEND",
-                            "RESUME"
+                            "RESUME",
+                            "PAYMENT_FAILURE"
                         ],
                         "type": "string"
                     },
@@ -445,7 +446,8 @@
                         "description": "It defines which offer sub source that should be used for OFFER source. It is mandatory to use it, if OFFER is the discount source",
                         "enum": [
                             "SUSPEND",
-                            "RESUME"
+                            "RESUME",
+                            "PAYMENT_FAILURE"
                         ],
                         "example": "RESUME | SUSPEND",
                         "type": "string"
