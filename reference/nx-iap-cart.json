@@ -272,6 +272,14 @@
                         "description": "External end user id",
                         "type": "string"
                     },
+                    "extraTermsBonuses": {
+                        "description": "Set of extra term bonuses applied on the cart",
+                        "items": {
+                            "$ref": "#/components/schemas/ExtraTermsBonuses"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
                     "flags": {
                         "$ref": "#/components/schemas/Flags",
                         "description": "Set of customer specific flags"
@@ -1802,6 +1810,39 @@
                 },
                 "type": "object"
             },
+            "ExtraTermBonusDetails": {
+                "properties": {
+                    "extraTermBonusTag": {
+                        "type": "string"
+                    },
+                    "initialLicenseNextExpirationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "initialLifeTime": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ExtraTermsBonuses": {
+                "properties": {
+                    "extraTermBonusTag": {
+                        "type": "string"
+                    },
+                    "productId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Flags": {
                 "properties": {
                     "productSubstituted": {
@@ -2431,6 +2472,14 @@
                         "example": "external context",
                         "type": "string"
                     },
+                    "extraTerm": {
+                        "$ref": "#/components/schemas/ExtraTermBonusDetails",
+                        "description": "extra term bonus"
+                    },
+                    "extraTermId": {
+                        "description": "extra term ID",
+                        "type": "string"
+                    },
                     "forceRemoteLicenseNextExpirationDate": {
                         "description": "true if next license expiration date comes from remote catalog",
                         "type": "boolean"
@@ -2730,6 +2779,10 @@
                     "existingLicenseId": {
                         "description": "License id",
                         "example": "b7df28f3-99cb-4ffe-b74e-972dca528f5a",
+                        "type": "string"
+                    },
+                    "extraTermBonusTag": {
+                        "description": "Extra term bonus tag requested for this product",
                         "type": "string"
                     },
                     "forcedBy": {
@@ -3332,7 +3385,8 @@
                             "END_USER",
                             "SHIPPING_ADDRESS",
                             "GIFT_PRODUCT",
-                            "MID_TERM_UPGRADE"
+                            "MID_TERM_UPGRADE",
+                            "EXTRA_TERM"
                         ],
                         "type": "string"
                     }
