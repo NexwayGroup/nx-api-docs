@@ -1441,6 +1441,29 @@
                     "id"
                 ]
             },
+            "com.nx.notification.model.payload.order.ExtraTermBonusDetails": {
+                "description": "Extra term bonus details",
+                "properties": {
+                    "extraTermBonusTag": {
+                        "description": "Extra term bonus tag",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "Extra term bonus unit",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Extra term bonus value",
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "extraTermBonusTag",
+                    "unit",
+                    "value"
+                ]
+            },
             "com.nx.notification.model.payload.order.LastPaymentError": {
                 "description": "Error details if payment failed",
                 "properties": {
@@ -1485,6 +1508,9 @@
                     "externalContext": {
                         "description": "External context data",
                         "type": "string"
+                    },
+                    "extraTerm": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.order.ExtraTermBonusDetails"
                     },
                     "fulfillmentId": {
                         "description": "Fulfillment process identifier",
@@ -3425,7 +3451,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Mon Jun 15 09:17:12 GMT 2026",
+        "generatedAt": "Thu Jun 18 13:09:52 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
