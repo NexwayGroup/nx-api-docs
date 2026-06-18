@@ -710,6 +710,28 @@
                 },
                 "type": "object"
             },
+            "ExtraTermBonusDetails": {
+                "properties": {
+                    "extraTermBonusTag": {
+                        "type": "string"
+                    },
+                    "initialLicenseNextExpirationDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "initialLifeTime": {
+                        "type": "string"
+                    },
+                    "unit": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "Features": {
                 "properties": {
                     "createInvoice": {
@@ -1174,6 +1196,14 @@
                     },
                     "externalContext": {
                         "description": "External context",
+                        "type": "string"
+                    },
+                    "extraTerm": {
+                        "$ref": "#/components/schemas/ExtraTermBonusDetails",
+                        "description": "extra term bonus details"
+                    },
+                    "extraTermId": {
+                        "description": "extra term ID",
                         "type": "string"
                     },
                     "forceRemoteLicenseNextExpirationDate": {
