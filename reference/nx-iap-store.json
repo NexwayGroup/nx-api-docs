@@ -211,6 +211,22 @@
                 },
                 "type": "object"
             },
+            "MandateConfig": {
+                "properties": {
+                    "maxAllowedMandate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "multiplyBy": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "useMandateValue": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -863,6 +879,10 @@
                         "description": "Store logo",
                         "example": "https://www.domain.com/logo/image.png",
                         "type": "string"
+                    },
+                    "mandateConfig": {
+                        "$ref": "#/components/schemas/MandateConfig",
+                        "description": "configuration of mandate value"
                     },
                     "marketplaceStore": {
                         "description": "Indicate if the store is a market place",
