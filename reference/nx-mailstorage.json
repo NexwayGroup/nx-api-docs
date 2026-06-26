@@ -48,9 +48,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -94,9 +92,7 @@
                         "type": "string"
                     },
                     "metadata": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "type": "object"
                     },
                     "sentTime": {
@@ -138,6 +134,7 @@
                         "items": {
                             "type": "string"
                         },
+                        "minItems": 1,
                         "type": "array"
                     }
                 },
@@ -179,6 +176,7 @@
                 "properties": {
                     "body": {
                         "description": "Email body content",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "customerId": {
@@ -198,7 +196,6 @@
                     },
                     "headers": {
                         "additionalProperties": {
-                            "description": "Email headers",
                             "type": "string"
                         },
                         "description": "Email headers",
@@ -216,7 +213,6 @@
                     "tags": {
                         "description": "List of tags for categorization",
                         "items": {
-                            "description": "List of tags for categorization",
                             "type": "string"
                         },
                         "type": "array"
@@ -224,6 +220,7 @@
                     "to": {
                         "description": "Recipient email address(es) - supports multiple addresses separated by comma or semicolon",
                         "example": "recipient@example.com,recipient2@example.com",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -310,10 +307,7 @@
                         "type": "integer"
                     },
                     "sort": {
-                        "items": {
-                            "$ref": "#/components/schemas/SortObject"
-                        },
-                        "type": "array"
+                        "$ref": "#/components/schemas/SortObject"
                     },
                     "totalElements": {
                         "format": "int64",
@@ -344,10 +338,7 @@
                         "type": "boolean"
                     },
                     "sort": {
-                        "items": {
-                            "$ref": "#/components/schemas/SortObject"
-                        },
-                        "type": "array"
+                        "$ref": "#/components/schemas/SortObject"
                     },
                     "unpaged": {
                         "type": "boolean"
@@ -399,20 +390,14 @@
             },
             "SortObject": {
                 "properties": {
-                    "ascending": {
+                    "empty": {
                         "type": "boolean"
                     },
-                    "direction": {
-                        "type": "string"
-                    },
-                    "ignoreCase": {
+                    "sorted": {
                         "type": "boolean"
                     },
-                    "nullHandling": {
-                        "type": "string"
-                    },
-                    "property": {
-                        "type": "string"
+                    "unsorted": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -428,6 +413,7 @@
                         "type": "string"
                     },
                     "contentType": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "createdAt": {
@@ -435,9 +421,11 @@
                         "type": "string"
                     },
                     "filename": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalFilename": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "s3Key": {
@@ -476,6 +464,7 @@
                         "type": "boolean"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -493,12 +482,14 @@
                         "type": "string"
                     },
                     "fromEmail": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "headers": {
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -508,9 +499,7 @@
                         "type": "string"
                     },
                     "metadata": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "type": "object"
                     },
                     "originalId": {
@@ -537,6 +526,7 @@
                         "type": "array"
                     },
                     "toEmail": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "transmissionId": {
@@ -547,6 +537,7 @@
                         "type": "integer"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -576,11 +567,11 @@
         "title": "Mailstorage API",
         "version": "1.0"
     },
-    "openapi": "3.0.1",
+    "openapi": "3.1.0",
     "paths": {
         "/mailstorage/mails": {
             "get": {
-                "operationId": "getMailCollection_1",
+                "operationId": "getMailCollection",
                 "parameters": [
                     {
                         "description": "Comma-separated list of tags",
@@ -679,9 +670,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -692,9 +681,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -735,9 +722,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -763,7 +748,7 @@
                 "x-operationWeight": "300"
             },
             "post": {
-                "operationId": "createItem_1",
+                "operationId": "createItem",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1111,9 +1096,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1254,9 +1237,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1267,9 +1248,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1280,9 +1259,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1371,9 +1348,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1384,9 +1359,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1397,9 +1370,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1410,9 +1381,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1637,6 +1606,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1816,9 +1793,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -1829,9 +1804,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2269,9 +2242,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2282,9 +2253,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2295,9 +2264,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2350,9 +2317,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2396,9 +2361,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2453,9 +2416,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
@@ -2521,9 +2482,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {
-                                        "type": "object"
-                                    },
+                                    "additionalProperties": {},
                                     "type": "object"
                                 }
                             }
