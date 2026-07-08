@@ -369,13 +369,22 @@
                     "notReadyForOrderCauseMessage": {
                         "type": "string"
                     },
+                    "offerCreationSource": {
+                        "description": "Source used to create the offer",
+                        "enum": [
+                            "INTERNAL",
+                            "EXTERNAL"
+                        ],
+                        "type": "string"
+                    },
                     "offerSubSource": {
                         "description": "It defines which offer sub source that should be used if OFFER is the source. It is mandatory to use it, if OFFER is the discount source",
                         "enum": [
                             "SUSPEND",
-                            "RESUME"
+                            "RESUME",
+                            "PAYMENT_FAILURE"
                         ],
-                        "example": "RESUME | SUSPEND",
+                        "example": "RESUME | SUSPEND | PAYMENT_FAILURE",
                         "type": "string"
                     },
                     "onPaymentClickRedirectUrl": {
@@ -3205,6 +3214,21 @@
                         "type": "string"
                     },
                     "externalContext": {
+                        "type": "string"
+                    },
+                    "offerCreationSource": {
+                        "enum": [
+                            "INTERNAL",
+                            "EXTERNAL"
+                        ],
+                        "type": "string"
+                    },
+                    "offerSubSource": {
+                        "enum": [
+                            "SUSPEND",
+                            "RESUME",
+                            "PAYMENT_FAILURE"
+                        ],
                         "type": "string"
                     },
                     "subscriptionId": {
