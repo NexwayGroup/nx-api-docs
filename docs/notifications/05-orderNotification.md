@@ -80,6 +80,10 @@ The following notifications include details about the subscription. Although, su
 | — → discountRate | number (double) | Discount rate applied | O |
 | — → expirationDate | string (date-time) | Product expiration timestamp in ISO 8601 format | O |
 | — → externalContext | string | External context data | R |
+| — → extraTerm | order.ExtraTermBonusDetails |  | O |
+| — — → extraTermBonusTag | string | Extra term bonus tag | R |
+| — — → unit | string | Extra term bonus unit | R |
+| — — → value | integer (int32) | Extra term bonus value | R |
 | — → fulfillmentId | string | Fulfillment process identifier | O |
 | — → id | string | Unique line item identifier | R |
 | — → isUpsell | boolean | Upsell status marker | O |
@@ -141,6 +145,7 @@ The following notifications include details about the subscription. Although, su
 | — → unitPriceExclVAT | number (double) | Unit price excluding tax | R |
 | — → unitPriceIncVAT | number (double) | Unit price including tax | R |
 | — → VATRate | number (double) | Applied sales tax rate | R |
+| → offerCreationSource | string | Source context for offer creation coming from cart | O |
 | → offerSubSource | string | Sub-source designation, e.g. SUSPEND, RESUME | O |
 | → payment | order.Payment |  | O |
 | — → amount | number (double) | Payment amount | O |

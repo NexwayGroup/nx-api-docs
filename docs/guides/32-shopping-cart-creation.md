@@ -112,7 +112,7 @@ Learn more about subscription plan [here](30-discount-api_guide.md)
 
 #### 5. Authorized Cart
 Creates a shopping cart with prefilled shopper's billing information.  
-[`POST /carts`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createItem)  
+[`POST /carts`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createItem)  
 **API Request Example**  
 ```json
 --header 'Authorization: Bearer <API_key>'
@@ -141,7 +141,7 @@ Creates a shopping cart with prefilled shopper's billing information.
 
 #### 6. Custom Cart
 Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. This method cannot be used to create a cart with subscription products. The method also has other business related limitations. Please discuss usage with your account manager first.  
-[`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/index.html#tag/Cart/operation/createCheckout)  
+[`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createCheckout)  
 **API Request Example**
 ```json
 --header 'Authorization: Bearer <API_key>'
