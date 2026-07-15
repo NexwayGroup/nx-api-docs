@@ -1,1202 +1,1870 @@
 {
-    "basePath": "/subscriptions",
-    "consumes": [
-        "application/json"
-    ],
-    "definitions": {
-        "BadRequest": {
-            "properties": {
-                "error": {
-                    "description": "HTTP response status codes label",
-                    "example": "Bad Request",
-                    "type": "string",
-                    "x-go-name": "StatusLabel"
+    "components": {
+        "schemas": {
+            "DiscountApplied": {
+                "description": "One discount contribution to a Price.",
+                "properties": {
+                    "discountAmount": {
+                        "description": "Absolute amount subtracted by this discount.",
+                        "example": 12.0,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountId": {
+                        "description": "Identifier of the discount rule that produced this contribution.",
+                        "example": "8f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "description": "Rate of this discount, as a decimal fraction.",
+                        "example": 0.24,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedGrossPrice": {
+                        "description": "Gross price after this discount was applied.",
+                        "example": 37.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "description": "Net price after this discount was applied.",
+                        "example": 31.66,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPrice": {
+                        "description": "Gross price before this discount was applied.",
+                        "example": 49.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPriceDiscountAmount": {
+                        "description": "Amount subtracted from the gross price by this contribution.",
+                        "example": 12.0,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "model": {
+                        "description": "Discount model. Sample values: `SUBSCRIPTION_PLAN`, `CAMPAIGN`.",
+                        "example": "SUBSCRIPTION_PLAN",
+                        "type": "string"
+                    },
+                    "netPrice": {
+                        "description": "Net price before this discount was applied.",
+                        "example": 41.66,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPriceDiscountAmount": {
+                        "description": "Amount subtracted from the net price by this contribution.",
+                        "example": 10.0,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatDiscountAmount": {
+                        "description": "VAT amount corresponding to this discount contribution.",
+                        "example": 1.67,
+                        "format": "double",
+                        "type": "number"
+                    }
                 },
-                "message": {
-                    "description": "Detailed error message",
-                    "example": "error: field can't be empty",
-                    "type": "string",
-                    "x-go-name": "ErrorMessage"
-                },
-                "path": {
-                    "description": "Resource path",
-                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
-                    "type": "string",
-                    "x-go-name": "Path"
-                },
-                "status": {
-                    "description": "HTTP response error status codes",
-                    "example": 400,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Status"
-                },
-                "timestamp": {
-                    "description": "Error timestamp in milliseconds",
-                    "example": 1593769514607,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Timestamp"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
-        },
-        "DiscountPlan": {
-            "properties": {
-                "nextDiscountStep": {
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "NextDiscountStep"
+            "DiscountPlan": {
+                "description": "Discount plan applied on the subscription's acquisition and future renewals. A plan is a named sequence of steps; startingStep marks where that sequence started. A current step is calculated as a sum of the startingStep and the generation of the subscription.",
+                "properties": {
+                    "nextDiscountStep": {
+                        "description": "Preview of the step that will be applied on the next renewal (not persisted).",
+                        "example": 1,
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "startingStep": {
+                        "description": "Index of the initial step. It is not incremented on each renewal.",
+                        "example": 0,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "tag": {
+                        "description": "Discount plan tag identifying the pricing schedule.",
+                        "example": "welcome-3-months-50off",
+                        "type": "string"
+                    }
                 },
-                "startingStep": {
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "StartingStep"
-                },
-                "tag": {
-                    "type": "string",
-                    "x-go-name": "Tag"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Email": {
-            "properties": {
-                "date": {
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Date"
+            "DiscountedPrice": {
+                "description": "Discount summary for a Price. Contains the discounted net/gross amounts and the full list of individual discounts that were applied.",
+                "properties": {
+                    "allDiscountsApplied": {
+                        "description": "Breakdown of every discount applied to this price.",
+                        "items": {
+                            "$ref": "#/components/schemas/DiscountApplied"
+                        },
+                        "type": "array"
+                    },
+                    "cumulatedDiscountRate": {
+                        "description": "Combined rate of all stacked discounts, as a decimal fraction.",
+                        "example": 0.24,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountId": {
+                        "description": "Identifier of the winning discount.",
+                        "example": "8f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "discountLabel": {
+                        "description": "Human-readable label of the winning discount.",
+                        "example": "Welcome offer - 3 months at 50% off",
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "description": "Effective rate of the winning discount, as a decimal fraction (0.24 = 24%).",
+                        "example": 0.24,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountTestOrder": {
+                        "description": "True when the discount was applied for test/order-preview purposes and should not be reported to accounting.",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "discountedGrossPrice": {
+                        "description": "Gross amount after all discounts.",
+                        "example": 37.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "description": "Net amount after all discounts.",
+                        "example": 31.66,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPriceDiscountAmount": {
+                        "description": "Amount saved on the gross price.",
+                        "example": 12.0,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPriceDiscountAmount": {
+                        "description": "Amount saved on the net price.",
+                        "example": 10.0,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatDiscountAmount": {
+                        "description": "VAT amount corresponding to the discount.",
+                        "example": 1.67,
+                        "format": "double",
+                        "type": "number"
+                    }
                 },
-                "emailId": {
-                    "type": "string",
-                    "x-go-name": "EmailID"
-                },
-                "id": {
-                    "type": "string",
-                    "x-go-name": "ID"
-                },
-                "message": {
-                    "type": "string",
-                    "x-go-name": "Message"
-                },
-                "templateName": {
-                    "type": "string",
-                    "x-go-name": "TemplateName"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Forbidden": {
-            "properties": {
-                "error": {
-                    "description": "HTTP response status codes label",
-                    "example": "Forbidden",
-                    "type": "string",
-                    "x-go-name": "StatusLabel"
+            "Email": {
+                "description": "Record of an email sent to the end user for this subscription.",
+                "properties": {
+                    "date": {
+                        "description": "Timestamp at which the email was queued for delivery.",
+                        "example": "2026-08-15T08:12:34.000Z",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "emailId": {
+                        "description": "Identifier assigned by the mail service after the email was accepted.",
+                        "example": "msg_2024_08_15_abc123",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Local identifier of the email entry.",
+                        "example": "5f8b1a1e-9b3d-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "Optional free-form message attached to the email.",
+                        "type": "string"
+                    },
+                    "templateName": {
+                        "description": "Template used to render the email.",
+                        "example": "SubscriptionCanceled",
+                        "type": "string"
+                    }
                 },
-                "message": {
-                    "description": "Detailed error message",
-                    "example": "Forbidden",
-                    "type": "string",
-                    "x-go-name": "ErrorMessage"
-                },
-                "path": {
-                    "description": "Resource path",
-                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
-                    "type": "string",
-                    "x-go-name": "Path"
-                },
-                "status": {
-                    "description": "HTTP response error status codes",
-                    "example": 403,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Status"
-                },
-                "timestamp": {
-                    "description": "Error timestamp in milliseconds",
-                    "example": 1593769514607,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Timestamp"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
-        },
-        "InternalServerError": {
-            "properties": {
-                "error": {
-                    "description": "HTTP response status codes label",
-                    "example": "Internal Server Error",
-                    "type": "string",
-                    "x-go-name": "StatusLabel"
+            "ExceptionDetail": {
+                "properties": {
+                    "errorType": {
+                        "type": "string"
+                    },
+                    "resourceDisplayName": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "specific": {
+                        "type": "object"
+                    }
                 },
-                "message": {
-                    "description": "Detailed error message",
-                    "example": "invalid memory address or nil pointer dereference",
-                    "type": "string",
-                    "x-go-name": "ErrorMessage"
-                },
-                "path": {
-                    "description": "Resource path",
-                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
-                    "type": "string",
-                    "x-go-name": "Path"
-                },
-                "status": {
-                    "description": "HTTP response error status codes",
-                    "example": 500,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Status"
-                },
-                "timestamp": {
-                    "description": "Error timestamp in milliseconds",
-                    "example": 1593769514607,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Timestamp"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
-        },
-        "LineItem": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "x-go-name": "ID"
+            "Lifecycle": {
+                "description": "Runtime state of a subscription: status, key dates and identifiers of the driving billing engine.",
+                "properties": {
+                    "anniversaryDate": {
+                        "description": "Date until which the subscription is paid \u2014 same value as `expirationDate` (Unix ms).",
+                        "example": 1786780800000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "creationDate": {
+                        "description": "Timestamp at which the subscription was created (Unix ms).",
+                        "example": 1768435200000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "daysBeforeAnniversary": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "estimatedExpirationDate": {
+                        "deprecated": true,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "expirationDate": {
+                        "description": "Date until which the subscription is paid \u2014 same value as `anniversaryDate` (Unix ms).",
+                        "example": 1786780800000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "firstChargeAttemptDate": {
+                        "description": "Timestamp of the first charge attempt in the current billing cycle (Unix ms).",
+                        "example": 1770940800000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "generation": {
+                        "description": "Number of times the subscription has been renewed. `-1` during the trial period, `0` during the first paid term, incremented on each renewal thereafter.",
+                        "example": 3,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "deprecated": true,
+                        "description": "Legacy subscription-engine v1 identifier. Deprecated: no active subscription runs on the v1 engine \u2014 retained only on historical, terminated records.",
+                        "example": 42,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "modelId": {
+                        "description": "Identifier of the subscription model currently driving the lifecycle.",
+                        "example": "9f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "nextBillingDate": {
+                        "description": "Timestamp of the next scheduled billing attempt (Unix ms).",
+                        "example": 1770940800000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "paymentDeadline": {
+                        "description": "Deadline by which the current renewal payment must succeed before the subscription enters Dunning/Expired (Unix ms).",
+                        "example": 1771027200000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "prebillingDate": {
+                        "description": "Next prebilling date \u2014 timestamp at which the prebilling order for the next renewal will be created (Unix ms).",
+                        "example": 1770595200000,
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Current lifecycle status.",
+                        "enum": [
+                            "Active",
+                            "Trial",
+                            "TrialConversion",
+                            "Dunning",
+                            "Suspended",
+                            "Canceled",
+                            "Expired"
+                        ],
+                        "example": "Active",
+                        "type": "string"
+                    },
+                    "subEngineId": {
+                        "description": "Subscription-engine v2 identifier. Always set for active and newly created subscriptions.",
+                        "example": "c7a1c2e0-2b21-4b6f-8b91-1a7c95df4e1d",
+                        "type": "string"
+                    }
                 },
-                "productId": {
-                    "type": "string",
-                    "x-go-name": "ProductId"
-                },
-                "subscriptionId": {
-                    "type": "string",
-                    "x-go-name": "SubscriptionID"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/order"
-        },
-        "NotFound": {
-            "properties": {
-                "error": {
-                    "description": "HTTP response status codes label",
-                    "example": "Not Found",
-                    "type": "string",
-                    "x-go-name": "StatusLabel"
+            "NormalizeException": {
+                "properties": {
+                    "details": {
+                        "items": {
+                            "$ref": "#/components/schemas/ExceptionDetail"
+                        },
+                        "type": "array"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
                 },
-                "message": {
-                    "description": "Detailed error message",
-                    "example": "item not found",
-                    "type": "string",
-                    "x-go-name": "ErrorMessage"
-                },
-                "path": {
-                    "description": "Resource path",
-                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
-                    "type": "string",
-                    "x-go-name": "Path"
-                },
-                "status": {
-                    "description": "HTTP response error status codes",
-                    "example": 404,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Status"
-                },
-                "timestamp": {
-                    "description": "Error timestamp in milliseconds",
-                    "example": 1593769514607,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Timestamp"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
-        },
-        "Order": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "x-go-name": "ID"
+            "Pageable": {
+                "properties": {
+                    "page": {
+                        "format": "int32",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
                 },
-                "lineItems": {
+                "type": "object"
+            },
+            "Price": {
+                "description": "Price returned by the renewal-price endpoint: net/gross amounts, VAT breakdown, currency, and any discount applied.",
+                "properties": {
+                    "currency": {
+                        "description": "ISO-4217 currency of the amounts above.",
+                        "example": "EUR",
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "discountedPrice": {
+                        "$ref": "#/components/schemas/DiscountedPrice",
+                        "description": "Discount details when a discount is applied on top of the base price."
+                    },
+                    "grossMsrp": {
+                        "description": "Manufacturer's suggested retail price, VAT-inclusive.",
+                        "example": 49.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "grossPrice": {
+                        "description": "Gross amount, including VAT.",
+                        "example": 49.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "description": "Net amount, excluding VAT.",
+                        "example": 41.66,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "orderId": {
+                        "description": "Identifier of the pre-billing order the price was read from, when applicable.",
+                        "example": "6d8b3b3e-1d1a-4e3a-9e2b-2b3f9f21c9c1",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "Origin of the price value.",
+                        "enum": [
+                            "INTERNAL",
+                            "EXTERNAL",
+                            "INTERNAL_CONVERTED",
+                            "MANDATE_VALUE"
+                        ],
+                        "type": "string"
+                    },
+                    "vatAmount": {
+                        "description": "Absolute VAT amount for this price.",
+                        "example": 8.33,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmountMsrp": {
+                        "description": "VAT amount for the manufacturer's suggested retail price (MSRP).",
+                        "example": 8.33,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatIncluded": {
+                        "description": "True if the gross amounts already include VAT.",
+                        "example": true,
+                        "type": "boolean"
+                    },
+                    "vatRate": {
+                        "description": "VAT rate as a decimal fraction (0.20 = 20%).",
+                        "example": 0.2,
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "description": "A product covered by the subscription and, on upgrade, the product to switch to.",
+                "properties": {
+                    "dynamicVariables": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Product-level variables forwarded to the pricing engine and used by dynamic pricing rules.",
+                        "type": "object"
+                    },
+                    "id": {
+                        "description": "Product identifier.",
+                        "example": "5a8f2b0c-6f8b-4c8d-9d0a-2c7e0e2c1a15",
+                        "type": "string"
+                    },
+                    "licenseId": {
+                        "description": "License identifier associated with the product, if any.",
+                        "example": "8f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "lineItemId": {
+                        "description": "Identifier of the line item in the initial order that provisioned this product.",
+                        "example": "1b2c3d4e-5f60-7182-93a4-b5c6d7e8f901",
+                        "type": "string"
+                    },
+                    "modelId": {
+                        "description": "On upgrade requests, the target subscription model to switch to. Only honoured when different from the current modelId.",
+                        "example": "9f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "previousLineItemId": {
+                        "description": "Line item identifier from the previous generation. Set after an upgrade to correlate the new product with the one it replaced.",
+                        "example": "0a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9",
+                        "type": "string"
+                    },
+                    "priceFunctionParameters": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Parameters passed to price-function evaluation at renewal.",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "id",
+                    "lineItemId"
+                ],
+                "type": "object"
+            },
+            "ReactivateRequest": {
+                "description": "Options for reactivating a subscription. Optional \u2014 an empty body reactivates with default behaviour (email is sent).",
+                "properties": {
+                    "skipSendingReactivationEmail": {
+                        "description": "When true, no reactivation email is sent to the end user. Defaults to false.",
+                        "example": false,
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchResultSubscription": {
+                "properties": {
                     "items": {
-                        "$ref": "#/definitions/LineItem"
+                        "items": {
+                            "$ref": "#/components/schemas/Subscription"
+                        },
+                        "type": "array"
                     },
-                    "type": "array",
-                    "x-go-name": "LineItems"
-                }
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/order"
-        },
-        "PreBillingRequest": {
-            "properties": {
-                "cartId": {
-                    "type": "string",
-                    "x-go-name": "CartId"
-                },
-                "force": {
-                    "type": "boolean",
-                    "x-go-name": "Force"
-                }
-            },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Product": {
-            "properties": {
-                "dynamicVariables": {
-                    "additionalProperties": {},
-                    "type": "object",
-                    "x-go-name": "DynamicVariables"
-                },
-                "id": {
-                    "type": "string",
-                    "x-go-name": "ID"
-                },
-                "licenseId": {
-                    "type": "string",
-                    "x-go-name": "LicenseId"
-                },
-                "lineItemId": {
-                    "type": "string",
-                    "x-go-name": "LineItemID"
-                },
-                "modelId": {
-                    "type": "string",
-                    "x-go-name": "ModelID"
-                },
-                "previousLineItemId": {
-                    "type": "string",
-                    "x-go-name": "PreviousLineItemID"
-                },
-                "priceFunctionParameters": {
-                    "additionalProperties": {},
-                    "type": "object",
-                    "x-go-name": "PriceFunctionParameters"
-                }
-            },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Subscription": {
-            "properties": {
-                "createDate": {
-                    "description": "Entity creation time.\nValue is auto generated upon creation and read only.\nTimestamp in milliseconds.",
-                    "example": 1593683684789,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "CreateDate"
-                },
-                "currency": {
-                    "type": "string",
-                    "x-go-name": "Currency"
-                },
-                "customerId": {
-                    "description": "Associates entity to certain customer.",
-                    "example": "e0436791-5866-406d-b0c8-3ba32ead438a",
-                    "type": "string",
-                    "x-go-name": "CustomerID"
-                },
-                "dbVersion": {
-                    "description": "Concurrent operations check mechanism.\n\nUsed in update actions.\nValue is auto generated upon creation/update and read only.\n\nPrevent for any issue during concurrent update transaction done by\nparallel applications. Upon spotted dbVersion incorrectness a 412 retry\nerror is returned.\nLet's consider a scenario where two application are trying update same\nentity:\n\nApp 1:\nGET entity request at 00:00:00.000\nReceived dbVersion=0\nchange entity data\nPUT entity request at 00:00:00.009\nupdated automatically dbVersion=1\n\nApp 2:\nGET entity request with at 00:00:00.005\nReceived dbVersion=0 because update of App 1 haven't occurred yet\nchange entity data\nupdate entity at 00:00:00.014\n412 Error, because dbVersion=1 after update of App 1",
-                    "example": 0,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "DbVersion"
-                },
-                "decodedExternalContext": {
-                    "additionalProperties": {},
-                    "type": "object",
-                    "x-go-name": "DecodedExternalContext"
-                },
-                "discountPlan": {
-                    "$ref": "#/definitions/DiscountPlan"
-                },
-                "emails": {
+            "SearchResultSubscriptionModel": {
+                "properties": {
                     "items": {
-                        "$ref": "#/definitions/Email"
+                        "items": {
+                            "$ref": "#/components/schemas/SubscriptionModel"
+                        },
+                        "type": "array"
                     },
-                    "type": "array",
-                    "x-go-name": "Emails"
-                },
-                "enduserId": {
-                    "description": "Associates entity to certain end user.",
-                    "example": "c84b801f-6f8d-4b32-8b8e-406e91a473d6",
-                    "type": "string",
-                    "x-go-name": "EnduserID"
-                },
-                "externalContext": {
-                    "type": "string",
-                    "x-go-name": "ExternalContext"
-                },
-                "externalRefId": {
-                    "type": "string",
-                    "x-go-name": "ExternalRefId"
-                },
-                "id": {
-                    "description": "Entity id.\nValue is auto generated upon creation and read only.",
-                    "example": "d87e0973-980a-4485-a39d-682184a8988a",
-                    "type": "string",
-                    "x-go-name": "ID"
-                },
-                "imported": {
-                    "type": "boolean",
-                    "x-go-name": "Imported"
-                },
-                "initialOrderId": {
-                    "type": "string",
-                    "x-go-name": "InitialOrderId"
-                },
-                "layout": {
-                    "type": "string",
-                    "x-go-name": "Layout"
-                },
-                "layoutName": {
-                    "type": "string",
-                    "x-go-name": "LayoutName"
-                },
-                "lifecycle": {
-                    "properties": {
-                        "anniversaryDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "AnniversaryDate"
-                        },
-                        "creationDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "CreationDate"
-                        },
-                        "daysBeforeAnniversary": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "DaysBeforeAnniversary"
-                        },
-                        "estimatedExpirationDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "EstimatedExpirationDate"
-                        },
-                        "expirationDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "ExpirationDate"
-                        },
-                        "generation": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "Generation"
-                        },
-                        "id": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "ID"
-                        },
-                        "modelId": {
-                            "type": "string",
-                            "x-go-name": "ModelID"
-                        },
-                        "nextBillingDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "NextBillingDate"
-                        },
-                        "paymentDeadline": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "PaymentDeadline"
-                        },
-                        "prebillingDate": {
-                            "format": "int64",
-                            "type": "integer",
-                            "x-go-name": "PrebillingDate"
-                        },
-                        "sgSubId": {
-                            "type": "string",
-                            "x-go-name": "SGSubID"
-                        },
-                        "status": {
-                            "type": "string",
-                            "x-go-name": "Status"
-                        }
+                    "last": {
+                        "type": "boolean"
                     },
-                    "type": "object",
-                    "x-go-name": "Lifecycle"
-                },
-                "mandateValue": {
-                    "format": "double",
-                    "type": "number",
-                    "x-go-name": "MandateValue"
-                },
-                "migratedFromCustomerId": {
-                    "type": "string",
-                    "x-go-name": "MigratedFromCustomerId"
-                },
-                "model": {
-                    "$ref": "#/definitions/SubscriptionModel"
-                },
-                "modelId": {
-                    "type": "string",
-                    "x-go-name": "ModelID"
-                },
-                "name": {
-                    "type": "string",
-                    "x-go-name": "Name"
-                },
-                "nextProducts": {
-                    "items": {
-                        "$ref": "#/definitions/Product"
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
                     },
-                    "type": "array",
-                    "x-go-name": "NextProducts"
-                },
-                "products": {
-                    "items": {
-                        "$ref": "#/definitions/Product"
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
                     },
-                    "type": "array",
-                    "x-go-name": "Products"
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
                 },
-                "source": {
-                    "type": "string",
-                    "x-go-name": "Source"
-                },
-                "storeId": {
-                    "type": "string",
-                    "x-go-name": "StoreID"
-                },
-                "updateDate": {
-                    "description": "Entity update time.\nValue is auto generated upon creation/update and read only.\nTimestamp in milliseconds.",
-                    "example": 1593685645385,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "UpdateDate"
-                },
-                "upgradable": {
-                    "type": "boolean",
-                    "x-go-name": "Upgradable"
-                }
+                "type": "object"
             },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
+            "Subscription": {
+                "description": "A subscription owned by an end user for a set of products, driven by a subscription model that dictates its billing term.",
+                "properties": {
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "currency": {
+                        "description": "ISO-4217 currency used for renewals.",
+                        "example": "EUR",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "decodedExternalContext": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Decoded form of externalContext.",
+                        "readOnly": true,
+                        "type": "object"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/DiscountPlan",
+                        "description": "Discount plan applied on renewals, if any."
+                    },
+                    "emails": {
+                        "description": "Emails sent for this subscription (welcome, renewal, cancellation\u2026).",
+                        "items": {
+                            "$ref": "#/components/schemas/Email"
+                        },
+                        "readOnly": true,
+                        "type": "array"
+                    },
+                    "enduserId": {
+                        "type": "string"
+                    },
+                    "externalContext": {
+                        "description": "Opaque JSON payload carried from the storefront; decoded into decodedExternalContext.",
+                        "type": "string"
+                    },
+                    "externalRefId": {
+                        "description": "Partner-provided reference id used to correlate this subscription with an external system.",
+                        "example": "PARTNER-2024-000123",
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "imported": {
+                        "description": "True when the subscription was imported from an external system instead of being created via checkout.",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "initialOrderId": {
+                        "description": "Identifier of the order that created the subscription.",
+                        "example": "6d8b3b3e-1d1a-4e3a-9e2b-2b3f9f21c9c1",
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "layout": {
+                        "description": "Layout code used to render the subscription in the storefront.",
+                        "example": "default",
+                        "type": "string"
+                    },
+                    "layoutName": {
+                        "description": "Layout display name.",
+                        "example": "Default layout",
+                        "type": "string"
+                    },
+                    "lifecycle": {
+                        "$ref": "#/components/schemas/Lifecycle",
+                        "description": "Current lifecycle state: dates, status and engine identifiers."
+                    },
+                    "mandateValue": {
+                        "description": "Mandate value for recurring payments, in the subscription currency.",
+                        "example": 49.99,
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "migratedFromCustomerId": {
+                        "description": "Original customer id when the subscription was migrated from another customer.",
+                        "example": "b2c9f3ee-8a4d-4a06-8a10-95f2c9adf7c1",
+                        "type": "string"
+                    },
+                    "model": {
+                        "$ref": "#/components/schemas/SubscriptionModel",
+                        "description": "Subscription model resolved from modelId (populated on read, not persisted).",
+                        "readOnly": true
+                    },
+                    "modelId": {
+                        "description": "Identifier of the subscription model that drives the billing schedule.",
+                        "example": "9f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Human-readable name of the subscription (usually the product name).",
+                        "example": "Kaspersky Total Security - 3 devices",
+                        "type": "string"
+                    },
+                    "nextProducts": {
+                        "description": "Products that will replace the current products at the next renewal (populated during upgrade).",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        },
+                        "type": "array"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "paymentMethodIsNoLongerReplayable": {
+                        "description": "True when the stored payment method cannot be replayed for further charges.",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "paymentMethodIsNoLongerReplayableReason": {
+                        "description": "Reason returned by the payment provider when the payment method is no longer replayable.",
+                        "example": "card_expired",
+                        "type": "string"
+                    },
+                    "products": {
+                        "description": "Products currently covered by the subscription.",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        },
+                        "type": "array"
+                    },
+                    "remotePriceParameters": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Parameters forwarded to the remote pricing engine to fetch the price of the next renewal order.",
+                        "type": "object"
+                    },
+                    "source": {
+                        "description": "Origin of the subscription (e.g. Nexway, partner code); not persisted.",
+                        "example": "Nexway",
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "description": "Identifier of the store that owns this subscription.",
+                        "example": "df8ad22a-5038-11eb-ae93-0242ac130002",
+                        "type": "string"
+                    },
+                    "subscriptionSuspendedUponEndUserDeletion": {
+                        "description": "True if the subscription was suspended because the owning end user was deleted.",
+                        "example": false,
+                        "type": "boolean"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "upgradable": {
+                        "description": "True if the subscription may be upgraded to another plan.",
+                        "example": true,
+                        "type": "boolean"
+                    },
+                    "v2": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "modelId",
+                    "name",
+                    "products",
+                    "storeId"
+                ],
+                "type": "object"
+            },
+            "SubscriptionModel": {
+                "description": "Defines the schedule that drives a subscription: billing term, prebilling timing and charge-attempt cadence.",
+                "properties": {
+                    "customer": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object",
+                        "writeOnly": true
+                    },
+                    "customerId": {
+                        "description": "Identifier of the customer this model belongs to.",
+                        "example": "b2c9f3ee-8a4d-4a06-8a10-95f2c9adf7c1",
+                        "type": "string"
+                    },
+                    "durationUntilTrialEnd": {
+                        "description": "Number of days between the subscription start and the end of the trial period. Absent when the model has no trial.",
+                        "example": 14,
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "events": {
+                        "items": {
+                            "additionalProperties": {
+                                "type": "object"
+                            },
+                            "type": "object"
+                        },
+                        "type": "array",
+                        "writeOnly": true
+                    },
+                    "id": {
+                        "description": "Subscription model identifier.",
+                        "example": "9f2a1e6c-4b31-4c8b-8f0d-1e42b7d5aa10",
+                        "type": "string"
+                    },
+                    "lifetime": {
+                        "$ref": "#/components/schemas/Term",
+                        "writeOnly": true
+                    },
+                    "name": {
+                        "description": "Human-readable model name.",
+                        "example": "Monthly plan - 1 device",
+                        "type": "string"
+                    },
+                    "term": {
+                        "$ref": "#/components/schemas/Term"
+                    }
+                },
+                "type": "object"
+            },
+            "Term": {
+                "description": "Billing term expressed as a duration (value + unit).",
+                "properties": {
+                    "unit": {
+                        "description": "Unit of the duration.",
+                        "enum": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                        ],
+                        "example": "month",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Numeric duration.",
+                        "example": 1,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpgradeRequest": {
+                "description": "Body of the /subscriptions/{id}/upgrade call. Set `lifecycle.expirationDate` to a Unix timestamp (milliseconds) strictly later than the current expiration date to extend the subscription.",
+                "properties": {
+                    "lifecycle": {
+                        "$ref": "#/components/schemas/Lifecycle",
+                        "description": "Lifecycle overrides. Set `expirationDate` to a Unix timestamp (milliseconds) strictly later than the current expiration date to extend the subscription."
+                    },
+                    "source": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
         },
-        "SubscriptionModel": {
-            "properties": {
-                "customerId": {
-                    "type": "string",
-                    "x-go-name": "CustomerID"
-                },
-                "durationUntilTrialEnd": {
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "DurationUntilTrialEnd"
-                },
-                "id": {
-                    "type": "string",
-                    "x-go-name": "ID"
-                },
-                "name": {
-                    "type": "string",
-                    "x-go-name": "Name"
-                },
-                "term": {
-                    "$ref": "#/definitions/Term"
-                }
-            },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Term": {
-            "properties": {
-                "unit": {
-                    "type": "string",
-                    "x-go-name": "Unit"
-                },
-                "value": {
-                    "format": "int64",
-                    "type": "string",
-                    "x-go-name": "Value"
-                }
-            },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nexwaygroup/nx-iap-subscription/model"
-        },
-        "Unauthorized": {
-            "properties": {
-                "error": {
-                    "description": "HTTP response status codes label",
-                    "example": "Unauthorized",
-                    "type": "string",
-                    "x-go-name": "StatusLabel"
-                },
-                "message": {
-                    "description": "Detailed error message",
-                    "example": "Unauthorized",
-                    "type": "string",
-                    "x-go-name": "ErrorMessage"
-                },
-                "path": {
-                    "description": "Resource path",
-                    "example": "/service-name/resource/36a6d3ac-207f-4b64-be01-664c1edbd38b",
-                    "type": "string",
-                    "x-go-name": "Path"
-                },
-                "status": {
-                    "description": "HTTP response error status codes",
-                    "example": 401,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Status"
-                },
-                "timestamp": {
-                    "description": "Error timestamp in milliseconds",
-                    "example": 1593769514607,
-                    "format": "int64",
-                    "type": "integer",
-                    "x-go-name": "Timestamp"
-                }
-            },
-            "type": "object",
-            "x-go-package": "gitlab.nexway.build/nexway/nx-go-starter/httphelper/swagger"
+        "securitySchemes": {
+            "Bearer": {
+                "bearerFormat": "JWT",
+                "description": "Enter Bearer token",
+                "scheme": "bearer",
+                "type": "http"
+            }
         }
     },
-    "host": "api.staging.nexway.build",
     "info": {
-        "description": "This service provides subscription resources and actions:",
-        "title": "Subscription Service.",
-        "version": "1.0.0"
+        "description": "API to manage monetize subscription",
+        "license": {
+            "name": "Nexway License Version 1.0"
+        },
+        "title": "Subscription",
+        "version": "1.0"
     },
+    "openapi": "3.1.0",
     "paths": {
-        "/subscriptions": {
+        "/subscription-manager/models": {
             "get": {
-                "description": "Get all subscriptions",
-                "operationId": "GetAllSubscriptions",
+                "description": "Paged listing of subscription models visible to the caller.",
+                "operationId": "getSubscriptionModels",
                 "parameters": [
                     {
-                        "default": 50,
-                        "description": "Amount of items returned per pagination page",
-                        "format": "int64",
                         "in": "query",
-                        "name": "size",
-                        "type": "integer",
-                        "x-go-name": "Size"
-                    },
-                    {
-                        "default": 0,
-                        "description": "Pagination page starting from 0",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "page",
-                        "type": "integer",
-                        "x-go-name": "Page"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/listSubscriptionsSuccess"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    },
-                    "403": {
-                        "$ref": "#/responses/starterForbidden"
-                    },
-                    "500": {
-                        "$ref": "#/responses/starterInternalServerError"
-                    }
-                },
-                "summary": "Get all subscriptions"
-            },
-            "post": {
-                "description": "Create a subscription",
-                "operationId": "createSubscription",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "Body",
+                        "name": "pageable",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Subscription"
+                            "$ref": "#/components/schemas/Pageable"
                         }
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultSubscriptionModel"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     },
                     "401": {
-                        "$ref": "#/responses/starterUnauthorized"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
                     },
                     "403": {
-                        "$ref": "#/responses/starterForbidden"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
                     },
                     "500": {
-                        "$ref": "#/responses/starterInternalServerError"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
                     }
                 },
-                "summary": "Create a subscription",
+                "summary": "Search subscription models",
                 "tags": [
-                    "Subscriptions"
-                ]
+                    "Subscription Model"
+                ],
+                "x-operationWeight": "200"
             }
         },
-        "/subscriptions/models": {
+        "/subscription-manager/models/{modelId}": {
             "get": {
-                "description": "Get all subscriptions models",
-                "operationId": "GetAllSubscriptionsModels",
+                "description": "Return the subscription model identified by its id, including billing term and trial duration.",
+                "operationId": "getSubscriptionModel",
                 "parameters": [
                     {
-                        "default": 50,
-                        "description": "Amount of items returned per pagination page",
-                        "format": "int64",
-                        "in": "query",
-                        "name": "size",
-                        "type": "integer",
-                        "x-go-name": "Size"
+                        "description": "Subscription model identifier",
+                        "in": "path",
+                        "name": "modelId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriptionModel"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get a subscription model",
+                "tags": [
+                    "Subscription Model"
+                ],
+                "x-operationWeight": "100"
+            }
+        },
+        "/subscription-manager/subscriptions": {
+            "get": {
+                "operationId": "getItems",
+                "parameters": [
                     {
-                        "default": 0,
-                        "description": "Pagination page starting from 0",
-                        "format": "int64",
+                        "description": "Page number (zero-based)",
                         "in": "query",
                         "name": "page",
-                        "type": "integer",
-                        "x-go-name": "Page"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/listSubscriptionsModelsSuccess"
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
                     },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    },
-                    "403": {
-                        "$ref": "#/responses/starterForbidden"
-                    },
-                    "500": {
-                        "$ref": "#/responses/starterInternalServerError"
-                    }
-                },
-                "summary": "Get all subscriptions models"
-            }
-        },
-        "/subscriptions/models/{model}": {
-            "get": {
-                "description": "Get a subscription model by name",
-                "operationId": "GetSubscriptionModel",
-                "parameters": [
                     {
-                        "description": "Model name",
-                        "in": "path",
-                        "name": "model",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "Model"
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultSubscription"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     },
                     "401": {
-                        "$ref": "#/responses/starterUnauthorized"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
                     },
                     "403": {
-                        "$ref": "#/responses/starterForbidden"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
                     },
                     "500": {
-                        "$ref": "#/responses/starterInternalServerError"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
                     }
                 },
-                "summary": "Get a subscription model by name",
+                "summary": "Get items",
                 "tags": [
-                    "Subscriptions"
-                ]
+                    "Subscription"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Subscription"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "300"
             }
         },
-        "/subscriptions/{subscriptionId}": {
+        "/subscription-manager/subscriptions/{id}": {
             "delete": {
-                "description": "Delete a subscription by id",
-                "operationId": "DeleteSubscription",
+                "operationId": "deleteItem",
                 "parameters": [
                     {
-                        "description": "ID of subscription",
                         "in": "path",
-                        "name": "subscriptionId",
+                        "name": "id",
                         "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
                     "204": {
-                        "$ref": "#/responses/starterSuccessNoContent"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
                     },
                     "401": {
-                        "$ref": "#/responses/starterUnauthorized"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
                     },
                     "403": {
-                        "$ref": "#/responses/starterForbidden"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
                     },
                     "500": {
-                        "$ref": "#/responses/starterInternalServerError"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
                     }
                 },
-                "summary": "Delete a subscription by id",
+                "summary": "Delete item",
                 "tags": [
-                    "Subscriptions"
-                ]
+                    "Subscription"
+                ],
+                "x-operationWeight": "500"
             },
             "get": {
-                "description": "Get a subscription by id",
-                "operationId": "GetSubscription",
+                "operationId": "getItem",
                 "parameters": [
                     {
-                        "description": "ID of subscription",
                         "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    },
-                    "403": {
-                        "$ref": "#/responses/starterForbidden"
-                    },
-                    "500": {
-                        "$ref": "#/responses/starterInternalServerError"
-                    }
-                },
-                "summary": "Get a subscription by id",
-                "tags": [
-                    "Subscriptions"
-                ]
-            },
-            "patch": {
-                "description": "Update a subscription by id",
-                "operationId": "updateSubscription",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "Body",
+                        "name": "id",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Subscription"
+                            "type": "string"
                         }
-                    },
-                    {
-                        "description": "ID of subscription",
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscription"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     },
                     "401": {
-                        "$ref": "#/responses/starterUnauthorized"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
                     },
                     "403": {
-                        "$ref": "#/responses/starterForbidden"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
                     },
                     "500": {
-                        "$ref": "#/responses/starterInternalServerError"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
                     }
                 },
-                "summary": "Update a subscription by id",
+                "summary": "Get item",
                 "tags": [
-                    "Subscriptions"
-                ]
+                    "Subscription"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Subscription"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscription"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "400"
             }
         },
-        "/subscriptions/{subscriptionId}/cancel": {
+        "/subscription-manager/subscriptions/{subscriptionId}/cancel": {
             "post": {
-                "description": "Cancel subscription",
+                "description": "Move the subscription to the terminal Canceled state via the billing engine. Emits a canceled event and sends the cancellation email to the end user unless skipEmail is set.",
                 "operationId": "cancelSubscription",
                 "parameters": [
                     {
-                        "description": "ID of subscription",
+                        "description": "Subscription identifier",
                         "in": "path",
                         "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    }
-                },
-                "summary": "Cancel subscription",
-                "tags": [
-                    "Subscriptions"
-                ]
-            }
-        },
-        "/subscriptions/{subscriptionId}/prebill": {
-            "post": {
-                "description": "This endpoint is used for creating pre-billed orders when pre-billings don't exist. For example, it is used for orders when discount source is OFFER\n\nThis endpoint may be used in the case of a discount OFFER process to pre-bill a subscription when pre-billing does not exist.",
-                "operationId": "pre-billing",
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/PreBilledOrderResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    },
-                    "403": {
-                        "$ref": "#/responses/starterForbidden"
-                    },
-                    "500": {
-                        "$ref": "#/responses/starterInternalServerError"
-                    }
-                },
-                "summary": "Pre-bill a subscription",
-                "tags": [
-                    "Subscriptions"
-                ]
-            }
-        },
-        "/subscriptions/{subscriptionId}/reactivate": {
-            "post": {
-                "description": "Reactivate subscription",
-                "operationId": "reactivateSubscription",
-                "parameters": [
-                    {
-                        "description": "ID of subscription",
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    }
-                },
-                "summary": "Reactivate subscription",
-                "tags": [
-                    "Subscriptions"
-                ]
-            }
-        },
-        "/subscriptions/{subscriptionId}/suspend": {
-            "post": {
-                "description": "Suspend subscription",
-                "operationId": "suspendSubscription",
-                "parameters": [
-                    {
-                        "description": "ID of subscription",
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
-                    },
-                    "401": {
-                        "$ref": "#/responses/starterUnauthorized"
-                    }
-                },
-                "summary": "Suspend subscription",
-                "tags": [
-                    "Subscriptions"
-                ]
-            }
-        },
-        "/subscriptions/{subscriptionId}/upgrade": {
-            "post": {
-                "description": "Upgrade subscription",
-                "operationId": "upgradeSubscription",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "Body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Subscription"
+                            "type": "string"
                         }
                     },
                     {
-                        "description": "ID of subscription",
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string",
-                        "x-go-name": "SubscriptionId"
+                        "description": "If true, no cancellation email is sent to the end user.",
+                        "in": "query",
+                        "name": "skipEmail",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "$ref": "#/responses/SubscriptionsSuccessResponse"
-                    },
-                    "400": {
-                        "$ref": "#/responses/starterBadRequest"
+                        "description": "Canceled"
                     },
                     "401": {
-                        "$ref": "#/responses/starterUnauthorized"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
                     }
                 },
-                "summary": "Upgrade subscription",
+                "summary": "Cancel a subscription",
                 "tags": [
-                    "Subscriptions"
-                ]
+                    "Subscription"
+                ],
+                "x-operationWeight": "900"
+            }
+        },
+        "/subscription-manager/subscriptions/{subscriptionId}/reactivate": {
+            "post": {
+                "description": "Resume a suspended or canceled subscription. By default the end user receives a reactivation email; set skipSendingReactivationEmail to disable it.",
+                "operationId": "reactivateSubscription",
+                "parameters": [
+                    {
+                        "description": "Subscription identifier",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReactivateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reactivated"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Reactivate a subscription",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "800"
+            }
+        },
+        "/subscription-manager/subscriptions/{subscriptionId}/renewalPrice": {
+            "get": {
+                "description": "Return the price that will be charged on the next renewal, including VAT breakdown and any applicable discount. Prefers the price of an existing pre-billing order when available, otherwise recomputes it from the next-generation products. Only allowed when the subscription is in Active, Dunning, Suspended, Trial or TrialConversion state; other statuses return 400.",
+                "operationId": "getRenewalPrice",
+                "parameters": [
+                    {
+                        "description": "Subscription identifier",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Price"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get the next renewal price",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "1100"
+            }
+        },
+        "/subscription-manager/subscriptions/{subscriptionId}/setDiscountPlan": {
+            "post": {
+                "description": "Set or replace the discount plan applied on future renewals. Providing an empty body clears the current plan.",
+                "operationId": "setDiscountPlan",
+                "parameters": [
+                    {
+                        "description": "Subscription identifier",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DiscountPlan"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Discount plan applied"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Attach a discount plan to a subscription",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "1000"
+            }
+        },
+        "/subscription-manager/subscriptions/{subscriptionId}/suspend": {
+            "post": {
+                "description": "Pause billing and product entitlement. Rejected when the subscription is already in a terminal state (Canceled or Expired). Emits a suspended event; a suspension email is sent to the end user unless the request is flagged as partner-initiated. The subscription can be resumed later via the reactivate endpoint.",
+                "operationId": "suspendSubscription",
+                "parameters": [
+                    {
+                        "description": "Subscription identifier",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Flag the suspension as initiated by a partner (only honoured for internal/customer/nexway callers).",
+                        "in": "query",
+                        "name": "byPartner",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suspended"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Suspend a subscription",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "700"
+            }
+        },
+        "/subscription-manager/subscriptions/{subscriptionId}/upgrade": {
+            "post": {
+                "description": "Extend the expiration date of an active subscription to give the end user additional time. Typical use cases include customer-service scenarios, promotional extensions, and other business needs. The new `expirationDate` must be later than the current one and expressed as a Unix timestamp in milliseconds. Only works for active subscriptions \u2014 cannot be applied to expired or canceled ones.\n\nTo update the product a subscription will renew with, use `POST /purchases/{subscriptionId}` instead.",
+                "operationId": "upgradeSubscription",
+                "parameters": [
+                    {
+                        "description": "Subscription identifier",
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpgradeRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upgrade accepted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Extend a subscription's expiration date",
+                "tags": [
+                    "Subscription"
+                ],
+                "x-operationWeight": "600"
             }
         }
     },
-    "produces": [
-        "application/json"
-    ],
-    "responses": {
-        "PreBilledOrderResponse": {
-            "description": "",
-            "schema": {
-                "$ref": "#/definitions/Order"
-            }
-        },
-        "SubscriptionsSuccessResponse": {
-            "description": "",
-            "schema": {
-                "$ref": "#/definitions/Subscription"
-            }
-        },
-        "listSubscriptionsModelsSuccess": {
-            "description": "Success",
-            "schema": {
-                "properties": {
-                    "format": {
-                        "description": "Available formats: short, full.\nDefault value: short.",
-                        "example": "short",
-                        "type": "string",
-                        "x-go-name": "Format"
-                    },
-                    "items": {
-                        "description": "List of found entities.",
-                        "items": {
-                            "$ref": "#/definitions/SubscriptionModel"
-                        },
-                        "type": "array",
-                        "x-go-name": "Items"
-                    },
-                    "last": {
-                        "description": "Pagination last page indicator.",
-                        "example": false,
-                        "type": "boolean",
-                        "x-go-name": "ComputedIsLastPage"
-                    },
-                    "number": {
-                        "description": "Current displayed pagination page.",
-                        "example": 41,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "Page"
-                    },
-                    "size": {
-                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
-                        "example": 10,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "Size"
-                    },
-                    "totalItems": {
-                        "description": "Total amount of items found for current search.",
-                        "example": 100523,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "TotalMatchingItems"
-                    },
-                    "totalPages": {
-                        "description": "Total amount of pages to paginate.",
-                        "example": 10053,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "ComputedTotalPages"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "listSubscriptionsSuccess": {
-            "description": "Success",
-            "schema": {
-                "properties": {
-                    "format": {
-                        "description": "Available formats: short, full.\nDefault value: short.",
-                        "example": "short",
-                        "type": "string",
-                        "x-go-name": "Format"
-                    },
-                    "items": {
-                        "description": "List of found entities.",
-                        "items": {
-                            "$ref": "#/definitions/Subscription"
-                        },
-                        "type": "array",
-                        "x-go-name": "Items"
-                    },
-                    "last": {
-                        "description": "Pagination last page indicator.",
-                        "example": false,
-                        "type": "boolean",
-                        "x-go-name": "ComputedIsLastPage"
-                    },
-                    "number": {
-                        "description": "Current displayed pagination page.",
-                        "example": 41,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "Page"
-                    },
-                    "size": {
-                        "description": "Amount of items returned per pagination page.\nDefault value: 50.",
-                        "example": 10,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "Size"
-                    },
-                    "totalItems": {
-                        "description": "Total amount of items found for current search.",
-                        "example": 100523,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "TotalMatchingItems"
-                    },
-                    "totalPages": {
-                        "description": "Total amount of pages to paginate.",
-                        "example": 10053,
-                        "format": "int64",
-                        "type": "integer",
-                        "x-go-name": "ComputedTotalPages"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "starterBadRequest": {
-            "description": "Bad request\n\nUsually indicates validation failure",
-            "schema": {
-                "$ref": "#/definitions/BadRequest"
-            }
-        },
-        "starterForbidden": {
-            "description": "Forbidden",
-            "schema": {
-                "$ref": "#/definitions/Forbidden"
-            }
-        },
-        "starterInternalServerError": {
-            "description": "Internal server error",
-            "schema": {
-                "$ref": "#/definitions/InternalServerError"
-            }
-        },
-        "starterNotFound": {
-            "description": "Not found",
-            "schema": {
-                "$ref": "#/definitions/NotFound"
-            }
-        },
-        "starterSuccessCreate": {
-            "description": "Successful",
-            "headers": {
-                "Location": {
-                    "description": "Resource path to created entity.\nexample /service-name/resource/aa313e76-ecc7-4755-bfd3-82ea4d9d6f89",
-                    "type": "string"
-                }
-            }
-        },
-        "starterSuccessNoContent": {
-            "description": "Successful"
-        },
-        "starterUnauthorized": {
-            "description": "Unauthorized\n\nIndicates that the request has not been applied because it lacks valid\nauthentication credentials for the target resource.",
-            "schema": {
-                "$ref": "#/definitions/Unauthorized"
-            }
-        }
-    },
-    "schemes": [
-        "https"
-    ],
     "security": [
         {
-            "JWT": []
+            "Bearer": [
+                "read",
+                "write"
+            ]
         }
     ],
-    "securityDefinitions": {
-        "JWT": {
-            "in": "header",
-            "name": "Authorization",
-            "type": "apiKey"
+    "servers": [
+        {
+            "description": "Generated server url",
+            "url": "https://api.nexway.store"
         }
-    },
-    "swagger": "2.0"
+    ],
+    "tags": [
+        {
+            "description": "Manage the lifecycle of a subscription \u2014 create, read, upgrade, suspend, reactivate, cancel and renew.",
+            "name": "Subscription"
+        },
+        {
+            "description": "Read the subscription models (billing term, trial duration, associated customer) referenced by subscriptions.",
+            "name": "Subscription Model"
+        }
+    ]
 }
