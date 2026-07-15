@@ -388,6 +388,39 @@
                 },
                 "type": "object"
             },
+            "SearchResultMail": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/mail"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "SortObject": {
                 "properties": {
                     "empty": {
@@ -571,73 +604,8 @@
     "paths": {
         "/mailstorage/mails": {
             "get": {
-                "operationId": "getMailCollection",
+                "operationId": "getItems",
                 "parameters": [
-                    {
-                        "description": "Comma-separated list of tags",
-                        "in": "query",
-                        "name": "tags",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by to email",
-                        "in": "query",
-                        "name": "toEmail",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by from email",
-                        "in": "query",
-                        "name": "fromEmail",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by subject",
-                        "in": "query",
-                        "name": "subject",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Start date for filtering (ISO format)",
-                        "in": "query",
-                        "name": "startDate",
-                        "required": false,
-                        "schema": {
-                            "format": "date-time",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "End date for filtering (ISO format)",
-                        "in": "query",
-                        "name": "endDate",
-                        "required": false,
-                        "schema": {
-                            "format": "date-time",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Range header for pagination (e.g., '0-19' or 'all')",
-                        "in": "query",
-                        "name": "range",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "description": "Page number (zero-based)",
                         "in": "query",
@@ -663,6 +631,41 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "description": "Filter mails by customerId",
+                        "in": "query",
+                        "name": "customerId"
+                    },
+                    {
+                        "description": "Filter mails by recipient email (exact match, '*' wildcard prefix/suffix supported)",
+                        "in": "query",
+                        "name": "toEmail"
+                    },
+                    {
+                        "description": "Filter mails by sender email (exact match, '*' wildcard prefix/suffix supported)",
+                        "in": "query",
+                        "name": "fromEmail"
+                    },
+                    {
+                        "description": "Filter mails by status (PENDING/SENT/FAILED/PROCESSING)",
+                        "in": "query",
+                        "name": "status"
+                    },
+                    {
+                        "description": "Filter mails by tag. Repeat the param for AND semantics: 'tags=kaspersky&tags=india' returns mails carrying both tags",
+                        "in": "query",
+                        "name": "tags"
+                    },
+                    {
+                        "description": "Filter mails by createDate. Allows range queries (e.g., from a date: 'creationDate=1735686000000%3C', to a date: 'creationDate=%3C1735772400000', between two dates: 'creationDate=1735686000000%3C%3C1736463600000'). Accepts epoch millis or ISO 'yyyy-MM-dd'T'HH:mm:ss'",
+                        "in": "query",
+                        "name": "creationDate"
+                    },
+                    {
+                        "description": "Filter mails by updateDate. Same range syntax as creationDate",
+                        "in": "query",
+                        "name": "updatingDate"
                     }
                 ],
                 "responses": {
@@ -670,23 +673,11 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/SearchResultMail"
                                 }
                             }
                         },
                         "description": "Success"
-                    },
-                    "206": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Partial content returned"
                     },
                     "401": {
                         "content": {
@@ -718,17 +709,6 @@
                         },
                         "description": "Not Found"
                     },
-                    "416": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Requested range not satisfiable"
-                    },
                     "500": {
                         "content": {
                             "application/json": {
@@ -742,8 +722,7 @@
                 },
                 "summary": "Get items",
                 "tags": [
-                    "mail",
-                    "mail-collection"
+                    "mail"
                 ],
                 "x-operationWeight": "300"
             },
@@ -829,43 +808,6 @@
                 "x-operationWeight": "300"
             }
         },
-        "/mailstorage/mails/failed": {
-            "get": {
-                "operationId": "getFailedMails",
-                "parameters": [
-                    {
-                        "description": "Maximum retry attempts",
-                        "in": "query",
-                        "name": "maxRetries",
-                        "required": false,
-                        "schema": {
-                            "default": 3,
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/mail"
-                                    },
-                                    "type": "array"
-                                }
-                            }
-                        },
-                        "description": "Failed mails retrieved successfully"
-                    }
-                },
-                "summary": "Get failed mails for retry",
-                "tags": [
-                    "mail-operations"
-                ]
-            }
-        },
         "/mailstorage/mails/migrate": {
             "post": {
                 "operationId": "migrateMail",
@@ -934,30 +876,6 @@
                 "summary": "Migrate a historical mail preserving its original createdAt date (supports attachments)",
                 "tags": [
                     "mail-migrate"
-                ]
-            }
-        },
-        "/mailstorage/mails/pending": {
-            "get": {
-                "operationId": "getPendingMails",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/mail"
-                                    },
-                                    "type": "array"
-                                }
-                            }
-                        },
-                        "description": "Pending mails retrieved successfully"
-                    }
-                },
-                "summary": "Get pending mails",
-                "tags": [
-                    "mail-operations"
                 ]
             }
         },
@@ -1270,128 +1188,6 @@
                 "summary": "Run all pending schema migrations",
                 "tags": [
                     "schema-migration"
-                ]
-            }
-        },
-        "/mailstorage/mails/search": {
-            "get": {
-                "operationId": "searchMails",
-                "parameters": [
-                    {
-                        "description": "Comma-separated list of tags",
-                        "in": "query",
-                        "name": "tags",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by to email",
-                        "in": "query",
-                        "name": "toEmail",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by from email",
-                        "in": "query",
-                        "name": "fromEmail",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Filter by subject",
-                        "in": "query",
-                        "name": "subject",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Start date for filtering (ISO format)",
-                        "in": "query",
-                        "name": "startDate",
-                        "required": false,
-                        "schema": {
-                            "format": "date-time",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "End date for filtering (ISO format)",
-                        "in": "query",
-                        "name": "endDate",
-                        "required": false,
-                        "schema": {
-                            "format": "date-time",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "Range header for pagination (e.g., '0-19' or 'all')",
-                        "in": "query",
-                        "name": "range",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Mails retrieved successfully"
-                    },
-                    "206": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Partial content returned"
-                    },
-                    "400": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Invalid request parameters"
-                    },
-                    "416": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Requested range not satisfiable"
-                    }
-                },
-                "summary": "Search mails with multiple criteria",
-                "tags": [
-                    "mail-operations"
                 ]
             }
         },
