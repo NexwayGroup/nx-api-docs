@@ -1634,13 +1634,39 @@
                     },
                     "refundMethodAuthorized": {
                         "items": {
-                            "enum": [
-                                "FULL",
-                                "LIFE_TIME"
-                            ],
-                            "type": "string"
+                            "additionalProperties": {
+                                "$ref": "#/components/schemas/PartialRefundPreview"
+                            },
+                            "type": "object"
                         },
                         "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "LineItemPreview": {
+                "properties": {
+                    "lineItemId": {
+                        "type": "string"
+                    },
+                    "ratio": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "refundAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "refundMethod": {
+                        "enum": [
+                            "FULL",
+                            "LIFE_TIME"
+                        ],
+                        "type": "string"
+                    },
+                    "remainingAmount": {
+                        "format": "double",
+                        "type": "number"
                     }
                 },
                 "type": "object"
@@ -2920,7 +2946,30 @@
                 },
                 "type": "object"
             },
-            "PartialRefundEligibilityResponse": {
+            "PartialRefundPreview": {
+                "properties": {
+                    "alreadyRefundedAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "orderAmount": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "preview": {
+                        "items": {
+                            "$ref": "#/components/schemas/LineItemPreview"
+                        },
+                        "type": "array"
+                    },
+                    "totalRefundAmount": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "PartialRefundPreviewResponse": {
                 "properties": {
                     "cancelPeriodEndDate": {
                         "format": "date-time",
@@ -3564,6 +3613,9 @@
                         "type": "array"
                     }
                 },
+                "required": [
+                    "lineItems"
+                ],
                 "type": "object"
             },
             "RelatedContent": {
@@ -8335,79 +8387,6 @@
                 "x-privateApi": "true"
             }
         },
-        "/ordersv2/{id}/partial-refund-eligibility": {
-            "get": {
-                "operationId": "partialRefundOrderEligibility",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PartialRefundEligibilityResponse"
-                                }
-                            }
-                        },
-                        "description": "Accepted"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "partial refund order eligibility",
-                "tags": [
-                    "RefundOrder"
-                ],
-                "x-operationWeight": "300",
-                "x-privateApi": "true"
-            }
-        },
         "/ordersv2/{id}/prepareforrepair": {
             "post": {
                 "operationId": "prepareForRepair",
@@ -8951,6 +8930,88 @@
                     "Order"
                 ],
                 "x-operationWeight": "900",
+                "x-privateApi": "true"
+            }
+        },
+        "/ordersv2/{orderId}/partial-refund-preview": {
+            "post": {
+                "operationId": "partialRefundOrderPreview",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "orderId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LineItemRefundOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PartialRefundPreviewResponse"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "partial refund order preview",
+                "tags": [
+                    "RefundOrder"
+                ],
+                "x-operationWeight": "300",
                 "x-privateApi": "true"
             }
         },
