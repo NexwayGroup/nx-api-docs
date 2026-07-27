@@ -200,6 +200,7 @@
     "paths": {
         "/command-scheduler/api/commands": {
             "get": {
+                "description": "Returns a paginated list of commands. Supports optional filtering by the following query parameters: `entity.id`, `entity.type`, `status`, and `triggerDate`. The `triggerDate` parameter accepts an ISO date (e.g. `2026-07-27`) and matches commands whose trigger date falls within that UTC day, i.e. `[00:00, next day 00:00)`. An invalid `triggerDate` results in a `400 Bad Request`. An invalid `status` is ignored (a warning is logged) and the filter is skipped.",
                 "operationId": "getCommands",
                 "parameters": [
                     {
