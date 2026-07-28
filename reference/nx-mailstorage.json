@@ -1844,6 +1844,75 @@
                 ]
             }
         },
+        "/mailstorage/mails/{uuid}/body.html": {
+            "get": {
+                "description": "Serves the mail body as a complete, sanitised HTML document intended to be embedded in a sandboxed iframe by the myNEXWAY SPA. cid: image references are rewritten to the public attachment preview URLs. The response carries a Content-Security-Policy sandbox so the browser enforces isolation at the network level.",
+                "operationId": "getMailBodyHtml",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uuid",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Sanitised HTML document (a minimal 'No content' document when the mail has no body)",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "private, max-age=300",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            },
+                            "Content-Security-Policy": {
+                                "description": "sandbox allow-popups; default-src 'none'; img-src 'self' data: https:; style-src 'unsafe-inline'; font-src 'self' data: https:",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            },
+                            "Referrer-Policy": {
+                                "description": "no-referrer",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            },
+                            "X-Content-Type-Options": {
+                                "description": "nosniff",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Mail not found in the primary or legacy store"
+                    },
+                    "500": {
+                        "description": "Unexpected failure (empty body, no stack trace leaked)"
+                    }
+                },
+                "summary": "Sanitised mail body as a standalone HTML document",
+                "tags": [
+                    "mail-export"
+                ]
+            }
+        },
         "/mailstorage/mails/{uuid}/html": {
             "get": {
                 "operationId": "downloadMailAsHtml_1",
