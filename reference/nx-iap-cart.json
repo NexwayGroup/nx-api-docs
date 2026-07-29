@@ -18,9 +18,7 @@
             "AdditionalFieldAttribute": {
                 "properties": {
                     "availableValues": {
-                        "items": {
-                            "type": "object"
-                        },
+                        "items": {},
                         "type": "array",
                         "uniqueItems": true
                     },
@@ -101,9 +99,7 @@
                 },
                 "type": "object"
             },
-            "ArrayNode": {
-                "type": "object"
-            },
+            "ArrayNode": {},
             "BuyerBehavior": {
                 "properties": {
                     "abandonedCart": {
@@ -180,6 +176,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -294,16 +291,17 @@
                         "type": "string"
                     },
                     "hideCrossSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display cross sell recommendation",
                         "type": "boolean"
                     },
                     "hideUpSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display upsell recommendation",
                         "type": "boolean"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "initialCurrency": {
@@ -350,7 +348,7 @@
                     },
                     "manualUpdateDate": {
                         "description": "Date of last manual modification, timestamp in milliseconds",
-                        "example": 1609948565487,
+                        "example": "1609948565487",
                         "format": "date-time",
                         "readOnly": true,
                         "type": "string"
@@ -548,6 +546,7 @@
                         "type": "number"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -672,12 +671,12 @@
                         "type": "string"
                     },
                     "hideCrossSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display cross sell recommendation",
                         "type": "boolean"
                     },
                     "hideUpSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display upsell recommendation",
                         "type": "boolean"
                     },
@@ -880,12 +879,12 @@
                         "type": "string"
                     },
                     "hideCrossSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display cross sell recommendation",
                         "type": "boolean"
                     },
                     "hideUpSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display upsell recommendation",
                         "type": "boolean"
                     },
@@ -1033,7 +1032,6 @@
                     "apeCode": {
                         "description": "APE/NAF code",
                         "example": "4791B",
-                        "pattern": "^\\d{4}[A-Za-z]$",
                         "type": "string"
                     },
                     "cnpj": {
@@ -1044,20 +1042,16 @@
                     "companyName": {
                         "description": "End-user company name",
                         "example": "My company name",
-                        "maxLength": 255,
-                        "minLength": 1,
                         "type": "string"
                     },
                     "fullRegistrationNumber": {
                         "description": "Siret Number",
-                        "example": 362,
-                        "pattern": "^\\d{14}$",
+                        "example": "362 521 879 00034",
                         "type": "string"
                     },
                     "registrationNumber": {
                         "description": "Siren Number",
-                        "example": 362,
-                        "pattern": "^\\d{9}$",
+                        "example": "362 521 879",
                         "type": "string"
                     },
                     "validVatNumber": {
@@ -1066,8 +1060,6 @@
                     "vatNumber": {
                         "description": "Company VAT number",
                         "example": "FR12345678901",
-                        "maxLength": 32,
-                        "minLength": 0,
                         "type": "string"
                     }
                 },
@@ -1091,7 +1083,7 @@
                 "properties": {
                     "bin": {
                         "description": "Bank Identification Number",
-                        "example": 411111,
+                        "example": "411111",
                         "type": "string"
                     },
                     "expirationDate": {
@@ -1167,9 +1159,11 @@
                         "type": "string"
                     },
                     "discountId": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "discountRate": {
+                        "deprecated": true,
                         "format": "double",
                         "type": "number"
                     },
@@ -1401,8 +1395,6 @@
                     "city": {
                         "description": "Address book city",
                         "example": "city name",
-                        "maxLength": 255,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "company": {
@@ -1428,8 +1420,7 @@
                     "email": {
                         "description": "End-user email",
                         "example": "email@domain.com",
-                        "maxLength": 150,
-                        "minLength": 0,
+                        "format": "email",
                         "type": "string"
                     },
                     "encryptedEmail": {
@@ -1439,8 +1430,6 @@
                     "firstName": {
                         "description": "End-user first name",
                         "example": "first name",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "id": {
@@ -1455,8 +1444,6 @@
                     "lastName": {
                         "description": "End-user last name",
                         "example": "last name",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "locale": {
@@ -1466,14 +1453,12 @@
                     },
                     "maskedEmail": {
                         "description": "Boolean to flag if the email needs to be masked in the public view",
-                        "example": true,
+                        "example": false,
                         "type": "boolean"
                     },
                     "phone": {
                         "description": "Phone",
                         "example": "0123456789",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "recipientCode": {
@@ -1512,8 +1497,6 @@
                     "streetAddress": {
                         "description": "Address book street address",
                         "example": "Street name",
-                        "maxLength": 255,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "taxExemptionChecked": {
@@ -1554,14 +1537,11 @@
                     },
                     "zipCode": {
                         "description": "Address book zip/postal code",
-                        "example": 12345,
-                        "maxLength": 32,
-                        "minLength": 0,
+                        "example": "12345",
                         "type": "string"
                     }
                 },
                 "required": [
-                    "country",
                     "email",
                     "locale",
                     "wallet",
@@ -1663,8 +1643,6 @@
                     "city": {
                         "description": "Address book city",
                         "example": "city name",
-                        "maxLength": 255,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "company": {
@@ -1687,8 +1665,7 @@
                     "email": {
                         "description": "End-user email",
                         "example": "email@domain.com",
-                        "maxLength": 150,
-                        "minLength": 0,
+                        "format": "email",
                         "type": "string"
                     },
                     "encryptedEmail": {
@@ -1698,15 +1675,11 @@
                     "firstName": {
                         "description": "End-user first name",
                         "example": "first name",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "lastName": {
                         "description": "End-user last name",
                         "example": "last name",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "locale": {
@@ -1716,14 +1689,12 @@
                     },
                     "maskedEmail": {
                         "description": "Boolean to flag if the email needs to be masked in the public view",
-                        "example": true,
+                        "example": false,
                         "type": "boolean"
                     },
                     "phone": {
                         "description": "Phone",
                         "example": "0123456789",
-                        "maxLength": 50,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "recipientCode": {
@@ -1753,8 +1724,6 @@
                     "streetAddress": {
                         "description": "Address book street address",
                         "example": "Street name",
-                        "maxLength": 255,
-                        "minLength": 0,
                         "type": "string"
                     },
                     "taxExemptionChecked": {
@@ -1785,14 +1754,11 @@
                     },
                     "zipCode": {
                         "description": "Address book zip/postal code",
-                        "example": 12345,
-                        "maxLength": 32,
-                        "minLength": 0,
+                        "example": "12345",
                         "type": "string"
                     }
                 },
                 "required": [
-                    "country",
                     "email",
                     "locale",
                     "zipCode"
@@ -1813,9 +1779,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -1888,6 +1852,7 @@
                         "type": "string"
                     },
                     "subscriptionId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "wantedProduct": {
@@ -1928,6 +1893,7 @@
             "PaymentMethodDiscount": {
                 "properties": {
                     "discountId": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "paymentTypeId": {
@@ -2229,12 +2195,12 @@
                         "type": "string"
                     },
                     "hideCrossSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display cross sell recommendation",
                         "type": "boolean"
                     },
                     "hideUpSell": {
-                        "default": "false",
+                        "default": false,
                         "description": "Define if we display upsell recommendation",
                         "type": "boolean"
                     },
@@ -2532,7 +2498,7 @@
                     },
                     "lifeTime": {
                         "description": "Lifetime",
-                        "example": 1,
+                        "example": "1 YEAR",
                         "type": "string"
                     },
                     "lifeTimeUnit": {
@@ -2542,7 +2508,7 @@
                     },
                     "lifeTimeValue": {
                         "description": "Lifetime value",
-                        "example": 1,
+                        "example": "1",
                         "type": "string"
                     },
                     "marketingCampaignId": {
@@ -2691,9 +2657,7 @@
                         "type": "boolean"
                     },
                     "variableValues": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "description": "Product variables",
                         "type": "object"
                     },
@@ -2739,9 +2703,7 @@
             },
             "ProductCustomFields": {
                 "properties": {
-                    "customFields": {
-                        "type": "object"
-                    },
+                    "customFields": {},
                     "customFieldsId": {
                         "type": "string"
                     },
@@ -2760,7 +2722,7 @@
                     },
                     "currentExpirationDate": {
                         "description": "Current expiration date",
-                        "example": 1712906328000,
+                        "example": "1712906328000",
                         "type": "string"
                     },
                     "discountPlan": {
@@ -2815,7 +2777,7 @@
                     },
                     "nextExpirationDate": {
                         "description": "Next expiration date",
-                        "example": 1712906328000,
+                        "example": "1712906328000",
                         "type": "string"
                     },
                     "parentId": {
@@ -2887,6 +2849,7 @@
                         "type": "string"
                     },
                     "previousLineItemId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "upgradeProductId": {
@@ -2905,8 +2868,7 @@
             "PublicParameter": {
                 "properties": {
                     "defaultValue": {
-                        "description": "Parameter default name",
-                        "type": "object"
+                        "description": "Parameter default name"
                     },
                     "field": {
                         "description": "Parameter name",
@@ -2981,14 +2943,11 @@
                     },
                     "remittanceRate": {
                         "format": "double",
-                        "maximum": 1.0,
-                        "minimum": 0.0,
                         "type": "number"
                     }
                 },
                 "required": [
-                    "id",
-                    "remittanceAmount"
+                    "id"
                 ],
                 "type": "object"
             },
@@ -3009,12 +2968,12 @@
                 "properties": {
                     "lifeTime": {
                         "description": "Lifetime",
-                        "example": 1,
+                        "example": "1 YEAR",
                         "type": "string"
                     },
                     "lifeTimeUnit": {
                         "description": "LifetimeUnit",
-                        "example": 1,
+                        "example": "1",
                         "type": "string"
                     },
                     "lifeTimeValue": {
@@ -3052,6 +3011,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -3141,6 +3103,7 @@
                     "city": {
                         "description": "City",
                         "example": "Sens",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "firstName": {
@@ -3160,6 +3123,7 @@
                     "phone": {
                         "description": "Phone",
                         "example": "0612345678",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "region": {
@@ -3169,12 +3133,14 @@
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -3232,6 +3198,7 @@
                         "type": "string"
                     },
                     "subscriptionId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "useStrikeThroughPrice": {
@@ -3321,9 +3288,7 @@
                     "label": {
                         "type": "string"
                     },
-                    "value": {
-                        "type": "object"
-                    }
+                    "value": {}
                 },
                 "type": "object"
             },
@@ -5228,6 +5193,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
