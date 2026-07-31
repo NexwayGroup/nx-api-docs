@@ -324,6 +324,10 @@
                     "id": {
                         "type": "string"
                     },
+                    "internal": {
+                        "description": "Whether this notification definition is intended for internal use",
+                        "type": "boolean"
+                    },
                     "lastUpdateReason": {
                         "type": "string"
                     },
@@ -407,7 +411,8 @@
                             "DISCOUNT_PLAN_UPDATED",
                             "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED",
                             "TAX_RATE",
-                            "SCHEDULED_TAX_RATE"
+                            "SCHEDULED_TAX_RATE",
+                            "CART"
                         ],
                         "examples": [
                             "ORDER"
@@ -1167,12 +1172,12 @@
                         "description": "Notification subject, e.g. order, subscription, endUser",
                         "type": "string"
                     },
+                    "taxRate": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.taxManager.TaxRate"
+                    },
                     "type": {
                         "description": "Event type, e.g. created, completed, paymentFailed",
                         "type": "string"
-                    },
-                    "vatRate": {
-                        "$ref": "#/components/schemas/com.nx.notification.model.payload.taxManager.VatRate"
                     }
                 },
                 "required": [
@@ -1188,6 +1193,378 @@
                         "type": "string"
                     }
                 }
+            },
+            "com.nx.notification.model.payload.cart.Cart": {
+                "description": "Primary cart data container",
+                "properties": {
+                    "country": {
+                        "description": "Cart country",
+                        "type": "string"
+                    },
+                    "createDate": {
+                        "format": "int64",
+                        "type": "integer",
+                        "writeOnly": true
+                    },
+                    "creationDate": {
+                        "description": "The date when cart was created",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.Customer"
+                    },
+                    "customerId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "decodedExternalContext": {
+                        "description": "Decoded map of cart string parameters if they were provided in the json format",
+                        "type": "object"
+                    },
+                    "externalContext": {
+                        "description": "Base64 encoded string of cart parameters",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Cart unique identifier",
+                        "type": "string"
+                    },
+                    "locale": {
+                        "description": "Cart locale",
+                        "type": "string"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.Price"
+                    },
+                    "products": {
+                        "description": "List of products in cart",
+                        "items": {
+                            "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.Product"
+                        },
+                        "type": "array"
+                    },
+                    "scenario": {
+                        "description": "Cart scenario: acquisition, retention, etc",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "Cart source: PURCHASE, SUBSCRIPTION, OFFER, MANUAL_RENEWAL, etc",
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "description": "Store id from the cart",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "country",
+                    "creationDate",
+                    "customer",
+                    "id",
+                    "locale",
+                    "price",
+                    "products",
+                    "source",
+                    "storeId"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.CartNotification": {
+                "properties": {
+                    "cart": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.Cart"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "cart",
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.Customer": {
+                "description": "Customer object",
+                "properties": {
+                    "id": {
+                        "description": "Customer id associated to the cart",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Customer name associated to the cart",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.Discount": {
+                "description": "Array of all applied discounts. Each discount represented as object",
+                "properties": {
+                    "discountAmount": {
+                        "description": "Amount of discount",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountCode": {
+                        "description": "Discount code (if any)",
+                        "type": "string"
+                    },
+                    "discountId": {
+                        "description": "Identifier of discount in Monetize",
+                        "type": "string"
+                    },
+                    "discountRate": {
+                        "description": "Discount rate, f.e. 0.2",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "discountId"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.DiscountPlan": {
+                "description": "Subscription discount plan node will exist in case if discount plan is applied to subscription",
+                "properties": {
+                    "discountStep": {
+                        "description": "Subscription discount plan step is used on acquisition",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "ignorePurchaseDiscount": {
+                        "description": "Only in case if this flag was set on acquisition",
+                        "type": "boolean"
+                    },
+                    "tag": {
+                        "description": "Subscription discount plan tag",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "discountStep",
+                    "tag"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.DiscountedPrice": {
+                "description": "Discounted price object",
+                "properties": {
+                    "allDiscountsApplied": {
+                        "description": "Array of all applied discounts. Each discount represented as object",
+                        "items": {
+                            "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.Discount"
+                        },
+                        "type": "array"
+                    },
+                    "cumulatedDiscountRate": {
+                        "description": "Discount rate applied to product",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedGrossPrice": {
+                        "description": "Discounted unit price, including sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedNetPrice": {
+                        "description": "Discounted unit price, excluding sales tax",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "allDiscountsApplied",
+                    "discountedGrossPrice",
+                    "discountedNetPrice"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.ExtraTermBonus": {
+                "description": "Extra term bonus node will exist in case if Extra term bonus is applied to product",
+                "properties": {
+                    "extraTermBonusTag": {
+                        "description": "Extra term bonus tag",
+                        "type": "string"
+                    },
+                    "unit": {
+                        "description": "Extra term bonus unit: \"months\" or \"days\"",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Number of extra term bonus units",
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "extraTermBonusTag",
+                    "unit",
+                    "value"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.Price": {
+                "description": "Cart price object",
+                "properties": {
+                    "currency": {
+                        "description": "Cart price currency",
+                        "type": "string"
+                    },
+                    "grossPrice": {
+                        "description": "Total price of a cart, including sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "description": "Total price of a cart, excluding sales tax",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "currency",
+                    "grossPrice",
+                    "netPrice"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.Product": {
+                "description": "List of products in cart",
+                "properties": {
+                    "businessSegment": {
+                        "description": "Product business segment: b2c, b2b, STRICT b2b and STRICT b2c",
+                        "type": "string"
+                    },
+                    "discountPlan": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.DiscountPlan"
+                    },
+                    "expirationDate": {
+                        "description": "Product license expiration date",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "extraTerm": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.ExtraTermBonus"
+                    },
+                    "fulfillmentTemplate": {
+                        "description": "Fulfillment template ID in Monetize",
+                        "type": "string"
+                    },
+                    "gift": {
+                        "description": "Boolean indicating if product is gift",
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "description": "Unique ID for a product in the cart",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Product name",
+                        "type": "string"
+                    },
+                    "parentId": {
+                        "description": "Product parent ID (Unique ID of parent product in Monetize)",
+                        "type": "string"
+                    },
+                    "productFamily": {
+                        "description": "Product family name",
+                        "type": "string"
+                    },
+                    "publisherRefId": {
+                        "description": "A unique ID for identifying your product in your information system, if defined",
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "description": "Product quantity",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "subscriptionProduct": {
+                        "description": "Boolean indicating if product is sold by subscription model",
+                        "type": "boolean"
+                    },
+                    "subscriptionTemplate": {
+                        "description": "Subscription template name in Monetize",
+                        "type": "string"
+                    },
+                    "taxExempt": {
+                        "description": "Boolean indicating if product has tax exemption",
+                        "type": "boolean"
+                    },
+                    "trial": {
+                        "description": "Boolean indicating if product is trial",
+                        "type": "boolean"
+                    },
+                    "unitPrice": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.UnitPrice"
+                    },
+                    "upsell": {
+                        "description": "Boolean indicating if product was upsold or not",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "businessSegment",
+                    "gift",
+                    "id",
+                    "name",
+                    "parentId",
+                    "quantity",
+                    "subscriptionProduct",
+                    "taxExempt",
+                    "trial",
+                    "unitPrice",
+                    "upsell"
+                ]
+            },
+            "com.nx.notification.model.payload.cart.UnitPrice": {
+                "description": "Price object",
+                "properties": {
+                    "VATRate": {
+                        "description": "Sold product applied sales tax rate",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "discountedPrice": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.cart.DiscountedPrice"
+                    },
+                    "grossPrice": {
+                        "description": "Product unit price, including sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "netPrice": {
+                        "description": "Product unit price, excluding sales tax",
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "vatAmount": {
+                        "description": "Vat amount",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "VATRate",
+                    "grossPrice",
+                    "netPrice"
+                ]
             },
             "com.nx.notification.model.payload.consent.Consent": {
                 "properties": {
@@ -2234,43 +2611,53 @@
             },
             "com.nx.notification.model.payload.taxManager.TaxRate": {
                 "properties": {
-                    "taxCategory": {
-                        "type": "string"
-                    },
-                    "taxName": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "format": "double",
-                        "type": "number"
-                    }
-                }
-            },
-            "com.nx.notification.model.payload.taxManager.VatRate": {
-                "properties": {
-                    "failed": {
-                        "type": "boolean"
-                    },
                     "iso2CountryCode": {
-                        "type": "string"
-                    },
-                    "newTaxRates": {
-                        "items": {
-                            "$ref": "#/components/schemas/com.nx.notification.model.payload.taxManager.TaxRate"
-                        },
-                        "type": "array"
-                    },
-                    "operation": {
+                        "description": "ISO 3166-1 alpha-2 country code, e.g. `FR`, `CA`",
                         "type": "string"
                     },
                     "regionCode": {
+                        "description": "Region or province code, e.g. `CA-QC`. Present only if the rate applies to a specific region",
                         "type": "string"
                     },
                     "startDate": {
+                        "description": "Planned activation time as a Unix epoch timestamp (milliseconds). Present only for scheduled tax rate change events",
                         "format": "date-time",
                         "type": "string"
+                    },
+                    "taxRates": {
+                        "description": "Array of tax rate entries. For multi-rate countries the array contains one entry per tax category",
+                        "items": {
+                            "$ref": "#/components/schemas/com.nx.notification.model.payload.taxManager.TaxRateDetail"
+                        },
+                        "type": "array"
                     }
-                }
+                },
+                "required": [
+                    "iso2CountryCode",
+                    "taxRates"
+                ]
+            },
+            "com.nx.notification.model.payload.taxManager.TaxRateDetail": {
+                "description": "Array of tax rate entries. For multi-rate countries the array contains one entry per tax category",
+                "properties": {
+                    "taxCategory": {
+                        "description": "Tax category identifier, e.g. `STANDARD`, `FEDERAL`, `STATE`, `VAT`",
+                        "type": "string"
+                    },
+                    "taxName": {
+                        "description": "Human-readable name of the tax, e.g. `Federal Tax`, `QST`",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Tax rate as a decimal, e.g. `0.05` for 5%",
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "taxCategory",
+                    "value"
+                ]
             }
         },
         "securitySchemes": {
@@ -3451,7 +3838,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Thu Jul 23 08:26:23 GMT 2026",
+        "generatedAt": "Fri Jul 31 14:31:33 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
@@ -3459,6 +3846,13 @@
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.AbandonedCartNotification",
                 "subject": "cart",
                 "type": "abandoned"
+            },
+            "Cart created": {
+                "content": "CART",
+                "payloadSchema": "com.nx.notification.model.payload.cart.CartNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.cart.CartNotification",
+                "subject": "cart",
+                "type": "created"
             },
             "Check payment method replayability on updated subscription": {
                 "content": "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED",
@@ -3649,69 +4043,6 @@
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
-            "Permission - privilege created": {
-                "content": "PRIVILEGE",
-                "payloadSchema": "com.nx.notification.model.payload.PrivilegeNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PrivilegeNotification",
-                "subject": "privilege",
-                "type": "created"
-            },
-            "Permission - privilege deleted": {
-                "content": "PRIVILEGE",
-                "payloadSchema": "com.nx.notification.model.payload.PrivilegeNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PrivilegeNotification",
-                "subject": "privilege",
-                "type": "deleted"
-            },
-            "Permission - privilege updated": {
-                "content": "PRIVILEGE",
-                "payloadSchema": "com.nx.notification.model.payload.PrivilegeNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PrivilegeNotification",
-                "subject": "privilege",
-                "type": "updated"
-            },
-            "Permission - profile created": {
-                "content": "META_ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.MetaRoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.MetaRoleNotification",
-                "subject": "metarole",
-                "type": "created"
-            },
-            "Permission - profile deleted": {
-                "content": "META_ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.MetaRoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.MetaRoleNotification",
-                "subject": "metarole",
-                "type": "deleted"
-            },
-            "Permission - profile updated": {
-                "content": "META_ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.MetaRoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.MetaRoleNotification",
-                "subject": "metarole",
-                "type": "updated"
-            },
-            "Permission - role created": {
-                "content": "ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.RoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.RoleNotification",
-                "subject": "role",
-                "type": "created"
-            },
-            "Permission - role deleted": {
-                "content": "ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.RoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.RoleNotification",
-                "subject": "role",
-                "type": "deleted"
-            },
-            "Permission - role updated": {
-                "content": "ROLE",
-                "payloadSchema": "com.nx.notification.model.payload.RoleNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.RoleNotification",
-                "subject": "role",
-                "type": "updated"
-            },
             "Prebilling Order Created": {
                 "content": "ORDER_AND_SUBSCRIPTION",
                 "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
@@ -3753,34 +4084,6 @@
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
-            },
-            "Scheduled Tax Rate Change Created": {
-                "content": "SCHEDULED_TAX_RATE",
-                "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "scheduled_tax_rate"
-            },
-            "Scheduled Tax Rate Change Failed": {
-                "content": "SCHEDULED_TAX_RATE",
-                "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "scheduled_tax_rate"
-            },
-            "Scheduled Tax Rate Change Updated": {
-                "content": "SCHEDULED_TAX_RATE",
-                "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "scheduled_tax_rate"
-            },
-            "Skeepers Purchase Event": {
-                "content": "SKEEPERS_PURCHASE_EVENT",
-                "payloadSchema": "com.nx.notification.model.payload.skeepers.SkeepersPurchaseEvent",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.skeepers.SkeepersPurchaseEvent",
-                "subject": "order",
-                "type": "completed"
             },
             "Subscription Canceled": {
                 "content": "SUBSCRIPTION",
@@ -3856,54 +4159,43 @@
                 "content": "TAX_RATE",
                 "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "tax_rate"
+                "subject": "taxRate",
+                "type": "created"
             },
             "Tax Rate Deleted": {
                 "content": "TAX_RATE",
                 "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "tax_rate"
-            },
-            "Tax Rate Failed": {
-                "content": "TAX_RATE",
-                "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "tax_rate"
+                "subject": "taxRate",
+                "type": "deleted"
             },
             "Tax Rate Updated": {
                 "content": "TAX_RATE",
                 "payloadSchema": "com.nx.notification.model.payload.TaxRateNotification",
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-                "subject": "tax-management",
-                "type": "tax_rate"
+                "subject": "taxRate",
+                "type": "updated"
             }
         },
         "payloadSchemas": {
             "ABANDONED_CART": "#/components/schemas/com.nx.notification.model.payload.AbandonedCartNotification",
+            "CART": "#/components/schemas/com.nx.notification.model.payload.cart.CartNotification",
             "CONSENT_CREATED": "#/components/schemas/com.nx.notification.model.payload.ConsentNotification",
             "CONSENT_UPDATED": "#/components/schemas/com.nx.notification.model.payload.ConsentNotification",
             "DISCOUNT_PLAN_UPDATED": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
             "END_USER_DELETED": "#/components/schemas/com.nx.notification.model.payload.BaseNotificationContent",
             "IDENTITY": "#/components/schemas/com.nx.notification.model.payload.TextNotification",
             "LICENSE_KEY_PACKAGE": "#/components/schemas/com.nx.notification.model.payload.PackageThresholdReachedNotification",
-            "META_ROLE": "#/components/schemas/com.nx.notification.model.payload.MetaRoleNotification",
             "ORDER": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
             "ORDER_AND_SUBSCRIPTION": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
             "PAYMENT_METHOD_ADDED": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodAddedNotification",
             "PAYMENT_METHOD_UPDATED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
-            "PRIVILEGE": "#/components/schemas/com.nx.notification.model.payload.PrivilegeNotification",
             "RESELLER": "#/components/schemas/com.nx.notification.model.payload.ResellerNotification",
-            "ROLE": "#/components/schemas/com.nx.notification.model.payload.RoleNotification",
-            "SCHEDULED_TAX_RATE": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification",
-            "SKEEPERS_PURCHASE_EVENT": "#/components/schemas/com.nx.notification.model.payload.skeepers.SkeepersPurchaseEvent",
             "SUBSCRIPTION": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
             "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodReplayabilityChangedNotification",
             "TAX_RATE": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification"
         },
-        "totalDefinitions": 61,
-        "uniqueContents": 61
+        "totalDefinitions": 48,
+        "uniqueContents": 48
     }
 }
