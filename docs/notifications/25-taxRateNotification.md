@@ -11,15 +11,14 @@ Nexway Monetize tracks tax rates per country and region.  This section describes
 
 ## List of fields
 
-<!-- GEN:notification:TaxRateNotification subject="`tax_rate`" type="`created` / `updated` / `deleted` — see [Event list](#event-list)" objectId="Tax rate identifier" -->
+<!-- GEN:notification:TaxRateNotification subject="`taxRate`" type="`created` / `updated` / `deleted` — see [Event list](#event-list)" objectId="Tax rate identifier" -->
 | Field | Type | Description | R/O |
 |---|---|---|---|
-| subject | string | `tax_rate` | R |
+| subject | string | `taxRate` | R |
 | type | string | `created` / `updated` / `deleted` — see [Event list](#event-list) | R |
 | objectId | string | Tax rate identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
 | taxRate | taxManager.TaxRate | Tax rate details object | R |
-| → failed | boolean | `true` if the operation failed; `false` if it succeeded | O |
 | → iso2CountryCode | string | ISO 3166-1 alpha-2 country code, e.g. `FR`, `CA` | R |
 | → regionCode | string | Region or province code, e.g. `CA-QC`. Present only if the rate applies to a specific region | O |
 | → taxRates | taxManager.TaxRateDetail[] | Array of tax rate entries. For multi-rate countries the array contains one entry per tax category | R |
@@ -34,12 +33,11 @@ Nexway Monetize tracks tax rates per country and region.  This section describes
 
 ```json
 {
-  "subject": "tax_rate",
+  "subject": "taxRate",
   "type": "created",
   "objectId": "83353aee-427f-473d-a628-55727f590641",
   "eventDate": "2026-05-04T14:55:34Z",
   "taxRate": {
-    "failed": false,
     "iso2CountryCode": "VG",
     "regionCode": "VG-TEST",
     "taxRates": [
@@ -56,12 +54,11 @@ Nexway Monetize tracks tax rates per country and region.  This section describes
 
 ```json
 {
-  "subject": "tax_rate",
+  "subject": "taxRate",
   "type": "updated",
   "objectId": "11109753-db0f-435b-abf4-5119a6af3ab0",
   "eventDate": "2026-05-04T16:00:00Z",
   "taxRate": {
-    "failed": false,
     "iso2CountryCode": "FR",
     "taxRates": [
       {
@@ -77,12 +74,11 @@ Nexway Monetize tracks tax rates per country and region.  This section describes
 
 ```json
 {
-  "subject": "tax_rate",
+  "subject": "taxRate",
   "type": "deleted",
   "objectId": "83353aee-427f-473d-a628-55727f590641",
   "eventDate": "2026-05-04T14:55:34Z",
   "taxRate": {
-    "failed": false,
     "iso2CountryCode": "VG",
     "regionCode": "VG-TEST",
     "taxRates": [
