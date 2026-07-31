@@ -1,6 +1,6 @@
 # Single Sign-On (SSO)
 
-Our API allows you to generate a deep link that automatically logs an end user into their portal. This enables a smooth transition from your customer portal to the Nexway-managed portal, where users can manage their subscriptions, payment methods, billing details, download invoices, and more.
+Our API allows you to generate a deep link that automatically logs an end user into their portal or into the checkout of an [Authenticated Cart](32-shopping-cart-creation.md#5-authenticated-cart). This enables a smooth transition from your customer portal to the Nexway-managed portal, where users can manage their subscriptions, payment methods, billing details, download invoices, and more — or straight to a pre-created checkout where the signed-in shopper can complete the purchase using the billing address and payment methods already saved in their wallet.
 
 ## How to Create a Deep Link
 

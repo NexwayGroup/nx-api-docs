@@ -111,7 +111,7 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 Learn more about subscription plan [here](30-discount-api_guide.md)
 
 #### 5. Authenticated Cart
-Creates a shopping cart for an authenticated end user with prefilled billing information. The cart is created server-to-server on the customer's backend (never from the shopper's browser) and is intended only for end users who are already authenticated in the customer's system. Because the end user is known, the checkout can reuse the billing address and payment methods already saved in the end user's wallet, skipping data re-entry.
+Creates a shopping cart for an authenticated end user with prefilled billing information. The cart is created by a server-to-server API call from the customer’s backend (never from the shopper’s browser) and is intended only for end users who are already authenticated in the customer’s system. Because the end user is known, the checkout can reuse the billing address and payment methods already saved in the end user's wallet, skipping data re-entry.
 
 The typical flow is:
 1. The authenticated end user clicks a "Buy" button in the customer's application.
