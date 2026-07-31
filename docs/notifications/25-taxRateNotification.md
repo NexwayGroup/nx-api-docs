@@ -1,10 +1,7 @@
 # Tax Rate Notifications
 
-This section describes notifications sent when a tax (VAT) rate is created, updated, or deleted on the Nexway Monetize platform.
+Nexway Monetize tracks tax rates per country and region.  This section describes notifications sent when a tax (VAT) rate is created, updated, or deleted on the Nexway Monetize platform.
 
-## Overview
-
-Nexway Monetize allows merchants to configure tax rates per country and region. Whenever a tax rate is created, updated, or deleted, a notification is sent to the configured receiver. The specific operation is encoded in the top-level `type` field.
 
 ## Event list
 
@@ -21,7 +18,7 @@ Nexway Monetize allows merchants to configure tax rates per country and region. 
 | type | string | `created` / `updated` / `deleted` — see [Event list](#event-list) | R |
 | objectId | string | Tax rate identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
-| vatRate | taxManager.TaxRate | Tax rate details object | R |
+| taxRate | taxManager.TaxRate | Tax rate details object | R |
 | → failed | boolean | `true` if the operation failed; `false` if it succeeded | O |
 | → iso2CountryCode | string | ISO 3166-1 alpha-2 country code, e.g. `FR`, `CA` | R |
 | → regionCode | string | Region or province code, e.g. `CA-QC`. Present only if the rate applies to a specific region | O |
@@ -41,7 +38,7 @@ Nexway Monetize allows merchants to configure tax rates per country and region. 
   "type": "created",
   "objectId": "83353aee-427f-473d-a628-55727f590641",
   "eventDate": "2026-05-04T14:55:34Z",
-  "vatRate": {
+  "taxRate": {
     "failed": false,
     "iso2CountryCode": "VG",
     "regionCode": "VG-TEST",
@@ -63,7 +60,7 @@ Nexway Monetize allows merchants to configure tax rates per country and region. 
   "type": "updated",
   "objectId": "11109753-db0f-435b-abf4-5119a6af3ab0",
   "eventDate": "2026-05-04T16:00:00Z",
-  "vatRate": {
+  "taxRate": {
     "failed": false,
     "iso2CountryCode": "FR",
     "taxRates": [
@@ -84,7 +81,7 @@ Nexway Monetize allows merchants to configure tax rates per country and region. 
   "type": "deleted",
   "objectId": "83353aee-427f-473d-a628-55727f590641",
   "eventDate": "2026-05-04T14:55:34Z",
-  "vatRate": {
+  "taxRate": {
     "failed": false,
     "iso2CountryCode": "VG",
     "regionCode": "VG-TEST",
@@ -100,5 +97,5 @@ Nexway Monetize allows merchants to configure tax rates per country and region. 
 
 ## Notes
 
-- The `vatRate.taxRates` array contains the full set of rates for the given country/region in this operation, not a diff.
+- The `taxRate.taxRates` array contains the full set of rates for the given country/region in this operation, not a diff.
 - For countries with multiple tax categories (e.g. federal and state), each category appears as a separate entry in `taxRates`.
