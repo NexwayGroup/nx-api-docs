@@ -110,9 +110,21 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 ```
 Learn more about subscription plan [here](30-discount-api_guide.md)
 
-#### 5. Authorized Cart
-Creates a shopping cart with prefilled shopper's billing information.  
-[`POST /carts`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createItem)  
+#### 5. Authenticated Cart
+Creates a shopping cart for an authenticated end user with prefilled billing information. The cart is created server-to-server on the customer's backend (never from the shopper's browser) and is intended only for end users who are already authenticated in the customer's system. Because the end user is known, the checkout can reuse the billing address and payment methods already saved in the end user's wallet, skipping data re-entry.
+
+The typical flow is:
+1. The authenticated end user clicks a "Buy" button in the customer's application.
+2. The customer's server calls [`POST /carts`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createItem) using its API key and receives the `cartId` (in the `Location` header) and the `checkoutUrl` (via [`GET /carts/{cartId}`](https://apidoc.nexway.store/api/cart#tag/Public/operation/getOne)).
+3. The customer's server generates a Single Sign-On deeplink that points to `checkoutUrl` as the `baseLink`, so the end user lands on the checkout already signed in and with the wallet available.
+4. The deeplink is returned to the shopper's browser, which navigates to the pre-authenticated checkout.
+
+See the [Single Sign-On guide](16-single-sign-on.md) for the deeplink generation details.
+
+:::important
+`endUser.enduserId` **must** be included in the create cart request. It is what binds the cart to the authenticated end user and enables reuse of the saved billing address and wallet payment methods, as well as SSO into the checkout. Without it the cart behaves as an anonymous public cart.
+:::
+
 **API Request Example**  
 ```json
 --header 'Authorization: Bearer <API_key>'
@@ -126,6 +138,7 @@ Creates a shopping cart with prefilled shopper's billing information.
         }
     ],
     "endUser": { 
+        "enduserId": "{{endUserId}}", // Required — the authenticated end user's Nexway ID
         "firstName": "John",
         "lastName": "Smith",
         "email": "John.Smith@domain.com",
@@ -138,6 +151,22 @@ Creates a shopping cart with prefilled shopper's billing information.
     }
 }   
 ```
+
+**SSO Deeplink Example**  
+Once the cart is created, retrieve it via [`GET /carts/{cartId}`](https://apidoc.nexway.store/api/cart#tag/Public/operation/getOne) and take the `checkoutUrl` property from the response — this value must be passed as `baseLink` in the SSO deeplink request so the shopper reaches the checkout already authenticated:
+```
+POST https://api.nexway.store/iam/deeplinks/
+Authorization: Bearer <API_key>
+```
+```json
+{
+    "enduserId": "{{endUserId}}",
+    "baseLink": "{{cart.checkoutUrl}}", // The checkoutUrl property of the created cart
+    "linkDuration": 600,
+    "singleUse": true
+}
+```
+The `Location` header of the response contains the deeplink URL to hand back to the shopper's browser.
 
 #### 6. Custom Cart
 Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. This method cannot be used to create a cart with subscription products. The method also has other business related limitations. Please discuss usage with your account manager first.  
