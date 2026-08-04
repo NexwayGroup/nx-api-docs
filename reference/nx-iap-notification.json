@@ -1901,8 +1901,12 @@
                         "description": "Upsell status marker",
                         "type": "boolean"
                     },
+                    "lineItemDataId": {
+                        "description": "Line item data identifier",
+                        "type": "string"
+                    },
                     "lineItemId": {
-                        "description": "Line item identifier",
+                        "description": "Line item identifier. For compatibility purposes.",
                         "type": "string"
                     },
                     "pricing": {
@@ -1963,7 +1967,7 @@
                     "VATRate",
                     "externalContext",
                     "id",
-                    "lineItemId",
+                    "lineItemDataId",
                     "pricing",
                     "product",
                     "quantity",
@@ -3838,7 +3842,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Fri Jul 31 14:31:33 GMT 2026",
+        "generatedAt": "Tue Aug 04 14:50:31 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
