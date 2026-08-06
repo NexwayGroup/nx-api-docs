@@ -38,9 +38,7 @@ https://{storeHostName}/checkout/add?productId={productId}
 
 A shopping cart can also be created via API. The `cartId` is returned in the `Location` header of the API response. To redirect the shopper to checkout, retrieve the cart content using the cartId with the [`GET /carts/{cartId}`](https://apidoc.nexway.store/api/cart#tag/Public/operation/getOne). The response contains `checkoutUrl`, which should be used to redirect the shopper to the checkout page.
 
-### API Use Cases 
-
-#### 1. Public Cart Creation API  
+### 1. Public Cart Creation API  
 Creates a cart using products from the Nexway catalog.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -55,7 +53,7 @@ Creates a cart using products from the Nexway catalog.
 }   
 ```
 
-#### 2. Thank you page upgrade offer (cart)  
+### 2. Thank you page upgrade offer (cart)  
 This endpoint allows upgrading a license immediately after purchase with a more functional product at a higher price. The shopper is charged only the difference between the current and upgraded product prices, without using a prorated formula.
 The request should include the ID of the line item from the purchase order.  
 [`POST /carts/public/upgrade`](https://apidoc.nexway.store/api/cart#tag/Public/operation/createProductUpgradeCart)  
@@ -68,7 +66,7 @@ The request should include the ID of the line item from the purchase order.
 ```
 
 
-#### 3. Cart with Remote Price  
+### 3. Cart with Remote Price  
 Creates a shopping cart with a product price retrieved from an external service.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -87,7 +85,7 @@ Creates a shopping cart with a product price retrieved from an external service.
 }   
 ```
 
-#### 4. Cart with Discount plan
+### 4. Cart with Discount plan
 Creates a shopping cart with a discount plan applied to the subscription. The `tag` and `discountStep` attributes are required.  
 [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart)  
 **API Request Example**
@@ -110,8 +108,9 @@ Creates a shopping cart with a discount plan applied to the subscription. The `t
 ```
 Learn more about subscription plan [here](30-discount-api_guide.md)
 
-#### 5. Authenticated Cart
-Creates a shopping cart for an authenticated end user with prefilled billing information. The cart is created by a server-to-server API call from the customer’s backend (never from the shopper’s browser) and is intended only for end users who are already authenticated in the customer’s system. Because the end user is known, the checkout can reuse the billing address and payment methods already saved in the end user's wallet, skipping data re-entry.
+### 5. Authenticated Cart
+Creates a shopping cart for an authenticated end user with prefilled billing information. The cart is created by a server-to-server API call from the customer’s backend (never from the shopper’s browser) and is intended only for end users who are already authenticated in the customer’s system. Because the end user is known, the checkout can reuse the billing address and payment methods already saved in the end user's wallet, skipping data re-entry.  
+[`POST /carts`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createItem)
 
 The typical flow is:
 1. The authenticated end user clicks a "Buy" button in the customer's application.
@@ -140,9 +139,7 @@ To let shoppers save replayable payment methods to their wallet, either enable s
     "enduserId": "{{endUserId}}", // Required — the authenticated end user's Nexway ID
     "storeId": "36f48867-d6ca-42d3-bf55-5f54a6740803",
     "wantedProducts": [
-        {
-           "id": "2f9bb37b-3558-49f0-bea6-69ab834013de"
-        }
+        {"id": "2f9bb37b-3558-49f0-bea6-69ab834013de"}
     ]
 }   
 ```
@@ -164,7 +161,7 @@ Authorization: Bearer <API_key>
 ```
 The `Location` header of the response contains the deeplink URL to hand back to the shopper's browser.
 
-#### 6. Custom Cart
+### 6. Custom Cart
 Creates a shopping cart with a custom catalog that is not managed by Nexway. This will create the catalog dynamically in Nexway, and the product IDs will be prefixed with the catalog ID. This method cannot be used to create a cart with subscription products. The method also has other business related limitations. Please discuss usage with your account manager first.  
 [`POST /carts/createCheckout`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createCheckout)  
 **API Request Example**
@@ -204,7 +201,7 @@ Creates a shopping cart with a custom catalog that is not managed by Nexway. Thi
 } 
 ```
 
-#### 7. Apply payment method discount
+### 7. Apply payment method discount
 [Here](30-discount-api_guide.md) you can find a description of what a payment method discount is.
 
 In a cart, it is normally applied during `PUT /carts` or `PUT /carts/public`. However, it is also possible to apply it during `POST /carts` or `POST /carts/public`.
