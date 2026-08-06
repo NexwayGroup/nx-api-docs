@@ -87,7 +87,8 @@ The following notifications include details about the subscription. Although, su
 | — → fulfillmentId | string | Fulfillment process identifier | O |
 | — → id | string | Unique line item identifier | R |
 | — → isUpsell | boolean | Upsell status marker | O |
-| — → lineItemId | string | Line item identifier | R |
+| — → lineItemDataId | string | Line item data identifier | R |
+| — → lineItemId | string | Line item identifier. For compatibility purposes. | O |
 | — → pricing | order.Pricing |  | R |
 | — — → allDiscountsApplied | com.nx.notification.externalapi.DiscountApplied[] | All discounts applied to this item | O |
 | — — — → discountAmount | number (double) | Discount value | R |

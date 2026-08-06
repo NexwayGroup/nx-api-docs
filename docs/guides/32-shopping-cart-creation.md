@@ -122,35 +122,31 @@ The typical flow is:
 See the [Single Sign-On guide](16-single-sign-on.md) for the deeplink generation details.
 
 :::important
-`endUser.enduserId` **must** be included in the create cart request. It is what binds the cart to the authenticated end user and enables reuse of the saved billing address and wallet payment methods, as well as SSO into the checkout. Without it the cart behaves as an anonymous public cart.
+`enduserId` **must** be included at the root of the create cart request. It is what binds the cart to the authenticated end user and enables reuse of the saved billing address and wallet payment methods, as well as SSO into the checkout. Without it the cart behaves as an anonymous public cart.
+:::
+
+:::note
+`country` and `locale` are normally required, but for authenticated carts they are inherited from the end user's profile and can be omitted.
+:::
+
+:::note
+To let shoppers save replayable payment methods to their wallet, either enable subscriptions on the product or ask your account manager to set `promoteOneClickPayment=true` at the store or customer level. Once enabled, a checkbox appears in the cart allowing the shopper to preserve their payment method for future payments.
 :::
 
 **API Request Example**  
 ```json
 --header 'Authorization: Bearer <API_key>'
 {
-    "country": "FR",
-    "locale": "fr-FR",
+    "enduserId": "{{endUserId}}", // Required — the authenticated end user's Nexway ID
     "storeId": "36f48867-d6ca-42d3-bf55-5f54a6740803",
     "wantedProducts": [
         {
-        "id": "2f9bb37b-3558-49f0-bea6-69ab834013de"
+           "id": "2f9bb37b-3558-49f0-bea6-69ab834013de"
         }
-    ],
-    "endUser": { 
-        "enduserId": "{{endUserId}}", // Required — the authenticated end user's Nexway ID
-        "firstName": "John",
-        "lastName": "Smith",
-        "email": "John.Smith@domain.com",
-        "maskedEmail": true, // Obfuscates the email
-        "city": "Marseille",
-        "country": "FR",
-        "streetAddress": "Queen Street, 12",
-        "zipCode": "2601"
-        // Add more billing information if necessary.
-    }
+    ]
 }   
 ```
+The `Location` header of the response contains the cartId.
 
 **SSO Deeplink Example**  
 Once the cart is created, retrieve it via [`GET /carts/{cartId}`](https://apidoc.nexway.store/api/cart#tag/Public/operation/getOne) and take the `checkoutUrl` property from the response — this value must be passed as `baseLink` in the SSO deeplink request so the shopper reaches the checkout already authenticated:
