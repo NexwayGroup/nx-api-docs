@@ -2230,11 +2230,16 @@
                         "format": "int32",
                         "type": "integer"
                     },
+                    "offerCreationSource": {
+                        "description": "Source offer creation coming from cart",
+                        "type": "string"
+                    },
                     "offerSubSource": {
                         "description": "Sub source that should be used for OFFER source. It is mandatory to use it, if OFFER is the discount source",
                         "enum": [
                             "SUSPEND",
-                            "RESUME"
+                            "RESUME",
+                            "PAYMENT_FAILURE"
                         ],
                         "example": "RESUME | SUSPEND",
                         "type": "string"
@@ -3102,6 +3107,10 @@
                     },
                     "onPaymentClickRedirectUrl": {
                         "description": "Redirection URL once the payment page is closed",
+                        "type": "string"
+                    },
+                    "paymentFailureOfferId": {
+                        "description": "Id of the offer created for payment failure recovery",
                         "type": "string"
                     },
                     "paymentId": {
