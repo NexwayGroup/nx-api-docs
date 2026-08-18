@@ -58,13 +58,12 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
                     "customFields": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "type": "object"
                     },
                     "customerId": {
@@ -75,6 +74,7 @@
                         "type": "integer"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -85,6 +85,7 @@
                         "writeOnly": true
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -94,6 +95,7 @@
             "CustomFieldsDefinition": {
                 "properties": {
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -110,6 +112,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -138,6 +141,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -154,6 +158,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -169,6 +174,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -219,6 +225,7 @@
                         "type": "integer"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -240,6 +247,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -252,6 +260,7 @@
                     },
                     "description": {
                         "description": "Description's comment",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "fallbackLocale": {
@@ -259,6 +268,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -290,6 +300,7 @@
                             "type": "string"
                         },
                         "description": "Localized marketing name descriptions",
+                        "minProperties": 1,
                         "type": "object"
                     },
                     "localizedPurchaseEmailDesc": {
@@ -360,6 +371,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -449,6 +461,7 @@
                         "type": "boolean"
                     },
                     "tag": {
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -458,9 +471,7 @@
                 ],
                 "type": "object"
             },
-            "DiscountStatus": {
-                "type": "object"
-            },
+            "DiscountStatus": {},
             "DiscountedPrice": {
                 "properties": {
                     "allDiscountsApplied": {
@@ -507,11 +518,13 @@
                     "productName": {
                         "description": "Product name of the new product",
                         "example": "My Product",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "publisherRefId": {
                         "description": "Publisher reference ID of the new product",
                         "example": "49FD453",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -567,6 +580,7 @@
                         "type": "array"
                     },
                     "storeId": {
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -589,15 +603,14 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
             "ExtraTermBonus": {
                 "properties": {
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -612,9 +625,11 @@
                         "$ref": "#/components/schemas/EligibilityRules"
                     },
                     "extraTermBonusTag": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -639,6 +654,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -865,8 +881,7 @@
                     },
                     "matrix": {
                         "description": "Matrix",
-                        "readOnly": true,
-                        "type": "object"
+                        "readOnly": true
                     },
                     "matrixVariables": {
                         "description": "List of variables",
@@ -1018,6 +1033,7 @@
                     },
                     "field": {
                         "description": "Parameter name",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "internalDesc": {
@@ -1067,6 +1083,7 @@
             "PriceFunction": {
                 "properties": {
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1079,9 +1096,11 @@
                     },
                     "expression": {
                         "description": "JEXL expression for price function",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -1089,6 +1108,7 @@
                     },
                     "name": {
                         "description": "Name of the price function",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalId": {
@@ -1111,6 +1131,7 @@
                         "uniqueItems": true
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1231,6 +1252,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1278,6 +1300,7 @@
                         "type": "boolean"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -1451,6 +1474,7 @@
                         "type": "boolean"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1582,6 +1606,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1634,6 +1659,7 @@
                         "type": "boolean"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -1839,6 +1865,7 @@
                         "type": "boolean"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1916,6 +1943,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1963,6 +1991,7 @@
                         "type": "boolean"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -2136,6 +2165,7 @@
                         "type": "boolean"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -2187,6 +2217,7 @@
                     },
                     "field": {
                         "description": "Parameter name",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "internalDesc": {
@@ -2260,18 +2291,17 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
                     "customFields": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "description": "Product custom fields",
                         "type": "object"
                     },
                     "customFieldsId": {
-                        "description": "Product custom fields id",
+                        "description": "CustomFields ID",
                         "type": "string"
                     },
                     "customerId": {
@@ -2341,6 +2371,7 @@
                         "type": "boolean"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -2525,13 +2556,12 @@
                         "description": "Unit price of the product"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
                     "variableValues": {
-                        "additionalProperties": {
-                            "type": "object"
-                        },
+                        "additionalProperties": {},
                         "description": "Product variable values",
                         "type": "object"
                     },
@@ -2578,6 +2608,7 @@
                     },
                     "label": {
                         "description": "Explanation of what this file is",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -2609,6 +2640,7 @@
                 "properties": {
                     "url": {
                         "description": "URL of the asset",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -2627,6 +2659,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2658,6 +2693,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2687,6 +2725,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2718,6 +2759,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2747,6 +2791,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2778,6 +2825,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2807,6 +2857,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2838,6 +2891,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2867,6 +2923,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2923,8 +2982,7 @@
             "Variable": {
                 "properties": {
                     "defaultValue": {
-                        "description": "Name of variable",
-                        "type": "object"
+                        "description": "Name of variable"
                     },
                     "field": {
                         "description": "Variable name",
@@ -2961,8 +3019,7 @@
                         "type": "string"
                     },
                     "value": {
-                        "description": "Possible values of variable",
-                        "type": "object"
+                        "description": "Possible values of variable"
                     }
                 },
                 "required": [
@@ -2978,6 +3035,7 @@
                 "properties": {
                     "description": {
                         "description": "Description",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "label": {
@@ -3010,6 +3068,7 @@
                     },
                     "description": {
                         "description": "Description",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "localizedValue": {
@@ -3622,6 +3681,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -3994,6 +4061,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -4441,6 +4516,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -5015,6 +5098,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -5458,6 +5549,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -6237,6 +6336,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -6743,6 +6850,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7278,6 +7393,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -7417,6 +7540,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
