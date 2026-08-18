@@ -1,19 +1,171 @@
 {
-    "components": {},
+    "components": {
+        "schemas": {
+            "FileInfo": {
+                "properties": {
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "lastModified": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
     "info": {
         "title": "OpenAPI definition",
         "version": "v0"
     },
     "openapi": "3.1.0",
     "paths": {
-        "/document-manager/status/ping": {
+        "/document-manager/{folderName}/files": {
             "get": {
-                "operationId": "ping",
+                "operationId": "listFiles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
                             "*/*": {
                                 "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/FileInfo"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "List files in a folder (no externalId)",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/files/{fileName}": {
+            "delete": {
+                "operationId": "deleteFile",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "fileName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Delete a file by name in a folder (no externalId)",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/upload": {
+            "post": {
+                "operationId": "uploadFiles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "files": {
+                                        "items": {
+                                            "format": "binary",
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "files"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Upload files to a folder (no externalId)",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/{externalId}/download-zip": {
+            "get": {
+                "operationId": "downloadZip",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "format": "byte",
                                     "type": "string"
                                 }
                             }
@@ -21,8 +173,192 @@
                         "description": "OK"
                     }
                 },
+                "summary": "Download all files for a given externalId as a ZIP archive",
                 "tags": [
-                    "status"
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/{externalId}/download/{fileName}": {
+            "get": {
+                "operationId": "downloadFile",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "fileName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "format": "byte",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Download a single file for a given externalId",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/{externalId}/files": {
+            "get": {
+                "operationId": "listFilesForExternalId",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/FileInfo"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "List files for a given externalId",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/{externalId}/files/{fileName}": {
+            "delete": {
+                "operationId": "deleteFileForExternalId",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "fileName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Delete a file by name for a given externalId",
+                "tags": [
+                    "document manager"
+                ]
+            }
+        },
+        "/document-manager/{folderName}/{externalId}/upload": {
+            "post": {
+                "operationId": "uploadFilesForExternalId",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "folderName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "externalId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "files": {
+                                        "items": {
+                                            "format": "binary",
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "files"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "Upload files for a given externalId",
+                "tags": [
+                    "document manager"
                 ]
             }
         }
@@ -31,6 +367,12 @@
         {
             "description": "Generated server url",
             "url": "https://api.nexway.store"
+        }
+    ],
+    "tags": [
+        {
+            "description": "manage documents",
+            "name": "document manager"
         }
     ]
 }
