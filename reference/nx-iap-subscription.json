@@ -572,6 +572,11 @@
             "Subscription": {
                 "description": "A subscription owned by an end user for a set of products, driven by a subscription model that dictates its billing term.",
                 "properties": {
+                    "billingAddressId": {
+                        "description": "Identifier of the end user billing address for this subscription.",
+                        "example": "df8ad22a-5038-11eb-ae93-0242ac130002",
+                        "type": "string"
+                    },
                     "createDate": {
                         "format": "date-time",
                         "type": "string"
