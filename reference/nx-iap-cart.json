@@ -1159,11 +1159,9 @@
                         "type": "string"
                     },
                     "discountId": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "discountRate": {
-                        "deprecated": true,
                         "format": "double",
                         "type": "number"
                     },
@@ -1453,7 +1451,7 @@
                     },
                     "maskedEmail": {
                         "description": "Boolean to flag if the email needs to be masked in the public view",
-                        "example": false,
+                        "example": true,
                         "type": "boolean"
                     },
                     "phone": {
@@ -1693,7 +1691,7 @@
                     },
                     "maskedEmail": {
                         "description": "Boolean to flag if the email needs to be masked in the public view",
-                        "example": false,
+                        "example": true,
                         "type": "boolean"
                     },
                     "phone": {
@@ -1903,7 +1901,6 @@
             "PaymentMethodDiscount": {
                 "properties": {
                     "discountId": {
-                        "deprecated": true,
                         "type": "string"
                     },
                     "paymentTypeId": {
@@ -2037,6 +2034,7 @@
                         "description": "Mandate value is a maximum price we can set for a single transaction to charge off end user for subscription renew",
                         "example": 10.55,
                         "format": "double",
+                        "minimum": 0,
                         "readOnly": true,
                         "type": "number"
                     },
