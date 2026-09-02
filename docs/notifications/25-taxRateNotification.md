@@ -18,13 +18,14 @@ Nexway Monetize tracks tax rates per country and region.  This section describes
 | type | string | `created` / `updated` / `deleted` — see [Event list](#event-list) | R |
 | objectId | string | Tax rate identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
-| taxRate | taxManager.TaxRate | Tax rate details object | R |
+| taxRate | taxManager.TaxRate |  | O |
 | → iso2CountryCode | string | ISO 3166-1 alpha-2 country code, e.g. `FR`, `CA` | R |
 | → regionCode | string | Region or province code, e.g. `CA-QC`. Present only if the rate applies to a specific region | O |
+| → startDate | string (date-time) | Planned activation time as a Unix epoch timestamp (milliseconds). Present only for scheduled tax rate change events | O |
 | → taxRates | taxManager.TaxRateDetail[] | Array of tax rate entries. For multi-rate countries the array contains one entry per tax category | R |
-| → → value | number | Tax rate as a decimal, e.g. `0.05` for 5% | R |
-| → → taxCategory | string | Tax category identifier, e.g. `STANDARD`, `FEDERAL`, `STATE`, `VAT` | R |
-| → → taxName | string | Human-readable name of the tax, e.g. `Federal Tax`, `QST` | O |
+| — → taxCategory | string | Tax category identifier, e.g. `STANDARD`, `FEDERAL`, `STATE` | R |
+| — → taxName | string | Human-readable name of the tax, e.g. `Federal Tax`, `PST`, `QST`, `GST`, etc. | O |
+| — → value | number (double) | Tax rate as a decimal, e.g. `0.05` for 5% | R |
 <!-- /GEN:notification:TaxRateNotification -->
 
 ## Examples
