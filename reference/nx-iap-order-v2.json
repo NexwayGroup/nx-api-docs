@@ -1052,7 +1052,7 @@
                 "type": "object"
             },
             "Invoice": {
-                "description": "Invoice information",
+                "description": "Receipt information",
                 "properties": {
                     "date": {
                         "description": "Invoice creation date",
@@ -2176,6 +2176,7 @@
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
+                            "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
                             "SUBSCRIPTION_PENDING",
@@ -2312,6 +2313,25 @@
                         "description": "Indicates if the offline payment reminder email has been sent",
                         "type": "boolean"
                     },
+                    "paymentReceiptStatus": {
+                        "description": "Global status for payment receipt workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
+                        ],
+                        "type": "string"
+                    },
                     "paymentStatus": {
                         "description": "Global status for payment workflow",
                         "enum": [
@@ -2384,6 +2404,10 @@
                         "description": "Indicates if one-click payment is promoted",
                         "example": true,
                         "type": "boolean"
+                    },
+                    "receipt": {
+                        "$ref": "#/components/schemas/Invoice",
+                        "description": "Receipt information"
                     },
                     "refund": {
                         "$ref": "#/components/schemas/Refund",
@@ -2776,6 +2800,7 @@
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
+                            "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
                             "SUBSCRIPTION_PENDING",
@@ -3842,6 +3867,7 @@
                             "WAITING_FOR_PAYMENT",
                             "PAYMENT_PENDING",
                             "INVOICE_PENDING",
+                            "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
                             "SUBSCRIPTION_PENDING",
@@ -7429,6 +7455,7 @@
                                 "WAITING_FOR_PAYMENT",
                                 "PAYMENT_PENDING",
                                 "INVOICE_PENDING",
+                                "RECEIPT_PENDING",
                                 "ELECTRONIC_INVOICE_PENDING",
                                 "ENDUSER_PENDING",
                                 "SUBSCRIPTION_PENDING",
