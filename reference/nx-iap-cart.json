@@ -99,6 +99,76 @@
                 },
                 "type": "object"
             },
+            "Address": {
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "description": "End user company name",
+                        "example": "Nexway",
+                        "maxLength": 255,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Country",
+                        "example": "FR",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Phone",
+                        "example": "0612345678",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "example": "FR-MQ",
+                        "type": "string"
+                    },
+                    "regionName": {
+                        "description": "Region name",
+                        "example": "Occitanie",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": "2 cours tarb\u00e9, Appt B25",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title",
+                        "enum": [
+                            "MR",
+                            "MRS"
+                        ],
+                        "example": "MR, MRS",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": "75001",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ArrayNode": {},
             "BuyerBehavior": {
                 "properties": {
@@ -1384,6 +1454,10 @@
                         },
                         "type": "array"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "billing address"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -1487,8 +1561,8 @@
                         "type": "boolean"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress",
-                        "description": "End-user Shipping address"
+                        "$ref": "#/components/schemas/Address",
+                        "description": "shipping address"
                     },
                     "storeId": {
                         "type": "string"
@@ -1636,6 +1710,10 @@
                         },
                         "type": "array"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "billing address"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -1720,8 +1798,8 @@
                         "type": "boolean"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress",
-                        "description": "End-user Shipping address"
+                        "$ref": "#/components/schemas/Address",
+                        "description": "shipping address"
                     },
                     "streetAddress": {
                         "description": "Address book street address",
@@ -2131,6 +2209,9 @@
             "PrivateCartInput": {
                 "properties": {
                     "Subscription Id": {
+                        "type": "string"
+                    },
+                    "billingAddressId": {
                         "type": "string"
                     },
                     "billingPlanId": {
@@ -3104,62 +3185,6 @@
                         "description": "Shipping cost for selected shipping method"
                     }
                 },
-                "type": "object"
-            },
-            "ShippingAddress": {
-                "properties": {
-                    "city": {
-                        "description": "City",
-                        "example": "Sens",
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "description": "First name",
-                        "example": "John",
-                        "maxLength": 250,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "description": "Last name",
-                        "example": "John",
-                        "maxLength": 250,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "phone": {
-                        "description": "Phone",
-                        "example": "0612345678",
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "region": {
-                        "description": "Region",
-                        "example": "FR-MQ",
-                        "type": "string"
-                    },
-                    "streetAddress": {
-                        "description": "Street address",
-                        "example": "2 cours tarb\u00e9, Appt B25",
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "zipCode": {
-                        "description": "Zip/postal code of town",
-                        "example": "75001",
-                        "minLength": 1,
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "city",
-                    "firstName",
-                    "lastName",
-                    "phone",
-                    "streetAddress",
-                    "zipCode"
-                ],
                 "type": "object"
             },
             "ShippingMethod": {
