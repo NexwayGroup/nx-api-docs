@@ -210,9 +210,31 @@ The API converts the cart to order which will be used during auto-renewal. A `20
                 "grossPrice": 200.0,
                 "vatRate": 0.1,
                 "currency": "AUD",
-                "vatIncluded": true,
-                "source": "INTERNAL"
-            },
+                "discountedPrice": {
+                    "discountedNetPrice": 163.64,
+                    "discountedGrossPrice": 180.0,
+                    "discountRate": 0.1,
+                    "cumulatedDiscountRate": 0.1,
+                    "netPriceDiscountAmount": 18.18,
+                    "grossPriceDiscountAmount": 20.0,
+                    "vatDiscountAmount": 16.36,
+                    "discountId": "0605770c-538a-49bf-997a-b08d4edXXXX",
+                    "discountCode": "subplan",
+                    "allDiscountsApplied": [
+                        {
+                            "grossPrice": 200.0,
+                            "netPrice": 181.82,
+                            "discountedGrossPrice": 180.0,
+                            "discountedNetPrice": 163.64,
+                            "discountRate": 0.1,
+                            "vatDiscountAmount": 16.36,
+                            "netPriceDiscountAmount": 18.18,
+                            "grossPriceDiscountAmount": 20.0,
+                            "discountId": "0605770c-538a-49bf-997a-b08d4edXXXX",
+                            "model": "SUBSCRIPTION_PLAN"
+                        }
+                    ]
+                },
             "taxExempt": false
         }
     ]
@@ -234,15 +256,23 @@ The upgrade takes effect immediately, updating the product while keeping the sub
 ### Part 1: Create a Mid-Term Upgrade Cart 
 
 After shopper accepts for mid-term upgrade of their subscription, send a request to the Nexway API to create a shopping cart. Include the subscription identifier and details of the product the subscription is being upgraded to. The new product price must exceed the current subscription price.
+:::note
+To preserve or add a subscription plan during an upgrade, make sure it's also included in the cart creation request.
+:::
 
 **API Request Example**
 ```json
 POST /carts/mid-term-upgrade
 {
-  "subscriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
-  "wantedProduct" : {
-    "id": "8c7115e2-6fa2-454e-be09-50dd20ecacc4"
-  }
+    "subscriptionId": "636e5de6-57f3-4e28-b8cb-4734c418d887",
+    "wantedProduct": {
+        "id": "83af8c26-7cb6-43e1-9da2-3c7d216e1965",
+        "discountPlan": {
+            "tag": "testtypreco",
+            "discountStep": 0,
+            "ignorePurchaseDiscount": false
+        }
+    }
 }
 ```
 The `201 Created` response includes product details and prorated price in `cart.price.discountedPrice`. 
@@ -251,114 +281,30 @@ The `201 Created` response includes product details and prorated price in `cart.
 ```json
 {
     "id": "0eb27503-674b-4855-b3bb-00f8386b64ea",
-    "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
-    "enduserId": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
-    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
-    "products": [
+    "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
+    "enduserId": "1f312803-acc9-432b-821a-0ac89a809d02",
+    "createDate": 1788784072578,
+    "updateDate": 1788784072578,
+    "dbVersion": 0,
+    "availableCurrencies": [
+        "EUR"
+    ],
+    "blockDiscounts": false,
+    "country": "FR",
+    "currency": "EUR",
+    "discountsStatus": [
         {
-            "publisherRefId": "123",
-            "id": "8c7115e2-6fa2-454e-be09-50dd20ecacc4",
-            "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
-            "quantityMaxReached": false,
-            "price": {
-                "currency": "AUD",
-                "netPrice": 40.91,
-                "grossPrice": 45.0,
-                "vatIncluded": true,
-                "vatRate": 0.1,
-                "vatAmount": 4.09,
-                "discountedPrice": {
-                    "discountedNetPrice": 4.59,
-                    "discountedGrossPrice": 5.05,
-                    "netPriceDiscountAmount": 36.32,
-                    "grossPriceDiscountAmount": 39.95,
-                    "vatDiscountAmount": 0.46,
-                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
-                },
-                "source": "INTERNAL"
-            },
-            "defaultCurrency": "BRL",
-            "unitPrice": {
-                "currency": "AUD",
-                "netPrice": 40.91,
-                "grossPrice": 45.0,
-                "vatIncluded": true,
-                "vatRate": 0.1,
-                "vatAmount": 4.09,
-                "discountedPrice": {
-                    "discountedNetPrice": 4.59,
-                    "discountedGrossPrice": 5.05,
-                    "netPriceDiscountAmount": 36.32,
-                    "grossPriceDiscountAmount": 39.95,
-                    "vatDiscountAmount": 0.46,
-                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
-                },
-                "source": "INTERNAL"
-            },
-            "renewingPrice": {
-                "currency": "AUD",
-                "netPrice": 40.91,
-                "grossPrice": 45.0,
-                "vatIncluded": true,
-                "vatRate": 0.1,
-                "vatAmount": 4.09,
-                "source": "INTERNAL"
-            },
-            "type": "SOFTWARE",
-            "businessSegment": "B2C",
-            "fullPrice": {
-                "currency": "AUD",
-                "netPrice": 40.91,
-                "grossPrice": 45.0,
-                "vatIncluded": true,
-                "vatRate": 0.1,
-                "vatAmount": 4.09,
-                "discountedPrice": {
-                    "discountedNetPrice": 4.59,
-                    "discountedGrossPrice": 5.05,
-                    "netPriceDiscountAmount": 36.32,
-                    "grossPriceDiscountAmount": 39.95,
-                    "vatDiscountAmount": 0.46,
-                    "signedDiscount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy"
-                }
-            },
-            "lifeTime": "1YEAR",
-            "licenseNextExpirationDate": 1765536344000,
-            "subscriptionTemplate": "NEXWAY_1Y",
-            "fulfillmentTemplate": "42c365e5-32c2-47a9-87eb-a6ce09086762",
-            "trial": false,
-            "taxExempt": false,
-            "renewingProductDetails": {
-                "lifeTime": "1YEAR"
-            },
-            "previousLineItemId": "2f3d2c41-af75-458c-b881-d76eb19526d6",
-            "quantity": 1,
-            "name": "Product for upgrade",
-            "priceSource": "INTERNAL",
-            "subscriptionProduct": true,
-            "paidTrial": false,
-            "productFamily": "",
-            "discountsStatus": [
-                {
-                    "discount": "eyJjdXN0b21lcklkIjoiMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQyIiwicHJvZHVjdElkcyI6WyI4YzcxMTVlMi02ZmEyLTQ1NGUtYmUwOS01MGRkMjBlY2FjYzQiXSwic3RvcmVJZHMiOlsiNTk0MDk0ODItOTcxOS00ZDc2LTk3YWQtYzY3OWFjYzdkMTRhIl0sImVuZERhdGUiOjE3MzQwMDQ4MjQ3NTEsImFtb3VudEJ5Q3VycmVuY3kiOnsiQVVEIjozOS45NX19LS0tLU1Dd0NGQ1pwcE12OGlJdk1CN3NBTytkVmhKdkoxaS9xQWhRbi85VjQ2cFYzZXdJWHB6L1MxYkdURllrcjBRPT0tLS0tMjcyMTMyNDQtZmEyNC00NzI4LWFlMDMtYTQyMzc2YWFkZDQy",
-                    "status": "APPLIED"
-                }
-            ],
-            "salesMode": "STANDARD",
-            "fulfillmentTemplateName": "wiremock",
-            "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
-            "nextGenerationOf": [],
-            "catalogId": "aa720d46-840a-418c-a0b5-b5356f31315b",
-            "descriptionId": "99f22922-17db-4c0b-bfa6-065166dcf312",
-            "trialAllowed": false,
-            "unifiedRegisterSoftware": false,
-            "physical": false,
-            "expirationDate": 1765537224050
+            "discount": "Didscount plan for reco",
+            "status": "OVERLAPPING"
         }
     ],
-    "locale": "en-US",
-    "country": "AU",
+    "eligibleFeatures": {
+        "abandoned": false
+    },
     "endUser": {
+        "id": "1f312803-acc9-432b-821a-0ac89a809d02",
+        "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
+        "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
         "email": "userEmail@domain.com",
         "maskedEmail": false,
         "lastName": "lastName",
@@ -368,9 +314,6 @@ The `201 Created` response includes product details and prorated price in `cart.
         "country": "AU",
         "locale": "en-US",
         "taxExemptionEligible": false,
-        "id": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
-        "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
-        "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
         "storeRoute": {
             "hostname": "testdomain.nexway.build",
             "fullUrl": "https://testdomain.nexway.build",
@@ -384,32 +327,213 @@ The `201 Created` response includes product details and prorated price in `cart.
                     "type": "visa",
                     "bin": "411111",
                     "expirationDate": "01/2032"
-                }
-            ]
-        },
-            "paypals": []
+                }]
         },
         "type": "BUYER"
     },
+    "endUserDiscountAmountByCurrency": {},
+    "endUserDiscounts": [],
+    "extraTermsBonuses": [],
+    "forceAuthenticationFlow": false,
+    "forcedCurrency": "EUR",
+    "hideCrossSell": false,
+    "hideUpSell": false,
+    "keepNonRecurringPaymentMethods": false,
+    "lastUpdateReason": "cart created by subscription mid term upgrade",
+    "locale": "fr-FR",
+    "manualUpdateDate": 1788784071655,
     "price": {
-        "currency": "AUD",
-        "netPrice": 40.91,
-        "grossPrice": 45.0,
-        "vatAmount": 4.09,
+        "currency": "EUR",
+        "netPrice": 33.33,
+        "grossPrice": 39.99,
+        "vatAmount": 6.66,
         "discountedPrice": {
-            "discountedNetPrice": 4.59,
-            "discountedGrossPrice": 5.05,
-            "netPriceDiscountAmount": 36.32,
-            "grossPriceDiscountAmount": 39.95,
-            "vatDiscountAmount": 0.46
+            "discountedGrossPrice": 12.0,
+            "discountedNetPrice": 10.0,
+            "grossPriceDiscountAmount": 27.99,
+            "netPriceDiscountAmount": 23.33,
+            "vatDiscountAmount": 2.0
         }
     },
-    "subsidiaryId": "1",
+    "products": [
+        {
+            "blackListedCountries": [],
+            "businessSegment": "B2C",
+            "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
+            "defaultCurrency": "EUR",
+            "discountPlan": {
+                "tag": "testtypreco",
+                "discountStep": 0,
+                "ignorePurchaseDiscount": false
+            },
+            "fullPrice": {
+                "currency": "EUR",
+                "netPrice": 33.33,
+                "grossPrice": 39.99,
+                "vatIncluded": true,
+                "vatRate": 0.2,
+                "vatAmount": 6.66,
+                "discountedPrice": {
+                    "discountedGrossPrice": 12.0,
+                    "discountedNetPrice": 10.0,
+                    "grossPriceDiscountAmount": 27.99,
+                    "netPriceDiscountAmount": 23.33,
+                    "vatDiscountAmount": 2.0
+                }
+            },
+            "gift": false,
+            "id": "83af8c26-7cb6-43e1-9da2-3c7d216e1965",
+            "licenseNextExpirationDate": 1820319793000,
+            "lifeTime": "1YEAR",
+            "lifeTimeUnit": "years",
+            "lifeTimeValue": "1",
+            "name": "My super product",
+            "physical": true,
+            "previousLineItemId": "cda35084-9062-4413-844b-1590698b1725",
+            "price": {
+                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a5",
+                "currency": "EUR",
+                "netPrice": 33.33,
+                "grossPrice": 39.99,
+                "vatIncluded": true,
+                "vatRate": 0.2,
+                "vatAmount": 6.66,
+                "discountedPrice": {
+                    "allDiscountsApplied": [
+                        {
+                            "discountAmount": 27.99,
+                            "discountedGrossPrice": 12.0,
+                            "discountedNetPrice": 10.0,
+                            "grossPrice": 39.99,
+                            "grossPriceDiscountAmount": 27.99,
+                            "netPrice": 33.33,
+                            "netPriceDiscountAmount": 23.33,
+                            "vatDiscountAmount": 2.0
+                        }
+                    ],
+                    "discountedGrossPrice": 12.0,
+                    "discountedNetPrice": 10.0,
+                    "grossPriceDiscountAmount": 27.99,
+                    "netPriceDiscountAmount": 23.33,
+                    "vatDiscountAmount": 2.0,
+                },
+                "source": "INTERNAL"
+            },
+            "priceSource": "INTERNAL",
+            "priority": 0,
+            "quantity": 1,
+            "quantityMaxReached": false,
+            "relatedContents": [],
+            "renewingPrice": {
+                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a6",
+                "currency": "EUR",
+                "netPrice": 33.33,
+                "grossPrice": 39.99,
+                "vatIncluded": true,
+                "vatRate": 0.2,
+                "vatAmount": 6.66,
+                "discountedPrice": {
+                    "allDiscountsApplied": [
+                        {
+                            "discountCode": "Didscount plan for reco",
+                            "discountId": "c3bdf422-bd09-40f9-989c-d2a83520e64b",
+                            "discountRate": 0.09,
+                            "discountedGrossPrice": 36.39,
+                            "discountedNetPrice": 30.33,
+                            "grossPrice": 39.99,
+                            "grossPriceDiscountAmount": 3.6,
+                            "model": "SUBSCRIPTION_PLAN",
+                            "netPrice": 33.33,
+                            "netPriceDiscountAmount": 3.0,
+                            "vatDiscountAmount": 6.06
+                        }
+                    ],
+                    "cumulatedDiscountRate": 0.09,
+                    "discountCode": "Didscount plan for reco",
+                    "discountId": "c3bdf422-bd09-40f9-989c-d2a83520e64b",
+                    "discountRate": 0.09,
+                    "discountedGrossPrice": 36.39,
+                    "discountedNetPrice": 30.33,
+                    "grossPriceDiscountAmount": 3.6,
+                    "netPriceDiscountAmount": 3.0,
+                    "vatDiscountAmount": 6.06,
+                    "discountTestOrder": false
+                },
+                "source": "INTERNAL"
+            },
+            "renewingProductDetails": {
+                "lifeTime": "1YEAR",
+                "lifeTimeUnit": "years",
+                "lifeTimeValue": "1"
+            },
+            "subscriptionProduct": true,
+            "subscriptionTemplate": "NEXWAY_15M",
+            "taxExempt": false,
+            "trial": false,
+            "type": "SOFTWARE",
+            "unitPrice": {
+                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a5",
+                "currency": "EUR",
+                "netPrice": 33.33,
+                "grossPrice": 39.99,
+                "vatIncluded": true,
+                "vatRate": 0.2,
+                "vatAmount": 6.66,
+                "discountedPrice": {
+                    "allDiscountsApplied": [
+                        {
+                            "discountAmount": 27.99,
+                            "discountedGrossPrice": 12.0,
+                            "discountedNetPrice": 10.0,
+                            "grossPrice": 39.99,
+                            "grossPriceDiscountAmount": 27.99,
+                            "netPrice": 33.33,
+                            "netPriceDiscountAmount": 23.33,
+                            "vatDiscountAmount": 2.0
+                        }
+                    ],
+                    "discountedGrossPrice": 12.0,
+                    "discountedNetPrice": 10.0,
+                    "grossPriceDiscountAmount": 27.99,
+                    "netPriceDiscountAmount": 23.33,
+                    "vatDiscountAmount": 2.0,
+                },
+                "source": "INTERNAL"
+            },
+            "upsell": false,
+            "variableValues": {
+                "seats": "val1"
+            },
+            "paidTrial": false,
+            "productFamily": "",
+            "discountsStatus": [
+                {
+                    "status": "APPLIED"
+                }
+            ],
+            "fulfillmentTemplateName": "wiremock-fine",
+            "salesMode": "STANDARD",
+            "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+            "descriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
+            "nextGenerationOf": [],
+            "trialAllowed": false,
+            "unifiedRegisterSoftware": false,
+            "longDesc": "Hello",
+            "expirationDate": 1820320071847
+        }
+    ],
+    "promoteOneClickPayment": false,
+    "renewalSource": false,
+    "scheduledSuppressionDate": 1789043271655,
+    "source": "MID_TERM_UPGRADE",
     "storeHostname": "testdomain.nexway.build",
     "checkoutUrl": "https://testdomain.nexway.build/checkout/add?cartId=0eb27503-674b-4855-b3bb-00f8386b64ea",
     "subscriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
-    "source": "MID_TERM_UPGRADE",
-    "totalAmount": 5.05
+    "subsidiaryId": "1",
+    "taxAuthority": "NX_VATENGINE",
+    "totalAmount": 12.0,
+    "useCurrencyConversion": false,
+    "useStrikeThroughPrice": false
 }
 ```
 
