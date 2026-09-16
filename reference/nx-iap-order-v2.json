@@ -1670,7 +1670,8 @@
                     "refundMethod": {
                         "enum": [
                             "FULL",
-                            "LIFE_TIME"
+                            "LIFE_TIME",
+                            "AMOUNT"
                         ],
                         "type": "string"
                     },
@@ -1683,6 +1684,11 @@
             },
             "LineItemRefundOrderRequest": {
                 "properties": {
+                    "amount": {
+                        "description": "Amount to refund, mandatory for the AMOUNT refund method only",
+                        "format": "double",
+                        "type": "number"
+                    },
                     "id": {
                         "type": "string"
                     },
@@ -1693,7 +1699,8 @@
                     "partialRefundMethod": {
                         "enum": [
                             "FULL",
-                            "LIFE_TIME"
+                            "LIFE_TIME",
+                            "AMOUNT"
                         ],
                         "type": "string"
                     }
@@ -1813,6 +1820,9 @@
             "Order": {
                 "properties": {
                     "Indicates if cancel the order without cancel subscription and fulfillment": {
+                        "type": "boolean"
+                    },
+                    "Indicates if partially refund the order without cancel subscription and fulfillment": {
                         "type": "boolean"
                     },
                     "Indicates if send email or not in when fail in payment process failed": {
@@ -3619,7 +3629,8 @@
                     "refundMethod": {
                         "enum": [
                             "FULL",
-                            "LIFE_TIME"
+                            "LIFE_TIME",
+                            "AMOUNT"
                         ],
                         "type": "string"
                     },
@@ -8361,6 +8372,15 @@
                         "schema": {
                             "type": "boolean"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "refundWithoutSubscriptionAndFulfillmentCancellation",
+                        "required": false,
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -8383,6 +8403,16 @@
                             }
                         },
                         "description": "Accepted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
                     },
                     "401": {
                         "content": {
