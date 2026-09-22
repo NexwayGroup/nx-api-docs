@@ -579,14 +579,13 @@
                         },
                         "type": "array"
                     },
-                    "storeId": {
-                        "minLength": 1,
-                        "type": "string"
+                    "storeIds": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     }
                 },
-                "required": [
-                    "storeId"
-                ],
                 "type": "object"
             },
             "ExceptionDetail": {
@@ -665,7 +664,6 @@
                     }
                 },
                 "required": [
-                    "eligibilityRules",
                     "extraTermBonusTag",
                     "status",
                     "unit"
