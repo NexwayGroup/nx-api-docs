@@ -32,7 +32,7 @@ These events are fired when some payment is added or deleted from the wallet. Th
 | Field | Type | Description | R/O |
 |---|---|---|---|
 | subject | string | endUser | R |
-| type | string | paymentMethodAddedToWallet / paymentMethodDeletedFromWallet | R |
+| type | string | subscriptionPaymentMethodUpdated | R |
 | objectId | string | EndUser identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
 | addedPaymentMethods | enduser.PaymentMethod[] | List of added payment instruments | R |
