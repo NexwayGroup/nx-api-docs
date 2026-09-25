@@ -28,11 +28,11 @@ These events are fired when some payment is added or deleted from the wallet. Th
 
 ## Payment Method Event Payload Structure
 
-<!-- GEN:notification:PaymentMethodAddedNotification subject="endUser" type="paymentMethodAddedToWallet / paymentMethodDeletedFromWallet" objectId="EndUser identifier" -->
+<!-- GEN:notification:PaymentMethodAddedNotification subject="endUser" type="subscriptionPaymentMethodUpdated" objectId="EndUser identifier" -->
 | Field | Type | Description | R/O |
 |---|---|---|---|
 | subject | string | endUser | R |
-| type | string | paymentMethodAddedToWallet / paymentMethodDeletedFromWallet | R |
+| type | string | subscriptionPaymentMethodUpdated | R |
 | objectId | string | EndUser identifier | R |
 | eventDate | string (date-time) | ISO 8601 timestamp | R |
 | addedPaymentMethods | enduser.PaymentMethod[] | List of added payment instruments | R |
