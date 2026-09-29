@@ -213,3 +213,78 @@ There is a validation step that checks the payment method type applied to the ca
 For example:
 - If a credit card (recurring) is applied to the shopping cart, the payment method discount must have `"recurring": true`.
 - If the recurrence does not match, the discount cannot be applied and the backend will return an error.
+
+## External Context Principles
+
+External context is your own data, carried along with the shopping cart. You set it when the cart is created, Nexway stores it without interpreting it, and you get it back unchanged on the order, the subscription, the notifications and the fulfillment call — typically a session ID, a campaign, a partner reference or a basket ID in your back office.
+
+### 1. Format
+
+The field accepts any string, but the recommended convention is a **Base64-encoded JSON object** — in JavaScript, `JSON.stringify()` followed by `btoa()`:
+
+```js
+const externalContext = btoa(JSON.stringify({
+    yourContextKey1: "some-value-you-want-to-receive-after-the-purchase"
+}));
+// "eyJ5b3VyQ29udGV4dEtleTEiOiJzb21lLXZhbHVlLXlvdS13YW50LXRvLXJlY2VpdmUtYWZ0ZXItdGhlLXB1cmNoYXNlIn0="
+```
+
+When the value follows this convention, `decodedExternalContext` is exposed alongside `externalContext` in the cart and order notifications and on the subscription object. A value that does not follow it is still transported end to end, but only as the raw `externalContext` string — `decodedExternalContext` stays empty.
+
+### 2. Setting the external context
+
+How the value is produced depends on how the cart is created.
+
+**Cart created via the API.** Send `externalContext` at the root of the request body of [`POST /carts`](https://apidoc.nexway.store/api/cart/#tag/Cart/operation/createItem) or [`POST /carts/public`](https://apidoc.nexway.store/api/cart#tag/Public/operation/publicCreateCart). The value is stored verbatim, so build the Base64 payload yourself.
+
+```json
+{
+    "country": "FR",
+    "locale": "en-US",
+    "storeId": "36f48867-d6ca-42d3-bf55-5f54a6740803",
+    "externalContext": "eyJ5b3VyQ29udGV4dEtleTEiOiJzb21lLXZhbHVlLXlvdS13YW50LXRvLXJlY2VpdmUtYWZ0ZXItdGhlLXB1cmNoYXNlIn0=",
+    "wantedProducts": [
+        {"id": "2f9bb37b-3558-49f0-bea6-69ab834013de"}
+    ]
+}
+```
+
+**Cart created from a buy-link.** The cart UI application builds the value from the buy-link URL and passes it to the cart API. It supports two mutually exclusive ways of doing so:
+
+* **Explicit** — the `externalContext` query parameter is passed on the buy-link and is used as is: `/checkout/add?productId={productId}&externalContext={value}`. The value is whatever you put in the URL, not necessarily a Base64-encoded map — it is stored unchanged.
+* **Implicit** — the cart UI collects named buy-link query parameters, assembles them into a JSON map and Base64-encodes it. Only named buy-link parameters declared at store level are collected: a parameter whose name is not part of that configuration is ignored, and nothing else (end-user data, cart content, session information) ever enters the map. Ask your account manager to configure `externalContextGenerationParams` at store level with the list of buy-link parameter names you want to be picked up.
+
+Whichever path is used, the cart API treats the value as an atomic string. It never assembles it and never parses it: the only processing it performs is exposing the decoded map as `decodedExternalContext` when the value happens to be a Base64-encoded JSON map.
+
+The value can be overwritten with `PUT /carts` or `PUT /carts/public` as long as the cart is not converted into an order, and the upgrade endpoints accept their own `externalContext` — [`POST /carts/public/upgrade`](https://apidoc.nexway.store/api/cart#tag/Public/operation/createProductUpgradeCart) and the mid-term upgrade request.
+
+### 3. Where you get it back
+
+The external context set on the cart is copied to every object created from it, so you get your own data back without having to keep a mapping table on your side:
+
+| Where you read it back | Field |
+|------------------------|-------|
+| Cart creation notification | `cart.externalContext` and `cart.decodedExternalContext` |
+| Order notification | `order.externalContext` and `order.decodedExternalContext` |
+| Order API | `externalContext` on the order and on each line item |
+| Subscription | `externalContext` and `decodedExternalContext`, reused for every renewal generated from that subscription |
+| Fulfillment | `.Checkout.CartExternalContext` in the [fulfillment template](15-fulfillment-templating.md), so the value can be forwarded to your fulfillment endpoint |
+
+The values carried in the external context are only consumed at the edges of the platform: notifications, fulfillment calls and, in specific configurations, email template customization. They are never read by the platform in between.
+
+### 4. Cart external context vs. product external context
+
+There are two independent external contexts:
+
+* **Cart external context** — set per transaction, as described above. Use it for data that changes from one purchase to another.
+* **Product external context** — a static value set on the product itself, at product creation or update only (see [Product API guide](18-product-api-guide.md)). It cannot be set or overridden from the cart. It is carried on the cart line item and on the order line item, and is available in the fulfillment template as `.Product.ExternalContext`. Use it for data that is always the same for a given product, such as a mapping to an SKU or an entitlement code in your system.
+
+Both are transported independently and never overwrite each other.
+
+:::important
+The external context is opaque to the platform: it is never used for pricing, tax, fraud or any other business logic, and its content is not validated. Business logic is driven by explicit attributes such as the cart source, the business segment or the scenario — never by the external context.
+:::
+
+:::note
+Do not put personal data in the external context. On a Buy-Link it is visible in the URL and in browser history, and it is stored and replayed in notifications and fulfillment calls. Keep the payload small — a Buy-Link is subject to the usual URL length limits — and use an opaque identifier that only your system can resolve rather than the data itself.
+:::
