@@ -3191,6 +3191,9 @@
                     "shippingPrice": {
                         "$ref": "#/components/schemas/Price",
                         "description": "Shipping cost for selected shipping method"
+                    },
+                    "shippingPriceValid": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -3414,6 +3417,7 @@
                             "ENCRYPTED_EMAIL",
                             "END_USER",
                             "SHIPPING_ADDRESS",
+                            "SHIPPING_PRICE",
                             "GIFT_PRODUCT",
                             "MID_TERM_UPGRADE",
                             "EXTRA_TERM"
