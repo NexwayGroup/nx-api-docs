@@ -1024,6 +1024,10 @@
                         "description": "Thank you description",
                         "type": "object"
                     },
+                    "thankYouPageRedirect": {
+                        "$ref": "#/components/schemas/ThankYouPageRedirect",
+                        "description": "thank you page redirection"
+                    },
                     "theme": {
                         "type": "string",
                         "writeOnly": true
@@ -1055,6 +1059,19 @@
                     "routes",
                     "saleLocales"
                 ],
+                "type": "object"
+            },
+            "ThankYouPageRedirect": {
+                "properties": {
+                    "enabled": {
+                        "description": "activation boolean",
+                        "type": "boolean"
+                    },
+                    "providerId": {
+                        "description": "provider id used in the redirection",
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "Validator": {
