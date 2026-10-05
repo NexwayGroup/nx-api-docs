@@ -398,6 +398,8 @@
                             "PAYMENT_METHOD_ADDED",
                             "PAYMENT_METHOD_DELETED",
                             "PAYMENT_METHOD_UPDATED",
+                            "END_USER_CREATED",
+                            "END_USER_UPDATED",
                             "END_USER_DELETED",
                             "LICENSE_KEY_PACKAGE",
                             "PRIVILEGE",
@@ -833,6 +835,36 @@
                 "properties": {
                     "consent": {
                         "$ref": "#/components/schemas/com.nx.notification.model.payload.consent.Consent"
+                    },
+                    "eventDate": {
+                        "description": "Timestamp of the event in ISO 8601 format",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "objectId": {
+                        "description": "Unique identifier of the object that triggered the event",
+                        "type": "string"
+                    },
+                    "subject": {
+                        "description": "Notification subject, e.g. order, subscription, endUser",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Event type, e.g. created, completed, paymentFailed",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eventDate",
+                    "objectId",
+                    "subject",
+                    "type"
+                ]
+            },
+            "com.nx.notification.model.payload.EndUserNotification": {
+                "properties": {
+                    "endUser": {
+                        "$ref": "#/components/schemas/com.nx.notification.model.payload.enduser.EndUserDetails"
                     },
                     "eventDate": {
                         "description": "Timestamp of the event in ISO 8601 format",
@@ -1656,6 +1688,58 @@
                         "type": "string"
                     }
                 }
+            },
+            "com.nx.notification.model.payload.enduser.EndUserDetails": {
+                "properties": {
+                    "city": {
+                        "description": "City",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Alpha-2 country code",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "description": "Customer identifier the end user belongs to",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "End user email address",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "End user identifier",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "type": "string"
+                    },
+                    "locale": {
+                        "description": "Locale used by the end user, e.g. `fr-FR`",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region code, e.g. `FR-MQ`",
+                        "type": "string"
+                    },
+                    "storeId": {
+                        "description": "Store identifier the end user belongs to",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "country",
+                    "customerId",
+                    "email",
+                    "id",
+                    "locale",
+                    "storeId"
+                ]
             },
             "com.nx.notification.model.payload.enduser.PaymentMethod": {
                 "description": "List of added payment instruments",
@@ -3842,7 +3926,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Mon Sep 07 08:39:40 GMT 2026",
+        "generatedAt": "Mon Oct 05 09:30:55 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
@@ -3885,6 +3969,20 @@
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodAddedNotification",
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
+            },
+            "End User Created": {
+                "content": "END_USER_CREATED",
+                "payloadSchema": "com.nx.notification.model.payload.EndUserNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.EndUserNotification",
+                "subject": "endUser",
+                "type": "created"
+            },
+            "End User Updated": {
+                "content": "END_USER_UPDATED",
+                "payloadSchema": "com.nx.notification.model.payload.EndUserNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.EndUserNotification",
+                "subject": "endUser",
+                "type": "updated"
             },
             "EndUser Deleted": {
                 "content": "END_USER_DELETED",
@@ -4187,7 +4285,9 @@
             "CONSENT_CREATED": "#/components/schemas/com.nx.notification.model.payload.ConsentNotification",
             "CONSENT_UPDATED": "#/components/schemas/com.nx.notification.model.payload.ConsentNotification",
             "DISCOUNT_PLAN_UPDATED": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+            "END_USER_CREATED": "#/components/schemas/com.nx.notification.model.payload.EndUserNotification",
             "END_USER_DELETED": "#/components/schemas/com.nx.notification.model.payload.BaseNotificationContent",
+            "END_USER_UPDATED": "#/components/schemas/com.nx.notification.model.payload.EndUserNotification",
             "IDENTITY": "#/components/schemas/com.nx.notification.model.payload.TextNotification",
             "LICENSE_KEY_PACKAGE": "#/components/schemas/com.nx.notification.model.payload.PackageThresholdReachedNotification",
             "ORDER": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
@@ -4199,7 +4299,7 @@
             "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodReplayabilityChangedNotification",
             "TAX_RATE": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification"
         },
-        "totalDefinitions": 48,
-        "uniqueContents": 48
+        "totalDefinitions": 50,
+        "uniqueContents": 50
     }
 }
