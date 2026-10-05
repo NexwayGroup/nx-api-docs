@@ -3771,6 +3771,28 @@
                 },
                 "type": "object"
             },
+            "RepairOrderIssueFulfillmentCreditNoteRequest": {
+                "properties": {
+                    "forceCreditNoteStatusCOMPLETEDAndRestartCancellation": {
+                        "type": "boolean"
+                    },
+                    "fulfillmentOperationId": {
+                        "type": "string"
+                    },
+                    "lineItemDataId": {
+                        "type": "string"
+                    },
+                    "orderId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "fulfillmentOperationId",
+                    "lineItemDataId",
+                    "orderId"
+                ],
+                "type": "object"
+            },
             "ResetFulfillmentCancellationRequest": {
                 "properties": {
                     "lineItemDataIdToReset": {
@@ -6900,6 +6922,79 @@
                 "tags": [
                     "ApiPublicCommand"
                 ]
+            }
+        },
+        "/ordersv2/repair-fulfillment-credit-note": {
+            "post": {
+                "operationId": "repairRefundOrder_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RepairOrderIssueFulfillmentCreditNoteRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        },
+                        "description": "Accepted"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "order repair issue on fulfillment - ticket IAP-28315",
+                "tags": [
+                    "Order"
+                ],
+                "x-operationWeight": "400",
+                "x-privateApi": "true"
             }
         },
         "/ordersv2/search": {
