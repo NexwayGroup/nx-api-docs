@@ -1,6 +1,109 @@
 {
     "components": {
         "schemas": {
+            "Address": {
+                "properties": {
+                    "addressSufficientForCountryInvoice": {
+                        "description": "Whether this address contains all the fields required for invoicing in its country",
+                        "readOnly": true,
+                        "type": "boolean"
+                    },
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "description": "End user company name",
+                        "example": "Nexway",
+                        "maxLength": 255,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Country",
+                        "example": "FR",
+                        "type": "string"
+                    },
+                    "createDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "type": "string"
+                    },
+                    "dbVersion": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "enduserId": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "John",
+                        "maxLength": 250,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "lastUpdateReason": {
+                        "type": "string"
+                    },
+                    "originalId": {
+                        "type": "string",
+                        "writeOnly": true
+                    },
+                    "phone": {
+                        "description": "Phone",
+                        "example": "0612345678",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "example": "FR-MQ",
+                        "type": "string"
+                    },
+                    "regionName": {
+                        "description": "Region name",
+                        "example": "Occitanie",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": 2,
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title",
+                        "enum": [
+                            "MR",
+                            "MRS"
+                        ],
+                        "example": "MR, MRS",
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": 75001,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "Asset": {
                 "properties": {
                     "href": {
@@ -193,6 +296,11 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "billing address",
+                        "readOnly": true
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -204,6 +312,7 @@
                         "writeOnly": true
                     },
                     "city": {
+                        "deprecated": true,
                         "description": "City",
                         "example": "Sens",
                         "type": "string"
@@ -247,6 +356,14 @@
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "defaultBillingAddressId": {
+                        "description": "default billing address Id",
+                        "type": "string"
+                    },
+                    "defaultShippingAddressId": {
+                        "description": "default shipping address Id",
+                        "type": "string"
                     },
                     "email": {
                         "description": "Email",
@@ -333,11 +450,13 @@
                         "type": "string"
                     },
                     "region": {
+                        "deprecated": true,
                         "description": "Region",
                         "example": "FR-MQ",
                         "type": "string"
                     },
                     "regionName": {
+                        "deprecated": true,
                         "description": "Region name",
                         "example": "Occitanie",
                         "type": "string"
@@ -354,14 +473,9 @@
                         "type": "string"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress"
-                    },
-                    "shippingAddresses": {
-                        "description": "List of shipping address",
-                        "items": {
-                            "$ref": "#/components/schemas/ShippingAddress"
-                        },
-                        "type": "array"
+                        "$ref": "#/components/schemas/Address",
+                        "description": "shipping address",
+                        "readOnly": true
                     },
                     "status": {
                         "description": "Status",
@@ -379,6 +493,7 @@
                         "type": "string"
                     },
                     "streetAddress": {
+                        "deprecated": true,
                         "description": "Street address",
                         "example": 2,
                         "type": "string"
@@ -431,6 +546,7 @@
                         "type": "string"
                     },
                     "zipCode": {
+                        "deprecated": true,
                         "description": "Zip/postal code of town",
                         "example": 75001,
                         "type": "string"
@@ -466,6 +582,11 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "billing address",
+                        "readOnly": true
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -477,6 +598,7 @@
                         "writeOnly": true
                     },
                     "city": {
+                        "deprecated": true,
                         "description": "City",
                         "example": "Sens",
                         "type": "string"
@@ -520,6 +642,14 @@
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "defaultBillingAddressId": {
+                        "description": "default billing address Id",
+                        "type": "string"
+                    },
+                    "defaultShippingAddressId": {
+                        "description": "default shipping address Id",
+                        "type": "string"
                     },
                     "email": {
                         "description": "Email",
@@ -609,11 +739,13 @@
                         "type": "string"
                     },
                     "region": {
+                        "deprecated": true,
                         "description": "Region",
                         "example": "FR-MQ",
                         "type": "string"
                     },
                     "regionName": {
+                        "deprecated": true,
                         "description": "Region name",
                         "example": "Occitanie",
                         "type": "string"
@@ -634,14 +766,9 @@
                         "type": "string"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress"
-                    },
-                    "shippingAddresses": {
-                        "description": "List of shipping address",
-                        "items": {
-                            "$ref": "#/components/schemas/ShippingAddress"
-                        },
-                        "type": "array"
+                        "$ref": "#/components/schemas/Address",
+                        "description": "shipping address",
+                        "readOnly": true
                     },
                     "status": {
                         "description": "Status",
@@ -659,6 +786,7 @@
                         "type": "string"
                     },
                     "streetAddress": {
+                        "deprecated": true,
                         "description": "Street address",
                         "example": 2,
                         "type": "string"
@@ -718,6 +846,7 @@
                         "type": "string"
                     },
                     "zipCode": {
+                        "deprecated": true,
                         "description": "Zip/postal code of town",
                         "example": 75001,
                         "type": "string"
@@ -745,6 +874,11 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "billing address",
+                        "readOnly": true
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -756,6 +890,7 @@
                         "writeOnly": true
                     },
                     "city": {
+                        "deprecated": true,
                         "description": "City",
                         "example": "Sens",
                         "type": "string"
@@ -802,6 +937,14 @@
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "defaultBillingAddressId": {
+                        "description": "default billing address Id",
+                        "type": "string"
+                    },
+                    "defaultShippingAddressId": {
+                        "description": "default shipping address Id",
+                        "type": "string"
                     },
                     "email": {
                         "description": "Email",
@@ -888,11 +1031,13 @@
                         "type": "string"
                     },
                     "region": {
+                        "deprecated": true,
                         "description": "Region",
                         "example": "FR-MQ",
                         "type": "string"
                     },
                     "regionName": {
+                        "deprecated": true,
                         "description": "Region name",
                         "example": "Occitanie",
                         "type": "string"
@@ -909,14 +1054,9 @@
                         "type": "string"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress"
-                    },
-                    "shippingAddresses": {
-                        "description": "List of shipping address",
-                        "items": {
-                            "$ref": "#/components/schemas/ShippingAddress"
-                        },
-                        "type": "array"
+                        "$ref": "#/components/schemas/Address",
+                        "description": "shipping address",
+                        "readOnly": true
                     },
                     "status": {
                         "description": "Status",
@@ -934,6 +1074,7 @@
                         "type": "string"
                     },
                     "streetAddress": {
+                        "deprecated": true,
                         "description": "Street address",
                         "example": 2,
                         "type": "string"
@@ -986,6 +1127,7 @@
                         "type": "string"
                     },
                     "zipCode": {
+                        "deprecated": true,
                         "description": "Zip/postal code of town",
                         "example": 75001,
                         "type": "string"
@@ -1063,6 +1205,7 @@
                         "writeOnly": true
                     },
                     "city": {
+                        "deprecated": true,
                         "description": "City",
                         "example": "Sens",
                         "type": "string"
@@ -1096,6 +1239,14 @@
                     "dbVersion": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "defaultBillingAddressId": {
+                        "description": "default billing address Id",
+                        "type": "string"
+                    },
+                    "defaultShippingAddressId": {
+                        "description": "default shipping address Id",
+                        "type": "string"
                     },
                     "email": {
                         "description": "Email",
@@ -1165,11 +1316,13 @@
                         "type": "string"
                     },
                     "region": {
+                        "deprecated": true,
                         "description": "Region",
                         "example": "FR-MQ",
                         "type": "string"
                     },
                     "regionName": {
+                        "deprecated": true,
                         "description": "Region name",
                         "example": "Occitanie",
                         "type": "string"
@@ -1185,16 +1338,6 @@
                         "format": "date-time",
                         "type": "string"
                     },
-                    "shippingAddress": {
-                        "$ref": "#/components/schemas/ShippingAddress"
-                    },
-                    "shippingAddresses": {
-                        "description": "List of shipping address",
-                        "items": {
-                            "$ref": "#/components/schemas/ShippingAddress"
-                        },
-                        "type": "array"
-                    },
                     "status": {
                         "description": "Status",
                         "enum": [
@@ -1206,6 +1349,7 @@
                         "type": "string"
                     },
                     "streetAddress": {
+                        "deprecated": true,
                         "description": "Street address",
                         "example": 2,
                         "type": "string"
@@ -1249,6 +1393,7 @@
                         "type": "string"
                     },
                     "zipCode": {
+                        "deprecated": true,
                         "description": "Zip/postal code of town",
                         "example": 75001,
                         "type": "string"
@@ -1892,6 +2037,36 @@
                 },
                 "type": "object"
             },
+            "SearchResultAddress": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Address"
+                        },
+                        "type": "array"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "totalItems": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "SearchResultEndUser": {
                 "properties": {
                     "items": {
@@ -2025,73 +2200,6 @@
                         "type": "string"
                     }
                 },
-                "type": "object"
-            },
-            "ShippingAddress": {
-                "properties": {
-                    "city": {
-                        "description": "City",
-                        "example": "Sens",
-                        "type": "string"
-                    },
-                    "country": {
-                        "description": "Country",
-                        "example": "FR",
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "description": "First name",
-                        "example": "John",
-                        "maxLength": 250,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "description": "Last name",
-                        "example": "John",
-                        "maxLength": 250,
-                        "minLength": 1,
-                        "type": "string"
-                    },
-                    "phone": {
-                        "description": "Phone",
-                        "example": "0612345678",
-                        "type": "string"
-                    },
-                    "region": {
-                        "description": "Region",
-                        "example": "FR-MQ",
-                        "type": "string"
-                    },
-                    "streetAddress": {
-                        "description": "Street address",
-                        "example": 2,
-                        "type": "string"
-                    },
-                    "title": {
-                        "description": "Title",
-                        "enum": [
-                            "MR",
-                            "MRS"
-                        ],
-                        "example": "MR, MRS",
-                        "type": "string"
-                    },
-                    "zipCode": {
-                        "description": "Zip/postal code of town",
-                        "example": 75001,
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "city",
-                    "country",
-                    "firstName",
-                    "lastName",
-                    "phone",
-                    "streetAddress",
-                    "zipCode"
-                ],
                 "type": "object"
             },
             "SignInWithoutPasswordRequest": {
@@ -2552,6 +2660,453 @@
                     "EndUser"
                 ],
                 "x-operationWeight": "300"
+            }
+        },
+        "/endusers/addresses": {
+            "get": {
+                "operationId": "getItems_2",
+                "parameters": [
+                    {
+                        "description": "Page number (zero-based)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size (maximum 500)",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Sort order (e.g., 'createDate,desc')",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResultAddress"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get items",
+                "tags": [
+                    "Address"
+                ],
+                "x-operationWeight": "300"
+            },
+            "post": {
+                "operationId": "createItem_2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create an item",
+                "tags": [
+                    "Address"
+                ],
+                "x-operationWeight": "300"
+            }
+        },
+        "/endusers/addresses/invoice-sufficiency": {
+            "post": {
+                "operationId": "isAddressSufficientForInvoice",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Check whether an address contains all the fields required to be used for invoicing in its country",
+                "tags": [
+                    "Address"
+                ]
+            }
+        },
+        "/endusers/addresses/{enduserId}/match-address": {
+            "post": {
+                "operationId": "matchAddress",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "enduserId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Address"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "Find an end user's address matching a country and region, falling back to their default billing address and select address can be apply invoice",
+                "tags": [
+                    "Address"
+                ]
+            }
+        },
+        "/endusers/addresses/{id}": {
+            "delete": {
+                "operationId": "deleteItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Delete item",
+                "tags": [
+                    "Address"
+                ],
+                "x-operationWeight": "500"
+            },
+            "get": {
+                "operationId": "getItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Address"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Get item",
+                "tags": [
+                    "Address"
+                ],
+                "x-operationWeight": "200"
+            },
+            "put": {
+                "operationId": "updateItem_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Address"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Address"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Update item",
+                "tags": [
+                    "Address"
+                ],
+                "x-operationWeight": "400"
             }
         },
         "/endusers/clone": {
