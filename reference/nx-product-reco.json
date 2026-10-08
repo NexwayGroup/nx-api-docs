@@ -16,17 +16,6 @@
                 },
                 "type": "object"
             },
-            "Document": {
-                "additionalProperties": {
-                    "type": "object"
-                },
-                "properties": {
-                    "empty": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "ExceptionDetail": {
                 "properties": {
                     "errorType": {
@@ -41,9 +30,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -112,27 +99,6 @@
                 },
                 "type": "object"
             },
-            "Pageable": {
-                "properties": {
-                    "page": {
-                        "format": "int32",
-                        "minimum": 0,
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "minimum": 1,
-                        "type": "integer"
-                    },
-                    "sort": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    }
-                },
-                "type": "object"
-            },
             "PredefinedIdsRecoRule": {
                 "allOf": [
                     {
@@ -164,9 +130,7 @@
                     "type"
                 ]
             },
-            "Price": {
-                "type": "object"
-            },
+            "Price": {},
             "ProductRecommendation": {
                 "discriminator": {
                     "propertyName": "function"
@@ -217,7 +181,7 @@
                     },
                     "endDate": {
                         "description": "Rule end date timestamp in milliseconds",
-                        "example": 1589439239780,
+                        "example": "1589439239780",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -253,6 +217,7 @@
                             ],
                             "type": "string"
                         },
+                        "minItems": 1,
                         "type": "array",
                         "uniqueItems": true
                     },
@@ -267,12 +232,9 @@
                         "description": "Prices and bundle from this marketing operation will be applied",
                         "type": "string"
                     },
-                    "modelVersion": {
-                        "deprecated": true,
-                        "type": "string"
-                    },
                     "name": {
                         "description": "Rule name",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalId": {
@@ -299,7 +261,7 @@
                     },
                     "startDate": {
                         "description": "Rule start date timestamp in milliseconds",
-                        "example": 1589439239780,
+                        "example": "1589439239780",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -395,18 +357,6 @@
                 },
                 "type": "object"
             },
-            "RecapEntry": {
-                "properties": {
-                    "count": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "targetValue": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "RecommendationReport": {
                 "description": "Product report per each recommended product",
                 "properties": {
@@ -474,66 +424,6 @@
                 },
                 "type": "object"
             },
-            "SearchResultDocument": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/Document"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchResultObject": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
             "SearchResultProductRecommendation": {
                 "properties": {
                     "items": {
@@ -552,35 +442,8 @@
                     "last": {
                         "type": "boolean"
                     },
-                    "number": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "size": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalItems": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "totalPages": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "SearchResultRecapEntry": {
-                "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/RecapEntry"
-                        },
-                        "type": "array"
-                    },
-                    "last": {
-                        "type": "boolean"
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -626,25 +489,27 @@
                 "operationId": "getItems",
                 "parameters": [
                     {
+                        "description": "Page number (zero-based)",
                         "in": "query",
-                        "name": "pageable",
-                        "required": true,
+                        "name": "page",
                         "schema": {
-                            "$ref": "#/components/schemas/Pageable"
+                            "default": 0,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Page size (maximum 500)",
                         "in": "query",
-                        "name": "predicate",
-                        "required": true,
+                        "name": "size",
                         "schema": {
-                            "type": "object"
+                            "default": 20,
+                            "type": "integer"
                         }
                     },
                     {
+                        "description": "Sort order (e.g., 'createDate,desc')",
                         "in": "query",
-                        "name": "target",
-                        "required": false,
+                        "name": "sort",
                         "schema": {
                             "type": "string"
                         }
@@ -777,94 +642,6 @@
                     "ProductRecommendation"
                 ],
                 "x-operationWeight": "300"
-            }
-        },
-        "/product-recommendations/distinct": {
-            "get": {
-                "operationId": "distinct",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultObject"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get distinct values for a given field",
-                "tags": [
-                    "ProductRecommendation"
-                ],
-                "x-operationWeight": "100"
             }
         },
         "/product-recommendations/import": {
@@ -1046,94 +823,6 @@
                 "x-operationWeight": "300"
             }
         },
-        "/product-recommendations/recap": {
-            "get": {
-                "operationId": "recap",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultRecapEntry"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Get recap quantities for a given field",
-                "tags": [
-                    "ProductRecommendation"
-                ],
-                "x-operationWeight": "150"
-            }
-        },
         "/product-recommendations/request": {
             "get": {
                 "description": "Get product recommendations for all products in a given cart.",
@@ -1217,6 +906,7 @@
                         "name": "previousLineItemId",
                         "required": true,
                         "schema": {
+                            "minLength": 1,
                             "type": "string"
                         }
                     },
@@ -1286,94 +976,6 @@
                     "ProductRecommendation"
                 ],
                 "x-operationWeight": "300"
-            }
-        },
-        "/product-recommendations/unwind": {
-            "get": {
-                "operationId": "unwind",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "target",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pageable",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "predicate",
-                        "required": true,
-                        "schema": {
-                            "type": "object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SearchResultDocument"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NormalizeException"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "Search unwind for a given field",
-                "tags": [
-                    "ProductRecommendation"
-                ],
-                "x-operationWeight": "150"
             }
         },
         "/product-recommendations/{id}": {
@@ -1454,6 +1056,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
