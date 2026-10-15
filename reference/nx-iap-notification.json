@@ -398,6 +398,7 @@
                             "PAYMENT_METHOD_ADDED",
                             "PAYMENT_METHOD_DELETED",
                             "PAYMENT_METHOD_UPDATED",
+                            "SUBSCRIPTION_CREATED_PAYMENT_METHOD",
                             "END_USER_CREATED",
                             "END_USER_UPDATED",
                             "END_USER_DELETED",
@@ -3926,7 +3927,7 @@
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Wed Oct 14 12:18:27 GMT 2026",
+        "generatedAt": "Thu Oct 15 08:14:31 GMT 2026",
         "notificationDefinitions": {
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
@@ -4229,6 +4230,13 @@
                 "subject": "order",
                 "type": "renewCompleted"
             },
+            "Subscription Payment Method Set On Creation": {
+                "content": "SUBSCRIPTION_CREATED_PAYMENT_METHOD",
+                "payloadSchema": "com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
+                "subject": "endUser",
+                "type": "subscriptionPaymentMethodUpdated"
+            },
             "Subscription Payment Method Updated": {
                 "content": "PAYMENT_METHOD_UPDATED",
                 "payloadSchema": "com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
@@ -4296,10 +4304,11 @@
             "PAYMENT_METHOD_UPDATED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
             "RESELLER": "#/components/schemas/com.nx.notification.model.payload.ResellerNotification",
             "SUBSCRIPTION": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+            "SUBSCRIPTION_CREATED_PAYMENT_METHOD": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
             "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodReplayabilityChangedNotification",
             "TAX_RATE": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification"
         },
-        "totalDefinitions": 50,
-        "uniqueContents": 50
+        "totalDefinitions": 51,
+        "uniqueContents": 51
     }
 }
