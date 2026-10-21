@@ -310,6 +310,30 @@
                 },
                 "type": "object"
             },
+            "LineItem": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/Price"
+                    },
+                    "productId": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "subscriptionId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "NormalizeException": {
                 "properties": {
                     "details": {
@@ -577,6 +601,11 @@
                         "example": "df8ad22a-5038-11eb-ae93-0242ac130002",
                         "type": "string"
                     },
+                    "country": {
+                        "description": "End user country.",
+                        "example": "FR",
+                        "type": "string"
+                    },
                     "createDate": {
                         "format": "date-time",
                         "type": "string"
@@ -715,6 +744,9 @@
                         },
                         "description": "Parameters forwarded to the remote pricing engine to fetch the price of the next renewal order.",
                         "type": "object"
+                    },
+                    "renewalProduct": {
+                        "$ref": "#/components/schemas/LineItem"
                     },
                     "source": {
                         "description": "Origin of the subscription (e.g. Nexway, partner code); not persisted.",
