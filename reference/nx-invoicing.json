@@ -107,7 +107,8 @@
                     "type": {
                         "enum": [
                             "PAYMENT",
-                            "REFUND"
+                            "REFUND_TOTAL",
+                            "REFUND_PARTIAL"
                         ],
                         "type": "string"
                     },
@@ -167,6 +168,14 @@
                     },
                     "order": {
                         "$ref": "#/components/schemas/ReceiptOrder"
+                    },
+                    "refundType": {
+                        "enum": [
+                            "PAYMENT",
+                            "REFUND_TOTAL",
+                            "REFUND_PARTIAL"
+                        ],
+                        "type": "string"
                     },
                     "relatedReceiptId": {
                         "type": "string"
@@ -707,6 +716,116 @@
                     }
                 },
                 "summary": "Create a payment receipt",
+                "tags": [
+                    "Receipt"
+                ]
+            }
+        },
+        "/invoice-manager/receipts/refund": {
+            "post": {
+                "operationId": "createRefund",
+                "parameters": [
+                    {
+                        "description": "If true, validate and return the receipt without persisting it",
+                        "in": "query",
+                        "name": "dryRun",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Optional audit reason attached to the creation event",
+                        "in": "query",
+                        "name": "reason",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReceiptCreateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Receipt"
+                                }
+                            }
+                        },
+                        "description": "Refund receipt created"
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Missing/invalid payload, or relatedReceiptId missing/not a payment receipt"
+                    },
+                    "401": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "relatedReceiptId does not reference an existing receipt"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceiptConflictResponse"
+                                }
+                            }
+                        },
+                        "description": "A receipt already exists for this orderId, the existing receipt is returned"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Create a refund receipt",
                 "tags": [
                     "Receipt"
                 ]
