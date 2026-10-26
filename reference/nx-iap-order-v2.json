@@ -59,6 +59,75 @@
                 },
                 "type": "object"
             },
+            "Address": {
+                "properties": {
+                    "addressSufficientForCountryInvoice": {
+                        "description": "Whether this address contains all the fields required for invoicing in its country",
+                        "type": "boolean"
+                    },
+                    "city": {
+                        "description": "City",
+                        "example": "Sens",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "description": "End user company name",
+                        "example": "Nexway",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Country",
+                        "example": "FR",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "example": "John",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "id",
+                        "example": "John",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last name",
+                        "example": "John",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Phone",
+                        "example": "0612345678",
+                        "type": "string"
+                    },
+                    "region": {
+                        "description": "Region",
+                        "example": "FR-MQ",
+                        "type": "string"
+                    },
+                    "regionName": {
+                        "description": "Region name",
+                        "example": "Occitanie",
+                        "type": "string"
+                    },
+                    "streetAddress": {
+                        "description": "Street address",
+                        "example": 2,
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title",
+                        "example": "MR, MRS",
+                        "type": "string"
+                    },
+                    "zipCode": {
+                        "description": "Zip/postal code of town",
+                        "example": 75001,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "AttributePatternCriteria": {
                 "properties": {
                     "fromDate": {
@@ -520,6 +589,14 @@
                         "example": true,
                         "type": "boolean"
                     },
+                    "billingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "End user billing address for this order.",
+                        "example": "df8ad22a-5038-11eb-ae93-0242ac130002"
+                    },
+                    "billingAddressId": {
+                        "type": "string"
+                    },
                     "birthDate": {
                         "description": "Birth date",
                         "example": "2002-01-09",
@@ -620,6 +697,11 @@
                     "resellerPIN": {
                         "description": "Reseller PIN",
                         "type": "string"
+                    },
+                    "shippingAddress": {
+                        "$ref": "#/components/schemas/Address",
+                        "description": "End user shipping address for this order.",
+                        "example": "df8ad22a-5038-11eb-ae93-0242ac130002"
                     },
                     "storeId": {
                         "description": "ID of the store associated with the end-user",
@@ -2029,7 +2111,7 @@
                         "description": "End-user information"
                     },
                     "endUserCreationStatus": {
-                        "description": "Global status for endUser workflow",
+                        "description": "Creation status for endUser workflow",
                         "enum": [
                             "NONE",
                             "INITIALIZED",
@@ -2050,6 +2132,25 @@
                     "endUserIp": {
                         "description": "End-user IP used during purchase",
                         "example": "127.0.0.1",
+                        "type": "string"
+                    },
+                    "endUserRecoveryStatus": {
+                        "description": "End user recovery status for endUser workflow",
+                        "enum": [
+                            "NONE",
+                            "INITIALIZED",
+                            "PENDING",
+                            "PARTIAL_COMPLETED",
+                            "FAILED",
+                            "COMPLETED",
+                            "ABORTED",
+                            "PARTIALLY_REFUNDED",
+                            "REFUNDED",
+                            "COMMITTED",
+                            "NOT_COMMITTED",
+                            "COMMITMENT_FAILED",
+                            "REFUND_FAILED"
+                        ],
                         "type": "string"
                     },
                     "externalContext": {
@@ -2198,6 +2299,7 @@
                             "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
+                            "ENDUSER_FAILED",
                             "SUBSCRIPTION_PENDING",
                             "FULFILLMENT_PENDING",
                             "EMAILCONFIRMATION_PENDING",
@@ -2822,6 +2924,7 @@
                             "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
+                            "ENDUSER_FAILED",
                             "SUBSCRIPTION_PENDING",
                             "FULFILLMENT_PENDING",
                             "EMAILCONFIRMATION_PENDING",
@@ -3912,6 +4015,7 @@
                             "RECEIPT_PENDING",
                             "ELECTRONIC_INVOICE_PENDING",
                             "ENDUSER_PENDING",
+                            "ENDUSER_FAILED",
                             "SUBSCRIPTION_PENDING",
                             "FULFILLMENT_PENDING",
                             "EMAILCONFIRMATION_PENDING",
@@ -4368,6 +4472,9 @@
             },
             "Subscription": {
                 "properties": {
+                    "billingAddressId": {
+                        "type": "string"
+                    },
                     "country": {
                         "type": "string"
                     },
@@ -7576,6 +7683,7 @@
                                 "RECEIPT_PENDING",
                                 "ELECTRONIC_INVOICE_PENDING",
                                 "ENDUSER_PENDING",
+                                "ENDUSER_FAILED",
                                 "SUBSCRIPTION_PENDING",
                                 "FULFILLMENT_PENDING",
                                 "EMAILCONFIRMATION_PENDING",
