@@ -26,6 +26,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -47,6 +48,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastName": {
@@ -80,7 +82,7 @@
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "title": {
@@ -93,12 +95,13 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "type": "string"
                     }
                 },
@@ -113,6 +116,7 @@
                     "url": {
                         "description": "URL",
                         "example": "https://wwww.domain.com/myLogo.png",
+                        "pattern": "",
                         "type": "string"
                     }
                 },
@@ -121,15 +125,19 @@
             "CloneEndUserRequest": {
                 "properties": {
                     "fromCustomerId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalEndUserId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "toCustomerId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "toStoreId": {
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -150,6 +158,7 @@
                         "type": "string"
                     },
                     "bannerResellerEmail": {
+                        "pattern": "",
                         "type": "string"
                     },
                     "cnpj": {
@@ -166,13 +175,13 @@
                     },
                     "fullRegistrationNumber": {
                         "description": "Siret Number",
-                        "example": 12345678900000,
+                        "example": "12345678900000",
                         "pattern": "^\\d{14}$",
                         "type": "string"
                     },
                     "registrationNumber": {
                         "description": "Siren Number",
-                        "example": 123456789,
+                        "example": "123456789",
                         "pattern": "^\\d{9}$",
                         "type": "string"
                     },
@@ -251,14 +260,14 @@
                 "properties": {
                     "createDate": {
                         "description": "Creation date",
-                        "example": 1610375836393,
+                        "example": "1610375836393",
                         "format": "date-time",
                         "readOnly": true,
                         "type": "string"
                     },
                     "emailId": {
                         "description": "Reference in email storage",
-                        "example": 12345,
+                        "example": "12345",
                         "readOnly": true,
                         "type": "string"
                     },
@@ -347,6 +356,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -368,6 +378,7 @@
                     "email": {
                         "description": "Email",
                         "example": "jhon.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -403,6 +414,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "imported": {
@@ -468,7 +480,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
-                        "example": 1756290932000,
+                        "example": "1756290932000",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -490,12 +502,13 @@
                     "storeId": {
                         "description": "Store ID",
                         "example": "7242c416-541b-11eb-ae93-0242ac130002",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "streetAddress": {
                         "deprecated": true,
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -530,6 +543,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -548,7 +562,7 @@
                     "zipCode": {
                         "deprecated": true,
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "type": "string"
                     }
                 },
@@ -633,6 +647,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -654,6 +669,7 @@
                     "email": {
                         "description": "Email",
                         "example": "jhon.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -689,6 +705,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "imported": {
@@ -757,7 +774,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
-                        "example": 1756290932000,
+                        "example": "1756290932000",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -783,12 +800,13 @@
                     "storeId": {
                         "description": "Store ID",
                         "example": "7242c416-541b-11eb-ae93-0242ac130002",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "streetAddress": {
                         "deprecated": true,
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "subscriptionsToImport": {
@@ -830,6 +848,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -848,7 +867,7 @@
                     "zipCode": {
                         "deprecated": true,
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "type": "string"
                     }
                 },
@@ -928,6 +947,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -949,6 +969,7 @@
                     "email": {
                         "description": "Email",
                         "example": "jhon.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -984,6 +1005,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "imported": {
@@ -1049,7 +1071,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
-                        "example": 1756290932000,
+                        "example": "1756290932000",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1071,12 +1093,13 @@
                     "storeId": {
                         "description": "Store ID",
                         "example": "7242c416-541b-11eb-ae93-0242ac130002",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "streetAddress": {
                         "deprecated": true,
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -1111,6 +1134,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1129,7 +1153,7 @@
                     "zipCode": {
                         "deprecated": true,
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "type": "string"
                     }
                 },
@@ -1230,6 +1254,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1251,6 +1276,7 @@
                     "email": {
                         "description": "Email",
                         "example": "jhon.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -1278,6 +1304,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastName": {
@@ -1334,7 +1361,7 @@
                     },
                     "resellerTaxExemptionExpirationDate": {
                         "description": "End date when tax exemption for reseller is not eligible anymore",
-                        "example": 1756290932000,
+                        "example": "1756290932000",
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1351,7 +1378,7 @@
                     "streetAddress": {
                         "deprecated": true,
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "taxExemptionEligible": {
@@ -1381,6 +1408,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1395,7 +1423,7 @@
                     "zipCode": {
                         "deprecated": true,
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "type": "string"
                     }
                 },
@@ -1421,9 +1449,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -1435,6 +1461,7 @@
                         "description": "Banner"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1451,6 +1478,7 @@
                         "type": "string"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -1461,7 +1489,7 @@
                             "$ref": "#/components/schemas/Asset"
                         },
                         "description": "Localized banners group (map)",
-                        "example": "en-US",
+                        "example": "\"en-US\" : \"my asset\"",
                         "type": "object"
                     },
                     "localizedLogo": {
@@ -1469,7 +1497,7 @@
                             "$ref": "#/components/schemas/Asset"
                         },
                         "description": "Localized logos group (map)",
-                        "example": "en-US",
+                        "example": "\"en-US\" : \"my asset\"",
                         "type": "object"
                     },
                     "localizedLongDesc": {
@@ -1477,7 +1505,7 @@
                             "type": "string"
                         },
                         "description": "Localized long descriptions (map)",
-                        "example": "en-US",
+                        "example": "\"en-US\" : \"my html description\"",
                         "type": "object"
                     },
                     "localizedShortDesc": {
@@ -1485,7 +1513,7 @@
                             "type": "string"
                         },
                         "description": "Localized short descriptions (map)",
-                        "example": "en-US",
+                        "example": "\"en-US\" : \"my html description\"",
                         "type": "object"
                     },
                     "logo": {
@@ -1496,6 +1524,7 @@
                     "name": {
                         "description": "Name",
                         "example": "myGroupName",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalId": {
@@ -1503,6 +1532,7 @@
                         "writeOnly": true
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -1581,11 +1611,13 @@
                     "password": {
                         "description": "End user password",
                         "example": "mySecurePassword",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
                         "example": "reselleruk-store.staging.nexway.build",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -1596,6 +1628,92 @@
                 "type": "object"
             },
             "JsonNode": {
+                "properties": {
+                    "array": {
+                        "type": "boolean"
+                    },
+                    "bigDecimal": {
+                        "type": "boolean"
+                    },
+                    "bigInteger": {
+                        "type": "boolean"
+                    },
+                    "binary": {
+                        "type": "boolean"
+                    },
+                    "boolean": {
+                        "type": "boolean"
+                    },
+                    "container": {
+                        "type": "boolean"
+                    },
+                    "double": {
+                        "type": "boolean"
+                    },
+                    "embeddedValue": {
+                        "type": "boolean"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "float": {
+                        "type": "boolean"
+                    },
+                    "floatingPointNumber": {
+                        "type": "boolean"
+                    },
+                    "int": {
+                        "type": "boolean"
+                    },
+                    "integralNumber": {
+                        "type": "boolean"
+                    },
+                    "long": {
+                        "type": "boolean"
+                    },
+                    "missingNode": {
+                        "type": "boolean"
+                    },
+                    "nodeType": {
+                        "enum": [
+                            "ARRAY",
+                            "BINARY",
+                            "BOOLEAN",
+                            "MISSING",
+                            "NULL",
+                            "NUMBER",
+                            "OBJECT",
+                            "POJO",
+                            "STRING"
+                        ],
+                        "type": "string"
+                    },
+                    "null": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "type": "boolean"
+                    },
+                    "object": {
+                        "type": "boolean"
+                    },
+                    "pojo": {
+                        "type": "boolean"
+                    },
+                    "short": {
+                        "type": "boolean"
+                    },
+                    "string": {
+                        "type": "boolean"
+                    },
+                    "textual": {
+                        "deprecated": true,
+                        "type": "boolean"
+                    },
+                    "valueNode": {
+                        "type": "boolean"
+                    }
+                },
                 "type": "object"
             },
             "LoginIAMRequest": {
@@ -1603,6 +1721,7 @@
                     "customerId": {
                         "description": "Customer ID",
                         "example": "d9efab80-541e-11eb-ae93-0242ac130002",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "identifier": {
@@ -1611,6 +1730,7 @@
                     "password": {
                         "description": "End user password",
                         "example": "mySecurePassword",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "storeId": {
@@ -1666,11 +1786,13 @@
                     "password": {
                         "description": "End user password",
                         "example": "mySecurePassword",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
                         "example": "reselleruk-store.staging.nexway.build",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -1695,6 +1817,7 @@
                     "storeHostname": {
                         "description": "Hostname of store",
                         "example": "reselleruk-store.staging.nexway.build",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -1901,6 +2024,7 @@
                     "email": {
                         "description": "End user email",
                         "example": "john.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -1913,6 +2037,7 @@
                     "storeId": {
                         "description": "Store unique identifier",
                         "example": "f2c419a5-e486-44ef-b0c4-3c4368c6c74f",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -1955,6 +2080,7 @@
                     "country": {
                         "description": "Country",
                         "example": "FR",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "cpf": {
@@ -1965,6 +2091,7 @@
                     "email": {
                         "description": "Email",
                         "example": "jhon.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -1996,11 +2123,12 @@
                     "resellerPIN": {
                         "description": "Reseller PIN",
                         "example": "XXXXX",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "streetAddress": {
                         "description": "Street address",
-                        "example": 2,
+                        "example": "2 cours tarb\u00e9, Appt B25",
                         "type": "string"
                     },
                     "website": {
@@ -2010,7 +2138,7 @@
                     },
                     "zipCode": {
                         "description": "Zip/postal code of town",
-                        "example": 75001,
+                        "example": "75001",
                         "maxLength": 50,
                         "minLength": 1,
                         "type": "string"
@@ -2048,6 +2176,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2078,6 +2209,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -2107,6 +2241,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -2207,6 +2344,7 @@
                     "email": {
                         "description": "End user email",
                         "example": "john.doe@nexway.com",
+                        "format": "email",
                         "maxLength": 150,
                         "minLength": 6,
                         "type": "string"
@@ -2218,11 +2356,13 @@
                     "storeHostname": {
                         "description": "Store hostname",
                         "example": "reselleruk-store.staging.nexway.build",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "storeId": {
                         "description": "Store unique identifier",
                         "example": "f2c419a5-e486-44ef-b0c4-3c4368c6c74f",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "target": {
@@ -2294,6 +2434,7 @@
                         "additionalProperties": {
                             "type": "string"
                         },
+                        "minProperties": 1,
                         "type": "object"
                     },
                     "type": {
@@ -2304,6 +2445,7 @@
                         "type": "string"
                     },
                     "url": {
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -2968,6 +3110,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -3432,6 +3582,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -7059,6 +7217,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
