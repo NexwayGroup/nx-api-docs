@@ -573,11 +573,6 @@
             },
             "IamClient": {
                 "properties": {
-                    "clientSecret": {
-                        "description": "Customer auth client secret",
-                        "example": "0f8a68f4-3947-42d4-bb7a-628dce40515a",
-                        "type": "string"
-                    },
                     "realmName": {
                         "description": "Customer realm name",
                         "example": "abcdefghi1609946930636",
@@ -587,14 +582,6 @@
                         "description": "Customer auth public key",
                         "example": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwvOOUnZ...",
                         "type": "string"
-                    },
-                    "secretKeys": {
-                        "description": "Client secret list",
-                        "items": {
-                            "$ref": "#/components/schemas/SecretKey"
-                        },
-                        "type": "array",
-                        "uniqueItems": true
                     }
                 },
                 "required": [
@@ -1051,20 +1038,6 @@
                     "totalPages": {
                         "format": "int32",
                         "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "SecretKey": {
-                "properties": {
-                    "createDate": {
-                        "description": "Creation date of this secret",
-                        "format": "date-time",
-                        "type": "string"
-                    },
-                    "secret": {
-                        "description": "Secret key, used to authenticate by customer identity",
-                        "type": "string"
                     }
                 },
                 "type": "object"
