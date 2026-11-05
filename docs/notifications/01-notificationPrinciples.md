@@ -69,18 +69,18 @@ GET https://api.nexway.store/notification/definitions
 ### How to receive 'order completed' notifications by email
 In this example, we want to receive order confirmation notifications on 'email@domain.com' email.
 
-The customerId is `06874434-4d42-423e-87c0-3290862809cc`.
+The customerId is `00000000-0000-4000-8000-000000000001`.
 The notificationDefinitionId is `19656f45-db84-4fa9-bd24-8917b88fb6b5`.
 
 Create a receiver with a POST request to https://api.nexway.store/notification/receivers
 
 ```json
 {
-  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
+  "customerId": "00000000-0000-4000-8000-000000000001",
   "name": "My Order Confirmation notification by email",
   "status": "ACTIVE",
   "targetedCustomerIds": [
-    "83b3d537-3687-4814-bdfc-6d3901dd2011"
+    "00000000-0000-4000-8000-000000000001"
   ],
   "notificationDefinitionIds": [
     "19656f45-db84-4fa9-bd24-8917b88fb6b5"
@@ -98,59 +98,23 @@ Notifications will be sent to email@domain.com upon the successfull completion o
 
 In this example, we want to receive an order confirmation notification by webhook.
 
-The customerId is `06874434-4d42-423e-87c0-3290862809cc`.
+The customerId is `00000000-0000-4000-8000-000000000001`.
 The notificationId is `19656f45-db84-4fa9-bd24-8917b88fb6b5`.
 
 Create a receiver with a POST request to https://api.nexway.store/notification/receivers
 
-#### Authentication by OAuth 2.0
 ```json
 {
-  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
+  "customerId": "00000000-0000-4000-8000-000000000001",
   "name": "My Order Confirmation notification by webhook",
   "status": "ACTIVE",
   "targetedCustomerIds": [
-    "83b3d537-3687-4814-bdfc-6d3901dd2011"
+    "00000000-0000-4000-8000-000000000001"
   ],
   "notificationDefinitionIds": [
     "19656f45-db84-4fa9-bd24-8917b88fb6b5"
   ],
-  "url": "https://notifications.your-domain.com/{webhooksPath}",
-  "httpClientConfiguration": {
-    "clientCredentialOauth2Config": {
-      "clientId": "client123456789",
-      "clientSecret": "secret123456789",
-      "tokenUrl": "https://auth.your-domain.com/token",
-      "scopes": [
-        "provided"
-      ],
-      "oauth2Type": "BASIC"
-    }
-  }
-}
-```
-
-#### Authentication by a client certificate
-```json
-{
-  "customerId": "83b3d537-3687-4814-bdfc-6d3901dd2011",
-  "name": "My Order Confirmation notification by webhook",
-  "status": "ACTIVE",
-  "targetedCustomerIds": [
-    "83b3d537-3687-4814-bdfc-6d3901dd2011"
-  ],
-  "notificationDefinitionIds": [
-    "19656f45-db84-4fa9-bd24-8917b88fb6b5"
-  ],
-  "url": "https://notifications.your-domain.com/{webhooksPath}",
-  "httpClientConfiguration": {
-    "tlsConfiguration": {
-      "tlsAuthMode": "CLIENT",
-      "clientCertificates": "-----BEGIN CERTIFICATE-----\n**********\n-----END CERTIFICATE-----",
-      "privateKey": "-----BEGIN PRIVATE KEY-----\n**********\n-----END PRIVATE KEY-----",
-      "serverCACertificates": "-----BEGIN CERTIFICATE-----\n**********\n-----END CERTIFICATE-----"
-    }
-  }
+  "url": "https://notifications.your-domain.com/{webhooksPath}"
 }
 ```
 
