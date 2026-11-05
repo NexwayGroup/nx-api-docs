@@ -1,0 +1,1135 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Users",
+    "description": "API to manage users identity and access management.\nIt brings together the management and modification of users, groups and roles.",
+    "license": {
+      "name": "Nexway License Version 1.0"
+    },
+    "version": "1.0"
+  },
+  "servers": [],
+  "security": [
+    {
+      "Bearer": [
+        "read",
+        "write"
+      ]
+    }
+  ],
+  "paths": {
+    "/iam/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get item",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Identity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "200",
+        "description": "Retrieved one user from a customer"
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a user",
+        "description": "Update a user from a customer.",
+        "operationId": "put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "x-operationWeight": "200"
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete a user",
+        "description": "Delete a user from a customer.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "x-operationWeight": "300"
+      }
+    },
+    "/iam/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get items",
+        "operationId": "getItems",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultIdentity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "300",
+        "description": "Retrieved all users from a customer."
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a user",
+        "description": "Create a user from a customer.",
+        "operationId": "post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "100"
+      }
+    },
+    "/iam/users/recap": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get recap quantities for a given field",
+        "operationId": "recap",
+        "parameters": [
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Return selected fields only (multiple occurrences allowed for selecting multiple fields)"
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "predicate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultRecapEntry"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NormalizeException"
+                }
+              }
+            }
+          }
+        },
+        "x-operationWeight": "150",
+        "description": "Get a list of recap entries"
+      }
+    },
+    "/iam/users/public/resetpassword/{realm}/{token}": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Reset a password",
+        "description": "Reset a password from a user.",
+        "operationId": "resetUserPassword",
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredential"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "100"
+      }
+    },
+    "/iam/users/public/lostpassword/{realm}": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Trigger the lost password actions",
+        "description": "Trigger the lost password actions.",
+        "operationId": "lostUserPassword",
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LostPassword"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Failure"
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "300"
+      }
+    },
+    "/iam/users/public/checkpasswordtoken/{realm}/{token}": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Check validity of password token",
+        "description": "Check validity of password token.",
+        "operationId": "checkPasswordToken",
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidityToken"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidityToken"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failure",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidityToken"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ],
+        "x-operationWeight": "200"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthorizedCustomer": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "description": "Customer id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Customer name"
+          }
+        },
+        "description": "List of authorized customer",
+        "readOnly": true
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "Email"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "First name"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Last name"
+          },
+          "userName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name"
+          },
+          "authorizedCustomers": {
+            "type": "array",
+            "description": "List of authorized customer",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AuthorizedCustomer"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "authorizedCustomerIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Customer Identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "userName",
+          "status"
+        ]
+      },
+      "Identity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "User email"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "User first name"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "User last name"
+          },
+          "locale": {
+            "type": "string",
+            "description": "Country code in ISO 3166-2 format"
+          },
+          "inactive": {
+            "type": "boolean",
+            "description": "identity is inactive"
+          },
+          "token": {
+            "type": "string",
+            "description": "Token used for reset the password"
+          },
+          "userName": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string",
+            "description": "User name"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          },
+          "clientId": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "secretKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecretKey"
+            }
+          },
+          "roleIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Role identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metaRoleIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Metarole identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authorizedCustomerIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Customer identifiers this user has rights on",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Email"
+            }
+          },
+          "preferences": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "provider": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TokenProvider"
+            },
+            "description": "Map of providers"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "RecapEntry": {
+        "type": "object",
+        "properties": {
+          "targetValue": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchResultIdentity": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identity"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "LostPassword": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "User email"
+          }
+        }
+      },
+      "ValidityToken": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "VALID",
+              "INVALID"
+            ]
+          },
+          "expirationDate": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchResultRecapEntry": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecapEntry"
+            }
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Email": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier",
+            "readOnly": true
+          },
+          "emailId": {
+            "type": "string",
+            "description": "Unique identifier of the email in the mail storage",
+            "readOnly": true
+          },
+          "createDate": {
+            "type": "string",
+            "description": "Create date time",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Type",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message if the email is not send",
+            "readOnly": true
+          }
+        },
+        "description": "List of emails sent to the user"
+      },
+      "User": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "password",
+          "status",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "deprecated": true
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "updateDate": {
+            "type": "string",
+            "format": "date-time",
+            "deprecated": true
+          },
+          "modelVersion": {
+            "type": "string",
+            "deprecated": true
+          },
+          "dbVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateReason": {
+            "type": "string"
+          },
+          "originalId": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Status",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 6,
+            "type": "string",
+            "description": "Email"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "First name"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Last name"
+          },
+          "userName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name"
+          },
+          "password": {
+            "maxLength": 50,
+            "minLength": 8,
+            "type": "string",
+            "description": "Password"
+          },
+          "token": {
+            "type": "string",
+            "description": "Token used for reset the password"
+          },
+          "emails": {
+            "type": "array",
+            "description": "List of emails sent to the user",
+            "items": {
+              "$ref": "#/components/schemas/Email"
+            }
+          },
+          "authorizedCustomers": {
+            "type": "array",
+            "description": "List of authorized customer",
+            "items": {
+              "$ref": "#/components/schemas/AuthorizedCustomer"
+            }
+          },
+          "preferences": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "description": "Preferences"
+            },
+            "description": "Preferences"
+          },
+          "authorizedCustomerIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UserCredential": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password related to a user."
+          }
+        }
+      },
+      "SecretKey": {
+        "title": "SecretKey",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Pageable": {
+        "title": "Pageable",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Sort": {
+        "title": "Sort",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenProvider": {
+        "title": "TokenProvider",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "NormalizeException": {
+        "title": "NormalizeException",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "ExceptionDetail": {
+        "title": "ExceptionDetail",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter Bearer token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
