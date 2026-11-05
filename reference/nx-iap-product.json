@@ -1093,7 +1093,8 @@
                         "type": "integer"
                     },
                     "expression": {
-                        "description": "JEXL expression for price function",
+                        "description": "Math-only JEXL expression for price function: variables, numbers, 'text' literals (letters, digits, space, _ and -), arithmetic/comparison/logical operators, parentheses, if/else and return",
+                        "maxLength": 500,
                         "minLength": 1,
                         "type": "string"
                     },
