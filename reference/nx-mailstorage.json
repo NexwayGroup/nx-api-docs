@@ -23,17 +23,6 @@
                 },
                 "type": "object"
             },
-            "CustomerSearchResult": {
-                "properties": {
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "customerName": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "ExceptionDetail": {
                 "properties": {
                     "errorType": {
@@ -845,16 +834,6 @@
                         },
                         "description": "Invalid payload"
                     },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MigrateResponse"
-                                }
-                            }
-                        },
-                        "description": "Missing or invalid migration secret"
-                    },
                     "429": {
                         "content": {
                             "application/json": {
@@ -1034,7 +1013,7 @@
         "/mailstorage/mails/retry/mail/{mailId}": {
             "get": {
                 "description": "Retrieves detailed information about a specific email",
-                "operationId": "getMailDetails_1",
+                "operationId": "getMailDetails",
                 "parameters": [
                     {
                         "description": "Mail UUID",
@@ -1099,7 +1078,7 @@
         "/mailstorage/mails/retry/{mailId}": {
             "post": {
                 "description": "Retries a single failed email",
-                "operationId": "retrySingleEmail_1",
+                "operationId": "retrySingleEmail",
                 "parameters": [
                     {
                         "description": "Mail UUID",
@@ -1146,51 +1125,6 @@
                 "summary": "Retry single email",
                 "tags": [
                     "Mail Retry"
-                ]
-            }
-        },
-        "/mailstorage/mails/schema/migrate": {
-            "post": {
-                "description": "Runs all pending schema migrations in order. Idempotent \u2014 safe to call multiple times. Requires the `X-Migration-Secret` header.",
-                "operationId": "runAllMigrations",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Migration(s) executed (see body for details)"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Missing or invalid X-Migration-Secret"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "Internal error during migration"
-                    }
-                },
-                "summary": "Run all pending schema migrations",
-                "tags": [
-                    "schema-migration"
                 ]
             }
         },
@@ -1717,7 +1651,7 @@
         },
         "/mailstorage/mails/{uuid}/attachments/{fileIndex}": {
             "get": {
-                "operationId": "downloadAttachment_1",
+                "operationId": "downloadAttachment",
                 "parameters": [
                     {
                         "description": "Mail UUID",
@@ -1783,7 +1717,7 @@
         },
         "/mailstorage/mails/{uuid}/attachments/{fileIndex}/preview": {
             "get": {
-                "operationId": "previewAttachment_1",
+                "operationId": "previewAttachment",
                 "parameters": [
                     {
                         "description": "Mail UUID",
@@ -1918,7 +1852,7 @@
         },
         "/mailstorage/mails/{uuid}/html": {
             "get": {
-                "operationId": "downloadMailAsHtml_1",
+                "operationId": "downloadMailAsHtml",
                 "parameters": [
                     {
                         "in": "path",
@@ -1962,7 +1896,7 @@
         },
         "/mailstorage/mails/{uuid}/pdf": {
             "get": {
-                "operationId": "downloadMailAsPdf_1",
+                "operationId": "downloadMailAsPdf",
                 "parameters": [
                     {
                         "in": "path",
@@ -2297,277 +2231,6 @@
                     "metrics"
                 ]
             }
-        },
-        "/mailstorage/ui/customers/search": {
-            "get": {
-                "operationId": "searchCustomers",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "q",
-                        "required": false,
-                        "schema": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "schema": {
-                            "default": 15,
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/CustomerSearchResult"
-                                    },
-                                    "type": "array"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/debug/security-context": {
-            "get": {
-                "operationId": "debugSecurityContext",
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "additionalProperties": {},
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/retry/mail/{mailId}": {
-            "get": {
-                "operationId": "getMailDetails",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "mailId",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MailDetailResponse"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/retry/{mailId}": {
-            "post": {
-                "operationId": "retrySingleEmail",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "mailId",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MailRetryResponse"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/{uuid}/attachments/{fileIndex}": {
-            "get": {
-                "operationId": "downloadAttachment",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uuid",
-                        "required": true,
-                        "schema": {
-                            "format": "uuid",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "path",
-                        "name": "fileIndex",
-                        "required": true,
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "format": "binary",
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/{uuid}/attachments/{fileIndex}/preview": {
-            "get": {
-                "operationId": "previewAttachment",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uuid",
-                        "required": true,
-                        "schema": {
-                            "format": "uuid",
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "path",
-                        "name": "fileIndex",
-                        "required": true,
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "format": "binary",
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/{uuid}/html": {
-            "get": {
-                "operationId": "downloadMailAsHtml",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uuid",
-                        "required": true,
-                        "schema": {
-                            "format": "uuid",
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "format": "byte",
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
-        },
-        "/mailstorage/ui/mails/{uuid}/pdf": {
-            "get": {
-                "operationId": "downloadMailAsPdf",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uuid",
-                        "required": true,
-                        "schema": {
-                            "format": "uuid",
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "format": "byte",
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    }
-                },
-                "tags": [
-                    "mail-ui-controller"
-                ]
-            }
         }
     },
     "security": [
@@ -2580,15 +2243,11 @@
     ],
     "servers": [
         {
-            "description": "Generated server url",
+            "description": "production server",
             "url": "https://api.nexway.store"
         }
     ],
     "tags": [
-        {
-            "description": "One-shot MongoDB collection schema migration (requires X-Migration-Secret)",
-            "name": "schema-migration"
-        },
         {
             "description": "Operations for retrying failed emails",
             "name": "Mail Retry"
