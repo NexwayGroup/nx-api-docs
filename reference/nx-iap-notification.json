@@ -3922,13 +3922,27 @@
     ],
     "servers": [
         {
-            "description": "Generated server url",
+            "description": "production server",
             "url": "https://api.nexway.store"
         }
     ],
     "x-notification-reference": {
-        "generatedAt": "Wed Nov 04 10:27:24 GMT 2026",
+        "generatedAt": "Mon Nov 09 16:21:01 GMT 2026",
         "notificationDefinitions": {
+            "Abandoned Cart Notification": {
+                "content": "ABANDONED_CART",
+                "payloadSchema": "com.nx.notification.model.payload.AbandonedCartNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.AbandonedCartNotification",
+                "subject": "Cart",
+                "type": "campaign-configuration"
+            },
+            "Benj Notfi Definition Test": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "subscription",
+                "type": "unpaidsubscription"
+            },
             "Cart Abandoned": {
                 "content": "ABANDONED_CART",
                 "payloadSchema": "com.nx.notification.model.payload.AbandonedCartNotification",
@@ -3992,6 +4006,13 @@
                 "subject": "endUser",
                 "type": "deleted"
             },
+            "Enter prebilling (test)": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
+                "subject": "order",
+                "type": "updated"
+            },
             "Identity created": {
                 "content": "IDENTITY",
                 "payloadSchema": "com.nx.notification.model.payload.TextNotification",
@@ -4012,6 +4033,20 @@
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.TextNotification",
                 "subject": "identity",
                 "type": "updated"
+            },
+            "Notification sub renew": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "subscription",
+                "type": "suspended"
+            },
+            "OFFER ABORTED": {
+                "content": "ORDER",
+                "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
+                "subject": "offer",
+                "type": "aborted"
             },
             "Offer Order Aborted": {
                 "content": "ORDER",
@@ -4111,6 +4146,13 @@
                 "subject": "order",
                 "type": "paymentRefused"
             },
+            "Order Pending with Error": {
+                "content": "ORDER",
+                "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
+                "subject": "order",
+                "type": "updated"
+            },
             "Order payment refused with last error code": {
                 "content": "ORDER",
                 "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
@@ -4140,11 +4182,11 @@
                 "type": "partialRefundFailed"
             },
             "Payment Method Deleted": {
-                "content": "PAYMENT_METHOD_ADDED",
-                "payloadSchema": "com.nx.notification.model.payload.PaymentMethodAddedNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodAddedNotification",
+                "content": "PAYMENT_METHOD_DELETED",
+                "payloadSchema": "com.nx.notification.model.payload.PaymentMethodDeletedNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodDeletedNotification",
                 "subject": "endUser",
-                "type": "paymentMethodAddedToWallet"
+                "type": "paymentMethodDeletedFromWallet"
             },
             "Prebilling Order Created": {
                 "content": "ORDER_AND_SUBSCRIPTION",
@@ -4188,6 +4230,34 @@
                 "subject": "endUser",
                 "type": "paymentMethodAddedToWallet"
             },
+            "SUBSCRIPTION-reactivated-1451092306": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "notif-SUBSCRIPTION1451092306",
+                "type": "type-SUBSCRIPTION1451092306"
+            },
+            "SUBSCRIPTION-reactivated-1990355311": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "notif-SUBSCRIPTION1990355311",
+                "type": "type-SUBSCRIPTION1990355311"
+            },
+            "SUBSCRIPTION-suspended-1046862457": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "notif-SUBSCRIPTION1046862457",
+                "type": "type-SUBSCRIPTION1046862457"
+            },
+            "SUBSCRIPTION-suspended-1290070773": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "notif-SUBSCRIPTION1290070773",
+                "type": "type-SUBSCRIPTION1290070773"
+            },
             "Subscription Canceled": {
                 "content": "SUBSCRIPTION",
                 "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
@@ -4195,12 +4265,26 @@
                 "subject": "subscription",
                 "type": "canceled"
             },
+            "Subscription Created": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "subscription",
+                "type": "created"
+            },
             "Subscription Discount Plan Updated": {
                 "content": "DISCOUNT_PLAN_UPDATED",
                 "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
                 "subject": "subscription",
                 "type": "discountPlanUpdated"
+            },
+            "Subscription Entered Prebilling": {
+                "content": "ORDER_AND_SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.OrderNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
+                "subject": "order",
+                "type": "PrebilingOrderCreated"
             },
             "Subscription Expiration Date Updated": {
                 "content": "SUBSCRIPTION",
@@ -4230,13 +4314,6 @@
                 "subject": "order",
                 "type": "renewCompleted"
             },
-            "Subscription Payment Method Set On Creation": {
-                "content": "SUBSCRIPTION_CREATED_PAYMENT_METHOD",
-                "payloadSchema": "com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
-                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
-                "subject": "endUser",
-                "type": "subscriptionPaymentMethodUpdated"
-            },
             "Subscription Payment Method Updated": {
                 "content": "PAYMENT_METHOD_UPDATED",
                 "payloadSchema": "com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
@@ -4264,6 +4341,13 @@
                 "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
                 "subject": "subscription",
                 "type": "unpaid"
+            },
+            "Subscription created": {
+                "content": "SUBSCRIPTION",
+                "payloadSchema": "com.nx.notification.model.payload.SubscriptionNotification",
+                "payloadSchemaRef": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
+                "subject": "subscription",
+                "type": "created"
             },
             "Tax Rate Created": {
                 "content": "TAX_RATE",
@@ -4301,14 +4385,14 @@
             "ORDER": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
             "ORDER_AND_SUBSCRIPTION": "#/components/schemas/com.nx.notification.model.payload.OrderNotification",
             "PAYMENT_METHOD_ADDED": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodAddedNotification",
+            "PAYMENT_METHOD_DELETED": "#/components/schemas/com.nx.notification.model.payload.PaymentMethodDeletedNotification",
             "PAYMENT_METHOD_UPDATED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
             "RESELLER": "#/components/schemas/com.nx.notification.model.payload.ResellerNotification",
             "SUBSCRIPTION": "#/components/schemas/com.nx.notification.model.payload.SubscriptionNotification",
-            "SUBSCRIPTION_CREATED_PAYMENT_METHOD": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodUpdatedNotification",
             "SUBSCRIPTION_PAYMENT_METHOD_REPLAYABILITY_CHANGED": "#/components/schemas/com.nx.notification.model.payload.subscription.PaymentMethodReplayabilityChangedNotification",
             "TAX_RATE": "#/components/schemas/com.nx.notification.model.payload.TaxRateNotification"
         },
-        "totalDefinitions": 51,
-        "uniqueContents": 51
+        "totalDefinitions": 78,
+        "uniqueContents": 63
     }
 }
