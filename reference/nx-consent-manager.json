@@ -4,6 +4,7 @@
             "AbandonedCartUnsubscribeRequest": {
                 "properties": {
                     "customerId": {
+                        "minLength": 1,
                         "type": "string"
                     },
                     "legalEntityName": {
@@ -13,6 +14,8 @@
                         "type": "string"
                     },
                     "userEmail": {
+                        "format": "email",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -41,6 +44,7 @@
                         "type": "array"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -59,6 +63,7 @@
                         "uniqueItems": true
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastLegalActionTimestamp": {
@@ -94,6 +99,7 @@
                         "uniqueItems": true
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -133,6 +139,7 @@
                         "type": "object"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -171,6 +178,8 @@
                         "type": "string"
                     },
                     "userEmail": {
+                        "format": "email",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "userId": {
@@ -196,9 +205,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -259,6 +266,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -281,6 +291,8 @@
             "UpdateUserEmailRequest": {
                 "properties": {
                     "userEmail": {
+                        "format": "email",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -454,6 +466,8 @@
                         "name": "userEmail",
                         "required": true,
                         "schema": {
+                            "format": "email",
+                            "minLength": 1,
                             "type": "string"
                         }
                     }
@@ -682,6 +696,8 @@
                         "name": "userEmail",
                         "required": true,
                         "schema": {
+                            "format": "email",
+                            "minLength": 1,
                             "type": "string"
                         }
                     },
@@ -729,6 +745,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -804,7 +828,7 @@
     ],
     "servers": [
         {
-            "description": "Generated server url",
+            "description": "production server",
             "url": "https://api.nexway.store"
         }
     ]
