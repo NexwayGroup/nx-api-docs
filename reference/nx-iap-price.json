@@ -51,32 +51,6 @@
                 },
                 "type": "object"
             },
-            "Event": {
-                "properties": {
-                    "affectedIds": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "event": {
-                        "enum": [
-                            "CREATED",
-                            "UPDATED",
-                            "ARCHIVED"
-                        ],
-                        "type": "string"
-                    },
-                    "previousData": {
-                        "$ref": "#/components/schemas/Price"
-                    },
-                    "when": {
-                        "format": "date-time",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "ExceptionDetail": {
                 "properties": {
                     "errorType": {
@@ -219,10 +193,6 @@
                     "active": {
                         "type": "boolean"
                     },
-                    "archived": {
-                        "description": "Indicator if the price was removed/archived",
-                        "type": "boolean"
-                    },
                     "country": {
                         "description": "Country code in ISO 3166-2 format",
                         "example": "FR",
@@ -281,20 +251,8 @@
                     "externalContext": {
                         "type": "string"
                     },
-                    "history": {
-                        "description": "Historical data on the price",
-                        "items": {
-                            "$ref": "#/components/schemas/Event"
-                        },
-                        "readOnly": true,
-                        "type": "array"
-                    },
                     "id": {
                         "type": "string"
-                    },
-                    "idUpdateTask": {
-                        "type": "string",
-                        "writeOnly": true
                     },
                     "lastUpdateReason": {
                         "type": "string"
@@ -852,7 +810,7 @@
                         "name": "date",
                         "required": false,
                         "schema": {
-                            "default": "2026-11-03T13:58:32.61Z",
+                            "default": "2026-11-09T09:40:51.116Z",
                             "format": "date-time",
                             "type": "string"
                         }
@@ -1997,7 +1955,7 @@
     ],
     "servers": [
         {
-            "description": "Generated server url",
+            "description": "production server",
             "url": "https://api.nexway.store"
         }
     ]
