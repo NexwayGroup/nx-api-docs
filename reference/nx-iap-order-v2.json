@@ -1431,13 +1431,6 @@
                         "$ref": "#/components/schemas/Refund",
                         "description": "Refund information"
                     },
-                    "relatedContents": {
-                        "description": "List of links for downloading product-related content files",
-                        "items": {
-                            "$ref": "#/components/schemas/RelatedContent"
-                        },
-                        "type": "array"
-                    },
                     "releaseDate": {
                         "description": "Product release date",
                         "format": "date-time",
@@ -3732,6 +3725,9 @@
                         "format": "double",
                         "type": "number"
                     },
+                    "id": {
+                        "type": "string"
+                    },
                     "ratio": {
                         "format": "double",
                         "type": "number"
@@ -3784,19 +3780,6 @@
                 "required": [
                     "lineItems"
                 ],
-                "type": "object"
-            },
-            "RelatedContent": {
-                "properties": {
-                    "file": {
-                        "description": "URL or file name with extension for downloading",
-                        "type": "string"
-                    },
-                    "label": {
-                        "description": "Text that explains what this binary is",
-                        "type": "string"
-                    }
-                },
                 "type": "object"
             },
             "Remitted": {
@@ -6874,6 +6857,7 @@
         },
         "/ordersv2/public/{id}": {
             "get": {
+                "description": "Requires a buyer (or reseller) token. Answers 404, like an unknown order, to any caller that does not own the order.",
                 "operationId": "getOrderInfo",
                 "parameters": [
                     {
@@ -6896,6 +6880,16 @@
                         },
                         "description": "Success"
                     },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Missing or invalid buyer token"
+                    },
                     "404": {
                         "content": {
                             "application/json": {
@@ -6904,7 +6898,7 @@
                                 }
                             }
                         },
-                        "description": "Not Found"
+                        "description": "Not Found, or not owned by the caller"
                     },
                     "500": {
                         "content": {
@@ -6917,9 +6911,9 @@
                         "description": "Failure"
                     }
                 },
-                "summary": "Get order public details by order ID",
+                "summary": "Get the order view of an order owned by the calling buyer",
                 "tags": [
-                    "ApiPublicCommand"
+                    "ApiEndUserOrderView"
                 ]
             }
         },
@@ -9478,7 +9472,7 @@
     ],
     "servers": [
         {
-            "description": "Generated server url",
+            "description": "production server",
             "url": "https://api.nexway.store"
         }
     ]
