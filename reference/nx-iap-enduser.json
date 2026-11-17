@@ -525,9 +525,6 @@
                         "example": "MR, MRS",
                         "type": "string"
                     },
-                    "tokenExpired": {
-                        "type": "boolean"
-                    },
                     "type": {
                         "description": "Type",
                         "enum": [
@@ -828,9 +825,6 @@
                         "example": "MR, MRS",
                         "type": "string"
                     },
-                    "tokenExpired": {
-                        "type": "boolean"
-                    },
                     "type": {
                         "description": "Type",
                         "enum": [
@@ -1111,9 +1105,6 @@
                         ],
                         "example": "MR, MRS",
                         "type": "string"
-                    },
-                    "tokenExpired": {
-                        "type": "boolean"
                     },
                     "type": {
                         "description": "Type",
@@ -1820,6 +1811,21 @@
                     "oldPassword",
                     "storeHostname"
                 ],
+                "type": "object"
+            },
+            "PasswordTokenResponse": {
+                "properties": {
+                    "expirationDate": {
+                        "description": "Expiration date of the token",
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "token": {
+                        "description": "Token to initialize the password, to be sent to the end user only",
+                        "example": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+                        "type": "string"
+                    }
+                },
                 "type": "object"
             },
             "PaymentMethod": {
@@ -7361,6 +7367,97 @@
                     "EndUser"
                 ],
                 "x-operationWeight": "400"
+            }
+        },
+        "/endusers/{id}/password-token": {
+            "post": {
+                "operationId": "issueInitPasswordToken",
+                "parameters": [
+                    {
+                        "description": "End user id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "reason of request",
+                        "in": "query",
+                        "name": "reason",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PasswordTokenResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "End user already has a password"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Issue a new initial password token for the given end user id (the previous initial tokens stay valid)",
+                "tags": [
+                    "EndUser"
+                ]
             }
         },
         "/endusers/{id}/reset-account": {
