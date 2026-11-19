@@ -73,7 +73,7 @@ When a shopper selects the option to cancel auto-renewal, your platform sends a 
 ```json
 POST /carts/subscription-offers
 {
-    "subscriptionId": "18fc54b1-d07e-4d65-9f1f-d1ae6621a813",
+    "subscriptionId": "00000000-0000-4000-8000-000000000001",
     "discountCode": "StaySubscribeddiscount" //optional
 }
 ```
@@ -82,15 +82,15 @@ The API searches for the Stay Subscribed discount and applies it to the subscrip
 **API Response Example**
 ```json
 {
-    "cartId": "86695c69-4d49-4208-8444-1e482a4d0150",
-    "subscriptionId": "18fc54b1-d07e-4d65-9f1f-d1ae6621a813",
-    "customerId": "27213244-fa24-4728-ae03-a42376aadd42",
-    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+    "cartId": "00000000-0000-4000-8000-000000000002",
+    "subscriptionId": "00000000-0000-4000-8000-000000000001",
+    "customerId": "00000000-0000-4000-8000-000000000003",
+    "storeId": "00000000-0000-4000-8000-000000000004",
     "source": "OFFER",
     "offerSubSource": "SUSPEND",
     "totalAmount": 180.0,
     "product": {
-        "id": "e1978002-ffa4-4c50-9635-e20239b3a27d",
+        "id": "00000000-0000-4000-8000-000000000005",
         "name": "Test Product",
         "publisherRefId": "111047E9753",
         "lifeTime": "1MONTH",
@@ -102,7 +102,7 @@ The API searches for the Stay Subscribed discount and applies it to the subscrip
             "vatRate": 0.1,
             "vatAmount": 18.18,
             "discountedPrice": {
-                "discountId": "0605770c-538a-49bf-997a-b08d4ed88a23",
+                "discountId": "00000000-0000-4000-8000-000000000006",
                 "discountedNetPrice": 163.64,
                 "discountedGrossPrice": 180.0,
                 "netPriceDiscountAmount": 18.18,
@@ -119,7 +119,7 @@ The API searches for the Stay Subscribed discount and applies it to the subscrip
                         "vatDiscountAmount": 16.36,
                         "netPriceDiscountAmount": 18.18,
                         "grossPriceDiscountAmount": 20.0,
-                        "discountId": "0605770c-538a-49bf-997a-b08d4ed88a23",
+                        "discountId": "00000000-0000-4000-8000-000000000006",
                         "model": "COUPON",
                         "discountCode": "StaySubscribeddiscount"
                     }
@@ -137,8 +137,8 @@ When the shopper accepts the Stay Subscribed offer, your platform must create an
 ```json
 POST /purchases/prepareNextOrderFromOffer
 {
-  "cartId": "86695c69-4d49-4208-8444-1e482a4d0150",
-  "subscriptionId": "18fc54b1-d07e-4d65-9f1f-d1ae6621a813"
+  "cartId": "00000000-0000-4000-8000-000000000002",
+  "subscriptionId": "00000000-0000-4000-8000-000000000001"
 }
 ```
 The API converts the cart to order which will be used during auto-renewal. A `201 Created` response confirms the order with `source = OFFER` and `offerSubSource = SUSPEND` is created. You can display a confirmation page to the shopper after receiving this response.
@@ -150,8 +150,8 @@ The API converts the cart to order which will be used during auto-renewal. A `20
     "createDate": 1733917173779,
     "lineItems": [
         {
-            "id": "8e497d23-fe7e-4816-a3a5-9fa24d4d640b",
-            "productId": "e1978002-ffa4-4c50-9635-e20239b3a27d",
+            "id": "00000000-0000-4000-8000-000000000007",
+            "productId": "00000000-0000-4000-8000-000000000005",
             "lifeTime": "1MONTH",
             "licenseNextExpirationDate": 1768123641000,
             "trial": false,
@@ -184,7 +184,7 @@ The API converts the cart to order which will be used during auto-renewal. A `20
                     "netPriceDiscountAmount": 18.18,
                     "grossPriceDiscountAmount": 20.0,
                     "vatDiscountAmount": 16.36,
-                    "discountId": "0605770c-538a-49bf-997a-b08d4ed88a23",
+                    "discountId": "00000000-0000-4000-8000-000000000006",
                     "discountCode": "StaySubscribeddiscount",
                     "allDiscountsApplied": [
                         {
@@ -196,7 +196,7 @@ The API converts the cart to order which will be used during auto-renewal. A `20
                             "vatDiscountAmount": 16.36,
                             "netPriceDiscountAmount": 18.18,
                             "grossPriceDiscountAmount": 20.0,
-                            "discountId": "0605770c-538a-49bf-997a-b08d4ed88a23",
+                            "discountId": "00000000-0000-4000-8000-000000000006",
                             "model": "COUPON"
                         }
                     ]
@@ -264,9 +264,9 @@ To preserve or add a subscription plan during an upgrade, make sure it's also in
 ```json
 POST /carts/mid-term-upgrade
 {
-    "subscriptionId": "636e5de6-57f3-4e28-b8cb-4734c418d887",
+    "subscriptionId": "00000000-0000-4000-8000-000000000008",
     "wantedProduct": {
-        "id": "83af8c26-7cb6-43e1-9da2-3c7d216e1965",
+        "id": "00000000-0000-4000-8000-000000000009",
         "discountPlan": {
             "tag": "testtypreco",
             "discountStep": 0,
@@ -280,9 +280,9 @@ The `201 Created` response includes product details and prorated price in `cart.
 **API Response Example**
 ```json
 {
-    "id": "0eb27503-674b-4855-b3bb-00f8386b64ea",
-    "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
-    "enduserId": "1f312803-acc9-432b-821a-0ac89a809d02",
+    "id": "00000000-0000-4000-8000-000000000010",
+    "customerId": "00000000-0000-4000-8000-000000000011",
+    "enduserId": "00000000-0000-4000-8000-000000000012",
     "createDate": 1788784072578,
     "updateDate": 1788784072578,
     "dbVersion": 0,
@@ -302,9 +302,9 @@ The `201 Created` response includes product details and prorated price in `cart.
         "abandoned": false
     },
     "endUser": {
-        "id": "1f312803-acc9-432b-821a-0ac89a809d02",
-        "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
-        "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+        "id": "00000000-0000-4000-8000-000000000012",
+        "customerId": "00000000-0000-4000-8000-000000000011",
+        "storeId": "00000000-0000-4000-8000-000000000004",
         "email": "userEmail@domain.com",
         "maskedEmail": false,
         "lastName": "lastName",
@@ -315,14 +315,14 @@ The `201 Created` response includes product details and prorated price in `cart.
         "locale": "en-US",
         "taxExemptionEligible": false,
         "storeRoute": {
-            "hostname": "testdomain.nexway.build",
-            "fullUrl": "https://testdomain.nexway.build",
-            "builtHostname": "testdomain.nexway.build"
+            "hostname": "store.example.com",
+            "fullUrl": "https://store.example.com",
+            "builtHostname": "store.example.com"
         },
         "wallet": {
             "creditCards": [
                 {
-                    "id": "c1a30e53-9485-44f2-b8b0-7a28d3b0a38a",
+                    "id": "00000000-0000-4000-8000-000000000013",
                     "paymentMethodType": "CreditCard",
                     "type": "visa",
                     "bin": "411111",
@@ -359,7 +359,7 @@ The `201 Created` response includes product details and prorated price in `cart.
         {
             "blackListedCountries": [],
             "businessSegment": "B2C",
-            "customerId": "82222222-f443-4c15-a901-b4a88f994ac7",
+            "customerId": "00000000-0000-4000-8000-000000000011",
             "defaultCurrency": "EUR",
             "discountPlan": {
                 "tag": "testtypreco",
@@ -382,16 +382,16 @@ The `201 Created` response includes product details and prorated price in `cart.
                 }
             },
             "gift": false,
-            "id": "83af8c26-7cb6-43e1-9da2-3c7d216e1965",
+            "id": "00000000-0000-4000-8000-000000000009",
             "licenseNextExpirationDate": 1820319793000,
             "lifeTime": "1YEAR",
             "lifeTimeUnit": "years",
             "lifeTimeValue": "1",
             "name": "My super product",
             "physical": true,
-            "previousLineItemId": "cda35084-9062-4413-844b-1590698b1725",
+            "previousLineItemId": "00000000-0000-4000-8000-000000000014",
             "price": {
-                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a5",
+                "id": "00000000-0000-4000-8000-000000000015",
                 "currency": "EUR",
                 "netPrice": 33.33,
                 "grossPrice": 39.99,
@@ -425,7 +425,7 @@ The `201 Created` response includes product details and prorated price in `cart.
             "quantityMaxReached": false,
             "relatedContents": [],
             "renewingPrice": {
-                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a6",
+                "id": "00000000-0000-4000-8000-000000000016",
                 "currency": "EUR",
                 "netPrice": 33.33,
                 "grossPrice": 39.99,
@@ -436,7 +436,7 @@ The `201 Created` response includes product details and prorated price in `cart.
                     "allDiscountsApplied": [
                         {
                             "discountCode": "Didscount plan for reco",
-                            "discountId": "c3bdf422-bd09-40f9-989c-d2a83520e64b",
+                            "discountId": "00000000-0000-4000-8000-000000000017",
                             "discountRate": 0.09,
                             "discountedGrossPrice": 36.39,
                             "discountedNetPrice": 30.33,
@@ -450,7 +450,7 @@ The `201 Created` response includes product details and prorated price in `cart.
                     ],
                     "cumulatedDiscountRate": 0.09,
                     "discountCode": "Didscount plan for reco",
-                    "discountId": "c3bdf422-bd09-40f9-989c-d2a83520e64b",
+                    "discountId": "00000000-0000-4000-8000-000000000017",
                     "discountRate": 0.09,
                     "discountedGrossPrice": 36.39,
                     "discountedNetPrice": 30.33,
@@ -472,7 +472,7 @@ The `201 Created` response includes product details and prorated price in `cart.
             "trial": false,
             "type": "SOFTWARE",
             "unitPrice": {
-                "id": "4a0ab49b-5ad7-4c81-84de-e506280aa0a5",
+                "id": "00000000-0000-4000-8000-000000000015",
                 "currency": "EUR",
                 "netPrice": 33.33,
                 "grossPrice": 39.99,
@@ -513,8 +513,8 @@ The `201 Created` response includes product details and prorated price in `cart.
             ],
             "fulfillmentTemplateName": "wiremock-fine",
             "salesMode": "STANDARD",
-            "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
-            "descriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
+            "storeId": "00000000-0000-4000-8000-000000000004",
+            "descriptionId": "00000000-0000-4000-8000-000000000018",
             "nextGenerationOf": [],
             "trialAllowed": false,
             "unifiedRegisterSoftware": false,
@@ -526,9 +526,9 @@ The `201 Created` response includes product details and prorated price in `cart.
     "renewalSource": false,
     "scheduledSuppressionDate": 1789043271655,
     "source": "MID_TERM_UPGRADE",
-    "storeHostname": "testdomain.nexway.build",
-    "checkoutUrl": "https://testdomain.nexway.build/checkout/add?cartId=0eb27503-674b-4855-b3bb-00f8386b64ea",
-    "subscriptionId": "46d9841b-6e60-4479-9699-511c6d0f6ca2",
+    "storeHostname": "store.example.com",
+    "checkoutUrl": "https://store.example.com/checkout/add?cartId=00000000-0000-4000-8000-000000000010",
+    "subscriptionId": "00000000-0000-4000-8000-000000000018",
     "subsidiaryId": "1",
     "taxAuthority": "NX_VATENGINE",
     "totalAmount": 12.0,
@@ -544,9 +544,9 @@ Use the checkoutUrl, endUserId, and storeId from the Create a Mid-Term Upgrade C
 ```json
 POST /iam/deeplink/
 {
-    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
-    "enduserId": "417e7503-9bd9-48e8-a526-7b3add6f32b2",
-    "baseLink": "https://testdomain.nexway.build/checkout/selfrenew",
+    "storeId": "00000000-0000-4000-8000-000000000004",
+    "enduserId": "00000000-0000-4000-8000-000000000019",
+    "baseLink": "https://store.example.com/checkout/selfrenew",
     "expiration_time": 1000,
     "single_use": false
 }
@@ -557,12 +557,12 @@ The `Location` header in the `201 Created` response contains the authorized chec
 **API Response Example**
 ```
 Headers
-Location: https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78
+Location: https://store.example.com/checkout/selfrenew?deeplinkid=00000000-0000-4000-8000-000000000020
 ```
 
 Add the cart identifier received in the Create a Mid-Term Upgrade Cart response to the authorized checkout URL and redirect the shopper to the resulting link as in the example below.
 ```
-https://testdomain.nexway.build/checkout/selfrenew?deeplinkid=30fc528f-b8a9-4f67-b4c8-b428227aae78&cartid=0eb27503-674b-4855-b3bb-00f8386b64ea
+https://store.example.com/checkout/selfrenew?deeplinkid=00000000-0000-4000-8000-000000000020&cartid=00000000-0000-4000-8000-000000000010
 ```
 
 On the checkout page, the shopper reviews the order, confirms billing details, and selects a payment method (either from their wallet or by adding a new method).
@@ -608,7 +608,7 @@ Pass billing information via API to streamline the checkout process for shoppers
 ```json
 POST /carts
 {
-    "storeId": "59409482-9719-4d76-97ad-c679acc7d14a",
+    "storeId": "00000000-0000-4000-8000-000000000004",
      "endUser": {
         "email": "email@domain.com",
         "lastName": "lastName",
@@ -622,7 +622,7 @@ POST /carts
     },
     "wantedProducts": [
         {
-        "id": "2f9bb37b-3558-49f0-bea6-69ab834013de",
+        "id": "00000000-0000-4000-8000-000000000021",
         "currentExpirationDate": "1713268338000
         }
     ],
@@ -645,13 +645,13 @@ The `201 Created` response includes the `cartId` in the `Location` header.
 **API Response Example**
 ```
 Headers
-Location: /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
+Location: /carts/00000000-0000-4000-8000-000000000022
 ```
 To retrieve the cart content, use the `cartId` with the API request below.
 
 **API Request Example**
 ```
-GET /carts/d513f26a-e36a-4b5d-ab7f-887de69bc21e
+GET /carts/00000000-0000-4000-8000-000000000022
 ```
 The `201 Created` response contains the `checkoutUrl` attribute. Use this URL to redirect the end-user to the shopping cart. 
 
@@ -661,7 +661,7 @@ Build a buy-link that directs the shopper straight to the shopping cart for revi
 
 **Buy-link Example**
 ```
-https://storeName.mydomain.fr/checkout/add?products=2f9bb37b-3558-49f0-bea6-69ab834013de&mktop=testCampaign&scenario=subscriptionimport&&discountTag=testDiscountPlan&discountStep=0&theme=theme&layout=layout
+https://storeName.mydomain.fr/checkout/add?products=00000000-0000-4000-8000-000000000021&mktop=testCampaign&scenario=subscriptionimport&&discountTag=testDiscountPlan&discountStep=0&theme=theme&layout=layout
 ```
 
 ### Part 2: Checkout

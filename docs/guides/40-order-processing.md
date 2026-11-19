@@ -5,7 +5,7 @@ An **order** contains  a list of purchased products, pricing, discounts and the 
 ## Order workflow
 The diagram below shows the main statuses of the order workflow.
 
-![Order statuses](https://s3storage.nexway.com/iap-staticfiles/2d8a948f601d801a630c9d773f28dba2.png)
+![Order statuses](/img/guides/2d8a948f601d801a630c9d773f28dba2.png)
 
 
 ## Order Statuses
