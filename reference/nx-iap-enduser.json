@@ -1601,7 +1601,7 @@
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
-                        "example": "store.example.com",
+                        "example": "reselleruk-store.staging.nexway.build",
                         "minLength": 1,
                         "type": "string"
                     }
@@ -1776,7 +1776,7 @@
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
-                        "example": "store.example.com",
+                        "example": "reselleruk-store.staging.nexway.build",
                         "minLength": 1,
                         "type": "string"
                     }
@@ -1801,7 +1801,7 @@
                     },
                     "storeHostname": {
                         "description": "Hostname of store",
-                        "example": "store.example.com",
+                        "example": "reselleruk-store.staging.nexway.build",
                         "minLength": 1,
                         "type": "string"
                     }
@@ -2031,7 +2031,7 @@
                     },
                     "storeHostname": {
                         "description": "Store hostname",
-                        "example": "store.example.com",
+                        "example": "reselleruk-store.staging.nexway.build",
                         "type": "string"
                     },
                     "storeId": {
@@ -2355,7 +2355,7 @@
                     },
                     "storeHostname": {
                         "description": "Store hostname",
-                        "example": "store.example.com",
+                        "example": "reselleruk-store.staging.nexway.build",
                         "minLength": 1,
                         "type": "string"
                     },
@@ -2368,7 +2368,7 @@
                     "target": {
                         "$ref": "#/components/schemas/Target",
                         "description": "it regroups where the deeplink should redirect and the type of url",
-                        "example": "store.example.com"
+                        "example": "reselleruk-store.staging.nexway.build"
                     }
                 },
                 "required": [
@@ -4054,6 +4054,82 @@
                     }
                 },
                 "summary": "Update end user",
+                "tags": [
+                    "EndUserPortal"
+                ]
+            }
+        },
+        "/endusers/portal/invoice-rules": {
+            "get": {
+                "description": "Provide invoice required fields rule filtered by country code",
+                "operationId": "getRequiredFieldsByCountry",
+                "parameters": [
+                    {
+                        "description": "Filter invoice required fields rule by country code, e.g FR",
+                        "in": "query",
+                        "name": "country",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NormalizeException"
+                                }
+                            }
+                        },
+                        "description": "Failure"
+                    }
+                },
+                "summary": "Filter invoice required fields rule",
                 "tags": [
                     "EndUserPortal"
                 ]
