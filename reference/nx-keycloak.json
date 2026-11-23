@@ -191,88 +191,6 @@
                 },
                 "type": "object"
             },
-            "ProviderTokenRequest": {
-                "properties": {
-                    "clientId": {
-                        "type": "string"
-                    },
-                    "clientSecret": {
-                        "type": "string"
-                    },
-                    "client_id": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "client_secret": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "customerId": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "grantType": {
-                        "enum": [
-                            "password",
-                            "refresh_token",
-                            "client_credentials",
-                            "end_user_credentials",
-                            "google_login",
-                            "sso_login",
-                            "sso_post_registration"
-                        ],
-                        "type": "string"
-                    },
-                    "grant_type": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "provider": {
-                        "$ref": "#/components/schemas/TokenProvider"
-                    },
-                    "realm": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "realmName": {
-                        "type": "string"
-                    },
-                    "refreshToken": {
-                        "type": "string"
-                    },
-                    "refresh_token": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "scope": {
-                        "type": "string"
-                    },
-                    "storeId": {
-                        "type": "string"
-                    },
-                    "tokenId": {
-                        "type": "string"
-                    },
-                    "trustToken": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "TokenByBackupCodeRequest": {
                 "properties": {
                     "backupCode": {
@@ -294,17 +212,6 @@
                     "password",
                     "realm"
                 ],
-                "type": "object"
-            },
-            "TokenProvider": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                },
                 "type": "object"
             },
             "TokenRequest": {
@@ -1625,89 +1532,6 @@
                     "DeepLink"
                 ],
                 "x-operationWeight": "200"
-            }
-        },
-        "/iam/oauth2/tokens": {
-            "post": {
-                "deprecated": true,
-                "description": "Create or refresh a JWT token.",
-                "operationId": "createGoogleUserTokenWithBody",
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "X-Real-Ip",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/ProviderTokenRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        },
-                        "description": "Success"
-                    },
-                    "401": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        },
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        },
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        },
-                        "description": "Not Found"
-                    },
-                    "500": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AccessToken"
-                                }
-                            }
-                        },
-                        "description": "Failure"
-                    }
-                },
-                "summary": "create/refresh a token",
-                "tags": [
-                    "GoogleToken"
-                ],
-                "x-operationWeight": "100"
             }
         },
         "/iam/token": {
