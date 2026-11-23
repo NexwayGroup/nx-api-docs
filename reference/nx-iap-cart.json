@@ -207,14 +207,6 @@
                         "type": "array",
                         "uniqueItems": true
                     },
-                    "billingPlanId": {
-                        "description": "Billing plan ID",
-                        "type": "string"
-                    },
-                    "billingPlanPeriod": {
-                        "description": "Billing plan period",
-                        "type": "string"
-                    },
                     "blockDiscounts": {
                         "description": "Apply discounts on this cart",
                         "type": "boolean"
@@ -559,12 +551,11 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN",
                             "OFFER",
                             "MID_TERM_UPGRADE",
                             "UPGRADE"
                         ],
-                        "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | BILLING_PLAN | OFFER",
+                        "example": "PURCHASE | SUBSCRIPTION | MANUAL_RENEWAL | OFFER",
                         "type": "string"
                     },
                     "storeHostname": {
@@ -851,7 +842,6 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN",
                             "OFFER",
                             "MID_TERM_UPGRADE",
                             "UPGRADE"
@@ -1666,7 +1656,6 @@
                                 "PURCHASE",
                                 "SUBSCRIPTION",
                                 "MANUAL_RENEWAL",
-                                "BILLING_PLAN",
                                 "OFFER",
                                 "MID_TERM_UPGRADE",
                                 "UPGRADE"
@@ -2225,12 +2214,6 @@
                     "billingAddressId": {
                         "type": "string"
                     },
-                    "billingPlanId": {
-                        "type": "string"
-                    },
-                    "billingPlanPeriod": {
-                        "type": "string"
-                    },
                     "blockDiscounts": {
                         "description": "Block discounts on this cart",
                         "type": "boolean"
@@ -2405,7 +2388,6 @@
                             "PURCHASE",
                             "SUBSCRIPTION",
                             "MANUAL_RENEWAL",
-                            "BILLING_PLAN",
                             "OFFER",
                             "MID_TERM_UPGRADE",
                             "UPGRADE"
