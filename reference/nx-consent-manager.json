@@ -13,9 +13,15 @@
                     "storeId": {
                         "type": "string"
                     },
+                    "token": {
+                        "maxLength": 1024,
+                        "minLength": 0,
+                        "type": "string"
+                    },
                     "userEmail": {
                         "format": "email",
-                        "minLength": 1,
+                        "maxLength": 255,
+                        "minLength": 0,
                         "type": "string"
                     }
                 },
@@ -651,6 +657,7 @@
         },
         "/consent-manager/public/firstSubscribe": {
             "post": {
+                "deprecated": true,
                 "operationId": "firstSubscribe",
                 "requestBody": {
                     "content": {
@@ -659,8 +666,7 @@
                                 "$ref": "#/components/schemas/ConsentRequest"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
