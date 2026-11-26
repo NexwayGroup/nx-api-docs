@@ -27,7 +27,7 @@
                     },
                     "streetAddress": {
                         "description": "Address book street address",
-                        "example": 1,
+                        "example": "1 rue de la paix",
                         "maxLength": 150,
                         "minLength": 1,
                         "type": "string"
@@ -51,6 +51,7 @@
             "BlackListRequest": {
                 "properties": {
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -62,6 +63,7 @@
                         "type": "integer"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -73,9 +75,11 @@
                     },
                     "signedData": {
                         "description": "Signed data to be blacklisted",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -91,6 +95,7 @@
                         "type": "string"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -102,6 +107,7 @@
                         "type": "integer"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -118,6 +124,7 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -155,6 +162,7 @@
                     },
                     "bannerEmail": {
                         "description": "Banner email",
+                        "pattern": "",
                         "type": "string"
                     },
                     "blackListedCountries": {
@@ -181,6 +189,7 @@
                         "type": "integer"
                     },
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -209,10 +218,6 @@
                         "example": "AIMarche",
                         "type": "string"
                     },
-                    "ecommercePartner": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
                     "features": {
                         "$ref": "#/components/schemas/Features"
                     },
@@ -230,6 +235,7 @@
                         "readOnly": true
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -255,6 +261,7 @@
                     "logo": {
                         "description": "Logo",
                         "example": "https://www.domain.com/logo.png",
+                        "pattern": "",
                         "type": "string"
                     },
                     "multiplePaymentsValidityDuration": {
@@ -274,6 +281,7 @@
                     "onboardingGuideUrl": {
                         "description": "GuideUrl",
                         "example": "https://www.domain.com/guide.pdf",
+                        "pattern": "",
                         "type": "string"
                     },
                     "onboardingManager": {
@@ -282,6 +290,7 @@
                     "onboardingTermsUrl": {
                         "description": "TermsUrl",
                         "example": "https://www.domain.com/terms.pdf",
+                        "pattern": "",
                         "type": "string"
                     },
                     "originalId": {
@@ -334,6 +343,7 @@
                     },
                     "salesReportDashboardURL": {
                         "description": "sales report dashboard URL",
+                        "pattern": "",
                         "type": "string"
                     },
                     "sendOrderConfirmationEmail": {
@@ -377,11 +387,13 @@
                         "type": "string"
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
                     "urlToOverrideDirectPaymentPublicUrl": {
                         "description": "Directpayment Public URL",
+                        "pattern": "",
                         "type": "string"
                     },
                     "vatNumber": {
@@ -483,9 +495,7 @@
                     "resourceType": {
                         "type": "string"
                     },
-                    "specific": {
-                        "type": "object"
-                    }
+                    "specific": {}
                 },
                 "type": "object"
             },
@@ -573,6 +583,7 @@
                     "realmName": {
                         "description": "Customer realm name",
                         "example": "abcdefghi1609946930636",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "realmPublicKey": {
@@ -591,6 +602,7 @@
                     "baseLink": {
                         "description": "link definition base link ",
                         "example": "https://my-beautiful.site/path/to/honey",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "queryParameters": {
@@ -598,7 +610,7 @@
                             "$ref": "#/components/schemas/QueryParameter"
                         },
                         "description": "list of useful parameters to generate the activation link ",
-                        "example": "queryParameters",
+                        "example": "\"queryParameters\": { \"param1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"param2\": { \"type\": \"STATIC\", \"value\": \"staticval2\" }, \"ac\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"ACTIVATION_CODE\" }, \"param3\": { \"type\": \"LINK\", value: { \"base\": \"https://my-ugly.site/path/to/cement\", \"queryParameters\": { \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" }, \"email\": { \"type\": \"DYNAMIC_ENCRYPTED\", \"value\": \"email\" } } } }",
                         "type": "object"
                     }
                 },
@@ -696,16 +708,16 @@
                         "description": "Maximum payments parts",
                         "example": 3,
                         "format": "int32",
-                        "maximum": 4,
-                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
                         "type": "integer"
                     },
                     "minPaymentAmountInPercent": {
                         "description": "Minimum payment amount in percent",
                         "example": 70,
                         "format": "int32",
-                        "maximum": 100,
-                        "minimum": 10,
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
                         "type": "integer"
                     },
                     "paymentVendor": {
@@ -729,6 +741,7 @@
                 "description": "The provider collection stores the providers data like query params used in activationLink feature",
                 "properties": {
                     "createDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     },
@@ -744,6 +757,7 @@
                         "type": "integer"
                     },
                     "id": {
+                        "deprecated": true,
                         "type": "string"
                     },
                     "lastUpdateReason": {
@@ -755,6 +769,7 @@
                     "name": {
                         "description": "Provider name",
                         "example": "My provider name",
+                        "minLength": 1,
                         "type": "string"
                     },
                     "originalId": {
@@ -762,6 +777,7 @@
                         "writeOnly": true
                     },
                     "updateDate": {
+                        "deprecated": true,
                         "format": "date-time",
                         "type": "string"
                     }
@@ -852,8 +868,7 @@
                     },
                     "value": {
                         "description": "gven value to the query parameter, can be a text value or a query parameter json value",
-                        "example": "value",
-                        "type": "object"
+                        "example": "\"value\": \"staticval1\" or \"someparam1\": { \"type\": \"STATIC\", \"value\": \"staticval1\" },"
                     }
                 },
                 "required": [
@@ -886,9 +901,7 @@
                 },
                 "type": "object"
             },
-            "RemittanceAccount": {
-                "type": "object"
-            },
+            "RemittanceAccount": {},
             "RemotePriceFiltering": {
                 "properties": {
                     "filteringFieldsForB2B": {
@@ -927,6 +940,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -956,6 +972,9 @@
                     },
                     "last": {
                         "type": "boolean"
+                    },
+                    "nextToken": {
+                        "type": "string"
                     },
                     "number": {
                         "format": "int32",
@@ -987,6 +1006,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -1017,6 +1039,9 @@
                     "last": {
                         "type": "boolean"
                     },
+                    "nextToken": {
+                        "type": "string"
+                    },
                     "number": {
                         "format": "int32",
                         "type": "integer"
@@ -1040,6 +1065,7 @@
                 "properties": {
                     "signedData": {
                         "description": "Signed data to verify and decode",
+                        "minLength": 1,
                         "type": "string"
                     }
                 },
@@ -1052,8 +1078,7 @@
                 "properties": {
                     "originalData": {
                         "description": "Original data",
-                        "readOnly": true,
-                        "type": "object"
+                        "readOnly": true
                     },
                     "signedData": {
                         "description": "Signed data",
@@ -1077,6 +1102,7 @@
                         "additionalProperties": {
                             "$ref": "#/components/schemas/RemotePriceFiltering"
                         },
+                        "minProperties": 1,
                         "type": "object"
                     }
                 },
@@ -1754,6 +1780,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -2275,6 +2309,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -3291,6 +3333,14 @@
                         "in": "path",
                         "name": "id",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "target",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
